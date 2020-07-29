@@ -3,9 +3,10 @@
   "localized-strings": {
     "next": "Next",
     "previous": "Previous",
-    "tagline": "Fast and cross-platform physics for the Rust programming language.",
+    "tagline": "Fast and cross-platform physics engine for the Rust programming language.",
     "docs": {},
     "links": {
+      "Demos": "Demos",
       "About": "About"
     },
     "categories": {

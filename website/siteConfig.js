@@ -14,15 +14,15 @@ const users = [
     caption: 'User1',
     // You will need to prepend the image path with your baseUrl
     // if it is not '/', like: '/test-site/img/docusaurus.svg'.
-    image: '/img/rapier_logo_color_small.svg',
-    infoLink: 'https://www.facebook.com',
+    image: '/img/todo.svg',
+    infoLink: 'https://www.todo.com',
     pinned: true,
   },
 ];
 
 const siteConfig = {
   title: 'Rapier', // Title for your website.
-  tagline: 'Fast and cross-platform physics for the Rust programming language.',
+  tagline: 'Fast and cross-platform physics engine for the Rust programming language.',
   url: 'https://rapier.rs', // Your website URL
   baseUrl: '/', // Base URL for your project */
   // For github.io type URLs, you would set the url and baseUrl like:
@@ -53,7 +53,7 @@ const siteConfig = {
 
   /* Colors for website */
   colors: {
-    primaryColor: '#346B77',
+    primaryColor: '#657884', /*'#5D5F60',*/
     secondaryColor: '#346B77',
   },
 
@@ -72,7 +72,7 @@ const siteConfig = {
   */
 
   // This copyright info is used in /core/Footer.js and blog RSS/Atom feeds.
-  copyright: `Copyright © ${new Date().getFullYear()} Dimforge EURL`,
+  copyright: `Copyright © ${new Date().getFullYear()} Dimforge EURL.`,
 
   highlight: {
     // Highlight.js theme to use for syntax highlighting in code blocks.

@@ -69,7 +69,7 @@ class Footer extends React.Component {
             {/*<a href="https://github.com/rapier">GitHub</a>*/}
           {/*</div>*/}
         {/*</section>*/}
-        <section className="copyright">{this.props.config.copyright}</section>
+        <section className="copyright">{this.props.config.copyright} Landing images by <a href="https://undraw.co">unDraw</a>.</section>
       </footer>
     );
   }

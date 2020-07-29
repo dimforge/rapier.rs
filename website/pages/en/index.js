@@ -52,14 +52,14 @@ const SplashContainer = props => (
 );
 
 const Logo = props => (
-  <div className="projectLogo" img_src={imgUrl('rapier_logo_color_notext.svg')}>
+  <div className="" img_src={imgUrl('rapier_logo_color_notext.svg')}>
     <img src={props.img_src} alt="Project Logo" />
   </div>
 );
 
 const ProjectTitle = () => (
   <h2 className="projectTitle">
-    {siteConfig.title}
+    {/*{siteConfig.title}*/}
     <small>{siteConfig.tagline}</small>
   </h2>
 );
@@ -77,12 +77,14 @@ class HomeSplash extends React.Component {
     const language = this.props.language || '';
     return (
       <SplashContainer>
-          {/*<Logo img_src={imgUrl('rapier_logo_color_notext.svg')} />*/}
           <div className="inner">
-          <ProjectTitle />
-            <PromoSection>
+              <Logo img_src={imgUrl('rapier_logo_color.svg')} />
+
+              <ProjectTitle />
+
+              <PromoSection>
               {/*<Button href="https://discourse.nphysics.org">User forum</Button>*/}
-              <Button href="https://github.com/diforge/rapier">View on Github</Button>
+              <Button href="https://github.com/dimforge/rapier">View on Github</Button>
               <Button href="https://discord.gg/vt9DJSW">Join us on Discord</Button>
             {/*<Button href={docUrl('doc1.html', language)}>Example Link</Button>*/}
             {/*<Button href={docUrl('doc2.html', language)}>Example Link 2</Button>*/}
@@ -95,51 +97,63 @@ class HomeSplash extends React.Component {
 
 const Block = props => (
   <Container
-    padding={['bottom', 'top']}
+    padding={['bottom', 'top' ]}
     id={props.id}
     background={props.background}>
     <GridBlock align="center" contents={props.children} layout={props.layout} className={props.className} />
   </Container>
 );
 
-const LearnHow = () => (
-  <Block background="light">
-    {[
-      {
-        content: 'Talk about learning how to use this',
-        image: imgUrl('rapier_logo_color_notexte.svg'),
-        imageAlign: 'right',
-        title: 'Learn How',
-      },
-    ]}
-  </Block>
+const Desc2 = () => (
+    <Block background="light" layout="threeColumn">
+        {[
+
+        ]}
+    </Block>
+)
+const Features = () => (
+    <Block background="light" layout="threeColumn">
+        {[
+            {
+                content: 'Fast physics for games, animation and robotics. Runs cross-platform, including the official support ' +
+                    'of web platforms.',
+                image: imgUrl('undraw_physics_simulation.svg'),
+                imageAlign: 'top',
+                title: 'Multi-platforms physics simulations',
+            },
+            {
+                content: 'Use serialization to take or restore a complete snapshot of the ' +
+                    'instantaneous state of the physics simulation.',
+                image: imgUrl('undraw_snapshot.svg'),
+                imageAlign: 'top',
+                title: 'Take and restore snapshots',
+            },
+            {
+                content: 'Optionally make Rapier cross-platform deterministic on all IEEE 754-2008 compliant 32- or' +
+                    '64-bits platforms.',
+                image: imgUrl('undraw_determinism.svg'),
+                imageAlign: 'top',
+                title: 'Bit-level cross-platform determinism',
+            },
+            {
+                content: 'Use our official NPM packages published behind the [@dimforge](https://www.npmjs.com/search?q=%40dimforge) ' +
+                    'namespace and run Rapier in any modern browser. Rapier is one of the fastest web physics engine ' +
+                    'available.',
+                image: imgUrl('undraw_web.svg'),
+                imageAlign: 'top',
+                title: 'WebAssembly and JavaScript support',
+            },
+            {
+                content: 'Built with Open-Source at heart, Rapier aims to empower the Rust and web communities ' +
+                    'with a free, cross-platform, and efficient, solid physics simulation framework.',
+                image: imgUrl('undraw_open_source.svg'),
+                imageAlign: 'top',
+                title: 'Forever free and Open-Source',
+            },
+        ]}
+    </Block>
 );
 
-const TryOut = () => (
-  <Block id="try">
-    {[
-      {
-        content: 'Talk about trying this out',
-        image: imgUrl('rapier_logo_color_notexte.svg'),
-        imageAlign: 'left',
-        title: 'Try it Out',
-      },
-    ]}
-  </Block>
-);
-
-const Description = () => (
-  <Block background="dark">
-    {[
-      {
-        content: 'This is another description of how this project is useful',
-        image: imgUrl('rapier_logo_color_notexte.svg'),
-        imageAlign: 'right',
-        title: 'Description',
-      },
-    ]}
-  </Block>
-);
 
 const Showcase = props => {
   if ((siteConfig.users || []).length === 0) {
@@ -176,6 +190,7 @@ class Index extends React.Component {
         <div className="mainContainer">
           {/*<LearnHow />*/}
           {/*<TryOut />*/}
+            <Features />
           {/*<Description />*/}
           {/*<Showcase language={language} />*/}
         </div>
