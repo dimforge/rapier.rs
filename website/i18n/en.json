@@ -3,10 +3,9 @@
   "localized-strings": {
     "next": "Next",
     "previous": "Previous",
-    "tagline": "Rust crates for numerical simulation.",
+    "tagline": "Fast and cross-platform physics for the Rust programming language.",
     "docs": {},
     "links": {
-      "Blog": "Blog",
       "About": "About"
     },
     "categories": {

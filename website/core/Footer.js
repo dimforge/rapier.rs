@@ -66,7 +66,7 @@ class Footer extends React.Component {
           {/*<div>*/}
             {/*<h5>More</h5>*/}
             {/*<a href="https://discourse.nphysics.org">User forum</a>*/}
-            {/*<a href="https://github.com/rustsim">GitHub</a>*/}
+            {/*<a href="https://github.com/rapier">GitHub</a>*/}
           {/*</div>*/}
         {/*</section>*/}
         <section className="copyright">{this.props.config.copyright}</section>

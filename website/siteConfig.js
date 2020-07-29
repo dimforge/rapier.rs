@@ -14,7 +14,7 @@ const users = [
     caption: 'User1',
     // You will need to prepend the image path with your baseUrl
     // if it is not '/', like: '/test-site/img/docusaurus.svg'.
-    image: '/img/rustsim.svg',
+    image: '/img/rapier_logo_color_small.svg',
     infoLink: 'https://www.facebook.com',
     pinned: true,
   },
@@ -30,24 +30,25 @@ const siteConfig = {
   //   baseUrl: '/test-site/',
 
   // Used for publishing and more
-  projectName: 'rustsim',
-  organizationName: 'rustsim',
+  projectName: 'rapier',
+  organizationName: 'rapier',
   // For top-level user or org sites, the organization is still the same.
   // e.g., for the https://JoelMarcey.github.io site, it would be set like...
   //   organizationName: 'JoelMarcey'
 
   // For no header links in the top nav bar -> headerLinks: [],
   headerLinks: [
-      {blog: true, label: 'Blog'},
-      {page: 'about', label: 'About'},
+      // {blog: true, label: 'Blog'},
+    {page: 'demos/', label: 'Demos'},
+    {page: 'about', label: 'About'},
   ],
 
   // If you have users set above, you add it here:
   users,
 
   /* path to images for header/footer */
-  headerIcon: 'img/rustsim.svg',
-  footerIcon: 'img/rustsim.svg',
+  headerIcon: 'img/rapier_logo_color_small.svg',
+  footerIcon: 'img/rapier_logo_color_small.svg',
   favicon: 'img/favicon.png',
 
   /* Colors for website */
@@ -71,7 +72,7 @@ const siteConfig = {
   */
 
   // This copyright info is used in /core/Footer.js and blog RSS/Atom feeds.
-  copyright: `Copyright © ${new Date().getFullYear()} The rustsim organization maintainers`,
+  copyright: `Copyright © ${new Date().getFullYear()} Dimforge EURL`,
 
   highlight: {
     // Highlight.js theme to use for syntax highlighting in code blocks.
@@ -87,8 +88,8 @@ const siteConfig = {
   cleanUrl: true,
 
   // Open Graph and Twitter card images.
-  ogImage: 'img/rustsim.png',
-  twitterImage: 'img/rustsim.png',
+  ogImage: 'img/rapier.png',
+  twitterImage: 'img/rapier.png',
 
   // You may provide arbitrary config keys to be used as needed by your
   // template. For example, if you need your repo's URL...

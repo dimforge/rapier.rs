@@ -52,7 +52,7 @@ const SplashContainer = props => (
 );
 
 const Logo = props => (
-  <div className="projectLogo" img_src={imgUrl('rustsim.svg')}>
+  <div className="projectLogo" img_src={imgUrl('rapier_logo_color_notext.svg')}>
     <img src={props.img_src} alt="Project Logo" />
   </div>
 );
@@ -77,10 +77,10 @@ class HomeSplash extends React.Component {
     const language = this.props.language || '';
     return (
       <SplashContainer>
-        <Logo img_src={imgUrl('rustsim.svg')} />
-        <div className="inner">
+          {/*<Logo img_src={imgUrl('rapier_logo_color_notext.svg')} />*/}
+          <div className="inner">
           <ProjectTitle />
-          <PromoSection>
+            <PromoSection>
               {/*<Button href="https://discourse.nphysics.org">User forum</Button>*/}
               <Button href="https://github.com/diforge/rapier">View on Github</Button>
               <Button href="https://discord.gg/vt9DJSW">Join us on Discord</Button>
@@ -107,7 +107,7 @@ const LearnHow = () => (
     {[
       {
         content: 'Talk about learning how to use this',
-        image: imgUrl('rustsim.svg'),
+        image: imgUrl('rapier_logo_color_notexte.svg'),
         imageAlign: 'right',
         title: 'Learn How',
       },
@@ -120,7 +120,7 @@ const TryOut = () => (
     {[
       {
         content: 'Talk about trying this out',
-        image: imgUrl('rustsim.svg'),
+        image: imgUrl('rapier_logo_color_notexte.svg'),
         imageAlign: 'left',
         title: 'Try it Out',
       },
@@ -133,7 +133,7 @@ const Description = () => (
     {[
       {
         content: 'This is another description of how this project is useful',
-        image: imgUrl('rustsim.svg'),
+        image: imgUrl('rapier_logo_color_notexte.svg'),
         imageAlign: 'right',
         title: 'Description',
       },

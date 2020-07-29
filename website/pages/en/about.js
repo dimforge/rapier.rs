@@ -25,13 +25,13 @@ class About extends React.Component {
       {
         content: 'Any crate in the scope of numerical simulation are welcome to be integrated to this organization.' +
                  ' However, only crates which are documented (at minima on [docs.rs](https://docs.rs)) and sufficiently developed to be useful can be accepted.' +
-                 ' All crate part of this organization will be featured on [rustsim.org](https://rustsim.org) and will have a category given on the rustsim user' +
-                 ' forum (and users will be welcome to ask their questions about this crate there!) You can submit a request to joint this organization by opening an issue on the [rustsim.org bug tracker](https://github.com/rustsim/rustsim.org/issues).',
+                 ' All crate part of this organization will be featured on [rapier.org](https://rapier.org) and will have a category given on the rapier user' +
+                 ' forum (and users will be welcome to ask their questions about this crate there!) You can submit a request to joint this organization by opening an issue on the [rapier.org bug tracker](https://github.com/rapier/rapier.org/issues).',
         title: 'Join the organization',
       },
       {
-        content: "If you need help regarding the use of any crate part of the rustsim **organization**, you may either (in order of preference):" +
-            "<ul><li>Ask a question on the [rustsim user forum](https://discourse.nphysics.org). There is one category per crate.</li>" +
+        content: "If you need help regarding the use of any crate part of the rapier **organization**, you may either (in order of preference):" +
+            "<ul><li>Ask a question on the [rapier user forum](https://discourse.nphysics.org). There is one category per crate.</li>" +
             "<li>Ask a question on [Discord](https://discord.gg/vt9DJSW).</li>" +
             "<li>Ask a question on IRC #rust and #rust-gamedev, or on discord `general` or `gamedev`.</li>" +
             "<li>Open an issue on the relevant crate's repository.</li>" +
@@ -45,9 +45,9 @@ class About extends React.Component {
         <Container className="mainContainer documentContainer postContainer">
           <div className="post">
             <header className="postHeader">
-              <h1>About the rustsim organization</h1>
+              <h1>About the rapier organization</h1>
             </header>
-              <p>The <b>rustsim</b> organization is dedicated to offer pure-Rust high-quality multi-platforms libraries for performing various types of numerical simulations.
+              <p>The <b>rapier</b> organization is dedicated to offer pure-Rust high-quality multi-platforms libraries for performing various types of numerical simulations.
                The targetted applications can cover a wide set of natural phenomena with various performance characteristics, including real-time
                as well as offline simulations. As of today, most crates parts of this organization are focused on real-time physics (mechanics) for animation,
                robotics, and video games. Contributions to creates new crates intended to cover more fields (like sound-synthesis, simulation
