@@ -78,7 +78,7 @@ class HomeSplash extends React.Component {
     return (
       <SplashContainer>
           <div className="inner">
-              <Logo img_src={imgUrl('rapier_logo_color.svg')} />
+              <Logo img_src={imgUrl('rapier_logo_color_textpath.svg')} />
 
               <ProjectTitle />
 
