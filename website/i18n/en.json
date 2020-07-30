@@ -5,14 +5,58 @@
     "previous": "Previous",
     "tagline": "Fast and cross-platform physics engine for the Rust programming language.",
     "docs": {
+      "classes/collider": {
+        "title": "Collider",
+        "sidebar_label": "Collider"
+      },
+      "classes/colliderdesc": {
+        "title": "ColliderDesc",
+        "sidebar_label": "ColliderDesc"
+      },
+      "classes/joint": {
+        "title": "Joint",
+        "sidebar_label": "Joint"
+      },
+      "classes/jointdesc": {
+        "title": "JointDesc",
+        "sidebar_label": "JointDesc"
+      },
+      "classes/rigidbody": {
+        "title": "RigidBody",
+        "sidebar_label": "RigidBody"
+      },
+      "classes/rigidbodydesc": {
+        "title": "RigidBodyDesc",
+        "sidebar_label": "RigidBodyDesc"
+      },
+      "classes/rotation": {
+        "title": "Rotation",
+        "sidebar_label": "Rotation"
+      },
+      "classes/vector": {
+        "title": "Vector",
+        "sidebar_label": "Vector"
+      },
+      "classes/world": {
+        "title": "World",
+        "sidebar_label": "World"
+      },
       "doc1": {
         "title": "Latin-ish",
         "sidebar_label": "Example Page"
+      },
+      "globals": {
+        "title": "@dimforge/rapier3d",
+        "sidebar_label": "Globals"
+      },
+      "index": {
+        "title": "@dimforge/rapier3d",
+        "sidebar_label": "README"
       }
     },
     "links": {
       "Docs": "Docs",
-      "JS documentation": "JS documentation",
+      "JSDocs": "JSDocs",
       "Demos": "Demos",
       "About": "About"
     },
