@@ -1,7 +1,7 @@
 ---
-id: "globals"
+id: "JavaScript"
 title: "@dimforge/rapier3d"
-sidebar_label: "Globals"
+sidebar_label: "JavaScript"
 ---
 
 [@dimforge/rapier3d](index.md) › [Globals](globals.md)
