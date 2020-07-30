@@ -22,8 +22,8 @@ module.exports = {
           position: 'left',
         },
         {
-          to: '/demos/',
-          label: 'Demos',
+          href: 'https://rapier.rs/demos/index.html', // FIXME: should depend on the base url.
+          label: 'Demos ↪',
           position: 'left',
         },
         // {to: 'blog', label: 'Blog', position: 'left'},
@@ -45,8 +45,8 @@ module.exports = {
               to: 'docs/',
             },
             {
-              label: 'Demos',
-              to: 'demos/',
+              label: 'Demos ↪',
+              href: 'https://rapier.rs/demos/index.html',
             },
           ],
         },
@@ -90,7 +90,7 @@ module.exports = {
       {
         docs: {
           // It is recommended to set document id as docs home page (`docs/` path).
-          homePageId: 'doc1',
+          homePageId: 'getting_started',
           sidebarPath: require.resolve('./sidebars.js')
         },
         // blog: {

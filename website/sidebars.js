@@ -1,9 +1,6 @@
 module.exports = {
   someSidebar: {
-    Rapier: ['doc1', 'doc2'],
-    Bindings: [
-      {
-        JavaScript: [ 'JavaScript' ]
-      }],
+    'User Guide': ['getting_started'],
+    Bindings: [ 'JavaScript' ],
   },
 };
