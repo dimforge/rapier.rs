@@ -4,8 +4,15 @@
     "next": "Next",
     "previous": "Previous",
     "tagline": "Fast and cross-platform physics engine for the Rust programming language.",
-    "docs": {},
+    "docs": {
+      "doc1": {
+        "title": "Latin-ish",
+        "sidebar_label": "Example Page"
+      }
+    },
     "links": {
+      "Docs": "Docs",
+      "JS documentation": "JS documentation",
       "Demos": "Demos",
       "About": "About"
     },

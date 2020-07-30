@@ -38,7 +38,9 @@ const siteConfig = {
 
   // For no header links in the top nav bar -> headerLinks: [],
   headerLinks: [
+    {doc: 'doc1', label: 'Docs'},
       // {blog: true, label: 'Blog'},
+    {page: 'js_docs/', label: 'JSDoc'},
     {page: 'demos/', label: 'Demos'},
     {page: 'about', label: 'About'},
   ],
@@ -49,7 +51,7 @@ const siteConfig = {
   /* path to images for header/footer */
   headerIcon: 'img/rapier_logo_color_small.svg',
   footerIcon: 'img/rapier_logo_color_small.svg',
-  favicon: 'img/favicon.png',
+  favicon: 'img/favicon/favicon.png',
 
   /* Colors for website */
   colors: {

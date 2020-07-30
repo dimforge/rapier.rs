@@ -53,7 +53,7 @@ const SplashContainer = props => (
 
 const Logo = props => (
   <div className="" img_src={imgUrl('rapier_logo_color_notext.svg')}>
-    <img src={props.img_src} alt="Project Logo" />
+    <img src={props.img_src} width="70%" alt="Project Logo" />
   </div>
 );
 
@@ -129,7 +129,7 @@ const Features = () => (
                 title: 'Take and restore snapshots',
             },
             {
-                content: 'Optionally make Rapier cross-platform deterministic on all IEEE 754-2008 compliant 32- or' +
+                content: 'Optionally make Rapier cross-platform deterministic on all IEEE 754-2008 compliant 32- and ' +
                     '64-bits platforms.',
                 image: imgUrl('undraw_determinism.svg'),
                 imageAlign: 'top',
