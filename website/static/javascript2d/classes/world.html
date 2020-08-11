@@ -106,6 +106,7 @@
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="world.html#createrigidbody" class="tsd-kind-icon">create<wbr>Rigid<wbr>Body</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="world.html#foreachcollider" class="tsd-kind-icon">for<wbr>Each<wbr>Collider</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="world.html#foreachrigidbody" class="tsd-kind-icon">for<wbr>Each<wbr>Rigid<wbr>Body</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="world.html#removerigidbody" class="tsd-kind-icon">remove<wbr>Rigid<wbr>Body</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="world.html#step" class="tsd-kind-icon">step</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="world.html#takesnapshot" class="tsd-kind-icon">take<wbr>Snapshot</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><a href="world.html#restoresnapshot" class="tsd-kind-icon">restore<wbr>Snapshot</a></li>
@@ -168,7 +169,7 @@
 					<div class="tsd-signature tsd-kind-icon">max<wbr>Position<wbr>Iterations<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in rapier2d.d.ts:438</li>
+							<li>Defined in rapier2d.d.ts:449</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -187,7 +188,7 @@
 					<div class="tsd-signature tsd-kind-icon">max<wbr>Velocity<wbr>Iterations<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in rapier2d.d.ts:443</li>
+							<li>Defined in rapier2d.d.ts:454</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -206,7 +207,7 @@
 					<div class="tsd-signature tsd-kind-icon">timestep<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in rapier2d.d.ts:448</li>
+							<li>Defined in rapier2d.d.ts:459</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -308,7 +309,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in rapier2d.d.ts:425</li>
+									<li>Defined in rapier2d.d.ts:436</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -344,7 +345,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in rapier2d.d.ts:433</li>
+									<li>Defined in rapier2d.d.ts:444</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -362,6 +363,44 @@
 							<ul class="tsd-parameters">
 								<li>
 									<h5>f: <span class="tsd-signature-type">Function</span></h5>
+									<div class="tsd-comment tsd-typography">
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="removerigidbody" class="tsd-anchor"></a>
+					<h3>remove<wbr>Rigid<wbr>Body</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">remove<wbr>Rigid<wbr>Body<span class="tsd-signature-symbol">(</span>body<span class="tsd-signature-symbol">: </span><a href="rigidbody.html" class="tsd-signature-type">RigidBody</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in rapier2d.d.ts:428</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Removes the given rigid-body from this physics world.</p>
+								</div>
+								<p>This will remove this rigid-body as wall as all its attached colliders and joints.
+								Every other bodies touching or attached by joints to this rigid-body will be woken-up.</p>
+								<a href="#parameters" id="parameters" style="color: inherit; text-decoration: none;">
+									<h1>Parameters</h1>
+								</a>
+								<ul>
+									<li><code>body</code>: the rigid-body to remove.</li>
+								</ul>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>body: <a href="rigidbody.html" class="tsd-signature-type">RigidBody</a></h5>
 									<div class="tsd-comment tsd-typography">
 									</div>
 								</li>
@@ -509,6 +548,9 @@
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="world.html#foreachrigidbody" class="tsd-kind-icon">for<wbr>Each<wbr>Rigid<wbr>Body</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="world.html#removerigidbody" class="tsd-kind-icon">remove<wbr>Rigid<wbr>Body</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="world.html#step" class="tsd-kind-icon">step</a>
