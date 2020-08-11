@@ -1,0 +1,552 @@
+<!doctype html>
+<html class="default no-js">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>World | @dimforge/rapier2d</title>
+	<meta name="description" content="Documentation for @dimforge/rapier2d">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="../assets/css/main.css">
+</head>
+<body>
+<header>
+	<div class="tsd-page-toolbar">
+		<div class="container">
+			<div class="table-wrap">
+				<div class="table-cell" id="tsd-search" data-index="../assets/js/search.json" data-base="..">
+					<div class="field">
+						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
+						<input id="tsd-search-field" type="text" />
+					</div>
+					<ul class="results">
+						<li class="state loading">Preparing search index...</li>
+						<li class="state failure">The search index is not available</li>
+					</ul>
+					<a href="../index.html" class="title">@dimforge/rapier2d</a>
+				</div>
+				<div class="table-cell" id="tsd-widgets">
+					<div id="tsd-filter">
+						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
+						<div class="tsd-filter-group">
+							<div class="tsd-select" id="tsd-filter-visibility">
+								<span class="tsd-select-label">All</span>
+								<ul class="tsd-select-list">
+									<li data-value="public">Public</li>
+									<li data-value="protected">Public/Protected</li>
+									<li data-value="private" class="selected">All</li>
+								</ul>
+							</div>
+							<input type="checkbox" id="tsd-filter-inherited" checked />
+							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
+							<input type="checkbox" id="tsd-filter-only-exported" />
+							<label class="tsd-widget" for="tsd-filter-only-exported">Only exported</label>
+						</div>
+					</div>
+					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="tsd-page-title">
+		<div class="container">
+			<ul class="tsd-breadcrumb">
+				<li>
+					<a href="../globals.html">Globals</a>
+				</li>
+				<li>
+					<a href="world.html">World</a>
+				</li>
+			</ul>
+			<h1>Class World</h1>
+		</div>
+	</div>
+</header>
+<div class="container container-main">
+	<div class="row">
+		<div class="col-8 col-content">
+			<section class="tsd-panel tsd-comment">
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>The physics world.</p>
+					</div>
+					<p>This contains all the data-structures necessary for creating and simulating
+					bodies with contacts, joints, and external forces.</p>
+				</div>
+			</section>
+			<section class="tsd-panel tsd-hierarchy">
+				<h3>Hierarchy</h3>
+				<ul class="tsd-hierarchy">
+					<li>
+						<span class="target">World</span>
+					</li>
+				</ul>
+			</section>
+			<section class="tsd-panel-group tsd-index-group">
+				<h2>Index</h2>
+				<section class="tsd-panel tsd-index-panel">
+					<div class="tsd-index-content">
+						<section class="tsd-index-section ">
+							<h3>Constructors</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-constructor tsd-parent-kind-class"><a href="world.html#constructor" class="tsd-kind-icon">constructor</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section ">
+							<h3>Properties</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="world.html#maxpositioniterations" class="tsd-kind-icon">max<wbr>Position<wbr>Iterations</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="world.html#maxvelocityiterations" class="tsd-kind-icon">max<wbr>Velocity<wbr>Iterations</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="world.html#timestep" class="tsd-kind-icon">timestep</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section ">
+							<h3>Methods</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="world.html#createjoint" class="tsd-kind-icon">create<wbr>Joint</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="world.html#createrigidbody" class="tsd-kind-icon">create<wbr>Rigid<wbr>Body</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="world.html#foreachcollider" class="tsd-kind-icon">for<wbr>Each<wbr>Collider</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="world.html#foreachrigidbody" class="tsd-kind-icon">for<wbr>Each<wbr>Rigid<wbr>Body</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="world.html#step" class="tsd-kind-icon">step</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="world.html#takesnapshot" class="tsd-kind-icon">take<wbr>Snapshot</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><a href="world.html#restoresnapshot" class="tsd-kind-icon">restore<wbr>Snapshot</a></li>
+							</ul>
+						</section>
+					</div>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Constructors</h2>
+				<section class="tsd-panel tsd-member tsd-kind-constructor tsd-parent-kind-class">
+					<a name="constructor" class="tsd-anchor"></a>
+					<h3>constructor</h3>
+					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">new <wbr>World<span class="tsd-signature-symbol">(</span>gravity_x<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, gravity_y<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="world.html" class="tsd-signature-type">World</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in rapier2d.d.ts:363</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Creates a new physics World with the given initial gravity affecting all rigid bodies with
+									non-zero mass.</p>
+								</div>
+								<a href="#arguments" id="arguments" style="color: inherit; text-decoration: none;">
+									<h1>Arguments</h1>
+								</a>
+								<ul>
+									<li><code>gravity_x</code> − The <code>x</code> component of the gravity.</li>
+									<li><code>gravity_y</code> − The <code>y</code> component of the gravity.</li>
+								</ul>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>gravity_x: <span class="tsd-signature-type">number</span></h5>
+								</li>
+								<li>
+									<h5>gravity_y: <span class="tsd-signature-type">number</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<div class="lead">
+										</div>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="world.html" class="tsd-signature-type">World</a></h4>
+						</li>
+					</ul>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Properties</h2>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="maxpositioniterations" class="tsd-anchor"></a>
+					<h3>max<wbr>Position<wbr>Iterations</h3>
+					<div class="tsd-signature tsd-kind-icon">max<wbr>Position<wbr>Iterations<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in rapier2d.d.ts:438</li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>The maximum position iterations the position-based constraint regularization solver can make.</p>
+						</div>
+						<dl class="tsd-comment-tags">
+							<dt>returns</dt>
+							<dd></dd>
+						</dl>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="maxvelocityiterations" class="tsd-anchor"></a>
+					<h3>max<wbr>Velocity<wbr>Iterations</h3>
+					<div class="tsd-signature tsd-kind-icon">max<wbr>Velocity<wbr>Iterations<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in rapier2d.d.ts:443</li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>The maximum velocity iterations the velocity-based force constraint solver can make.</p>
+						</div>
+						<dl class="tsd-comment-tags">
+							<dt>returns</dt>
+							<dd></dd>
+						</dl>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="timestep" class="tsd-anchor"></a>
+					<h3>timestep</h3>
+					<div class="tsd-signature tsd-kind-icon">timestep<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in rapier2d.d.ts:448</li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>The current simulation timestep.</p>
+						</div>
+						<dl class="tsd-comment-tags">
+							<dt>returns</dt>
+							<dd></dd>
+						</dl>
+					</div>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Methods</h2>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="createjoint" class="tsd-anchor"></a>
+					<h3>create<wbr>Joint</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">create<wbr>Joint<span class="tsd-signature-symbol">(</span>joint<span class="tsd-signature-symbol">: </span><a href="jointdesc.html" class="tsd-signature-type">JointDesc</a>, parent1<span class="tsd-signature-symbol">: </span><a href="rigidbody.html" class="tsd-signature-type">RigidBody</a>, parent2<span class="tsd-signature-symbol">: </span><a href="rigidbody.html" class="tsd-signature-type">RigidBody</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="joint.html" class="tsd-signature-type">Joint</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in rapier2d.d.ts:417</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Creates a new joint from the given joint descriptior.</p>
+								</div>
+								<a href="#parameters" id="parameters" style="color: inherit; text-decoration: none;">
+									<h1>Parameters</h1>
+								</a>
+								<ul>
+									<li><code>joint</code>: the description of the joint to create.</li>
+									<li><code>parent1</code>: the first rigid-body attached to this joint.</li>
+									<li><code>parent2</code>: the second rigid-body attached to this joint.</li>
+								</ul>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>joint: <a href="jointdesc.html" class="tsd-signature-type">JointDesc</a></h5>
+								</li>
+								<li>
+									<h5>parent1: <a href="rigidbody.html" class="tsd-signature-type">RigidBody</a></h5>
+								</li>
+								<li>
+									<h5>parent2: <a href="rigidbody.html" class="tsd-signature-type">RigidBody</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="joint.html" class="tsd-signature-type">Joint</a></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="createrigidbody" class="tsd-anchor"></a>
+					<h3>create<wbr>Rigid<wbr>Body</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">create<wbr>Rigid<wbr>Body<span class="tsd-signature-symbol">(</span>body<span class="tsd-signature-symbol">: </span><a href="rigidbodydesc.html" class="tsd-signature-type">RigidBodyDesc</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="rigidbody.html" class="tsd-signature-type">RigidBody</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in rapier2d.d.ts:404</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Creates a new rigid-body from the given rigd-body descriptior.</p>
+								</div>
+								<a href="#parameters" id="parameters" style="color: inherit; text-decoration: none;">
+									<h1>Parameters</h1>
+								</a>
+								<ul>
+									<li><code>body</code>: the description of the rigid-body to create.</li>
+								</ul>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>body: <a href="rigidbodydesc.html" class="tsd-signature-type">RigidBodyDesc</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="rigidbody.html" class="tsd-signature-type">RigidBody</a></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="foreachcollider" class="tsd-anchor"></a>
+					<h3>for<wbr>Each<wbr>Collider</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">for<wbr>Each<wbr>Collider<span class="tsd-signature-symbol">(</span>f<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Function</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in rapier2d.d.ts:425</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Applies the given JavaScript function to each collider managed by this physics world.</p>
+								</div>
+								<a href="#parameters" id="parameters" style="color: inherit; text-decoration: none;">
+									<h1>Parameters</h1>
+								</a>
+								<ul>
+									<li><code>f</code>: the function to apply to each collider managed by this physics world. Called as <code>f(collider)</code>.</li>
+								</ul>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>f: <span class="tsd-signature-type">Function</span></h5>
+									<div class="tsd-comment tsd-typography">
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="foreachrigidbody" class="tsd-anchor"></a>
+					<h3>for<wbr>Each<wbr>Rigid<wbr>Body</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">for<wbr>Each<wbr>Rigid<wbr>Body<span class="tsd-signature-symbol">(</span>f<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Function</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in rapier2d.d.ts:433</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Applies the given JavaScript function to each rigid-body managed by this physics world.</p>
+								</div>
+								<a href="#parameters" id="parameters" style="color: inherit; text-decoration: none;">
+									<h1>Parameters</h1>
+								</a>
+								<ul>
+									<li><code>f</code>: the function to apply to each rigid-body managed by this physics world. Called as <code>f(collider)</code>.</li>
+								</ul>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>f: <span class="tsd-signature-type">Function</span></h5>
+									<div class="tsd-comment tsd-typography">
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="step" class="tsd-anchor"></a>
+					<h3>step</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">step<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in rapier2d.d.ts:395</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Advance the simulation by one time step.</p>
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="takesnapshot" class="tsd-anchor"></a>
+					<h3>take<wbr>Snapshot</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">take<wbr>Snapshot<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Uint8Array</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in rapier2d.d.ts:383</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Takes a snapshot of this world.</p>
+								</div>
+								<p>Use <code>World.restoreSnapshot</code> to create a new physics world with a state identical to
+								the state when <code>.takeSnapshot()</code> is called.</p>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Uint8Array</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-static">
+					<a name="restoresnapshot" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagStatic">Static</span> restore<wbr>Snapshot</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-static">
+						<li class="tsd-signature tsd-kind-icon">restore<wbr>Snapshot<span class="tsd-signature-symbol">(</span>data<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Uint8Array</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="world.html" class="tsd-signature-type">World</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in rapier2d.d.ts:391</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Creates a new physics world from a snapshot.</p>
+								</div>
+								<p>This new physics world will be an identical copy of the snapshoted physics world.</p>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>data: <span class="tsd-signature-type">Uint8Array</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="world.html" class="tsd-signature-type">World</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span></h4>
+						</li>
+					</ul>
+				</section>
+			</section>
+		</div>
+		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
+			<nav class="tsd-navigation primary">
+				<ul>
+					<li class="globals  ">
+						<a href="../globals.html"><em>Globals</em></a>
+					</li>
+				</ul>
+			</nav>
+			<nav class="tsd-navigation secondary menu-sticky">
+				<ul class="before-current">
+					<li class=" tsd-kind-class">
+						<a href="collider.html" class="tsd-kind-icon">Collider</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="colliderdesc.html" class="tsd-kind-icon">Collider<wbr>Desc</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="joint.html" class="tsd-kind-icon">Joint</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="jointdesc.html" class="tsd-kind-icon">Joint<wbr>Desc</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="rigidbody.html" class="tsd-kind-icon">Rigid<wbr>Body</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="rigidbodydesc.html" class="tsd-kind-icon">Rigid<wbr>Body<wbr>Desc</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="rotation.html" class="tsd-kind-icon">Rotation</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="vector.html" class="tsd-kind-icon">Vector</a>
+					</li>
+				</ul>
+				<ul class="current">
+					<li class="current tsd-kind-class">
+						<a href="world.html" class="tsd-kind-icon">World</a>
+						<ul>
+							<li class=" tsd-kind-constructor tsd-parent-kind-class">
+								<a href="world.html#constructor" class="tsd-kind-icon">constructor</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="world.html#maxpositioniterations" class="tsd-kind-icon">max<wbr>Position<wbr>Iterations</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="world.html#maxvelocityiterations" class="tsd-kind-icon">max<wbr>Velocity<wbr>Iterations</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="world.html#timestep" class="tsd-kind-icon">timestep</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="world.html#createjoint" class="tsd-kind-icon">create<wbr>Joint</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="world.html#createrigidbody" class="tsd-kind-icon">create<wbr>Rigid<wbr>Body</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="world.html#foreachcollider" class="tsd-kind-icon">for<wbr>Each<wbr>Collider</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="world.html#foreachrigidbody" class="tsd-kind-icon">for<wbr>Each<wbr>Rigid<wbr>Body</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="world.html#step" class="tsd-kind-icon">step</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="world.html#takesnapshot" class="tsd-kind-icon">take<wbr>Snapshot</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-static">
+								<a href="world.html#restoresnapshot" class="tsd-kind-icon">restore<wbr>Snapshot</a>
+							</li>
+						</ul>
+					</li>
+				</ul>
+				<ul class="after-current">
+				</ul>
+			</nav>
+		</div>
+	</div>
+</div>
+<footer class="with-border-bottom">
+	<div class="container">
+		<h2>Legend</h2>
+		<div class="tsd-legend-group">
+			<ul class="tsd-legend">
+				<li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static method</span></li>
+			</ul>
+		</div>
+	</div>
+</footer>
+<div class="container tsd-generator">
+	<p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p>
+</div>
+<div class="overlay"></div>
+<script src="../assets/js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,480 @@
+<!doctype html>
+<html class="default no-js">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Collider | @dimforge/rapier3d</title>
+	<meta name="description" content="Documentation for @dimforge/rapier3d">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="../assets/css/main.css">
+</head>
+<body>
+<header>
+	<div class="tsd-page-toolbar">
+		<div class="container">
+			<div class="table-wrap">
+				<div class="table-cell" id="tsd-search" data-index="../assets/js/search.json" data-base="..">
+					<div class="field">
+						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
+						<input id="tsd-search-field" type="text" />
+					</div>
+					<ul class="results">
+						<li class="state loading">Preparing search index...</li>
+						<li class="state failure">The search index is not available</li>
+					</ul>
+					<a href="../index.html" class="title">@dimforge/rapier3d</a>
+				</div>
+				<div class="table-cell" id="tsd-widgets">
+					<div id="tsd-filter">
+						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
+						<div class="tsd-filter-group">
+							<div class="tsd-select" id="tsd-filter-visibility">
+								<span class="tsd-select-label">All</span>
+								<ul class="tsd-select-list">
+									<li data-value="public">Public</li>
+									<li data-value="protected">Public/Protected</li>
+									<li data-value="private" class="selected">All</li>
+								</ul>
+							</div>
+							<input type="checkbox" id="tsd-filter-inherited" checked />
+							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
+							<input type="checkbox" id="tsd-filter-only-exported" />
+							<label class="tsd-widget" for="tsd-filter-only-exported">Only exported</label>
+						</div>
+					</div>
+					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="tsd-page-title">
+		<div class="container">
+			<ul class="tsd-breadcrumb">
+				<li>
+					<a href="../globals.html">Globals</a>
+				</li>
+				<li>
+					<a href="collider.html">Collider</a>
+				</li>
+			</ul>
+			<h1>Class Collider</h1>
+		</div>
+	</div>
+</header>
+<div class="container container-main">
+	<div class="row">
+		<div class="col-8 col-content">
+			<section class="tsd-panel tsd-comment">
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>A geometric entity that can be attached to a body so it can be affected by contacts and proximity queries.</p>
+					</div>
+					<p>To build a new collider, use the <code>ColliderBuilder</code> structure.</p>
+				</div>
+			</section>
+			<section class="tsd-panel tsd-hierarchy">
+				<h3>Hierarchy</h3>
+				<ul class="tsd-hierarchy">
+					<li>
+						<span class="target">Collider</span>
+					</li>
+				</ul>
+			</section>
+			<section class="tsd-panel-group tsd-index-group">
+				<h2>Index</h2>
+				<section class="tsd-panel tsd-index-panel">
+					<div class="tsd-index-content">
+						<section class="tsd-index-section ">
+							<h3>Methods</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="collider.html#density" class="tsd-kind-icon">density</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="collider.html#friction" class="tsd-kind-icon">friction</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="collider.html#halfextents" class="tsd-kind-icon">half<wbr>Extents</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="collider.html#handle" class="tsd-kind-icon">handle</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="collider.html#parent" class="tsd-kind-icon">parent</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="collider.html#parenthandle" class="tsd-kind-icon">parent<wbr>Handle</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="collider.html#radius" class="tsd-kind-icon">radius</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="collider.html#rotation" class="tsd-kind-icon">rotation</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="collider.html#setpositiondebug" class="tsd-kind-icon">set<wbr>Position<wbr>Debug</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="collider.html#shapetype" class="tsd-kind-icon">shape<wbr>Type</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="collider.html#translation" class="tsd-kind-icon">translation</a></li>
+							</ul>
+						</section>
+					</div>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Methods</h2>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="density" class="tsd-anchor"></a>
+					<h3>density</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">density<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in rapier3d.d.ts:70</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>The density of this collider.</p>
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="friction" class="tsd-anchor"></a>
+					<h3>friction</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">friction<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in rapier3d.d.ts:54</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>The friction coefficient of this collider.</p>
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="halfextents" class="tsd-anchor"></a>
+					<h3>half<wbr>Extents</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">half<wbr>Extents<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="vector.html" class="tsd-signature-type">Vector</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in rapier3d.d.ts:29</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>The half-extents of this collider if it is has a cuboid shape.</p>
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <a href="vector.html" class="tsd-signature-type">Vector</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="handle" class="tsd-anchor"></a>
+					<h3>handle</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">handle<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in rapier3d.d.ts:44</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>The unique integer identifier of this collider.</p>
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="parent" class="tsd-anchor"></a>
+					<h3>parent</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">parent<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="rigidbody.html" class="tsd-signature-type">RigidBody</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in rapier3d.d.ts:39</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>The rigid-body this collider is attached to.</p>
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <a href="rigidbody.html" class="tsd-signature-type">RigidBody</a></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="parenthandle" class="tsd-anchor"></a>
+					<h3>parent<wbr>Handle</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">parent<wbr>Handle<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in rapier3d.d.ts:49</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>The unique integer identifier of the rigid-body this collider is attached to.</p>
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="radius" class="tsd-anchor"></a>
+					<h3>radius</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">radius<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in rapier3d.d.ts:34</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>The radius of this collider if it is has a ball shape.</p>
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="rotation" class="tsd-anchor"></a>
+					<h3>rotation</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">rotation<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="rotation.html" class="tsd-signature-type">Rotation</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in rapier3d.d.ts:19</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>The world-space orientation of this collider.</p>
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <a href="rotation.html" class="tsd-signature-type">Rotation</a></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="setpositiondebug" class="tsd-anchor"></a>
+					<h3>set<wbr>Position<wbr>Debug</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">set<wbr>Position<wbr>Debug<span class="tsd-signature-symbol">(</span>x<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, y<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, z<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, ri<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, rj<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, rk<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, rw<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in rapier3d.d.ts:65</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Reserved for debug.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>x: <span class="tsd-signature-type">number</span></h5>
+								</li>
+								<li>
+									<h5>y: <span class="tsd-signature-type">number</span></h5>
+								</li>
+								<li>
+									<h5>z: <span class="tsd-signature-type">number</span></h5>
+								</li>
+								<li>
+									<h5>ri: <span class="tsd-signature-type">number</span></h5>
+								</li>
+								<li>
+									<h5>rj: <span class="tsd-signature-type">number</span></h5>
+								</li>
+								<li>
+									<h5>rk: <span class="tsd-signature-type">number</span></h5>
+								</li>
+								<li>
+									<h5>rw: <span class="tsd-signature-type">number</span></h5>
+									<div class="tsd-comment tsd-typography">
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="shapetype" class="tsd-anchor"></a>
+					<h3>shape<wbr>Type</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">shape<wbr>Type<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in rapier3d.d.ts:24</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>The type of the shape of this collider.</p>
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="translation" class="tsd-anchor"></a>
+					<h3>translation</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">translation<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="vector.html" class="tsd-signature-type">Vector</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in rapier3d.d.ts:14</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>The world-space position of this collider.</p>
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <a href="vector.html" class="tsd-signature-type">Vector</a></h4>
+						</li>
+					</ul>
+				</section>
+			</section>
+		</div>
+		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
+			<nav class="tsd-navigation primary">
+				<ul>
+					<li class="globals  ">
+						<a href="../globals.html"><em>Globals</em></a>
+					</li>
+				</ul>
+			</nav>
+			<nav class="tsd-navigation secondary menu-sticky">
+				<ul class="before-current">
+				</ul>
+				<ul class="current">
+					<li class="current tsd-kind-class">
+						<a href="collider.html" class="tsd-kind-icon">Collider</a>
+						<ul>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="collider.html#density" class="tsd-kind-icon">density</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="collider.html#friction" class="tsd-kind-icon">friction</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="collider.html#halfextents" class="tsd-kind-icon">half<wbr>Extents</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="collider.html#handle" class="tsd-kind-icon">handle</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="collider.html#parent" class="tsd-kind-icon">parent</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="collider.html#parenthandle" class="tsd-kind-icon">parent<wbr>Handle</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="collider.html#radius" class="tsd-kind-icon">radius</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="collider.html#rotation" class="tsd-kind-icon">rotation</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="collider.html#setpositiondebug" class="tsd-kind-icon">set<wbr>Position<wbr>Debug</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="collider.html#shapetype" class="tsd-kind-icon">shape<wbr>Type</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="collider.html#translation" class="tsd-kind-icon">translation</a>
+							</li>
+						</ul>
+					</li>
+				</ul>
+				<ul class="after-current">
+					<li class=" tsd-kind-class">
+						<a href="colliderdesc.html" class="tsd-kind-icon">Collider<wbr>Desc</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="joint.html" class="tsd-kind-icon">Joint</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="jointdesc.html" class="tsd-kind-icon">Joint<wbr>Desc</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="rigidbody.html" class="tsd-kind-icon">Rigid<wbr>Body</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="rigidbodydesc.html" class="tsd-kind-icon">Rigid<wbr>Body<wbr>Desc</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="rotation.html" class="tsd-kind-icon">Rotation</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="vector.html" class="tsd-kind-icon">Vector</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="world.html" class="tsd-kind-icon">World</a>
+					</li>
+				</ul>
+			</nav>
+		</div>
+	</div>
+</div>
+<footer class="with-border-bottom">
+	<div class="container">
+		<h2>Legend</h2>
+		<div class="tsd-legend-group">
+			<ul class="tsd-legend">
+				<li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static method</span></li>
+			</ul>
+		</div>
+	</div>
+</footer>
+<div class="container tsd-generator">
+	<p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p>
+</div>
+<div class="overlay"></div>
+<script src="../assets/js/main.js"></script>
+</body>
+</html>
