@@ -98,6 +98,7 @@
 						<section class="tsd-index-section ">
 							<h3>Methods</h3>
 							<ul class="tsd-index-list">
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="rigidbodydesc.html#setrotation" class="tsd-kind-icon">set<wbr>Rotation</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="rigidbodydesc.html#settranslation" class="tsd-kind-icon">set<wbr>Translation</a></li>
 							</ul>
 						</section>
@@ -116,7 +117,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in rapier2d.d.ts:260</li>
+									<li>Defined in rapier2d.d.ts:436</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -156,7 +157,7 @@
 					<div class="tsd-signature tsd-kind-icon">position<span class="tsd-signature-symbol">:</span> <a href="vector.html" class="tsd-signature-type">Vector</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in rapier2d.d.ts:287</li>
+							<li>Defined in rapier2d.d.ts:471</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -173,6 +174,42 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Methods</h2>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="setrotation" class="tsd-anchor"></a>
+					<h3>set<wbr>Rotation</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">set<wbr>Rotation<span class="tsd-signature-symbol">(</span>angle<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in rapier2d.d.ts:466</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Sets the rotation angle of the rigid-body to be created.</p>
+								</div>
+								<a href="#parameters" id="parameters" style="color: inherit; text-decoration: none;">
+									<h1>Parameters</h1>
+								</a>
+								<ul>
+									<li><code>angle</code>: the rotation angle.</li>
+								</ul>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>angle: <span class="tsd-signature-type">number</span></h5>
+									<div class="tsd-comment tsd-typography">
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
 					<a name="settranslation" class="tsd-anchor"></a>
 					<h3>set<wbr>Translation</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
@@ -182,19 +219,19 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in rapier2d.d.ts:282</li>
+									<li>Defined in rapier2d.d.ts:458</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>Sets the world-space position of this rigid-body.</p>
+									<p>Sets the world-space position of the rigid-body to be created.</p>
 								</div>
 								<a href="#parameters" id="parameters" style="color: inherit; text-decoration: none;">
 									<h1>Parameters</h1>
 								</a>
 								<ul>
-									<li><code>x</code>: the position of this rigid-body along the <code>x</code> axis.</li>
-									<li><code>y</code>: the position of this rigid-body along the <code>y</code> axis.</li>
+									<li><code>x</code>: the position of the rigid-body to be created along the <code>x</code> axis.</li>
+									<li><code>y</code>: the position of the rigid-body to be created along the <code>y</code> axis.</li>
 								</ul>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -224,11 +261,17 @@
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
+					<li class=" tsd-kind-enum">
+						<a href="../enums/proximity.html" class="tsd-kind-icon">Proximity</a>
+					</li>
 					<li class=" tsd-kind-class">
 						<a href="collider.html" class="tsd-kind-icon">Collider</a>
 					</li>
 					<li class=" tsd-kind-class">
 						<a href="colliderdesc.html" class="tsd-kind-icon">Collider<wbr>Desc</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="eventqueue.html" class="tsd-kind-icon">Event<wbr>Queue</a>
 					</li>
 					<li class=" tsd-kind-class">
 						<a href="joint.html" class="tsd-kind-icon">Joint</a>
@@ -249,6 +292,9 @@
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class">
 								<a href="rigidbodydesc.html#position" class="tsd-kind-icon">position</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="rigidbodydesc.html#setrotation" class="tsd-kind-icon">set<wbr>Rotation</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="rigidbodydesc.html#settranslation" class="tsd-kind-icon">set<wbr>Translation</a>

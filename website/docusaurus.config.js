@@ -15,11 +15,11 @@ module.exports = {
         theme: require('prism-react-renderer/themes/github'),
         additionalLanguages: ['toml', 'rust'],
     },
-//    announcementBar: {
-//      id: 'supportus',
-//      content:
-//        '⭐️ If you like Rapier, give it a star on <a target="_blank" rel="noopener noreferrer" href="https://github.com/dimforge/rapier">GitHub</a>! ⭐️',
-//    },
+    announcementBar: {
+      id: 'supportus',
+      content:
+        '⭐️ If you like Rapier, give it a star on <a target="_blank" rel="noopener noreferrer" href="https://github.com/dimforge/rapier">GitHub</a>! ⭐️',
+    },
     navbar: {
       title: 'Rapier',
       logo: {
@@ -45,15 +45,21 @@ module.exports = {
           position: 'left',
         },
         // {to: 'blog', label: 'Blog', position: 'left'},
-        // {
-        //   href: 'https://github.com/dimforge/rapier',
-        //   label: 'GitHub',
-        //   position: 'right',
-        // },
+        {
+          href: 'https://github.com/dimforge/rapier',
+          label: 'GitHub',
+          position: 'right',
+        },
       ],
     },
     footer: {
       style: 'dark',
+      logo: {
+        alt: 'Dimforge EURL Logo',
+        src: 'https://www.dimforge.com/img/logo/logo_dimforge_small_rect.svg',
+        href: 'https://www.dimforge.com/'
+      },
+      copyright: `Built by <a href="https://www.dimforge.com">Dimforge, EURL</a>.`,
       links: [
         {
           title: 'Resources',
@@ -96,10 +102,10 @@ module.exports = {
             //   label: 'Blog',
             //   to: 'blog',
             // },
-            // {
-            //   label: 'GitHub',
-            //   href: 'https://github.com/dimforge/rapier',
-            // },
+            {
+              label: 'GitHub',
+              href: 'https://github.com/dimforge/rapier',
+            },
           ],
         },
       ],

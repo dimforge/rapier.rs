@@ -87,6 +87,12 @@
 						<section class="tsd-index-section ">
 							<h3>Methods</h3>
 							<ul class="tsd-index-list">
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="rigidbody.html#applyforce" class="tsd-kind-icon">apply<wbr>Force</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="rigidbody.html#applyforceatpoint" class="tsd-kind-icon">apply<wbr>Force<wbr>AtPoint</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="rigidbody.html#applyimpulse" class="tsd-kind-icon">apply<wbr>Impulse</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="rigidbody.html#applyimpulseatpoint" class="tsd-kind-icon">apply<wbr>Impulse<wbr>AtPoint</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="rigidbody.html#applytorque" class="tsd-kind-icon">apply<wbr>Torque</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="rigidbody.html#applytorqueimpulse" class="tsd-kind-icon">apply<wbr>Torque<wbr>Impulse</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="rigidbody.html#bodytype" class="tsd-kind-icon">body<wbr>Type</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="rigidbody.html#collider" class="tsd-kind-icon">collider</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="rigidbody.html#createcollider" class="tsd-kind-icon">create<wbr>Collider</a></li>
@@ -97,7 +103,11 @@
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="rigidbody.html#linvel" class="tsd-kind-icon">linvel</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="rigidbody.html#mass" class="tsd-kind-icon">mass</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="rigidbody.html#numcolliders" class="tsd-kind-icon">num<wbr>Colliders</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="rigidbody.html#rotation" class="tsd-kind-icon">rotation</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="rigidbody.html#setrotation" class="tsd-kind-icon">set<wbr>Rotation</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="rigidbody.html#settranslation" class="tsd-kind-icon">set<wbr>Translation</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="rigidbody.html#translation" class="tsd-kind-icon">translation</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="rigidbody.html#wakeup" class="tsd-kind-icon">wake<wbr>Up</a></li>
 							</ul>
 						</section>
 					</div>
@@ -105,6 +115,254 @@
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Methods</h2>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="applyforce" class="tsd-anchor"></a>
+					<h3>apply<wbr>Force</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">apply<wbr>Force<span class="tsd-signature-symbol">(</span>force<span class="tsd-signature-symbol">: </span><a href="vector.html" class="tsd-signature-type">Vector</a>, wakeUp<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in rapier3d.d.ts:421</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Applies a force at the center-of-mass of this rigid-body.</p>
+								</div>
+								<a href="#parameters" id="parameters" style="color: inherit; text-decoration: none;">
+									<h1>Parameters</h1>
+								</a>
+								<ul>
+									<li><code>force</code>: the world-space force to apply on the rigid-body.</li>
+									<li><code>wakeUp</code>: should the rigid-body be automatically woken-up?</li>
+								</ul>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>force: <a href="vector.html" class="tsd-signature-type">Vector</a></h5>
+								</li>
+								<li>
+									<h5>wakeUp: <span class="tsd-signature-type">boolean</span></h5>
+									<div class="tsd-comment tsd-typography">
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="applyforceatpoint" class="tsd-anchor"></a>
+					<h3>apply<wbr>Force<wbr>AtPoint</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">apply<wbr>Force<wbr>AtPoint<span class="tsd-signature-symbol">(</span>force<span class="tsd-signature-symbol">: </span><a href="vector.html" class="tsd-signature-type">Vector</a>, point<span class="tsd-signature-symbol">: </span><a href="vector.html" class="tsd-signature-type">Vector</a>, wakeUp<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in rapier3d.d.ts:463</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Applies a force at the given world-space point of this rigid-body.</p>
+								</div>
+								<a href="#parameters" id="parameters" style="color: inherit; text-decoration: none;">
+									<h1>Parameters</h1>
+								</a>
+								<ul>
+									<li><code>force</code>: the world-space force to apply on the rigid-body.</li>
+									<li><code>point</code>: the world-space point where the impulse is to be applied on the rigid-body.</li>
+									<li><code>wakeUp</code>: should the rigid-body be automatically woken-up?</li>
+								</ul>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>force: <a href="vector.html" class="tsd-signature-type">Vector</a></h5>
+								</li>
+								<li>
+									<h5>point: <a href="vector.html" class="tsd-signature-type">Vector</a></h5>
+								</li>
+								<li>
+									<h5>wakeUp: <span class="tsd-signature-type">boolean</span></h5>
+									<div class="tsd-comment tsd-typography">
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="applyimpulse" class="tsd-anchor"></a>
+					<h3>apply<wbr>Impulse</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">apply<wbr>Impulse<span class="tsd-signature-symbol">(</span>impulse<span class="tsd-signature-symbol">: </span><a href="vector.html" class="tsd-signature-type">Vector</a>, wakeUp<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in rapier3d.d.ts:431</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Applies an impulse at the center-of-mass of this rigid-body.</p>
+								</div>
+								<a href="#parameters" id="parameters" style="color: inherit; text-decoration: none;">
+									<h1>Parameters</h1>
+								</a>
+								<ul>
+									<li><code>impulse</code>: the world-space impulse to apply on the rigid-body.</li>
+									<li><code>wakeUp</code>: should the rigid-body be automatically woken-up?</li>
+								</ul>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>impulse: <a href="vector.html" class="tsd-signature-type">Vector</a></h5>
+								</li>
+								<li>
+									<h5>wakeUp: <span class="tsd-signature-type">boolean</span></h5>
+									<div class="tsd-comment tsd-typography">
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="applyimpulseatpoint" class="tsd-anchor"></a>
+					<h3>apply<wbr>Impulse<wbr>AtPoint</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">apply<wbr>Impulse<wbr>AtPoint<span class="tsd-signature-symbol">(</span>impulse<span class="tsd-signature-symbol">: </span><a href="vector.html" class="tsd-signature-type">Vector</a>, point<span class="tsd-signature-symbol">: </span><a href="vector.html" class="tsd-signature-type">Vector</a>, wakeUp<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in rapier3d.d.ts:475</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Applies an impulse at the given world-space point of this rigid-body.</p>
+								</div>
+								<a href="#parameters" id="parameters" style="color: inherit; text-decoration: none;">
+									<h1>Parameters</h1>
+								</a>
+								<ul>
+									<li><code>impulse</code>: the world-space impulse to apply on the rigid-body.</li>
+									<li><code>point</code>: the world-space point where the impulse is to be applied on the rigid-body.</li>
+									<li><code>wakeUp</code>: should the rigid-body be automatically woken-up?</li>
+								</ul>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>impulse: <a href="vector.html" class="tsd-signature-type">Vector</a></h5>
+								</li>
+								<li>
+									<h5>point: <a href="vector.html" class="tsd-signature-type">Vector</a></h5>
+								</li>
+								<li>
+									<h5>wakeUp: <span class="tsd-signature-type">boolean</span></h5>
+									<div class="tsd-comment tsd-typography">
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="applytorque" class="tsd-anchor"></a>
+					<h3>apply<wbr>Torque</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">apply<wbr>Torque<span class="tsd-signature-symbol">(</span>torque<span class="tsd-signature-symbol">: </span><a href="vector.html" class="tsd-signature-type">Vector</a>, wakeUp<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in rapier3d.d.ts:441</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Applies a torque at the center-of-mass of this rigid-body.</p>
+								</div>
+								<a href="#parameters" id="parameters" style="color: inherit; text-decoration: none;">
+									<h1>Parameters</h1>
+								</a>
+								<ul>
+									<li><code>torque</code>: the world-space torque to apply on the rigid-body.</li>
+									<li><code>wakeUp</code>: should the rigid-body be automatically woken-up?</li>
+								</ul>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>torque: <a href="vector.html" class="tsd-signature-type">Vector</a></h5>
+								</li>
+								<li>
+									<h5>wakeUp: <span class="tsd-signature-type">boolean</span></h5>
+									<div class="tsd-comment tsd-typography">
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="applytorqueimpulse" class="tsd-anchor"></a>
+					<h3>apply<wbr>Torque<wbr>Impulse</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">apply<wbr>Torque<wbr>Impulse<span class="tsd-signature-symbol">(</span>torque_impulse<span class="tsd-signature-symbol">: </span><a href="vector.html" class="tsd-signature-type">Vector</a>, wakeUp<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in rapier3d.d.ts:451</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Applies an impulsive torque at the center-of-mass of this rigid-body.</p>
+								</div>
+								<a href="#parameters" id="parameters" style="color: inherit; text-decoration: none;">
+									<h1>Parameters</h1>
+								</a>
+								<ul>
+									<li><code>torque impulse</code>: the world-space torque impulse to apply on the rigid-body.</li>
+									<li><code>wakeUp</code>: should the rigid-body be automatically woken-up?</li>
+								</ul>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>torque_impulse: <a href="vector.html" class="tsd-signature-type">Vector</a></h5>
+								</li>
+								<li>
+									<h5>wakeUp: <span class="tsd-signature-type">boolean</span></h5>
+									<div class="tsd-comment tsd-typography">
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
 					<a name="bodytype" class="tsd-anchor"></a>
 					<h3>body<wbr>Type</h3>
@@ -115,7 +373,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in rapier3d.d.ts:274</li>
+									<li>Defined in rapier3d.d.ts:396</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -137,7 +395,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in rapier3d.d.ts:269</li>
+									<li>Defined in rapier3d.d.ts:391</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -148,7 +406,7 @@
 									<h1>Parameters</h1>
 								</a>
 								<ul>
-									<li><code>at</code>: The index of the collidder to retrieve. Must be a number in <code>[0, this.numColliders()[</code>.<pre><code>  This index is **<span class="hljs-keyword">not</span>** <span class="hljs-keyword">the</span> same <span class="hljs-keyword">as</span> <span class="hljs-keyword">the</span> unique identifier <span class="hljs-keyword">of</span> <span class="hljs-keyword">the</span> collider.</code></pre></li>
+									<li><code>at</code>: The index of the collider to retrieve. Must be a number in <code>[0, this.numColliders()[</code>.<pre><code>  This index is **<span class="hljs-keyword">not</span>** <span class="hljs-keyword">the</span> same <span class="hljs-keyword">as</span> <span class="hljs-keyword">the</span> unique identifier <span class="hljs-keyword">of</span> <span class="hljs-keyword">the</span> collider.</code></pre></li>
 								</ul>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -171,7 +429,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in rapier3d.d.ts:249</li>
+									<li>Defined in rapier3d.d.ts:371</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -205,7 +463,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in rapier3d.d.ts:254</li>
+									<li>Defined in rapier3d.d.ts:376</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -227,7 +485,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in rapier3d.d.ts:289</li>
+									<li>Defined in rapier3d.d.ts:411</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -249,7 +507,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in rapier3d.d.ts:284</li>
+									<li>Defined in rapier3d.d.ts:406</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -271,7 +529,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in rapier3d.d.ts:279</li>
+									<li>Defined in rapier3d.d.ts:401</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -293,7 +551,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in rapier3d.d.ts:235</li>
+									<li>Defined in rapier3d.d.ts:347</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -315,7 +573,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in rapier3d.d.ts:240</li>
+									<li>Defined in rapier3d.d.ts:352</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -337,7 +595,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in rapier3d.d.ts:259</li>
+									<li>Defined in rapier3d.d.ts:381</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -346,6 +604,131 @@
 								</div>
 							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="rotation" class="tsd-anchor"></a>
+					<h3>rotation</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">rotation<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="rotation.html" class="tsd-signature-type">Rotation</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in rapier3d.d.ts:308</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>The world-space orientation of this rigid-body.</p>
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <a href="rotation.html" class="tsd-signature-type">Rotation</a></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="setrotation" class="tsd-anchor"></a>
+					<h3>set<wbr>Rotation</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">set<wbr>Rotation<span class="tsd-signature-symbol">(</span>x<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, y<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, z<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, w<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, wakeUp<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in rapier3d.d.ts:342</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Sets the rotation quaternion of this rigid-body.</p>
+								</div>
+								<p>This does nothing if a zero quaternion is provided.</p>
+								<a href="#parameters" id="parameters" style="color: inherit; text-decoration: none;">
+									<h1>Parameters</h1>
+								</a>
+								<ul>
+									<li><code>x</code>: the first vector component of the quaternion.</li>
+									<li><code>y</code>: the second vector component of the quaternion.</li>
+									<li><code>z</code>: the third vector component of the quaternion.</li>
+									<li><code>w</code>: the scalar component of the quaternion.</li>
+									<li><code>wakeUp</code>: forces the rigid-body to wake-up so it is properly affected by forces if it
+									wasn&#39;t moving before modifying its position.</li>
+								</ul>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>x: <span class="tsd-signature-type">number</span></h5>
+								</li>
+								<li>
+									<h5>y: <span class="tsd-signature-type">number</span></h5>
+								</li>
+								<li>
+									<h5>z: <span class="tsd-signature-type">number</span></h5>
+								</li>
+								<li>
+									<h5>w: <span class="tsd-signature-type">number</span></h5>
+								</li>
+								<li>
+									<h5>wakeUp: <span class="tsd-signature-type">boolean</span></h5>
+									<div class="tsd-comment tsd-typography">
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="settranslation" class="tsd-anchor"></a>
+					<h3>set<wbr>Translation</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">set<wbr>Translation<span class="tsd-signature-symbol">(</span>x<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, y<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, z<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, wakeUp<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in rapier3d.d.ts:323</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Sets the translation of this rigid-body.</p>
+								</div>
+								<a href="#parameters" id="parameters" style="color: inherit; text-decoration: none;">
+									<h1>Parameters</h1>
+								</a>
+								<ul>
+									<li><code>x</code>: the world-space position of the rigid-body along the <code>x</code> axis.</li>
+									<li><code>y</code>: the world-space position of the rigid-body along the <code>y</code> axis.</li>
+									<li><code>z</code>: the world-space position of the rigid-body along the <code>z</code> axis.</li>
+									<li><code>wakeUp</code>: forces the rigid-body to wake-up so it is properly affected by forces if it
+									wasn&#39;t moving before modifying its position.</li>
+								</ul>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>x: <span class="tsd-signature-type">number</span></h5>
+								</li>
+								<li>
+									<h5>y: <span class="tsd-signature-type">number</span></h5>
+								</li>
+								<li>
+									<h5>z: <span class="tsd-signature-type">number</span></h5>
+								</li>
+								<li>
+									<h5>wakeUp: <span class="tsd-signature-type">boolean</span></h5>
+									<div class="tsd-comment tsd-typography">
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -359,15 +742,42 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in rapier3d.d.ts:230</li>
+									<li>Defined in rapier3d.d.ts:303</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>The world-space position of this rigid-body.</p>
+									<p>The world-space translation of this rigid-body.</p>
 								</div>
 							</div>
 							<h4 class="tsd-returns-title">Returns <a href="vector.html" class="tsd-signature-type">Vector</a></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="wakeup" class="tsd-anchor"></a>
+					<h3>wake<wbr>Up</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">wake<wbr>Up<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in rapier3d.d.ts:362</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Wakes this rigid-body up.</p>
+								</div>
+								<p>A dynamic rigid-body that does not move during several consecutive frames will
+									be put to sleep by the physics engine, i.e., it will stop being simulated in order
+									to avoid useless computations.
+									This methods forces a sleeping rigid-body to wake-up. This is useful, e.g., before modifying
+								the position of a dynamic body so that it is properly simulated afterwards.</p>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -383,11 +793,17 @@
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
+					<li class=" tsd-kind-enum">
+						<a href="../enums/proximity.html" class="tsd-kind-icon">Proximity</a>
+					</li>
 					<li class=" tsd-kind-class">
 						<a href="collider.html" class="tsd-kind-icon">Collider</a>
 					</li>
 					<li class=" tsd-kind-class">
 						<a href="colliderdesc.html" class="tsd-kind-icon">Collider<wbr>Desc</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="eventqueue.html" class="tsd-kind-icon">Event<wbr>Queue</a>
 					</li>
 					<li class=" tsd-kind-class">
 						<a href="joint.html" class="tsd-kind-icon">Joint</a>
@@ -400,6 +816,24 @@
 					<li class="current tsd-kind-class">
 						<a href="rigidbody.html" class="tsd-kind-icon">Rigid<wbr>Body</a>
 						<ul>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="rigidbody.html#applyforce" class="tsd-kind-icon">apply<wbr>Force</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="rigidbody.html#applyforceatpoint" class="tsd-kind-icon">apply<wbr>Force<wbr>AtPoint</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="rigidbody.html#applyimpulse" class="tsd-kind-icon">apply<wbr>Impulse</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="rigidbody.html#applyimpulseatpoint" class="tsd-kind-icon">apply<wbr>Impulse<wbr>AtPoint</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="rigidbody.html#applytorque" class="tsd-kind-icon">apply<wbr>Torque</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="rigidbody.html#applytorqueimpulse" class="tsd-kind-icon">apply<wbr>Torque<wbr>Impulse</a>
+							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="rigidbody.html#bodytype" class="tsd-kind-icon">body<wbr>Type</a>
 							</li>
@@ -431,7 +865,19 @@
 								<a href="rigidbody.html#numcolliders" class="tsd-kind-icon">num<wbr>Colliders</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="rigidbody.html#rotation" class="tsd-kind-icon">rotation</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="rigidbody.html#setrotation" class="tsd-kind-icon">set<wbr>Rotation</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="rigidbody.html#settranslation" class="tsd-kind-icon">set<wbr>Translation</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="rigidbody.html#translation" class="tsd-kind-icon">translation</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="rigidbody.html#wakeup" class="tsd-kind-icon">wake<wbr>Up</a>
 							</li>
 						</ul>
 					</li>

@@ -3,8 +3,8 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>JointDesc | @dimforge/rapier2d</title>
-	<meta name="description" content="Documentation for @dimforge/rapier2d">
+	<title>Proximity | @dimforge/rapier3d</title>
+	<meta name="description" content="Documentation for @dimforge/rapier3d">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
 </head>
@@ -22,7 +22,7 @@
 						<li class="state loading">Preparing search index...</li>
 						<li class="state failure">The search index is not available</li>
 					</ul>
-					<a href="../index.html" class="title">@dimforge/rapier2d</a>
+					<a href="../index.html" class="title">@dimforge/rapier3d</a>
 				</div>
 				<div class="table-cell" id="tsd-widgets">
 					<div id="tsd-filter">
@@ -54,10 +54,10 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="jointdesc.html">JointDesc</a>
+					<a href="proximity.html">Proximity</a>
 				</li>
 			</ul>
-			<h1>Class JointDesc</h1>
+			<h1>Enumeration Proximity</h1>
 		</div>
 	</div>
 </header>
@@ -67,68 +67,71 @@
 			<section class="tsd-panel tsd-comment">
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
-						<p>The description of a joint to be constructed.</p>
+						<p>The proximity state of a sensor collider and another collider.</p>
 					</div>
-					<p>Note that the rigid-bodies the joint is attached to are configuration
-					when the joint is constructed with <code>world.createJoint</code>.</p>
 				</div>
-			</section>
-			<section class="tsd-panel tsd-hierarchy">
-				<h3>Hierarchy</h3>
-				<ul class="tsd-hierarchy">
-					<li>
-						<span class="target">JointDesc</span>
-					</li>
-				</ul>
 			</section>
 			<section class="tsd-panel-group tsd-index-group">
 				<h2>Index</h2>
 				<section class="tsd-panel tsd-index-panel">
 					<div class="tsd-index-content">
 						<section class="tsd-index-section ">
-							<h3>Methods</h3>
+							<h3>Enumeration members</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><a href="jointdesc.html#ball" class="tsd-kind-icon">ball</a></li>
+								<li class="tsd-kind-enum-member tsd-parent-kind-enum"><a href="proximity.html#disjoint" class="tsd-kind-icon">Disjoint</a></li>
+								<li class="tsd-kind-enum-member tsd-parent-kind-enum"><a href="proximity.html#intersecting" class="tsd-kind-icon">Intersecting</a></li>
+								<li class="tsd-kind-enum-member tsd-parent-kind-enum"><a href="proximity.html#withinmargin" class="tsd-kind-icon">Within<wbr>Margin</a></li>
 							</ul>
 						</section>
 					</div>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
-				<h2>Methods</h2>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-static">
-					<a name="ball" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagStatic">Static</span> ball</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-static">
-						<li class="tsd-signature tsd-kind-icon">ball<span class="tsd-signature-symbol">(</span>anchor1<span class="tsd-signature-symbol">: </span><a href="vector.html" class="tsd-signature-type">Vector</a>, anchor2<span class="tsd-signature-symbol">: </span><a href="vector.html" class="tsd-signature-type">Vector</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="jointdesc.html" class="tsd-signature-type">JointDesc</a></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in rapier2d.d.ts:255</li>
-								</ul>
-							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>Create a new joint descriptor that builds Ball joints.</p>
-								</div>
-								<p>A ball joints allows three relative rotational degrees of freedom
-									by preventing any relative translation between the anchors of the
-								two attached rigid-bodies.</p>
-							</div>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>anchor1: <a href="vector.html" class="tsd-signature-type">Vector</a></h5>
-								</li>
-								<li>
-									<h5>anchor2: <a href="vector.html" class="tsd-signature-type">Vector</a></h5>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <a href="jointdesc.html" class="tsd-signature-type">JointDesc</a></h4>
-						</li>
-					</ul>
+				<h2>Enumeration members</h2>
+				<section class="tsd-panel tsd-member tsd-kind-enum-member tsd-parent-kind-enum">
+					<a name="disjoint" class="tsd-anchor"></a>
+					<h3>Disjoint</h3>
+					<div class="tsd-signature tsd-kind-icon">Disjoint<span class="tsd-signature-symbol">:</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in rapier3d.d.ts:18</li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>The sensor is disjoint from the other collider.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-enum-member tsd-parent-kind-enum">
+					<a name="intersecting" class="tsd-anchor"></a>
+					<h3>Intersecting</h3>
+					<div class="tsd-signature tsd-kind-icon">Intersecting<span class="tsd-signature-symbol">:</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in rapier3d.d.ts:10</li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>The sensor is intersecting the other collider.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-enum-member tsd-parent-kind-enum">
+					<a name="withinmargin" class="tsd-anchor"></a>
+					<h3>Within<wbr>Margin</h3>
+					<div class="tsd-signature tsd-kind-icon">Within<wbr>Margin<span class="tsd-signature-symbol">:</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in rapier3d.d.ts:14</li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>The sensor is within tolerance margin of the other collider.</p>
+						</div>
+					</div>
 				</section>
 			</section>
 		</div>
@@ -142,47 +145,53 @@
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
-					<li class=" tsd-kind-enum">
-						<a href="../enums/proximity.html" class="tsd-kind-icon">Proximity</a>
-					</li>
-					<li class=" tsd-kind-class">
-						<a href="collider.html" class="tsd-kind-icon">Collider</a>
-					</li>
-					<li class=" tsd-kind-class">
-						<a href="colliderdesc.html" class="tsd-kind-icon">Collider<wbr>Desc</a>
-					</li>
-					<li class=" tsd-kind-class">
-						<a href="eventqueue.html" class="tsd-kind-icon">Event<wbr>Queue</a>
-					</li>
-					<li class=" tsd-kind-class">
-						<a href="joint.html" class="tsd-kind-icon">Joint</a>
-					</li>
 				</ul>
 				<ul class="current">
-					<li class="current tsd-kind-class">
-						<a href="jointdesc.html" class="tsd-kind-icon">Joint<wbr>Desc</a>
+					<li class="current tsd-kind-enum">
+						<a href="proximity.html" class="tsd-kind-icon">Proximity</a>
 						<ul>
-							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-static">
-								<a href="jointdesc.html#ball" class="tsd-kind-icon">ball</a>
+							<li class=" tsd-kind-enum-member tsd-parent-kind-enum">
+								<a href="proximity.html#disjoint" class="tsd-kind-icon">Disjoint</a>
+							</li>
+							<li class=" tsd-kind-enum-member tsd-parent-kind-enum">
+								<a href="proximity.html#intersecting" class="tsd-kind-icon">Intersecting</a>
+							</li>
+							<li class=" tsd-kind-enum-member tsd-parent-kind-enum">
+								<a href="proximity.html#withinmargin" class="tsd-kind-icon">Within<wbr>Margin</a>
 							</li>
 						</ul>
 					</li>
 				</ul>
 				<ul class="after-current">
 					<li class=" tsd-kind-class">
-						<a href="rigidbody.html" class="tsd-kind-icon">Rigid<wbr>Body</a>
+						<a href="../classes/collider.html" class="tsd-kind-icon">Collider</a>
 					</li>
 					<li class=" tsd-kind-class">
-						<a href="rigidbodydesc.html" class="tsd-kind-icon">Rigid<wbr>Body<wbr>Desc</a>
+						<a href="../classes/colliderdesc.html" class="tsd-kind-icon">Collider<wbr>Desc</a>
 					</li>
 					<li class=" tsd-kind-class">
-						<a href="rotation.html" class="tsd-kind-icon">Rotation</a>
+						<a href="../classes/eventqueue.html" class="tsd-kind-icon">Event<wbr>Queue</a>
 					</li>
 					<li class=" tsd-kind-class">
-						<a href="vector.html" class="tsd-kind-icon">Vector</a>
+						<a href="../classes/joint.html" class="tsd-kind-icon">Joint</a>
 					</li>
 					<li class=" tsd-kind-class">
-						<a href="world.html" class="tsd-kind-icon">World</a>
+						<a href="../classes/jointdesc.html" class="tsd-kind-icon">Joint<wbr>Desc</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="../classes/rigidbody.html" class="tsd-kind-icon">Rigid<wbr>Body</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="../classes/rigidbodydesc.html" class="tsd-kind-icon">Rigid<wbr>Body<wbr>Desc</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="../classes/rotation.html" class="tsd-kind-icon">Rotation</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="../classes/vector.html" class="tsd-kind-icon">Vector</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="../classes/world.html" class="tsd-kind-icon">World</a>
 					</li>
 				</ul>
 			</nav>
