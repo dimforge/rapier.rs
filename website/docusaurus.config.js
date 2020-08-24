@@ -119,7 +119,7 @@ module.exports = {
         docs: {
           homePageId: 'user_guides/about_rapier',
           sidebarPath: require.resolve('./sidebars.js'),
-          showLastUpdateTime: true,
+          showLastUpdateTime: false,
           remarkPlugins: [math],
           rehypePlugins: [katex],
         },

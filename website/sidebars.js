@@ -6,7 +6,8 @@ module.exports = {
       'Rust': [
         'user_guides/rust/getting_started',
         'user_guides/rust/rigid_body_simulation',
-        'user_guides/rust/integration_parameters'
+        'user_guides/rust/integration_parameters',
+        'user_guides/rust/integration_to_bevy'
       ],
       'JavaScript': [ 'user_guides/javascript/getting_started' ],
     }],

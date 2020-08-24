@@ -435,7 +435,7 @@ let _ = ColliderBuilder::cuboid(0.5, 0.2);
 // Builder for a capsule-shaped collider. The capsule principal axis is the `x` coordinate axis.
 let _ = ColliderBuilder::capsule_x(0.5, 0.2);
 // Builder for a capsule-shaped collider. The capsule principal axis is the `y` coordinate axis.
-let _ = ColliderBuilder::capsule_y(0.5);
+let _ = ColliderBuilder::capsule_y(0.5, 0.2);
 // Builder for a triangle-mesh-shaped collider.
 let _ = ColliderBuilder::trimesh(vertices, indices);
 // Builder for a heightfield-shaped collider.
@@ -455,9 +455,8 @@ let collider = ColliderBuilder::new(Shape::Ball(Ball::new(0.5))
     // Whether this collider is a sensor, i.e., generate only proximity events.
     // Default: false
     .sensor(true)
-    // All done, actually build the collider into the `world`.
-    // It will be attached to the body with handle `parent_body_handle`.
-    .build(parent_body_handle);
+    // All done, actually build the collider.
+    .build();
 ```
 
   </TabItem>
@@ -496,9 +495,8 @@ let collider = ColliderBuilder::new(Shape::Ball(Ball::new(0.5))
     // Whether this collider is a sensor, i.e., generate only proximity events.
     // Default: false
     .sensor(true)
-    // All done, actually build the collider into the `world`.
-    // It will be attached to the body with handle `parent_body_handle`.
-    .build(parent_body_handle);
+    // All done, actually build the collider.
+    .build();
 ```
 
   </TabItem>
@@ -511,9 +509,10 @@ a collider:
 
 ```rust
 let mut collider_set = DefaultColliderSet::new();
-let handle = collider_set.insert(collider);
+let handle = collider_set.insert(collider, parent_handle, &mut rigid_body_set);
 ```
 
+When inserting the collider, it will be attached to the rigid-body specified by is handle `parent_handle`.
 Upon insertion, the collider set will return a handle to the collider. This will allow you to get a reference to this
 collider if needed later:
 
@@ -541,8 +540,8 @@ let shape = ShapeHandle::new(Ball::new(1.5));
 let collider = ColliderBuilder::new(shape)
     .density(1.0)
     .translation(Vector3::y() * 5.0)
-    .build(BodyPartHandle(parent_handle, 0));
-let collider_handle = collider_set.insert(collider);
+    .build();
+let collider_handle = collider_set.insert(collider, parent_handle, &mut body_set);
 ```
 
 In this example the body part handle we specified was `BodyPartHandle(parent_handle, 0)`. This means that the collider
@@ -552,10 +551,10 @@ of several body parts. Thus, attaching a collider to a multibody link requires s
 link: `BodyPartHandle(parent_handle, link_index)` where `link_index` is an integer lying between 0 and the total number
 of links the multibody has.
 
-!!! Note
+:::Note
     If a collider is given a density, it will contribute to the mass and angular inertia of the body part it is
-    attached to. This will take effect only after the next call to `mechanical_world.step(...)` or
-    `mechanical_world.maintain(...)`.
+    attached to.
+:::
 
 The following shows a way to retrieve the handle of the body attached to a collider:
 
