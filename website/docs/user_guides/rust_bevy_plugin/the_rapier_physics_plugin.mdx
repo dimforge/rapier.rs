@@ -195,11 +195,117 @@ Once these components are added, three things will happen during the next step o
 The current version of our `bevy_rapier` plugin is limited to one rigid-body **and** one collider per entity. An entity
 with a rigid-body but no collider is not supported. Nor is an entity with no rigid-body and a collider. Entities with
 multiple rigid-bodies or multiple colliders attached to them are not supported either. This will be improved in future
-version of our plugins.
+versions of our plugins.
 :::
 
 ## Creating joints
+The creation of joints is slightly different from the creation of rigid-bodies and colliders because a joint affects
+two rigid-bodies at the same time. First joint parameters like `BallJoint`, `FixedJoint`, etc. have to be created and
+initialized, as usual. However instead of calling `JointSet::insert_joint(...)` directly to create the joint, we
+need to create a `JointBuilderComponent` which is responsible for letting the Rapier plugin know that a joint has to
+be created between two Bevy entities containing a rigid-body each:
 
+
+<Tabs
+  groupId="dim"
+  defaultValue="2D"
+  values={[
+    {label: 'Example 2D', value: '2D'},
+    {label: 'Example 3D', value: '3D'},
+  ]}>
+  <TabItem value="2D">
+
+```rust
+use bevy::prelude::*;
+use bevy_rapier2d::na::Point2;
+use bevy_rapier2d::physics::{JointBuilderComponent, RapierPhysicsPlugin};
+use bevy_rapier2d::rapier::dynamics::{BallJoint, RigidBodyBuilder};
+use bevy_rapier2d::rapier::geometry::ColliderBuilder;
+
+fn main() {
+    App::build()
+        .add_plugin(RapierPhysicsPlugin)
+        .add_startup_system(setup_physics.system())
+        .run();
+}
+
+fn setup_physics(mut commands: Commands) {
+    // Static rigid-body with a cuboid shape.
+    let rigid_body1 = RigidBodyBuilder::new_static();
+    let collider1 = ColliderBuilder::cuboid(10.0, 1.0);
+    // Keep the entity identifier.
+    let entity1 = commands
+        .spawn((rigid_body1, collider1))
+        .current_entity()
+        .unwrap();
+
+    // Dynamic rigid-body with ball shape.
+    let rigid_body2 = RigidBodyBuilder::new_dynamic().translation(0.0, 3.0);
+    let collider2 = ColliderBuilder::ball(0.5);
+    // Keep the entity identifier.
+    let entity2 = commands
+        .spawn((rigid_body2, collider2))
+        .current_entity()
+        .unwrap();
+
+    // Create the joint.
+    let joint_params = BallJoint::new(Point2::origin(), Point2::new(0.0, -3.0));
+    let joint_builder_component = JointBuilderComponent::new(joint_params, entity1, entity2);
+    commands.spawn((joint_builder_component,));
+}
+```
+
+  </TabItem>
+  <TabItem value="3D">
+
+```rust
+use bevy::prelude::*;
+use bevy_rapier3d::na::Point3;
+use bevy_rapier3d::physics::{JointBuilderComponent, RapierPhysicsPlugin};
+use bevy_rapier3d::rapier::dynamics::{BallJoint, RigidBodyBuilder};
+use bevy_rapier3d::rapier::geometry::ColliderBuilder;
+
+fn main() {
+    App::build()
+        .add_plugin(RapierPhysicsPlugin)
+        .add_startup_system(setup_physics.system())
+        .run();
+}
+
+fn setup_physics(mut commands: Commands) {
+    // Static rigid-body with a cuboid shape.
+    let rigid_body1 = RigidBodyBuilder::new_static();
+    let collider1 = ColliderBuilder::cuboid(10.0, 1.0, 10.0);
+    // Keep the entity identifier.
+    let entity1 = commands
+        .spawn((rigid_body1, collider1))
+        .current_entity()
+        .unwrap();
+
+    // Dynamic rigid-body with ball shape.
+    let rigid_body2 = RigidBodyBuilder::new_dynamic().translation(0.0, 3.0, 0.0);
+    let collider2 = ColliderBuilder::ball(0.5);
+    // Keep the entity identifier.
+    let entity2 = commands
+        .spawn((rigid_body2, collider2))
+        .current_entity()
+        .unwrap();
+
+    // Create the joint.
+    let joint_params = BallJoint::new(Point3::origin(), Point3::new(0.0, -3.0, 0.0));
+    let joint_builder_component = JointBuilderComponent::new(joint_params, entity1, entity2);
+    commands.spawn((joint_builder_component,));
+}
+```
+
+  </TabItem>
+</Tabs>
+
+This `JointBuilderComponent` is a transient component that will cause one of the Rapier plugin systems to:
+1. Create the corresponding `Joint` and add it to the `JointSet` resource.
+2. Remove this `JointBuilderComponent` from the processed entity.
+3. Add a `JointHandleComponent` to the processed entity. This new component will contain an handle necessary to get
+   a reference to the joint from the `JointSet`. It also contains the identifiers of the entity this joint is attached to.
 
 ## Handling contact/proximity events
 The `RapierPhysicsPlugin` automatically creates and add the `EventQueue` resource to the Bevy app. This event queue
