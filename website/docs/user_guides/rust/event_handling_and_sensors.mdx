@@ -1,0 +1,251 @@
+---
+id: event_handling_and_sensors
+title: Event handling and sensors
+sidebar_label: Event handling and sensors
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+Besides the physics simulation itself, applications often need to perform specific actions when some particular events
+occur inside of the physics world. For example, we might want to generate sounds when two solids collide, or open a
+door when a player comes close to it, detect when a projectile hits a target, etc. To allow those kinds of actions, it
+is possible to know when two objects start/stop colliding.
+
+In addition, a special kind of collider, called [sensors](#sensors) that do not generate any contacts points, but will detect when they
+start/stop touching another collider (be it another sensor or not). This is often useful to detect, e.g., that a player
+entered a specific area.
+
+Finally it is possible to retrieve at any time the set of colliders interacting with another collider using various
+[iterators](#interaction-iterators) provided by the contact and proximity graphs.
+
+## Sensors
+Sensors are a special type of [collider](/docs/user_guides/rust/rigid_body_simulation#colliders) that don't generate any contact.
+Like regular colliders, they have to be added to the `ColliderSet`, are given a geometric shape, and are attached to a rigid-body.
+They are commonly used for detecting proximity, e.g., to detect when a player enters a
+specific area or is close to a door.
+
+The creation of a sensor is identical to the creation of a regular collider except that its sensor flag is set to `true`:
+
+```rust
+let sensor = ColliderBuilder::ball(0.5)
+    .sensor(true)
+    .build();
+// Add to the collider set.
+let sensor_handle = collider_set.insert(sensor, parent_body, &mut body_set);
+```
+
+As presented in the next [section](/event_handling_and_sensors/#event-handling) sensors and regular colliders both
+generate events of different types to distinguish events due to contacts from events due to sensors.
+
+<!--
+:::note
+Because sensors are just special cases of colliders, they can be given a specific **collision group** so they
+generate events only with a subset of sensors and colliders. The procedure for setting up collision groups is the
+same as for regular colliders as described in [that section](rigid_body_simulations_with_contacts/#collision-groups).
+:::
+-->
+
+## Interaction handling
+I order to handle physics events, it is necessary to collect them using a structure implementing the `EventHandler` trait.
+Because **Rapier** can be paralellized, this event handler must be `Send + Sync`. One such structure provided by `Rapier`
+is the `pipeline::ChannelEventCollector`. This event collector contains channels from the
+[crossbeam crate](https://crates.io/crates/crossbeam). These channels will be populated with events during each called
+to `pipeline.step`:
+
+
+<Tabs
+  groupId="dim"
+  defaultValue="2D"
+  values={[
+    {label: 'Example 2D', value: '2D'},
+    {label: 'Example 3D', value: '3D'},
+  ]}>
+  <TabItem value="2D">
+
+```rust
+use rapier2d::na::Vector2;
+use rapier2d::dynamics::{JointSet, RigidBodySet, IntegrationParameters};
+use rapier2d::geometry::{BroadPhase, NarrowPhase, ColliderSet};
+use rapier2d::pipeline::{PhysicsPipeline, ChannelEventCollector};
+
+fn main() {
+    // Here the gravity is -9.81 along the y axis.
+    let mut pipeline = PhysicsPipeline::new();
+    let gravity = Vector2::new(0.0, -9.81);
+    let integration_parameters = IntegrationParameters::default();
+    let mut broad_phase = BroadPhase::new();
+    let mut narrow_phase = NarrowPhase::new();
+    let mut bodies = RigidBodySet::new();
+    let mut colliders = ColliderSet::new();
+    let mut joints = JointSet::new();
+    // Initialize the event collector.
+    let (contact_send, contact_recv) = crossbeam::channel::unbounded();
+    let (proximity_send, proximity_recv) = crossbeam::channel::unbounded();
+    let event_handler = ChannelEventCollector::new(proximity_send, contact_send);
+
+    // Run the simulation in the game loop.
+    loop {
+        pipeline.step(
+            &gravity,
+            &integration_parameters,
+            &mut broad_phase,
+            &mut narrow_phase,
+            &mut bodies,
+            &mut colliders,
+            &mut joints,
+            &event_handler
+        );
+
+        while let Ok(proximity_event) = proximity_recv.try_recv() {
+            // Handle the proximity event.
+        }
+
+        while let Ok(contact_event) = contact_recv.try_recv() {
+            // Handle the contact event.
+        }
+    }
+}
+```
+
+  </TabItem>
+  <TabItem value="3D">
+
+```rust
+use rapier3d::na::Vector3;
+use rapier3d::dynamics::{JointSet, RigidBodySet, IntegrationParameters};
+use rapier3d::geometry::{BroadPhase, NarrowPhase, ColliderSet};
+use rapier3d::pipeline::{PhysicsPipeline, ChannelEventCollector};
+
+fn main() {
+    // Here the gravity is -9.81 along the y axis.
+    let mut pipeline = PhysicsPipeline::new();
+    let gravity = Vector3::new(0.0, -9.81, 0.0);
+    let integration_parameters = IntegrationParameters::default();
+    let mut broad_phase = BroadPhase::new();
+    let mut narrow_phase = NarrowPhase::new();
+    let mut bodies = RigidBodySet::new();
+    let mut colliders = ColliderSet::new();
+    let mut joints = JointSet::new();
+    // Initialize the event collector.
+    let (contact_send, contact_recv) = crossbeam::channel::unbounded();
+    let (proximity_send, proximity_recv) = crossbeam::channel::unbounded();
+    let event_handler = ChannelEventCollector::new(proximity_send, contact_send);
+
+    // Run the simulation in the game loop.
+    loop {
+        pipeline.step(
+            &gravity,
+            &integration_parameters,
+            &mut broad_phase,
+            &mut narrow_phase,
+            &mut bodies,
+            &mut colliders,
+            &mut joints,
+            &event_handler
+        );
+
+        while let Ok(proximity_event) = proximity_recv.try_recv() {
+            // Handle the proximity event.
+        }
+
+        while let Ok(contact_event) = contact_recv.try_recv() {
+            // Handle the contact event.
+        }
+    }
+}
+```
+
+  </TabItem>
+</Tabs>
+
+:::note
+Contact and proximity events identify the involved colliders by their handle. It is possible to retrieve the handle of
+the body a collider is attached to: `colliders.get(collider_handle).unwrap().parent()`.
+:::
+
+### Proximity events
+Proximity events are triggered when two sensors, or one collider and one sensor,
+transition between two different proximity statuses. There are three possible proximity statuses:
+
+1. `Proximity::Intersecting` indicates two sensors (or one sensor and one collider) are touching/penetrating.
+2. `Proximity::WithinMargin` indicates two sensors (or one sensor and one collider) are not touching but separated by a
+   distance smaller than a small margin given to each collider by the physics pipeline.
+3. `Proximity::Disjoint` indicates two sensors (or one sensor and one collider) are no longer touching, and are too far
+   apart to be closer than the sum of the `linear_prediction` given to each collider.
+
+One proximity event has the type `ProximityEvent`:
+
+| Field         | Description |
+|--             | --          |
+| `collider1`   | The handle of the first collider/sensor involved in the proximity. |
+| `collider2`   | The handle of the second collider/sensor involved in the proximity. |
+| `prev_status` | The previous proximity status of the colliders/sensors. |
+| `new_status`  | The current proximity status of the colliders/sensors. |
+
+Only status changes are reported, so `prev_status != new_status` is guaranteed. On the other
+hand, keep in mind that the body a collider/sensor is attached to is not required to have a smooth
+motion. Thus, the transition from, e.g., `Proximity::Intersecting` to
+`Proximity::Disjoint` is possible even if a smooth motion would have
+necessarily triggered transitions from `::Intersecting` to `::WithinMargin` and
+then from `::WithinMargin` to `::Disjoint` instead.
+
+### Contact events
+Contact events are triggered when two colliders transition between having zero contact points and at least one.
+Transitioning between one to more than one contact points is not reported.
+
+An iterator through all contact events may be retrieved by the `.contact_events()`
+method of the `World`. The yielded `ContactEvent` enum has two variants:
+
+1. `ContactEvent::Started(h1, h2)` to indicate the transition between
+0 to at least one contact point.
+2. `ContactEvent::Stopped(h1, h2)` to indicate the transition between
+at least one contact point to 0.
+
+Here `h1` and `h2` identify the handles of the colliders involved in the contact.
+
+<!--
+In the case of starting contacts, it is possible to retrieve the contacts by obtaining
+a reference to the contact manifold with:
+
+```rust
+if let Some(collider1, collider2, algorithm, manifold) = geometrical_world.contact_pair(handle1, handle2) {
+   // ...
+}
+```
+
+## Interaction iterators
+Besides polling events, it is possible to retrieve at any time the complete list of colliders interacting with another
+one using the `GeometricalWorld` (or its type alias `DefaultGeometricalWorld`).
+
+:::note "The **is_effective** flag"
+In the following table, the `is_effective` parameter is something you likely want to always set to `true`.
+
+Setting it to `false` will yield results that may be misleading. Indeed, setting this to `false` will return **all**
+the pairs created by the narrow-phase of the collision detection pipeline. Therefore, it will include all pairs that
+are close enough to require the narrow phase to deal with them but that may not actually be in contact or proximity,
+depending on the `linear_prediction` and `angular_prediction` parameters set during the
+[collider construction](/rigid_body_simulations_with_contacts/#colliders). Setting `is_effective` to `true` will
+filter-out those spurious pairs for you.
+:::
+
+| Method | Description |
+|--      |--           |
+| `.contact_pairs(is_effective)`  | Iterator through all the contact pairs. If `is_effective` is `true`, only pairs involving actual contacts (i.e. contacts within the shapes margin or penetrating) are yielded. |
+| `.proximity_pairs(is_effective)`  | Iterator through all the proximity pairs. If `is_effective` is `true`, only pairs with a proximity equal to `Proximity::Intersecting` are yielded. |
+| `.interaction_pairs(is_effective)`  | Combination of `.contact_pairs` and `.proximity_pairs` into a single iterator. |
+| `.contact_pair(h1, h2, is_effective)`  | The contact pair, if any, between the colliders identified by `h1` and `h2`. If `is_effective` is `true`, only a pair involving actual contacts (i.e. contacts within the shapes margin or penetrating) is returned. |
+| `.proximity_pair(h1, h2, is_effective)`  | The proximity pair, if any, between the colliders identified by `h1` and `h2`. If `is_effective` is `true`, only a pair involving a proximity equal to `Proximity::Intersecting` is returned. |
+| `.interaction_pair(h1, h2, is_effective)`  | Combination of `.contact_pair` and `.proximity_pair` in a single iterator. |
+| `.contacts_with(h, is_effective)`  | Iterator through all the proximity algorithms and colliders in contact with the one identified by `h`. If `is_effective` is `true`, only pairs involving actual contacts (i.e. contacts within the shapes margin or penetrating) are yielded. |
+| `.proximities_with(h, is_effective)`  | Iterator through all the proximity algorithms and colliders in proximity of the one identified by `h`. If `is_effective` is `true`, only pairs with a proximity equal to `Proximity::Intersecting` are yielded. |
+| `.interactions_with(h, is_effective)`  | Combination of `.contacts_with` and `.proximities_with` on a single iterator. |
+| `.colliders_in_contact_with(h)`  | Iterator through all the colliders in contact with the one identified by `h`, i.e., non-sensor colliders with shapes (margin included) that intersect the shape (margin included) of the one identified by `h` |
+| `.colliders_in_proximity_of(h)`  | Iterator through all the colliders in proximity `Proximity::Intersecting` of the one identified by `h`. The collider identified by `h` and/or one of the intersecting colliders will be a sensor. |
+| `.colliders_interacting_with(h)`  | Combination of `.collider_in_contact_with` and `.colliders_in_proximity_of` on a single iterator. |
+
+:::note "Proximity events"
+Recall that a proximity can only occur between a sensor collider and another collider (sensor or not). On
+the other hand, contacts only occur between two non-sensor colliders.
+:::
+-->

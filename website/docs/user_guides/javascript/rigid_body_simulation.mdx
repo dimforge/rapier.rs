@@ -24,13 +24,15 @@ step by step inside of the game loop using its `world.step()` method:
 
 ```js
 import('@dimforge/rapier2d').then(RAPIER => {
-  let gravity = new RAPIER.Vector(0.0, -9.81);
-  let world = new RAPIER.World(gravity);
+  let world = new RAPIER.World(0.0, -9.81);
 
   // Game loop. Replace by your own game loop system.
-  while (true) {
+  let gameLoop = () => {
       world.step();
+      setTimeout(gameLoop, 16);
   }
+
+  gameLoop();
 })
 ```
 
@@ -39,13 +41,15 @@ import('@dimforge/rapier2d').then(RAPIER => {
 
 ```js
 import('@dimforge/rapier3d').then(RAPIER => {
-  let gravity = new RAPIER.Vector(0.0, -9.81, 0.0);
-  let world = new RAPIER.World(gravity);
+  let world = new RAPIER.World(0.0, -9.81, 0.0);
 
   // Game loop. Replace by your own game loop system.
-  while (true) {
+  let gameLoop = () => {
       world.step();
+      setTimeout(gameLoop, 16);
   }
+
+  gameLoop();
 })
 ```
 
@@ -76,8 +80,7 @@ To create a rigid-body, we must first initialize its `RigidBodyDesc` descriptor:
 
 ```js
 import('@dimforge/rapier2d').then(RAPIER => {
-  let gravity = new RAPIER.Vector(0.0, -9.81);
-  let world = new RAPIER.World(gravity);
+  let world = new RAPIER.World(0.0, -9.81);
 
   // Create a dynamic rigid-body.
   // Use "static" for a static rigid-body instead.
@@ -86,13 +89,17 @@ import('@dimforge/rapier2d').then(RAPIER => {
   let rigidBody = world.createRigidBody(rigidBodyDesc);
 
   // Game loop. Replace by your own game loop system.
-  while (true) {
-      world.step();
+  let gameLoop = () => {
+    world.step();
 
-      // Get and print the rigid-body's position.
-      let position = rigidBody.translation();
-      console.log("Rigid-body position: ", position);
-  }
+    // Get and print the rigid-body's position.
+    let position = rigidBody.translation();
+    console.log("Rigid-body position: ", position.x, position.y);
+
+    setTimeout(gameLoop, 16);
+  };
+
+  gameLoop();
 })
 ```
 
@@ -101,8 +108,7 @@ import('@dimforge/rapier2d').then(RAPIER => {
 
 ```js
 import('@dimforge/rapier3d').then(RAPIER => {
-  let gravity = new RAPIER.Vector(0.0, -9.81, 0.0);
-  let world = new RAPIER.World(gravity);
+  let world = new RAPIER.World(0.0, -9.81, 0.0);
 
   // Create a dynamic rigid-body.
   // Use "static" for a static rigid-body instead.
@@ -111,12 +117,17 @@ import('@dimforge/rapier3d').then(RAPIER => {
   let rigidBody = world.createRigidBody(rigidBodyDesc);
 
   // Game loop. Replace by your own game loop system.
-  while (true) {
-      world.step();
-      // Get and print the rigid-body's position.
-      let position = rigidBody.translation();
-      console.log("Rigid-body position: ", position);
-  }
+  let gameLoop = () => {
+    world.step();
+
+    // Get and print the rigid-body's position.
+    let position = rigidBody.translation();
+    console.log("Rigid-body position: ", position.x, position.y, position.z);
+
+    setTimeout(gameLoop, 16);
+  };
+
+  gameLoop();
 })
 ```
 
@@ -158,8 +169,7 @@ the given `rigidBody`:
 
 ```js
 import('@dimforge/rapier2d').then(RAPIER => {
-  let gravity = new RAPIER.Vector(0.0, -9.81);
-  let world = new RAPIER.World(gravity);
+  let world = new RAPIER.World(0.0, -9.81);
 
   // Create a dynamic rigid-body.
   // Use "static" for a static rigid-body instead.
@@ -169,17 +179,21 @@ import('@dimforge/rapier2d').then(RAPIER => {
 
   // Create a cuboid collider attached to rigidBody.
   let colliderDesc = RAPIER.ColliderDesc.cuboid(0.5, 0.5);
-  colliderDesc.setDensity(2.0); // The default density is 1.0.
+  colliderDesc.density = 2.0; // The default density is 1.0.
   let collider = rigidBody.createCollider(colliderDesc);
 
   // Game loop. Replace by your own game loop system.
-  while (true) {
-      world.step();
+  let gameLoop = () => {
+    world.step();
 
-      // Get and print the rigid-body's position.
-      let position = rigidBody.translation();
-      console.log("Rigid-body position: ", position);
-  }
+    // Get and print the rigid-body's position.
+    let position = rigidBody.translation();
+    console.log("Rigid-body position: ", position.x, position.y);
+
+    setTimeout(gameLoop, 16);
+  };
+
+  gameLoop();
 })
 ```
 
@@ -188,8 +202,7 @@ import('@dimforge/rapier2d').then(RAPIER => {
 
 ```js
 import('@dimforge/rapier3d').then(RAPIER => {
-  let gravity = new RAPIER.Vector(0.0, -9.81, 0.0);
-  let world = new RAPIER.World(gravity);
+  let world = new RAPIER.World(0.0, -9.81, 0.0);
 
   // Create a dynamic rigid-body.
   // Use "static" for a static rigid-body instead.
@@ -199,16 +212,21 @@ import('@dimforge/rapier3d').then(RAPIER => {
 
   // Create a cuboid collider attached to rigidBody.
   let colliderDesc = RAPIER.ColliderDesc.cuboid(0.5, 0.5, 0.5);
-  colliderDesc.setDensity(2.0); // The default density is 1.0.
+  colliderDesc.density = 2.0; // The default density is 1.0.
   let collider = rigidBody.createCollider(colliderDesc);
 
   // Game loop. Replace by your own game loop system.
-  while (true) {
-      world.step();
-      // Get and print the rigid-body's position.
-      let position = rigidBody.translation();
-      console.log("Rigid-body position: ", position);
-  }
+  let gameLoop = () => {
+    world.step();
+
+    // Get and print the rigid-body's position.
+    let position = rigidBody.translation();
+    console.log("Rigid-body position: ", position.x, position.y, position.z);
+
+    setTimeout(gameLoop, 16);
+  };
+
+  gameLoop();
 })
 ```
 
@@ -235,8 +253,7 @@ won't fall because of gravity:
 
 ```js
 import('@dimforge/rapier2d').then(RAPIER => {
-  let gravity = new RAPIER.Vector(0.0, -9.81);
-  let world = new RAPIER.World(gravity);
+  let world = new RAPIER.World(0.0, -9.81);
 
   // Create the ground
   let groundRigidBodyDesc = new RAPIER.RigidBodyDesc("static");
@@ -252,17 +269,21 @@ import('@dimforge/rapier2d').then(RAPIER => {
 
   // Create a cuboid collider attached to rigidBody.
   let colliderDesc = RAPIER.ColliderDesc.cuboid(0.5, 0.5);
-  colliderDesc.setDensity(2.0); // The default density is 1.0.
+  colliderDesc.density = 2.0; // The default density is 1.0.
   let collider = rigidBody.createCollider(colliderDesc);
 
   // Game loop. Replace by your own game loop system.
-  while (true) {
-      world.step();
+  let gameLoop = () => {
+    world.step();
 
-      // Get and print the rigid-body's position.
-      let position = rigidBody.translation();
-      console.log("Rigid-body position: ", position);
-  }
+    // Get and print the rigid-body's position.
+    let position = rigidBody.translation();
+    console.log("Rigid-body position: ", position.x, position.y);
+
+    setTimeout(gameLoop, 16);
+  };
+
+  gameLoop();
 })
 ```
 
@@ -271,8 +292,7 @@ import('@dimforge/rapier2d').then(RAPIER => {
 
 ```js
 import('@dimforge/rapier3d').then(RAPIER => {
-  let gravity = new RAPIER.Vector(0.0, -9.81, 0.0);
-  let world = new RAPIER.World(gravity);
+  let world = new RAPIER.World(0.0, -9.81, 0.0);
 
   // Create the ground
   let groundRigidBodyDesc = new RAPIER.RigidBodyDesc("static");
@@ -288,16 +308,21 @@ import('@dimforge/rapier3d').then(RAPIER => {
 
   // Create a cuboid collider attached to rigidBody.
   let colliderDesc = RAPIER.ColliderDesc.cuboid(0.5, 0.5, 0.5);
-  colliderDesc.setDensity(2.0); // The default density is 1.0.
+  colliderDesc.density = 2.0; // The default density is 1.0.
   let collider = rigidBody.createCollider(colliderDesc);
 
   // Game loop. Replace by your own game loop system.
-  while (true) {
-      world.step();
-      // Get and print the rigid-body's position.
-      let position = rigidBody.translation();
-      console.log("Rigid-body position: ", position);
-  }
+  let gameLoop = () => {
+    world.step();
+
+    // Get and print the rigid-body's position.
+    let position = rigidBody.translation();
+    console.log("Rigid-body position: ", position.x, position.y, position.z);
+
+    setTimeout(gameLoop, 16);
+  };
+
+  gameLoop();
 })
 ```
 

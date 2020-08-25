@@ -11,14 +11,13 @@ The real-time simulation of rigid-bodies subjected to forces and contacts is the
 video-games, robotics, or animation. Rigid-bodies are typically used to simulate the dynamics of non-deformable solids as well
 as to integrate the trajectory of solids which velocities are controlled by the user (e.g. moving platforms). On
 the other hand, rigid-bodies are not enough to simulate, e.g., cars, ragdolls, or robotic systems, as those use-cases
-require adding restrictions on the relative motion between their parts with joints. Joints are the topic of
-[the next chapter](joint.md).
+require adding restrictions on the relative motion between their parts with joints.
 
 In this chapter, we first show how to initialize a [physics world](#initializing-the-physics-world) which will construct
 all that is to be physically simulated and will drive the physics simulation.
 
 Then we introduce [colliders](#colliders) which are geometric shapes responsible for generating contacts or simulating
-sensors. Those colliders are attached to [rigid-bodies](#rigid-bodies) which are responsible for the simulation of
+sensors. Colliders are attached to [rigid-bodies](#rigid-bodies) which are responsible for the simulation of
 the object trajectory under various forces including gravity.  
 
 ## Basic setup
@@ -34,25 +33,31 @@ First, let's see what is the minimum set of elements that must be setup to have 
   <TabItem value="2D">
 
 ```rust
-extern crate nalgebra as na;
-
-use na::Vector2;
-use rapier2d::dynamics::{JointSet, RigidBodySet};
-use rapier2d::geometry::ColliderSet;
-use rapier2d::world::World;
+use rapier2d::na::Vector2;
+use rapier2d::dynamics::{JointSet, RigidBodySet, IntegrationParameters};
+use rapier2d::geometry::{BroadPhase, NarrowPhase, ColliderSet};
+use rapier2d::pipeline::PhysicsPipeline;
 
 fn main() {
     // Here the gravity is -9.81 along the y axis.
-    let world = World::new(Vector2::new(0.0, -9.81));
+    let mut pipeline = PhysicsPipeline::new();
+    let gravity = Vector2::new(0.0, -9.81);
+    let integration_parameters = IntegrationParameters::default();
+    let mut broad_phase = BroadPhase::new();
+    let mut narrow_phase = NarrowPhase::new();
     let mut bodies = RigidBodySet::new();
     let mut colliders = ColliderSet::new();
     let mut joints = JointSet::new();
     // We ignore contact events for now.
     let event_handler = ();
 
+    // Run the simulation in the game loop.
     loop {
-        // Run the simulation.
-        world.step(
+        pipeline.step(
+            &gravity,
+            &integration_parameters,
+            &mut broad_phase,
+            &mut narrow_phase,
             &mut bodies,
             &mut colliders,
             &mut joints,
@@ -66,25 +71,31 @@ fn main() {
   <TabItem value="3D">
 
 ```rust
-extern crate nalgebra as na;
-
-use na::Vector3;
-use rapier3d::dynamics::{JointSet, RigidBodySet};
-use rapier3d::geometry::ColliderSet;
-use rapier3d::world::World;
+use rapier3d::na::Vector3;
+use rapier3d::dynamics::{JointSet, RigidBodySet, IntegrationParameters};
+use rapier3d::geometry::{BroadPhase, NarrowPhase, ColliderSet};
+use rapier3d::pipeline::PhysicsPipeline;
 
 fn main() {
     // Here the gravity is -9.81 along the y axis.
-    let world = World::new(Vector3::new(0.0, -9.81, 0.0));
+    let mut pipeline = PhysicsPipeline::new();
+    let gravity = Vector3::new(0.0, -9.81, 0.0);
+    let integration_parameters = IntegrationParameters::default();
+    let mut broad_phase = BroadPhase::new();
+    let mut narrow_phase = NarrowPhase::new();
     let mut bodies = RigidBodySet::new();
     let mut colliders = ColliderSet::new();
     let mut joints = JointSet::new();
     // We ignore contact events for now.
     let event_handler = ();
 
+    // Run the simulation in the game loop.
     loop {
-        // Run the simulation.
-        world.step(
+        pipeline.step(
+            &gravity,
+            &integration_parameters,
+            &mut broad_phase,
+            &mut narrow_phase,
             &mut bodies,
             &mut colliders,
             &mut joints,
@@ -97,22 +108,43 @@ fn main() {
   </TabItem>
 </Tabs>
 
-The **world** is responsible for executing the whole simulation: collision detection as well as the simulation of
-physical phenomena: gravity, contact forces, joints, etc. This world will affect:
+The `PhysicsPipeline` is responsible for executing the whole simulation: collision detection as well as the simulation of
+physical phenomena: gravity, contact forces, joints, etc. All the state contained by the `PhysicsPipeline` are workspace
+buffers so you are free to discard it at any time without breaking the simulation. For example, it is perfectly fine
+to re-instantiate a new `PhysicsPipeline` at each game loop iteration. However this will be less efficient due to
+repeated allocations of the workspace buffers. All the actually useful simulation-related data are stored in the arguments
+of `PhysicsPipeline::step`:
 
-- The `RigidBodySet` which is a set rigid-bodies.
-- The `ColliderSet` which is a set of colliders.
-- The `JointSet` which is a set of joint.
+- The gravity is a global force affecting all dynamic rigid-bodies with non-zero mass.
+- The `IntegrationParameters` contains elements to configure the constraint solver.
+- The `BroadPhase` performs coarse AABB-based collision detections.
+- The `NarrowPhase` performs precise contact point determination based on the collision pairs generated by the broad-phase.
+- The `RigidBodySet` contains all the rigid-bodies part of the simulation.
+- The `ColliderSet` contains all the colliders part of the simulation.
+- The `JointSet` contains all the joint constraints part of the simulation.
+- The `event_handler` will collect all the events generated by the physics pipeline. Setting this to `()` simply ignores
+  these events.
 
-It will also use an event-handler for handling events happening during the simulation.
+All the mentioned sets associate a unique handle to each element they contain. These handles are generational indices so
+they don't suffer from the ABA problem.
 
-All those sets associate a unique handle to each element it contains. It is this handle that the physicsworld
-will end up storing on their internal data structure. That way, the world doesn't own the elements itself, which is very
-flexible as it allows, for example, to iterate through all the contact pairs stored by the geometrical world, and retrieve
-at each iteration an immutable reference to a collider involved in the contact at the same time as a mutable reference to
-the body it is attached to so you can apply a force to it. All this is possible without getting borrowing issues.
+Each call to `pipeline.step(...)` will advance the simulation by a time equal to $1/60$ seconds, which is a good default if your
+application has a refresh rate of 60Hz. The length of this timestep can be retrieved by `integration_parameters.dt()` and modified
+using `integration_parameters.set_dt(value)`. Note that if you use the
+recommanded [International System of Units](https://en.wikipedia.org/wiki/International_System_of_Units) (SI units), this
+timestep is to be given in seconds. Keep in mind that the timestep length strongly affects the accuracy of the simulation:
+the smaller the timestep, the more accurate the simulation will be.
 
-The subsequent sections provide more details on each of those elements.
+Changes of timesteps during the simulation should be avoided as much as possible since they may introduce numerical
+instabilities or reduce the constraints solvers convergence.
+
+:::warning
+Note that we are free to replace the `pipeline` by a fresh instance of `PhysicsPipeline` whenever we want. This is not the
+case for the other mutable components. Once at least one `pipeline.step` has been called with these components, they will be
+inter-dependent. Replacing any of them (in subsequent calls to `.step`) with new/other instances may cause unexpected
+behaviors. We are working to ensure this is no longer an issue in the future.
+:::
+
 
 <!--
 
@@ -134,7 +166,7 @@ custom parameters and contact/proximity algorithm dispatchers:
 // Build a broad-phase instance.
 let broad_phase = DBVTBroadPhase::new(na::convert(0.01));
 // Needed to build a narrow phase instance.
-let coll_dispatcher = Box::new(DefaultContactDispatcher::new());
+let coll_dispatcher = Box::new(ContactDispatcher::new());
 let prox_dispatcher = Box::new(DefaultProximityDispatcher::new());
 // Build a narrow-phase instance.
 let narrow_phase = NarrowPhase::new(coll_dispatcher, prox_dispatcher);
@@ -175,9 +207,9 @@ Once the physics world is created, the next step is to create some bodies that w
 ## Rigid-bodies
 A rigid-body is the simplest type of body supported by **rapier**. It can be seen as the aggregation of a position,
 orientation, and mass properties (rotational inertia tensor, mass, and center of mass). It does not hold any information
-regarding its shape which can optionally be specified by attaching one or multiple [colliders](/rigid_body_simulations_with_contacts/#colliders)
-to it. A rigid-body with no collider will be affected by all the forces the world is aware of, including joints attached to it,
-but not by contacts (because it does not have any shape that can be collided to).
+regarding its shape which can optionally be specified by attaching one or multiple [colliders](/docs/user_guides/rust/rigid_body_simulation#colliders)
+to it. A rigid-body with no collider, but with a non-zero mass, will be affected by all the forces the world is aware of,
+including joints attached to it, but not by contacts (because it does not have any shape that can be collided to).
 
 ### Creating a rigid-body
 
@@ -199,7 +231,7 @@ as-is will not lead to a useful result.
   <TabItem value="2D">
 
 ```rust
-use na::{Vector2, Isometry2};
+use rapier2d::na::{Vector2, Isometry2};
 use rapier2d::dynamics::{BodyStatus, RigidBodyBuilder};
 
 // Builder for a static rigid-body.
@@ -236,14 +268,14 @@ let rigid_body = RigidBodyBuilder::new(BodyStatus::Dynamic)
   <TabItem value="3D">
 
 ```rust
-use na::{Vector3, Isometry3};
+use rapier3d::na::{Vector3, Isometry3};
 use rapier3d::dynamics::{BodyStatus, RigidBodyBuilder};
 
- // Builder for a static rigid-body.
+// Builder for a static rigid-body.
 let _ = RigidBodyBuilder::new_static();
- // Builder for a dynamic rigid-body.
+// Builder for a dynamic rigid-body.
 let _ = RigidBodyBuilder::new_dynamic();
- // Builder for a kinematic rigid-body.
+// Builder for a kinematic rigid-body.
 let _ = RigidBodyBuilder::new_kinematic();
 // Builder for a body with a status specified by an enum.
 let rigid_body = RigidBodyBuilder::new(BodyStatus::Dynamic)
@@ -307,8 +339,8 @@ let mut body_set = RigidBodySet::new();
 let handle = body_set.insert(rigid_body);
 ```
 
-Upon insertion, the body set will return a handle to the rigid body. This will allow you to get a reference to this body
-if needed later:
+Upon insertion, the body set will return a handle to the rigid body. This will allow use to get a reference to this body
+later if needed:
 
 ```rust
 let rigid_body = body_set.get(handle);     // Retrieve an immutable reference.
@@ -317,23 +349,22 @@ let rigid_body = body_set.get_mut(handle); // Retrieve a mutable reference.
 
 :::note
 No two bodies in the same body set will share the same handle. This handle is what you should store for future
-addressing of this rigid body as it is required by various operations including: attaching colliders or constraints
+addressing of this rigid body as it is required by various operations including: attaching colliders or joints
 to the rigid-body.
 :::
 
 
 ### Body statuses
-Any body can have one of three different statuses identified by the [`dynamics::BodyStatus`](/rustdoc/rapier3d/dynamics/enum.BodyStatus.html)
-enumeration:
+Any body can have one of three different statuses identified by the `dynamics::BodyStatus` enumeration:
 
 * **`BodyStatus::Dynamic`:** It indicates the body is affected by external forces, inertial forces (gyroscopic, coriolis, etc.)
     and contacts.
 * **`BodyStatus::Static`:** Indicates the body cannot move. It acts as if it has an infinite mass and will not be
     affected by any force. It will continue to collide with dynamic bodies but not with static nor with kinematic
-    ones. This is typically used for the ground or for temporarily freezing a body.
-* **`BodyStatus::Kinematic`:** Indicates the body velocity must not be altered by the physics engine. The user is
-    free to set any velocity and the body position will be integrated at each update accordingly. This is typically
-    used for moving **platforms**, **elevators**, etc.
+    bodies. This is typically used for the ground or for temporarily freezing a body.
+* **`BodyStatus::Kinematic`:** Indicates the body position must not be altered by the physics engine. The user is
+    free to set any position and the body velocity will be deduced at each update accordingly to ensure a realistic
+    behavior of dynamic bodies in contact with it. This is typically used for moving **platforms**, **elevators**, etc.
 
 <!--
 * **`BodyStatus::Disabled`:** Indicates the body should be completely ignored by the physics engine. In practice,
@@ -508,7 +539,7 @@ Once the collider is created it must be added to a collider set. A collider set 
 a collider:
 
 ```rust
-let mut collider_set = DefaultColliderSet::new();
+let mut collider_set = ColliderSet::new();
 let handle = collider_set.insert(collider, parent_handle, &mut rigid_body_set);
 ```
 
@@ -655,33 +686,3 @@ zero since a rigid body has only one part.
 
 -->
 
-## Running the simulation
-To compute new positions and velocities of the various bodies on the physical world, you have to call the
-`world.step(...)` method. Typically, a game loop will look like this:
-
-```rust
-loop {
-    handle_input_events();
-    world.step(
-        &mut body_set,
-        &mut collider_set,
-        &mut joint_set,
-        &event_collector,
-    );
-    handle_physics_events(&event_collector);
-    render_scene();
-}
-```
-
-Physics events are detailed on a dedicated [page](interaction_handling_and_sensors.md) of this guide. One physics step
-will detect contacts between the colliders, generate contact points, compute forces accordingly, and update the positions
-of all bodies. Forces taken into account by **rapier** includes gravity, contact forces, and joints forces.
-
-Each call to `world.step(...)` will advance the simulation by a time equal to $1/60$ seconds, which is adapted if your
-application has a refresh rate of 60Hz. The length of this timestep can be retrieved by `world.timestep()` and modified
-using `world.set_timestep(...)`. Note that if you use the [International System of Units](https://en.wikipedia.org/wiki/International_System_of_Units)
-(SI units), this timestep is to be given in seconds. Keep in mind that the timestep length strongly affects the accuracy
-of the simulation: the smaller the timestep, the more accurate the simulation will be.
-
-Changes of timesteps during the simulation should be avoided as much as possible since they may introduce numerical
-instabilities or reduce the constraints solvers convergence.

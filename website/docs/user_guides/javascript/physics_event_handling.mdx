@@ -34,17 +34,21 @@ import('@dimforge/rapier2d').then(RAPIER => {
   let eventQueue = new RAPIER.EventQueue(true);
 
   // Game loop. Replace by your own game loop system.
-  while (true) {
+  let gameLoop = () => {
       world.stepWithEvents(eventQueue);
 
       eventQueue.drainContactEvents((handle1, handle2, contactStarted) => {
-        console.log("Contact between: " + handle1 + " and " + handle2 + ". Started: " + contactStarted);
+        console.log("Contact between:", handle1, "and", handle2, ". Started:", contactStarted);
       });
 
       eventQueue.drainProximityEvents((handle1, handle2, prevProximity, newProximity) => {
-        console.log("Proximity between: " + handle1 + " and " + handle2 + ". Previous proximity: " + prevProximity + ", new proximity: " + newProximity);
+        console.log("Proximity between: ", handle1, "and", handle2, ". Previous proximity:", prevProximity, "new proximity: ", newProximity);
       });
-  }
+
+      setTimeout(gameLoop);
+  };
+
+  gameLoop();
 })
 ```
 
@@ -58,17 +62,21 @@ import('@dimforge/rapier3d').then(RAPIER => {
   let eventQueue = new RAPIER.EventQueue(true);
 
   // Game loop. Replace by your own game loop system.
-  while (true) {
-      world.stepWithEvents(eventQueue);
+  let gameLoop = () => {
+    world.stepWithEvents(eventQueue);
 
-      eventQueue.drainContactEvents((handle1, handle2, contactStarted) => {
-        console.log("Contact between: " + handle1 + " and " + handle2 + ". Started: " + contactStarted);
-      });
+    eventQueue.drainContactEvents((handle1, handle2, contactStarted) => {
+      console.log("Contact between:", handle1, "and", handle2, ". Started:", contactStarted);
+    });
 
-      eventQueue.drainProximityEvents((handle1, handle2, prevProximity, newProximity) => {
-        console.log("Proximity between: " + handle1 + " and " + handle2 + ". Previous proximity: " + prevProximity + ", new proximity: " + newProximity);
-      });
-  }
+    eventQueue.drainProximityEvents((handle1, handle2, prevProximity, newProximity) => {
+      console.log("Proximity between: ", handle1, "and", handle2, ". Previous proximity:", prevProximity, "new proximity: ", newProximity);
+    });
+
+    setTimeout(gameLoop);
+  };
+
+  gameLoop();
 })
 ```
 

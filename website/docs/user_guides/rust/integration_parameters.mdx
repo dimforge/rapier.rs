@@ -8,13 +8,13 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
 Various aspects of the integrator implemented on **nphysics** can be modified through the
-[integration parameters](/rustdoc/nphysics3d/solver/struct.IntegrationParameters.html). Those parameters can be changed
-by modifying the `world.integration_parameters` field.
+integration parameters. Those parameters can be changed
+by modifying the fields of your instance of `IntegrationParameters`.
 
 Most of these parameters are somewhat advanced and should not be modified unless you know their meaning and effect.
 Several of them are about tuning parameters for optimal simulation stability, or for compromising between efficiency and
 accuracy. They are given default values that work well in the context of video-games or animations. For more realistic
-simulations you may want to change those parameters to favor accuracy over performance:
+simulations you may want to change those parameters to favor accuracy over performance.
 
 ### `dt`
 The timestep length used for each update of the physics engine. The default is $1 / 60$ seconds. This typically corresponds to

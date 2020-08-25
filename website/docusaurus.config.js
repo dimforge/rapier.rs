@@ -18,7 +18,7 @@ module.exports = {
     announcementBar: {
       id: 'supportus',
       content:
-        '⭐️ If you like Rapier, give it a star on <a target="_blank" rel="noopener noreferrer" href="https://github.com/dimforge/rapier">GitHub</a>! ⭐️',
+        '⭐️ If you like Rapier, support us on <a target="_blank" rel="noopener noreferrer" href="https://github.com/sponsors/dimforge">GitHub Sponsor</a>! ⭐️',
     },
     navbar: {
       title: 'Rapier',
