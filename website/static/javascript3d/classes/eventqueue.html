@@ -68,8 +68,14 @@
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
 						<p>A structure responsible for collecting events generated
+							by the physics engine.
+							A structure responsible for collecting events generated
 						by the physics engine.</p>
 					</div>
+					<p>To avoid leaking WASM resources, this MUST be freed manually with <code>eventQueue.free()</code>
+					once you are done using it.</p>
+					<p>To avoid leaking WASM resources, this MUST be freed manually with <code>eventQueue.free()</code>
+					once you are done using it.</p>
 				</div>
 			</section>
 			<section class="tsd-panel tsd-hierarchy">
@@ -91,11 +97,18 @@
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
+							<h3>Properties</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="eventqueue.html#raw" class="tsd-kind-icon">raw</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section ">
 							<h3>Methods</h3>
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="eventqueue.html#clear" class="tsd-kind-icon">clear</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="eventqueue.html#draincontactevents" class="tsd-kind-icon">drain<wbr>Contact<wbr>Events</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="eventqueue.html#drainproximityevents" class="tsd-kind-icon">drain<wbr>Proximity<wbr>Events</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="eventqueue.html#free" class="tsd-kind-icon">free</a></li>
 							</ul>
 						</section>
 					</div>
@@ -107,28 +120,19 @@
 					<a name="constructor" class="tsd-anchor"></a>
 					<h3>constructor</h3>
 					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">new <wbr>Event<wbr>Queue<span class="tsd-signature-symbol">(</span>autoDrain<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="eventqueue.html" class="tsd-signature-type">EventQueue</a></li>
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Event<wbr>Queue<span class="tsd-signature-symbol">(</span>autoDrain<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span>, raw<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">RawEventQueue</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="eventqueue.html" class="tsd-signature-type">EventQueue</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in rapier3d.d.ts:147</li>
+									<li>Defined in pipeline/event_queue.d.ts:29</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
 									<p>Creates a new event collector.</p>
 								</div>
-								<a href="#parameters" id="parameters" style="color: inherit; text-decoration: none;">
-									<h1>Parameters</h1>
-								</a>
-								<ul>
-									<li><code>autoDrain</code>: setting this to <code>true</code> is strongly recommended. If true, the collector will
-										be automatically drained before each <code>world.step(collector)</code>. If false, the collector will
-										keep all events in memory unless it is manually drained/cleared; this may lead to unbounded use of
-									RAM if no drain is performed.</li>
-								</ul>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
@@ -136,13 +140,34 @@
 									<h5>autoDrain: <span class="tsd-signature-type">boolean</span></h5>
 									<div class="tsd-comment tsd-typography">
 										<div class="lead">
+											<p>-setting this to <code>true</code> is strongly recommended. If true, the collector will
+												be automatically drained before each <code>world.step(collector)</code>. If false, the collector will
+												keep all events in memory unless it is manually drained/cleared; this may lead to unbounded use of
+											RAM if no drain is performed.</p>
 										</div>
 									</div>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> raw: <span class="tsd-signature-type">RawEventQueue</span></h5>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <a href="eventqueue.html" class="tsd-signature-type">EventQueue</a></h4>
 						</li>
 					</ul>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Properties</h2>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="raw" class="tsd-anchor"></a>
+					<h3>raw</h3>
+					<div class="tsd-signature tsd-kind-icon">raw<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">RawEventQueue</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in pipeline/event_queue.d.ts:29</li>
+							<li>Defined in pipeline/event_queue.ts:32</li>
+						</ul>
+					</aside>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
@@ -157,12 +182,12 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in rapier3d.d.ts:186</li>
+									<li>Defined in pipeline/event_queue.d.ts:66</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>Removes all events contained by this collector.</p>
+									<p>Removes all events contained by this collector</p>
 								</div>
 							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -173,13 +198,13 @@
 					<a name="draincontactevents" class="tsd-anchor"></a>
 					<h3>drain<wbr>Contact<wbr>Events</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">drain<wbr>Contact<wbr>Events<span class="tsd-signature-symbol">(</span>f<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Function</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+						<li class="tsd-signature tsd-kind-icon">drain<wbr>Contact<wbr>Events<span class="tsd-signature-symbol">(</span>f<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>handle1<span class="tsd-signature-symbol">: </span><a href="../globals.html#colliderhandle" class="tsd-signature-type">ColliderHandle</a>, handle2<span class="tsd-signature-symbol">: </span><a href="../globals.html#colliderhandle" class="tsd-signature-type">ColliderHandle</a>, started<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in rapier3d.d.ts:170</li>
+									<li>Defined in pipeline/event_queue.d.ts:52</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -187,22 +212,43 @@
 									<p>Applies the given javascript closure on each contact event of this collector, then clear
 									the internal contact event buffer.</p>
 								</div>
-								<a href="#parameters" id="parameters" style="color: inherit; text-decoration: none;">
-									<h1>Parameters</h1>
-								</a>
-								<ul>
-									<li><code>f(handle1, handle2, started)</code>:  JavaScript closure applied to each contact event. The
-										closure should take three arguments: two integers representing the handles of the colliders
-										involved in the contact, and a boolean indicating if the contact started (true) or stopped
-									(false).</li>
-								</ul>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>f: <span class="tsd-signature-type">Function</span></h5>
+									<h5>f: <span class="tsd-signature-symbol">(</span>handle1<span class="tsd-signature-symbol">: </span><a href="../globals.html#colliderhandle" class="tsd-signature-type">ColliderHandle</a>, handle2<span class="tsd-signature-symbol">: </span><a href="../globals.html#colliderhandle" class="tsd-signature-type">ColliderHandle</a>, started<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></h5>
 									<div class="tsd-comment tsd-typography">
+										<div class="lead">
+											<p>JavaScript closure applied to each contact event. The
+												closure should take three arguments: two integers representing the handles of the colliders
+												involved in the contact, and a boolean indicating if the contact started (true) or stopped
+											(false).</p>
+										</div>
 									</div>
+									<ul class="tsd-parameters">
+										<li class="tsd-parameter-signature">
+											<ul class="tsd-signatures tsd-kind-type-literal">
+												<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>handle1<span class="tsd-signature-symbol">: </span><a href="../globals.html#colliderhandle" class="tsd-signature-type">ColliderHandle</a>, handle2<span class="tsd-signature-symbol">: </span><a href="../globals.html#colliderhandle" class="tsd-signature-type">ColliderHandle</a>, started<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+											</ul>
+											<ul class="tsd-descriptions">
+												<li class="tsd-description">
+													<h4 class="tsd-parameters-title">Parameters</h4>
+													<ul class="tsd-parameters">
+														<li>
+															<h5>handle1: <a href="../globals.html#colliderhandle" class="tsd-signature-type">ColliderHandle</a></h5>
+														</li>
+														<li>
+															<h5>handle2: <a href="../globals.html#colliderhandle" class="tsd-signature-type">ColliderHandle</a></h5>
+														</li>
+														<li>
+															<h5>started: <span class="tsd-signature-type">boolean</span></h5>
+														</li>
+													</ul>
+													<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+												</li>
+											</ul>
+										</li>
+									</ul>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -213,13 +259,13 @@
 					<a name="drainproximityevents" class="tsd-anchor"></a>
 					<h3>drain<wbr>Proximity<wbr>Events</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">drain<wbr>Proximity<wbr>Events<span class="tsd-signature-symbol">(</span>f<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Function</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+						<li class="tsd-signature tsd-kind-icon">drain<wbr>Proximity<wbr>Events<span class="tsd-signature-symbol">(</span>f<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>handle1<span class="tsd-signature-symbol">: </span><a href="../globals.html#colliderhandle" class="tsd-signature-type">ColliderHandle</a>, handle2<span class="tsd-signature-symbol">: </span><a href="../globals.html#colliderhandle" class="tsd-signature-type">ColliderHandle</a>, prevProx<span class="tsd-signature-symbol">: </span><a href="../enums/proximity.html" class="tsd-signature-type">Proximity</a>, newProx<span class="tsd-signature-symbol">: </span><a href="../enums/proximity.html" class="tsd-signature-type">Proximity</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in rapier3d.d.ts:182</li>
+									<li>Defined in pipeline/event_queue.d.ts:62</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -227,24 +273,70 @@
 									<p>Applies the given javascript closure on each proximity event of this collector, then clear
 									the internal proximity event buffer.</p>
 								</div>
-								<a href="#parameters" id="parameters" style="color: inherit; text-decoration: none;">
-									<h1>Parameters</h1>
-								</a>
-								<ul>
-									<li><code>f(handle1, handle2, prev_prox, new_prox)</code>:  JavaScript closure applied to each proximity event. The
-										closure should take four arguments: two integers representing the handles of the colliders
-										involved in the proximity, and two <code>RAPIER.Proximity</code> enums representing the previous proximity
-									status and the new proximity status.</li>
-								</ul>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>f: <span class="tsd-signature-type">Function</span></h5>
+									<h5>f: <span class="tsd-signature-symbol">(</span>handle1<span class="tsd-signature-symbol">: </span><a href="../globals.html#colliderhandle" class="tsd-signature-type">ColliderHandle</a>, handle2<span class="tsd-signature-symbol">: </span><a href="../globals.html#colliderhandle" class="tsd-signature-type">ColliderHandle</a>, prevProx<span class="tsd-signature-symbol">: </span><a href="../enums/proximity.html" class="tsd-signature-type">Proximity</a>, newProx<span class="tsd-signature-symbol">: </span><a href="../enums/proximity.html" class="tsd-signature-type">Proximity</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></h5>
 									<div class="tsd-comment tsd-typography">
+										<div class="lead">
+											<p>JavaScript closure applied to each proximity event. The
+												closure should take four arguments: two integers representing the handles of the colliders
+												involved in the proximity, and two <code>Proximity</code> enums representing the previous proximity
+											status and the new proximity status.</p>
+										</div>
 									</div>
+									<ul class="tsd-parameters">
+										<li class="tsd-parameter-signature">
+											<ul class="tsd-signatures tsd-kind-type-literal">
+												<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>handle1<span class="tsd-signature-symbol">: </span><a href="../globals.html#colliderhandle" class="tsd-signature-type">ColliderHandle</a>, handle2<span class="tsd-signature-symbol">: </span><a href="../globals.html#colliderhandle" class="tsd-signature-type">ColliderHandle</a>, prevProx<span class="tsd-signature-symbol">: </span><a href="../enums/proximity.html" class="tsd-signature-type">Proximity</a>, newProx<span class="tsd-signature-symbol">: </span><a href="../enums/proximity.html" class="tsd-signature-type">Proximity</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+											</ul>
+											<ul class="tsd-descriptions">
+												<li class="tsd-description">
+													<h4 class="tsd-parameters-title">Parameters</h4>
+													<ul class="tsd-parameters">
+														<li>
+															<h5>handle1: <a href="../globals.html#colliderhandle" class="tsd-signature-type">ColliderHandle</a></h5>
+														</li>
+														<li>
+															<h5>handle2: <a href="../globals.html#colliderhandle" class="tsd-signature-type">ColliderHandle</a></h5>
+														</li>
+														<li>
+															<h5>prevProx: <a href="../enums/proximity.html" class="tsd-signature-type">Proximity</a></h5>
+														</li>
+														<li>
+															<h5>newProx: <a href="../enums/proximity.html" class="tsd-signature-type">Proximity</a></h5>
+														</li>
+													</ul>
+													<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+												</li>
+											</ul>
+										</li>
+									</ul>
 								</li>
 							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="free" class="tsd-anchor"></a>
+					<h3>free</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">free<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in pipeline/event_queue.d.ts:42</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Release the WASM memory occupied by this event-queue.</p>
+								</div>
+							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
 						</li>
 					</ul>
@@ -261,15 +353,6 @@
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
-					<li class=" tsd-kind-enum">
-						<a href="../enums/proximity.html" class="tsd-kind-icon">Proximity</a>
-					</li>
-					<li class=" tsd-kind-class">
-						<a href="collider.html" class="tsd-kind-icon">Collider</a>
-					</li>
-					<li class=" tsd-kind-class">
-						<a href="colliderdesc.html" class="tsd-kind-icon">Collider<wbr>Desc</a>
-					</li>
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-class">
@@ -277,6 +360,9 @@
 						<ul>
 							<li class=" tsd-kind-constructor tsd-parent-kind-class">
 								<a href="eventqueue.html#constructor" class="tsd-kind-icon">constructor</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="eventqueue.html#raw" class="tsd-kind-icon">raw</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="eventqueue.html#clear" class="tsd-kind-icon">clear</a>
@@ -287,31 +373,13 @@
 							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="eventqueue.html#drainproximityevents" class="tsd-kind-icon">drain<wbr>Proximity<wbr>Events</a>
 							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="eventqueue.html#free" class="tsd-kind-icon">free</a>
+							</li>
 						</ul>
 					</li>
 				</ul>
 				<ul class="after-current">
-					<li class=" tsd-kind-class">
-						<a href="joint.html" class="tsd-kind-icon">Joint</a>
-					</li>
-					<li class=" tsd-kind-class">
-						<a href="jointdesc.html" class="tsd-kind-icon">Joint<wbr>Desc</a>
-					</li>
-					<li class=" tsd-kind-class">
-						<a href="rigidbody.html" class="tsd-kind-icon">Rigid<wbr>Body</a>
-					</li>
-					<li class=" tsd-kind-class">
-						<a href="rigidbodydesc.html" class="tsd-kind-icon">Rigid<wbr>Body<wbr>Desc</a>
-					</li>
-					<li class=" tsd-kind-class">
-						<a href="rotation.html" class="tsd-kind-icon">Rotation</a>
-					</li>
-					<li class=" tsd-kind-class">
-						<a href="vector.html" class="tsd-kind-icon">Vector</a>
-					</li>
-					<li class=" tsd-kind-class">
-						<a href="world.html" class="tsd-kind-icon">World</a>
-					</li>
 				</ul>
 			</nav>
 		</div>
@@ -325,6 +393,13 @@
 				<li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li>
 				<li class="tsd-kind-property tsd-parent-kind-class"><span class="tsd-kind-icon">Property</span></li>
 				<li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class"><span class="tsd-kind-icon">Accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-interface"><span class="tsd-kind-icon">Property</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private property</span></li>
 			</ul>
 			<ul class="tsd-legend">
 				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static method</span></li>

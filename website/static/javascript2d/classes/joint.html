@@ -64,13 +64,6 @@
 <div class="container container-main">
 	<div class="row">
 		<div class="col-8 col-content">
-			<section class="tsd-panel tsd-comment">
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>A joint attached to two bodies.</p>
-					</div>
-				</div>
-			</section>
 			<section class="tsd-panel tsd-hierarchy">
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
@@ -84,6 +77,19 @@
 				<section class="tsd-panel tsd-index-panel">
 					<div class="tsd-index-content">
 						<section class="tsd-index-section ">
+							<h3>Constructors</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-constructor tsd-parent-kind-class"><a href="joint.html#constructor" class="tsd-kind-icon">constructor</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section ">
+							<h3>Properties</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="joint.html#handle" class="tsd-kind-icon">handle</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="joint.html#rawset" class="tsd-kind-icon">raw<wbr>Set</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section ">
 							<h3>Methods</h3>
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="joint.html#anchor1" class="tsd-kind-icon">anchor1</a></li>
@@ -92,11 +98,86 @@
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="joint.html#axis2" class="tsd-kind-icon">axis2</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="joint.html#bodyhandle1" class="tsd-kind-icon">body<wbr>Handle1</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="joint.html#bodyhandle2" class="tsd-kind-icon">body<wbr>Handle2</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="joint.html#handle" class="tsd-kind-icon">handle</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="joint.html#jointtype" class="tsd-kind-icon">joint<wbr>Type</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="joint.html#isvalid" class="tsd-kind-icon">is<wbr>Valid</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="joint.html#limitsenabled" class="tsd-kind-icon">limits<wbr>Enabled</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="joint.html#limitsmax" class="tsd-kind-icon">limits<wbr>Max</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="joint.html#limitsmin" class="tsd-kind-icon">limits<wbr>Min</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="joint.html#type" class="tsd-kind-icon">type</a></li>
 							</ul>
 						</section>
 					</div>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Constructors</h2>
+				<section class="tsd-panel tsd-member tsd-kind-constructor tsd-parent-kind-class">
+					<a name="constructor" class="tsd-anchor"></a>
+					<h3>constructor</h3>
+					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Joint<span class="tsd-signature-symbol">(</span>rawSet<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">RawJointSet</span>, handle<span class="tsd-signature-symbol">: </span><a href="../globals.html#jointhandle" class="tsd-signature-type">JointHandle</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="joint.html" class="tsd-signature-type">Joint</a></li>
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Joint<span class="tsd-signature-symbol">(</span>rawSet<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">RawJointSet</span>, handle<span class="tsd-signature-symbol">: </span><a href="../globals.html#jointhandle" class="tsd-signature-type">JointHandle</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="joint.html" class="tsd-signature-type">Joint</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in dynamics/joint.ts:29</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>rawSet: <span class="tsd-signature-type">RawJointSet</span></h5>
+								</li>
+								<li>
+									<h5>handle: <a href="../globals.html#jointhandle" class="tsd-signature-type">JointHandle</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="joint.html" class="tsd-signature-type">Joint</a></h4>
+						</li>
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in dynamics/joint.d.ts:24</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>rawSet: <span class="tsd-signature-type">RawJointSet</span></h5>
+								</li>
+								<li>
+									<h5>handle: <a href="../globals.html#jointhandle" class="tsd-signature-type">JointHandle</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="joint.html" class="tsd-signature-type">Joint</a></h4>
+						</li>
+					</ul>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Properties</h2>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="handle" class="tsd-anchor"></a>
+					<h3>handle</h3>
+					<div class="tsd-signature tsd-kind-icon">handle<span class="tsd-signature-symbol">:</span> <a href="../globals.html#jointhandle" class="tsd-signature-type">JointHandle</a></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in dynamics/joint.ts:29</li>
+							<li>Defined in dynamics/joint.d.ts:24</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="rawset" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> raw<wbr>Set</h3>
+					<div class="tsd-signature tsd-kind-icon">raw<wbr>Set<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in dynamics/joint.ts:28</li>
+							<li>Defined in dynamics/joint.d.ts:23</li>
+						</ul>
+					</aside>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
@@ -105,13 +186,14 @@
 					<a name="anchor1" class="tsd-anchor"></a>
 					<h3>anchor1</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">anchor1<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="vector.html" class="tsd-signature-type">Vector</a></li>
+						<li class="tsd-signature tsd-kind-icon">anchor1<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/vector.html" class="tsd-signature-type">Vector</a></li>
+						<li class="tsd-signature tsd-kind-icon">anchor1<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/vector.html" class="tsd-signature-type">Vector</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in rapier2d.d.ts:209</li>
+									<li>Defined in dynamics/joint.ts:78</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -121,7 +203,22 @@
 								<p>The first anchor gives the position of the points application point on the
 								local frame of the first rigid-body it is attached to.</p>
 							</div>
-							<h4 class="tsd-returns-title">Returns <a href="vector.html" class="tsd-signature-type">Vector</a></h4>
+							<h4 class="tsd-returns-title">Returns <a href="../interfaces/vector.html" class="tsd-signature-type">Vector</a></h4>
+						</li>
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in dynamics/joint.d.ts:49</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>The position of the first anchor of this joint.</p>
+								</div>
+								<p>The first anchor gives the position of the points application point on the
+								local frame of the first rigid-body it is attached to.</p>
+							</div>
+							<h4 class="tsd-returns-title">Returns <a href="../interfaces/vector.html" class="tsd-signature-type">Vector</a></h4>
 						</li>
 					</ul>
 				</section>
@@ -129,13 +226,14 @@
 					<a name="anchor2" class="tsd-anchor"></a>
 					<h3>anchor2</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">anchor2<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="vector.html" class="tsd-signature-type">Vector</a></li>
+						<li class="tsd-signature tsd-kind-icon">anchor2<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/vector.html" class="tsd-signature-type">Vector</a></li>
+						<li class="tsd-signature tsd-kind-icon">anchor2<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/vector.html" class="tsd-signature-type">Vector</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in rapier2d.d.ts:217</li>
+									<li>Defined in dynamics/joint.ts:88</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -145,7 +243,22 @@
 								<p>The second anchor gives the position of the points application point on the
 								local frame of the second rigid-body it is attached to.</p>
 							</div>
-							<h4 class="tsd-returns-title">Returns <a href="vector.html" class="tsd-signature-type">Vector</a></h4>
+							<h4 class="tsd-returns-title">Returns <a href="../interfaces/vector.html" class="tsd-signature-type">Vector</a></h4>
+						</li>
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in dynamics/joint.d.ts:56</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>The position of the second anchor of this joint.</p>
+								</div>
+								<p>The second anchor gives the position of the points application point on the
+								local frame of the second rigid-body it is attached to.</p>
+							</div>
+							<h4 class="tsd-returns-title">Returns <a href="../interfaces/vector.html" class="tsd-signature-type">Vector</a></h4>
 						</li>
 					</ul>
 				</section>
@@ -153,24 +266,41 @@
 					<a name="axis1" class="tsd-anchor"></a>
 					<h3>axis1</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">axis1<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="vector.html" class="tsd-signature-type">Vector</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span></li>
+						<li class="tsd-signature tsd-kind-icon">axis1<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/vector.html" class="tsd-signature-type">Vector</a></li>
+						<li class="tsd-signature tsd-kind-icon">axis1<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/vector.html" class="tsd-signature-type">Vector</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in rapier2d.d.ts:226</li>
+									<li>Defined in dynamics/joint.ts:99</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
 									<p>The first axis of this joint, if any.</p>
 								</div>
-								<p>For joints where an application axis makes sence (e.g. the revolute and prismatic joins),
+								<p>For joints where an application axis makes sense (e.g. the revolute and prismatic joins),
 									this returns the application axis on the first rigid-body this joint is attached to, expressed
 								in the local-space of this first rigid-body.</p>
 							</div>
-							<h4 class="tsd-returns-title">Returns <a href="vector.html" class="tsd-signature-type">Vector</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span></h4>
+							<h4 class="tsd-returns-title">Returns <a href="../interfaces/vector.html" class="tsd-signature-type">Vector</a></h4>
+						</li>
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in dynamics/joint.d.ts:64</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>The first axis of this joint, if any.</p>
+								</div>
+								<p>For joints where an application axis makes sense (e.g. the revolute and prismatic joins),
+									this returns the application axis on the first rigid-body this joint is attached to, expressed
+								in the local-space of this first rigid-body.</p>
+							</div>
+							<h4 class="tsd-returns-title">Returns <a href="../interfaces/vector.html" class="tsd-signature-type">Vector</a></h4>
 						</li>
 					</ul>
 				</section>
@@ -178,24 +308,41 @@
 					<a name="axis2" class="tsd-anchor"></a>
 					<h3>axis2</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">axis2<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="vector.html" class="tsd-signature-type">Vector</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span></li>
+						<li class="tsd-signature tsd-kind-icon">axis2<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/vector.html" class="tsd-signature-type">Vector</a></li>
+						<li class="tsd-signature tsd-kind-icon">axis2<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/vector.html" class="tsd-signature-type">Vector</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in rapier2d.d.ts:235</li>
+									<li>Defined in dynamics/joint.ts:110</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
 									<p>The second axis of this joint, if any.</p>
 								</div>
-								<p>For joints where an application axis makes sence (e.g. the revolute and prismatic joins),
+								<p>For joints where an application axis makes sense (e.g. the revolute and prismatic joins),
 									this returns the application axis on the second rigid-body this joint is attached to, expressed
 								in the local-space of this second rigid-body.</p>
 							</div>
-							<h4 class="tsd-returns-title">Returns <a href="vector.html" class="tsd-signature-type">Vector</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span></h4>
+							<h4 class="tsd-returns-title">Returns <a href="../interfaces/vector.html" class="tsd-signature-type">Vector</a></h4>
+						</li>
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in dynamics/joint.d.ts:72</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>The second axis of this joint, if any.</p>
+								</div>
+								<p>For joints where an application axis makes sense (e.g. the revolute and prismatic joins),
+									this returns the application axis on the second rigid-body this joint is attached to, expressed
+								in the local-space of this second rigid-body.</p>
+							</div>
+							<h4 class="tsd-returns-title">Returns <a href="../interfaces/vector.html" class="tsd-signature-type">Vector</a></h4>
 						</li>
 					</ul>
 				</section>
@@ -203,13 +350,14 @@
 					<a name="bodyhandle1" class="tsd-anchor"></a>
 					<h3>body<wbr>Handle1</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">body<wbr>Handle1<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li>
+						<li class="tsd-signature tsd-kind-icon">body<wbr>Handle1<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../globals.html#rigidbodyhandle" class="tsd-signature-type">RigidBodyHandle</a></li>
+						<li class="tsd-signature tsd-kind-icon">body<wbr>Handle1<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../globals.html#rigidbodyhandle" class="tsd-signature-type">RigidBodyHandle</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in rapier2d.d.ts:189</li>
+									<li>Defined in dynamics/joint.ts:48</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -217,7 +365,20 @@
 									<p>The unique integer identifier of the first rigid-body this joint it attached to.</p>
 								</div>
 							</div>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
+							<h4 class="tsd-returns-title">Returns <a href="../globals.html#rigidbodyhandle" class="tsd-signature-type">RigidBodyHandle</a></h4>
+						</li>
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in dynamics/joint.d.ts:34</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>The unique integer identifier of the first rigid-body this joint it attached to.</p>
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <a href="../globals.html#rigidbodyhandle" class="tsd-signature-type">RigidBodyHandle</a></h4>
 						</li>
 					</ul>
 				</section>
@@ -225,13 +386,14 @@
 					<a name="bodyhandle2" class="tsd-anchor"></a>
 					<h3>body<wbr>Handle2</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">body<wbr>Handle2<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li>
+						<li class="tsd-signature tsd-kind-icon">body<wbr>Handle2<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../globals.html#rigidbodyhandle" class="tsd-signature-type">RigidBodyHandle</a></li>
+						<li class="tsd-signature tsd-kind-icon">body<wbr>Handle2<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../globals.html#rigidbodyhandle" class="tsd-signature-type">RigidBodyHandle</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in rapier2d.d.ts:194</li>
+									<li>Defined in dynamics/joint.ts:55</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -239,52 +401,206 @@
 									<p>The unique integer identifier of the second rigid-body this joint is attached to.</p>
 								</div>
 							</div>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
+							<h4 class="tsd-returns-title">Returns <a href="../globals.html#rigidbodyhandle" class="tsd-signature-type">RigidBodyHandle</a></h4>
+						</li>
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in dynamics/joint.d.ts:38</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>The unique integer identifier of the second rigid-body this joint is attached to.</p>
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <a href="../globals.html#rigidbodyhandle" class="tsd-signature-type">RigidBodyHandle</a></h4>
 						</li>
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="handle" class="tsd-anchor"></a>
-					<h3>handle</h3>
+					<a name="isvalid" class="tsd-anchor"></a>
+					<h3>is<wbr>Valid</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">handle<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li>
+						<li class="tsd-signature tsd-kind-icon">is<wbr>Valid<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+						<li class="tsd-signature tsd-kind-icon">is<wbr>Valid<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in rapier2d.d.ts:184</li>
+									<li>Defined in dynamics/joint.ts:41</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>The unique integer identifier of this joint.</p>
+									<p>Checks if this joint is still valid (i.e. that it has
+									not been deleted from the joint set yet).</p>
 								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
+						</li>
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in dynamics/joint.d.ts:30</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Checks if this joint is still valid (i.e. that it has
+									not been deleted from the joint set yet).</p>
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="limitsenabled" class="tsd-anchor"></a>
+					<h3>limits<wbr>Enabled</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">limits<wbr>Enabled<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+						<li class="tsd-signature tsd-kind-icon">limits<wbr>Enabled<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in dynamics/joint.ts:117</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Are the limits enabled for this joint?</p>
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
+						</li>
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in dynamics/joint.d.ts:76</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Are the limits enabled for this joint?</p>
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="limitsmax" class="tsd-anchor"></a>
+					<h3>limits<wbr>Max</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">limits<wbr>Max<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li>
+						<li class="tsd-signature tsd-kind-icon">limits<wbr>Max<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in dynamics/joint.ts:135</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>The max limit of this joint.</p>
+								</div>
+								<p>If this joint as a prismatic joint, returns its max limit.</p>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
+						</li>
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in dynamics/joint.d.ts:88</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>The max limit of this joint.</p>
+								</div>
+								<p>If this joint as a prismatic joint, returns its max limit.</p>
 							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
 						</li>
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="jointtype" class="tsd-anchor"></a>
-					<h3>joint<wbr>Type</h3>
+					<a name="limitsmin" class="tsd-anchor"></a>
+					<h3>limits<wbr>Min</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">joint<wbr>Type<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
+						<li class="tsd-signature tsd-kind-icon">limits<wbr>Min<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li>
+						<li class="tsd-signature tsd-kind-icon">limits<wbr>Min<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in rapier2d.d.ts:201</li>
+									<li>Defined in dynamics/joint.ts:126</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>The min limit of this joint.</p>
+								</div>
+								<p>If this joint as a prismatic joint, returns its min limit.</p>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
+						</li>
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in dynamics/joint.d.ts:82</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>The min limit of this joint.</p>
+								</div>
+								<p>If this joint as a prismatic joint, returns its min limit.</p>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="type" class="tsd-anchor"></a>
+					<h3>type</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">type<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../enums/jointtype.html" class="tsd-signature-type">JointType</a></li>
+						<li class="tsd-signature tsd-kind-icon">type<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../enums/jointtype.html" class="tsd-signature-type">JointType</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in dynamics/joint.ts:62</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
 									<p>The type of this joint given as a string.</p>
 								</div>
-								<p>Can return &quot;Ball&quot;, &quot;Revolute&quot;, &quot;Fixed&quot;, or &quot;Prismatic&quot;.</p>
 							</div>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
+							<h4 class="tsd-returns-title">Returns <a href="../enums/jointtype.html" class="tsd-signature-type">JointType</a></h4>
+						</li>
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in dynamics/joint.d.ts:42</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>The type of this joint given as a string.</p>
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <a href="../enums/jointtype.html" class="tsd-signature-type">JointType</a></h4>
 						</li>
 					</ul>
 				</section>
@@ -301,7 +617,25 @@
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
 					<li class=" tsd-kind-enum">
+						<a href="../enums/bodystatus.html" class="tsd-kind-icon">Body<wbr>Status</a>
+					</li>
+					<li class=" tsd-kind-enum">
+						<a href="../enums/jointtype.html" class="tsd-kind-icon">Joint<wbr>Type</a>
+					</li>
+					<li class=" tsd-kind-enum">
 						<a href="../enums/proximity.html" class="tsd-kind-icon">Proximity</a>
+					</li>
+					<li class=" tsd-kind-enum">
+						<a href="../enums/shapetype.html" class="tsd-kind-icon">Shape<wbr>Type</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="ball.html" class="tsd-kind-icon">Ball</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="broadphase.html" class="tsd-kind-icon">Broad<wbr>Phase</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="capsule.html" class="tsd-kind-icon">Capsule</a>
 					</li>
 					<li class=" tsd-kind-class">
 						<a href="collider.html" class="tsd-kind-icon">Collider</a>
@@ -310,13 +644,34 @@
 						<a href="colliderdesc.html" class="tsd-kind-icon">Collider<wbr>Desc</a>
 					</li>
 					<li class=" tsd-kind-class">
+						<a href="colliderset.html" class="tsd-kind-icon">Collider<wbr>Set</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="cuboid.html" class="tsd-kind-icon">Cuboid</a>
+					</li>
+					<li class=" tsd-kind-class">
 						<a href="eventqueue.html" class="tsd-kind-icon">Event<wbr>Queue</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="heightfield.html" class="tsd-kind-icon">Heightfield</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="integrationparameters.html" class="tsd-kind-icon">Integration<wbr>Parameters</a>
 					</li>
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-class">
 						<a href="joint.html" class="tsd-kind-icon">Joint</a>
 						<ul>
+							<li class=" tsd-kind-constructor tsd-parent-kind-class">
+								<a href="joint.html#constructor" class="tsd-kind-icon">constructor</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="joint.html#handle" class="tsd-kind-icon">handle</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="joint.html#rawset" class="tsd-kind-icon">raw<wbr>Set</a>
+							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="joint.html#anchor1" class="tsd-kind-icon">anchor1</a>
 							</li>
@@ -336,17 +691,44 @@
 								<a href="joint.html#bodyhandle2" class="tsd-kind-icon">body<wbr>Handle2</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="joint.html#handle" class="tsd-kind-icon">handle</a>
+								<a href="joint.html#isvalid" class="tsd-kind-icon">is<wbr>Valid</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="joint.html#jointtype" class="tsd-kind-icon">joint<wbr>Type</a>
+								<a href="joint.html#limitsenabled" class="tsd-kind-icon">limits<wbr>Enabled</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="joint.html#limitsmax" class="tsd-kind-icon">limits<wbr>Max</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="joint.html#limitsmin" class="tsd-kind-icon">limits<wbr>Min</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="joint.html#type" class="tsd-kind-icon">type</a>
 							</li>
 						</ul>
 					</li>
 				</ul>
 				<ul class="after-current">
 					<li class=" tsd-kind-class">
-						<a href="jointdesc.html" class="tsd-kind-icon">Joint<wbr>Desc</a>
+						<a href="jointparams.html" class="tsd-kind-icon">Joint<wbr>Params</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="jointset.html" class="tsd-kind-icon">Joint<wbr>Set</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="narrowphase.html" class="tsd-kind-icon">Narrow<wbr>Phase</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="physicspipeline.html" class="tsd-kind-icon">Physics<wbr>Pipeline</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="querypipeline.html" class="tsd-kind-icon">Query<wbr>Pipeline</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="ray.html" class="tsd-kind-icon">Ray</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="raycolliderintersection.html" class="tsd-kind-icon">Ray<wbr>Collider<wbr>Intersection</a>
 					</li>
 					<li class=" tsd-kind-class">
 						<a href="rigidbody.html" class="tsd-kind-icon">Rigid<wbr>Body</a>
@@ -355,13 +737,43 @@
 						<a href="rigidbodydesc.html" class="tsd-kind-icon">Rigid<wbr>Body<wbr>Desc</a>
 					</li>
 					<li class=" tsd-kind-class">
-						<a href="rotation.html" class="tsd-kind-icon">Rotation</a>
+						<a href="rigidbodyset.html" class="tsd-kind-icon">Rigid<wbr>Body<wbr>Set</a>
 					</li>
 					<li class=" tsd-kind-class">
-						<a href="vector.html" class="tsd-kind-icon">Vector</a>
+						<a href="rotationops.html" class="tsd-kind-icon">Rotation<wbr>Ops</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="serializationpipeline.html" class="tsd-kind-icon">Serialization<wbr>Pipeline</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="trimesh.html" class="tsd-kind-icon">Trimesh</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="vector2.html" class="tsd-kind-icon">Vector2</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="vectorops.html" class="tsd-kind-icon">Vector<wbr>Ops</a>
 					</li>
 					<li class=" tsd-kind-class">
 						<a href="world.html" class="tsd-kind-icon">World</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="../interfaces/vector.html" class="tsd-kind-icon">Vector</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="../globals.html#colliderhandle" class="tsd-kind-icon">Collider<wbr>Handle</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="../globals.html#interactiongroups" class="tsd-kind-icon">Interaction<wbr>Groups</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="../globals.html#jointhandle" class="tsd-kind-icon">Joint<wbr>Handle</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="../globals.html#rigidbodyhandle" class="tsd-kind-icon">Rigid<wbr>Body<wbr>Handle</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="../globals.html#rotation" class="tsd-kind-icon">Rotation</a>
 					</li>
 				</ul>
 			</nav>
@@ -376,6 +788,13 @@
 				<li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li>
 				<li class="tsd-kind-property tsd-parent-kind-class"><span class="tsd-kind-icon">Property</span></li>
 				<li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class"><span class="tsd-kind-icon">Accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-interface"><span class="tsd-kind-icon">Property</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private property</span></li>
 			</ul>
 			<ul class="tsd-legend">
 				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static method</span></li>

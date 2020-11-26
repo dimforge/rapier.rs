@@ -18,7 +18,8 @@
     "react": "^16.8.4",
     "react-dom": "^16.8.4",
     "rehype-katex": "^3.1.0",
-    "remark-math": "^2.0.1"
+    "remark-math": "^2.0.1",
+    "terminus": "^1.1.0"
   },
   "browserslist": {
     "production": [

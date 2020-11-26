@@ -64,13 +64,6 @@
 <div class="container container-main">
 	<div class="row">
 		<div class="col-8 col-content">
-			<section class="tsd-panel tsd-comment">
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>The description used to build a rigid-body.</p>
-					</div>
-				</div>
-			</section>
 			<section class="tsd-panel tsd-hierarchy">
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
@@ -92,12 +85,29 @@
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-class"><a href="rigidbodydesc.html#position" class="tsd-kind-icon">position</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="rigidbodydesc.html#angulardamping" class="tsd-kind-icon">angular<wbr>Damping</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="rigidbodydesc.html#angvel" class="tsd-kind-icon">angvel</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="rigidbodydesc.html#cansleep" class="tsd-kind-icon">can<wbr>Sleep</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="rigidbodydesc.html#centerofmass" class="tsd-kind-icon">center<wbr>OfMass</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="rigidbodydesc.html#lineardamping" class="tsd-kind-icon">linear<wbr>Damping</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="rigidbodydesc.html#linvel" class="tsd-kind-icon">linvel</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="rigidbodydesc.html#mass" class="tsd-kind-icon">mass</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="rigidbodydesc.html#principalangularinertia" class="tsd-kind-icon">principal<wbr>Angular<wbr>Inertia</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="rigidbodydesc.html#rotation" class="tsd-kind-icon">rotation</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="rigidbodydesc.html#status" class="tsd-kind-icon">status</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="rigidbodydesc.html#translation" class="tsd-kind-icon">translation</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
 							<h3>Methods</h3>
 							<ul class="tsd-index-list">
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="rigidbodydesc.html#setangulardamping" class="tsd-kind-icon">set<wbr>Angular<wbr>Damping</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="rigidbodydesc.html#setangvel" class="tsd-kind-icon">set<wbr>Angvel</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="rigidbodydesc.html#setcansleep" class="tsd-kind-icon">set<wbr>Can<wbr>Sleep</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="rigidbodydesc.html#setlineardamping" class="tsd-kind-icon">set<wbr>Linear<wbr>Damping</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="rigidbodydesc.html#setlinvel" class="tsd-kind-icon">set<wbr>Linvel</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="rigidbodydesc.html#setmass" class="tsd-kind-icon">set<wbr>Mass</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="rigidbodydesc.html#setmassproperties" class="tsd-kind-icon">set<wbr>Mass<wbr>Properties</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="rigidbodydesc.html#setrotation" class="tsd-kind-icon">set<wbr>Rotation</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="rigidbodydesc.html#settranslation" class="tsd-kind-icon">set<wbr>Translation</a></li>
 							</ul>
@@ -111,37 +121,34 @@
 					<a name="constructor" class="tsd-anchor"></a>
 					<h3>constructor</h3>
 					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">new <wbr>Rigid<wbr>Body<wbr>Desc<span class="tsd-signature-symbol">(</span>bodyType<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="rigidbodydesc.html" class="tsd-signature-type">RigidBodyDesc</a></li>
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Rigid<wbr>Body<wbr>Desc<span class="tsd-signature-symbol">(</span>status<span class="tsd-signature-symbol">: </span><a href="../enums/bodystatus.html" class="tsd-signature-type">BodyStatus</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="rigidbodydesc.html" class="tsd-signature-type">RigidBodyDesc</a></li>
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Rigid<wbr>Body<wbr>Desc<span class="tsd-signature-symbol">(</span>status<span class="tsd-signature-symbol">: </span><a href="../enums/bodystatus.html" class="tsd-signature-type">BodyStatus</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="rigidbodydesc.html" class="tsd-signature-type">RigidBodyDesc</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in rapier2d.d.ts:436</li>
+									<li>Defined in dynamics/rigid_body.ts:424</li>
 								</ul>
 							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>Create a new rigid-body with the given type.</p>
-								</div>
-								<a href="#parameters" id="parameters" style="color: inherit; text-decoration: none;">
-									<h1>Parameters</h1>
-								</a>
-								<ul>
-									<li><code>bodyType</code>: the rigid-body type. Can be <code>static</code>, <code>dynamic</code> or <code>kinematic</code>. Dynamic bodies<pre><code>        are affected <span class="hljs-keyword">by</span> <span class="hljs-keyword">all</span> forces. Kinematic bodies are <span class="hljs-keyword">not</span> affected <span class="hljs-keyword">by</span> <span class="hljs-keyword">any</span> force but can be
-        <span class="hljs-keyword">user</span>-controlled <span class="hljs-keyword">by</span> setting its position. A `static` <span class="hljs-keyword">is</span> <span class="hljs-keyword">not</span> affected <span class="hljs-keyword">by</span> <span class="hljs-keyword">any</span> forces, <span class="hljs-keyword">and</span>
-        cannot be controlled <span class="hljs-keyword">by</span> the <span class="hljs-keyword">user</span> <span class="hljs-keyword">without</span> potentially introducing insabilities <span class="hljs-keyword">with</span>
-        the other bodies it interactd <span class="hljs-keyword">with</span>.</code></pre></li>
-								</ul>
-							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>bodyType: <span class="tsd-signature-type">string</span></h5>
-									<div class="tsd-comment tsd-typography">
-										<div class="lead">
-										</div>
-									</div>
+									<h5>status: <a href="../enums/bodystatus.html" class="tsd-signature-type">BodyStatus</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="rigidbodydesc.html" class="tsd-signature-type">RigidBodyDesc</a></h4>
+						</li>
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in dynamics/rigid_body.d.ts:249</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>status: <a href="../enums/bodystatus.html" class="tsd-signature-type">BodyStatus</a></h5>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <a href="rigidbodydesc.html" class="tsd-signature-type">RigidBodyDesc</a></h4>
@@ -152,60 +159,618 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-					<a name="position" class="tsd-anchor"></a>
-					<h3>position</h3>
-					<div class="tsd-signature tsd-kind-icon">position<span class="tsd-signature-symbol">:</span> <a href="vector.html" class="tsd-signature-type">Vector</a></div>
+					<a name="angulardamping" class="tsd-anchor"></a>
+					<h3>angular<wbr>Damping</h3>
+					<div class="tsd-signature tsd-kind-icon">angular<wbr>Damping<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in rapier2d.d.ts:471</li>
+							<li>Defined in dynamics/rigid_body.ts:422</li>
+							<li>Defined in dynamics/rigid_body.d.ts:247</li>
 						</ul>
 					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>The world-space rigid-body position.</p>
-						</div>
-						<dl class="tsd-comment-tags">
-							<dt>returns</dt>
-							<dd></dd>
-						</dl>
-					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="angvel" class="tsd-anchor"></a>
+					<h3>angvel</h3>
+					<div class="tsd-signature tsd-kind-icon">angvel<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in dynamics/rigid_body.ts:416</li>
+							<li>Defined in dynamics/rigid_body.d.ts:244</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="cansleep" class="tsd-anchor"></a>
+					<h3>can<wbr>Sleep</h3>
+					<div class="tsd-signature tsd-kind-icon">can<wbr>Sleep<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in dynamics/rigid_body.ts:424</li>
+							<li>Defined in dynamics/rigid_body.d.ts:249</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="centerofmass" class="tsd-anchor"></a>
+					<h3>center<wbr>OfMass</h3>
+					<div class="tsd-signature tsd-kind-icon">center<wbr>OfMass<span class="tsd-signature-symbol">:</span> <a href="../interfaces/vector.html" class="tsd-signature-type">Vector</a></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in dynamics/rigid_body.ts:413</li>
+							<li>Defined in dynamics/rigid_body.d.ts:242</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="lineardamping" class="tsd-anchor"></a>
+					<h3>linear<wbr>Damping</h3>
+					<div class="tsd-signature tsd-kind-icon">linear<wbr>Damping<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in dynamics/rigid_body.ts:421</li>
+							<li>Defined in dynamics/rigid_body.d.ts:246</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="linvel" class="tsd-anchor"></a>
+					<h3>linvel</h3>
+					<div class="tsd-signature tsd-kind-icon">linvel<span class="tsd-signature-symbol">:</span> <a href="../interfaces/vector.html" class="tsd-signature-type">Vector</a></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in dynamics/rigid_body.ts:414</li>
+							<li>Defined in dynamics/rigid_body.d.ts:243</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="mass" class="tsd-anchor"></a>
+					<h3>mass</h3>
+					<div class="tsd-signature tsd-kind-icon">mass<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in dynamics/rigid_body.ts:412</li>
+							<li>Defined in dynamics/rigid_body.d.ts:241</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="principalangularinertia" class="tsd-anchor"></a>
+					<h3>principal<wbr>Angular<wbr>Inertia</h3>
+					<div class="tsd-signature tsd-kind-icon">principal<wbr>Angular<wbr>Inertia<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in dynamics/rigid_body.ts:417</li>
+							<li>Defined in dynamics/rigid_body.d.ts:245</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="rotation" class="tsd-anchor"></a>
+					<h3>rotation</h3>
+					<div class="tsd-signature tsd-kind-icon">rotation<span class="tsd-signature-symbol">:</span> <a href="../globals.html#rotation" class="tsd-signature-type">Rotation</a></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in dynamics/rigid_body.ts:411</li>
+							<li>Defined in dynamics/rigid_body.d.ts:240</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="status" class="tsd-anchor"></a>
+					<h3>status</h3>
+					<div class="tsd-signature tsd-kind-icon">status<span class="tsd-signature-symbol">:</span> <a href="../enums/bodystatus.html" class="tsd-signature-type">BodyStatus</a></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in dynamics/rigid_body.ts:423</li>
+							<li>Defined in dynamics/rigid_body.d.ts:248</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="translation" class="tsd-anchor"></a>
+					<h3>translation</h3>
+					<div class="tsd-signature tsd-kind-icon">translation<span class="tsd-signature-symbol">:</span> <a href="../interfaces/vector.html" class="tsd-signature-type">Vector</a></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in dynamics/rigid_body.ts:410</li>
+							<li>Defined in dynamics/rigid_body.d.ts:239</li>
+						</ul>
+					</aside>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Methods</h2>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="setrotation" class="tsd-anchor"></a>
-					<h3>set<wbr>Rotation</h3>
+					<a name="setangulardamping" class="tsd-anchor"></a>
+					<h3>set<wbr>Angular<wbr>Damping</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">set<wbr>Rotation<span class="tsd-signature-symbol">(</span>angle<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+						<li class="tsd-signature tsd-kind-icon">set<wbr>Angular<wbr>Damping<span class="tsd-signature-symbol">(</span>damping<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="rigidbodydesc.html" class="tsd-signature-type">RigidBodyDesc</a></li>
+						<li class="tsd-signature tsd-kind-icon">set<wbr>Angular<wbr>Damping<span class="tsd-signature-symbol">(</span>damping<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="rigidbodydesc.html" class="tsd-signature-type">RigidBodyDesc</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in rapier2d.d.ts:466</li>
+									<li>Defined in dynamics/rigid_body.ts:553</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>Sets the rotation angle of the rigid-body to be created.</p>
+									<p>Sets the angular damping of the rigid-body to create.</p>
 								</div>
-								<a href="#parameters" id="parameters" style="color: inherit; text-decoration: none;">
-									<h1>Parameters</h1>
-								</a>
-								<ul>
-									<li><code>angle</code>: the rotation angle.</li>
-								</ul>
+								<p>This will progressively slowdown the rotational movement of the rigid-body.</p>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>angle: <span class="tsd-signature-type">number</span></h5>
+									<h5>damping: <span class="tsd-signature-type">number</span></h5>
 									<div class="tsd-comment tsd-typography">
+										<p>The angular damping coefficient. Should be &gt;= 0. The higher this
+										value is, the stronger the rotational slowdown will be.</p>
 									</div>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+							<h4 class="tsd-returns-title">Returns <a href="rigidbodydesc.html" class="tsd-signature-type">RigidBodyDesc</a></h4>
+						</li>
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in dynamics/rigid_body.d.ts:324</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Sets the angular damping of the rigid-body to create.</p>
+								</div>
+								<p>This will progressively slowdown the rotational movement of the rigid-body.</p>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>damping: <span class="tsd-signature-type">number</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The angular damping coefficient. Should be &gt;= 0. The higher this
+										value is, the stronger the rotational slowdown will be.</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="rigidbodydesc.html" class="tsd-signature-type">RigidBodyDesc</a></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="setangvel" class="tsd-anchor"></a>
+					<h3>set<wbr>Angvel</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">set<wbr>Angvel<span class="tsd-signature-symbol">(</span>vel<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="rigidbodydesc.html" class="tsd-signature-type">RigidBodyDesc</a></li>
+						<li class="tsd-signature tsd-kind-icon">set<wbr>Angvel<span class="tsd-signature-symbol">(</span>vel<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="rigidbodydesc.html" class="tsd-signature-type">RigidBodyDesc</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in dynamics/rigid_body.ts:499</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Sets the initial angular velocity of the rigid-body to create.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>vel: <span class="tsd-signature-type">number</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The angular velocity to set.</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="rigidbodydesc.html" class="tsd-signature-type">RigidBodyDesc</a></h4>
+						</li>
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in dynamics/rigid_body.d.ts:289</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Sets the initial angular velocity of the rigid-body to create.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>vel: <span class="tsd-signature-type">number</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The angular velocity to set.</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="rigidbodydesc.html" class="tsd-signature-type">RigidBodyDesc</a></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="setcansleep" class="tsd-anchor"></a>
+					<h3>set<wbr>Can<wbr>Sleep</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">set<wbr>Can<wbr>Sleep<span class="tsd-signature-symbol">(</span>can<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="rigidbodydesc.html" class="tsd-signature-type">RigidBodyDesc</a></li>
+						<li class="tsd-signature tsd-kind-icon">set<wbr>Can<wbr>Sleep<span class="tsd-signature-symbol">(</span>can<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="rigidbodydesc.html" class="tsd-signature-type">RigidBodyDesc</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in dynamics/rigid_body.ts:563</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Sets whether or not the rigid-body to create can sleep.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>can: <span class="tsd-signature-type">boolean</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>true if the rigid-body can sleep, false if it can&#39;t.</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="rigidbodydesc.html" class="tsd-signature-type">RigidBodyDesc</a></h4>
+						</li>
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in dynamics/rigid_body.d.ts:330</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Sets whether or not the rigid-body to create can sleep.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>can: <span class="tsd-signature-type">boolean</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>true if the rigid-body can sleep, false if it can&#39;t.</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="rigidbodydesc.html" class="tsd-signature-type">RigidBodyDesc</a></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="setlineardamping" class="tsd-anchor"></a>
+					<h3>set<wbr>Linear<wbr>Damping</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">set<wbr>Linear<wbr>Damping<span class="tsd-signature-symbol">(</span>damping<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="rigidbodydesc.html" class="tsd-signature-type">RigidBodyDesc</a></li>
+						<li class="tsd-signature tsd-kind-icon">set<wbr>Linear<wbr>Damping<span class="tsd-signature-symbol">(</span>damping<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="rigidbodydesc.html" class="tsd-signature-type">RigidBodyDesc</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in dynamics/rigid_body.ts:540</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Sets the linear damping of the rigid-body to create.</p>
+								</div>
+								<p>This will progressively slowdown the translational movement of the rigid-body.</p>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>damping: <span class="tsd-signature-type">number</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The angular damping coefficient. Should be &gt;= 0. The higher this
+										value is, the stronger the translational slowdown will be.</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="rigidbodydesc.html" class="tsd-signature-type">RigidBodyDesc</a></h4>
+						</li>
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in dynamics/rigid_body.d.ts:315</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Sets the linear damping of the rigid-body to create.</p>
+								</div>
+								<p>This will progressively slowdown the translational movement of the rigid-body.</p>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>damping: <span class="tsd-signature-type">number</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The angular damping coefficient. Should be &gt;= 0. The higher this
+										value is, the stronger the translational slowdown will be.</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="rigidbodydesc.html" class="tsd-signature-type">RigidBodyDesc</a></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="setlinvel" class="tsd-anchor"></a>
+					<h3>set<wbr>Linvel</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">set<wbr>Linvel<span class="tsd-signature-symbol">(</span>vel<span class="tsd-signature-symbol">: </span><a href="../interfaces/vector.html" class="tsd-signature-type">Vector</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="rigidbodydesc.html" class="tsd-signature-type">RigidBodyDesc</a></li>
+						<li class="tsd-signature tsd-kind-icon">set<wbr>Linvel<span class="tsd-signature-symbol">(</span>vel<span class="tsd-signature-symbol">: </span><a href="../interfaces/vector.html" class="tsd-signature-type">Vector</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="rigidbodydesc.html" class="tsd-signature-type">RigidBodyDesc</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in dynamics/rigid_body.ts:488</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Sets the initial linear velocity of the rigid-body to create.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>vel: <a href="../interfaces/vector.html" class="tsd-signature-type">Vector</a></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The linear velocity to set.</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="rigidbodydesc.html" class="tsd-signature-type">RigidBodyDesc</a></h4>
+						</li>
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in dynamics/rigid_body.d.ts:283</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Sets the initial linear velocity of the rigid-body to create.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>vel: <a href="../interfaces/vector.html" class="tsd-signature-type">Vector</a></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The linear velocity to set.</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="rigidbodydesc.html" class="tsd-signature-type">RigidBodyDesc</a></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="setmass" class="tsd-anchor"></a>
+					<h3>set<wbr>Mass</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">set<wbr>Mass<span class="tsd-signature-symbol">(</span>mass<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="rigidbodydesc.html" class="tsd-signature-type">RigidBodyDesc</a></li>
+						<li class="tsd-signature tsd-kind-icon">set<wbr>Mass<span class="tsd-signature-symbol">(</span>mass<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="rigidbodydesc.html" class="tsd-signature-type">RigidBodyDesc</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in dynamics/rigid_body.ts:478</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Sets the mass of the rigid-body being built.</p>
+								</div>
+								<p>Note that the final mass of the rigid-bodies depends
+									on the initial mass of the rigid-body (set by this method)
+									to which is added the contributions of all the colliders with non-zero density
+								attached to this rigid-body.</p>
+								<p>Therefore, if you want your provided mass to be the final
+									mass of your rigid-body, don&#39;t attach colliders to it, or
+								only attach colliders with densities equal to zero.</p>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>mass: <span class="tsd-signature-type">number</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>− The initial mass of the rigid-body to create.</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="rigidbodydesc.html" class="tsd-signature-type">RigidBodyDesc</a></h4>
+						</li>
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in dynamics/rigid_body.d.ts:277</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Sets the mass of the rigid-body being built.</p>
+								</div>
+								<p>Note that the final mass of the rigid-bodies depends
+									on the initial mass of the rigid-body (set by this method)
+									to which is added the contributions of all the colliders with non-zero density
+								attached to this rigid-body.</p>
+								<p>Therefore, if you want your provided mass to be the final
+									mass of your rigid-body, don&#39;t attach colliders to it, or
+								only attach colliders with densities equal to zero.</p>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>mass: <span class="tsd-signature-type">number</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>− The initial mass of the rigid-body to create.</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="rigidbodydesc.html" class="tsd-signature-type">RigidBodyDesc</a></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="setmassproperties" class="tsd-anchor"></a>
+					<h3>set<wbr>Mass<wbr>Properties</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">set<wbr>Mass<wbr>Properties<span class="tsd-signature-symbol">(</span>mass<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, centerOfMass<span class="tsd-signature-symbol">: </span><a href="../interfaces/vector.html" class="tsd-signature-type">Vector</a>, principalAngularInertia<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
+						<li class="tsd-signature tsd-kind-icon">set<wbr>Mass<wbr>Properties<span class="tsd-signature-symbol">(</span>mass<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, centerOfMass<span class="tsd-signature-symbol">: </span><a href="../interfaces/vector.html" class="tsd-signature-type">Vector</a>, principalAngularInertia<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in dynamics/rigid_body.ts:520</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Sets the mass properties of the rigid-body being built.</p>
+								</div>
+								<p>Note that the final mass properties of the rigid-bodies depends
+									on the initial mass-properties of the rigid-body (set by this method)
+									to which is added the contributions of all the colliders with non-zero density
+								attached to this rigid-body.</p>
+								<p>Therefore, if you want your provided mass properties to be the final
+									mass properties of your rigid-body, don&#39;t attach colliders to it, or
+								only attach colliders with densities equal to zero.</p>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>mass: <span class="tsd-signature-type">number</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>− The initial mass of the rigid-body to create.</p>
+									</div>
+								</li>
+								<li>
+									<h5>centerOfMass: <a href="../interfaces/vector.html" class="tsd-signature-type">Vector</a></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>− The initial center-of-mass of the rigid-body to create.</p>
+									</div>
+								</li>
+								<li>
+									<h5>principalAngularInertia: <span class="tsd-signature-type">number</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>− The initial principal angular inertia of the rigid-body to create.</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">this</span></h4>
+						</li>
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in dynamics/rigid_body.d.ts:306</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Sets the mass properties of the rigid-body being built.</p>
+								</div>
+								<p>Note that the final mass properties of the rigid-bodies depends
+									on the initial mass-properties of the rigid-body (set by this method)
+									to which is added the contributions of all the colliders with non-zero density
+								attached to this rigid-body.</p>
+								<p>Therefore, if you want your provided mass properties to be the final
+									mass properties of your rigid-body, don&#39;t attach colliders to it, or
+								only attach colliders with densities equal to zero.</p>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>mass: <span class="tsd-signature-type">number</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>− The initial mass of the rigid-body to create.</p>
+									</div>
+								</li>
+								<li>
+									<h5>centerOfMass: <a href="../interfaces/vector.html" class="tsd-signature-type">Vector</a></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>− The initial center-of-mass of the rigid-body to create.</p>
+									</div>
+								</li>
+								<li>
+									<h5>principalAngularInertia: <span class="tsd-signature-type">number</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>− The initial principal angular inertia of the rigid-body to create.</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">this</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="setrotation" class="tsd-anchor"></a>
+					<h3>set<wbr>Rotation</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">set<wbr>Rotation<span class="tsd-signature-symbol">(</span>rot<span class="tsd-signature-symbol">: </span><a href="../globals.html#rotation" class="tsd-signature-type">Rotation</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="rigidbodydesc.html" class="tsd-signature-type">RigidBodyDesc</a></li>
+						<li class="tsd-signature tsd-kind-icon">set<wbr>Rotation<span class="tsd-signature-symbol">(</span>rot<span class="tsd-signature-symbol">: </span><a href="../globals.html#rotation" class="tsd-signature-type">Rotation</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="rigidbodydesc.html" class="tsd-signature-type">RigidBodyDesc</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in dynamics/rigid_body.ts:459</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Sets the initial rotation of the rigid-body to create.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>rot: <a href="../globals.html#rotation" class="tsd-signature-type">Rotation</a></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The otation to set.</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="rigidbodydesc.html" class="tsd-signature-type">RigidBodyDesc</a></h4>
+						</li>
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in dynamics/rigid_body.d.ts:262</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Sets the initial rotation of the rigid-body to create.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>rot: <a href="../globals.html#rotation" class="tsd-signature-type">Rotation</a></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The otation to set.</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="rigidbodydesc.html" class="tsd-signature-type">RigidBodyDesc</a></h4>
 						</li>
 					</ul>
 				</section>
@@ -213,39 +778,53 @@
 					<a name="settranslation" class="tsd-anchor"></a>
 					<h3>set<wbr>Translation</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">set<wbr>Translation<span class="tsd-signature-symbol">(</span>x<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, y<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+						<li class="tsd-signature tsd-kind-icon">set<wbr>Translation<span class="tsd-signature-symbol">(</span>tra<span class="tsd-signature-symbol">: </span><a href="../interfaces/vector.html" class="tsd-signature-type">Vector</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="rigidbodydesc.html" class="tsd-signature-type">RigidBodyDesc</a></li>
+						<li class="tsd-signature tsd-kind-icon">set<wbr>Translation<span class="tsd-signature-symbol">(</span>tra<span class="tsd-signature-symbol">: </span><a href="../interfaces/vector.html" class="tsd-signature-type">Vector</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="rigidbodydesc.html" class="tsd-signature-type">RigidBodyDesc</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in rapier2d.d.ts:458</li>
+									<li>Defined in dynamics/rigid_body.ts:449</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>Sets the world-space position of the rigid-body to be created.</p>
+									<p>Sets the initial translation of the rigid-body to create.</p>
 								</div>
-								<a href="#parameters" id="parameters" style="color: inherit; text-decoration: none;">
-									<h1>Parameters</h1>
-								</a>
-								<ul>
-									<li><code>x</code>: the position of the rigid-body to be created along the <code>x</code> axis.</li>
-									<li><code>y</code>: the position of the rigid-body to be created along the <code>y</code> axis.</li>
-								</ul>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>x: <span class="tsd-signature-type">number</span></h5>
-								</li>
-								<li>
-									<h5>y: <span class="tsd-signature-type">number</span></h5>
+									<h5>tra: <a href="../interfaces/vector.html" class="tsd-signature-type">Vector</a></h5>
 									<div class="tsd-comment tsd-typography">
+										<p>The translation to set.</p>
 									</div>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+							<h4 class="tsd-returns-title">Returns <a href="rigidbodydesc.html" class="tsd-signature-type">RigidBodyDesc</a></h4>
+						</li>
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in dynamics/rigid_body.d.ts:256</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Sets the initial translation of the rigid-body to create.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>tra: <a href="../interfaces/vector.html" class="tsd-signature-type">Vector</a></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The translation to set.</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="rigidbodydesc.html" class="tsd-signature-type">RigidBodyDesc</a></h4>
 						</li>
 					</ul>
 				</section>
@@ -262,7 +841,25 @@
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
 					<li class=" tsd-kind-enum">
+						<a href="../enums/bodystatus.html" class="tsd-kind-icon">Body<wbr>Status</a>
+					</li>
+					<li class=" tsd-kind-enum">
+						<a href="../enums/jointtype.html" class="tsd-kind-icon">Joint<wbr>Type</a>
+					</li>
+					<li class=" tsd-kind-enum">
 						<a href="../enums/proximity.html" class="tsd-kind-icon">Proximity</a>
+					</li>
+					<li class=" tsd-kind-enum">
+						<a href="../enums/shapetype.html" class="tsd-kind-icon">Shape<wbr>Type</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="ball.html" class="tsd-kind-icon">Ball</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="broadphase.html" class="tsd-kind-icon">Broad<wbr>Phase</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="capsule.html" class="tsd-kind-icon">Capsule</a>
 					</li>
 					<li class=" tsd-kind-class">
 						<a href="collider.html" class="tsd-kind-icon">Collider</a>
@@ -271,13 +868,43 @@
 						<a href="colliderdesc.html" class="tsd-kind-icon">Collider<wbr>Desc</a>
 					</li>
 					<li class=" tsd-kind-class">
+						<a href="colliderset.html" class="tsd-kind-icon">Collider<wbr>Set</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="cuboid.html" class="tsd-kind-icon">Cuboid</a>
+					</li>
+					<li class=" tsd-kind-class">
 						<a href="eventqueue.html" class="tsd-kind-icon">Event<wbr>Queue</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="heightfield.html" class="tsd-kind-icon">Heightfield</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="integrationparameters.html" class="tsd-kind-icon">Integration<wbr>Parameters</a>
 					</li>
 					<li class=" tsd-kind-class">
 						<a href="joint.html" class="tsd-kind-icon">Joint</a>
 					</li>
 					<li class=" tsd-kind-class">
-						<a href="jointdesc.html" class="tsd-kind-icon">Joint<wbr>Desc</a>
+						<a href="jointparams.html" class="tsd-kind-icon">Joint<wbr>Params</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="jointset.html" class="tsd-kind-icon">Joint<wbr>Set</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="narrowphase.html" class="tsd-kind-icon">Narrow<wbr>Phase</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="physicspipeline.html" class="tsd-kind-icon">Physics<wbr>Pipeline</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="querypipeline.html" class="tsd-kind-icon">Query<wbr>Pipeline</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="ray.html" class="tsd-kind-icon">Ray</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="raycolliderintersection.html" class="tsd-kind-icon">Ray<wbr>Collider<wbr>Intersection</a>
 					</li>
 					<li class=" tsd-kind-class">
 						<a href="rigidbody.html" class="tsd-kind-icon">Rigid<wbr>Body</a>
@@ -291,7 +918,58 @@
 								<a href="rigidbodydesc.html#constructor" class="tsd-kind-icon">constructor</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class">
-								<a href="rigidbodydesc.html#position" class="tsd-kind-icon">position</a>
+								<a href="rigidbodydesc.html#angulardamping" class="tsd-kind-icon">angular<wbr>Damping</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="rigidbodydesc.html#angvel" class="tsd-kind-icon">angvel</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="rigidbodydesc.html#cansleep" class="tsd-kind-icon">can<wbr>Sleep</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="rigidbodydesc.html#centerofmass" class="tsd-kind-icon">center<wbr>OfMass</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="rigidbodydesc.html#lineardamping" class="tsd-kind-icon">linear<wbr>Damping</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="rigidbodydesc.html#linvel" class="tsd-kind-icon">linvel</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="rigidbodydesc.html#mass" class="tsd-kind-icon">mass</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="rigidbodydesc.html#principalangularinertia" class="tsd-kind-icon">principal<wbr>Angular<wbr>Inertia</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="rigidbodydesc.html#rotation" class="tsd-kind-icon">rotation</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="rigidbodydesc.html#status" class="tsd-kind-icon">status</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="rigidbodydesc.html#translation" class="tsd-kind-icon">translation</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="rigidbodydesc.html#setangulardamping" class="tsd-kind-icon">set<wbr>Angular<wbr>Damping</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="rigidbodydesc.html#setangvel" class="tsd-kind-icon">set<wbr>Angvel</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="rigidbodydesc.html#setcansleep" class="tsd-kind-icon">set<wbr>Can<wbr>Sleep</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="rigidbodydesc.html#setlineardamping" class="tsd-kind-icon">set<wbr>Linear<wbr>Damping</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="rigidbodydesc.html#setlinvel" class="tsd-kind-icon">set<wbr>Linvel</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="rigidbodydesc.html#setmass" class="tsd-kind-icon">set<wbr>Mass</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="rigidbodydesc.html#setmassproperties" class="tsd-kind-icon">set<wbr>Mass<wbr>Properties</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="rigidbodydesc.html#setrotation" class="tsd-kind-icon">set<wbr>Rotation</a>
@@ -304,13 +982,43 @@
 				</ul>
 				<ul class="after-current">
 					<li class=" tsd-kind-class">
-						<a href="rotation.html" class="tsd-kind-icon">Rotation</a>
+						<a href="rigidbodyset.html" class="tsd-kind-icon">Rigid<wbr>Body<wbr>Set</a>
 					</li>
 					<li class=" tsd-kind-class">
-						<a href="vector.html" class="tsd-kind-icon">Vector</a>
+						<a href="rotationops.html" class="tsd-kind-icon">Rotation<wbr>Ops</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="serializationpipeline.html" class="tsd-kind-icon">Serialization<wbr>Pipeline</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="trimesh.html" class="tsd-kind-icon">Trimesh</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="vector2.html" class="tsd-kind-icon">Vector2</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="vectorops.html" class="tsd-kind-icon">Vector<wbr>Ops</a>
 					</li>
 					<li class=" tsd-kind-class">
 						<a href="world.html" class="tsd-kind-icon">World</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="../interfaces/vector.html" class="tsd-kind-icon">Vector</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="../globals.html#colliderhandle" class="tsd-kind-icon">Collider<wbr>Handle</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="../globals.html#interactiongroups" class="tsd-kind-icon">Interaction<wbr>Groups</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="../globals.html#jointhandle" class="tsd-kind-icon">Joint<wbr>Handle</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="../globals.html#rigidbodyhandle" class="tsd-kind-icon">Rigid<wbr>Body<wbr>Handle</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="../globals.html#rotation" class="tsd-kind-icon">Rotation</a>
 					</li>
 				</ul>
 			</nav>
@@ -325,6 +1033,13 @@
 				<li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li>
 				<li class="tsd-kind-property tsd-parent-kind-class"><span class="tsd-kind-icon">Property</span></li>
 				<li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class"><span class="tsd-kind-icon">Accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-interface"><span class="tsd-kind-icon">Property</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private property</span></li>
 			</ul>
 			<ul class="tsd-legend">
 				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static method</span></li>

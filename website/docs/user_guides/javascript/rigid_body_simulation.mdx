@@ -24,7 +24,8 @@ step by step inside of the game loop using its `world.step()` method:
 
 ```js
 import('@dimforge/rapier2d').then(RAPIER => {
-  let world = new RAPIER.World(0.0, -9.81);
+  let gravity = new RAPIER.Vector2(0.0, -9.81);
+  let world = new RAPIER.World(gravity);
 
   // Game loop. Replace by your own game loop system.
   let gameLoop = () => {
@@ -41,7 +42,8 @@ import('@dimforge/rapier2d').then(RAPIER => {
 
 ```js
 import('@dimforge/rapier3d').then(RAPIER => {
-  let world = new RAPIER.World(0.0, -9.81, 0.0);
+  let gravity = new RAPIER.Vector3(0.0, -9.81, 0.0);
+  let world = new RAPIER.World(gravity);
 
   // Game loop. Replace by your own game loop system.
   let gameLoop = () => {
@@ -56,7 +58,12 @@ import('@dimforge/rapier3d').then(RAPIER => {
   </TabItem>
 </Tabs>
 
-This `World` class is responsible for creating/deleting rigid bodies and joints, advancing the simulation, retrieving
+:::info
+Note that the use of `RAPIER.Vector2` and `RAPIER.Vector3` is not mandatory. Any
+object with fields `x, y` (for 2D), and `z` (for 3D) will work as well.
+:::
+
+This `World` class is responsible for creating/deleting rigid bodies, colliders, and joints, advancing the simulation, retrieving
 contact events, etc. Now that it is created, the next step is to create rigid-bodies and colliders.
 
 ## Creating rigid-bodies
@@ -80,12 +87,13 @@ To create a rigid-body, we must first initialize its `RigidBodyDesc` descriptor:
 
 ```js
 import('@dimforge/rapier2d').then(RAPIER => {
-  let world = new RAPIER.World(0.0, -9.81);
+  let gravity = new RAPIER.Vector2(0.0, -9.81);
+  let world = new RAPIER.World(gravity);
 
   // Create a dynamic rigid-body.
   // Use "static" for a static rigid-body instead.
-  let rigidBodyDesc = new RAPIER.RigidBodyDesc("dynamic");
-  rigidBodyDesc.setTranslation(0.0, 1.0);
+  let rigidBodyDesc = new RAPIER.RigidBodyDesc(RAPIER.BodyStatus.Dynamic)
+    .setTranslation(new RAPIER.Vector2(0.0, 1.0));
   let rigidBody = world.createRigidBody(rigidBodyDesc);
 
   // Game loop. Replace by your own game loop system.
@@ -108,12 +116,13 @@ import('@dimforge/rapier2d').then(RAPIER => {
 
 ```js
 import('@dimforge/rapier3d').then(RAPIER => {
-  let world = new RAPIER.World(0.0, -9.81, 0.0);
+  let gravity = new RAPIER.Vector3(0.0, -9.81, 0.0);
+  let world = new RAPIER.World(gravity);
 
   // Create a dynamic rigid-body.
   // Use "static" for a static rigid-body instead.
-  let rigidBodyDesc = new RAPIER.RigidBodyDesc("dynamic");
-  rigidBodyDesc.setTranslation(0.0, 1.0, 0.0);
+  let rigidBodyDesc = new RAPIER.RigidBodyDesc(RAPIER.BodyStatus.Dynamic)
+    .setTranslation(new RAPIER.Vector3(0.0, 1.0, 0.0));
   let rigidBody = world.createRigidBody(rigidBodyDesc);
 
   // Game loop. Replace by your own game loop system.
@@ -139,9 +148,7 @@ velocity, etc. This descriptor is then passed to the physics `World` to actually
 world. The `world.createRigidBody(desc)` returns a reference to the newly created rigid-body.
 
 :::note
-Unfortunately, the JS bindings don't expose a nice builder pattern similar to what we can do with the `RigidBodyBuilder`
-in Rust. This is due to some limitations on the Rust WASM/JS interface which prevents us from doing this efficiently. This
-may be improved in the future.
+The `RigidBodyDesc` and the `ColliderDesc` will will see afterwards follow the builder pattern.
 :::
 
 If you run this example, you will see that the rigid-body position is always equal to `(0.0, 1.0, 0.0)`. It is not
@@ -154,7 +161,7 @@ used to automatically compute the mass and angular inertia of the rigid-body the
 
 Similarly to the rigid-bodies, the creation of a collider required the initialization of a `ColliderDesc` class. This
 collider description contains the shape, position, density, etc., of the collider to be created. This description
-can then be passed to the `rigidBody.createCollider(desc)` function to create the actual collider and attach it to
+can then be passed to the `world.createCollider(desc, parentHandle)` function to create the actual collider and attach it to
 the given `rigidBody`:
 
 
@@ -169,18 +176,19 @@ the given `rigidBody`:
 
 ```js
 import('@dimforge/rapier2d').then(RAPIER => {
-  let world = new RAPIER.World(0.0, -9.81);
+  let gravity = new RAPIER.Vector2(0.0, -9.81);
+  let world = new RAPIER.World(gravity);
 
   // Create a dynamic rigid-body.
   // Use "static" for a static rigid-body instead.
-  let rigidBodyDesc = new RAPIER.RigidBodyDesc("dynamic");
-  rigidBodyDesc.setTranslation(0.0, 1.0);
+  let rigidBodyDesc = new RAPIER.RigidBodyDesc(RAPIER.BodyStatus.Dynamic)
+    .setTranslation(new RAPIER.Vector2(0.0, 1.0));
   let rigidBody = world.createRigidBody(rigidBodyDesc);
 
   // Create a cuboid collider attached to rigidBody.
-  let colliderDesc = RAPIER.ColliderDesc.cuboid(0.5, 0.5);
-  colliderDesc.density = 2.0; // The default density is 1.0.
-  let collider = rigidBody.createCollider(colliderDesc);
+  let colliderDesc = RAPIER.ColliderDesc.cuboid(0.5, 0.5)
+    .setDensity(2.0); // The default density is 1.0.
+  let collider = world.createCollider(colliderDesc, rigidBody.handle);
 
   // Game loop. Replace by your own game loop system.
   let gameLoop = () => {
@@ -202,18 +210,19 @@ import('@dimforge/rapier2d').then(RAPIER => {
 
 ```js
 import('@dimforge/rapier3d').then(RAPIER => {
-  let world = new RAPIER.World(0.0, -9.81, 0.0);
+  let gravity = new RAPIER.Vector3(0.0, -9.81, 0.0);
+  let world = new RAPIER.World(gravity);
 
   // Create a dynamic rigid-body.
   // Use "static" for a static rigid-body instead.
-  let rigidBodyDesc = new RAPIER.RigidBodyDesc("dynamic");
-  rigidBodyDesc.setTranslation(0.0, 1.0, 0.0);
+  let rigidBodyDesc = new RAPIER.RigidBodyDesc(RAPIER.BodyStatus.Dynamic)
+    .setTranslation(new RAPIER.Vector3(0.0, 1.0, 0.0));
   let rigidBody = world.createRigidBody(rigidBodyDesc);
 
   // Create a cuboid collider attached to rigidBody.
-  let colliderDesc = RAPIER.ColliderDesc.cuboid(0.5, 0.5, 0.5);
-  colliderDesc.density = 2.0; // The default density is 1.0.
-  let collider = rigidBody.createCollider(colliderDesc);
+  let colliderDesc = RAPIER.ColliderDesc.cuboid(0.5, 0.5, 0.5)
+    .setDensity(2.0); // The default density is 1.0.
+  let collider = world.createCollider(colliderDesc, rigidBody.handle);
 
   // Game loop. Replace by your own game loop system.
   let gameLoop = () => {
@@ -253,24 +262,25 @@ won't fall because of gravity:
 
 ```js
 import('@dimforge/rapier2d').then(RAPIER => {
-  let world = new RAPIER.World(0.0, -9.81);
+  let gravity = new RAPIER.Vector2(0.0, -9.81);
+  let world = new RAPIER.World(gravity);
 
   // Create the ground
-  let groundRigidBodyDesc = new RAPIER.RigidBodyDesc("static");
+  let groundRigidBodyDesc = new RAPIER.RigidBodyDesc(RAPIER.BodyStatus.Static);
   let groundRigidBody = world.createRigidBody(groundRigidBodyDesc);
   let groundColliderDesc = RAPIER.ColliderDesc.cuboid(10.0, 0.1);
-  groundRigidBody.createCollider(groundColliderDesc);
+  world.createCollider(groundColliderDesc, groundRigidBody.handle);
 
   // Create a dynamic rigid-body.
   // Use "static" for a static rigid-body instead.
-  let rigidBodyDesc = new RAPIER.RigidBodyDesc("dynamic");
-  rigidBodyDesc.setTranslation(0.0, 1.0);
+  let rigidBodyDesc = new RAPIER.RigidBodyDesc(RAPIER.BodyStatus.Dynamic)
+    .setTranslation(new RAPIER.Vector2(0.0, 1.0));
   let rigidBody = world.createRigidBody(rigidBodyDesc);
 
   // Create a cuboid collider attached to rigidBody.
-  let colliderDesc = RAPIER.ColliderDesc.cuboid(0.5, 0.5);
-  colliderDesc.density = 2.0; // The default density is 1.0.
-  let collider = rigidBody.createCollider(colliderDesc);
+  let colliderDesc = RAPIER.ColliderDesc.cuboid(0.5, 0.5)
+    .setDensity(2.0); // The default density is 1.0.
+  let collider = world.createCollider(colliderDesc, rigidBody.handle);
 
   // Game loop. Replace by your own game loop system.
   let gameLoop = () => {
@@ -292,24 +302,25 @@ import('@dimforge/rapier2d').then(RAPIER => {
 
 ```js
 import('@dimforge/rapier3d').then(RAPIER => {
-  let world = new RAPIER.World(0.0, -9.81, 0.0);
+  let gravity = new RAPIER.Vector3(0.0, -9.81, 0.0);
+  let world = new RAPIER.World(gravity);
 
   // Create the ground
-  let groundRigidBodyDesc = new RAPIER.RigidBodyDesc("static");
+  let groundRigidBodyDesc = new RAPIER.RigidBodyDesc(RAPIER.BodyStatus.Static);
   let groundRigidBody = world.createRigidBody(groundRigidBodyDesc);
   let groundColliderDesc = RAPIER.ColliderDesc.cuboid(10.0, 0.1, 10.0);
-  groundRigidBody.createCollider(groundColliderDesc);
+  world.createCollider(groundColliderDesc, groundRigidBody.handle);
 
   // Create a dynamic rigid-body.
   // Use "static" for a static rigid-body instead.
-  let rigidBodyDesc = new RAPIER.RigidBodyDesc("dynamic");
-  rigidBodyDesc.setTranslation(0.0, 1.0, 0.0);
+  let rigidBodyDesc = new RAPIER.RigidBodyDesc(RAPIER.BodyStatus.Dynamic)
+    .setTranslation(new RAPIER.Vector3(0.0, 1.0, 0.0));
   let rigidBody = world.createRigidBody(rigidBodyDesc);
 
   // Create a cuboid collider attached to rigidBody.
-  let colliderDesc = RAPIER.ColliderDesc.cuboid(0.5, 0.5, 0.5);
-  colliderDesc.density = 2.0; // The default density is 1.0.
-  let collider = rigidBody.createCollider(colliderDesc);
+  let colliderDesc = RAPIER.ColliderDesc.cuboid(0.5, 0.5, 0.5)
+    .setDensity(2.0); // The default density is 1.0.
+  let collider = world.createCollider(colliderDesc, rigidBody.handle);
 
   // Game loop. Replace by your own game loop system.
   let gameLoop = () => {
@@ -348,8 +359,8 @@ colliders collide. It is possible to apply manual forces and impulses to a rigid
 ```js
 import('@dimforge/rapier2d').then(RAPIER => {
     // ... World initialization.
-    let force = new RAPIER.Vector(1.0, 2.0);
-    let impulse = new RAPIER.Vector(0.1, 0.2);
+    let force = new RAPIER.Vector2(1.0, 2.0);
+    let impulse = new RAPIER.Vector2(0.1, 0.2);
     let torque = 3.0;
     let torqueImpulse = 0.3;
 
@@ -366,10 +377,10 @@ import('@dimforge/rapier2d').then(RAPIER => {
 ```js
 import('@dimforge/rapier3d').then(RAPIER => {
     // ... World initialization.
-    let force = new RAPIER.Vector(1.0, 2.0, 3.0);
-    let impulse = new RAPIER.Vector(0.1, 0.2, 0.3);
-    let torque = new RAPIER.Vector(0.0, 3.0, 0.0);
-    let torqueImpulse = new RAPIER.Vector(0.0, 0.3, 0.0);
+    let force = new RAPIER.Vector3(1.0, 2.0, 3.0);
+    let impulse = new RAPIER.Vector3(0.1, 0.2, 0.3);
+    let torque = new RAPIER.Vector3(0.0, 3.0, 0.0);
+    let torqueImpulse = new RAPIER.Vector3(0.0, 0.3, 0.0);
 
     rigidBody.applyForce(force, true);
     rigidBody.applyImpulse(impulse, true);

@@ -339,7 +339,7 @@ let mut body_set = RigidBodySet::new();
 let handle = body_set.insert(rigid_body);
 ```
 
-Upon insertion, the body set will return a handle to the rigid body. This will allow use to get a reference to this body
+Upon insertion, the body set will return a handle to the rigid body. This will allow us to get a reference to this body
 later if needed:
 
 ```rust
@@ -473,11 +473,17 @@ let _ = ColliderBuilder::trimesh(vertices, indices);
 let _ = ColliderBuilder::heightfield(heights, scale);
 // Builder for a collider with the given shape.
 let collider = ColliderBuilder::new(Shape::Ball(Ball::new(0.5))
-    // The collider position wrt. the body part it is attached to.
+    // The collider translation wrt. the body it is attached to.
+    // Default: the zero vector.
+    .translation(1.0, 2.0)
+    // The collider rotation wrt. the body it is attached to.
+    // Default: the identity rotation.
+    .rotation(f32::PI)
+    // The collider position wrt. the body it is attached to.
     // Default: the identity isometry.
-    .delta(Isometry2::new(Vector2::new(1.0, 2.0), PI))
+    .position(Isometry2::new(Vector2::new(1.0, 2.0), PI))
     // The collider density. If non-zero the collider's mass and angular inertia will be added
-    // to the inertial properties of the body part it is attached to.
+    // to the inertial properties of the body it is attached to.
     // Default: 1.0
     .density(1.3)
     // The friction coefficient of this collider.
@@ -513,11 +519,17 @@ let _ = ColliderBuilder::trimesh(vertices, indices);
 let _ = ColliderBuilder::heightfield(heights, scale);
 // Builder for a collider with the given shape.
 let collider = ColliderBuilder::new(Shape::Ball(Ball::new(0.5))
-    // The collider position wrt. the body part it is attached to.
+    // The collider translation wrt. the body it is attached to.
+    // Default: the zero vector.
+    .translation(1.0, 2.0, 3.0)
+    // The collider rotation wrt. the body it is attached to.
+    // Default: the identity rotation.
+    .rotation(Vector3::y() * f32::PI)
+    // The collider position wrt. the body it is attached to.
     // Default: the identity isometry.
-    .delta(Isometry3::new(Vector3::new(1.0, 2.0, 3.0), Vector3::y() * f32::PI))
+    .position(Isometry3::new(Vector3::new(1.0, 2.0, 3.0), Vector3::y() * f32::PI))
     // The collider density. If non-zero the collider's mass and angular inertia will be added
-    // to the inertial properties of the body part it is attached to.
+    // to the inertial properties of the body it is attached to.
     // Default: 1.0
     .density(1.3)
     // The friction coefficient of this collider.
@@ -560,7 +572,7 @@ addressing of this collider.
 <!--
 
 ### Collider with parent
-Every collider must be attached to a body part by specifying the body part handle when building the collider:
+Every collider must be attached to a body by specifying the body handle when building the collider:
 
 ```rust
 let parent_rigid_body = RigidBodyBuilder::new()
@@ -575,15 +587,15 @@ let collider = ColliderBuilder::new(shape)
 let collider_handle = collider_set.insert(collider, parent_handle, &mut body_set);
 ```
 
-In this example the body part handle we specified was `BodyPartHandle(parent_handle, 0)`. This means that the collider
-will be attached to the first part (indexing of body parts starts at 0) of the body identified by `parent_handle`. A rigid
+In this example the body handle we specified was `BodyPartHandle(parent_handle, 0)`. This means that the collider
+will be attached to the first part (indexing of bodys starts at 0) of the body identified by `parent_handle`. A rigid
 body always has one part. Other bodies like [multibodies](/joint_constraints_and_multibodies/#multibodies) are composed
-of several body parts. Thus, attaching a collider to a multibody link requires specifying the index of the specific
+of several bodys. Thus, attaching a collider to a multibody link requires specifying the index of the specific
 link: `BodyPartHandle(parent_handle, link_index)` where `link_index` is an integer lying between 0 and the total number
 of links the multibody has.
 
 :::Note
-    If a collider is given a density, it will contribute to the mass and angular inertia of the body part it is
+    If a collider is given a density, it will contribute to the mass and angular inertia of the body it is
     attached to.
 :::
 
@@ -609,7 +621,7 @@ dedicated user guide.
 ## Gravity, forces, and impulses
 There are three ways of applying forces to a body in **rapier**. The most common force is gravity and
 is treated as a special case by **rapier**. Finally, forces, impulses, and instantaneous velocity or acceleration
-changes can be [applied](#one-time-force-application-and-impulses) for a single timestep to each body part individually.
+changes can be [applied](#one-time-force-application-and-impulses) for a single timestep to each body individually.
 
 ### Gravity
 Because gravity is such a common force, it is a special case within **rapier**.
@@ -644,31 +656,31 @@ rb.enable_gravity(false);
 ```
 
 ### One-time force application and impulses
-It is possible to apply a force to any body part, at any of its points. In the following, let us call $~f$ a force we
-apply at the center of mass of a body part. We distinguish four kinds of forces listed in the `ForceType` enum:
+It is possible to apply a force to any body, at any of its points. In the following, let us call $~f$ a force we
+apply at the center of mass of a body. We distinguish four kinds of forces listed in the `ForceType` enum:
 
 * `ForceType::Force`: a force as in the formula $~f = mass × acceleration$. Applying this force to a body will
-   add a velocity of $~\frac{f}{mass} × dt$ (where $~dt$ is the time step length) to the body part's velocity at the next
+   add a velocity of $~\frac{f}{mass} × dt$ (where $~dt$ is the time step length) to the body's velocity at the next
    timestep.
-* `ForceType::AccelerationChange`: a direct acceleration change that will add $~f × dt$ to the body part's velocity at the next timestep.
-* `ForceType::Impulse`: an impulsive force that immediately adds $~\frac{f}{mass}$ to the body part's velocity.
-* `ForceType::VelocityChange`: a direct velocity change that immediately adds $~f$ to the body part's velocity.
+* `ForceType::AccelerationChange`: a direct acceleration change that will add $~f × dt$ to the body's velocity at the next timestep.
+* `ForceType::Impulse`: an impulsive force that immediately adds $~\frac{f}{mass}$ to the body's velocity.
+* `ForceType::VelocityChange`: a direct velocity change that immediately adds $~f$ to the body's velocity.
 
 !!! Note
-    All forces applied to a body part are cleared during the next timestep. Therefore a persistent force
+    All forces applied to a body are cleared during the next timestep. Therefore a persistent force
     should be re-applied at each frame.
 
-Several methods of the `Body` trait can be called in order to apply a force to a body part:
+Several methods of the `Body` trait can be called in order to apply a force to a body:
 
 ```rust
 use rapier2d::math::{Force, ForceType}; // For 2D
 use rapier3d::math::{Force, ForceType}; // For 3D
 
-// Force application at the body part's center of mass.
+// Force application at the body's center of mass.
 fn apply_force(&mut self, part_id: usize, f: &Force<N>, force_type: ForceType, auto_wake_up: bool);
 fn apply_local_force(&mut self, part_id: usize, f: &Force<N>, force_type: ForceType, auto_wake_up: bool);
 
-// Force application at a custom point on the body part.
+// Force application at a custom point on the body.
 fn apply_force_at_point(&mut self, part_id: usize, f: &Vector<N>, point: &Point<N>, force_type: ForceType, auto_wake_up: bool);
 fn apply_local_force_at_point(&mut self, part_id: usize, f: &Vector<N>, point: &Point<N>, force_type: ForceType, auto_wake_up: bool);
 fn apply_force_at_local_point(&mut self, part_id: usize, f: &Vector<N>, point: &Point<N>, force_type: ForceType, auto_wake_up: bool);

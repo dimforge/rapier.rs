@@ -14,7 +14,7 @@ be retrieved in order to apply custom game logics. There are currently two types
 
 In order to listen to these physics events, we need to:
 1. Create and `EventQueue` which is responsible for collecting events occurring during one timestep.
-2. Call `world.stepWithEvents(eventQueue)` instead of `world.step()` to advance the simulation.
+2. Call `world.step(eventQueue)` instead of `world.step()` to advance the simulation.
 3. Iterate through the events using `eventQueue.drainContactEvents` and `eventsQueue.drainProximityEvents`.
 
 
@@ -29,23 +29,23 @@ In order to listen to these physics events, we need to:
 
 ```js
 import('@dimforge/rapier2d').then(RAPIER => {
-  let gravity = new RAPIER.Vector(0.0, -9.81);
+  let gravity = new RAPIER.Vector2(0.0, -9.81);
   let world = new RAPIER.World(gravity);
   let eventQueue = new RAPIER.EventQueue(true);
 
   // Game loop. Replace by your own game loop system.
   let gameLoop = () => {
-      world.stepWithEvents(eventQueue);
+    world.step(eventQueue);
 
-      eventQueue.drainContactEvents((handle1, handle2, contactStarted) => {
-        console.log("Contact between:", handle1, "and", handle2, ". Started:", contactStarted);
-      });
+    eventQueue.drainContactEvents((handle1, handle2, contactStarted) => {
+      console.log("Contact between:", handle1, "and", handle2, ". Started:", contactStarted);
+    });
 
-      eventQueue.drainProximityEvents((handle1, handle2, prevProximity, newProximity) => {
-        console.log("Proximity between: ", handle1, "and", handle2, ". Previous proximity:", prevProximity, "new proximity: ", newProximity);
-      });
+    eventQueue.drainProximityEvents((handle1, handle2, prevProximity, newProximity) => {
+      console.log("Proximity between: ", handle1, "and", handle2, ". Previous proximity:", prevProximity, "new proximity: ", newProximity);
+    });
 
-      setTimeout(gameLoop);
+    setTimeout(gameLoop);
   };
 
   gameLoop();
@@ -57,13 +57,13 @@ import('@dimforge/rapier2d').then(RAPIER => {
 
 ```js
 import('@dimforge/rapier3d').then(RAPIER => {
-  let gravity = new RAPIER.Vector(0.0, -9.81, 0.0);
+  let gravity = new RAPIER.Vector3(0.0, -9.81, 0.0);
   let world = new RAPIER.World(gravity);
   let eventQueue = new RAPIER.EventQueue(true);
 
   // Game loop. Replace by your own game loop system.
   let gameLoop = () => {
-    world.stepWithEvents(eventQueue);
+    world.step(eventQueue);
 
     eventQueue.drainContactEvents((handle1, handle2, contactStarted) => {
       console.log("Contact between:", handle1, "and", handle2, ". Started:", contactStarted);
@@ -84,10 +84,10 @@ import('@dimforge/rapier3d').then(RAPIER => {
 </Tabs>
 
 The parameter of the `EventQueue` constructor indicates whether or not the queue should be automatically cleared at
-the beginning of each `stepWithEvents` call. Setting this to `false` will allow us to handle events that were generated
+the beginning of each `step` call. Setting this to `false` will allow us to handle events that were generated
 by previous timesteps. However, this may cause a memory overflow if the queue is never cleared or drained. If it is
-set to `true`, then we need to handle the all physics events in-between each calls to `stepWithEvents`; all unhandled
-events that occurred before the last call to `stepWithEvents` will be lost.
+set to `true`, then we need to handle the all physics events in-between each calls to `step`; all unhandled
+events that occurred before the last call to `step` will be lost.
 
 Handling the events is achieved by calling the corresponding drain function. This function will clear the event queue
 and pass all its items to a JS closure:

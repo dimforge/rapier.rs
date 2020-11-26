@@ -35,6 +35,12 @@ module.exports = {
           position: 'left',
         },
         {
+          to: 'benchmarks/',
+          activeBasePath: 'benchmarks',
+          label: 'Benchmarks',
+          position: 'left',
+        },
+        {
           href: 'https://rapier.rs/demos2d/index.html', // FIXME: should depend on the base url.
           label: 'Demos 2D ↪',
           position: 'left',
@@ -87,7 +93,7 @@ module.exports = {
             },
             {
               label: 'Discord',
-              href: 'https://discord.gg/G7JtTX',
+              href: 'https://discord.gg/vt9DJSW',
             },
             // {
             //   label: 'Twitter',
