@@ -61,6 +61,8 @@ fn main() {
             &mut bodies,
             &mut colliders,
             &mut joints,
+            None,
+            None,
             &event_handler
         );
     }
@@ -99,6 +101,8 @@ fn main() {
             &mut bodies,
             &mut colliders,
             &mut joints,
+            None,
+            None,
             &event_handler
         );
     }
@@ -144,65 +148,6 @@ case for the other mutable components. Once at least one `pipeline.step` has bee
 inter-dependent. Replacing any of them (in subsequent calls to `.step`) with new/other instances may cause unexpected
 behaviors. We are working to ensure this is no longer an issue in the future.
 :::
-
-
-<!--
-
-## Initializing the physics worlds
-A working physics simulation requires two world structures to be created: the geometrical world and the mechanical world. The
-**geometrical world** contains all the data structures and algorithms necessary to perform efficiently geometric operations like
-computing sets of contacts between touching objects, detecting when two objects start interacting with each other, etc.
-It is basically a wrapper around the data structures provided by the **ncollide2d** or **ncollide3d** [crate](https://ncollide.org).
-A geometrical world can either be created with its default configuration:
-
-```rust
-let mut geometrical_world = DefaultGeometricalWorld::new();
-```
-
-or by manually giving it an instance of a broad-phase and a narrow-phase. This allows you to configure them with
-custom parameters and contact/proximity algorithm dispatchers:
-
-```rust
-// Build a broad-phase instance.
-let broad_phase = DBVTBroadPhase::new(na::convert(0.01));
-// Needed to build a narrow phase instance.
-let coll_dispatcher = Box::new(ContactDispatcher::new());
-let prox_dispatcher = Box::new(DefaultProximityDispatcher::new());
-// Build a narrow-phase instance.
-let narrow_phase = NarrowPhase::new(coll_dispatcher, prox_dispatcher);
-
-// Build the geometrical world.
-let mut geometrical_world = DefaultGeometricalWorld::from_parts(broad_phase, narrow_phase);
-```
-
-The **mechanical world** contains all the data structures and algorithms necessary to perform efficiently the simulation of
-physical phenomena like gravity, contact forces, deformations, etc. It can be constructed with a given gravity vector:
-
-```rust
-let gravity = Vector3::y() * -9.81;
-let mut mechanical_world = DefaultMechanicalWorld::new(gravity);
-```
-
-The mechanical world has several fields, you are free to change them if you need some specific configuration.
-For example if the gravity has to be changed, simply do `mechanical_world.gravity = new_gravity;` and it will be taken into
-account during subsequent timesteps. Keep in mind however, that it is discouraged to change the constraints solver once
-you started performing timesteps (with the `.step` method) as you may cause some cached data, that improves stability and
-performance, to be reset. By default, the constraint solver handles contacts using the Signorini-Coulomb contact model (to
-enforce non-penetration with friction). This can be changed for other contact models depending on your needs. Refer
-to the dedicated [section](contact_models.md).
-
-
-| Public field              | Description                                                  |
-|--                         | --                                                           |
-| `.counters`               | Various counters that measure internal performance of the physics engine. They are disabled by default. |
-| `.solver`                 | The impulse-based constraints solver responsible for computing contact forces and fixing penetrations. |
-| `.integration_parameters` | Parameters affecting the whole simulation. Find more details [here](/performance_tuning/#integration-parameters). |
-| `.material_coefficients`  | A table that maps pairs of materials to material coefficients (for friction, restitution, and surface velocity). |
-| `.gravity`                | The gravity affecting all dynamic bodies in the scene except those that are configured to ignore gravity. |
-
-Once the physics world is created, the next step is to create some bodies that will take part in the simulation.
-
--->
 
 ## Rigid-bodies
 A rigid-body is the simplest type of body supported by **rapier**. It can be seen as the aggregation of a position,
@@ -250,7 +195,7 @@ let rigid_body = RigidBodyBuilder::new(BodyStatus::Dynamic)
     .rotation(5.0)
     // The rigid body position. Will override `.translation(...)` and `.rotation(...)`.
     // Default: the identity isometry.
-    .position(Isometry2::new(Vector2::new(1.0, 2.0), f32::PI))
+    .position(Isometry2::new(Vector2::new(1.0, 2.0), 0.4))
     // The linear velocity of this body.
     // Default: zero velocity.
     .linvel(1.0, 2.0)
@@ -287,7 +232,7 @@ let rigid_body = RigidBodyBuilder::new(BodyStatus::Dynamic)
     .rotation(Vector3::z() * 5.0)
     // The rigid body position. Will override `.translation(...)` and `.rotation(...)`.
     // Default: the identity isometry.
-    .position(Isometry3::new(Vector3::new(1.0, 3.0, 2.0), Vector3::y() * f32::PI))
+    .position(Isometry3::new(Vector3::new(1.0, 3.0, 2.0), Vector3::y() * 0.4))
     // The linear velocity of this body.
     // Default: zero velocity.
     .linvel(1.0, 3.0, 4.0)
@@ -311,24 +256,6 @@ initialize the builder, and `.build()` to actually build the rigid body.
 
 Typically, the inertia and center of mass are automatically set to the inertia and center of mass resulting from the
 shapes of the [colliders](#colliders) attached to the rigid-body.
-
-<!--
- however this is not a requirement: you can for example
-set the inertia and center of mass when building the rigid-body, and only attach to it colliders without density so
-they don't contribute to this inertia and center of mass.
-
-:::note
-The `.build()` method of the `RigidBodyBuilder` returns the newly created rigid-body. It is
-still possible to further modify it after creation:
-:::
-
-```rust
-let mut rigid_body = RigidBodyBuilder::new()
-                        .translation(Vector3::x() * 2.0)
-                        .build();
-rigid_body.set_mass(10.0);
-```
--->
 
 ### The rigid-body handle
 Once the rigid body is created it must be added to a `RigidBodySet`. A body set is a container that maps a unique handle to
@@ -366,74 +293,6 @@ Any body can have one of three different statuses identified by the `dynamics::B
     free to set any position and the body velocity will be deduced at each update accordingly to ensure a realistic
     behavior of dynamic bodies in contact with it. This is typically used for moving **platforms**, **elevators**, etc.
 
-<!--
-* **`BodyStatus::Disabled`:** Indicates the body should be completely ignored by the physics engine. In practice,
-    this will remove all contacts this body is involved with and disable (but not remove) all joint constraints
-    attached to it.
-
-For example, to change the status of a rigid-body, you need to retrieve a mutable reference to it and then call the
-`.set_status(...)` method:
-
-```rust
-let mut rb = body_set.get_mut(handle).expect("Rigid-body not found.");
-rb.set_status(BodyStatus::Kinematic);
-// Sets the velocity of the kinematic rigid-body.
-rb.set_velocity(Velocity::linear(0.0, 0.0, 1.0));
-```
--->
-
-<!--
-### Kinematic degrees of freedom
-Some bodies allow to mark only some of their degrees of freedom as kinematic. For example:
-
-* It is possible to mark as kinematic some translations or rotations of a rigid body. This is useful to prevent
-  all translations and/or rotations wrt. some specific coordinate axes, or to control them at the velocity level.
-  This is achieved by the `.kinematic_translations` and `kinematic_rotations` modifiers at construction-time, or by
-  the `.set_translations_kinematic` and `.set_rotations_kinematic` methods after construction:
-
-```rust
-let rigid_body = RigidBodyBuilder::new()
-    // Translations along the y and z axises will be locked and controllable at the
-    // velocity level by the user.
-    .kinematic_translations(Vector3::new(false, true, true));
-    .velocity(Velocity::linear(1.0, 0.0, 3.0))
-    .build();
-
-// NOTE: the velocity of the rigid body along the `y` and `z` axis will remain
-// constant independently from any forces. Therefore this body will be fixed
-// in translation wrt the `y` axis, and will translate with a velocity of `3.0`
-// along the `z` axis.
-```
-
-This second example changes the kinematic degrees of freedom of a rigid body after its creation and addition to the body
-set, using its handle. Now the translations along `x` as well as rotations wrt. the axes `x` and `z` will be locked and
-controllable at the velocity level:
-
-```rust
-let rb = body_set.rigid_body_mut(handle).expect("Rigid body not found");
-rb.set_translations_kinematic(Vector3::new(true, false, false))
-rb.set_rotations_kinematic(Vector3::new(true, false, true));
-```
-
-:::note "Rigid bodies that cannot rotate"
-It can be useful to prevent a rigid-body from rotating at all, e.g., for the player entity of a video game.
-This can be achieved by setting all its rotations as kinematic, or, equivalently, by calling
-`.disable_all_rotations()` on the rigid body. Note that `.disable_all_rotations()` will also set the rigid-body
-angular velocity to zero in addition to marking all its rotational degrees of freedom as kinematic.
-:::
-
-* It is possible to mark some nodes of a deformable body as kinematic so that those nodes remain fixed in space or can
-  be controlled by the user at the velocity level. See the [deformable bodies](/deformable_bodies/) section.
-
-:::note ""Controllable at the velocity level""
-We used the term **controllable at the velocity level** multiple times here. This means it is still possible for the
-user to set a non-zero velocity to a kinematic body or a dynamic body with kinematic degrees of freedom. A kinematic
-body or the kinematic degrees of freedom will keep this velocity constant no matter what. This is useful for platforms
-that should have a specific trajectory without being disturbed by any force of the world. Of course, the user can
-still modify this trajectory by changing the velocity of those kinematic elements at any time.
-:::
--->
-
 ## Colliders
 Colliders represent the geometric shapes that generate contacts and proximity events when they touch.
 
@@ -457,7 +316,7 @@ lead to a useful result.
 
 ```rust
 use na::{Vector2, Isometry2};
-use rapier2d::geometry::{ColliderBuilder, Shape, Ball};
+use rapier2d::geometry::{ColliderBuilder, ColliderShape, Ball};
 
 // Builder for a ball-shaped collider.
 let _ = ColliderBuilder::ball(0.5);
@@ -472,7 +331,7 @@ let _ = ColliderBuilder::trimesh(vertices, indices);
 // Builder for a heightfield-shaped collider.
 let _ = ColliderBuilder::heightfield(heights, scale);
 // Builder for a collider with the given shape.
-let collider = ColliderBuilder::new(Shape::Ball(Ball::new(0.5))
+let collider = ColliderBuilder::new(ColliderShape::ball(0.5))
     // The collider translation wrt. the body it is attached to.
     // Default: the zero vector.
     .translation(1.0, 2.0)
@@ -481,7 +340,7 @@ let collider = ColliderBuilder::new(Shape::Ball(Ball::new(0.5))
     .rotation(f32::PI)
     // The collider position wrt. the body it is attached to.
     // Default: the identity isometry.
-    .position(Isometry2::new(Vector2::new(1.0, 2.0), PI))
+    .position(Isometry2::new(Vector2::new(1.0, 2.0), f32::PI))
     // The collider density. If non-zero the collider's mass and angular inertia will be added
     // to the inertial properties of the body it is attached to.
     // Default: 1.0
@@ -501,7 +360,7 @@ let collider = ColliderBuilder::new(Shape::Ball(Ball::new(0.5))
 
 ```rust
 use na::{Vector3, Isometry3};
-use rapier3d::geometry::{ColliderBuilder, Shape, Ball};
+use rapier3d::geometry::{ColliderBuilder, ColliderShape, Ball};
 
 // Builder for a ball-shaped collider.
 let _ = ColliderBuilder::ball(0.5);
@@ -518,7 +377,7 @@ let _ = ColliderBuilder::trimesh(vertices, indices);
 // Builder for a heightfield-shaped collider.
 let _ = ColliderBuilder::heightfield(heights, scale);
 // Builder for a collider with the given shape.
-let collider = ColliderBuilder::new(Shape::Ball(Ball::new(0.5))
+let collider = ColliderBuilder::new(ColliderShape::ball(0.5))
     // The collider translation wrt. the body it is attached to.
     // Default: the zero vector.
     .translation(1.0, 2.0, 3.0)
@@ -569,132 +428,4 @@ No two colliders in the same collider set will share the same handle. This handl
 addressing of this collider.
 :::
 
-<!--
-
-### Collider with parent
-Every collider must be attached to a body by specifying the body handle when building the collider:
-
-```rust
-let parent_rigid_body = RigidBodyBuilder::new()
-    .build();
-let parent_handle = body_set.insert(parent_rigid_body);
-
-let shape = ShapeHandle::new(Ball::new(1.5));
-let collider = ColliderBuilder::new(shape)
-    .density(1.0)
-    .translation(Vector3::y() * 5.0)
-    .build();
-let collider_handle = collider_set.insert(collider, parent_handle, &mut body_set);
-```
-
-In this example the body handle we specified was `BodyPartHandle(parent_handle, 0)`. This means that the collider
-will be attached to the first part (indexing of bodys starts at 0) of the body identified by `parent_handle`. A rigid
-body always has one part. Other bodies like [multibodies](/joint_constraints_and_multibodies/#multibodies) are composed
-of several bodys. Thus, attaching a collider to a multibody link requires specifying the index of the specific
-link: `BodyPartHandle(parent_handle, link_index)` where `link_index` is an integer lying between 0 and the total number
-of links the multibody has.
-
-:::Note
-    If a collider is given a density, it will contribute to the mass and angular inertia of the body it is
-    attached to.
-:::
-
-The following shows a way to retrieve the handle of the body attached to a collider:
-
-```rust
-// Assuming `collider_handle` is a valid handle of a collider previously added to the world.
-let collider = collider_set.get(collider_handle).expect("Collider not found.");
-let body_handle = collider.body();
-```
-
-### Collision groups
-It is possible to configure a subset of colliders to collide only with another subset of colliders. This is the goal of
-**collision groups**. Collision groups are demonstrated on the [Collision groups](/all_examples3/?collision_groups) example where
-only colliders with the same colors can collide with one another. The source-code of the demo is available on
-[github](https://github.com/rustsim/rapier/blob/master/examples3d/collision_groups3.rs). A collider's collision group
-can be configured in a `ColliderBuilder` before it is built into the physics world.
-
-Because this is a feature from the **ncollide2d** and **ncollide3d** crates, an in-depth description of collision
-groups is given in [that section](https://ncollide.org/collision_detection_pipeline/#collision-groups) of their
-dedicated user guide.
-
-## Gravity, forces, and impulses
-There are three ways of applying forces to a body in **rapier**. The most common force is gravity and
-is treated as a special case by **rapier**. Finally, forces, impulses, and instantaneous velocity or acceleration
-changes can be [applied](#one-time-force-application-and-impulses) for a single timestep to each body individually.
-
-### Gravity
-Because gravity is such a common force, it is a special case within **rapier**.
-It is set at the creation of the mechanical world and can be changed later with the mechanical world's
-`.gravity` public field:
-
-```rust
-let mut mechanical_world = MechanicalWorld::new();
-mechanical_world.gravity = Vector3::y() * -9.81; // or Vector2 in 2D.
-```
-
-Even though gravity automatically affects all the dynamic bodies, it is possible to cancel the effect of gravity
-on a specific body:
-
-* By disabling gravity for this body before it is constructed by calling the `.gravity_enabled(false)` setter. Example:
-
-```rust
-let mut rigid_body = RigidBodyBuilder::new()
-   // ... other initialization accessors.
-   // Disable gravity for rigid bodies built by this RigidBodyBuilder.
-   .gravity_enabled(false)
-   .build();
-```
-
-* Or by calling `body.enable_gravity(false)` on a body that has already been created into the physics world. This
-    `.enable_gravity` method is part of the [`Body`](https://www.rapier.org/rustdoc/rapier3d/object/trait.Body.html)
-    trait:
-
-```rust
-let mut rb = body_set.body_mut(rb_handle).expect("Rigid body not found.");
-rb.enable_gravity(false);
-```
-
-### One-time force application and impulses
-It is possible to apply a force to any body, at any of its points. In the following, let us call $~f$ a force we
-apply at the center of mass of a body. We distinguish four kinds of forces listed in the `ForceType` enum:
-
-* `ForceType::Force`: a force as in the formula $~f = mass × acceleration$. Applying this force to a body will
-   add a velocity of $~\frac{f}{mass} × dt$ (where $~dt$ is the time step length) to the body's velocity at the next
-   timestep.
-* `ForceType::AccelerationChange`: a direct acceleration change that will add $~f × dt$ to the body's velocity at the next timestep.
-* `ForceType::Impulse`: an impulsive force that immediately adds $~\frac{f}{mass}$ to the body's velocity.
-* `ForceType::VelocityChange`: a direct velocity change that immediately adds $~f$ to the body's velocity.
-
-!!! Note
-    All forces applied to a body are cleared during the next timestep. Therefore a persistent force
-    should be re-applied at each frame.
-
-Several methods of the `Body` trait can be called in order to apply a force to a body:
-
-```rust
-use rapier2d::math::{Force, ForceType}; // For 2D
-use rapier3d::math::{Force, ForceType}; // For 3D
-
-// Force application at the body's center of mass.
-fn apply_force(&mut self, part_id: usize, f: &Force<N>, force_type: ForceType, auto_wake_up: bool);
-fn apply_local_force(&mut self, part_id: usize, f: &Force<N>, force_type: ForceType, auto_wake_up: bool);
-
-// Force application at a custom point on the body.
-fn apply_force_at_point(&mut self, part_id: usize, f: &Vector<N>, point: &Point<N>, force_type: ForceType, auto_wake_up: bool);
-fn apply_local_force_at_point(&mut self, part_id: usize, f: &Vector<N>, point: &Point<N>, force_type: ForceType, auto_wake_up: bool);
-fn apply_force_at_local_point(&mut self, part_id: usize, f: &Vector<N>, point: &Point<N>, force_type: ForceType, auto_wake_up: bool);
-fn apply_local_force_at_local_point(&mut self, part_id: usize, f: &Vector<N>, point: &Point<N>, force_type: ForceType, auto_wake_up: bool);
-```
-
-Every method takes very similar arguments among which:
-
-* **part_id** is the index of the body's part you want to apply the force to. For rigid bodies, this argument should be
-zero since a rigid body has only one part.
-* **auto_wake_up** controls whether the body affected by the force should be woken up automatically because of this force
-  application. This should typically be set to `true` whenever you are applying a one-time force manually. This should
-  likely be set to `false` if you are applying a continuous force from a force generator (so that bodies reaching a dynamic
-  equilibrium can be put to sleep again).
-
--->
 

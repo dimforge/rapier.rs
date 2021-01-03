@@ -25,6 +25,7 @@ use bevy_rapier2d::physics::RapierPhysicsPlugin;
 
 fn main() {
     App::build()
+        .add_plugins(DefaultPlugins) // Default Bevy plugins.
         .add_plugin(RapierPhysicsPlugin)
         .run();
 }
@@ -39,6 +40,7 @@ use bevy_rapier3d::physics::RapierPhysicsPlugin;
 
 fn main() {
     App::build()
+        .add_plugins(DefaultPlugins) // Default Bevy plugins.
         .add_plugin(RapierPhysicsPlugin)
         .run();
 }
@@ -134,12 +136,13 @@ use bevy_rapier2d::rapier::geometry::ColliderBuilder;
 
 fn main() {
     App::build()
+        .add_plugins(DefaultPlugins) // Default Bevy plugins.
         .add_plugin(RapierPhysicsPlugin)
         .add_startup_system(setup_physics.system())
         .run();
 }
 
-fn setup_physics(mut commands: Commands) {
+fn setup_physics(commands: &mut Commands) {
     // Static rigid-body with a cuboid shape.
     let rigid_body1 = RigidBodyBuilder::new_static();
     let collider1 = ColliderBuilder::cuboid(10.0, 1.0);
@@ -163,12 +166,13 @@ use bevy_rapier3d::rapier::geometry::ColliderBuilder;
 
 fn main() {
     App::build()
+        .add_plugins(DefaultPlugins) // Default Bevy plugins.
         .add_plugin(RapierPhysicsPlugin)
         .add_startup_system(setup_physics.system())
         .run();
 }
 
-fn setup_physics(mut commands: Commands) {
+fn setup_physics(commands: &mut Commands) {
     // Static rigid-body with a cuboid shape.
     let rigid_body1 = RigidBodyBuilder::new_static();
     let collider1 = ColliderBuilder::cuboid(10.0, 1.0, 10.0);
@@ -224,12 +228,13 @@ use bevy_rapier2d::rapier::geometry::ColliderBuilder;
 
 fn main() {
     App::build()
+        .add_plugins(DefaultPlugins) // Default Bevy plugins.
         .add_plugin(RapierPhysicsPlugin)
         .add_startup_system(setup_physics.system())
         .run();
 }
 
-fn setup_physics(mut commands: Commands) {
+fn setup_physics(commands: &mut Commands) {
     // Static rigid-body with a cuboid shape.
     let rigid_body1 = RigidBodyBuilder::new_static();
     let collider1 = ColliderBuilder::cuboid(10.0, 1.0);
@@ -267,12 +272,13 @@ use bevy_rapier3d::rapier::geometry::ColliderBuilder;
 
 fn main() {
     App::build()
+        .add_plugins(DefaultPlugins) // Default Bevy plugins.
         .add_plugin(RapierPhysicsPlugin)
         .add_startup_system(setup_physics.system())
         .run();
 }
 
-fn setup_physics(mut commands: Commands) {
+fn setup_physics(commands: &mut Commands) {
     // Static rigid-body with a cuboid shape.
     let rigid_body1 = RigidBodyBuilder::new_static();
     let collider1 = ColliderBuilder::cuboid(10.0, 1.0, 10.0);
@@ -327,6 +333,7 @@ use bevy_rapier2d::physics::{RapierPhysicsPlugin, EventQueue};
 
 fn main() {
     App::build()
+        .add_plugins(DefaultPlugins) // Default Bevy plugins.
         .add_plugin(RapierPhysicsPlugin)
         .add_system(print_events.system())
         .run();
@@ -352,6 +359,7 @@ use bevy_rapier3d::physics::{RapierPhysicsPlugin, EventQueue};
 
 fn main() {
     App::build()
+        .add_plugins(DefaultPlugins) // Default Bevy plugins.
         .add_plugin(RapierPhysicsPlugin)
         .add_system(print_events.system())
         .run();

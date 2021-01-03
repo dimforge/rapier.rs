@@ -94,6 +94,8 @@ fn main() {
             &mut bodies,
             &mut colliders,
             &mut joints,
+            None,
+            None,
             &event_handler
         );
 
@@ -142,6 +144,8 @@ fn main() {
             &mut bodies,
             &mut colliders,
             &mut joints,
+            None,
+            None,
             &event_handler
         );
 
@@ -204,48 +208,3 @@ at least one contact point to 0.
 
 Here `h1` and `h2` identify the handles of the colliders involved in the contact.
 
-<!--
-In the case of starting contacts, it is possible to retrieve the contacts by obtaining
-a reference to the contact manifold with:
-
-```rust
-if let Some(collider1, collider2, algorithm, manifold) = geometrical_world.contact_pair(handle1, handle2) {
-   // ...
-}
-```
-
-## Interaction iterators
-Besides polling events, it is possible to retrieve at any time the complete list of colliders interacting with another
-one using the `GeometricalWorld` (or its type alias `DefaultGeometricalWorld`).
-
-:::note "The **is_effective** flag"
-In the following table, the `is_effective` parameter is something you likely want to always set to `true`.
-
-Setting it to `false` will yield results that may be misleading. Indeed, setting this to `false` will return **all**
-the pairs created by the narrow-phase of the collision detection pipeline. Therefore, it will include all pairs that
-are close enough to require the narrow phase to deal with them but that may not actually be in contact or proximity,
-depending on the `linear_prediction` and `angular_prediction` parameters set during the
-[collider construction](/rigid_body_simulations_with_contacts/#colliders). Setting `is_effective` to `true` will
-filter-out those spurious pairs for you.
-:::
-
-| Method | Description |
-|--      |--           |
-| `.contact_pairs(is_effective)`  | Iterator through all the contact pairs. If `is_effective` is `true`, only pairs involving actual contacts (i.e. contacts within the shapes margin or penetrating) are yielded. |
-| `.proximity_pairs(is_effective)`  | Iterator through all the proximity pairs. If `is_effective` is `true`, only pairs with a proximity equal to `Proximity::Intersecting` are yielded. |
-| `.interaction_pairs(is_effective)`  | Combination of `.contact_pairs` and `.proximity_pairs` into a single iterator. |
-| `.contact_pair(h1, h2, is_effective)`  | The contact pair, if any, between the colliders identified by `h1` and `h2`. If `is_effective` is `true`, only a pair involving actual contacts (i.e. contacts within the shapes margin or penetrating) is returned. |
-| `.proximity_pair(h1, h2, is_effective)`  | The proximity pair, if any, between the colliders identified by `h1` and `h2`. If `is_effective` is `true`, only a pair involving a proximity equal to `Proximity::Intersecting` is returned. |
-| `.interaction_pair(h1, h2, is_effective)`  | Combination of `.contact_pair` and `.proximity_pair` in a single iterator. |
-| `.contacts_with(h, is_effective)`  | Iterator through all the proximity algorithms and colliders in contact with the one identified by `h`. If `is_effective` is `true`, only pairs involving actual contacts (i.e. contacts within the shapes margin or penetrating) are yielded. |
-| `.proximities_with(h, is_effective)`  | Iterator through all the proximity algorithms and colliders in proximity of the one identified by `h`. If `is_effective` is `true`, only pairs with a proximity equal to `Proximity::Intersecting` are yielded. |
-| `.interactions_with(h, is_effective)`  | Combination of `.contacts_with` and `.proximities_with` on a single iterator. |
-| `.colliders_in_contact_with(h)`  | Iterator through all the colliders in contact with the one identified by `h`, i.e., non-sensor colliders with shapes (margin included) that intersect the shape (margin included) of the one identified by `h` |
-| `.colliders_in_proximity_of(h)`  | Iterator through all the colliders in proximity `Proximity::Intersecting` of the one identified by `h`. The collider identified by `h` and/or one of the intersecting colliders will be a sensor. |
-| `.colliders_interacting_with(h)`  | Combination of `.collider_in_contact_with` and `.colliders_in_proximity_of` on a single iterator. |
-
-:::note "Proximity events"
-Recall that a proximity can only occur between a sensor collider and another collider (sensor or not). On
-the other hand, contacts only occur between two non-sensor colliders.
-:::
--->
