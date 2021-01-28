@@ -3,23 +3,23 @@ const katex = require('rehype-katex')
 
 module.exports = {
   title: 'Rapier',
-  tagline: 'Fast and cross-platform physics engine for the Rust programming language.',
-  url: 'https://your-docusaurus-test-site.com',
+  tagline: 'Fast 2D and 3D physics engine for the Rust programming language.',
+  url: 'https://rapier.rs',
   baseUrl: '/',
   onBrokenLinks: 'error', // 'throw',
   favicon: 'img/favicon.png',
-  organizationName: 'facebook', // Usually your GitHub org/user name.
-  projectName: 'docusaurus', // Usually your repo name.
+  organizationName: 'dimforge', // Usually your GitHub org/user name.
+  projectName: 'rapier', // Usually your repo name.
   themeConfig: {
     prism: {
         theme: require('prism-react-renderer/themes/github'),
         additionalLanguages: ['toml', 'rust'],
     },
-    announcementBar: {
-      id: 'supportus',
-      content:
-        '⭐️ If you like Rapier, support us on <a target="_blank" rel="noopener noreferrer" href="https://github.com/sponsors/dimforge">GitHub Sponsor</a>! ⭐️',
-    },
+    // announcementBar: {
+    //   id: 'supportus',
+    //   content:
+    //     '⭐️ If you like Rapier, support us on <a target="_blank" rel="noopener noreferrer" href="https://github.com/sponsors/dimforge">GitHub Sponsor</a>! ⭐️',
+    // },
     navbar: {
       title: 'Rapier',
       logo: {
@@ -35,26 +35,54 @@ module.exports = {
           position: 'left',
         },
         {
+          label: 'Demos',
+          position: 'left',
+          items: [
+            {
+              href: 'https://rapier.rs/demos2d/index.html', // FIXME: should depend on the base url.
+              label: '2D Demos ↪',
+              position: 'left',
+            },
+            {
+              href: 'https://rapier.rs/demos3d/index.html', // FIXME: should depend on the base url.
+              label: '3D Demos ↪',
+              position: 'left',
+            }
+          ],
+        },
+        {
           to: 'benchmarks/',
           activeBasePath: 'benchmarks',
           label: 'Benchmarks',
           position: 'left',
         },
         {
-          href: 'https://rapier.rs/demos2d/index.html', // FIXME: should depend on the base url.
-          label: 'Demos 2D ↪',
+          to: '/community',
+          position: 'left',
+          activeBaseRegex: `/community/`,
+          label: 'Community',
+        },
+        {
+          href: 'https://dimforge.com/blog',
+          label: 'Blog ↪',
           position: 'left',
         },
         {
-          href: 'https://rapier.rs/demos3d/index.html', // FIXME: should depend on the base url.
-          label: 'Demos 3D ↪',
-          position: 'left',
+          href: 'https://github.com/sponsors/dimforge',
+          label: 'Donate ♥',
+          position: 'right',
+          className: 'header-button-donate'
         },
-        // {to: 'blog', label: 'Blog', position: 'left'},
+        {
+          href: 'https://dimforge.com',
+          label: 'Dimforge ↪',
+          position: 'right',
+        },
         {
           href: 'https://github.com/dimforge/rapier',
-          label: 'GitHub',
           position: 'right',
+          className: 'header-github-link',
+          'aria-label': 'GitHub repository',
         },
       ],
     },
@@ -118,13 +146,24 @@ module.exports = {
       // copyright: `Copyright © ${new Date().getFullYear()} Dimforge EURL. Website built with Docusaurus.`,
     },
   },
+  plugins: [
+    [
+      '@docusaurus/plugin-content-docs',
+      {
+        id: 'community',
+        path: 'community',
+        routeBasePath: 'community',
+        sidebarPath: require.resolve('./sidebar_community.js'),
+        showLastUpdateTime: false,
+      }
+    ],
+  ],
   presets: [
     [
       '@docusaurus/preset-classic',
       {
         docs: {
-          homePageId: 'user_guides/about_rapier',
-          sidebarPath: require.resolve('./sidebars.js'),
+          sidebarPath: require.resolve('./sidebar_docs.js'),
           showLastUpdateTime: false,
           remarkPlugins: [math],
           rehypePlugins: [katex],

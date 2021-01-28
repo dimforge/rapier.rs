@@ -7,39 +7,60 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
 import styles from './styles.module.css';
 
 const features = [
-  {
-    title: <>Multi-platforms physics simulations</>,
-    imageUrl: 'img/undraw_physics_simulation.svg',
-    description: (
-      <>
-          Fast physics for games, animation and robotics. Runs cross-platform,
-          including the official support of web platforms.
-      </>
-    ),
-  },
-  {
-    title: <>Take and restore snapshots</>,
-    imageUrl: 'img/undraw_snapshot.svg',
-    description: (
-      <>
-          Use serialization to take or restore a complete snapshot of the
-          instantaneous state of the physics simulation.
-      </>
-    ),
-  },
-{
-    title: <>Cross-platform determinism</>,
-    imageUrl: 'img/undraw_determinism.svg',
-    description: (
-        <>
-            Optionally make Rapier cross-platform deterministic on all
-            IEEE 754-2008 compliant 32- and 64-bits platforms.
-        </>
-    ),
-},
+    {
+        title: <>Multi-platforms physics simulations</>,
+        imageUrl: 'img/feature_contact_models.svg',
+        description: (
+            <>
+                Fast physics for games, animation and robotics. Runs cross-platform,
+                including the official support of web platforms.
+            </>
+        ),
+    },
+    {
+        title: <>Joint constraints</>,
+        imageUrl: 'img/feature_multibody_and_constraints.svg',
+        description: (
+            <>
+                Constraint the relative motion of two rigid-bodies using
+                force-based joints. Simulate ragdolls, robots, vehicles,
+                etc.
+            </>
+        ),
+    },
+    {
+        title: <>Contact events and scene queries</>,
+        imageUrl: 'img/feature_event_handling_and_sensors.svg',
+        description: (
+            <>
+                Handle collision and intersection events or use scene queries to perform
+                ray-casting, sweep-tests, intersection tests, etc.
+            </>
+        ),
+    },
+    // {
+    //     title: <>Continuous collision detection</>,
+    //     imageUrl: 'img/feature_continuous_collision_detection.svg',
+    //     description: (
+    //         <>
+    //             Use collision detection (CCD) on any rigid-body to avoid missing contacts.
+    //             CCD is also supported on sensors.
+    //         </>
+    //     ),
+    // },
+    {
+        title: <>SIMD and parallelism</>,
+        imageUrl: 'img/feature_performances_tuning.svg',
+        description: (
+            <>
+                Optionally enable SIMD optimizations and/or parallelism to get the best
+                performance your CPU can offer to simulate complex scenes.
+            </>
+        ),
+    },
 {
     title: <>WebAssembly and JavaScript</>,
-    imageUrl: 'img/undraw_web.svg',
+    imageUrl: 'img/feature_wasm.svg',
     description: (
         <>
             Use our official NPM packages published behind
@@ -48,6 +69,16 @@ const features = [
         </>
     ),
 },
+    {
+        title: <>Cross-platform determinism</>,
+        imageUrl: 'img/undraw_determinism.svg',
+        description: (
+            <>
+                Optionally make Rapier cross-platform deterministic on all
+                IEEE 754-2008 compliant 32- and 64-bits platforms.
+            </>
+        ),
+    },
 {
     title: <>Forever free and Open-Source</>,
     imageUrl: 'img/undraw_open_source.svg',
@@ -91,7 +122,7 @@ function Home() {
             <div className={styles.buttons}>
             <Link
               className={clsx(
-                'button button--outline button--lg --ifm-color-prim', /*button--secondary*/
+                'button button--outline button--lg --ifm-color-prim force-border', /*button--secondary*/
                 styles.getStarted,
               )}
               to={useBaseUrl('docs/')}>
