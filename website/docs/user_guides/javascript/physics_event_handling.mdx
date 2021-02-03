@@ -10,12 +10,12 @@ import TabItem from '@theme/TabItem';
 During the course of a physics simulation, colliders will collides, and sensors will be activated. These events can
 be retrieved in order to apply custom game logics. There are currently two types of events:
 - Contact events triggered when two colliders start or stop having contact points.
-- Proximity events triggered when one sensor collider and another collider start of step touching.
+- Intersection events triggered when one sensor collider and another collider start or stop touching.
 
 In order to listen to these physics events, we need to:
 1. Create and `EventQueue` which is responsible for collecting events occurring during one timestep.
 2. Call `world.step(eventQueue)` instead of `world.step()` to advance the simulation.
-3. Iterate through the events using `eventQueue.drainContactEvents` and `eventsQueue.drainProximityEvents`.
+3. Iterate through the events using `eventQueue.drainContactEvents` and `eventsQueue.drainIntersectionEvents`.
 
 
 <Tabs
@@ -41,8 +41,8 @@ import('@dimforge/rapier2d').then(RAPIER => {
       console.log("Contact between:", handle1, "and", handle2, ". Started:", contactStarted);
     });
 
-    eventQueue.drainProximityEvents((handle1, handle2, prevProximity, newProximity) => {
-      console.log("Proximity between: ", handle1, "and", handle2, ". Previous proximity:", prevProximity, "new proximity: ", newProximity);
+    eventQueue.drainIntersectionEvents((handle1, handle2, intersecting) => {
+      console.log("Intersection between: ", handle1, "and", handle2, ". Currently intersecting:", intersecting);
     });
 
     setTimeout(gameLoop);
@@ -69,8 +69,8 @@ import('@dimforge/rapier3d').then(RAPIER => {
       console.log("Contact between:", handle1, "and", handle2, ". Started:", contactStarted);
     });
 
-    eventQueue.drainProximityEvents((handle1, handle2, prevProximity, newProximity) => {
-      console.log("Proximity between: ", handle1, "and", handle2, ". Previous proximity:", prevProximity, "new proximity: ", newProximity);
+    eventQueue.drainIntersection((handle1, handle2, intersecting) => {
+      console.log("Intersection between: ", handle1, "and", handle2, ". Currently intersecting: ", intersecting);
     });
 
     setTimeout(gameLoop);
@@ -95,9 +95,6 @@ and pass all its items to a JS closure:
 two integers and one boolean. The twe integers are the handles of the colliders involved in the contact. We can retrieve
 the actual collider reference form its integer handle using `world.getCollider(handle)`. The boolean indicates whether the
 two colliders are starting to be in contact (true) or no longer have any contact point (false).
-- The `eventQueue.drainProximityEvents` drain all the proximity events. The input closure is expected to take four arguments,
-two integers and two integer enumerations of type `RAPIER.Proximity`. The two integers are the handles of the colliders
-involved in the proximity. Because this is a proximity event and not a contact, one of these colliders (or both) will be a sensor.
-The first proximity enum represents the previous known proximity state, and the the second proximity enum represents the
-new proximity state. For example if `prevProximity == RAPIER.Proximity.Disjoint` and `newProximity == RAPIER.Proximity.Intersecting`
-then the two colliders were disjoint during the last timestep and are now intersecting.
+- The `eventQueue.drainIntersection` drain all the proximity events. The input closure is expected to take three arguments,
+two integers and one boolean. The two integers are the handles of the colliders
+involved in the proximity. The boolean indicates if they are intersecting.

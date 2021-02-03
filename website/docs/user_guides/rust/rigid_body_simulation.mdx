@@ -294,7 +294,7 @@ Any body can have one of three different statuses identified by the `dynamics::B
     behavior of dynamic bodies in contact with it. This is typically used for moving **platforms**, **elevators**, etc.
 
 ## Colliders
-Colliders represent the geometric shapes that generate contacts and proximity events when they touch.
+Colliders represent the geometric shapes that generate contacts and intersection events when they touch.
 
 ### Creating a collider
 A collider is built by a `ColliderBuilder` structure following the builder pattern:
@@ -348,7 +348,7 @@ let collider = ColliderBuilder::new(ColliderShape::ball(0.5))
     // The friction coefficient of this collider.
     // Default: ColliderBuilder::default_friction() == 0.5
     .friction(0.8)
-    // Whether this collider is a sensor, i.e., generate only proximity events.
+    // Whether this collider is a sensor, i.e., generate only intersection events.
     // Default: false
     .sensor(true)
     // All done, actually build the collider.
@@ -394,7 +394,7 @@ let collider = ColliderBuilder::new(ColliderShape::ball(0.5))
     // The friction coefficient of this collider.
     // Default: ColliderBuilder::default_friction() == 0.5
     .friction(0.8)
-    // Whether this collider is a sensor, i.e., generate only proximity events.
+    // Whether this collider is a sensor, i.e., generate only intersection events.
     // Default: false
     .sensor(true)
     // All done, actually build the collider.

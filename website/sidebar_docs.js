@@ -26,17 +26,27 @@ module.exports = {
     },
     {
       'API Documentation': [
-          'api/javascript/JavaScript2D',
+        'api/javascript/JavaScript2D',
         'api/javascript/JavaScript3D',
         {
           type: 'link',
-          label: 'Rust 2D ↪',
+          label: 'rapier2d ↪',
           href: 'https://docs.rs/rapier2d'
         },
         {
           type: 'link',
-          label: 'Rust 3D ↪',
+          label: 'rapier3d ↪',
           href: 'https://docs.rs/rapier3d'
+        },
+        {
+          type: 'link',
+          label: 'rapier2d-f64 ↪',
+          href: 'https://docs.rs/rapier2d-f64'
+        },
+        {
+          type: 'link',
+          label: 'rapier3d-f64 ↪',
+          href: 'https://docs.rs/rapier3d-f64'
         },
       ],
     }

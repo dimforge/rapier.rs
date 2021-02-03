@@ -17,12 +17,12 @@ start/stop touching another collider (be it another sensor or not). This is ofte
 entered a specific area.
 
 Finally it is possible to retrieve at any time the set of colliders interacting with another collider using various
-[iterators](#interaction-iterators) provided by the contact and proximity graphs.
+[iterators](#interaction-iterators) provided by the contact and intersection graphs.
 
 ## Sensors
 Sensors are a special type of [collider](/docs/user_guides/rust/rigid_body_simulation#colliders) that don't generate any contact.
 Like regular colliders, they have to be added to the `ColliderSet`, are given a geometric shape, and are attached to a rigid-body.
-They are commonly used for detecting proximity, e.g., to detect when a player enters a
+They are commonly used for detecting intersection, e.g., to detect when a player enters a
 specific area or is close to a door.
 
 The creation of a sensor is identical to the creation of a regular collider except that its sensor flag is set to `true`:
@@ -81,8 +81,8 @@ fn main() {
     let mut joints = JointSet::new();
     // Initialize the event collector.
     let (contact_send, contact_recv) = crossbeam::channel::unbounded();
-    let (proximity_send, proximity_recv) = crossbeam::channel::unbounded();
-    let event_handler = ChannelEventCollector::new(proximity_send, contact_send);
+    let (intersection_send, intersection_recv) = crossbeam::channel::unbounded();
+    let event_handler = ChannelEventCollector::new(intersection_send, contact_send);
 
     // Run the simulation in the game loop.
     loop {
@@ -99,8 +99,8 @@ fn main() {
             &event_handler
         );
 
-        while let Ok(proximity_event) = proximity_recv.try_recv() {
-            // Handle the proximity event.
+        while let Ok(intersection_event) = intersection_recv.try_recv() {
+            // Handle the intersection event.
         }
 
         while let Ok(contact_event) = contact_recv.try_recv() {
@@ -131,8 +131,8 @@ fn main() {
     let mut joints = JointSet::new();
     // Initialize the event collector.
     let (contact_send, contact_recv) = crossbeam::channel::unbounded();
-    let (proximity_send, proximity_recv) = crossbeam::channel::unbounded();
-    let event_handler = ChannelEventCollector::new(proximity_send, contact_send);
+    let (intersection_send, intersection_recv) = crossbeam::channel::unbounded();
+    let event_handler = ChannelEventCollector::new(intersection_send, contact_send);
 
     // Run the simulation in the game loop.
     loop {
@@ -149,8 +149,8 @@ fn main() {
             &event_handler
         );
 
-        while let Ok(proximity_event) = proximity_recv.try_recv() {
-            // Handle the proximity event.
+        while let Ok(intersection_event) = intersection_recv.try_recv() {
+            // Handle the intersection event.
         }
 
         while let Ok(contact_event) = contact_recv.try_recv() {
@@ -164,35 +164,21 @@ fn main() {
 </Tabs>
 
 :::note
-Contact and proximity events identify the involved colliders by their handle. It is possible to retrieve the handle of
+Contact and intersection events identify the involved colliders by their handle. It is possible to retrieve the handle of
 the body a collider is attached to: `colliders.get(collider_handle).unwrap().parent()`.
 :::
 
-### Proximity events
-Proximity events are triggered when two sensors, or one collider and one sensor,
-transition between two different proximity statuses. There are three possible proximity statuses:
+### Intersection events
+Intersection events are triggered when two sensors, or one collider and one sensor,
+transition between intersecting or not.
 
-1. `Proximity::Intersecting` indicates two sensors (or one sensor and one collider) are touching/penetrating.
-2. `Proximity::WithinMargin` indicates two sensors (or one sensor and one collider) are not touching but separated by a
-   distance smaller than a small margin given to each collider by the physics pipeline.
-3. `Proximity::Disjoint` indicates two sensors (or one sensor and one collider) are no longer touching, and are too far
-   apart to be closer than the sum of the `linear_prediction` given to each collider.
-
-One proximity event has the type `ProximityEvent`:
+One intersection event has the type `ProximityEvent`:
 
 | Field         | Description |
 |--             | --          |
-| `collider1`   | The handle of the first collider/sensor involved in the proximity. |
-| `collider2`   | The handle of the second collider/sensor involved in the proximity. |
-| `prev_status` | The previous proximity status of the colliders/sensors. |
-| `new_status`  | The current proximity status of the colliders/sensors. |
-
-Only status changes are reported, so `prev_status != new_status` is guaranteed. On the other
-hand, keep in mind that the body a collider/sensor is attached to is not required to have a smooth
-motion. Thus, the transition from, e.g., `Proximity::Intersecting` to
-`Proximity::Disjoint` is possible even if a smooth motion would have
-necessarily triggered transitions from `::Intersecting` to `::WithinMargin` and
-then from `::WithinMargin` to `::Disjoint` instead.
+| `collider1`   | The handle of the first collider/sensor involved in the intersection. |
+| `collider2`   | The handle of the second collider/sensor involved in the intersection. |
+| `intersecting` | Set to `true` if the colliders are intersecting. |
 
 ### Contact events
 Contact events are triggered when two colliders transition between having zero contact points and at least one.
