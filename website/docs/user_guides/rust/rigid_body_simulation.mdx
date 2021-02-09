@@ -133,11 +133,10 @@ All the mentioned sets associate a unique handle to each element they contain. T
 they don't suffer from the ABA problem.
 
 Each call to `pipeline.step(...)` will advance the simulation by a time equal to $1/60$ seconds, which is a good default if your
-application has a refresh rate of 60Hz. The length of this timestep can be retrieved by `integration_parameters.dt()` and modified
-using `integration_parameters.set_dt(value)`. Note that if you use the
-recommanded [International System of Units](https://en.wikipedia.org/wiki/International_System_of_Units) (SI units), this
-timestep is to be given in seconds. Keep in mind that the timestep length strongly affects the accuracy of the simulation:
-the smaller the timestep, the more accurate the simulation will be.
+application has a refresh rate of 60Hz. The length of this timestep can be read and set via the `integration_parameters.dt` field.
+Note that if you use the recommended [International System of Units](https://en.wikipedia.org/wiki/International_System_of_Units)
+(SI units), this timestep is to be given in seconds. Keep in mind that the timestep length strongly affects the accuracy of the
+simulation: the smaller the timestep, the more accurate the simulation will be.
 
 Changes of timesteps during the simulation should be avoided as much as possible since they may introduce numerical
 instabilities or reduce the constraints solvers convergence.
@@ -414,7 +413,7 @@ let mut collider_set = ColliderSet::new();
 let handle = collider_set.insert(collider, parent_handle, &mut rigid_body_set);
 ```
 
-When inserting the collider, it will be attached to the rigid-body specified by is handle `parent_handle`.
+When inserting the collider, it will be attached to the rigid-body specified by its handle `parent_handle`.
 Upon insertion, the collider set will return a handle to the collider. This will allow you to get a reference to this
 collider if needed later:
 
