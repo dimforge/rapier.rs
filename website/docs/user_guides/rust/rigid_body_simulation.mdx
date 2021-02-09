@@ -315,7 +315,7 @@ lead to a useful result.
 
 ```rust
 use na::{Vector2, Isometry2};
-use rapier2d::geometry::{ColliderBuilder, ColliderShape, Ball};
+use rapier2d::geometry::{ColliderBuilder, SharedShape};
 
 // Builder for a ball-shaped collider.
 let _ = ColliderBuilder::ball(0.5);
@@ -330,16 +330,16 @@ let _ = ColliderBuilder::trimesh(vertices, indices);
 // Builder for a heightfield-shaped collider.
 let _ = ColliderBuilder::heightfield(heights, scale);
 // Builder for a collider with the given shape.
-let collider = ColliderBuilder::new(ColliderShape::ball(0.5))
+let collider = ColliderBuilder::new(SharedShape::ball(0.5))
     // The collider translation wrt. the body it is attached to.
     // Default: the zero vector.
     .translation(1.0, 2.0)
     // The collider rotation wrt. the body it is attached to.
     // Default: the identity rotation.
-    .rotation(f32::PI)
+    .rotation(core::f32::consts::PI)
     // The collider position wrt. the body it is attached to.
     // Default: the identity isometry.
-    .position(Isometry2::new(Vector2::new(1.0, 2.0), f32::PI))
+    .position(Isometry2::new(Vector2::new(1.0, 2.0), core::f32::consts::PI))
     // The collider density. If non-zero the collider's mass and angular inertia will be added
     // to the inertial properties of the body it is attached to.
     // Default: 1.0
@@ -359,7 +359,7 @@ let collider = ColliderBuilder::new(ColliderShape::ball(0.5))
 
 ```rust
 use na::{Vector3, Isometry3};
-use rapier3d::geometry::{ColliderBuilder, ColliderShape, Ball};
+use rapier3d::geometry::{ColliderBuilder, SharedShape};
 
 // Builder for a ball-shaped collider.
 let _ = ColliderBuilder::ball(0.5);
@@ -376,16 +376,16 @@ let _ = ColliderBuilder::trimesh(vertices, indices);
 // Builder for a heightfield-shaped collider.
 let _ = ColliderBuilder::heightfield(heights, scale);
 // Builder for a collider with the given shape.
-let collider = ColliderBuilder::new(ColliderShape::ball(0.5))
+let collider = ColliderBuilder::new(SharedShape::ball(0.5))
     // The collider translation wrt. the body it is attached to.
     // Default: the zero vector.
     .translation(1.0, 2.0, 3.0)
     // The collider rotation wrt. the body it is attached to.
     // Default: the identity rotation.
-    .rotation(Vector3::y() * f32::PI)
+    .rotation(Vector3::y() * core::f32::consts::PI)
     // The collider position wrt. the body it is attached to.
     // Default: the identity isometry.
-    .position(Isometry3::new(Vector3::new(1.0, 2.0, 3.0), Vector3::y() * f32::PI))
+    .position(Isometry3::new(Vector3::new(1.0, 2.0, 3.0), Vector3::y() * core::f32::consts::PI))
     // The collider density. If non-zero the collider's mass and angular inertia will be added
     // to the inertial properties of the body it is attached to.
     // Default: 1.0
@@ -418,8 +418,8 @@ Upon insertion, the collider set will return a handle to the collider. This will
 collider if needed later:
 
 ```rust
-let collider = body_set.get(handle);     // Retrieve an immutable reference.
-let collider = body_set.get_mut(handle); // Retrieve a mutable reference.
+let collider = collider_set.get(handle);     // Retrieve an immutable reference.
+let collider = collider_set.get_mut(handle); // Retrieve a mutable reference.
 ```
 
 :::note
