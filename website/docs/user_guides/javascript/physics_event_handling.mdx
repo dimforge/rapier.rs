@@ -69,7 +69,7 @@ import('@dimforge/rapier3d').then(RAPIER => {
       console.log("Contact between:", handle1, "and", handle2, ". Started:", contactStarted);
     });
 
-    eventQueue.drainIntersection((handle1, handle2, intersecting) => {
+    eventQueue.drainIntersectionEvents((handle1, handle2, intersecting) => {
       console.log("Intersection between: ", handle1, "and", handle2, ". Currently intersecting: ", intersecting);
     });
 
@@ -95,6 +95,6 @@ and pass all its items to a JS closure:
 two integers and one boolean. The twe integers are the handles of the colliders involved in the contact. We can retrieve
 the actual collider reference form its integer handle using `world.getCollider(handle)`. The boolean indicates whether the
 two colliders are starting to be in contact (true) or no longer have any contact point (false).
-- The `eventQueue.drainIntersection` drain all the proximity events. The input closure is expected to take three arguments,
+- The `eventQueue.drainIntersectionEvents` drain all the proximity events. The input closure is expected to take three arguments,
 two integers and one boolean. The two integers are the handles of the colliders
 involved in the proximity. The boolean indicates if they are intersecting.
