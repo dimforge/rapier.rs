@@ -83,6 +83,7 @@ fn main() {
     let (contact_send, contact_recv) = crossbeam::channel::unbounded();
     let (intersection_send, intersection_recv) = crossbeam::channel::unbounded();
     let event_handler = ChannelEventCollector::new(intersection_send, contact_send);
+    let physics_hooks = (); // Ignore physics hooks.
 
     // Run the simulation in the game loop.
     loop {
@@ -94,8 +95,7 @@ fn main() {
             &mut bodies,
             &mut colliders,
             &mut joints,
-            None,
-            None,
+            &physics_hooks,
             &event_handler
         );
 
@@ -133,6 +133,7 @@ fn main() {
     let (contact_send, contact_recv) = crossbeam::channel::unbounded();
     let (intersection_send, intersection_recv) = crossbeam::channel::unbounded();
     let event_handler = ChannelEventCollector::new(intersection_send, contact_send);
+    let physics_hooks = (); // Ignore physics hooks.
 
     // Run the simulation in the game loop.
     loop {
@@ -144,8 +145,7 @@ fn main() {
             &mut bodies,
             &mut colliders,
             &mut joints,
-            None,
-            None,
+            &physics_hooks,
             &event_handler
         );
 

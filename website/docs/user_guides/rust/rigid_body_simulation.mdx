@@ -48,7 +48,8 @@ fn main() {
     let mut bodies = RigidBodySet::new();
     let mut colliders = ColliderSet::new();
     let mut joints = JointSet::new();
-    // We ignore contact events for now.
+    // We ignore physics hooks and contact events for now.
+    let physics_hooks = ();
     let event_handler = ();
 
     // Run the simulation in the game loop.
@@ -61,8 +62,7 @@ fn main() {
             &mut bodies,
             &mut colliders,
             &mut joints,
-            None,
-            None,
+            &physics_hooks,
             &event_handler
         );
     }
@@ -88,7 +88,8 @@ fn main() {
     let mut bodies = RigidBodySet::new();
     let mut colliders = ColliderSet::new();
     let mut joints = JointSet::new();
-    // We ignore contact events for now.
+    // We ignore physics hooks and contact events for now.
+    let physics_hooks = ();
     let event_handler = ();
 
     // Run the simulation in the game loop.
@@ -101,8 +102,7 @@ fn main() {
             &mut bodies,
             &mut colliders,
             &mut joints,
-            None,
-            None,
+            &physics_hooks,
             &event_handler
         );
     }
