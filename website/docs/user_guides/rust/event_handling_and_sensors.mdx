@@ -65,7 +65,7 @@ to `pipeline.step`:
 
 ```rust
 use rapier2d::na::Vector2;
-use rapier2d::dynamics::{JointSet, RigidBodySet, IntegrationParameters};
+use rapier2d::dynamics::{JointSet, RigidBodySet, IntegrationParameters, CCDSolver};
 use rapier2d::geometry::{BroadPhase, NarrowPhase, ColliderSet};
 use rapier2d::pipeline::{PhysicsPipeline, ChannelEventCollector};
 
@@ -79,6 +79,7 @@ fn main() {
     let mut bodies = RigidBodySet::new();
     let mut colliders = ColliderSet::new();
     let mut joints = JointSet::new();
+    let mut ccd_solver = CCDSolver::new();
     // Initialize the event collector.
     let (contact_send, contact_recv) = crossbeam::channel::unbounded();
     let (intersection_send, intersection_recv) = crossbeam::channel::unbounded();
@@ -95,6 +96,7 @@ fn main() {
             &mut bodies,
             &mut colliders,
             &mut joints,
+            &mut ccd_solver,
             &physics_hooks,
             &event_handler
         );
@@ -115,7 +117,7 @@ fn main() {
 
 ```rust
 use rapier3d::na::Vector3;
-use rapier3d::dynamics::{JointSet, RigidBodySet, IntegrationParameters};
+use rapier3d::dynamics::{CCDSolver, JointSet, RigidBodySet, IntegrationParameters};
 use rapier3d::geometry::{BroadPhase, NarrowPhase, ColliderSet};
 use rapier3d::pipeline::{PhysicsPipeline, ChannelEventCollector};
 
@@ -129,6 +131,7 @@ fn main() {
     let mut bodies = RigidBodySet::new();
     let mut colliders = ColliderSet::new();
     let mut joints = JointSet::new();
+    let mut ccd_solver = CCDSolver::new();
     // Initialize the event collector.
     let (contact_send, contact_recv) = crossbeam::channel::unbounded();
     let (intersection_send, intersection_recv) = crossbeam::channel::unbounded();
@@ -145,6 +148,7 @@ fn main() {
             &mut bodies,
             &mut colliders,
             &mut joints,
+            &mut ccd_solver,
             &physics_hooks,
             &event_handler
         );

@@ -11,6 +11,10 @@ module.exports = {
   organizationName: 'dimforge', // Usually your GitHub org/user name.
   projectName: 'rapier', // Usually your repo name.
   themeConfig: {
+    algolia: {
+      apiKey: '2fb2392fe420e3f9cd94004bda27a775',
+      indexName: 'rapier',
+    },
     prism: {
         theme: require('prism-react-renderer/themes/github'),
         additionalLanguages: ['toml', 'rust'],
