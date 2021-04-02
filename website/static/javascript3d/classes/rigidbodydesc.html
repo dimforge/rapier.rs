@@ -89,6 +89,7 @@
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="rigidbodydesc.html#angularinertialocalframe" class="tsd-kind-icon">angular<wbr>Inertia<wbr>Local<wbr>Frame</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="rigidbodydesc.html#angvel" class="tsd-kind-icon">angvel</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="rigidbodydesc.html#cansleep" class="tsd-kind-icon">can<wbr>Sleep</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="rigidbodydesc.html#ccdenabled" class="tsd-kind-icon">ccd<wbr>Enabled</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="rigidbodydesc.html#centerofmass" class="tsd-kind-icon">center<wbr>OfMass</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="rigidbodydesc.html#gravityscale" class="tsd-kind-icon">gravity<wbr>Scale</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="rigidbodydesc.html#lineardamping" class="tsd-kind-icon">linear<wbr>Damping</a></li>
@@ -113,6 +114,7 @@
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="rigidbodydesc.html#setangulardamping" class="tsd-kind-icon">set<wbr>Angular<wbr>Damping</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="rigidbodydesc.html#setangvel" class="tsd-kind-icon">set<wbr>Angvel</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="rigidbodydesc.html#setcansleep" class="tsd-kind-icon">set<wbr>Can<wbr>Sleep</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="rigidbodydesc.html#setccdenabled" class="tsd-kind-icon">set<wbr>Ccd<wbr>Enabled</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="rigidbodydesc.html#setgravityscale" class="tsd-kind-icon">set<wbr>Gravity<wbr>Scale</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="rigidbodydesc.html#setlineardamping" class="tsd-kind-icon">set<wbr>Linear<wbr>Damping</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="rigidbodydesc.html#setlinvel" class="tsd-kind-icon">set<wbr>Linvel</a></li>
@@ -142,7 +144,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in dynamics/rigid_body.ts:476</li>
+									<li>Defined in dynamics/rigid_body.ts:484</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -156,7 +158,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in dynamics/rigid_body.d.ts:283</li>
+									<li>Defined in dynamics/rigid_body.d.ts:288</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -178,8 +180,8 @@
 					<div class="tsd-signature tsd-kind-icon">angular<wbr>Damping<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in dynamics/rigid_body.ts:474</li>
-							<li>Defined in dynamics/rigid_body.d.ts:281</li>
+							<li>Defined in dynamics/rigid_body.ts:481</li>
+							<li>Defined in dynamics/rigid_body.d.ts:285</li>
 						</ul>
 					</aside>
 				</section>
@@ -189,8 +191,8 @@
 					<div class="tsd-signature tsd-kind-icon">angular<wbr>Inertia<wbr>Local<wbr>Frame<span class="tsd-signature-symbol">:</span> <a href="../interfaces/rotation.html" class="tsd-signature-type">Rotation</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in dynamics/rigid_body.ts:468</li>
-							<li>Defined in dynamics/rigid_body.d.ts:276</li>
+							<li>Defined in dynamics/rigid_body.ts:475</li>
+							<li>Defined in dynamics/rigid_body.d.ts:280</li>
 						</ul>
 					</aside>
 				</section>
@@ -200,8 +202,8 @@
 					<div class="tsd-signature tsd-kind-icon">angvel<span class="tsd-signature-symbol">:</span> <a href="../interfaces/vector.html" class="tsd-signature-type">Vector</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in dynamics/rigid_body.ts:466</li>
-							<li>Defined in dynamics/rigid_body.d.ts:274</li>
+							<li>Defined in dynamics/rigid_body.ts:473</li>
+							<li>Defined in dynamics/rigid_body.d.ts:278</li>
 						</ul>
 					</aside>
 				</section>
@@ -211,8 +213,19 @@
 					<div class="tsd-signature tsd-kind-icon">can<wbr>Sleep<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in dynamics/rigid_body.ts:476</li>
-							<li>Defined in dynamics/rigid_body.d.ts:283</li>
+							<li>Defined in dynamics/rigid_body.ts:483</li>
+							<li>Defined in dynamics/rigid_body.d.ts:287</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="ccdenabled" class="tsd-anchor"></a>
+					<h3>ccd<wbr>Enabled</h3>
+					<div class="tsd-signature tsd-kind-icon">ccd<wbr>Enabled<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in dynamics/rigid_body.ts:484</li>
+							<li>Defined in dynamics/rigid_body.d.ts:288</li>
 						</ul>
 					</aside>
 				</section>
@@ -222,8 +235,8 @@
 					<div class="tsd-signature tsd-kind-icon">center<wbr>OfMass<span class="tsd-signature-symbol">:</span> <a href="../interfaces/vector.html" class="tsd-signature-type">Vector</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in dynamics/rigid_body.ts:461</li>
-							<li>Defined in dynamics/rigid_body.d.ts:272</li>
+							<li>Defined in dynamics/rigid_body.ts:468</li>
+							<li>Defined in dynamics/rigid_body.d.ts:276</li>
 						</ul>
 					</aside>
 				</section>
@@ -233,8 +246,8 @@
 					<div class="tsd-signature tsd-kind-icon">gravity<wbr>Scale<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in dynamics/rigid_body.ts:458</li>
-							<li>Defined in dynamics/rigid_body.d.ts:269</li>
+							<li>Defined in dynamics/rigid_body.ts:465</li>
+							<li>Defined in dynamics/rigid_body.d.ts:273</li>
 						</ul>
 					</aside>
 				</section>
@@ -244,8 +257,8 @@
 					<div class="tsd-signature tsd-kind-icon">linear<wbr>Damping<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in dynamics/rigid_body.ts:473</li>
-							<li>Defined in dynamics/rigid_body.d.ts:280</li>
+							<li>Defined in dynamics/rigid_body.ts:480</li>
+							<li>Defined in dynamics/rigid_body.d.ts:284</li>
 						</ul>
 					</aside>
 				</section>
@@ -255,8 +268,8 @@
 					<div class="tsd-signature tsd-kind-icon">linvel<span class="tsd-signature-symbol">:</span> <a href="../interfaces/vector.html" class="tsd-signature-type">Vector</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in dynamics/rigid_body.ts:462</li>
-							<li>Defined in dynamics/rigid_body.d.ts:273</li>
+							<li>Defined in dynamics/rigid_body.ts:469</li>
+							<li>Defined in dynamics/rigid_body.d.ts:277</li>
 						</ul>
 					</aside>
 				</section>
@@ -266,8 +279,8 @@
 					<div class="tsd-signature tsd-kind-icon">mass<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in dynamics/rigid_body.ts:459</li>
-							<li>Defined in dynamics/rigid_body.d.ts:270</li>
+							<li>Defined in dynamics/rigid_body.ts:466</li>
+							<li>Defined in dynamics/rigid_body.d.ts:274</li>
 						</ul>
 					</aside>
 				</section>
@@ -277,8 +290,8 @@
 					<div class="tsd-signature tsd-kind-icon">principal<wbr>Angular<wbr>Inertia<span class="tsd-signature-symbol">:</span> <a href="../interfaces/vector.html" class="tsd-signature-type">Vector</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in dynamics/rigid_body.ts:467</li>
-							<li>Defined in dynamics/rigid_body.d.ts:275</li>
+							<li>Defined in dynamics/rigid_body.ts:474</li>
+							<li>Defined in dynamics/rigid_body.d.ts:279</li>
 						</ul>
 					</aside>
 				</section>
@@ -288,8 +301,8 @@
 					<div class="tsd-signature tsd-kind-icon">rotation<span class="tsd-signature-symbol">:</span> <a href="../interfaces/rotation.html" class="tsd-signature-type">Rotation</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in dynamics/rigid_body.ts:457</li>
-							<li>Defined in dynamics/rigid_body.d.ts:268</li>
+							<li>Defined in dynamics/rigid_body.ts:464</li>
+							<li>Defined in dynamics/rigid_body.d.ts:272</li>
 						</ul>
 					</aside>
 				</section>
@@ -299,8 +312,8 @@
 					<div class="tsd-signature tsd-kind-icon">rotations<wbr>EnabledX<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in dynamics/rigid_body.ts:469</li>
-							<li>Defined in dynamics/rigid_body.d.ts:277</li>
+							<li>Defined in dynamics/rigid_body.ts:476</li>
+							<li>Defined in dynamics/rigid_body.d.ts:281</li>
 						</ul>
 					</aside>
 				</section>
@@ -310,8 +323,8 @@
 					<div class="tsd-signature tsd-kind-icon">rotations<wbr>EnabledY<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in dynamics/rigid_body.ts:470</li>
-							<li>Defined in dynamics/rigid_body.d.ts:278</li>
+							<li>Defined in dynamics/rigid_body.ts:477</li>
+							<li>Defined in dynamics/rigid_body.d.ts:282</li>
 						</ul>
 					</aside>
 				</section>
@@ -321,8 +334,8 @@
 					<div class="tsd-signature tsd-kind-icon">rotations<wbr>EnabledZ<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in dynamics/rigid_body.ts:471</li>
-							<li>Defined in dynamics/rigid_body.d.ts:279</li>
+							<li>Defined in dynamics/rigid_body.ts:478</li>
+							<li>Defined in dynamics/rigid_body.d.ts:283</li>
 						</ul>
 					</aside>
 				</section>
@@ -332,8 +345,8 @@
 					<div class="tsd-signature tsd-kind-icon">status<span class="tsd-signature-symbol">:</span> <a href="../enums/bodystatus.html" class="tsd-signature-type">BodyStatus</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in dynamics/rigid_body.ts:475</li>
-							<li>Defined in dynamics/rigid_body.d.ts:282</li>
+							<li>Defined in dynamics/rigid_body.ts:482</li>
+							<li>Defined in dynamics/rigid_body.d.ts:286</li>
 						</ul>
 					</aside>
 				</section>
@@ -343,8 +356,8 @@
 					<div class="tsd-signature tsd-kind-icon">translation<span class="tsd-signature-symbol">:</span> <a href="../interfaces/vector.html" class="tsd-signature-type">Vector</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in dynamics/rigid_body.ts:456</li>
-							<li>Defined in dynamics/rigid_body.d.ts:267</li>
+							<li>Defined in dynamics/rigid_body.ts:463</li>
+							<li>Defined in dynamics/rigid_body.d.ts:271</li>
 						</ul>
 					</aside>
 				</section>
@@ -354,8 +367,8 @@
 					<div class="tsd-signature tsd-kind-icon">translations<wbr>Enabled<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in dynamics/rigid_body.ts:460</li>
-							<li>Defined in dynamics/rigid_body.d.ts:271</li>
+							<li>Defined in dynamics/rigid_body.ts:467</li>
+							<li>Defined in dynamics/rigid_body.d.ts:275</li>
 						</ul>
 					</aside>
 				</section>
@@ -373,7 +386,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in dynamics/rigid_body.ts:667</li>
+									<li>Defined in dynamics/rigid_body.ts:676</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -387,7 +400,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in dynamics/rigid_body.d.ts:379</li>
+									<li>Defined in dynamics/rigid_body.d.ts:384</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -411,7 +424,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in dynamics/rigid_body.ts:578</li>
+									<li>Defined in dynamics/rigid_body.ts:587</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -425,7 +438,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in dynamics/rigid_body.d.ts:327</li>
+									<li>Defined in dynamics/rigid_body.d.ts:332</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -449,7 +462,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in dynamics/rigid_body.ts:656</li>
+									<li>Defined in dynamics/rigid_body.ts:665</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -483,7 +496,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in dynamics/rigid_body.d.ts:374</li>
+									<li>Defined in dynamics/rigid_body.d.ts:379</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -527,7 +540,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in dynamics/rigid_body.ts:694</li>
+									<li>Defined in dynamics/rigid_body.ts:703</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -551,7 +564,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in dynamics/rigid_body.d.ts:397</li>
+									<li>Defined in dynamics/rigid_body.d.ts:402</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -585,7 +598,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in dynamics/rigid_body.ts:607</li>
+									<li>Defined in dynamics/rigid_body.ts:616</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -607,7 +620,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in dynamics/rigid_body.d.ts:341</li>
+									<li>Defined in dynamics/rigid_body.d.ts:346</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -639,7 +652,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in dynamics/rigid_body.ts:704</li>
+									<li>Defined in dynamics/rigid_body.ts:713</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -661,7 +674,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in dynamics/rigid_body.d.ts:403</li>
+									<li>Defined in dynamics/rigid_body.d.ts:408</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -683,6 +696,60 @@
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="setccdenabled" class="tsd-anchor"></a>
+					<h3>set<wbr>Ccd<wbr>Enabled</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">set<wbr>Ccd<wbr>Enabled<span class="tsd-signature-symbol">(</span>enabled<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="rigidbodydesc.html" class="tsd-signature-type">RigidBodyDesc</a></li>
+						<li class="tsd-signature tsd-kind-icon">set<wbr>Ccd<wbr>Enabled<span class="tsd-signature-symbol">(</span>enabled<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="rigidbodydesc.html" class="tsd-signature-type">RigidBodyDesc</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in dynamics/rigid_body.ts:723</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Sets whether Continuous Collision Detection (CCD) is enabled for this rigid-body.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>enabled: <span class="tsd-signature-type">boolean</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>true if the rigid-body has CCD enabled.</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="rigidbodydesc.html" class="tsd-signature-type">RigidBodyDesc</a></h4>
+						</li>
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in dynamics/rigid_body.d.ts:414</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Sets whether Continuous Collision Detection (CCD) is enabled for this rigid-body.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>enabled: <span class="tsd-signature-type">boolean</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>true if the rigid-body has CCD enabled.</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="rigidbodydesc.html" class="tsd-signature-type">RigidBodyDesc</a></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
 					<a name="setgravityscale" class="tsd-anchor"></a>
 					<h3>set<wbr>Gravity<wbr>Scale</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
@@ -693,7 +760,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in dynamics/rigid_body.ts:559</li>
+									<li>Defined in dynamics/rigid_body.ts:568</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -717,7 +784,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in dynamics/rigid_body.d.ts:316</li>
+									<li>Defined in dynamics/rigid_body.d.ts:321</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -751,7 +818,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in dynamics/rigid_body.ts:681</li>
+									<li>Defined in dynamics/rigid_body.ts:690</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -775,7 +842,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in dynamics/rigid_body.d.ts:388</li>
+									<li>Defined in dynamics/rigid_body.d.ts:393</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -809,7 +876,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in dynamics/rigid_body.ts:594</li>
+									<li>Defined in dynamics/rigid_body.ts:603</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -843,7 +910,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in dynamics/rigid_body.d.ts:335</li>
+									<li>Defined in dynamics/rigid_body.d.ts:340</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -887,7 +954,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in dynamics/rigid_body.ts:569</li>
+									<li>Defined in dynamics/rigid_body.ts:578</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -909,7 +976,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in dynamics/rigid_body.d.ts:322</li>
+									<li>Defined in dynamics/rigid_body.d.ts:327</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -941,7 +1008,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in dynamics/rigid_body.ts:631</li>
+									<li>Defined in dynamics/rigid_body.ts:640</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -990,7 +1057,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in dynamics/rigid_body.d.ts:361</li>
+									<li>Defined in dynamics/rigid_body.d.ts:366</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1049,7 +1116,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in dynamics/rigid_body.ts:645</li>
+									<li>Defined in dynamics/rigid_body.ts:654</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1071,7 +1138,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in dynamics/rigid_body.d.ts:367</li>
+									<li>Defined in dynamics/rigid_body.d.ts:372</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1103,7 +1170,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in dynamics/rigid_body.ts:547</li>
+									<li>Defined in dynamics/rigid_body.ts:556</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1125,7 +1192,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in dynamics/rigid_body.d.ts:308</li>
+									<li>Defined in dynamics/rigid_body.d.ts:313</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1157,7 +1224,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in dynamics/rigid_body.ts:532</li>
+									<li>Defined in dynamics/rigid_body.ts:541</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1182,7 +1249,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in dynamics/rigid_body.d.ts:302</li>
+									<li>Defined in dynamics/rigid_body.d.ts:307</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1217,7 +1284,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in dynamics/rigid_body.ts:505</li>
+									<li>Defined in dynamics/rigid_body.ts:514</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1230,7 +1297,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in dynamics/rigid_body.d.ts:288</li>
+									<li>Defined in dynamics/rigid_body.d.ts:293</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1253,7 +1320,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in dynamics/rigid_body.ts:512</li>
+									<li>Defined in dynamics/rigid_body.ts:521</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1266,7 +1333,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in dynamics/rigid_body.d.ts:292</li>
+									<li>Defined in dynamics/rigid_body.d.ts:297</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1289,7 +1356,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in dynamics/rigid_body.ts:519</li>
+									<li>Defined in dynamics/rigid_body.ts:528</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1302,7 +1369,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in dynamics/rigid_body.d.ts:296</li>
+									<li>Defined in dynamics/rigid_body.d.ts:301</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1345,6 +1412,9 @@
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class">
 								<a href="rigidbodydesc.html#cansleep" class="tsd-kind-icon">can<wbr>Sleep</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="rigidbodydesc.html#ccdenabled" class="tsd-kind-icon">ccd<wbr>Enabled</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class">
 								<a href="rigidbodydesc.html#centerofmass" class="tsd-kind-icon">center<wbr>OfMass</a>
@@ -1402,6 +1472,9 @@
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="rigidbodydesc.html#setcansleep" class="tsd-kind-icon">set<wbr>Can<wbr>Sleep</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="rigidbodydesc.html#setccdenabled" class="tsd-kind-icon">set<wbr>Ccd<wbr>Enabled</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="rigidbodydesc.html#setgravityscale" class="tsd-kind-icon">set<wbr>Gravity<wbr>Scale</a>

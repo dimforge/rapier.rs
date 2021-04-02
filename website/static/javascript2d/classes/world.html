@@ -99,6 +99,7 @@
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="world.html#bodies" class="tsd-kind-icon">bodies</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="world.html#broadphase" class="tsd-kind-icon">broad<wbr>Phase</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="world.html#ccdsolver" class="tsd-kind-icon">ccd<wbr>Solver</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="world.html#colliders" class="tsd-kind-icon">colliders</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="world.html#gravity" class="tsd-kind-icon">gravity</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="world.html#integrationparameters" class="tsd-kind-icon">integration<wbr>Parameters</a></li>
@@ -158,14 +159,14 @@
 					<a name="constructor" class="tsd-anchor"></a>
 					<h3>constructor</h3>
 					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">new <wbr>World<span class="tsd-signature-symbol">(</span>gravity<span class="tsd-signature-symbol">: </span><a href="../interfaces/vector.html" class="tsd-signature-type">Vector</a>, rawIntegrationParameters<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">RawIntegrationParameters</span>, rawBroadPhase<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">RawBroadPhase</span>, rawNarrowPhase<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">RawNarrowPhase</span>, rawBodies<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">RawRigidBodySet</span>, rawColliders<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">RawColliderSet</span>, rawJoints<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">RawJointSet</span>, rawQueryPipeline<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">RawQueryPipeline</span>, rawPhysicsPipeline<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">RawPhysicsPipeline</span>, rawSerializationPipeline<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">RawSerializationPipeline</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="world.html" class="tsd-signature-type">World</a></li>
-						<li class="tsd-signature tsd-kind-icon">new <wbr>World<span class="tsd-signature-symbol">(</span>gravity<span class="tsd-signature-symbol">: </span><a href="../interfaces/vector.html" class="tsd-signature-type">Vector</a>, rawIntegrationParameters<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">RawIntegrationParameters</span>, rawBroadPhase<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">RawBroadPhase</span>, rawNarrowPhase<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">RawNarrowPhase</span>, rawBodies<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">RawRigidBodySet</span>, rawColliders<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">RawColliderSet</span>, rawJoints<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">RawJointSet</span>, rawQueryPipeline<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">RawQueryPipeline</span>, rawPhysicsPipeline<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">RawPhysicsPipeline</span>, rawSerializationPipeline<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">RawSerializationPipeline</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="world.html" class="tsd-signature-type">World</a></li>
+						<li class="tsd-signature tsd-kind-icon">new <wbr>World<span class="tsd-signature-symbol">(</span>gravity<span class="tsd-signature-symbol">: </span><a href="../interfaces/vector.html" class="tsd-signature-type">Vector</a>, rawIntegrationParameters<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">RawIntegrationParameters</span>, rawBroadPhase<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">RawBroadPhase</span>, rawNarrowPhase<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">RawNarrowPhase</span>, rawBodies<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">RawRigidBodySet</span>, rawColliders<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">RawColliderSet</span>, rawJoints<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">RawJointSet</span>, rawCCDSolver<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">RawCCDSolver</span>, rawQueryPipeline<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">RawQueryPipeline</span>, rawPhysicsPipeline<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">RawPhysicsPipeline</span>, rawSerializationPipeline<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">RawSerializationPipeline</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="world.html" class="tsd-signature-type">World</a></li>
+						<li class="tsd-signature tsd-kind-icon">new <wbr>World<span class="tsd-signature-symbol">(</span>gravity<span class="tsd-signature-symbol">: </span><a href="../interfaces/vector.html" class="tsd-signature-type">Vector</a>, rawIntegrationParameters<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">RawIntegrationParameters</span>, rawBroadPhase<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">RawBroadPhase</span>, rawNarrowPhase<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">RawNarrowPhase</span>, rawBodies<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">RawRigidBodySet</span>, rawColliders<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">RawColliderSet</span>, rawJoints<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">RawJointSet</span>, rawCCDSolver<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">RawCCDSolver</span>, rawQueryPipeline<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">RawQueryPipeline</span>, rawPhysicsPipeline<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">RawPhysicsPipeline</span>, rawSerializationPipeline<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">RawSerializationPipeline</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="world.html" class="tsd-signature-type">World</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in pipeline/world.ts:79</li>
+									<li>Defined in pipeline/world.ts:83</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -190,6 +191,9 @@
 								</li>
 								<li>
 									<h5><span class="tsd-flag ts-flagOptional">Optional</span> rawJoints: <span class="tsd-signature-type">RawJointSet</span></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> rawCCDSolver: <span class="tsd-signature-type">RawCCDSolver</span></h5>
 								</li>
 								<li>
 									<h5><span class="tsd-flag ts-flagOptional">Optional</span> rawQueryPipeline: <span class="tsd-signature-type">RawQueryPipeline</span></h5>
@@ -206,7 +210,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in pipeline/world.d.ts:32</li>
+									<li>Defined in pipeline/world.d.ts:33</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -231,6 +235,9 @@
 								</li>
 								<li>
 									<h5><span class="tsd-flag ts-flagOptional">Optional</span> rawJoints: <span class="tsd-signature-type">RawJointSet</span></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> rawCCDSolver: <span class="tsd-signature-type">RawCCDSolver</span></h5>
 								</li>
 								<li>
 									<h5><span class="tsd-flag ts-flagOptional">Optional</span> rawQueryPipeline: <span class="tsd-signature-type">RawQueryPipeline</span></h5>
@@ -255,7 +262,7 @@
 					<div class="tsd-signature tsd-kind-icon">bodies<span class="tsd-signature-symbol">:</span> <a href="rigidbodyset.html" class="tsd-signature-type">RigidBodySet</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in pipeline/world.ts:46</li>
+							<li>Defined in pipeline/world.ts:47</li>
 							<li>Defined in pipeline/world.d.ts:20</li>
 						</ul>
 					</aside>
@@ -266,8 +273,19 @@
 					<div class="tsd-signature tsd-kind-icon">broad<wbr>Phase<span class="tsd-signature-symbol">:</span> <a href="broadphase.html" class="tsd-signature-type">BroadPhase</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in pipeline/world.ts:44</li>
+							<li>Defined in pipeline/world.ts:45</li>
 							<li>Defined in pipeline/world.d.ts:18</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="ccdsolver" class="tsd-anchor"></a>
+					<h3>ccd<wbr>Solver</h3>
+					<div class="tsd-signature tsd-kind-icon">ccd<wbr>Solver<span class="tsd-signature-symbol">:</span> <a href="ccdsolver.html" class="tsd-signature-type">CCDSolver</a></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in pipeline/world.ts:50</li>
+							<li>Defined in pipeline/world.d.ts:23</li>
 						</ul>
 					</aside>
 				</section>
@@ -277,7 +295,7 @@
 					<div class="tsd-signature tsd-kind-icon">colliders<span class="tsd-signature-symbol">:</span> <a href="colliderset.html" class="tsd-signature-type">ColliderSet</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in pipeline/world.ts:47</li>
+							<li>Defined in pipeline/world.ts:48</li>
 							<li>Defined in pipeline/world.d.ts:21</li>
 						</ul>
 					</aside>
@@ -288,7 +306,7 @@
 					<div class="tsd-signature tsd-kind-icon">gravity<span class="tsd-signature-symbol">:</span> <a href="../interfaces/vector.html" class="tsd-signature-type">Vector</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in pipeline/world.ts:42</li>
+							<li>Defined in pipeline/world.ts:43</li>
 							<li>Defined in pipeline/world.d.ts:16</li>
 						</ul>
 					</aside>
@@ -299,7 +317,7 @@
 					<div class="tsd-signature tsd-kind-icon">integration<wbr>Parameters<span class="tsd-signature-symbol">:</span> <a href="integrationparameters.html" class="tsd-signature-type">IntegrationParameters</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in pipeline/world.ts:43</li>
+							<li>Defined in pipeline/world.ts:44</li>
 							<li>Defined in pipeline/world.d.ts:17</li>
 						</ul>
 					</aside>
@@ -310,7 +328,7 @@
 					<div class="tsd-signature tsd-kind-icon">joints<span class="tsd-signature-symbol">:</span> <a href="jointset.html" class="tsd-signature-type">JointSet</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in pipeline/world.ts:48</li>
+							<li>Defined in pipeline/world.ts:49</li>
 							<li>Defined in pipeline/world.d.ts:22</li>
 						</ul>
 					</aside>
@@ -321,7 +339,7 @@
 					<div class="tsd-signature tsd-kind-icon">narrow<wbr>Phase<span class="tsd-signature-symbol">:</span> <a href="narrowphase.html" class="tsd-signature-type">NarrowPhase</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in pipeline/world.ts:45</li>
+							<li>Defined in pipeline/world.ts:46</li>
 							<li>Defined in pipeline/world.d.ts:19</li>
 						</ul>
 					</aside>
@@ -332,8 +350,8 @@
 					<div class="tsd-signature tsd-kind-icon">physics<wbr>Pipeline<span class="tsd-signature-symbol">:</span> <a href="physicspipeline.html" class="tsd-signature-type">PhysicsPipeline</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in pipeline/world.ts:50</li>
-							<li>Defined in pipeline/world.d.ts:24</li>
+							<li>Defined in pipeline/world.ts:52</li>
+							<li>Defined in pipeline/world.d.ts:25</li>
 						</ul>
 					</aside>
 				</section>
@@ -343,8 +361,8 @@
 					<div class="tsd-signature tsd-kind-icon">query<wbr>Pipeline<span class="tsd-signature-symbol">:</span> <a href="querypipeline.html" class="tsd-signature-type">QueryPipeline</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in pipeline/world.ts:49</li>
-							<li>Defined in pipeline/world.d.ts:23</li>
+							<li>Defined in pipeline/world.ts:51</li>
+							<li>Defined in pipeline/world.d.ts:24</li>
 						</ul>
 					</aside>
 				</section>
@@ -354,8 +372,8 @@
 					<div class="tsd-signature tsd-kind-icon">serialization<wbr>Pipeline<span class="tsd-signature-symbol">:</span> <a href="serializationpipeline.html" class="tsd-signature-type">SerializationPipeline</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in pipeline/world.ts:51</li>
-							<li>Defined in pipeline/world.d.ts:25</li>
+							<li>Defined in pipeline/world.ts:53</li>
+							<li>Defined in pipeline/world.d.ts:26</li>
 						</ul>
 					</aside>
 				</section>
@@ -373,7 +391,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in pipeline/world.d.ts:90</li>
+									<li>Defined in pipeline/world.d.ts:91</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -383,12 +401,12 @@
 								<p>The greater this value is, the less penetrations will be visible after one timestep where
 									the velocity solver did not converge entirely. Large values will degrade significantly
 								the performance of the simulation.</p>
-								<p>To increase realism of the simulation it is recommanded, more efficient, and more effecive,
+								<p>To increase realism of the simulation it is recommended, more efficient, and more effecive,
 								to increase the number of velocity iterations instead of this number of position iterations.</p>
 								<p>The greater this value is, the less penetrations will be visible after one timestep where
 									the velocity solver did not converge entirely. Large values will degrade significantly
 								the performance of the simulation.</p>
-								<p>To increase realism of the simulation it is recommanded, more efficient, and more effecive,
+								<p>To increase realism of the simulation it is recommended, more efficient, and more effecive,
 								to increase the number of velocity iterations instead of this number of position iterations.</p>
 							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
@@ -396,7 +414,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in pipeline/world.d.ts:103</li>
+									<li>Defined in pipeline/world.d.ts:104</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -406,7 +424,7 @@
 								<p>The greater this value is, the less penetrations will be visible after one timestep where
 									the velocity solver did not converge entirely. Large values will degrade significantly
 								the performance of the simulation.</p>
-								<p>To increase realism of the simulation it is recommanded, more efficient, and more effecive,
+								<p>To increase realism of the simulation it is recommended, more efficient, and more effecive,
 								to increase the number of velocity iterations instead of this number of position iterations.</p>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -433,7 +451,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in pipeline/world.d.ts:77</li>
+									<li>Defined in pipeline/world.d.ts:78</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -450,7 +468,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in pipeline/world.d.ts:86</li>
+									<li>Defined in pipeline/world.d.ts:87</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -484,7 +502,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in pipeline/world.d.ts:60</li>
+									<li>Defined in pipeline/world.d.ts:61</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -513,7 +531,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in pipeline/world.d.ts:73</li>
+									<li>Defined in pipeline/world.d.ts:74</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -553,7 +571,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in pipeline/world.ts:410</li>
+									<li>Defined in pipeline/world.ts:413</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -581,7 +599,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in pipeline/world.d.ts:218</li>
+									<li>Defined in pipeline/world.d.ts:219</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -619,7 +637,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in pipeline/world.ts:425</li>
+									<li>Defined in pipeline/world.ts:428</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -646,7 +664,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in pipeline/world.d.ts:230</li>
+									<li>Defined in pipeline/world.d.ts:231</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -683,7 +701,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in pipeline/world.ts:531</li>
+									<li>Defined in pipeline/world.ts:534</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -745,7 +763,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in pipeline/world.d.ts:297</li>
+									<li>Defined in pipeline/world.d.ts:298</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -817,7 +835,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in pipeline/world.ts:250</li>
+									<li>Defined in pipeline/world.ts:257</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -845,7 +863,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in pipeline/world.d.ts:116</li>
+									<li>Defined in pipeline/world.d.ts:117</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -883,7 +901,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in pipeline/world.ts:261</li>
+									<li>Defined in pipeline/world.ts:268</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -914,7 +932,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in pipeline/world.d.ts:124</li>
+									<li>Defined in pipeline/world.d.ts:125</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -955,7 +973,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in pipeline/world.ts:240</li>
+									<li>Defined in pipeline/world.ts:247</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -977,7 +995,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in pipeline/world.d.ts:109</li>
+									<li>Defined in pipeline/world.d.ts:110</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1009,7 +1027,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in pipeline/world.ts:379</li>
+									<li>Defined in pipeline/world.ts:382</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1052,7 +1070,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in pipeline/world.d.ts:193</li>
+									<li>Defined in pipeline/world.d.ts:194</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1105,7 +1123,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in pipeline/world.ts:394</li>
+									<li>Defined in pipeline/world.ts:397</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1146,7 +1164,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in pipeline/world.d.ts:205</li>
+									<li>Defined in pipeline/world.d.ts:206</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1197,7 +1215,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in pipeline/world.ts:339</li>
+									<li>Defined in pipeline/world.ts:342</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1234,7 +1252,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in pipeline/world.d.ts:165</li>
+									<li>Defined in pipeline/world.d.ts:166</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1281,7 +1299,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in pipeline/world.ts:348</li>
+									<li>Defined in pipeline/world.ts:351</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1318,7 +1336,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in pipeline/world.d.ts:171</li>
+									<li>Defined in pipeline/world.d.ts:172</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1365,7 +1383,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in pipeline/world.ts:357</li>
+									<li>Defined in pipeline/world.ts:360</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1402,7 +1420,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in pipeline/world.d.ts:177</li>
+									<li>Defined in pipeline/world.d.ts:178</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1449,7 +1467,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in pipeline/world.ts:366</li>
+									<li>Defined in pipeline/world.ts:369</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1486,7 +1504,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in pipeline/world.d.ts:183</li>
+									<li>Defined in pipeline/world.d.ts:184</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1533,7 +1551,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in pipeline/world.ts:59</li>
+									<li>Defined in pipeline/world.ts:61</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1548,7 +1566,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in pipeline/world.d.ts:32</li>
+									<li>Defined in pipeline/world.d.ts:33</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1573,7 +1591,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in pipeline/world.ts:285</li>
+									<li>Defined in pipeline/world.ts:292</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1595,7 +1613,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in pipeline/world.d.ts:136</li>
+									<li>Defined in pipeline/world.d.ts:137</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1627,7 +1645,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in pipeline/world.ts:294</li>
+									<li>Defined in pipeline/world.ts:301</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1649,7 +1667,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in pipeline/world.d.ts:142</li>
+									<li>Defined in pipeline/world.d.ts:143</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1681,7 +1699,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in pipeline/world.ts:276</li>
+									<li>Defined in pipeline/world.ts:283</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1703,7 +1721,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in pipeline/world.d.ts:130</li>
+									<li>Defined in pipeline/world.d.ts:131</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1735,7 +1753,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in pipeline/world.ts:465</li>
+									<li>Defined in pipeline/world.ts:468</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1782,7 +1800,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in pipeline/world.d.ts:256</li>
+									<li>Defined in pipeline/world.d.ts:257</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1839,7 +1857,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in pipeline/world.ts:507</li>
+									<li>Defined in pipeline/world.ts:510</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1899,7 +1917,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in pipeline/world.d.ts:281</li>
+									<li>Defined in pipeline/world.d.ts:282</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1969,7 +1987,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in pipeline/world.ts:444</li>
+									<li>Defined in pipeline/world.ts:447</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -2043,7 +2061,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in pipeline/world.d.ts:245</li>
+									<li>Defined in pipeline/world.d.ts:246</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -2127,7 +2145,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in pipeline/world.ts:554</li>
+									<li>Defined in pipeline/world.ts:557</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -2198,7 +2216,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in pipeline/world.d.ts:309</li>
+									<li>Defined in pipeline/world.d.ts:310</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -2279,7 +2297,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in pipeline/world.ts:488</li>
+									<li>Defined in pipeline/world.ts:491</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -2324,7 +2342,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in pipeline/world.d.ts:270</li>
+									<li>Defined in pipeline/world.d.ts:271</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -2379,7 +2397,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in pipeline/world.ts:324</li>
+									<li>Defined in pipeline/world.ts:329</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -2399,7 +2417,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in pipeline/world.d.ts:159</li>
+									<li>Defined in pipeline/world.d.ts:160</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -2429,7 +2447,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in pipeline/world.ts:306</li>
+									<li>Defined in pipeline/world.ts:313</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -2453,7 +2471,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in pipeline/world.d.ts:151</li>
+									<li>Defined in pipeline/world.d.ts:152</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -2487,7 +2505,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in pipeline/world.ts:156</li>
+									<li>Defined in pipeline/world.ts:162</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -2507,7 +2525,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in pipeline/world.d.ts:56</li>
+									<li>Defined in pipeline/world.d.ts:57</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -2537,7 +2555,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in pipeline/world.ts:126</li>
+									<li>Defined in pipeline/world.ts:132</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -2552,7 +2570,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in pipeline/world.d.ts:41</li>
+									<li>Defined in pipeline/world.d.ts:42</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -2577,7 +2595,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in pipeline/world.ts:105</li>
+									<li>Defined in pipeline/world.ts:111</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -2591,7 +2609,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in pipeline/world.d.ts:34</li>
+									<li>Defined in pipeline/world.d.ts:35</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -2615,7 +2633,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in pipeline/world.ts:143</li>
+									<li>Defined in pipeline/world.ts:149</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -2635,7 +2653,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in pipeline/world.d.ts:47</li>
+									<li>Defined in pipeline/world.d.ts:48</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -2679,6 +2697,9 @@
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class">
 								<a href="world.html#broadphase" class="tsd-kind-icon">broad<wbr>Phase</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="world.html#ccdsolver" class="tsd-kind-icon">ccd<wbr>Solver</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class">
 								<a href="world.html#colliders" class="tsd-kind-icon">colliders</a>
