@@ -47,10 +47,10 @@ same as for regular colliders as described in [that section](rigid_body_simulati
 -->
 
 ## Interaction handling
-I order to handle physics events, it is necessary to collect them using a structure implementing the `EventHandler` trait.
-Because **Rapier** can be paralellized, this event handler must be `Send + Sync`. One such structure provided by `Rapier`
+In order to handle physics events, it is necessary to collect them using a structure implementing the `EventHandler` trait.
+Because **Rapier** can be parallelized, this event handler must be `Send + Sync`. One such structure provided by `Rapier`
 is the `pipeline::ChannelEventCollector`. This event collector contains channels from the
-[crossbeam crate](https://crates.io/crates/crossbeam). These channels will be populated with events during each called
+[crossbeam crate](https://crates.io/crates/crossbeam). These channels will be populated with events during each call
 to `pipeline.step`:
 
 
