@@ -146,12 +146,12 @@ fn setup_physics(commands: &mut Commands) {
     // Static rigid-body with a cuboid shape.
     let rigid_body1 = RigidBodyBuilder::new_static();
     let collider1 = ColliderBuilder::cuboid(10.0, 1.0);
-    commands.spawn((rigid_body1, collider1));
+    commands.spawn_bundle((rigid_body1, collider1));
 
     // Dynamic rigid-body with ball shape.
     let rigid_body2 = RigidBodyBuilder::new_dynamic().translation(0.0, 3.0);
     let collider2 = ColliderBuilder::ball(0.5);
-    commands.spawn((rigid_body2, collider2));
+    commands.spawn_bundle((rigid_body2, collider2));
 }
 ```
 
@@ -176,12 +176,12 @@ fn setup_physics(commands: &mut Commands) {
     // Static rigid-body with a cuboid shape.
     let rigid_body1 = RigidBodyBuilder::new_static();
     let collider1 = ColliderBuilder::cuboid(10.0, 1.0, 10.0);
-    commands.spawn((rigid_body1, collider1));
+    commands.spawn_bundle((rigid_body1, collider1));
 
     // Dynamic rigid-body with ball shape.
     let rigid_body2 = RigidBodyBuilder::new_dynamic().translation(0.0, 3.0, 0.0);
     let collider2 = ColliderBuilder::ball(0.5);
-    commands.spawn((rigid_body2, collider2));
+    commands.spawn_bundle((rigid_body2, collider2));
 }
 ```
 
