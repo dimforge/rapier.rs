@@ -1,0 +1,49 @@
+---
+id: serialization
+title: Serialization
+sidebar_label: Serialization
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+When the `serde-serialize` feature of Rapier is enabled, most data structures of Rapier become serializable using [serde](http://serde.rs).
+Serialization can be useful to save the complete state of the simulation, e.g., to send it over the network, or to restore
+this state later. In order to fully serialize the simulation state, it is necessary to serialize every structure
+described in the [simulation structures](simulation_structures) page, except for the `PhysicsPipeline` and the
+`CollisionPipeline` which don't hold any useful state. The following shows an example of serialization of the
+complete physics state. For convenience, the example defines a `PhysicsState` serializable struct that wraps every
+relevant serializable state. It uses [bincode](https://crates.io/crates/bincode) as the serialization format:
+
+```rust
+// Use serde derives for our wrapper struct.
+#[derive(Serialize, Deserialize)] 
+struct PhysicsState {
+    pub islands: IslandManager,
+    pub broad_phase: BroadPhase,
+    pub narrow_phase: NarrowPhase,
+    pub bodies: RigidBodySet,
+    pub colliders: ColliderSet,
+    pub joints: JointSet,
+    pub ccd_solver: CCDSolver,
+    pub query_pipeline: QueryPipeline,
+    pub integration_parameters: IntegrationParameters,
+    pub gravity: Vector<f32>,
+}
+
+fn main() {
+    let physics_state = setup_physics_scene();
+    // Serialize everything.
+    let serialized = bincode::serialize(&physics_state).unwrap();
+    // Deserialize everything.
+    let deserialized = bincode::deserialize(&serialized).unwrap();
+    // The simulation can continue using the deserialized state.
+}
+```
+
+:::info
+If the `enhanced-determinism` feature of Rapier is enabled, and if your platform fulfills the required [determinism
+requirements](determinism), then you have the guarantee that running the exact same simulation on two different machine
+will result in the exact same byte vectors if the physics state is serialized on both machines after the same
+number of timesteps.
+:::

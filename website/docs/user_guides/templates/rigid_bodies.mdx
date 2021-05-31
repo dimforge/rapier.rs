@@ -11,18 +11,20 @@ The real-time simulation of rigid-bodies subjected to forces and contacts is the
 video-games, robotics, or animation. Rigid-bodies are typically used to simulate the dynamics of non-deformable solids as well
 as to integrate the trajectory of solids which velocities are controlled by the user (e.g. moving platforms). On
 the other hand, rigid-bodies are not enough to simulate, e.g., cars, ragdolls, or robotic systems, as those use-cases
-require adding restrictions on the relative motion between their parts with [joints](joints).
+require adding restrictions on the relative motion between their parts using [joints](joints).
  
-Note that rigid-bodies are only responsible for the dynamics of the solid. [Colliders](colliders) can be attached to a
-rigid-body to specify its shape and enable collision-detection. A rigid-body without collider attached to it will
+Note that rigid-bodies are only responsible for the dynamics and kinematics of the solid. [Colliders](colliders) can be
+attached to a rigid-body to specify its shape and enable collision-detection. A rigid-body without collider attached to it will
 not be affected by contacts (because there is no shape to compute contact against).
 
 ## Creation and insertion
+<rapier>
+
 A rigid-body is created by a `RigidBodyBuilder` structure that is based on the builder pattern. Then it needs
 to be inserted into the `RigidBodySet` that will be processed by the physics-pipeline or query-pipeline.
 
 :::info
-The following example shows most setters that can be called to customize the
+The following example shows several setters that can be called to customize the
 rigid-body being built. The input values are just random so using this example
 as-is will not lead to a useful result.
 :::
@@ -37,8 +39,7 @@ as-is will not lead to a useful result.
   <TabItem value="2D">
 
 ```rust
-use rapier2d::na::{vector, Isometry2};
-use rapier2d::dynamics::{BodyStatus, RigidBodyBuilder, RigidBodySet};
+use rapier2d::prelude::*;
 
 // The set that will contain our rigid-bodies.
 let mut rigid_body_set = RigidBodySet::new();
@@ -59,7 +60,7 @@ let rigid_body = RigidBodyBuilder::new(BodyStatus::Dynamic)
     .rotation(5.0)
     // The rigid body position. Will override `.translation(...)` and `.rotation(...)`.
     // Default: the identity isometry.
-    .position(Isometry2::new(vector![1.0, 2.0], 0.4))
+    .position(Isometry::new(vector![1.0, 2.0], 0.4))
     // The linear velocity of this body.
     // Default: zero velocity.
     .linvel(vector![1.0, 2.0])
@@ -86,8 +87,7 @@ let handle = rigid_body_set.insert(rigid_body);
   <TabItem value="3D">
 
 ```rust
-use rapier3d::na::{vector, Isometry3};
-use rapier3d::dynamics::{BodyStatus, RigidBodyBuilder, RigidBodySet};
+use rapier3d::prelude::*;
 
 // The set that will contain our rigid-bodies.
 let mut rigid_body_set = RigidBodySet::new();
@@ -108,7 +108,7 @@ let rigid_body = RigidBodyBuilder::new(BodyStatus::Dynamic)
     .rotation(vector![0.0, 0.0, 5.0])
     // The rigid body position. Will override `.translation(...)` and `.rotation(...)`.
     // Default: the identity isometry.
-    .position(Isometry3::new(vector![1.0, 3.0, 2.0], vector![0.0, 0.0, 0.4]))
+    .position(Isometry::new(vector![1.0, 3.0, 2.0], vector![0.0, 0.0, 0.4]))
     // The linear velocity of this body.
     // Default: zero velocity.
     .linvel(vector![1.0, 3.0, 4.0])
@@ -137,15 +137,81 @@ let handle = rigid_body_set.insert(rigid_body);
 
 All the properties are optional. The only calls that are required are `RigidBodyBuilder::new(status)`,
 `RigidBodyBuilder::new_static()`, `RigidBodyBuilder::new_dynamic()`, or `RigidBodyBuilder::new_kinematic()`, to
-initialize the builder, and `.build()` to actually build the rigid body.
+initialize the builder, and `.build()` to actually build the rigid-body.
 
+</rapier>
+
+<bevy>
+
+A rigid-body is created by adding all the components part of the `RigidBodyBundle` bundle.
+It is important for all the components in the bundle to be added at the same time. To remove
+the rigid-body, the complete bundle must be removed simultaneously too. Adding/removing only
+some of these components may end up in a panic.
+
+:::info
+The following example shows several initialization of components to customize
+rigid-body being built. The input values are just random so using this example
+as-is will not lead to a useful result.
+:::
+
+<Tabs
+groupId="dim"
+defaultValue="2D"
+values={[
+{label: 'Example 2D', value: '2D'},
+{label: 'Example 3D', value: '3D'},
+]}>
+<TabItem value="2D">
+
+```rust
+use bevy_rapier2d::prelude::*;
+
+let rigid_body = RigidBodyBundle {
+    position: [0.0, 5.0].into(),
+    velocity: RigidBodyVelocity { linvel: [1.0, 2.0].into(), angvel: 0.2 },
+    forces: RigidBodyForces { gravity_scale: 0.5, ..Default::default() },
+    activation: RigidBodyActivation { can_sleep: false, ..Default::default() },
+    ccd: RigidBodyCcd { ccd_enabled: true, ..Default::default() },
+    ..Default::default()
+};
+
+commands.spawn_bundle(rigid_body);
+```
+
+  </TabItem>
+  <TabItem value="3D">
+
+```rust
+use bevy_rapier2d::prelude::*;
+
+let rigid_body = RigidBodyBundle {
+    position: [0.0, 5.0, 3.0].into(),
+    velocity: RigidBodyVelocity { linvel: [1.0, 2.0, 3.0].into(), angvel: [0.2, 0.0, 0.0].into() },
+    forces: RigidBodyForces { gravity_scale: 0.5, ..Default::default() },
+    activation: RigidBodyActivation { can_sleep: false, ..Default::default() },
+    ccd: RigidBodyCcd { ccd_enabled: true, ..Default::default() },
+    ..Default::default()
+};
+
+commands.spawn_bundle(rigid_body);
+```
+
+  </TabItem>
+</Tabs>
+
+All the components part of the `RigidBodyBundle` can be queried and modified from Bevy systems.
+
+</bevy>
+
+:::info
 Typically, the inertia and center of mass are automatically set to the inertia and center of mass resulting from the
-shapes of the [colliders](#colliders) attached to the rigid-body. But it can also be set manually.
+shapes of the [colliders](#colliders) attached to the rigid-body. But they can also be set manually.
+:::
 
 ## Rigid-body type
-There are three types of rigid-bodies, identified by the `RigidBodyType` enumeration:
+There are three types of rigid-bodies, identified by the `RigidBodyType` <rapier>enumeration</rapier><bevy>component</bevy>:
 
-* **`RigidBodyType::Dynamic`:** It indicates the body is affected by external forces and contacts.
+* **`RigidBodyType::Dynamic`:** Indicates that the body is affected by external forces and contacts.
 * **`RigidBodyType::Static`:** Indicates the body cannot move. It acts as if it has an infinite mass and will not be
     affected by any force. It will continue to collide with dynamic bodies but not with static nor with kinematic
     bodies. This is typically used for the ground or for temporarily freezing a body.
@@ -156,7 +222,7 @@ There are three types of rigid-bodies, identified by the `RigidBodyType` enumera
 ## Position
 The position of a rigid-body represents its location (translation) in 2D or 3D world-space, as well as its orientation (rotation).
 It translational part is represented as a vector and its rotational part as an unit quaternion (in 3D) or a unit complex
-number (in 2D). Both are combined into an isometry (`Isometry2` or `Isometry3`).
+number (in 2D). Both are combined into an isometry<bevy> stored in the `RigidBodyPosition` component</bevy>.
 
 The position of a rigid-body can be set when creating it. It can also be set after
 its creation as illustrated bellow.
@@ -168,6 +234,8 @@ especially if it teleports into a space occupied by other objects. For dynamic b
 impulses](#forces-and-impulses), or [velocity modification](#velocity) should be preferred.
 For kinematic bodies, see the discussion after the examples bellow.
 :::
+
+<rapier>
 
 <Tabs
   groupId="dim"
@@ -189,7 +257,7 @@ let rigid_body = RigidBodyBuilder::new_dynamic()
     .rotation(5.0)
     // The rigid body position. Will override `.translation(...)` and `.rotation(...)`.
     // Default: the identity isometry.
-    .position(Isometry2::new(vector![1.0, 2.0], 0.4))
+    .position(Isometry::new(vector![1.0, 2.0], 0.4))
     // All done, actually build the rigid-body.
     .build();
 ```
@@ -197,13 +265,13 @@ let rigid_body = RigidBodyBuilder::new_dynamic()
 /* Set the position after the rigid-body creation. */
 let rigid_body = rigid_body_set.get_mut(rigid_body_handle).unwrap();
 // The `true` argument makes sure the rigid-body is awake.
-rigid_body.set_translation(vector![0.0, 5.0]), true);
+rigid_body.set_translation(vector![0.0, 5.0], true);
 rigid_body.set_rotation(0.2, true);
-assert_eq!(rigid_body.translation(), vector![0.0, 5.0]);
+assert_eq!(*rigid_body.translation(), vector![0.0, 5.0]);
 assert_eq!(rigid_body.rotation().angle(), 0.2);
 
-rigid_body.set_position(Isometry2::new(vector![1.0, 2.0], 0.4), true);
-assert_eq!(rigid_body.position(), Isometry2::new(vector![1.0, 2.0], 0.4));
+rigid_body.set_position(Isometry::new(vector![1.0, 2.0], 0.4), true);
+assert_eq!(*rigid_body.position(), Isometry::new(vector![1.0, 2.0], 0.4));
 ```
 
   </TabItem>
@@ -220,7 +288,7 @@ let rigid_body = RigidBodyBuilder::new_dynamic()
     .rotation(vector![0.2, 0.0, 0.0])
     // The rigid body position. Will override `.translation(...)` and `.rotation(...)`.
     // Default: the identity isometry.
-    .position(Isometry3::new(vector![1.0, 2.0, 3.0], vector![0.2, 0.0, 0.0]))
+    .position(Isometry::new(vector![1.0, 2.0, 3.0], vector![0.2, 0.0, 0.0]))
     // All done, actually build the rigid-body.
     .build();
 ```
@@ -228,23 +296,81 @@ let rigid_body = RigidBodyBuilder::new_dynamic()
 /* Set the position after the rigid-body creation. */
 let rigid_body = rigid_body_set.get_mut(rigid_body_handle).unwrap();
 // The `true` argument makes sure the rigid-body is awake.
-rigid_body.set_translation(vector![0.0, 5.0, 1.0]), true);
+rigid_body.set_translation(vector![0.0, 5.0, 1.0], true);
 rigid_body.set_rotation(vector![0.2, 0.0, 0.0], true);
-assert_eq!(rigid_body.translation(), vector![0.0, 5.0, 1.0]);
+assert_eq!(*rigid_body.translation(), vector![0.0, 5.0, 1.0]);
 assert_eq!(rigid_body.rotation().scaled_axis(), vector![0.2, 0.0, 0.0]);
 
-rigid_body.set_position(Isometry3::new(vector![1.0, 2.0, 3.0], vector![0.0, 0.4, 0.0]), true);
-assert_eq!(rigid_body.position(), Isometry3::new(vector![1.0, 2.0, 3.0], vector![0.0, 0.4, 0.0]));
+rigid_body.set_position(Isometry::new(vector![1.0, 2.0, 3.0], vector![0.0, 0.4, 0.0]), true);
+assert_eq!(*rigid_body.position(), Isometry::new(vector![1.0, 2.0, 3.0], vector![0.0, 0.4, 0.0]));
 ```
 
   </TabItem>
 </Tabs>
 
+</rapier>
+<bevy>
 
-In order to move a dynamic it is strongly discouraged to set its position directly as it
+<Tabs
+groupId="dim"
+defaultValue="2D"
+values={[
+{label: 'Example 2D', value: '2D'},
+{label: 'Example 3D', value: '3D'},
+]}>
+<TabItem value="2D">
+
+```rust
+/* Set the position when the rigid-body bundle is created. */
+let rigid_body = RigidBodyBundle {
+    position: (Vec2::new(0.0, 5.0), 5.0).into(), // Translation and rotation.
+    position: Vec2::new(0.0, 5.0).into(), // Translation only.
+    ..Default::default()
+};
+commands.spawn_bundle(rigid_body);
+```
+```rust
+/* Change the position inside of a system. */
+fn modify_body_translation(mut positions: Query<&mut RigidBodyPosition>) {
+    for rb_pos in positions.iter_mut() {
+        rb_pos.position.translation = Vec2::new(0.0, 5.0).into();
+    }
+}
+```
+
+  </TabItem>
+  <TabItem value="3D">
+
+```rust
+/* Set the position when the rigid-body bundle is created. */
+let rigid_body = RigidBodyBundle {
+    // NOTE: pick one of the following.
+    position: (Vec3::new(0.0, 5.0, 6.0), Quat::from_rotation_x(0.4)).into(), // Translation and rotation.
+    position: Vec3::new(0.0, 5.0, 6.0).into(),   // Translation only.
+    position: Quat::from_rotation_x(0.4).into(), // Rotation only.
+    ..Default::default()
+};
+commands.spawn_bundle(rigid_body);
+```
+```rust
+/* Change the position inside of a system. */
+fn modify_body_translation(mut positions: Query<&mut RigidBodyPosition>) {
+    for rb_pos in positions.iter_mut() {
+        rb_pos.position.translation = Vec3::new(0.0, 5.0, 6.0).into();
+    }
+}
+```
+
+  </TabItem>
+</Tabs>
+
+</bevy>
+
+In order to move a dynamic rigid-body it is strongly discouraged to set its position directly as it
 may results in weird behaviors: it's as if the rigid-body teleports itself, which is a non-physical behavior. For dynamic
 bodies, it is recommended to either set its [velocity](#velocity) or to apply [forces or impulses](#forces-and-impulses).
 
+<rapier>
 
 For kinematic bodies, it is recommended to use the special methods:
 - `RigidBody::set_next_kinematic_position`
@@ -252,8 +378,43 @@ For kinematic bodies, it is recommended to use the special methods:
 - `RigidBody::set_next_kinematic_translation`
 
 These methods will let the physics pipeline compute the fictitious velocity of the kinematic body for more realistic
-interactions with other rigid-bodies. These methods won't modify the position of the kinematic body itself. The
-position of the kinematic body will be automatically set to these values during the next physics pipeline update.
+interactions with other rigid-bodies. These methods won't immediately modify the position of the kinematic body itself.
+The position of the kinematic body will be automatically set to these values during the next physics pipeline update.
+
+</rapier>
+<bevy>
+
+For kinematic bodies, it is recommended to modify the `next_position` field of the `RigidBodyPosition` component instead
+of its `position` field. This will let the physics engine compute the fictitious velocity of the kinematic body for more
+realistic intersections with other rigid-bodies. The `position` field of the kinematic body will automatically be set
+to the `next_position` value during the next physics update.
+
+</bevy>
+
+<bevy>
+
+### Sync. with Bevy Transform
+If the entity containing the `RigidBodyPosition` component also has a `Transform` component, it is possible to
+tell the plugin to automatically update the `Transform` component at each frame using the `RigidBodyPosition`,
+by adding the `RigidBodyPositionSync` component to the same entity:
+
+```rust
+let rigid_body = RigidBodyBundle::default();
+commands.spawn_bundle(rigid_body)
+        .insert(Transform::default())
+        .insert(RigidBodyPositionSync::Discrete);
+```
+
+When running this update, the translation part of the transform is automatically multiplied by the
+`RapierConfiguration::scale` value (this is typically used in 2D for automatically converting between physics
+units (meters) to graphics units pixels).
+
+:::warning
+This synchronization between `RigidBodyPosition` and `Transform` is one-way: modifying the `Transform` will **not**
+result in the automatic modification of the `RigidBodyPosition`.
+:::
+
+</bevy>
 
 ## Velocity
 The velocity of a dynamic rigid-body controls how fast it is moving in time. The velocity is applied at the **center-of-mass**
@@ -265,11 +426,15 @@ given as a real representing the angular speed in `rad/s`.
 
 :::info
 The velocity is only relevant to **dynamic** rigid-bodies. It has not effect on static rigid-bodies and the
-velocity of kinematic rigid-bodies are automatically computed at each timestep.
+velocity of kinematic rigid-bodies are automatically computed at each timestep based on their next kinematic
+positions.
 :::
 
-The velocity of a rigid-body is automatically updated by the physics pipeline to take forces, contacts,
+The velocity of a rigid-body is automatically updated by the physics pipeline after taking forces, contacts,
 and joints into account. It can be set when the rigid-body is created or after its creation:
+
+<rapier>
+
 <Tabs
   groupId="dim"
   defaultValue="2D"
@@ -295,9 +460,9 @@ let rigid_body = RigidBodyBuilder::new_dynamic()
 /* Set the velocities after the rigid-body creation. */
 let rigid_body = rigid_body_set.get_mut(rigid_body_handle).unwrap();
 // The `true` argument makes sure the rigid-body is awake.
-rigid_body.set_linvel(vector![1.0, 3.0]), true);
+rigid_body.set_linvel(vector![1.0, 3.0], true);
 rigid_body.set_angvel(3.0, true);
-assert_eq!(rigid_body.linvel(), vector![1.0, 3.0]);
+assert_eq!(*rigid_body.linvel(), vector![1.0, 3.0]);
 assert_eq!(rigid_body.angvel(), 3.0);
 ```
 
@@ -322,24 +487,90 @@ let rigid_body = rigid_body_set.get_mut(rigid_body_handle).unwrap();
 // The `true` argument makes sure the rigid-body is awake.
 rigid_body.set_linvel(vector![1.0, 3.0, 4.0], true);
 rigid_body.set_angvel(vector![3.0, 0.0, 0.0], true);
-assert_eq!(rigid_body.linvel(), vector![1.0, 3.0, 4.0]);
-assert_eq!(rigid_body.angvel(), vector![3.0, 0.0, 0.0]);
+assert_eq!(*rigid_body.linvel(), vector![1.0, 3.0, 4.0]);
+assert_eq!(*rigid_body.angvel(), vector![3.0, 0.0, 0.0]);
 ```
 
   </TabItem>
 </Tabs>
 
-Alternatively, the velocity of a rigid-body can be altered indirectly by applying a force or an impulse
-in the rigid-body (see the [section about forces](#forces)).
+</rapier>
+
+<bevy>
+
+<Tabs
+groupId="dim"
+defaultValue="2D"
+values={[
+{label: 'Example 2D', value: '2D'},
+{label: 'Example 3D', value: '3D'},
+]}>
+<TabItem value="2D">
+
+```rust
+/* Set the velocities when the rigid-body is created. */
+let rigid_body = RigidBodyBundle {
+    velocity: RigidBodyVelocity {
+        linvel: Vec2::new(1.0, 2.0).into(),
+        angvel: 0.4
+    },
+    ..Default::default()
+};
+commands.spawn_bundle(rigid_body);
+```
+```rust
+/* Set the velocities inside of a system. */
+fn modify_body_velocity(mut velocities: Query<&mut RigidBodyVelocity>) {
+    for rb_vel in velocities.iter_mut() {
+        rb_vel.linvel = Vec2::new(1.0, 2.0).into();
+        rb_vel.angvel = 0.4;
+    }
+}
+```
+
+  </TabItem>
+  <TabItem value="3D">
+
+```rust
+/* Set the velocities when the rigid-body is created. */
+let rigid_body = RigidBodyBundle {
+    velocity: RigidBodyVelocity { 
+        linvel: Vec3::new(1.0, 2.0, 3.0).into(),
+        angvel: Vec3::new(0.2, 0.4, 0.8).into()
+    },
+    ..Default::default()
+};
+commands.spawn_bundle(rigid_body);
+```
+```rust
+/* Set the velocities inside of a system. */
+fn modify_body_velocity(mut velocities: Query<&mut RigidBodyVelocity>) {
+    for rb_vel in velocities.iter_mut() {
+        rb_vel.linvel = Vec3::new(1.0, 2.0, 3.0).into();
+        rb_vel.angvel = Vec3::new(0.2, 0.4, 0.8).into();
+    }
+}
+```
+
+  </TabItem>
+</Tabs>
+
+</bevy>
+
+Alternatively, the velocity of a dynamic rigid-body can be altered indirectly by
+[applying a force or an impulse](#forces-and-impulses).
 
 ## Gravity
 Gravity is such a common force that it is implemented as a special case (even if it could easily be implemented
-by the user using force application). The gravity is given as an argument to the `PhysicsPipeline::step` method and can be
-modified at will by simply modifying that argument. Note however that a change of gravity won't automatically wake-up
-the [sleeping bodies](#sleeping) so keep in mind that you may want to wake them up before a gravity change.
+by the user using [force application](#forces-and-impulses)). <rapier>The gravity is given as an argument to the
+`PhysicsPipeline::step` method and can be modified at will by simply modifying that argument.</rapier><bevy>The gravity
+ is given by the field `RapierConfiguration::gravity` of the resource `RapierConfiguration` and can be modified at will.</bevy>
+Note however that a change of gravity won't automatically wake-up the [sleeping bodies](#sleeping) so keep in mind that
+you may want to wake them up manually before a gravity change.
 
+:::note
 Because static and kinematic bodies are immune to forces, they are not affected by gravity.
-
+:::
 :::info
 A rigid-body with no mass will not be affected by gravity either. So if your rigid-body
 doesn't fall when you expected it to, make sure it has a mass set explicitly, or has at least one collider with
@@ -347,19 +578,13 @@ non-zero density attached to it.
 :::
 
 It is possible to change the way gravity affects a specific rigid-body by setting the rigid-body's **gravity scale**
-to a value other than `1`. The magnitude of the gravity applied to this body will be multiplied by this scaling
-factor. Therefore, a gravity scale set to `0` will disable gravity for the rigid-body whereas a gravity scale set to
-`2` will make it twice as strong. A negative value will flip the direction of the gravity.
+to a value other than `1.0`. The magnitude of the gravity applied to this body will be multiplied by this scaling
+factor. Therefore, a gravity scale set to `0.0` will disable gravity for the rigid-body whereas a gravity scale set to
+`2.0` will make it twice as strong. A negative value will flip the direction of the gravity for this rigid-body.
 
 This gravity scale factor can be set when the rigid-body is created or after its creation:
-<Tabs
-  groupId="dim"
-  defaultValue="2D"
-  values={[
-    {label: 'Example 2D', value: '2D'},
-    {label: 'Example 3D', value: '3D'},
-  ]}>
-  <TabItem value="2D">
+
+<rapier>
 
 ```rust
 /* Set the gravity scale when the rigid-body is created. */
@@ -376,36 +601,43 @@ rigid_body.set_gravity_scale(0.5, true);
 assert_eq!(rigid_body.gravity_scale(), 0.5);
 ```
 
-  </TabItem>
-  <TabItem value="3D">
+</rapier>
+<bevy>
 
 ```rust
 /* Set the gravity scale when the rigid-body is created. */
-let rigid_body = RigidBodyBuilder::new_dynamic()
-    // Divide by 2 the strength of gravity for this rigid-body.
-    .gravity_scale(0.5)
-    .build();
+let rigid_body = RigidBodyBundle {
+    forces: RigidBodyForces {
+        gravity_scale: 2.0,
+        ..Default::default()
+    },
+    ..Default::default()
+};
+commands.spawn_bundle(rigid_body);
 ```
 ```rust
-/* Set the gravity scale after the rigid-body creation. */
-let rigid_body = rigid_body_set.get_mut(rigid_body_handle).unwrap();
-// The `true` argument makes sure the rigid-body is awake.
-rigid_body.set_gravity_scale(0.5, true);
-assert_eq!(rigid_body.gravity_scale(), 0.5);
+/* Set the gravity scale inside of a system. */
+fn modify_body_gravity_scale(mut forces: Query<&mut RigidBodyForces>) {
+    for rb_forces in forces.iter_mut() {
+        rb_forces.gravity_scale = 2.0;
+    }
+}
 ```
 
-  </TabItem>
-</Tabs>
-
+</bevy>
 
 ## Forces and impulses
-In addition to [gravity](#gravity), it is possible to apply custom forces and impluses to dynamic rigid-bodies in order
-to make  them move in specific ways. Forces affect the rigid-body's acceleration whereas impulses affect the
-rigid-body's velocity using the familiar equations:
-- **Forces:** acceleration changes is equal to the force divided by the mass: $\Delta{}a = m^{-1}f$
-- **Impulses:** velocity change is equal to the impulse divided by the mass: $\Delta{}v = m^{-1}i$
+In addition to [gravity](#gravity), it is possible to apply custom forces (or torques) and impluses (or torque impulses)
+to dynamic rigid-bodies in order to make  them move in specific ways. Forces affect the rigid-body's acceleration
+whereas impulses affect the rigid-body's velocity. They are both based on the familiar equations:
+- **Forces:** the acceleration change is equal to the force divided by the mass: $\Delta{}a = m^{-1}f$
+- **Impulses:** the velocity change is equal to the impulse divided by the mass: $\Delta{}v = m^{-1}i$
 
-Forces and impulses can be applied to a rigid-body after it has been created:
+Forces and impulses can be applied to a rigid-body <rapier>after it has been created</rapier><bevy>when it is created or after
+its creation</bevy>:
+
+<rapier>
+
 <Tabs
 groupId="dim"
 defaultValue="2D"
@@ -447,34 +679,8 @@ rigid_body.apply_impulse_at_point(vector![0.0, 1000.0, 0.0], point![1.0, 2.0, 3.
   </TabItem>
 </Tabs>
 
-:::info
-Keep in mind that a rigid-body with  a zero mass won't be affected by a linear force/impulse, and a rigid-body with a zero
-angular inertia won't be affected by angular forces/impulses. So if your force doesn't appear to do anything, make sure that:
-1. It is strong enough to make the rigid-body move (try a very large value and see if it does something).
-2. The rigid-body is dynamic and awake (by setting the last `wake_up` parameter to `true`).
-3. The rigid-body has a non-zero mass or angular inertia either because they were set explicitly, or because they
-   were computed automatically from colliders with non-zero densities.
-:::
-
-## Mass properties
-The mass properties of a rigid-body is composed of three parts:
-- The **mass** which determines the resistance of the rigid-body wrt. linear movements. A high mass implies that
-  larger forces are needed to make the rigid-body move.
-- The **angular inertia** which determines the resistance of the rigid-body wrt. the angular movements. A high angular
-  inertia implies that larger torques are needed to make the rigid-body rotate.
-- The **center-of-mass** which determines relative to what points torques are applied to the rigid-body.  
-
-:::note
-Zero is a special value for masses and angular inertias. A mass equal to zero is interpreted as an infinite mass.
-An angular inertia equal to zero is interpreted as an infinite angular inertia. Therefore, a rigid-body with a
-mass equal to zero will not be affected by any force, and a rigid-body with an angular inertia equal to zero will
-not be affected by any torque.
-:::
-
-Computing the mass and angular-inertia can often be difficult because they depend on the geometric shape of the
-object being simulated. This is why they are automatically computed by Rapier when a [collider](#collider) is
-attached to the rigid-body: the collider add its own mass and angular-inertia contribution (computed from the
-collider's density) to the rigid-body it is attached to:
+</rapier>
+<bevy>
 
 <Tabs
 groupId="dim"
@@ -486,34 +692,136 @@ values={[
 <TabItem value="2D">
 
 ```rust
-let rigid_body = RigidBodyBuilder::new_dynamic();
-let rigid_body_handle = rigid_body_set.insert(rigid_body);
-// The default density is 1.0, we are setting 2.0 for this example.
-let collider = ColliderBuilder::cuboid(1.0, 2.0).density(2.0).build();
-// When the collider is attached, the rigid-body's mass and angular
-// inertia is automatically updated to take the collider into account.
-collider_set.insert(collider, rigid_body_handle, &mut rigid_body_set);
+/* Apply forces when the rigid-body is created. */
+let rigid_body = RigidBodyBundle {
+    forces: RigidBodyForces {
+        force: Vec2::new(1000.0, 2000.0).into(),
+        torque: 140.0,
+        ..Default::default()
+    },
+    ..Default::default()
+};
+commands.spawn_bundle(rigid_body);
+```
+```rust
+/* Apply forces and impulses inside of a system. */
+fn apply_forces(mut rigid_bodies: Query<(&mut RigidBodyForces, &mut RigidBodyVelocity, &RigidBodyMassProps)>) {
+    for (rb_forces, rb_vel, rb_mprops) in rigid_bodies.iter_mut() {
+        // Apply forces.
+        rb_forces.force = Vec2::new(1.0, 2.0).into();
+        rb_forces.torque = 0.4;
+
+        // Apply impulses.
+        rb_vel.apply_impulse(rb_mprops, Vec2::new(100.0, 200.0).into());
+        rb_vel.apply_torque_impulse(rb_mprops, 80.0);
+    }
+}
 ```
 
   </TabItem>
   <TabItem value="3D">
 
 ```rust
-let rigid_body = RigidBodyBuilder::new_dynamic();
-let rigid_body_handle = rigid_body_set.insert(rigid_body);
-// The default density is 1.0, we are setting 2.0 for this example.
-let collider = ColliderBuilder::cuboid(1.0, 2.0, 3.0).density(2.0).build();
-// When the collider is attached, the rigid-body's mass and angular
-// inertia is automatically updated to take the collider into account.
-collider_set.insert(collider, rigid_body_handle, &mut rigid_body_set);
+/* Apply forces when the rigid-body is created. */
+let rigid_body = RigidBodyBundle {
+    forces: RigidBodyForces {
+        force: Vec3::new(1000.0, 2000.0, 3000.0).into(),
+        torque: Vec3::new(140.0, 80.0, 20.0).into(),
+        ..Default::default()
+    },
+    ..Default::default()
+};
+commands.spawn_bundle(rigid_body);
+```
+```rust
+/* Apply forces and impulses inside of a system. */
+fn apply_forces(mut rigid_bodies: Query<(&mut RigidBodyForces, &mut RigidBodyVelocity, &RigidBodyMassProps)>) {
+    for (rb_forces, rb_vel, rb_mprops) in rigid_bodies.iter_mut() {
+        // Apply forces.
+        rb_forces.force = Vec3::new(1.0, 2.0, 3.0).into();
+        rb_forces.torque = Vec3::new(0.2, 0.4, 0.8).into();
+        
+        // Apply impulses.
+        rb_vel.apply_impulse(rb_mprops, Vec3::new(100.0, 200.0, 300.0).into());
+        rb_vel.apply_torque_impulse(rb_mprops, Vec3::new(140.0, 80.0, 20.0).into());
+    }
+}
 ```
 
   </TabItem>
 </Tabs>
 
-Alternatively, it is possible to set the mass properties of a rigid-body when it's created. Keep in mind that
+</bevy>
+
+:::info
+Keep in mind that a dynamic rigid-body with a zero mass won't be affected by a linear force/impulse, and a rigid-body with a zero
+angular inertia won't be affected by torques/torque impulses. So if your force doesn't appear to do anything, make sure that:
+1. The rigid-body is dynamic.
+2. It is strong enough to make the rigid-body move (try a very large value and see if it does something).
+3. The rigid-body has a non-zero mass or angular inertia either because they were set explicitly, or because they
+   were computed automatically from colliders with non-zero densities.
+   
+<rapier>4. The rigid-body is awake (by waking it up manually or setting the last `wake_up` parameter to `true`).</rapier>
+:::
+
+## Mass properties
+The mass properties of a rigid-body is composed of three parts:
+- The **mass** which determines the resistance of the rigid-body wrt. linear movements. A high mass implies that
+  larger forces are needed to make the rigid-body translate.
+- The **angular inertia** determines the resistance of the rigid-body wrt. the angular movements. A high angular
+  inertia implies that larger torques are needed to make the rigid-body rotate.
+- The **center-of-mass** determines relative to what points torques are applied to the rigid-body.  
+
+:::note
+Zero is a special value for masses and angular inertias. A mass equal to zero is interpreted as an infinite mass.
+An angular inertia equal to zero is interpreted as an infinite angular inertia. Therefore, a rigid-body with a
+mass equal to zero will not be affected by any force, and a rigid-body with an angular inertia equal to zero will
+not be affected by any torque.
+:::
+
+Computing the mass and angular-inertia can often be difficult because they depend on the geometric shape of the
+object being simulated. This is why they are automatically computed by Rapier when a [collider](#collider) is
+attached to the rigid-body: the collider add its own mass and angular-inertia contribution (computed based on the
+collider's shape and density) to the rigid-body it is attached to:
+
+<rapier>
+
+```rust
+let rigid_body = RigidBodyBuilder::new_dynamic().build();
+let rigid_body_handle = rigid_body_set.insert(rigid_body);
+// The default density is 1.0, we are setting 2.0 for this example.
+let collider = ColliderBuilder::ball(1.0).density(2.0).build();
+// When the collider is attached, the rigid-body's mass and angular
+// inertia is automatically updated to take the collider into account.
+collider_set.insert_with_parent(collider, rigid_body_handle, &mut rigid_body_set);
+```
+
+</rapier>
+
+<bevy>
+
+```rust
+let rigid_body = RigidBodyBundle::default();
+let collider = ColliderBundle {
+    shape: ColliderShape::ball(1.0),
+    // The default density is 1.0, we are setting 2.0 for this example.
+    mprops: ColliderMassProperties::Density(2.0),
+    ..Default::default()
+}
+
+// When the collider is attached, the rigid-body's mass and angular
+// inertia will be automatically updated to take the collider into account.
+command.spawn_bundle(rigid_body)
+       .insert_bundle(collider);
+```
+
+</bevy>
+
+Alternatively, it is possible to set the mass properties of a rigid-body when it is created. Keep in mind that
 this won't prevent the colliders' contributions to be added to these values. So make sure to set the attached
 colliders' densities to zero if you want your explicit values to be the final mass-properties values.
+
+<rapier>
 
 <Tabs
 groupId="dim"
@@ -545,29 +853,92 @@ rigid_body.set_mass_properties(MassProperties::new(point![0.0, 1.0], 0.5, 0.3), 
 
 ```rust
 /* Set the mass-properties when the rigid-body is created. */
-let rigid_body = RigidBodyBuilder::new_dynamic()
-    .additional_mass(0.5)
-    .additional_principal_angular_inertia(vector![0.3, 0.2, 0.1])
-    // Sets both the mass and angular inertia at once.
-    .additional_mass_properties(MassProperties::new(point![0.0, 1.0, 0.0], 0.5, vector![0.3, 0.2, 0.1]))
-    .build();
+    let rigid_body = RigidBodyBuilder::new_dynamic()
+        .additional_mass(0.5)
+        .additional_principal_angular_inertia(vector![0.3, 0.2, 0.1])
+        // Sets both the mass and angular inertia at once.
+        .additional_mass_properties(MassProperties::new(
+            point![0.0, 1.0, 0.0],
+            0.5,
+            vector![0.3, 0.2, 0.1],
+        ))
+        .build();
 ```
 ```rust
 /* Set the mass-properties after the rigid-body creation. */
 let rigid_body = rigid_body_set.get_mut(rigid_body_handle).unwrap();
 // The `true` argument makes sure the rigid-body is awake.
-rigid_body.set_mass_properties(MassProperties::new(point![0.0, 1.0, 0.0], 0.5, vector![0.3, 0.2, 0.1]), true);
+rigid_body.set_mass_properties(
+    MassProperties::new(point![0.0, 1.0, 0.0], 0.5, vector![0.3, 0.2, 0.1]),
+    true,
+);
 ```
 
   </TabItem>
 </Tabs>
 
+</rapier>
+<bevy>
+
+<Tabs
+groupId="dim"
+defaultValue="2D"
+values={[
+{label: 'Example 2D', value: '2D'},
+{label: 'Example 3D', value: '3D'},
+]}>
+<TabItem value="2D">
+
+```rust
+/* Set the mass properties when the rigid-body bundle is created. */
+let rigid_body = RigidBodyBundle {
+    mprops: MassProperties::new(point![1.0, 2.0], 10.0, 0.5).into(),
+    ..Default::default()
+};
+commands.spawn_bundle(rigid_body);
+```
+```rust
+/* Change the mass-properties inside of a system. */
+fn modify_body_mass_props(mut mprops: Query<&mut RigidBodyMassProps>) {
+    for rb_mprops in mprops.iter_mut() {
+        rb_mprops.local_mprops.set_mass(100.0, true);
+    }
+}
+```
+
+  </TabItem>
+  <TabItem value="3D">
+
+```rust
+/* Set the mass properties when the rigid-body bundle is created. */
+let rigid_body = RigidBodyBundle {
+    mprops: MassProperties::new(point![1.0, 2.0, 0.0], 10.0, vector![0.3, 0.4, 0.5]).into(),
+    ..Default::default()
+};
+commands.spawn_bundle(rigid_body);
+```
+```rust
+/* Change the mass-properties inside of a system. */
+fn modify_body_mass_props(mut mprops: Query<&mut RigidBodyMassProps>) {
+    for rb_mprops in mprops.iter_mut() {
+        rb_mprops.local_mprops.set_mass(100.0, true);
+    }
+}
+```
+
+  </TabItem>
+</Tabs>
+
+</bevy>
+
 ## Locking translations/rotations
 It is sometimes useful to prevent a rigid-body from rotating or translating. One typical use-case for locking rotations
-is to prevent a player modeled as a dynamic rigid-body from tilting. These kind of degree-of-freedom restrictions can
-be achieved by [joints](#joints) but locking translations/rotations of a single rigid-body wrt. the cartesian coordinate
-axes can be done  in a much more efficient and numerically stable way. That's why rigid-bodies have dedicated methods
-for this.
+is to prevent a player modeled as a dynamic rigid-body from tilting. These kind of degree-of-freedom restrictions could
+be achieved by [joints](#joints), but locking translations/rotations of a single rigid-body wrt. the cartesian coordinate
+axes can be done  in a much more efficient and numerically stable way. That's why rigid-bodies have
+dedicated <rapier>methods</rapier><bevy>flags</bevy> for this.
+
+<rapier>
 
 <Tabs
 groupId="dim"
@@ -619,23 +990,72 @@ rigid_body.restrict_rotations(true, false, false, true);
   </TabItem>
 </Tabs>
 
+</rapier>
+<bevy>
+
+<Tabs
+groupId="dim"
+defaultValue="2D"
+values={[
+{label: 'Example 2D', value: '2D'},
+{label: 'Example 3D', value: '3D'},
+]}>
+<TabItem value="2D">
+
+```rust
+/* Lock translations and/or rotations when the rigid-body bundle is created. */
+let rigid_body = RigidBodyBundle {
+    mprops: RigidBodyMassPropsFlags::TRANSLATION_LOCKED | RigidBodyMassPropsFlags::ROTATION_LOCKED_X,
+    ..Default::default()
+};
+commands.spawn_bundle(rigid_body);
+```
+```rust
+/* Lock translations and/or rotations inside of a system. */
+fn modify_body_locked_flags(mut mprops: Query<&mut RigidBodyMassProps>) {
+    for rb_mprops in mprops.iter_mut() {
+        rb_mprops.flags = RigidBodyMassPropsFlags::ROTATION_LOCKED;
+    }
+}
+```
+
+  </TabItem>
+  <TabItem value="3D">
+
+```rust
+/* Lock translations and/or rotations when the rigid-body bundle is created. */
+let rigid_body = RigidBodyBundle {
+    mprops: RigidBodyMassPropsFlags::TRANSLATION_LOCKED | RigidBodyMassPropsFlags::ROTATION_LOCKED,
+    ..Default::default()
+};
+commands.spawn_bundle(rigid_body);
+```
+```rust
+/* Lock translations and/or rotations inside of a system. */
+fn modify_body_locked_flags(mut mprops: Query<&mut RigidBodyMassProps>) {
+    for rb_mprops in mprops.iter_mut() {
+        rb_mprops.flags = RigidBodyMassPropsFlags::ROTATION_LOCKED;
+    }
+}
+```
+
+  </TabItem>
+</Tabs>
+
+</bevy>
+
+
 
 ## Damping
 Damping lets you slow down a rigid-body automatically. This can be used to achieve a wide variety of effects like
 fake air friction. Each rigid-body is given a **linear damping coefficient** (affecting its linear velocity) and an
 **angular damping coefficient** (affecting its angular velocity). Larger values of the damping coefficients lead to
-a stronger slow-downs. Its default value is `0.0` (no damping at all).
+a stronger slow-downs. Their default values are `0.0` (no damping at all).
 
 
 This damping coefficients can be set when the rigid-body is created or after its creation:
-<Tabs
-  groupId="dim"
-  defaultValue="2D"
-  values={[
-    {label: 'Example 2D', value: '2D'},
-    {label: 'Example 3D', value: '3D'},
-  ]}>
-  <TabItem value="2D">
+
+<rapier>
 
 ```rust
 /* Set the damping coefficients when the rigid-body is created. */
@@ -653,56 +1073,53 @@ assert_eq!(rigid_body.linear_damping(), 0.5);
 assert_eq!(rigid_body.angular_damping(), 1.0);
 ```
 
-  </TabItem>
-  <TabItem value="3D">
+</rapier>
+<bevy>
 
 ```rust
-/* Set the damping coefficients when the rigid-body is created. */
-let rigid_body = RigidBodyBuilder::new_dynamic()
-    .linear_damping(0.5)
-    .angular_damping(1.0)
-    .build();
+/* Set damping when the rigid-body bundle is created. */
+let rigid_body = RigidBodyBundle {
+    damping: RigidBodyDamping { linear_damping: 0.5, angular_damping: 1.0 },
+    ..Default::default()
+};
+commands.spawn_bundle(rigid_body);
 ```
 ```rust
-/* Set the damping coefficients after the rigid-body creation. */
-let rigid_body = rigid_body_set.get_mut(rigid_body_handle).unwrap();
-rigid_body.set_linear_damping(0.5);
-rigid_body.set_angular_damping(1.0);
-assert_eq!(rigid_body.linear_damping(), 0.5);
-assert_eq!(rigid_body.angular_damping(), 1.0);
+/* Set damping inside of a system. */
+fn modify_body_locked_flags(mut dampings: Query<&mut RigidBodyDamping>) {
+    for rb_damping in dampings.iter_mut() {
+        rb_damping.linear_damping = 0.5;
+        rb_damping.angular_damping = 1.0;
+    }
+}
 ```
 
-  </TabItem>
-</Tabs>
+</bevy>
 
 ## Dominance
 Dominance is a non-realistic, but sometimes useful, feature. It can be used to make one rigid-body immune to forces
-originating from contacts with some other specific bodies. For example this can let us model a player represented as a
-ynamic rigid-body that cannot be "pushed back" by any, or some, other dynamic rigid-bodies part of the environment.
+originating from contacts with some other bodies. For example this can be used ot model a player represented as a
+dynamic rigid-body that cannot be "pushed back" by any, or some, other dynamic rigid-bodies part of the environment.
 
 
-Each rigid-body is part of a dominance group in `[-127; 127]` (the default is 0). If the colliders from two rigid-body
+Each rigid-body is part of a dominance group in `[-127; 127]` (the default group is `0`). If the colliders from two rigid-bodies
 are in contact, the one with the highest dominance will act as if it has an infinite mass, making it immune to the
 contact forces the other body would apply on it. If both bodies are part of the same dominance group, then their
 contacts will work in the usual way (both are affected by opposite forces with the same magnitude).
 
-For example, if a dynamic body `A` is in the dominance group 10, and a dynamic body `B` in the dominance group -20, then
-a contact between a collider attached to `A` and a collider attached B will result in `A` remaining immobile and B being
-pushed by A.
+For example, if a dynamic body `A` is in the dominance group `10`, and a dynamic body `B` in the dominance group `-20`, then
+a contact between a collider attached to `A` and a collider attached `B` will result in `A` remaining immobile and `B` being
+pushed by `A` (independently from their mass).
 
+:::info
 A non-dynamic rigid-body is always considered as being part of a dominance group greater than any dynamic rigid-body.
 This means that dynamic/static and dynamic/kinematic contacts will continue to work normally, independently from the
 dominance group they were given by the user.
+:::
 
-This dominance group can be set when the rigid-body is created or after its creation:
-<Tabs
-  groupId="dim"
-  defaultValue="2D"
-  values={[
-    {label: 'Example 2D', value: '2D'},
-    {label: 'Example 3D', value: '3D'},
-  ]}>
-  <TabItem value="2D">
+The dominance group can be set when the rigid-body is created or after its creation:
+
+<rapier>
 
 ```rust
 /* Set the dominance group when the rigid-body is created. */
@@ -717,49 +1134,48 @@ rigid_body.set_dominance_group(10);
 assert_eq!(rigid_body.dominance_group(), 10);
 ```
 
-  </TabItem>
-  <TabItem value="3D">
+</rapier>
+<bevy>
 
 ```rust
-/* Set the dominance group when the rigid-body is created. */
-let rigid_body = RigidBodyBuilder::new_dynamic()
-    .dominance_group(10)
-    .build();
+/* Set dominance when the rigid-body bundle is created. */
+let rigid_body = RigidBodyBundle {
+    dominance: RigidBodyDominance(10),
+    ..Default::default()
+};
+commands.spawn_bundle(rigid_body);
 ```
 ```rust
-/* Set the dominance group after the rigid-body creation. */
-let rigid_body = rigid_body_set.get_mut(rigid_body_handle).unwrap();
-rigid_body.set_dominance_group(10);
-assert_eq!(rigid_body.dominance_group(), 10);
+/* Set dominance inside of a system. */
+fn modify_body_locked_flags(mut dominances: Query<&mut RigidBodyDominance>) {
+    for rb_dominance in dominances.iter_mut() {
+        rb_dominance.0 = 10;
+    }
+}
 ```
 
-  </TabItem>
-</Tabs>
+</bevy>
 
 ## Continuous collision detection
 Continuous Collision Detection (CCD) is used to make sure that fast-moving objects don't miss any contacts (a problem
-usually called "tunneling"). This  is done by using motion-clamping, i.e., each fast-moving rigid-body with CCD enabled
-will be stopped at the time where their first contact happen, assuming they have a continuous motion. This will result
+usually called **tunneling**). This  is done by using motion-clamping, i.e., each fast-moving rigid-body with CCD enabled
+will be stopped at the time where their first contact happen, taking they continuous motion into account. This will result
 in some "time loss" for that rigid-body. This loss of time can be reduced by increasing the maximum number of CCD
-substeps executed (the default being 1).
+substeps executed (the default being 1) in the [IntegrationParameters](simulation_structures#integration-parameters)
+(by changing the `IntegrationParameters::max_ccd_substeps` field).
 
 Rapier implements nonlinear CCD, meaning that it takes into account both the angular and translational motion of the
 rigid-body.
 
 :::info
-CCD takes action only if the CCD-enabled rigid-body is moving too fast relative to another rigid-body. Therefore
+CCD takes action only if the CCD-enabled rigid-body is moving fast relative to another rigid-body. Therefore
 it is useless to enable CCD on static rigid-bodies and rigid-bodies that are expected to move slowly.
 :::
 
-By default, CCD is disabled for all the rigid-bodies. It can be enabled when creating a rigid-body or after its creation:
-<Tabs
-  groupId="dim"
-  defaultValue="2D"
-  values={[
-  {label: 'Example 2D', value: '2D'},
-  {label: 'Example 3D', value: '3D'},
-  ]}>
-<TabItem value="2D">
+By default, CCD is disabled for all the rigid-bodies because it requires additional computations. It can be enabled
+when creating a rigid-body or after its creation:
+
+<rapier>
 
 ```rust
 /* Enable CCD when the rigid-body is created. */
@@ -774,36 +1190,45 @@ rigid_body.enable_ccd(true);
 assert_eq!(rigid_body.is_ccd_enabled(), true);
 ```
 
-  </TabItem>
-  <TabItem value="3D">
+</rapier>
+<bevy>
 
 ```rust
-/* Enable CCD when the rigid-body is created. */
-let rigid_body = RigidBodyBuilder::new_dynamic()
-    .ccd_enabled(true)
-    .build();
+/* Enable CCD when the rigid-body bundle is created. */
+let rigid_body = RigidBodyBundle {
+    dominance: RigidBodyCcd { ccd_enabled: true, ..Default::default() },
+    ..Default::default()
+};
+commands.spawn_bundle(rigid_body);
 ```
 ```rust
-/* Enable CCD after the rigid-body creation. */
-let rigid_body = rigid_body_set.get_mut(rigid_body_handle).unwrap();
-rigid_body.enable_ccd(true);
-assert_eq!(rigid_body.is_ccd_enabled(), true);
+/* Enable CCD inside of a system. */
+fn modify_body_locked_flags(mut ccds: Query<&mut RigidBodyCcd>) {
+    for rb_ccd in ccds.iter_mut() {
+        rb_ccd.ccd_enabled = true;
+    }
+}
 ```
 
-  </TabItem>
-</Tabs>
-
-
-
-The number of substeps executed by the CCD can be modified by setting the `IntegrationParameters::max_ccd_substeps`
-field.
+</bevy>
 
 ## Sleeping
 When a dynamic rigid-body doesn't move (or moves very slowly) during a few seconds, it will be marked as **sleeping**
 by the physics pipeline. Rigid-bodies marked as sleeping are no longer simulated by
-the physics engine until they are woken up. They are woken up automatically whenever another non-sleeping rigid-body
-starts interacting with them (either with a joint, or with one of its attached collider generating contacts). That
-way the physics engine doesn't waste any computational resources simulating objects that don't actually move.
+the physics engine until they are woken up. That way the physics engine doesn't waste any computational resources
+simulating objects that don't actually move. They are woken up automatically whenever another non-sleeping rigid-body
+starts interacting with them (either with a joint, or with one of its attached colliders generating contacts). 
+
+<bevy>
+
+When using the `bevy_rapier` plugin, rigid-bodies are also automatically woken up whenever one of the 
+components of the rigid-body is modified (to apply forces, change its position, etc.) They will **not** be awaken
+automatically when changing the gravity though. So you may sometimes want to wake a rigid-body manually by calling
+`RigidBodyActivation::wake_up(true)` on the `RigidBodyActivation` component. 
+
+</bevy>
+
+<rapier>
 
 However, a sleeping rigid-body won't respond to any user action. This is why it is possible to wake-up the rigid-body
 manually with `RigidBody::wake_up`. Some rigid-body methods take an additional `wake_up` boolean argument that, if
@@ -815,23 +1240,19 @@ true, ensures that the rigid-body wakes up before the action takes place. For ex
 Unless you want to achieve special effects, it is recommended to always set the `wake_up` argument to `true`.
 One example of case where setting the argument of `wake_up` to `false` makes sense is to simulate a custom
 constant gravity with `RigidBody::apply_force(force, false)`. This will result in the force being applied
-to the rigid-body, but will allow the rigid-body to fall asleep if it reaches a dynamic equilibrium (which is
-OK because the gravity field is constant).
+to the rigid-body, but will allow the rigid-body to fall asleep if it reaches a dynamic equilibrium.
+
+</rapier>
+
+
+<rapier>
 
 ## User-data
 Each rigid-body can be given a user-defined data of type `u128`. This integer can have any value
 and is never used/modified by the physics-engine. This can for example be useful to add some custom data for
-personalized [contact filtering/modification](advanced_collision_detection).
+custom [contact filtering/modification](advanced_collision_detection#physics-hooks).
 
 This user-data can be set when the rigid-body is created or after its creation:
-<Tabs
-  groupId="dim"
-  defaultValue="2D"
-  values={[
-    {label: 'Example 2D', value: '2D'},
-    {label: 'Example 3D', value: '3D'},
-  ]}>
-  <TabItem value="2D">
 
 ```rust
 /* Set the user-data when the rigid-body is created. */
@@ -846,22 +1267,4 @@ rigid_body.user_data = 42;
 assert_eq!(rigid_body.user_data, 42);
 ```
 
-  </TabItem>
-  <TabItem value="3D">
-
-```rust
-/* Set the user-data when the rigid-body is created. */
-let rigid_body = RigidBodyBuilder::new_dynamic()
-  .user_data(42)
-  .build();
-```
-```rust
-/* Set the user-data after the rigid-body creation. */
-let rigid_body = rigid_body_set.get_mut(rigid_body_handle).unwrap();
-rigid_body.user_data = 42;
-assert_eq!(rigid_body.user_data, 42);
-```
-
-  </TabItem>
-</Tabs>
-
+</rapier>

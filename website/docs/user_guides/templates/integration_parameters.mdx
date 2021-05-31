@@ -7,26 +7,35 @@ sidebar_label: Integration parameters
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-Various aspects of the integrator implemented on **nphysics** can be modified through the
-integration parameters. Those parameters can be changed
-by modifying the fields of your instance of `IntegrationParameters`.
-
+Various aspects of the physics simulation can be tuned by modifying the fields of the `IntegrationParameters`.
 Most of these parameters are somewhat advanced and should not be modified unless you know their meaning and effect.
-Several of them are about tuning parameters for optimal simulation stability, or for compromising between efficiency and
-accuracy. They are given default values that work well in the context of video-games or animations. For more realistic
-simulations you may want to change those parameters to favor accuracy over performance.
+Several of them are about balancing efficiency and accuracy. They are given default values that work well in the
+context of video-games or animations. For more realistic simulations you may want to change those parameters to favor
+accuracy over performance.
 
 ### `dt`
-The timestep length used for each update of the physics engine. The default is $1 / 60$ seconds. This typically corresponds to
-a refresh rate of 60Hz. Smaller timesteps yield better accuracy of the integrator. Large timesteps increase the negative
-effect of some approximations (linearization of various parts of the equations of motion) and may result in missed
-collisions (because of collisions that may occur in-between timesteps for fast-moving objects).
+The timestep length used for each update of the physics engine. This is the time by which the physics simulation will
+be advanced. The default is $1 / 60$ seconds. This typically corresponds to a refresh rate of 60Hz. Smaller timesteps
+yield better accuracy. Large timesteps increase the negative effect of some approximations (linearization of various
+parts of the equations of motion) and may result in missed collisions (because of collisions that may occur in-between
+timesteps for fast-moving objects).
+
+### `min_ccd_dt`
+When CCD with multiple substeps is enabled, the timestep is subdivided into smaller pieces. This timestep subdivision
+won't generate timestep lengths smaller than `min_ccd_dt`.
+
+Setting this to a large value will reduce the opportunity to performing CCD substepping, resulting in potentially more
+time dropped by the motion-clamping mechanism. Setting this to an very small value may lead to numerical instabilities
+and rigid-bodies remaining stuck in place.
 
 ### `erp`
 The Error Reduction Parameter in $[0, 1]$ is the proportion of the positional error to be corrected at each time step.
-The default is $0.2$. An ERP set to 0 means that no penetration will be corrected, and an ERP set to 1 means all
-the penetrations between two solids will be corrected in a single timestep. While setting 1 seems appealing, this will
+An ERP set to 0 means that no penetration will be corrected, and an ERP set to 1 means all
+the penetrations between two solids will be corrected in a single timestep. While setting 1 may sound appealing, this will
 cause objects to jitter in practice because penetration correction may add or remove kinetic energy to the system.
+
+### `joint_erp`
+This is the same as 
 
 ### `warmstart_coeff`
 Each cached impulse are multiplied by this coefficient in $[0, 1]$ when they are re-used to initialize the constraints

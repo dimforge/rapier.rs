@@ -56,7 +56,7 @@ any motion other than that single rotation to this body, meaning there is no way
 not realistic, even if the dynamics solver does not converge completely.
 2. The **constraints-based approach** (or full-coordinates approach) is the most commonly available approach on other
 physics engines for video-games and animations. Here, a 3D rigid-body attached to the ground with a revolute joint will
-still have its position encoded by 6 variables (3 for translations and 3 for rotations) just like any rigid-body without
+still have its position encoded by 6 variables (3 for translations and 3 for rotations) just like any rigid-body without
 a joint. Then the integrator will add mathematical constraints to the dynamic system to ensure forces are applied to
 simulate the reduction of the number of DOF as imposed by the joints. In practice, this means that the rigid-body will
 break the joint constraint if the constraint solver does not converge completely.

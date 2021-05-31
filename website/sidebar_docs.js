@@ -4,31 +4,52 @@ module.exports = {
     {
       'User Guides': [
         {
+          '<Templates>': [
+            'user_guides/templates/getting_started',
+            'user_guides/templates/getting_started_bevy',
+            'user_guides/templates/introduction_to_nalgebra',
+            'user_guides/templates/simulation_structures',
+            'user_guides/templates/rigid_bodies',
+            'user_guides/templates/colliders',
+            'user_guides/templates/joints',
+            'user_guides/templates/scene_queries',
+            'user_guides/templates/advanced_collision_detection',
+            // 'user_guides/templates/integration_parameters',
+            'user_guides/templates/serialization',
+            'user_guides/templates/determinism',
+            'user_guides/templates/common_mistakes',
+            // 'user_guides/templates/the_rapier_testbed',
+            // 'user_guides/templates/common_recipes',
+          ],
+          /*
           'Rust': [
             'user_guides/rust/getting_started',
-            'user_guides/rust/simulation_pipelines',
+            'user_guides/rust/introduction_to_nalgebra',
+            'user_guides/rust/simulation_structures',
             'user_guides/rust/rigid_bodies',
             'user_guides/rust/colliders',
             'user_guides/rust/joints',
             'user_guides/rust/scene_queries',
             'user_guides/rust/advanced_collision_detection',
-            'user_guides/rust/determinism',
-            'user_guides/rust/serialization',
-            'user_guides/rust/the_rapier_testbed',
-            'user_guides/rust/common_mistakes',
-            'user_guides/rust/common_recipes',
-
-            // 'user_guides/rust/rigid_body_simulation',
-            // 'user_guides/rust/joint_constraints',
-            // 'user_guides/rust/event_handling_and_sensors',
             // 'user_guides/rust/integration_parameters',
-            // 'user_guides/rust/conclusion'
+            'user_guides/rust/serialization',
+            'user_guides/rust/determinism',
+            'user_guides/rust/common_mistakes',
+            // 'user_guides/rust/the_rapier_testbed',
+            // 'user_guides/rust/common_recipes',
           ],
           'Rust Bevy Plugin': [
             'user_guides/rust_bevy_plugin/getting_started',
-            'user_guides/rust_bevy_plugin/the_rapier_physics_plugin',
-            'user_guides/rust_bevy_plugin/the_rapier_debug_renderer'
+            'user_guides/rust_bevy_plugin/introduction_to_nalgebra',
+            'user_guides/rust_bevy_plugin/simulation_structures',
+            'user_guides/rust_bevy_plugin/rigid_bodies',
+            'user_guides/rust_bevy_plugin/colliders',
+            'user_guides/rust_bevy_plugin/joints',
+            'user_guides/rust_bevy_plugin/scene_queries',
+            'user_guides/rust_bevy_plugin/advanced_collision_detection',
+            'user_guides/rust_bevy_plugin/common_mistakes',
           ],
+           */
           'JavaScript': [
             'user_guides/javascript/getting_started',
             'user_guides/javascript/rigid_body_simulation',

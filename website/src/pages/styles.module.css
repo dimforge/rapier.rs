@@ -31,6 +31,16 @@
   width: 100%;
 }
 
+.sponsors {
+  display: flex;
+  align-items: center;
+  padding: 2rem 0;
+  width: 100%;
+  background: var(--ifm-color-primary-lightest);
+  color: var(--ifm-font-color-base-inverse);
+  font-size: 1.25em;
+}
+
 .featureImage {
   height: 200px;
   width: 200px;

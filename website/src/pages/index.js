@@ -143,6 +143,20 @@ function Home() {
             </div>
           </section>
         )}
+          <section className={styles.sponsors}>
+              <div className="container" align={"center"}>
+              <h1>Sponsors</h1>
+              Rapier is supported by the community and companies.
+              <hr/>
+              <h2>Platinum Sponsors</h2>
+                  <br/>
+                  <p>
+                      <a href="https://embark-studios.com">
+                          <img src="https://www.embark.dev/img/logo_black.png" width="400px"/>
+                      </a>
+                  </p>
+              </div>
+          </section>
       </main>
     </Layout>
   );

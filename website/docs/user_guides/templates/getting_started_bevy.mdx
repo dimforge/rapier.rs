@@ -1,0 +1,193 @@
+---
+id: getting_started_bevy
+title: Getting started
+sidebar_label: Getting started
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+[**Bevy**](https://bevyengine.org) is an efficient, simple-to-use, and fast-to-compile data-driven game engine written
+in Rust. It is based on the ECS (Entity-Component-System) paradigm and allows the definition of _plugins_, i.e., sets
+of components, systems, and resources that share a common objective.
+
+The [**bevy_rapier2d**](https://crates.io/crates/bevy_rapier2d) and [**bevy_rapier3d**](https://crates.io/crates/bevy_rapier3d)
+crates which integrate **Rapier** to **Bevy** using their plugin system.
+
+
+## Cargo example
+To use these crates, the first step is to add a dependency to your `Cargo.toml`:
+
+<Tabs
+groupId="dim"
+defaultValue="2D"
+values={[
+{label: 'Example 2D', value: '2D'},
+{label: 'Example 3D', value: '3D'},
+]}>
+<TabItem value="2D">
+
+```toml
+[dependencies]
+# TODO: Replace the * by the latest version numbers.
+bevy_rapier2d = *
+```
+
+  </TabItem>
+  <TabItem value="3D">
+
+```toml
+[dependencies]
+# TODO: Replace the * by the latest version numbers.
+bevy_rapier3d = *
+```
+
+  </TabItem>
+</Tabs>
+
+If you need to enable some Rapier features like SIMD, parallelism, serialization, or determinism, you can enable them on
+**bevy_rapier** directly.
+
+
+<Tabs
+groupId="dim"
+defaultValue="2D"
+values={[
+{label: 'Example 2D', value: '2D'},
+{label: 'Example 3D', value: '3D'},
+]}>
+<TabItem value="2D">
+
+```toml
+[dependencies]
+# TODO: Replace the * by the latest version numbers.
+# Enable the `simd-stable` and `parallel` features of Rapier.
+bevy_rapier2d = { version = "*", features = [ "simd-stable", "parallel" ] }
+```
+
+  </TabItem>
+  <TabItem value="3D">
+
+```toml
+[dependencies]
+# TODO: Replace the * by the latest version numbers.
+# Enable the `simd-stable` and `parallel` features of Rapier.
+bevy_rapier3d = { version = "*", features = [ "simd-stable", "parallel" ] }
+```
+
+  </TabItem>
+</Tabs>
+
+
+## Basic simulation example
+
+Here is a basic example of `main.rs` file. This creates a ball bouncing on a static ground. Details about the
+elements used in this examples are given in subsequent pages of this guide.
+
+:::info
+The `use bevy_rapier2d::prelude::*` or `use bevy_rapier3d::prelude::*` will import all the most common types
+needed to work with `bevy_rapier`.
+:::
+
+<Tabs
+groupId="dim"
+defaultValue="2D"
+values={[
+{label: 'Example 2D', value: '2D'},
+{label: 'Example 3D', value: '3D'},
+]}>
+<TabItem value="2D">
+
+```rust
+use bevy::prelude::*;
+use bevy_rapier2d::prelude::*;
+
+fn main() {
+    App::build()
+        .add_plugins(DefaultPlugins)
+        .add_plugin(RapierPhysicsPlugin::<NoUserData>::default())
+        .add_startup_system(setup_physics.system())
+        .add_system(print_ball_altitude.system())
+        .run();
+}
+
+fn setup_physics(mut commands: Commands) {
+    /* Create the ground. */
+    let collider = ColliderBundle {
+        shape: ColliderShape::cuboid(100.0, 0.1),
+        ..Default::default()
+    };
+    commands.spawn_bundle(collider);
+
+    /* Create the bouncing ball. */
+    let rigid_body = RigidBodyBundle {
+        position: Vec2::new(0.0, 10.0).into(),
+        ..Default::default()
+    };
+    let collider = ColliderBundle {
+        shape: ColliderShape::ball(0.5),
+        material: ColliderMaterial {
+            restitution: 0.7,
+            ..Default::default()
+        }
+    };
+    commands.spawn_bundle(rigid_body)
+        .insert_bundle(collider);
+}
+
+fn print_ball_altitude(positions: Query<&RigidBodyPosition>) {
+    for rb_pos in positions.iter() {
+        println!("Ball altitude: {}", rb_pos.position.translation.vector.y);
+    }
+}
+```
+
+  </TabItem>
+  <TabItem value="3D">
+
+```rust
+use bevy::prelude::*;
+use bevy_rapier3d::prelude::*;
+
+fn main() {
+    App::build()
+        .add_plugins(DefaultPlugins)
+        .add_plugin(RapierPhysicsPlugin::<NoUserData>::default())
+        .add_startup_system(setup_physics.system())
+        .add_system(print_ball_altitude.system())
+        .run();
+}
+
+fn setup_physics(mut commands: Commands) {
+    /* Create the ground. */
+    let collider = ColliderBundle {
+        shape: ColliderShape::cuboid(100.0, 0.1, 100.0),
+        ..Default::default()
+    };
+    commands.spawn_bundle(collider);
+
+    /* Create the bouncing ball. */
+    let rigid_body = RigidBodyBundle {
+        position: Vec3::new(0.0, 10.0, 0.0).into(),
+        ..Default::default()
+    };
+    let collider = ColliderBundle {
+        shape: ColliderShape::ball(0.5),
+        material: ColliderMaterial {
+            restitution: 0.7,
+            ..Default::default()
+        }
+    };
+    commands.spawn_bundle(rigid_body)
+        .insert_bundle(collider);
+}
+
+fn print_ball_altitude(positions: Query<&RigidBodyPosition>) {
+    for rb_pos in positions.iter() {
+        println!("Ball altitude: {}", rb_pos.position.translation.vector.y);
+    }
+}
+```
+
+  </TabItem>
+</Tabs>
