@@ -170,7 +170,7 @@ let rigid_body = RigidBodyBundle {
     position: [0.0, 5.0].into(),
     velocity: RigidBodyVelocity { linvel: [1.0, 2.0].into(), angvel: 0.2 },
     forces: RigidBodyForces { gravity_scale: 0.5, ..Default::default() },
-    activation: RigidBodyActivation { can_sleep: false, ..Default::default() },
+    activation: RigidBodyActivation::cannot_sleep(),
     ccd: RigidBodyCcd { ccd_enabled: true, ..Default::default() },
     ..Default::default()
 };
@@ -182,13 +182,13 @@ commands.spawn_bundle(rigid_body);
   <TabItem value="3D">
 
 ```rust
-use bevy_rapier2d::prelude::*;
+use bevy_rapier3d::prelude::*;
 
 let rigid_body = RigidBodyBundle {
     position: [0.0, 5.0, 3.0].into(),
     velocity: RigidBodyVelocity { linvel: [1.0, 2.0, 3.0].into(), angvel: [0.2, 0.0, 0.0].into() },
     forces: RigidBodyForces { gravity_scale: 0.5, ..Default::default() },
-    activation: RigidBodyActivation { can_sleep: false, ..Default::default() },
+    activation: RigidBodyActivation::cannot_sleep(),
     ccd: RigidBodyCcd { ccd_enabled: true, ..Default::default() },
     ..Default::default()
 };
@@ -332,7 +332,7 @@ commands.spawn_bundle(rigid_body);
 ```rust
 /* Change the position inside of a system. */
 fn modify_body_translation(mut positions: Query<&mut RigidBodyPosition>) {
-    for rb_pos in positions.iter_mut() {
+    for mut rb_pos in positions.iter_mut() {
         rb_pos.position.translation = Vec2::new(0.0, 5.0).into();
     }
 }
@@ -355,7 +355,7 @@ commands.spawn_bundle(rigid_body);
 ```rust
 /* Change the position inside of a system. */
 fn modify_body_translation(mut positions: Query<&mut RigidBodyPosition>) {
-    for rb_pos in positions.iter_mut() {
+    for mut rb_pos in positions.iter_mut() {
         rb_pos.position.translation = Vec3::new(0.0, 5.0, 6.0).into();
     }
 }
@@ -521,7 +521,7 @@ commands.spawn_bundle(rigid_body);
 ```rust
 /* Set the velocities inside of a system. */
 fn modify_body_velocity(mut velocities: Query<&mut RigidBodyVelocity>) {
-    for rb_vel in velocities.iter_mut() {
+    for mut rb_vel in velocities.iter_mut() {
         rb_vel.linvel = Vec2::new(1.0, 2.0).into();
         rb_vel.angvel = 0.4;
     }
@@ -545,7 +545,7 @@ commands.spawn_bundle(rigid_body);
 ```rust
 /* Set the velocities inside of a system. */
 fn modify_body_velocity(mut velocities: Query<&mut RigidBodyVelocity>) {
-    for rb_vel in velocities.iter_mut() {
+    for mut rb_vel in velocities.iter_mut() {
         rb_vel.linvel = Vec3::new(1.0, 2.0, 3.0).into();
         rb_vel.angvel = Vec3::new(0.2, 0.4, 0.8).into();
     }
@@ -618,7 +618,7 @@ commands.spawn_bundle(rigid_body);
 ```rust
 /* Set the gravity scale inside of a system. */
 fn modify_body_gravity_scale(mut forces: Query<&mut RigidBodyForces>) {
-    for rb_forces in forces.iter_mut() {
+    for mut rb_forces in forces.iter_mut() {
         rb_forces.gravity_scale = 2.0;
     }
 }
@@ -706,7 +706,7 @@ commands.spawn_bundle(rigid_body);
 ```rust
 /* Apply forces and impulses inside of a system. */
 fn apply_forces(mut rigid_bodies: Query<(&mut RigidBodyForces, &mut RigidBodyVelocity, &RigidBodyMassProps)>) {
-    for (rb_forces, rb_vel, rb_mprops) in rigid_bodies.iter_mut() {
+    for (mut rb_forces, mut rb_vel, rb_mprops) in rigid_bodies.iter_mut() {
         // Apply forces.
         rb_forces.force = Vec2::new(1.0, 2.0).into();
         rb_forces.torque = 0.4;
@@ -736,7 +736,7 @@ commands.spawn_bundle(rigid_body);
 ```rust
 /* Apply forces and impulses inside of a system. */
 fn apply_forces(mut rigid_bodies: Query<(&mut RigidBodyForces, &mut RigidBodyVelocity, &RigidBodyMassProps)>) {
-    for (rb_forces, rb_vel, rb_mprops) in rigid_bodies.iter_mut() {
+    for (mut rb_forces, mut rb_vel, rb_mprops) in rigid_bodies.iter_mut() {
         // Apply forces.
         rb_forces.force = Vec3::new(1.0, 2.0, 3.0).into();
         rb_forces.torque = Vec3::new(0.2, 0.4, 0.8).into();
@@ -805,13 +805,13 @@ let rigid_body = RigidBodyBundle::default();
 let collider = ColliderBundle {
     shape: ColliderShape::ball(1.0),
     // The default density is 1.0, we are setting 2.0 for this example.
-    mprops: ColliderMassProperties::Density(2.0),
+    mass_properties: ColliderMassProps::Density(2.0),
     ..Default::default()
-}
+};
 
 // When the collider is attached, the rigid-body's mass and angular
 // inertia will be automatically updated to take the collider into account.
-command.spawn_bundle(rigid_body)
+commands.spawn_bundle(rigid_body)
        .insert_bundle(collider);
 ```
 
@@ -892,7 +892,7 @@ values={[
 ```rust
 /* Set the mass properties when the rigid-body bundle is created. */
 let rigid_body = RigidBodyBundle {
-    mprops: MassProperties::new(point![1.0, 2.0], 10.0, 0.5).into(),
+    mass_properties: MassProperties::new(Vec2::new(1.0, 2.0).into(), 10.0, 0.5).into(),
     ..Default::default()
 };
 commands.spawn_bundle(rigid_body);
@@ -900,7 +900,7 @@ commands.spawn_bundle(rigid_body);
 ```rust
 /* Change the mass-properties inside of a system. */
 fn modify_body_mass_props(mut mprops: Query<&mut RigidBodyMassProps>) {
-    for rb_mprops in mprops.iter_mut() {
+    for mut rb_mprops in mprops.iter_mut() {
         rb_mprops.local_mprops.set_mass(100.0, true);
     }
 }
@@ -912,7 +912,7 @@ fn modify_body_mass_props(mut mprops: Query<&mut RigidBodyMassProps>) {
 ```rust
 /* Set the mass properties when the rigid-body bundle is created. */
 let rigid_body = RigidBodyBundle {
-    mprops: MassProperties::new(point![1.0, 2.0, 0.0], 10.0, vector![0.3, 0.4, 0.5]).into(),
+    mass_properties: MassProperties::new(Vec3::new(1.0, 2.0, 0.0).into(), 10.0, Vec3::new(0.3, 0.4, 0.5).into()).into(),
     ..Default::default()
 };
 commands.spawn_bundle(rigid_body);
@@ -920,7 +920,7 @@ commands.spawn_bundle(rigid_body);
 ```rust
 /* Change the mass-properties inside of a system. */
 fn modify_body_mass_props(mut mprops: Query<&mut RigidBodyMassProps>) {
-    for rb_mprops in mprops.iter_mut() {
+    for mut rb_mprops in mprops.iter_mut() {
         rb_mprops.local_mprops.set_mass(100.0, true);
     }
 }
@@ -1005,7 +1005,7 @@ values={[
 ```rust
 /* Lock translations and/or rotations when the rigid-body bundle is created. */
 let rigid_body = RigidBodyBundle {
-    mprops: RigidBodyMassPropsFlags::TRANSLATION_LOCKED | RigidBodyMassPropsFlags::ROTATION_LOCKED_X,
+    mass_properties: (RigidBodyMassPropsFlags::TRANSLATION_LOCKED | RigidBodyMassPropsFlags::ROTATION_LOCKED).into(),
     ..Default::default()
 };
 commands.spawn_bundle(rigid_body);
@@ -1013,7 +1013,7 @@ commands.spawn_bundle(rigid_body);
 ```rust
 /* Lock translations and/or rotations inside of a system. */
 fn modify_body_locked_flags(mut mprops: Query<&mut RigidBodyMassProps>) {
-    for rb_mprops in mprops.iter_mut() {
+    for mut rb_mprops in mprops.iter_mut() {
         rb_mprops.flags = RigidBodyMassPropsFlags::ROTATION_LOCKED;
     }
 }
@@ -1025,7 +1025,7 @@ fn modify_body_locked_flags(mut mprops: Query<&mut RigidBodyMassProps>) {
 ```rust
 /* Lock translations and/or rotations when the rigid-body bundle is created. */
 let rigid_body = RigidBodyBundle {
-    mprops: RigidBodyMassPropsFlags::TRANSLATION_LOCKED | RigidBodyMassPropsFlags::ROTATION_LOCKED,
+    mass_properties: (RigidBodyMassPropsFlags::TRANSLATION_LOCKED | RigidBodyMassPropsFlags::ROTATION_LOCKED_X).into(),
     ..Default::default()
 };
 commands.spawn_bundle(rigid_body);
@@ -1033,8 +1033,8 @@ commands.spawn_bundle(rigid_body);
 ```rust
 /* Lock translations and/or rotations inside of a system. */
 fn modify_body_locked_flags(mut mprops: Query<&mut RigidBodyMassProps>) {
-    for rb_mprops in mprops.iter_mut() {
-        rb_mprops.flags = RigidBodyMassPropsFlags::ROTATION_LOCKED;
+    for mut rb_mprops in mprops.iter_mut() {
+        rb_mprops.flags = RigidBodyMassPropsFlags::ROTATION_LOCKED_Y;
     }
 }
 ```
@@ -1086,8 +1086,8 @@ commands.spawn_bundle(rigid_body);
 ```
 ```rust
 /* Set damping inside of a system. */
-fn modify_body_locked_flags(mut dampings: Query<&mut RigidBodyDamping>) {
-    for rb_damping in dampings.iter_mut() {
+fn modify_body_damping(mut dampings: Query<&mut RigidBodyDamping>) {
+    for mut rb_damping in dampings.iter_mut() {
         rb_damping.linear_damping = 0.5;
         rb_damping.angular_damping = 1.0;
     }
@@ -1147,8 +1147,8 @@ commands.spawn_bundle(rigid_body);
 ```
 ```rust
 /* Set dominance inside of a system. */
-fn modify_body_locked_flags(mut dominances: Query<&mut RigidBodyDominance>) {
-    for rb_dominance in dominances.iter_mut() {
+fn modify_body_dominance(mut dominances: Query<&mut RigidBodyDominance>) {
+    for mut rb_dominance in dominances.iter_mut() {
         rb_dominance.0 = 10;
     }
 }
@@ -1196,15 +1196,15 @@ assert_eq!(rigid_body.is_ccd_enabled(), true);
 ```rust
 /* Enable CCD when the rigid-body bundle is created. */
 let rigid_body = RigidBodyBundle {
-    dominance: RigidBodyCcd { ccd_enabled: true, ..Default::default() },
+    ccd: RigidBodyCcd { ccd_enabled: true, ..Default::default() },
     ..Default::default()
 };
 commands.spawn_bundle(rigid_body);
 ```
 ```rust
 /* Enable CCD inside of a system. */
-fn modify_body_locked_flags(mut ccds: Query<&mut RigidBodyCcd>) {
-    for rb_ccd in ccds.iter_mut() {
+fn modify_body_ccd(mut ccds: Query<&mut RigidBodyCcd>) {
+    for mut rb_ccd in ccds.iter_mut() {
         rb_ccd.ccd_enabled = true;
     }
 }

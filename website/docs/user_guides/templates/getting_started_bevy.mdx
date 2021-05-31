@@ -62,7 +62,7 @@ values={[
 [dependencies]
 # TODO: Replace the * by the latest version numbers.
 # Enable the `simd-stable` and `parallel` features of Rapier.
-bevy_rapier2d = { version = "*", features = [ "simd-stable", "parallel" ] }
+bevy_rapier2d = { version = "*", features = [ "simd-stable" ] }
 ```
 
   </TabItem>
@@ -72,7 +72,7 @@ bevy_rapier2d = { version = "*", features = [ "simd-stable", "parallel" ] }
 [dependencies]
 # TODO: Replace the * by the latest version numbers.
 # Enable the `simd-stable` and `parallel` features of Rapier.
-bevy_rapier3d = { version = "*", features = [ "simd-stable", "parallel" ] }
+bevy_rapier3d = { version = "*", features = [ "simd-stable" ] }
 ```
 
   </TabItem>
@@ -129,7 +129,8 @@ fn setup_physics(mut commands: Commands) {
         material: ColliderMaterial {
             restitution: 0.7,
             ..Default::default()
-        }
+        },
+        ..Default::default()
     };
     commands.spawn_bundle(rigid_body)
         .insert_bundle(collider);
@@ -176,7 +177,8 @@ fn setup_physics(mut commands: Commands) {
         material: ColliderMaterial {
             restitution: 0.7,
             ..Default::default()
-        }
+        },
+        ..Default::default()
     };
     commands.spawn_bundle(rigid_body)
         .insert_bundle(collider);

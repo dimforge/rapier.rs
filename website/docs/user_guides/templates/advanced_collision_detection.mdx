@@ -251,8 +251,8 @@ fn display_contact_info(narrow_phase: Res<NarrowPhase>) {
 }
 ```
 ```rust
-fn dispaly_contact_info(narrow_phase: Res<NarrowPhase>) {
-    let entity = ...; // Entity with a collider bundle attached.
+fn display_contact_info(narrow_phase: Res<NarrowPhase>) {
+    let entity = ...; // Entity with a collider bundle attached.F
     
     /* Iterate through all the contact pairs involving a specific collider. */
     for contact_pair in narrow_phase.contacts_with(entity.handle()) {
@@ -458,6 +458,15 @@ impl PhysicsHooks<RigidBodySet, ColliderSet> for MyPhysicsHooks {
 <rapier>
 
 ```rust
+fn main() {
+    App::build()
+        .add_plugins(DefaultPlugins)
+        // Make sure the Rapier plugin is parametrized by our custom user-data type.
+        .add_plugin(RapierPhysicsPlugin::<&CustomFilterTag>::default())
+        .add_startup_system(setup_physics.system())
+        .run();
+}
+
 #[derive(PartialEq, Eq, Clone, Copy)]
 enum CustomFilterTag {
     GroupA,
@@ -489,19 +498,10 @@ impl<'a> PhysicsHooksWithQuery<&'a CustomFilterTag> for SameUserDataFilter {
         &self,
         context: &PairFilterContext<RigidBodyComponentsSet, ColliderComponentsSet>,
         custom_tag: &Query<&'a CustomFilterTag>,
-    ) -> Option<SolverFlags> {
+    ) -> bool {
         custom_tag.get(context.collider1.entity()).ok().copied()
             == custom_tag.get(context.collider2.entity()).ok().copied()
     }
-}
-
-fn main() {
-    App::build()
-        .add_plugins(DefaultPlugins)
-        // Make sure the Rapier plugin is parametrized by our custom user-data type.
-        .add_plugin(RapierPhysicsPlugin::<&CustomFilterTag>::default())
-        .add_startup_system(setup_physics.system())
-        .run();
 }
 
 fn setup_physics(mut commands: Commands) {
@@ -517,8 +517,9 @@ fn setup_physics(mut commands: Commands) {
     // our custom physics hooks:
     let collider = ColliderBundle {
         material: ColliderMaterial {
-            active_hooks: PhysicsHooksFlags::FILTER_CONTACT_PAIR | FILTER_INTERSECTION_PAIR
-            ..Default::default(),
+            active_hooks: PhysicsHooksFlags::FILTER_CONTACT_PAIR 
+                | PhysicsHooksFlags::FILTER_INTERSECTION_PAIR,
+            ..Default::default()
         },
         ..Default::default()
     };
@@ -597,9 +598,17 @@ impl PhysicsHooks<RigidBodySet, ColliderSet> for MyPhysicsHooks {
 <bevy>
 
 ```rust
+fn main() {
+    App::build()
+        .add_plugins(DefaultPlugins)
+        .add_plugin(RapierPhysicsPlugin::<NoUserData>::default())
+        .add_startup_system(setup_physics.system())
+        .run();
+}
+
 struct MyPhysicsHooks;
 
-impl PhysicsHooksWithQuery<NoUserData> for MyPhysicsHooks {
+impl PhysicsHooksWithQuery<NoUserData<'_>> for MyPhysicsHooks {
     fn modify_solver_contacts(
         &self, 
         context: &mut ContactModificationContext<RigidBodyComponentsSet, ColliderComponentsSet>, 
@@ -632,14 +641,6 @@ impl PhysicsHooksWithQuery<NoUserData> for MyPhysicsHooks {
     }
 }
 
-fn main() {
-    App::build()
-        .add_plugins(DefaultPlugins)
-        .add_plugin(RapierPhysicsPlugin::<NoUserData>::default())
-        .add_startup_system(setup_physics.system())
-        .run();
-}
-
 fn setup_physics(mut commands: Commands) {
     // Register our physics hooks.
     commands.insert_resource(PhysicsHooksWithQueryObject(Box::new(MyPhysicsHooks {})));
@@ -649,8 +650,8 @@ fn setup_physics(mut commands: Commands) {
     // our custom physics hooks:
     let collider = ColliderBundle {
         material: ColliderMaterial {
-            active_hooks: PhysicsHooksFlags::MODIFY_SOLVER_CONTACTS
-            ..Default::default(),
+            active_hooks: PhysicsHooksFlags::MODIFY_SOLVER_CONTACTS,
+            ..Default::default()
         },
         ..Default::default()
     };

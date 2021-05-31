@@ -107,7 +107,7 @@ values={[
 
 ```rust
 let joint = FixedJoint::new(Isometry::identity(), Isometry::translation(0.0, -2.0));
-commands.spawn(JointBuilderComponent::new(joint, parent_entity, child_entity));
+commands.spawn().insert(JointBuilderComponent::new(joint, entity1, entity2));
 ```
 
   </TabItem>
@@ -115,7 +115,7 @@ commands.spawn(JointBuilderComponent::new(joint, parent_entity, child_entity));
 
 ```rust
 let joint = FixedJoint::new(Isometry::identity(), Isometry::translation(0.0, 0.0, -2.0));
-commands.spawn(JointBuilderComponent::new(joint, parent_entity, child_entity));
+commands.spawn().insert(JointBuilderComponent::new(joint, entity1, entity2));
 ```
 
   </TabItem>
@@ -170,8 +170,8 @@ values={[
 <TabItem value="2D">
 
 ```rust
-let joint = BallJoint::new(Vec2::new(0.0, 0.0).into(), Vec2::new(0.0, -3.0).into());
-commands.spawn(JointBuilderComponent::new(joint, parent_entity, child_entity));
+let joint = BallJoint::new(Vec2::ZERO.into(), Vec2::new(0.0, -3.0).into());
+commands.spawn().insert(JointBuilderComponent::new(joint, entity1, entity2));
 ```
 
   </TabItem>
@@ -179,7 +179,7 @@ commands.spawn(JointBuilderComponent::new(joint, parent_entity, child_entity));
 
 ```rust
 let joint = BallJoint::new(Vec3::new(0.0, 0.0, 1.0).into(), Vec3::new(0.0, 0.0, -3.0).into());
-commands.spawn(JointBuilderComponent::new(joint, parent_entity, child_entity));
+commands.spawn().insert(JointBuilderComponent::new(joint, entity1, entity2));
 ```
 
   </TabItem>
@@ -207,7 +207,7 @@ joint_set.insert(&mut rigid_body_set, body_handle1, body_handle2, joint);
 ```rust
 let x = Vector::x_axis();
 let joint = RevoluteJoint::new(Vec3::new(0.0, 0.0, 1.0).into(), x, Vec3::new(0.0, 0.0, -3.0).into(), x);
-commands.spawn(JointBuilderComponent::new(joint, parent_entity, child_entity));
+commands.spawn().insert(JointBuilderComponent::new(joint, entity1, entity2));
 ```
 
 </bevy>
@@ -274,9 +274,9 @@ values={[
 
 ```rust
 let x = Vector::x_axis();
-let mut joint = PrismaticJoint::new(Vec2::new(0.0, 0.0).into(), x, Vec2::new(0.0, -3.0).into(), x);
+let mut joint = PrismaticJoint::new(Vec2::ZERO.into(), x, Vec2::new(0.0, -3.0).into(), x);
 joint.limits = [-2.0, 5.0];
-commands.spawn(JointBuilderComponent::new(joint, parent_entity, child_entity));
+commands.spawn().insert(JointBuilderComponent::new(joint, entity1, entity2));
 ```
 
   </TabItem>
@@ -287,7 +287,7 @@ let x = Vector::x_axis();
 let z = Vector::z();
 let mut joint = PrismaticJoint::new(Vec3::new(0.0, 0.0, 1.0).into(), x, z, Vec3::new(0.0, 0.0, -3.0).into(), x, z);
 joint.limits = [-2.0, 5.0];
-commands.spawn(JointBuilderComponent::new(joint, parent_entity, child_entity));
+commands.spawn().insert(JointBuilderComponent::new(joint, entity1, entity2));
 ```
 
   </TabItem>
@@ -366,9 +366,9 @@ values={[
 
 ```rust
 let x = Vector::x_axis();
-let mut joint = PrismaticJoint::new(Vec2::new(0.0, 0.0).into(), x, Vec2::new(0.0, -3.0).into(), x);
+let mut joint = PrismaticJoint::new(Vec2::ZERO.into(), x, Vec2::new(0.0, -3.0).into(), x);
 joint.configure_motor_velocity(1.0, 0.5);
-joint_set.insert(&mut rigid_body_set, body_handle1, body_handle2, joint);
+commands.spawn().insert(JointBuilderComponent::new(joint, entity1, entity2));
 ```
 
   </TabItem>
@@ -379,7 +379,7 @@ let x = Vector::x_axis();
 let z = Vector::z();
 let mut joint = PrismaticJoint::new(Vec3::new(0.0, 0.0, 1.0).into(), x, z, Vec3::new(0.0, 0.0, -3.0).into(), x, z);
 joint.configure_motor_velocity(1.0, 0.5);
-joint_set.insert(&mut rigid_body_set, body_handle1, body_handle2, joint);
+commands.spawn().insert(JointBuilderComponent::new(joint, entity1, entity2));
 ```
 
   </TabItem>

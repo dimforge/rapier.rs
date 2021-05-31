@@ -93,8 +93,10 @@ does collision-detection.
 
 ## Query pipeline
 The `QueryPipeline` is responsible for efficiently running [scene queries](scene_queries), e.g., ray-casting,
-shape-casting (sweep tests), intersection tests, on all the colliders of the scene. Before it is used, the
-`QueryPipeline` needs to be updated in order to take the new colliders' positions into account.
+shape-casting (sweep tests), intersection tests, on all the colliders of the scene.
+
+<rapier>
+Before it is used, the `QueryPipeline` needs to be updated in order to take the new colliders' positions into account.
 The `QueryPipeline` can be used alone, but it is very common to use the `QueryPipeline` alongside the `CollisionPipeline`
 or `PhysicsPipeline`:
 
@@ -107,6 +109,8 @@ loop {
   // and we can do advanced scene queries on the colliders.
 }
 ```
+
+</rapier>
 
 Learn more about scene queries with the `QueryPipeline` in the [dedicated page](scene_queries).
 

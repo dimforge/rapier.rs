@@ -386,7 +386,7 @@ fn cast_shape(query_pipeline: Res<QueryPipeline>, collider_query: QueryPipelineC
     let collider_set = QueryPipelineColliderComponentsSet(&collider_query);
 
     let shape = Cuboid::new(Vec3::new(1.0, 2.0, 3.0).into());
-    let shape_pos = (Vec3::new(0.0, 1.0, 0.0), Quat::from_scaled_axis(0.2, 0.7, 0.1)).into();
+    let shape_pos = (Vec3::new(0.0, 1.0, 0.0), Quat::from_rotation_x(0.4)).into();
     let shape_vel = Vec3::new(0.1, 0.4, 0.2).into();
     let max_toi = 4.0;
     let groups = InteractionGroups::all();
