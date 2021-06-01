@@ -48,8 +48,10 @@ let mut rigid_body_set = RigidBodySet::new();
 let _ = RigidBodyBuilder::new_static();
 // Builder for a dynamic rigid-body.
 let _ = RigidBodyBuilder::new_dynamic();
-// Builder for a kinematic rigid-body.
-let _ = RigidBodyBuilder::new_kinematic();
+// Builder for a kinematic rigid-body controlled at the velocity level.
+let _ = RigidBodyBuilder::new_kinematic_velocity_based();
+// Builder for a kinematic rigid-body controlled at the position level.
+let _ = RigidBodyBuilder::new_kinematic_position_based();
 // Builder for a body with a status specified by an enum.
 let rigid_body = RigidBodyBuilder::new(BodyStatus::Dynamic)
     // The rigid body translation.
@@ -96,8 +98,10 @@ let mut rigid_body_set = RigidBodySet::new();
 let _ = RigidBodyBuilder::new_static();
 // Builder for a dynamic rigid-body.
 let _ = RigidBodyBuilder::new_dynamic();
-// Builder for a kinematic rigid-body.
-let _ = RigidBodyBuilder::new_kinematic();
+// Builder for a kinematic rigid-body controlled at the velocity level.
+let _ = RigidBodyBuilder::new_kinematic_velocity_based();
+// Builder for a kinematic rigid-body controlled at the position level.
+let _ = RigidBodyBuilder::new_kinematic_position_based();
 // Builder for a body with a status specified by an enum.
 let rigid_body = RigidBodyBuilder::new(BodyStatus::Dynamic)
     // The rigid body translation.
@@ -136,7 +140,8 @@ let handle = rigid_body_set.insert(rigid_body);
 
 
 All the properties are optional. The only calls that are required are `RigidBodyBuilder::new(status)`,
-`RigidBodyBuilder::new_static()`, `RigidBodyBuilder::new_dynamic()`, or `RigidBodyBuilder::new_kinematic()`, to
+`RigidBodyBuilder::new_static()`, `RigidBodyBuilder::new_dynamic()`, `RigidBodyBuilder::new_kinematic_velocity_based()`,
+or  , to
 initialize the builder, and `.build()` to actually build the rigid-body.
 
 </rapier>
@@ -215,9 +220,15 @@ There are three types of rigid-bodies, identified by the `RigidBodyType` <rapier
 * **`RigidBodyType::Static`:** Indicates the body cannot move. It acts as if it has an infinite mass and will not be
     affected by any force. It will continue to collide with dynamic bodies but not with static nor with kinematic
     bodies. This is typically used for the ground or for temporarily freezing a body.
-* **`RigidBodyType::Kinematic`:** Indicates that the body position must not be altered by the physics engine. The user is
-    free to set its next position and the body velocity will be deduced at each update accordingly to ensure a realistic
-    behavior of dynamic bodies in contact with it. This is typically used for moving **platforms**, **elevators**, etc.
+* **`RigidBodyType::KinematicPositionBased`:** Indicates that the body position must not be altered by the physics engine.
+  The user is free to set its next position and the body velocity will be deduced at each update accordingly to ensure
+  a realistic behavior of dynamic bodies in contact with it. This is typically used for moving **platforms**, **elevators**, etc.
+* **`RigidBodyType::KinematicVelocityBased`:** Indicates that the body velocity must not be altered by the physics engine.
+  The user is free to set its velocity and the next body position will be deduced at each update accordingly to ensure
+  a realistic behavior of dynamic bodies in contact with it. This is typically used for moving **platforms**, **elevators**, etc.
+  
+Both position-based and velocity-based kinematic bodies are mostly the same. Choosing between both is mostly a matter of
+preference between position-based control and velocity-based control.
 
 ## Position
 The position of a rigid-body represents its location (translation) in 2D or 3D world-space, as well as its orientation (rotation).
@@ -372,19 +383,21 @@ bodies, it is recommended to either set its [velocity](#velocity) or to apply [f
 
 <rapier>
 
-For kinematic bodies, it is recommended to use the special methods:
+For **velocity-based** kinematic bodies, it is recommended to set its velocity instead of setting its position directly.
+For **position-based** kinematic bodies, it is recommended to use the special methods:
 - `RigidBody::set_next_kinematic_position`
 - `RigidBody::set_next_kinematic_rotation`
 - `RigidBody::set_next_kinematic_translation`
 
-These methods will let the physics pipeline compute the fictitious velocity of the kinematic body for more realistic
+These methods will let the physics pipeline compute the fictitious velocity of the position-based kinematic body for more realistic
 interactions with other rigid-bodies. These methods won't immediately modify the position of the kinematic body itself.
 The position of the kinematic body will be automatically set to these values during the next physics pipeline update.
 
 </rapier>
 <bevy>
 
-For kinematic bodies, it is recommended to modify the `next_position` field of the `RigidBodyPosition` component instead
+For **velocity-based** kinematic bodies, it is recommended to set its velocity instead of setting its position directly.
+For **position-based** kinematic bodies, it is recommended to modify the `next_position` field of the `RigidBodyPosition` component instead
 of its `position` field. This will let the physics engine compute the fictitious velocity of the kinematic body for more
 realistic intersections with other rigid-bodies. The `position` field of the kinematic body will automatically be set
 to the `next_position` value during the next physics update.

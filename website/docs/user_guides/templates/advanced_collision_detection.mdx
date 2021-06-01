@@ -64,6 +64,12 @@ while let Ok(contact_event) = contact_recv.try_recv() {
 }
 ```
 
+Note however that if you need to access the contact information at the exact time a contact event happens, you need to
+provide your own `EventHandler` implementation to access the contact pair given to `EventHandler::handle_contact_event`.
+You may just query the `NarrowPhase` instead, but there are case where the contact information is no longer available at
+the end of the timestep (e.g. when running multi-step CCD and the contact start during one substep and steps at a
+substeps right after).
+
 :::info
 Contact and intersection events identify the involved colliders by their handle. It is possible to retrieve the handle of
 the rigid-body a collider is attached to: `collider_set.get(collider_handle).unwrap().parent()`
@@ -108,9 +114,14 @@ intersecting or not. One intersection event has the type `IntersectionEvent`:
 | `collider2`   | The handle of the second collider involved in the intersection. |
 | `intersecting` | Set to `true` if the colliders shapes are intersecting. |
 
+:::warning
+Intersection events are only generated between two colliders (where at least one of the is a sensor) if at
+least one of them has the `ActiveEvents::INTERSECTION_EVENTS` flag in its [active events](colliders#active-events).
+:::
+
 ### Contact events
 Contact events are triggered when two non-sensor colliders transition between having zero contact points and having
-at least one contact point.  Transitioning between having one contact point to having more than one contact points is
+at least one contact point. Transitioning between having one contact point to having more than one contact points is
 not reported an event. The `ContactEvent` enum has two variants:
 
 1. `ContactEvent::Started(h1, h2)` to indicate the transition between
@@ -119,6 +130,13 @@ not reported an event. The `ContactEvent` enum has two variants:
    at least one contact point to 0.
 
 Here `h1` and `h2` identify the handles of the colliders involved in the contact.
+
+
+:::warning
+Intersection events are only generated between two non-sensor colliders if at least one of them has
+the `ActiveEvents::CONTACT_EVENTS` flag in its [active events](colliders#active-events).
+:::
+
 
 ## The contact graph
 The contact graph can be read in order to determine whether two specific non-sensor colliders are in contact, or to determine
@@ -393,21 +411,15 @@ Sometimes, [collision groups and solver groups](colliders#collision-groups-and-s
 to achieve the desired behavior. In that case, the contact filtering hooks let you apply custom rules to filter contact
 pairs and intersection pairs:
 - For each potential contact pair (between two non-sensor colliders) detected by the broad-phase, if at least one
-  of the colliders involved in the pair has the bit `PhysicsHooksFlags::FILTER_CONTACT_PAIR` enabled in its
+  of the colliders involved in the pair has the bit `ActiveHooks::FILTER_CONTACT_PAIRS` enabled in its
   [active hooks](colliders#active-hooks), then `PhysicsHooks::filter_contact_pair` will be called. If this filter
   returns `None` then no contact computation will happen for this pair of colliders. If it returns `Some` then the
   narrow-phase will compute contact points.
 - For each potential intersection pair (between a sensor colliders and another collider) detected by the broad-phase, if
-  at least one of the colliders involved in the pair has the bit `PhysicsHooksFlags::FILTER_INTERSECTION_PAIR` enabled
+  at least one of the colliders involved in the pair has the bit `ActiveHooks::FILTER_INTERSECTION_PAIRS` enabled
   in its [active hooks](colliders#active-hooks), then `PhysicsHooks::filter_intersection_pair` will be called. If this
   filter returns `false` then no intersection computation will happen for this pair of colliders. If it returns `true`
   then the narrow-phase will test whether or not they are intersecting.
-  
-:::info
-By default, collision-detection is disabled between two colliders if none of them is attached to a dynamic
-rigid-body. The `filter_contact_pair` and `filter_intersection_pair` will bypass this default behavior if
-they return `Some` or `true` for a pair of colliders not attached to any dynamic rigid-bodies.
-:::
 
 When `PhysicsHooks::filter_contact_pair` returns `Some(flags)` it needs to provide a set of solver flags for this contact
 pair. These solver flags indicate what happen with the contacts of this contact pair afterwards:
@@ -517,8 +529,8 @@ fn setup_physics(mut commands: Commands) {
     // our custom physics hooks:
     let collider = ColliderBundle {
         material: ColliderMaterial {
-            active_hooks: PhysicsHooksFlags::FILTER_CONTACT_PAIR 
-                | PhysicsHooksFlags::FILTER_INTERSECTION_PAIR,
+            active_hooks: ActiveHooks::FILTER_CONTACT_PAIRS 
+                | ActiveHooks::FILTER_INTERSECTION_PAIRS,
             ..Default::default()
         },
         ..Default::default()
@@ -541,7 +553,7 @@ multiple advanced usages, for example:
   friction or restitution coefficients that depend on the contact points location.
 
 The `PhysicsHooks::modify_solver_contacts` methods is called on each contact manifold between two colliders where at
-least one of them has the `PhysicsHooksFlags::MODIFY_SOLVER_CONTACTS` flag enabled in its
+least one of them has the `ActiveHooks::MODIFY_SOLVER_CONTACTS` flag enabled in its
 [active hooks](colliders#active-hooks).
 
 :::warning
@@ -650,7 +662,7 @@ fn setup_physics(mut commands: Commands) {
     // our custom physics hooks:
     let collider = ColliderBundle {
         material: ColliderMaterial {
-            active_hooks: PhysicsHooksFlags::MODIFY_SOLVER_CONTACTS,
+            active_hooks: ActiveHooks::MODIFY_SOLVER_CONTACTS,
             ..Default::default()
         },
         ..Default::default()
