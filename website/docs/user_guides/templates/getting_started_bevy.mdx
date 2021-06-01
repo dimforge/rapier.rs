@@ -72,7 +72,6 @@ values={[
 ```toml
 [dependencies]
 # TODO: Replace the * by the latest version numbers.
-# Enable the `simd-stable` and `parallel` features of Rapier.
 bevy_rapier2d = { version = "*", features = [ "simd-stable" ] }
 ```
 
@@ -82,7 +81,6 @@ bevy_rapier2d = { version = "*", features = [ "simd-stable" ] }
 ```toml
 [dependencies]
 # TODO: Replace the * by the latest version numbers.
-# Enable the `simd-stable` and `parallel` features of Rapier.
 bevy_rapier3d = { version = "*", features = [ "simd-stable" ] }
 ```
 
@@ -204,3 +202,49 @@ fn print_ball_altitude(positions: Query<&RigidBodyPosition>) {
 
   </TabItem>
 </Tabs>
+
+
+## The debug renderer
+:::warning
+The debug-renderer is very limited right now. It won't be able to render every shape type,
+and doesn't render other elements like contacts, rigid-body frames, etc. Contributions are
+welcome!
+:::
+The `bevy_rapier` plugin comes with a debug-render to help debugging physics bugs. This can be enabled by:
+1. Enabling the `render` cargo feature of bevy-rapier.
+2. Adding the plugin `RapierRenderPlugin` to the Bevy app.
+3. Adding the `ColliderDebugRender` component to an entity containing a collider. Please note
+   that this will only work if the entity doesn't have a mesh already attached to it.
+4. (optional) Adding the `ColliderPositionSync` component to the same entity. This
+   is not needed if you have your own way of synchronizing the collider's position with the
+   entity's `Transform`.
+
+```toml
+[dependencies]
+# Make sure the "render" feature is enabled.
+bevy_rapier2d = { version = "*", features = [ "simd-stable", "render" ] }
+bevy_rapier3d = { version = "*", features = [ "simd-stable", "render" ] }
+```
+   
+```rust
+use bevy::prelude::*;
+use bevy_rapier3d::prelude::*;
+
+fn main() {
+    App::build()
+        ...
+        .add_plugin(RapierRenderPlugin)
+        ...
+        .run();
+}
+
+fn setup_physics() {
+    let collider = ColliderBundle {
+        shape: ColliderShape::ball(0.4),
+        ..Default::default()
+    };
+    commands.spawn_bundle(collider)
+        .insert(ColliderPositionSync::Discrete)
+        .insert(ColliderDebugRender::with_id(1)); // The id selects one of the predefined colors.
+}
+```

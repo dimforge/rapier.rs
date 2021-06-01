@@ -172,3 +172,50 @@ Because **points** represent a **location** in space, `isometry * point` will ro
 because **vectors** represent a **direction**, `isometry * vector` will only rotate the vector (the translation part
 of the isometry will be ignored).
 :::
+
+## Interoperability with glam
+[**glam**](https://crates.io/crates/glam) is another linear-algebra library written in Rust. It is popular within
+the Rust game development community and is used by several popular crates like [**Bevy**](https://bevyengine.org),
+[**macroquad**](https://crates.io/crates/macroquad), etc.
+
+It is possible to convert **nalgebra** types from/to **glam** types (using the standard library's `From` and `Into` traits)
+by enabling one of the conversion cargo features of **nalgebra**:
+- The `convert-glam013` features will enable conversion from/to **glam 0.13**.
+- The `convert-glam014` features will enable conversion from/to **glam 0.14**.
+- The `convert-glam015` features will enable conversion from/to **glam 0.15**.
+- The same feature naming conversion will be used for the other supported version of glam.
+
+<bevy>
+
+:::info
+The feature is already enabled by the bevy-rapier plugin. The selected version depends on the version
+of glam used by Bevy.
+:::
+
+</bevy>
+
+Here are examples of conversions these features enable:
+- Conversion between `na::Vector2` and `glam::Vec2`.
+- Conversion between `na::Vector3` and `glam::Vec3`.
+- Conversion between `na::Point2` and `glam::Vec2`.
+- Conversion between `na::Point3` and `glam::Vec3`.
+- Conversion between `na::Isometry2` and the tuple `(glam::Vec2, f32)`.
+- Conversion between `na::Isometry3` and the tuple `(glam::Vec3, glam::Quat)`.
+- Conversion from `glam::Vec2` to `na::Isometry2` (builds a translation-only isometry).
+- Conversion from `glam::Vec3` to `na::Isometry3` (builds a translation-only isometry).
+- Conversion from `glam::Quat` to `na::Isometry3` (builds a rotation-only isometry).
+
+```rust
+// Here are just a few examples.
+use nalgebra::{vector, Point2, Isometry3};
+use glam::{Quat, Vec2, Vec3};
+
+let na_vector = vector![1.0, 2.0, 3.0];
+let glam_vector: Vec3 = na_vector.into();
+
+let glam_vector = Vec2::new(1.0, 2.0);
+let na_point: Point2<f32> = glam_vector.into();
+
+let na_isometry: Isometry3<f32> = 
+    (Vec3::new(0.1, 2.0, 0.0), Quat::from_rotation_x(0.4)).into();
+```
