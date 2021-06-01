@@ -33,6 +33,7 @@ Has a great cross-platform support but requires a nightly version of the Rust co
 - `serde-serialize`: enables serialization of the physics components with [`serde`](https://github.com/serde-rs/serde).
 - `enhanced-determinism`: enables cross-platform determinism across all 32-bit and 64-bit platforms that implements the
 IEEE 754-2008 standard strictly. This includes most modern processors as well as WASM targets.
+- `wasm-bindgen`: enables usage of `rapier` as a dependency of a WASM crate that is compiled with `wasm-bindgen`.
 
 Currently, the `enhanced-determinism` feature cannot be enabled at the same time as the `parallel` or
 `simd-{stable,nightly}` features.
