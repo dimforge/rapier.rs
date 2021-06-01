@@ -26,9 +26,11 @@ Has limited cross-platform support but can be used with a stable version of the 
 Has a great cross-platform support but requires a nightly version of the Rust compiler.
 - `parallel`: enables parallelism of the physics pipeline with the [`rayon` crate](https://crates.io/crates/rayon).
 - `serde-serialize`: enables serialization of the physics components with [`serde`](https://github.com/serde-rs/serde).
-- `enhanced-determinism`: enables cross-platform determinism across all 32-bit and 64-bit platforms that implements the
-IEEE 754-2008 standard strictly. This includes most modern processors as well as WASM targets.
-  
+- `enhanced-determinism`: enables cross-platform determinism (assuming the rest of your code is also deterministic) across
+  all 32-bit and 64-bit platforms that implements the
+ IEEE 754-2008 standard strictly. This includes most modern processors as well as WASM targets.
+- `wasm-bindgen`: enables usage of `rapier` as a dependency of a WASM crate that is compiled with `wasm-bindgen`.
+
 :::warning
 Enabling parallelism is only useful if the scene being simulated has a high number of moving rigid-bodies, colliders,
 and/or joints. If the simulation isn't sufficiently complex, the parallelism may actually make the simulation slower

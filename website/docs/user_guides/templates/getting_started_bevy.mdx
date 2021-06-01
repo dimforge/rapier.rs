@@ -13,6 +13,17 @@ of components, systems, and resources that share a common objective.
 
 The [**bevy_rapier2d**](https://crates.io/crates/bevy_rapier2d) and [**bevy_rapier3d**](https://crates.io/crates/bevy_rapier3d)
 crates which integrate **Rapier** to **Bevy** using their plugin system.
+To get the best of **bevy-rapier** multiple features can be enabled optionally:
+- `simd-stable`: enables explicit SIMD optimizations using the [`wide` crate](https://crates.io/crates/wide).
+  Has limited cross-platform support but can be used with a stable version of the Rust compiler.
+- `simd-nightly`: enables explicit SIMD optimizations using the [`packed_simd` crate](https://crates.io/crates/packed_simd).
+  Has a great cross-platform support but requires a nightly version of the Rust compiler.
+- `parallel`: enables parallelism of the physics pipeline with the [`rayon` crate](https://crates.io/crates/rayon).
+- `serde-serialize`: enables serialization of the physics components with [`serde`](https://github.com/serde-rs/serde).
+- `enhanced-determinism`: enables cross-platform determinism (assuming the rest of your code is also deterministic)
+  across all 32-bit and 64-bit platforms that implements the IEEE 754-2008 standard strictly. This includes most modern
+  processors as well as WASM targets.
+- `wasm-bindgen`: enables usage of `rapier` as a dependency of a WASM crate that is compiled with `wasm-bindgen`.
 
 
 ## Cargo example
