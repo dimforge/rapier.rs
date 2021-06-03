@@ -22,3 +22,7 @@ yarn-debug.log*
 yarn-error.log*
 
 build
+
+# Ignore these because they are generated automatically from website/docs/user_guides/templates
+website/docs/user_guides/rust
+website/docs/user_guides/rust_bevy_plugin

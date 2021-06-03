@@ -179,7 +179,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in pipeline/serialization_pipeline.ts:70</li>
+									<li>Defined in pipeline/serialization_pipeline.ts:72</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -262,8 +262,8 @@
 					<a name="serializeall" class="tsd-anchor"></a>
 					<h3>serialize<wbr>All</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">serialize<wbr>All<span class="tsd-signature-symbol">(</span>gravity<span class="tsd-signature-symbol">: </span><a href="../interfaces/vector.html" class="tsd-signature-type">Vector</a>, integrationParameters<span class="tsd-signature-symbol">: </span><a href="integrationparameters.html" class="tsd-signature-type">IntegrationParameters</a>, broadPhase<span class="tsd-signature-symbol">: </span><a href="broadphase.html" class="tsd-signature-type">BroadPhase</a>, narrowPhase<span class="tsd-signature-symbol">: </span><a href="narrowphase.html" class="tsd-signature-type">NarrowPhase</a>, bodies<span class="tsd-signature-symbol">: </span><a href="rigidbodyset.html" class="tsd-signature-type">RigidBodySet</a>, colliders<span class="tsd-signature-symbol">: </span><a href="colliderset.html" class="tsd-signature-type">ColliderSet</a>, joints<span class="tsd-signature-symbol">: </span><a href="jointset.html" class="tsd-signature-type">JointSet</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Uint8Array</span></li>
-						<li class="tsd-signature tsd-kind-icon">serialize<wbr>All<span class="tsd-signature-symbol">(</span>gravity<span class="tsd-signature-symbol">: </span><a href="../interfaces/vector.html" class="tsd-signature-type">Vector</a>, integrationParameters<span class="tsd-signature-symbol">: </span><a href="integrationparameters.html" class="tsd-signature-type">IntegrationParameters</a>, broadPhase<span class="tsd-signature-symbol">: </span><a href="broadphase.html" class="tsd-signature-type">BroadPhase</a>, narrowPhase<span class="tsd-signature-symbol">: </span><a href="narrowphase.html" class="tsd-signature-type">NarrowPhase</a>, bodies<span class="tsd-signature-symbol">: </span><a href="rigidbodyset.html" class="tsd-signature-type">RigidBodySet</a>, colliders<span class="tsd-signature-symbol">: </span><a href="colliderset.html" class="tsd-signature-type">ColliderSet</a>, joints<span class="tsd-signature-symbol">: </span><a href="jointset.html" class="tsd-signature-type">JointSet</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Uint8Array</span></li>
+						<li class="tsd-signature tsd-kind-icon">serialize<wbr>All<span class="tsd-signature-symbol">(</span>gravity<span class="tsd-signature-symbol">: </span><a href="../interfaces/vector.html" class="tsd-signature-type">Vector</a>, integrationParameters<span class="tsd-signature-symbol">: </span><a href="integrationparameters.html" class="tsd-signature-type">IntegrationParameters</a>, islands<span class="tsd-signature-symbol">: </span><a href="islandmanager.html" class="tsd-signature-type">IslandManager</a>, broadPhase<span class="tsd-signature-symbol">: </span><a href="broadphase.html" class="tsd-signature-type">BroadPhase</a>, narrowPhase<span class="tsd-signature-symbol">: </span><a href="narrowphase.html" class="tsd-signature-type">NarrowPhase</a>, bodies<span class="tsd-signature-symbol">: </span><a href="rigidbodyset.html" class="tsd-signature-type">RigidBodySet</a>, colliders<span class="tsd-signature-symbol">: </span><a href="colliderset.html" class="tsd-signature-type">ColliderSet</a>, joints<span class="tsd-signature-symbol">: </span><a href="jointset.html" class="tsd-signature-type">JointSet</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Uint8Array</span></li>
+						<li class="tsd-signature tsd-kind-icon">serialize<wbr>All<span class="tsd-signature-symbol">(</span>gravity<span class="tsd-signature-symbol">: </span><a href="../interfaces/vector.html" class="tsd-signature-type">Vector</a>, integrationParameters<span class="tsd-signature-symbol">: </span><a href="integrationparameters.html" class="tsd-signature-type">IntegrationParameters</a>, islands<span class="tsd-signature-symbol">: </span><a href="islandmanager.html" class="tsd-signature-type">IslandManager</a>, broadPhase<span class="tsd-signature-symbol">: </span><a href="broadphase.html" class="tsd-signature-type">BroadPhase</a>, narrowPhase<span class="tsd-signature-symbol">: </span><a href="narrowphase.html" class="tsd-signature-type">NarrowPhase</a>, bodies<span class="tsd-signature-symbol">: </span><a href="rigidbodyset.html" class="tsd-signature-type">RigidBodySet</a>, colliders<span class="tsd-signature-symbol">: </span><a href="colliderset.html" class="tsd-signature-type">ColliderSet</a>, joints<span class="tsd-signature-symbol">: </span><a href="jointset.html" class="tsd-signature-type">JointSet</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Uint8Array</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
@@ -290,6 +290,9 @@
 									<div class="tsd-comment tsd-typography">
 										<p>The integration parameters of the simulation.</p>
 									</div>
+								</li>
+								<li>
+									<h5>islands: <a href="islandmanager.html" class="tsd-signature-type">IslandManager</a></h5>
 								</li>
 								<li>
 									<h5>broadPhase: <a href="broadphase.html" class="tsd-signature-type">BroadPhase</a></h5>
@@ -348,6 +351,9 @@
 									<div class="tsd-comment tsd-typography">
 										<p>The integration parameters of the simulation.</p>
 									</div>
+								</li>
+								<li>
+									<h5>islands: <a href="islandmanager.html" class="tsd-signature-type">IslandManager</a></h5>
 								</li>
 								<li>
 									<h5>broadPhase: <a href="broadphase.html" class="tsd-signature-type">BroadPhase</a></h5>
@@ -437,6 +443,7 @@
 			</ul>
 			<ul class="tsd-legend">
 				<li class="tsd-kind-property tsd-parent-kind-interface"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-interface"><span class="tsd-kind-icon">Method</span></li>
 			</ul>
 			<ul class="tsd-legend">
 				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private property</span></li>

@@ -1,0 +1,388 @@
+---
+id: joints
+title: Joints
+sidebar_label: Joints
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+One of the most appealing features of a physics engine is to simulate articulations. Articulations, aka. _joints_, allow
+the restriction of the motion of one body relative to another body. For example, one well-known joint is the ball-in-socket
+joint also known as the ball joint: it allows one object to rotate freely with regard to the other but not to translate.
+This is typically used to simulate shoulders of a ragdoll.
+
+<bevy>
+
+:::warning
+The API for using Rapier joints with Bevy isn't very ergonomic right now because all joints must be stored inside
+of the `JointSet` resource (instead of being actual components). This will be improved in the future.
+:::
+
+</bevy>
+
+## Basic concepts
+
+Joints can be modeled in various ways but let's talk about the concept of **Degrees Of Freedom (DOF)** first. In 3D, a
+rigid-body is capable of translating along the 3 coordinates axes $\mathbf{x}$, $\mathbf{y}$ and $\mathbf{z}$, and to
+rotate along those three axes as well. Therefore, a rigid-body is said to have **3 translational DOF** and **3 rotational DOF**.
+We can also say a 3D rigid-body has a total of **6 DOF**. The 2D case is similar but with less possibilities of movements:
+a 2D rigid-body has 2 translational DOF and only 1 rotational DOF (which forms a total of 3 DOF). The number of **relative DOF**
+of a body wrt. another body is the number of possible relative translations and rotations.
+
+The goal of a joint is to reduce the number of DOF a body has. For example, the aforementioned ball joint removes all relative
+translations between two bodies. Therefore, it allows only the 3 rotational DOF in 3D simulations or the 1 rotational DOF
+in 2D simulations. Other joints exist allowing other combinations of relative DOF. Note that because there are less possible
+motions in 2D, some joints are only defined in 3D. This is illustrated by empty cells in the following table for joints
+that are not defined in 2D:
+
+| Joint           | Allowed DOF in 2D | Allowed DOF in 3D |
+|-----------------|-------------------|---------------|
+| _Fixed joint_       | None           | None
+| _Free joint_        | All            | All
+| _Prismatic joint_   | 1 Translation  | 1 Translation |
+| _Revolute joint_    | 1 Rotation     | 1 Rotation    |
+| _Ball joint_        | 1 Rotation     | 3 Rotations |
+| _Cartesian joint_   | 2 Translations | 3 Translations |
+| _Planar joint_      |                | 2 Translations + 1 Rotation |
+| _Cylindrical joint_ |                | 1 Translation + 1 Rotation (along the same axis) |
+| _Pin-slot joint_    |                | 1 Translation + 1 Rotation (along different axes) |
+| _Rectangular joint_ |                | 2 Translations |
+| _Universal joint_   |                | 2 Rotations |
+
+Currently, Rapier supports **fixed**, **ball**, **prismatic**, and **revolute** joints. Joints must be inserted into a
+`JointSet`. Each joint is attached to two distinct rigid-bodies identified by they rigid-body handles.
+
+## Fixed joint
+A fixed joint ensures that two rigid-bodies don't move relative to each other. Fixed joints are characterized by
+one **local frame** (represented by an isometry) on each rigid-body. The fixed-joint makes these frames
+coincide in world-space.
+
+:::info
+Attaching multiple colliders to a single rigid-body will have the same effect as using one rigid-body
+per collider and attaching them with a fixed joint. However the multi-collider approach will be much
+more efficient and numerically efficient than the joint approach. So a fixed-joint should only be used when the multi-collider
+doesn't fit your use-case (for example if you want to read the force applied by the joint in order to
+break it dynamically).
+:::
+
+<rapier>
+
+<Tabs
+groupId="dim"
+defaultValue="2D"
+values={[
+{label: 'Example 2D', value: '2D'},
+{label: 'Example 3D', value: '3D'},
+]}>
+<TabItem value="2D">
+
+```rust
+let joint = FixedJoint::new(Isometry::identity(), Isometry::translation(0.0, -2.0));
+joint_set.insert(&mut rigid_body_set, body_handle1, body_handle2, joint);
+```
+
+  </TabItem>
+  <TabItem value="3D">
+
+```rust
+let joint = FixedJoint::new(Isometry::identity(), Isometry::translation(0.0, 0.0, -2.0));
+joint_set.insert(&mut rigid_body_set, body_handle1, body_handle2, joint);
+```
+
+  </TabItem>
+</Tabs>
+
+</rapier>
+<bevy>
+
+<Tabs
+groupId="dim"
+defaultValue="2D"
+values={[
+{label: 'Example 2D', value: '2D'},
+{label: 'Example 3D', value: '3D'},
+]}>
+<TabItem value="2D">
+
+```rust
+let joint = FixedJoint::new(Isometry::identity(), Isometry::translation(0.0, -2.0));
+commands.spawn().insert(JointBuilderComponent::new(joint, entity1, entity2));
+```
+
+  </TabItem>
+  <TabItem value="3D">
+
+```rust
+let joint = FixedJoint::new(Isometry::identity(), Isometry::translation(0.0, 0.0, -2.0));
+commands.spawn().insert(JointBuilderComponent::new(joint, entity1, entity2));
+```
+
+  </TabItem>
+</Tabs>
+
+</bevy>
+
+
+## Ball joint
+The ball joint ensures that two points on the local-spaces of two rigid-bodies always coincide (it prevents any
+relative translational motion at this points). This is typically used to simulate ragdolls arms, pendulums, etc.
+They are characterized by one **local anchor** on each rigid-body. Each anchor represents the location
+of the points that need to coincide on the local-space of each rigid-body.
+
+<rapier>
+
+<Tabs
+groupId="dim"
+defaultValue="2D"
+values={[
+{label: 'Example 2D', value: '2D'},
+{label: 'Example 3D', value: '3D'},
+]}>
+<TabItem value="2D">
+
+```rust
+let joint = BallJoint::new(point![0.0, 0.0], point![0.0, -3.0]);
+joint_set.insert(&mut rigid_body_set, body_handle1, body_handle2, joint);
+```
+
+  </TabItem>
+  <TabItem value="3D">
+
+```rust
+let joint = BallJoint::new(point![0.0, 0.0, 1.0], point![0.0, 0.0, -3.0]);
+joint_set.insert(&mut rigid_body_set, body_handle1, body_handle2, joint);
+```
+
+  </TabItem>
+</Tabs>
+
+</rapier>
+<bevy>
+
+<Tabs
+groupId="dim"
+defaultValue="2D"
+values={[
+{label: 'Example 2D', value: '2D'},
+{label: 'Example 3D', value: '3D'},
+]}>
+<TabItem value="2D">
+
+```rust
+let joint = BallJoint::new(Vec2::ZERO.into(), Vec2::new(0.0, -3.0).into());
+commands.spawn().insert(JointBuilderComponent::new(joint, entity1, entity2));
+```
+
+  </TabItem>
+  <TabItem value="3D">
+
+```rust
+let joint = BallJoint::new(Vec3::new(0.0, 0.0, 1.0).into(), Vec3::new(0.0, 0.0, -3.0).into());
+commands.spawn().insert(JointBuilderComponent::new(joint, entity1, entity2));
+```
+
+  </TabItem>
+</Tabs>
+
+</bevy>
+
+
+## Revolute joint
+The revolute joint prevents any relative movement between two rigid-bodies, except for relative rotations
+along one axis. This is typically used to simulate wheels, fans, etc. They are characterized by one **local
+anchor** as well as one **local axis** on each rigid-body.
+
+<rapier>
+
+```rust
+let x = Vector::x_axis();
+let joint = RevoluteJoint::new(point![0.0, 0.0, 1.0], x, point![0.0, 0.0, -3.0], x);
+joint_set.insert(&mut rigid_body_set, body_handle1, body_handle2, joint);
+```
+
+</rapier>
+<bevy>
+
+```rust
+let x = Vector::x_axis();
+let joint = RevoluteJoint::new(Vec3::new(0.0, 0.0, 1.0).into(), x, Vec3::new(0.0, 0.0, -3.0).into(), x);
+commands.spawn().insert(JointBuilderComponent::new(joint, entity1, entity2));
+```
+
+</bevy>
+
+:::note
+In 2D, revolute joints are ball joints are the same thing. Therefore, there is no `RevoluteJoint` type in
+2D (use the `BallJoint` type instead).
+:::
+
+## Prismatic joint
+The prismatic joint prevents any relative movement between two rigid-bodies, except for relative translations
+along one axis. It is characterized by one **local anchor** as well as one **local axis** on each rigid-body.
+In 3D, an optional **local tangent axis** can be specified for each rigid-body. If a local tangent axis
+equal to zero is specified, it will be computed automatically. Setting this tangent axis lets you control the
+fixed relative orientation of the rigid-bodies.
+
+The prismatic joint supports the application of **joint limits**. This will restrict the relative distance between
+the rigid-body anchors (along the free joint axis) to remain in the specified range `PrismaticJoint::limits`.
+The signed distance is computed as `(anchor2 - anchor1).dot(axis1)`.
+
+<rapier>
+
+<Tabs
+groupId="dim"
+defaultValue="2D"
+values={[
+{label: 'Example 2D', value: '2D'},
+{label: 'Example 3D', value: '3D'},
+]}>
+<TabItem value="2D">
+
+```rust
+let x = Vector::x_axis();
+let mut joint = PrismaticJoint::new(point![0.0, 0.0], x, point![0.0, -3.0], x);
+joint.limits = [-2.0, 5.0];
+joint_set.insert(&mut rigid_body_set, body_handle1, body_handle2, joint);
+```
+
+  </TabItem>
+  <TabItem value="3D">
+
+```rust
+let x = Vector::x_axis();
+let z = Vector::z();
+let mut joint = PrismaticJoint::new(point![0.0, 0.0, 1.0], x, z, point![0.0, 0.0, -3.0], x, z);
+joint.limits = [-2.0, 5.0];
+joint_set.insert(&mut rigid_body_set, body_handle1, body_handle2, joint);
+```
+
+  </TabItem>
+</Tabs>
+
+</rapier>
+<bevy>
+
+<Tabs
+groupId="dim"
+defaultValue="2D"
+values={[
+{label: 'Example 2D', value: '2D'},
+{label: 'Example 3D', value: '3D'},
+]}>
+<TabItem value="2D">
+
+```rust
+let x = Vector::x_axis();
+let mut joint = PrismaticJoint::new(Vec2::ZERO.into(), x, Vec2::new(0.0, -3.0).into(), x);
+joint.limits = [-2.0, 5.0];
+commands.spawn().insert(JointBuilderComponent::new(joint, entity1, entity2));
+```
+
+  </TabItem>
+  <TabItem value="3D">
+
+```rust
+let x = Vector::x_axis();
+let z = Vector::z();
+let mut joint = PrismaticJoint::new(Vec3::new(0.0, 0.0, 1.0).into(), x, z, Vec3::new(0.0, 0.0, -3.0).into(), x, z);
+joint.limits = [-2.0, 5.0];
+commands.spawn().insert(JointBuilderComponent::new(joint, entity1, entity2));
+```
+
+  </TabItem>
+</Tabs>
+
+</bevy>
+
+## Joint motors
+Ball, revolute, and prismatic joints support **joint motors**.
+
+Motors allow you to make the linked rigid-bodies move relative to one another, along the free degrees of freedoms left
+by the joint, as if a motor was pushing them. The joint motor is simulated with a PD controller (Proportional Derivative controller) where you
+can set a target relative velocity along the free degrees of freedom as well as a target position. The `stiffness` of
+the PD controller controls the strength of the force that will be applied to make the bodies reach the target relative
+positions along the free DOFs. The `damping` of the PD controller controls the strength of the force that will be applied
+to make the bodies reach the target relative velocities along the free DOFs. All joints supporting motors have the
+following methods:
+- `configure_motor_position(target_pos, stiffness, damping)`: this tells the joint motor that we want the relative position
+  of the rigid-bodies along the free DOFs to be equal to `target_pos`, and that the relative velocity when it reaches
+  that position should be zero.
+- `configure_motor_velocity(target_vel, damping)`: this tells the joint motor that we want the relative relative velocity
+  of the rigid-bodies along the free DOFs to be equal to `target_vel`. There is no restriction on the relative position
+  along the free DOF.
+- `configure_motor(target_pos, target_vel, stiffness, damping)`: this lets you control all the parameters of the motor's
+  spring-like equation. This should be used only of the other configuration methods are not flexible enough.
+- `configure_motor_model(model)`: this selects the mathematical model for the motor's controller. All the available
+  models use a __spring-like__ equation. See the [API documentation of SpringModel](https://docs.rs/rapier3d/latest/rapier3d/dynamics/enum.SpringModel.html)
+  for details.
+  
+It is also possible to configure the maximum impulse applied by the motor: this limits the maximum force/torque the
+motor is able to deliver. The following examples show the configuration of the joint motor for a prismatic joint:
+
+<rapier>
+
+<Tabs
+groupId="dim"
+defaultValue="2D"
+values={[
+{label: 'Example 2D', value: '2D'},
+{label: 'Example 3D', value: '3D'},
+]}>
+<TabItem value="2D">
+
+```rust
+let x = Vector::x_axis();
+let mut joint = PrismaticJoint::new(point![0.0, 0.0], x, point![0.0, -3.0], x);
+joint.configure_motor_velocity(1.0, 0.5);
+joint_set.insert(&mut rigid_body_set, body_handle1, body_handle2, joint);
+```
+
+  </TabItem>
+  <TabItem value="3D">
+
+```rust
+let x = Vector::x_axis();
+let z = Vector::z();
+let mut joint = PrismaticJoint::new(point![0.0, 0.0, 1.0], x, z, point![0.0, 0.0, -3.0], x, z);
+joint.configure_motor_velocity(1.0, 0.5);
+joint_set.insert(&mut rigid_body_set, body_handle1, body_handle2, joint);
+```
+
+  </TabItem>
+</Tabs>
+
+</rapier>
+<bevy>
+
+<Tabs
+groupId="dim"
+defaultValue="2D"
+values={[
+{label: 'Example 2D', value: '2D'},
+{label: 'Example 3D', value: '3D'},
+]}>
+<TabItem value="2D">
+
+```rust
+let x = Vector::x_axis();
+let mut joint = PrismaticJoint::new(Vec2::ZERO.into(), x, Vec2::new(0.0, -3.0).into(), x);
+joint.configure_motor_velocity(1.0, 0.5);
+commands.spawn().insert(JointBuilderComponent::new(joint, entity1, entity2));
+```
+
+  </TabItem>
+  <TabItem value="3D">
+
+```rust
+let x = Vector::x_axis();
+let z = Vector::z();
+let mut joint = PrismaticJoint::new(Vec3::new(0.0, 0.0, 1.0).into(), x, z, Vec3::new(0.0, 0.0, -3.0).into(), x, z);
+joint.configure_motor_velocity(1.0, 0.5);
+commands.spawn().insert(JointBuilderComponent::new(joint, entity1, entity2));
+```
+
+  </TabItem>
+</Tabs>
+
+</bevy>

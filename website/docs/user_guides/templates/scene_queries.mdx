@@ -1,0 +1,722 @@
+---
+id: scene_queries
+title: Scene queries
+sidebar_label: Scene queries
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+Scene queries are geometric queries that take all the colliders of the physics world into account. These queries are
+available through the [QueryPipeline](simulation_structures#the-query-pipeline).
+
+<rapier>
+
+Keep in mind that scene queries will only work as expected if no collider moved since the last call to `QueryPipeline::update`:
+
+```rust
+// Update the query pipeline to take the latest collider positions into account.
+query_pipeline.update(&island_manager, &rigid_body_set, &collider_set);
+// Scene queries can now be executed accurately.
+```
+
+:::note
+Right now, the query pipeline takes the `IslandManager` and `RigidBodySet` as arguments. These two arguments
+may look superfluous, especially if the colliders are not attached to rigid-bodies. A new update method that takes
+a `ColliderSet` as its only argument will be added in the future.
+:::
+
+</rapier>
+
+## Ray-casting
+Ray-casting is a geometric query that finds one or several colliders intersecting a half-line. Ray-casting is an
+extremely common operation that covers a wide variety of use-cases: firing bullets, character controllers, 
+rendering (for ray-tracing), etc.
+
+A ray is defined by its origin and its direction: it can be interpreted as a single point moving in a straight
+line towards the ray direction.
+
+:::info
+In addition to the ray geometric information, ray-casting method allow additional control over the behavior of the
+ray cast like limiting the length of the ray and ignoring some colliders. See the detailed ray-cast arguments description
+after the next example.
+:::
+
+There are multiple ray-casting methods yielding more or less detailed results (see example bellow). The more results you
+get, the more computationally expensive the ray-cast will be.
+
+<rapier>
+
+<Tabs
+groupId="dim"
+defaultValue="2D"
+values={[
+{label: 'Example 2D', value: '2D'},
+{label: 'Example 3D', value: '3D'},
+]}>
+<TabItem value="2D">
+
+```rust
+let ray = Ray::new(point![1.0, 2.0], vector![0.0, 1.0]);
+let max_toi = 4.0;
+let solid = true;
+let groups = InteractionGroups::all();
+let filter = None;
+
+if let Some((handle, toi)) = query_pipeline.cast_ray(
+    &collider_set, &ray, max_toi, solid, groups, filter
+) {
+    // The first collider hit has the handle `handle` and it hit after
+    // the ray travelled a distance equal to `ray.dir * toi`.
+    let hit_point = ray.point_at(toi); // Same as: `ray.origin + ray.dir * toi`
+    println!("Collider {:?} hit at point {}", handle, hit_point);
+}
+
+
+if let Some((handle, intersection)) = query_pipeline.cast_ray_and_get_normal(
+    &collider_set, &ray, max_toi, solid, groups, filter
+) {
+    // This is similar to `QueryPipeline::cast_ray` illustrated above except
+    // that it also returns the normal of the collider shape at the hit point.
+    let hit_point = ray.point_at(intersection.toi);
+    let hit_normal = intersection.normal;
+    println!("Collider {:?} hit at point {} with normal {}", handle, hit_point, hit_normal);
+}
+
+query_pipeline.intersections_with_ray(
+    &collider_set, &ray, max_toi, solid, groups, filter,
+    |handle, intersection| {
+        // Callback called on each collider hit by the ray.
+        let hit_point = ray.point_at(intersection.toi);
+        let hit_normal = intersection.normal;
+        println!("Collider {:?} hit at point {} with normal {}", handle, hit_point, hit_normal);
+        true // Return `false` instead if we want to stop searching for other hits.
+    }
+);
+```
+
+  </TabItem>
+  <TabItem value="3D">
+
+```rust
+let ray = Ray::new(point![1.0, 2.0, 3.0], vector![0.0, 1.0, 0.0]);
+let max_toi = 4.0;
+let solid = true;
+let groups = InteractionGroups::all();
+let filter = None;
+
+if let Some((handle, toi)) = query_pipeline.cast_ray(
+    &collider_set, &ray, max_toi, solid, groups, filter
+) {
+    // The first collider hit has the handle `handle` and it hit after
+    // the ray travelled a distance equal to `ray.dir * toi`.
+    let hit_point = ray.point_at(toi); // Same as: `ray.origin + ray.dir * toi`
+    println!("Collider {:?} hit at point {}", handle, hit_point);
+}
+
+
+if let Some((handle, intersection)) = query_pipeline.cast_ray_and_get_normal(
+    &collider_set, &ray, max_toi, solid, groups, filter
+) {
+    // This is similar to `QueryPipeline::cast_ray` illustrated above except
+    // that it also returns the normal of the collider shape at the hit point.
+    let hit_point = ray.point_at(intersection.toi);
+    let hit_normal = intersection.normal;
+    println!("Collider {:?} hit at point {} with normal {}", handle, hit_point, hit_normal);
+}
+
+query_pipeline.intersections_with_ray(
+    &collider_set, &ray, max_toi, solid, groups, filter,
+    |handle, intersection| {
+        // Callback called on each collider hit by the ray.
+        let hit_point = ray.point_at(intersection.toi);
+        let hit_normal = intersection.normal;
+        println!("Collider {:?} hit at point {} with normal {}", handle, hit_point, hit_normal);
+        true // Return `false` instead if we want to stop searching for other hits.
+    }
+);
+```
+
+  </TabItem>
+</Tabs>
+
+</rapier>
+<bevy>
+
+<Tabs
+groupId="dim"
+defaultValue="2D"
+values={[
+{label: 'Example 2D', value: '2D'},
+{label: 'Example 3D', value: '3D'},
+]}>
+<TabItem value="2D">
+
+```rust
+/* Cast a ray inside of a system. */
+fn cast_ray(query_pipeline: Res<QueryPipeline>, collider_query: QueryPipelineColliderComponentsQuery) {
+    // Wrap the bevy query so it can be used by the query pipeline.
+    let collider_set = QueryPipelineColliderComponentsSet(&collider_query);
+    
+    let ray = Ray::new(Vec2::new(1.0, 2.0).into(), Vec2::new(0.0, 1.0).into());
+    let max_toi = 4.0;
+    let solid = true;
+    let groups = InteractionGroups::all();
+    let filter = None;
+
+    if let Some((handle, toi)) = query_pipeline.cast_ray(
+        &collider_set, &ray, max_toi, solid, groups, filter
+    ) {
+        // The first collider hit has the handle `handle` and it hit after
+        // the ray travelled a distance equal to `ray.dir * toi`.
+        let hit_point = ray.point_at(toi); // Same as: `ray.origin + ray.dir * toi`
+        println!("Entity {:?} hit at point {}", handle.entity(), hit_point);
+    }
+
+
+    if let Some((handle, intersection)) = query_pipeline.cast_ray_and_get_normal(
+        &collider_set, &ray, max_toi, solid, groups, filter
+    ) {
+        // This is similar to `QueryPipeline::cast_ray` illustrated above except
+        // that it also returns the normal of the collider shape at the hit point.
+        let hit_point = ray.point_at(intersection.toi);
+        let hit_normal = intersection.normal;
+        println!("Entity {:?} hit at point {} with normal {}", handle.entity(), hit_point, hit_normal);
+    }
+
+    query_pipeline.intersections_with_ray(
+        &collider_set, &ray, max_toi, solid, groups, filter,
+        |handle, intersection| {
+            // Callback called on each collider hit by the ray.
+            let hit_point = ray.point_at(intersection.toi);
+            let hit_normal = intersection.normal;
+            println!("Entity {:?} hit at point {} with normal {}", handle.entity(), hit_point, hit_normal);
+            true // Return `false` instead if we want to stop searching for other hits.
+        }
+    );
+}
+```
+
+  </TabItem>
+  <TabItem value="3D">
+
+```rust
+/* Cast a ray inside of a system. */
+fn cast_ray(query_pipeline: Res<QueryPipeline>, collider_query: QueryPipelineColliderComponentsQuery) {
+    // Wrap the bevy query so it can be used by the query pipeline.
+    let collider_set = QueryPipelineColliderComponentsSet(&collider_query);
+
+    let ray = Ray::new(Vec3::new(1.0, 2.0, 3.0).into(), Vec3::new(0.0, 1.0, 0.0).into());
+    let max_toi = 4.0;
+    let solid = true;
+    let groups = InteractionGroups::all();
+    let filter = None;
+
+    if let Some((handle, toi)) = query_pipeline.cast_ray(
+        &collider_set, &ray, max_toi, solid, groups, filter
+    ) {
+        // The first collider hit has the handle `handle` and it hit after
+        // the ray travelled a distance equal to `ray.dir * toi`.
+        let hit_point = ray.point_at(toi); // Same as: `ray.origin + ray.dir * toi`
+        println!("Entity {:?} hit at point {}", handle.entity(), hit_point);
+    }
+
+
+    if let Some((handle, intersection)) = query_pipeline.cast_ray_and_get_normal(
+        &collider_set, &ray, max_toi, solid, groups, filter
+    ) {
+        // This is similar to `QueryPipeline::cast_ray` illustrated above except
+        // that it also returns the normal of the collider shape at the hit point.
+        let hit_point = ray.point_at(intersection.toi);
+        let hit_normal = intersection.normal;
+        println!("Entity {:?} hit at point {} with normal {}", handle.entity(), hit_point, hit_normal);
+    }
+
+    query_pipeline.intersections_with_ray(
+        &collider_set, &ray, max_toi, solid, groups, filter,
+        |handle, intersection| {
+            // Callback called on each collider hit by the ray.
+            let hit_point = ray.point_at(intersection.toi);
+            let hit_normal = intersection.normal;
+            println!("Entity {:?} hit at point {} with normal {}", handle.entity(), hit_point, hit_normal);
+            true // Return `false` instead if we want to stop searching for other hits.
+        }
+    );
+}
+```
+
+  </TabItem>
+</Tabs>
+
+</bevy>
+
+Aside from the ray being cast, all these ray-casting methods take a few extra parameters for controlling the behavior
+of the ray-cast:
+- **`max_toi`**: is the maximum "time-of-impact" that can be reported by the ray-cast. The notion of "time-of-impact" refer
+             to the fact that a ray can be seen as a point starting at `ray.origin` moving at a linear velocity equal
+             to `ray.dir`. Therefore, `max_toi` limits the ray-cast to the segment: `[ray.origin, ray.origin + ray.dir * max_toi]`.
+- **`solid`**: this argument controls the behavior of the ray-cast if `ray.origin` is inside of a shape: if `solid` is `true`
+           then the hit point will be the ray origin itself (`toi = 0.0`) because the interior of the shape will be assumed
+           to be filled with material. If `solid` is `false` then the shape will be assumed to have an empty interior and
+           the hit point will be the first time the ray hits the shape's boundary. The following 2D example illustrates
+           the difference between the two scenarios. The ray is in green and the resulting hit point circled in red:
+
+<div style={{textAlign: 'center'}}>
+
+![solid ray-cast](/img/solid_ray_cast.svg)
+
+</div>
+
+- **`groups`**: just like colliders, the ray is given a [collision group](colliders#collision-groups-and-solver-groups).
+                The ray-cast will only test intersections with colliders with collision groups compatible with the ray's
+                collision group (using the bitwise test described in the
+                [collision groups section](colliders#collision-groups-and-solver-groups)).
+- **`filter`**: if collision groups are not flexible enough, a custom closure can be given optionally. The ray-cast
+                will only test intersection with colliders for which the `filter` closure returns `true`.
+
+## Shape-casting
+Shape-casting (aka. sweep tests) is the big brother of ray-casting. The only difference with ray-cast is that instead of being a point
+travelling along a straight line, we have a complete shape travelling along a straight line. This is typically used for
+character controllers in games to determine by how much the player can move before it hits the environment.
+
+:::info
+Just like ray-casting, it is possible to control the behavior of the shape-casting like limiting the distance
+travelled by the shape cast, and ignoring some colliders. See the details about the `max_toi`, `groups` and
+`filter` arguments in the [ray-casting](#ray-casting) section.
+:::
+
+There is only one shape-casting method: `QueryPipeline::cast_shape`. This method has similar arguments as
+`QueryPipeline::cast_ray` except that the `Ray` is replaced by three arguments:
+the **shape** being cast, the **initial position** of the shape (this is analog to `ray.origin`) and the **linear velocity** the
+shape is travelling at (this is analog to `ray.dir`):
+
+<rapier>
+
+<Tabs
+groupId="dim"
+defaultValue="2D"
+values={[
+{label: 'Example 2D', value: '2D'},
+{label: 'Example 3D', value: '3D'},
+]}>
+<TabItem value="2D">
+
+```rust
+let shape = Cuboid::new(vector![1.0, 2.0]);
+let shape_pos = Isometry::new(vector![0.0, 1.0], 0.8);
+let shape_vel = vector![0.1, 0.4];
+let max_toi = 4.0;
+let groups = InteractionGroups::all();
+let filter = None;
+
+if let Some((handle, hit)) = query_pipeline.cast_shape(
+    &collider_set, &shape_pos, &shape_vel, &shape, max_toi, groups, filter
+) {
+    // The first collider hit has the handle `handle`. The `hit` is a
+    // structure containing details about the hit configuration.
+    println!("Hit the collider {:?} with the configuration: {:?}", handle, hit);
+}
+```
+
+  </TabItem>
+  <TabItem value="3D">
+
+```rust
+let shape = Cuboid::new(vector![1.0, 2.0, 3.0]);
+let shape_pos = Isometry::new(vector![0.0, 1.0, 0.0], vector![0.2, 0.7, 0.1]);
+let shape_vel = vector![0.1, 0.4, 0.2];
+let max_toi = 4.0;
+let groups = InteractionGroups::all();
+let filter = None;
+
+if let Some((handle, hit)) = query_pipeline.cast_shape(
+    &collider_set, &shape_pos, &shape_vel, &shape, max_toi, groups, filter
+) {
+    // The first collider hit has the handle `handle`. The `hit` is a
+    // structure containing details about the hit configuration.
+    println!("Hit the collider {:?} with the configuration: {:?}", handle, hit);
+}
+```
+
+  </TabItem>
+</Tabs>
+
+</rapier>
+<bevy>
+
+<Tabs
+groupId="dim"
+defaultValue="2D"
+values={[
+{label: 'Example 2D', value: '2D'},
+{label: 'Example 3D', value: '3D'},
+]}>
+<TabItem value="2D">
+
+```rust
+/* Cast a shape inside of a system. */
+fn cast_shape(query_pipeline: Res<QueryPipeline>, collider_query: QueryPipelineColliderComponentsQuery) {
+    // Wrap the bevy query so it can be used by the query pipeline.
+    let collider_set = QueryPipelineColliderComponentsSet(&collider_query);
+
+    let shape = Cuboid::new(Vec2::new(1.0, 2.0).into());
+    let shape_pos = (Vec2::new(1.0, 2.0), 0.8).into();
+    let shape_vel = Vec2::new(0.1, 0.4).into();
+    let max_toi = 4.0;
+    let groups = InteractionGroups::all();
+    let filter = None;
+
+    if let Some((handle, hit)) = query_pipeline.cast_shape(
+        &collider_set, &shape_pos, &shape_vel, &shape, max_toi, groups, filter
+    ) {
+        // The first collider hit has the handle `handle`. The `hit` is a
+        // structure containing details about the hit configuration.
+        println!("Hit the entity {:?} with the configuration: {:?}", handle.entity(), hit);
+    }
+}
+```
+
+  </TabItem>
+  <TabItem value="3D">
+
+```rust
+/* Cast a shape inside of a system. */
+fn cast_shape(query_pipeline: Res<QueryPipeline>, collider_query: QueryPipelineColliderComponentsQuery) {
+    // Wrap the bevy query so it can be used by the query pipeline.
+    let collider_set = QueryPipelineColliderComponentsSet(&collider_query);
+
+    let shape = Cuboid::new(Vec3::new(1.0, 2.0, 3.0).into());
+    let shape_pos = (Vec3::new(0.0, 1.0, 0.0), Quat::from_rotation_x(0.4)).into();
+    let shape_vel = Vec3::new(0.1, 0.4, 0.2).into();
+    let max_toi = 4.0;
+    let groups = InteractionGroups::all();
+    let filter = None;
+
+    if let Some((handle, hit)) = query_pipeline.cast_shape(
+        &collider_set, &shape_pos, &shape_vel, &shape, max_toi, groups, filter
+    ) {
+        // The first collider hit has the handle `handle`. The `hit` is a
+        // structure containing details about the hit configuration.
+        println!("Hit the entity {:?} with the configuration: {:?}", handle.entity(), hit);
+    }
+}
+```
+
+  </TabItem>
+</Tabs>
+
+</bevy>
+
+The result of `QueryPipeline::cast_shape` includes the handle of the first collider being hit, as well as
+detailed information about the geometry of the hit:
+- **`hit.toi`**: indicates the time of impact between the shape and the collider hit. This means that
+  after travelling a distance of `shape_vel * hit.toi` the collider and the cast shape are exactly
+  touching. If `hit.toi == 0.0` then the shape is already intersecting a collider at its initial position.
+- **`hit.witness1`**: indicates the contact point when the cast shape and the collider are touching, expressed in the
+  local-space of the collider hit by the shape.
+- **`hit.witness2`**: indicates the contact point when the cast shape and the collider are touching, expressed in the
+  local-space of the cast shape.
+- **`hit.normal1`**: indicates the normal at the contact point `hit.witness1`, expressed in the local-space of
+  the collider hit by the shape.
+- **`hit.normal2`**: indicates the normal at the contact point `hit.witness2`, expressed in the local-space of
+  the cast shape.
+
+
+## Point projection
+Point projection will either project a point on the closest collider of the scene (`QueryPipeline::project_point`),
+or will enumerate every collider containing given point (`QueryPipeline::intersections_with_point`).
+
+<rapier>
+
+<Tabs
+groupId="dim"
+defaultValue="2D"
+values={[
+{label: 'Example 2D', value: '2D'},
+{label: 'Example 3D', value: '3D'},
+]}>
+<TabItem value="2D">
+
+```rust
+let point = point![1.0, 2.0];
+let solid = true;
+let groups = InteractionGroups::all();
+let filter = None;
+
+if let Some((handle, projection)) = query_pipeline.project_point(
+    &collider_set, &point, solid, groups, filter
+) {
+    // The collider closest to the point has this `handle`.
+    println!("Projected point on collider {:?}. Point projection: {}", handle, projection.point);
+    println!("Point was inside of the collider shape: {}", projection.is_inside);
+}
+
+query_pipeline.intersections_with_point(
+    &collider_set, &point, groups, filter, |handle| {
+        // Callback called on each collider with a shape containing the point.
+        println!("The collider {:?} contains the point.", handle);
+        // Return `false` instead if we want to stop searching for other colliders containing this point.
+        true
+    }
+);
+```
+
+  </TabItem>
+  <TabItem value="3D">
+
+```rust
+let point = point![1.0, 2.0, 3.0];
+let solid = true;
+let groups = InteractionGroups::all();
+let filter = None;
+
+if let Some((handle, projection)) = query_pipeline.project_point(
+    &collider_set, &point, solid, groups, filter
+) {
+    // The collider closest to the point has this `handle`.
+    println!("Projected point on collider {:?}. Point projection: {}", handle, projection.point);
+    println!("Point was inside of the collider shape: {}", projection.is_inside);
+}
+
+query_pipeline.intersections_with_point(
+    &collider_set, &point, groups, filter, |handle| {
+        // Callback called on each collider with a shape containing the point.
+        println!("The collider {:?} contains the point.", handle);
+        // Return `false` instead if we want to stop searching for other colliders containing this point.
+        true 
+    }
+);
+```
+
+  </TabItem>
+</Tabs>
+
+</rapier>
+<bevy>
+
+<Tabs
+groupId="dim"
+defaultValue="2D"
+values={[
+{label: 'Example 2D', value: '2D'},
+{label: 'Example 3D', value: '3D'},
+]}>
+<TabItem value="2D">
+
+```rust
+/* Project a point inside of a system. */
+fn project_point(query_pipeline: Res<QueryPipeline>, collider_query: QueryPipelineColliderComponentsQuery) {
+    // Wrap the bevy query so it can be used by the query pipeline.
+    let collider_set = QueryPipelineColliderComponentsSet(&collider_query);
+
+    let point = Vec2::new(1.0, 2.0).into();
+    let solid = true;
+    let groups = InteractionGroups::all();
+    let filter = None;
+
+    if let Some((handle, projection)) = query_pipeline.project_point(
+        &collider_set, &point, solid, groups, filter
+    ) {
+        // The collider closest to the point has this `handle`.
+        println!("Projected point on entity {:?}. Point projection: {}", handle.entity(), projection.point);
+        println!("Point was inside of the collider shape: {}", projection.is_inside);
+    }
+
+    query_pipeline.intersections_with_point(
+        &collider_set, &point, groups, filter, |handle| {
+            // Callback called on each collider with a shape containing the point.
+            println!("The entity {:?} contains the point.", handle.entity());
+            // Return `false` instead if we want to stop searching for other colliders containing this point.
+            true
+        }
+    );
+}
+```
+
+  </TabItem>
+  <TabItem value="3D">
+
+```rust
+/* Project a point inside of a system. */
+fn project_point(query_pipeline: Res<QueryPipeline>, collider_query: QueryPipelineColliderComponentsQuery) {
+    // Wrap the bevy query so it can be used by the query pipeline.
+    let collider_set = QueryPipelineColliderComponentsSet(&collider_query);
+
+    let point = Vec3::new(1.0, 2.0, 3.0).into();
+    let solid = true;
+    let groups = InteractionGroups::all();
+    let filter = None;
+
+    if let Some((handle, projection)) = query_pipeline.project_point(
+        &collider_set, &point, solid, groups, filter
+    ) {
+        // The collider closest to the point has this `handle`.
+        println!("Projected point on entity {:?}. Point projection: {}", handle.entity(), projection.point);
+        println!("Point was inside of the collider shape: {}", projection.is_inside);
+    }
+
+    query_pipeline.intersections_with_point(
+        &collider_set, &point, groups, filter, |handle| {
+            // Callback called on each collider with a shape containing the point.
+            println!("The entity {:?} contains the point.", handle.entity());
+            // Return `false` instead if we want to stop searching for other colliders containing this point.
+            true
+        }
+    );
+}
+```
+
+  </TabItem>
+</Tabs>
+
+</bevy>
+
+The `solid`, `group` and `filter` arguments are used to control the way point-projection works: by ignoring the shape
+interiors and/or ignoring some colliders. See their description on the [ray-casting](#ray-casting) section.
+
+## Intersection test
+Intersection tests will find all the colliders with a shape intersecting a given shape. This can be useful for, e.g.,
+selecting all the objects that intersect a given area. There are two kind of intersection tests:
+- The exact intersection test `QueryPipeline::intersections_with_shape` searches for all the colliders with shapes
+  intersecting the given shape.
+- The approximate intersection test `QueryPipeline::colliders_with_aabb_intersecting_aabb` searches for all the
+  colliders with an AABB intersecting the given AABB. This does not check if the actual shapes of these colliders
+  intersect the AABB.
+
+:::info
+See the [ray-casting](#ray-casting) section for details about intersection tests between a ray and the colliders on the scene.
+And see the [point projection](#point-projection) section for details about the intersection test between the colliders and
+a point.
+:::
+
+<rapier>
+
+<Tabs
+groupId="dim"
+defaultValue="2D"
+values={[
+{label: 'Example 2D', value: '2D'},
+{label: 'Example 3D', value: '3D'},
+]}>
+<TabItem value="2D">
+
+```rust
+let shape = Cuboid::new(vector![1.0, 2.0]);
+let shape_pos = Isometry::new(vector![0.0, 1.0], 0.8);
+let groups = InteractionGroups::all();
+let filter = None;
+
+query_pipeline.intersections_with_shape(
+    &collider_set, &shape_pos, &shape, groups, filter, |handle| {
+        println!("The collider {:?} intersects our shape.", handle);
+        true // Return `false` instead if we want to stop searching for other colliders that contain this point.
+    }
+);
+
+let aabb = AABB::new(point![-1.0, -2.0], point![1.0, 2.0]);
+query_pipeline.colliders_with_aabb_intersecting_aabb(&aabb, |handle| {
+    println!("The collider {:?} has an AABB intersecting our test AABB", handle);
+    true // Return `false` instead if we want to stop searching for other colliders that contain this point.
+});
+```
+
+  </TabItem>
+  <TabItem value="3D">
+
+```rust
+let shape = Cuboid::new(vector![1.0, 2.0, 3.0]);
+let shape_pos = Isometry::new(vector![0.0, 1.0, 0.0], vector![0.2, 0.7, 0.1]);
+let groups = InteractionGroups::all();
+let filter = None;
+
+query_pipeline.intersections_with_shape(
+    &collider_set, &shape_pos, &shape, groups, filter, |handle| {
+        println!("The collider {:?} intersects our shape.", handle);
+        true // Return `false` instead if we want to stop searching for other colliders that contain this point.
+    }
+);
+
+let aabb = AABB::new(point![-1.0, -2.0, -3.0], point![1.0, 2.0, 3.0]);
+query_pipeline.colliders_with_aabb_intersecting_aabb(&aabb, |handle| {
+    println!("The collider {:?} has an AABB intersecting our test AABB", handle);
+    true // Return `false` instead if we want to stop searching for other colliders that contain this point.
+});
+```
+
+  </TabItem>
+</Tabs>
+
+</rapier>
+<bevy>
+
+<Tabs
+groupId="dim"
+defaultValue="2D"
+values={[
+{label: 'Example 2D', value: '2D'},
+{label: 'Example 3D', value: '3D'},
+]}>
+<TabItem value="2D">
+
+```rust
+/* Test intersections inside of a system. */
+fn test_intersections(query_pipeline: Res<QueryPipeline>, collider_query: QueryPipelineColliderComponentsQuery) {
+    // Wrap the bevy query so it can be used by the query pipeline.
+    let collider_set = QueryPipelineColliderComponentsSet(&collider_query);
+
+    let shape = Cuboid::new(Vec2::new(1.0, 2.0).into());
+    let shape_pos = (Vec2::new(0.0, 1.0), 0.8).into();
+    let groups = InteractionGroups::all();
+    let filter = None;
+
+    query_pipeline.intersections_with_shape(
+        &collider_set, &shape_pos, &shape, groups, filter, |handle| {
+            println!("The entity {:?} intersects our shape.", handle.entity());
+            true // Return `false` instead if we want to stop searching for other colliders that contain this point.
+        }
+    );
+
+    let aabb = AABB::new(Vec2::new(-1.0, -2.0).into(), Vec2::new(1.0, 2.0).into());
+    query_pipeline.colliders_with_aabb_intersecting_aabb(&aabb, |handle| {
+        println!("The entity {:?} has an AABB intersecting our test AABB", handle.entity());
+        true // Return `false` instead if we want to stop searching for other colliders that contain this point.
+    });
+}
+```
+
+  </TabItem>
+  <TabItem value="3D">
+
+```rust
+/* Test intersections inside of a system. */
+fn test_intersections(query_pipeline: Res<QueryPipeline>, collider_query: QueryPipelineColliderComponentsQuery) {
+    // Wrap the bevy query so it can be used by the query pipeline.
+    let collider_set = QueryPipelineColliderComponentsSet(&collider_query);
+
+    let shape = Cuboid::new(Vec3::new(1.0, 2.0, 3.0).into());
+    let shape_pos = Isometry::new(Vec3::new(0.0, 1.0, 0.0).into(), Vec3::new(0.2, 0.7, 0.1).into());
+    let groups = InteractionGroups::all();
+    let filter = None;
+
+    query_pipeline.intersections_with_shape(
+        &collider_set, &shape_pos, &shape, groups, filter, |handle| {
+            println!("The entity {:?} intersects our shape.", handle.entity());
+            true // Return `false` instead if we want to stop searching for other colliders that contain this point.
+        }
+    );
+
+    let aabb = AABB::new(Vec3::new(-1.0, -2.0, -3.0).into(), Vec3::new(1.0, 2.0, 3.0).into());
+    query_pipeline.colliders_with_aabb_intersecting_aabb(&aabb, |handle| {
+        println!("The entity {:?} has an AABB intersecting our test AABB", handle.entity());
+        true // Return `false` instead if we want to stop searching for other colliders that contain this point.
+    });
+}
+```
+
+  </TabItem>
+</Tabs>
+
+</bevy>
+
+Use the `group` and `filter` arguments to exclude some colliders from these intersection tests.
+See their description on the [ray-casting](#ray-casting) section.

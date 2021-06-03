@@ -75,3 +75,55 @@ import('@dimforge/rapier3d').then(RAPIER => {
 
 See the `testbed3d/src/demos` and `testbed2d/src/demos` folders for examples on how to initialize a Rapier physics
 world using these bindings.
+
+## Using Rapier without a bundler
+
+If you are attempting to use Rapier without a bundler, or if you are using a bundler that doesn't support WASM
+files properly, the previous solution will be difficult to get working. The alternative is to use our compatibility
+UMD packages `@dimforge/rapier2d-compat` or `@dimforge/rapier3d-compat`. These packages embed the WASM file (encoded
+in base64) into the main `JS` file. This results in a slightly different initialization process:
+
+<Tabs
+  groupId="dim"
+  defaultValue="2D"
+  values={[
+    {label: 'Example 2D', value: '2D'},
+    {label: 'Example 3D', value: '3D'},
+  ]}>
+  <TabItem value="2D">
+
+```js
+import RAPIER from 'https://cdn.skypack.dev/@dimforge/rapier2d-compat';
+
+RAPIER.init().then(() => {
+    // Run the simulation.
+});
+
+// OR using the await syntax:
+async function run_simulation() {
+    await RAPIER.init();
+    // Run the simulation.
+}
+```
+
+  </TabItem>
+  <TabItem value="3D">
+
+```js
+import RAPIER from 'https://cdn.skypack.dev/@dimforge/rapier3d-compat';
+
+RAPIER.init().then(() => {
+    // Run the simulation.
+});
+
+// OR using the await syntax:
+async function run_simulation() {
+    await RAPIER.init();
+    // Run the simulation.
+}
+```
+
+  </TabItem>
+</Tabs>
+
+A complete example can be found [on codepen](https://codepen.io/sebcrozet/pen/poRQoKK).

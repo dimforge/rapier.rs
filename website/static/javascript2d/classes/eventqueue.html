@@ -121,12 +121,43 @@
 					<h3>constructor</h3>
 					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
 						<li class="tsd-signature tsd-kind-icon">new <wbr>Event<wbr>Queue<span class="tsd-signature-symbol">(</span>autoDrain<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span>, raw<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">RawEventQueue</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="eventqueue.html" class="tsd-signature-type">EventQueue</a></li>
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Event<wbr>Queue<span class="tsd-signature-symbol">(</span>autoDrain<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span>, raw<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">RawEventQueue</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="eventqueue.html" class="tsd-signature-type">EventQueue</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in pipeline/event_queue.d.ts:11</li>
+									<li>Defined in pipeline/event_queue.ts:21</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Creates a new event collector.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>autoDrain: <span class="tsd-signature-type">boolean</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<div class="lead">
+											<p>-setting this to <code>true</code> is strongly recommended. If true, the collector will
+												be automatically drained before each <code>world.step(collector)</code>. If false, the collector will
+												keep all events in memory unless it is manually drained/cleared; this may lead to unbounded use of
+											RAM if no drain is performed.</p>
+										</div>
+									</div>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> raw: <span class="tsd-signature-type">RawEventQueue</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="eventqueue.html" class="tsd-signature-type">EventQueue</a></h4>
+						</li>
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in pipeline/event_queue.d.ts:15</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -164,8 +195,8 @@
 					<div class="tsd-signature tsd-kind-icon">raw<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">RawEventQueue</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in pipeline/event_queue.d.ts:11</li>
-							<li>Defined in pipeline/event_queue.ts:13</li>
+							<li>Defined in pipeline/event_queue.ts:21</li>
+							<li>Defined in pipeline/event_queue.d.ts:15</li>
 						</ul>
 					</aside>
 				</section>
@@ -177,12 +208,26 @@
 					<h3>clear</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
 						<li class="tsd-signature tsd-kind-icon">clear<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+						<li class="tsd-signature tsd-kind-icon">clear<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in pipeline/event_queue.d.ts:48</li>
+									<li>Defined in pipeline/event_queue.ts:72</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Removes all events contained by this collector</p>
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in pipeline/event_queue.d.ts:52</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -198,13 +243,14 @@
 					<a name="draincontactevents" class="tsd-anchor"></a>
 					<h3>drain<wbr>Contact<wbr>Events</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">drain<wbr>Contact<wbr>Events<span class="tsd-signature-symbol">(</span>f<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>handle1<span class="tsd-signature-symbol">: </span><a href="../globals.html#colliderhandle" class="tsd-signature-type">ColliderHandle</a>, handle2<span class="tsd-signature-symbol">: </span><a href="../globals.html#colliderhandle" class="tsd-signature-type">ColliderHandle</a>, started<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+						<li class="tsd-signature tsd-kind-icon">drain<wbr>Contact<wbr>Events<span class="tsd-signature-symbol">(</span>f<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>handle1<span class="tsd-signature-symbol">: </span><a href="" class="tsd-signature-type">ColliderHandle</a>, handle2<span class="tsd-signature-symbol">: </span><a href="" class="tsd-signature-type">ColliderHandle</a>, started<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+						<li class="tsd-signature tsd-kind-icon">drain<wbr>Contact<wbr>Events<span class="tsd-signature-symbol">(</span>f<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>handle1<span class="tsd-signature-symbol">: </span><a href="" class="tsd-signature-type">ColliderHandle</a>, handle2<span class="tsd-signature-symbol">: </span><a href="" class="tsd-signature-type">ColliderHandle</a>, started<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in pipeline/event_queue.d.ts:34</li>
+									<li>Defined in pipeline/event_queue.ts:52</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -216,29 +262,77 @@
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>f: <span class="tsd-signature-symbol">(</span>handle1<span class="tsd-signature-symbol">: </span><a href="../globals.html#colliderhandle" class="tsd-signature-type">ColliderHandle</a>, handle2<span class="tsd-signature-symbol">: </span><a href="../globals.html#colliderhandle" class="tsd-signature-type">ColliderHandle</a>, started<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></h5>
+									<h5>f: <span class="tsd-signature-symbol">(</span>handle1<span class="tsd-signature-symbol">: </span><a href="" class="tsd-signature-type">ColliderHandle</a>, handle2<span class="tsd-signature-symbol">: </span><a href="" class="tsd-signature-type">ColliderHandle</a>, started<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></h5>
 									<div class="tsd-comment tsd-typography">
-										<div class="lead">
-											<p>JavaScript closure applied to each contact event. The
-												closure should take three arguments: two integers representing the handles of the colliders
-												involved in the contact, and a boolean indicating if the contact started (true) or stopped
-											(false).</p>
-										</div>
+										<p>JavaScript closure applied to each contact event. The
+											closure should take three arguments: two integers representing the handles of the colliders
+											involved in the contact, and a boolean indicating if the contact started (true) or stopped
+										(false).</p>
 									</div>
 									<ul class="tsd-parameters">
 										<li class="tsd-parameter-signature">
 											<ul class="tsd-signatures tsd-kind-type-literal">
-												<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>handle1<span class="tsd-signature-symbol">: </span><a href="../globals.html#colliderhandle" class="tsd-signature-type">ColliderHandle</a>, handle2<span class="tsd-signature-symbol">: </span><a href="../globals.html#colliderhandle" class="tsd-signature-type">ColliderHandle</a>, started<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+												<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>handle1<span class="tsd-signature-symbol">: </span><a href="" class="tsd-signature-type">ColliderHandle</a>, handle2<span class="tsd-signature-symbol">: </span><a href="" class="tsd-signature-type">ColliderHandle</a>, started<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 											</ul>
 											<ul class="tsd-descriptions">
 												<li class="tsd-description">
 													<h4 class="tsd-parameters-title">Parameters</h4>
 													<ul class="tsd-parameters">
 														<li>
-															<h5>handle1: <a href="../globals.html#colliderhandle" class="tsd-signature-type">ColliderHandle</a></h5>
+															<h5>handle1: <a href="" class="tsd-signature-type">ColliderHandle</a></h5>
 														</li>
 														<li>
-															<h5>handle2: <a href="../globals.html#colliderhandle" class="tsd-signature-type">ColliderHandle</a></h5>
+															<h5>handle2: <a href="" class="tsd-signature-type">ColliderHandle</a></h5>
+														</li>
+														<li>
+															<h5>started: <span class="tsd-signature-type">boolean</span></h5>
+														</li>
+													</ul>
+													<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+												</li>
+											</ul>
+										</li>
+									</ul>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in pipeline/event_queue.d.ts:38</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Applies the given javascript closure on each contact event of this collector, then clear
+									the internal contact event buffer.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>f: <span class="tsd-signature-symbol">(</span>handle1<span class="tsd-signature-symbol">: </span><a href="" class="tsd-signature-type">ColliderHandle</a>, handle2<span class="tsd-signature-symbol">: </span><a href="" class="tsd-signature-type">ColliderHandle</a>, started<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>JavaScript closure applied to each contact event. The
+											closure should take three arguments: two integers representing the handles of the colliders
+											involved in the contact, and a boolean indicating if the contact started (true) or stopped
+										(false).</p>
+									</div>
+									<ul class="tsd-parameters">
+										<li class="tsd-parameter-signature">
+											<ul class="tsd-signatures tsd-kind-type-literal">
+												<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>handle1<span class="tsd-signature-symbol">: </span><a href="" class="tsd-signature-type">ColliderHandle</a>, handle2<span class="tsd-signature-symbol">: </span><a href="" class="tsd-signature-type">ColliderHandle</a>, started<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+											</ul>
+											<ul class="tsd-descriptions">
+												<li class="tsd-description">
+													<h4 class="tsd-parameters-title">Parameters</h4>
+													<ul class="tsd-parameters">
+														<li>
+															<h5>handle1: <a href="" class="tsd-signature-type">ColliderHandle</a></h5>
+														</li>
+														<li>
+															<h5>handle2: <a href="" class="tsd-signature-type">ColliderHandle</a></h5>
 														</li>
 														<li>
 															<h5>started: <span class="tsd-signature-type">boolean</span></h5>
@@ -259,13 +353,14 @@
 					<a name="drainintersectionevents" class="tsd-anchor"></a>
 					<h3>drain<wbr>Intersection<wbr>Events</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">drain<wbr>Intersection<wbr>Events<span class="tsd-signature-symbol">(</span>f<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>handle1<span class="tsd-signature-symbol">: </span><a href="../globals.html#colliderhandle" class="tsd-signature-type">ColliderHandle</a>, handle2<span class="tsd-signature-symbol">: </span><a href="../globals.html#colliderhandle" class="tsd-signature-type">ColliderHandle</a>, intersecting<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+						<li class="tsd-signature tsd-kind-icon">drain<wbr>Intersection<wbr>Events<span class="tsd-signature-symbol">(</span>f<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>handle1<span class="tsd-signature-symbol">: </span><a href="" class="tsd-signature-type">ColliderHandle</a>, handle2<span class="tsd-signature-symbol">: </span><a href="" class="tsd-signature-type">ColliderHandle</a>, intersecting<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+						<li class="tsd-signature tsd-kind-icon">drain<wbr>Intersection<wbr>Events<span class="tsd-signature-symbol">(</span>f<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>handle1<span class="tsd-signature-symbol">: </span><a href="" class="tsd-signature-type">ColliderHandle</a>, handle2<span class="tsd-signature-symbol">: </span><a href="" class="tsd-signature-type">ColliderHandle</a>, intersecting<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in pipeline/event_queue.d.ts:44</li>
+									<li>Defined in pipeline/event_queue.ts:65</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -277,29 +372,77 @@
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>f: <span class="tsd-signature-symbol">(</span>handle1<span class="tsd-signature-symbol">: </span><a href="../globals.html#colliderhandle" class="tsd-signature-type">ColliderHandle</a>, handle2<span class="tsd-signature-symbol">: </span><a href="../globals.html#colliderhandle" class="tsd-signature-type">ColliderHandle</a>, intersecting<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></h5>
+									<h5>f: <span class="tsd-signature-symbol">(</span>handle1<span class="tsd-signature-symbol">: </span><a href="" class="tsd-signature-type">ColliderHandle</a>, handle2<span class="tsd-signature-symbol">: </span><a href="" class="tsd-signature-type">ColliderHandle</a>, intersecting<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></h5>
 									<div class="tsd-comment tsd-typography">
-										<div class="lead">
-											<p>JavaScript closure applied to each intersection event. The
-												closure should take four arguments: two integers representing the handles of the colliders
-												involved in the intersection, and a boolean indicating if they started intersecting (true) or
-											stopped intersecting (false).</p>
-										</div>
+										<p>JavaScript closure applied to each intersection event. The
+											closure should take four arguments: two integers representing the handles of the colliders
+											involved in the intersection, and a boolean indicating if they started intersecting (true) or
+										stopped intersecting (false).</p>
 									</div>
 									<ul class="tsd-parameters">
 										<li class="tsd-parameter-signature">
 											<ul class="tsd-signatures tsd-kind-type-literal">
-												<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>handle1<span class="tsd-signature-symbol">: </span><a href="../globals.html#colliderhandle" class="tsd-signature-type">ColliderHandle</a>, handle2<span class="tsd-signature-symbol">: </span><a href="../globals.html#colliderhandle" class="tsd-signature-type">ColliderHandle</a>, intersecting<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+												<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>handle1<span class="tsd-signature-symbol">: </span><a href="" class="tsd-signature-type">ColliderHandle</a>, handle2<span class="tsd-signature-symbol">: </span><a href="" class="tsd-signature-type">ColliderHandle</a>, intersecting<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 											</ul>
 											<ul class="tsd-descriptions">
 												<li class="tsd-description">
 													<h4 class="tsd-parameters-title">Parameters</h4>
 													<ul class="tsd-parameters">
 														<li>
-															<h5>handle1: <a href="../globals.html#colliderhandle" class="tsd-signature-type">ColliderHandle</a></h5>
+															<h5>handle1: <a href="" class="tsd-signature-type">ColliderHandle</a></h5>
 														</li>
 														<li>
-															<h5>handle2: <a href="../globals.html#colliderhandle" class="tsd-signature-type">ColliderHandle</a></h5>
+															<h5>handle2: <a href="" class="tsd-signature-type">ColliderHandle</a></h5>
+														</li>
+														<li>
+															<h5>intersecting: <span class="tsd-signature-type">boolean</span></h5>
+														</li>
+													</ul>
+													<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+												</li>
+											</ul>
+										</li>
+									</ul>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in pipeline/event_queue.d.ts:48</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Applies the given javascript closure on each intersection event of this collector, then clear
+									the internal intersection event buffer.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>f: <span class="tsd-signature-symbol">(</span>handle1<span class="tsd-signature-symbol">: </span><a href="" class="tsd-signature-type">ColliderHandle</a>, handle2<span class="tsd-signature-symbol">: </span><a href="" class="tsd-signature-type">ColliderHandle</a>, intersecting<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>JavaScript closure applied to each intersection event. The
+											closure should take four arguments: two integers representing the handles of the colliders
+											involved in the intersection, and a boolean indicating if they started intersecting (true) or
+										stopped intersecting (false).</p>
+									</div>
+									<ul class="tsd-parameters">
+										<li class="tsd-parameter-signature">
+											<ul class="tsd-signatures tsd-kind-type-literal">
+												<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>handle1<span class="tsd-signature-symbol">: </span><a href="" class="tsd-signature-type">ColliderHandle</a>, handle2<span class="tsd-signature-symbol">: </span><a href="" class="tsd-signature-type">ColliderHandle</a>, intersecting<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+											</ul>
+											<ul class="tsd-descriptions">
+												<li class="tsd-description">
+													<h4 class="tsd-parameters-title">Parameters</h4>
+													<ul class="tsd-parameters">
+														<li>
+															<h5>handle1: <a href="" class="tsd-signature-type">ColliderHandle</a></h5>
+														</li>
+														<li>
+															<h5>handle2: <a href="" class="tsd-signature-type">ColliderHandle</a></h5>
 														</li>
 														<li>
 															<h5>intersecting: <span class="tsd-signature-type">boolean</span></h5>
@@ -321,12 +464,26 @@
 					<h3>free</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
 						<li class="tsd-signature tsd-kind-icon">free<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+						<li class="tsd-signature tsd-kind-icon">free<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in pipeline/event_queue.d.ts:24</li>
+									<li>Defined in pipeline/event_queue.ts:38</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Release the WASM memory occupied by this event-queue.</p>
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in pipeline/event_queue.d.ts:28</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -394,6 +551,7 @@
 			</ul>
 			<ul class="tsd-legend">
 				<li class="tsd-kind-property tsd-parent-kind-interface"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-interface"><span class="tsd-kind-icon">Method</span></li>
 			</ul>
 			<ul class="tsd-legend">
 				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private property</span></li>
