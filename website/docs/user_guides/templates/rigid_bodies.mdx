@@ -169,11 +169,15 @@ values={[
 <TabItem value="2D">
 
 ```rust
+use bevy::prelude::*;
 use bevy_rapier2d::prelude::*;
 
 let rigid_body = RigidBodyBundle {
-    position: [0.0, 5.0].into(),
-    velocity: RigidBodyVelocity { linvel: [1.0, 2.0].into(), angvel: 0.2 },
+    position: Vec2::new(0.0, 5.0).into(),
+    velocity: RigidBodyVelocity { 
+        linvel: Vec2::new(1.0, 2.0).into(), 
+        angvel: 0.2 
+    },
     forces: RigidBodyForces { gravity_scale: 0.5, ..Default::default() },
     activation: RigidBodyActivation::cannot_sleep(),
     ccd: RigidBodyCcd { ccd_enabled: true, ..Default::default() },
@@ -187,11 +191,15 @@ commands.spawn_bundle(rigid_body);
   <TabItem value="3D">
 
 ```rust
+use bevy::prelude::*;
 use bevy_rapier3d::prelude::*;
 
 let rigid_body = RigidBodyBundle {
-    position: [0.0, 5.0, 3.0].into(),
-    velocity: RigidBodyVelocity { linvel: [1.0, 2.0, 3.0].into(), angvel: [0.2, 0.0, 0.0].into() },
+    position: Vec3::new(0.0, 5.0, 3.0).into(),
+    velocity: RigidBodyVelocity { 
+        linvel: Vec3::new(1.0, 2.0, 3.0).into(), 
+        angvel: Vec3::new(0.2, 0.0, 0.0).into() 
+    },
     forces: RigidBodyForces { gravity_scale: 0.5, ..Default::default() },
     activation: RigidBodyActivation::cannot_sleep(),
     ccd: RigidBodyCcd { ccd_enabled: true, ..Default::default() },
@@ -334,6 +342,7 @@ values={[
 ```rust
 /* Set the position when the rigid-body bundle is created. */
 let rigid_body = RigidBodyBundle {
+    // NOTE: pick one of the following.
     position: (Vec2::new(0.0, 5.0), 5.0).into(), // Translation and rotation.
     position: Vec2::new(0.0, 5.0).into(), // Translation only.
     ..Default::default()
@@ -1111,7 +1120,7 @@ fn modify_body_damping(mut dampings: Query<&mut RigidBodyDamping>) {
 
 ## Dominance
 Dominance is a non-realistic, but sometimes useful, feature. It can be used to make one rigid-body immune to forces
-originating from contacts with some other bodies. For example this can be used ot model a player represented as a
+originating from contacts with some other bodies. For example this can be used to model a player represented as a
 dynamic rigid-body that cannot be "pushed back" by any, or some, other dynamic rigid-bodies part of the environment.
 
 
