@@ -68,10 +68,14 @@
 						<section class="tsd-index-section ">
 							<h3>Enumerations</h3>
 							<ul class="tsd-index-list">
+								<li class="tsd-kind-enum"><a href="enums/activecollisiontypes.html" class="tsd-kind-icon">Active<wbr>Collision<wbr>Types</a></li>
+								<li class="tsd-kind-enum"><a href="enums/activeevents.html" class="tsd-kind-icon">Active<wbr>Events</a></li>
+								<li class="tsd-kind-enum"><a href="enums/activehooks.html" class="tsd-kind-icon">Active<wbr>Hooks</a></li>
 								<li class="tsd-kind-enum"><a href="enums/bodystatus.html" class="tsd-kind-icon">Body<wbr>Status</a></li>
 								<li class="tsd-kind-enum"><a href="enums/coefficientcombinerule.html" class="tsd-kind-icon">Coefficient<wbr>Combine<wbr>Rule</a></li>
 								<li class="tsd-kind-enum"><a href="enums/jointtype.html" class="tsd-kind-icon">Joint<wbr>Type</a></li>
 								<li class="tsd-kind-enum"><a href="enums/shapetype.html" class="tsd-kind-icon">Shape<wbr>Type</a></li>
+								<li class="tsd-kind-enum"><a href="enums/solverflags.html" class="tsd-kind-icon">Solver<wbr>Flags</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
@@ -91,6 +95,7 @@
 								<li class="tsd-kind-class"><a href="classes/eventqueue.html" class="tsd-kind-icon">Event<wbr>Queue</a></li>
 								<li class="tsd-kind-class"><a href="classes/heightfield.html" class="tsd-kind-icon">Heightfield</a></li>
 								<li class="tsd-kind-class"><a href="classes/integrationparameters.html" class="tsd-kind-icon">Integration<wbr>Parameters</a></li>
+								<li class="tsd-kind-class"><a href="classes/islandmanager.html" class="tsd-kind-icon">Island<wbr>Manager</a></li>
 								<li class="tsd-kind-class"><a href="classes/joint.html" class="tsd-kind-icon">Joint</a></li>
 								<li class="tsd-kind-class"><a href="classes/jointparams.html" class="tsd-kind-icon">Joint<wbr>Params</a></li>
 								<li class="tsd-kind-class"><a href="classes/jointset.html" class="tsd-kind-icon">Joint<wbr>Set</a></li>
@@ -115,6 +120,7 @@
 								<li class="tsd-kind-class"><a href="classes/segment.html" class="tsd-kind-icon">Segment</a></li>
 								<li class="tsd-kind-class"><a href="classes/serializationpipeline.html" class="tsd-kind-icon">Serialization<wbr>Pipeline</a></li>
 								<li class="tsd-kind-class"><a href="classes/shapecollidertoi.html" class="tsd-kind-icon">Shape<wbr>ColliderTOI</a></li>
+								<li class="tsd-kind-class"><a href="classes/tempcontactmanifold.html" class="tsd-kind-icon">Temp<wbr>Contact<wbr>Manifold</a></li>
 								<li class="tsd-kind-class"><a href="classes/trimesh.html" class="tsd-kind-icon">Tri<wbr>Mesh</a></li>
 								<li class="tsd-kind-class"><a href="classes/triangle.html" class="tsd-kind-icon">Triangle</a></li>
 								<li class="tsd-kind-class"><a href="classes/vector3.html" class="tsd-kind-icon">Vector3</a></li>
@@ -125,6 +131,7 @@
 						<section class="tsd-index-section ">
 							<h3>Interfaces</h3>
 							<ul class="tsd-index-list">
+								<li class="tsd-kind-interface"><a href="interfaces/physicshooks.html" class="tsd-kind-icon">Physics<wbr>Hooks</a></li>
 								<li class="tsd-kind-interface"><a href="interfaces/rotation.html" class="tsd-kind-icon">Rotation</a></li>
 								<li class="tsd-kind-interface"><a href="interfaces/vector.html" class="tsd-kind-icon">Vector</a></li>
 							</ul>
@@ -156,8 +163,8 @@
 					<div class="tsd-signature tsd-kind-icon">Collider<wbr>Handle<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in geometry/collider.ts:19</li>
-							<li>Defined in geometry/collider.d.ts:8</li>
+							<li>Defined in geometry/collider.ts:50</li>
+							<li>Defined in geometry/collider.d.ts:19</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -250,7 +257,7 @@
 					<div class="tsd-signature tsd-kind-icon">Shape<span class="tsd-signature-symbol">:</span> <a href="classes/ball.html" class="tsd-signature-type">Ball</a><span class="tsd-signature-symbol"> | </span><a href="classes/cuboid.html" class="tsd-signature-type">Cuboid</a><span class="tsd-signature-symbol"> | </span><a href="classes/capsule.html" class="tsd-signature-type">Capsule</a><span class="tsd-signature-symbol"> | </span><a href="classes/segment.html" class="tsd-signature-type">Segment</a><span class="tsd-signature-symbol"> | </span><a href="classes/triangle.html" class="tsd-signature-type">Triangle</a><span class="tsd-signature-symbol"> | </span><a href="classes/trimesh.html" class="tsd-signature-type">TriMesh</a><span class="tsd-signature-symbol"> | </span><a href="classes/heightfield.html" class="tsd-signature-type">Heightfield</a><span class="tsd-signature-symbol"> | </span><a href="classes/convexpolyhedron.html" class="tsd-signature-type">ConvexPolyhedron</a><span class="tsd-signature-symbol"> | </span><a href="classes/cylinder.html" class="tsd-signature-type">Cylinder</a><span class="tsd-signature-symbol"> | </span><a href="classes/cone.html" class="tsd-signature-type">Cone</a><span class="tsd-signature-symbol"> | </span><a href="classes/roundcuboid.html" class="tsd-signature-type">RoundCuboid</a><span class="tsd-signature-symbol"> | </span><a href="classes/roundcylinder.html" class="tsd-signature-type">RoundCylinder</a><span class="tsd-signature-symbol"> | </span><a href="classes/roundcone.html" class="tsd-signature-type">RoundCone</a><span class="tsd-signature-symbol"> | </span><a href="classes/roundconvexpolyhedron.html" class="tsd-signature-type">RoundConvexPolyhedron</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in geometry/shape.ts:11</li>
+							<li>Defined in geometry/shape.ts:9</li>
 							<li>Defined in geometry/shape.d.ts:6</li>
 						</ul>
 					</aside>
@@ -294,6 +301,15 @@
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
 					<li class=" tsd-kind-enum">
+						<a href="enums/activecollisiontypes.html" class="tsd-kind-icon">Active<wbr>Collision<wbr>Types</a>
+					</li>
+					<li class=" tsd-kind-enum">
+						<a href="enums/activeevents.html" class="tsd-kind-icon">Active<wbr>Events</a>
+					</li>
+					<li class=" tsd-kind-enum">
+						<a href="enums/activehooks.html" class="tsd-kind-icon">Active<wbr>Hooks</a>
+					</li>
+					<li class=" tsd-kind-enum">
 						<a href="enums/bodystatus.html" class="tsd-kind-icon">Body<wbr>Status</a>
 					</li>
 					<li class=" tsd-kind-enum">
@@ -304,6 +320,9 @@
 					</li>
 					<li class=" tsd-kind-enum">
 						<a href="enums/shapetype.html" class="tsd-kind-icon">Shape<wbr>Type</a>
+					</li>
+					<li class=" tsd-kind-enum">
+						<a href="enums/solverflags.html" class="tsd-kind-icon">Solver<wbr>Flags</a>
 					</li>
 					<li class=" tsd-kind-class">
 						<a href="classes/ball.html" class="tsd-kind-icon">Ball</a>
@@ -346,6 +365,9 @@
 					</li>
 					<li class=" tsd-kind-class">
 						<a href="classes/integrationparameters.html" class="tsd-kind-icon">Integration<wbr>Parameters</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/islandmanager.html" class="tsd-kind-icon">Island<wbr>Manager</a>
 					</li>
 					<li class=" tsd-kind-class">
 						<a href="classes/joint.html" class="tsd-kind-icon">Joint</a>
@@ -420,6 +442,9 @@
 						<a href="classes/shapecollidertoi.html" class="tsd-kind-icon">Shape<wbr>ColliderTOI</a>
 					</li>
 					<li class=" tsd-kind-class">
+						<a href="classes/tempcontactmanifold.html" class="tsd-kind-icon">Temp<wbr>Contact<wbr>Manifold</a>
+					</li>
+					<li class=" tsd-kind-class">
 						<a href="classes/trimesh.html" class="tsd-kind-icon">Tri<wbr>Mesh</a>
 					</li>
 					<li class=" tsd-kind-class">
@@ -433,6 +458,9 @@
 					</li>
 					<li class=" tsd-kind-class">
 						<a href="classes/world.html" class="tsd-kind-icon">World</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/physicshooks.html" class="tsd-kind-icon">Physics<wbr>Hooks</a>
 					</li>
 					<li class=" tsd-kind-interface">
 						<a href="interfaces/rotation.html" class="tsd-kind-icon">Rotation</a>
@@ -475,6 +503,7 @@
 			</ul>
 			<ul class="tsd-legend">
 				<li class="tsd-kind-property tsd-parent-kind-interface"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-interface"><span class="tsd-kind-icon">Method</span></li>
 			</ul>
 			<ul class="tsd-legend">
 				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private property</span></li>
