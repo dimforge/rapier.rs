@@ -1,0 +1,64 @@
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+There are two types of colliders:
+- <notjs>`ColliderType::Solid`: **solid colliders**</notjs><js>A **solid collider**</js> represents a geometric shape
+  that can have contact points with other colliders to generate contact forces to prevent objects from
+  penetrating-each-others.
+- <notjs>`ColliderType::Sensor`: **sensor colliders**</notjs><js>**Sensor colliders**</js> on the other end don't
+  generate contacts: they only generate intersection events when one sensor collider and another collider start/stop
+  touching. Sensor colliders are generally used to detect when something enters an area.
+
+By default a collider is a solid collider. This can be changed to a sensor when constructing the collider, or after its
+construction:
+
+<rapier>
+
+```rust
+/* Set the collider type when the collider is created. */
+let collider = ColliderBuilder::ball(0.5)
+  .sensor(true)
+  .build();
+```
+```rust
+/* Set the collider type after the collider creation. */
+let collider = collider_set.get_mut(collider_handle).unwrap();
+collider.set_sensor(true);
+assert!(collider.is_sensor());
+```
+
+</rapier>
+<bevy>
+
+```rust
+/* Set the collider type when the collider is created. */
+let collider = ColliderBundle {
+    collider_type: ColliderType::Sensor,
+    ..Default::default()
+};
+```
+```rust
+/* Change the collider type inside of a system. */
+fn modify_collider_type(mut collider_types: Query<&mut ColliderType>) {
+    for mut co_type in collider_types.iter_mut() {
+        *co_type = ColliderType::Sensor;
+    }
+}
+```
+
+</bevy>
+<js>
+
+```rust
+/* Set the collider type when the collider is created. */
+let colliderDesc = ColliderDesc.ball(0.5)
+  .setSensor(true);
+let collider = world.createCollider(colliderDesc);
+```
+```rust
+/* Set the collider type after the collider creation. */
+let collider = world.getCollider(colliderHandle);
+collider.setSensor(true);
+```
+
+</js>

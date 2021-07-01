@@ -1,0 +1,371 @@
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+
+The position of a collider represents its location (translation) in 2D or 3D world-space as well as its orientation (rotation).
+It translational part is represented as a vector and its rotational part as an unit quaternion (in 3D) or <js>an angle (in 2D).</js>
+<notjs>a unit complex number (in 2D). Both are combined into an isometry.</notjs>
+
+:::warning
+Please read carefully the paragraph after the next example. It explains how the collider position (and the action of setting
+this position) behaves differently when it is attached to a rigid-body.
+:::
+
+It is possible to set this position when the collider is created or after its creation:
+
+<rapier>
+
+<Tabs
+groupId="dim"
+defaultValue="2D"
+values={[
+{label: 'Example 2D', value: '2D'},
+{label: 'Example 3D', value: '3D'},
+]}>
+<TabItem value="2D">
+
+```rust
+/* Set the collider position when the collider is created. */
+let collider = ColliderBuilder::ball(0.5)
+    .translation(vector![1.0, 2.0])
+    .rotation(0.4)
+    // Set both translation and rotation at once.
+    .position(Isometry::new(vector![1.0, 2.0], 0.4))
+    .build();
+```
+```rust
+/* Set the collider position after the collider creation. */
+let collider = collider_set.get_mut(collider_handle).unwrap();
+collider.set_translation(vector![1.0, 2.0]);
+collider.set_rotation(0.4);
+// Set both the translation and rotation at once.
+collider.set_position(Isometry::new(vector![1.0, 2.0], 0.4));
+assert_eq!(*collider.translation(), vector![1.0, 2.0]);
+assert_eq!(collider.rotation().angle(), 0.4);
+```
+
+  </TabItem>
+  <TabItem value="3D">
+
+```rust
+/* Set the collider position when the collider is created. */
+let collider = ColliderBuilder::ball(0.5)
+    .translation(vector![1.0, 2.0, 3.0])
+    .rotation(vector![0.1, 0.2, 0.4])
+    // Set both translation and rotation at once.
+    .position(Isometry::new(vector![1.0, 2.0, 3.0], vector![0.1, 0.2, 0.4]))
+    .build();
+```
+```rust
+/* Set the collider position after the collider creation. */
+let collider = collider_set.get_mut(collider_handle).unwrap();
+collider.set_translation(vector![1.0, 2.0, 3.0]);
+collider.set_rotation(vector![0.1, 0.2, 0.4]);
+// Set both the translation and rotation at once.
+collider.set_position(Isometry::new(vector![1.0, 2.0, 3.0], vector![0.1, 0.2, 0.4]));
+assert_eq!(*collider.translation(), vector![1.0, 2.0, 3.0]);
+assert_eq!(collider.rotation().scaled_axis(), vector![0.1, 0.2, 0.4]);
+```
+
+  </TabItem>
+</Tabs>
+
+</rapier>
+<bevy>
+
+<Tabs
+groupId="dim"
+defaultValue="2D"
+values={[
+{label: 'Example 2D', value: '2D'},
+{label: 'Example 3D', value: '3D'},
+]}>
+<TabItem value="2D">
+
+```rust
+/* Set the collider position when the collider is created. */
+let collider = ColliderBundle {
+    // Translation only:
+    position: Vec2::new(1.0, 2.0).into(),
+    // Both translation and rotation:
+    position: (Vec2:.new(1.0, 2.0), 0.8).into(),
+    ..Default::default()
+};
+commands.spawn_bundle(collider);
+```
+```rust
+/* Set the collider position inside of a system. */
+fn modify_collider_position(mut positions: Query<&mut ColliderPosition>) {
+    for mut co_pos in positions.iter_mut() {
+        co_pos.0.translation = Vec2::new(1.0, 2.0).into();
+        co_pos.0.rotation = Rotation::new(0.4);
+        // Set both the translation and rotation at once.
+        co_pos.0 = (Vec2::new(1.0, 2.0), 0.4).into();
+        assert_eq!(co_pos.0.translation.vector, vector![1.0, 2.0]);
+        assert_eq!(co_pos.0.rotation.angle(), 0.4);
+    }
+}
+```
+
+  </TabItem>
+  <TabItem value="3D">
+
+```rust
+/* Set the collider position when the collider is created. */
+let collider = ColliderBundle {
+    // Translation only:
+    position: Vec3::new(1.0, 2.0, 3.0).into(),
+    // Both translation and rotation:
+    position: (Vec3::new(1.0, 2.0, 3.0), Quat::from_rotation_x(0.4)).into(),
+    ..Default::default()
+};
+commands.spawn_bundle(collider);
+```
+```rust
+/* Set the collider position inside of a system. */
+fn modify_collider_position(mut positions: Query<&mut ColliderPosition>) {
+    for mut co_pos in positions.iter_mut() {
+        co_pos.0.translation = Vec3::new(1.0, 2.0, 3.0).into();
+        co_pos.0.rotation = Quat::from_rotation_x(0.4).into();
+        // Set both the translation and rotation at once.
+        co_pos.0 = (Vec3::new(1.0, 2.0, 3.0), Quat::from_rotation_x(0.4)).into();
+        assert_eq!(co_pos.0.translation.vector, vector![1.0, 2.0, 3.0]);
+        assert_eq!(co_pos.0.rotation.scaled_axis(), vector![0.1, 0.2, 0.4]);
+    }
+}
+```
+
+  </TabItem>
+</Tabs>
+
+</bevy>
+<js>
+
+<Tabs
+groupId="dim"
+defaultValue="2D"
+values={[
+{label: 'Example 2D', value: '2D'},
+{label: 'Example 3D', value: '3D'},
+]}>
+<TabItem value="2D">
+
+```js
+/* Set the collider position when the collider is created. */
+let colliderDesc = ColliderDesc.ball(0.5)
+    .setTranslation(1.0, 2.0)
+    .setRotation(0.4);
+let collider = world.createCollider(colliderDesc);
+```
+```js
+/* Set the collider position after the collider creation. */
+let collider = world.getCollider(colliderHandle);
+collider.setTranslation({ x: 1.0, y: 2.0 });
+collider.setRotation(0.4);
+```
+
+  </TabItem>
+  <TabItem value="3D">
+
+```js
+/* Set the collider position when the collider is created. */
+let colliderDesc = ColliderDesc.ball(0.5)
+    .setTranslation(1.0, 2.0, 3.0)
+    .setRotation({ w: 1.0, x: 0.0, y: 0.0, z: 0.0 });
+let collider = world.createCollider(colliderDesc);
+```
+```js
+/* Set the collider position after the collider creation. */
+let collider = world.getCollider(colliderHandle);
+collider.setTranslation({ x: 1.0, y: 2.0, z: 3.0 });
+collider.setRotation({ w: 1.0, x: 0.0, y: 0.0, z: 0.0 });
+```
+
+  </TabItem>
+</Tabs>
+
+</js>
+
+
+If a collider is **attached to a rigid-body**, its position is automatically updated by the physics pipeline when a
+rigid-body moved by the physics pipeline. If a change to the rigid-body position is made by the user then the collider
+position will be updated during the next timestep.
+
+Therefore, directly setting the position of a collider attached to a rigid-body will have **no
+lasting effect**. Instead, it is possible to set the position of the collider **relative** to the rigid-body it is
+attached to:
+
+<rapier>
+
+<Tabs
+groupId="dim"
+defaultValue="2D"
+values={[
+{label: 'Example 2D', value: '2D'},
+{label: 'Example 3D', value: '3D'},
+]}>
+<TabItem value="2D">
+
+```rust
+let rigid_body = RigidBodyBuilder::new_dynamic().build();
+let rigid_body_handle = rigid_body_set.insert(rigid_body);
+let collider = ColliderBuilder::ball(0.5)
+    .translation(vector![1.0, 2.0])
+    .build();
+// Attach the collider to the rigid-body. The collider's position wrt. the rigid-body
+// is automatically set to the collider current position when this method is called.
+collider_set.insert_with_parent(collider, rigid_body_handle, &mut rigid_body_set);
+```
+```rust
+/* Set the collider position wrt. its parent after the collider creation. */
+let collider = collider_set.get_mut(collider_handle).unwrap();
+collider.set_position_wrt_parent(Isometry::translation(1.0, 2.0));
+assert_eq!(collider.position_wrt_parent().unwrap().translation.vector, vector![1.0, 2.0]);
+```
+
+  </TabItem>
+  <TabItem value="3D">
+
+```rust
+let rigid_body = RigidBodyBuilder::new_dynamic().build();
+let rigid_body_handle = rigid_body_set.insert(rigid_body);
+let collider = ColliderBuilder::ball(0.5)
+    .translation(vector![1.0, 2.0, 3.0])
+    .build();
+// Attach the collider to the rigid-body. The collider's position wrt. the rigid-body
+// is automatically set to the collider current position when this method is called.
+collider_set.insert_with_parent(collider, rigid_body_handle, &mut rigid_body_set);
+```
+```rust
+/* Set the collider position wrt. its parent after the collider creation. */
+let collider = collider_set.get_mut(collider_handle).unwrap();
+collider.set_position_wrt_parent(Isometry::translation(1.0, 2.0, 3.0));
+assert_eq!(collider.position_wrt_parent().unwrap().translation.vector, vector![1.0, 2.0, 3.0]);
+```
+
+  </TabItem>
+</Tabs>
+
+</rapier>
+<bevy>
+
+<Tabs
+groupId="dim"
+defaultValue="2D"
+values={[
+{label: 'Example 2D', value: '2D'},
+{label: 'Example 3D', value: '3D'},
+]}>
+<TabItem value="2D">
+
+```rust
+let rigid_body = RigidBodyBundle::default();
+let collider = ColliderBundle {
+    // Translation only:
+    position: Vec2::new(1.0, 2.0).into(),
+    // Both translation and rotation:
+    position: (Vec2::new(1.0, 2.0), 0.8).into(),
+    ..Default::default()
+};
+
+// Attach the collider to the rigid-body. The collider's position wrt. the rigid-body
+// is automatically set to the collider current position when this method is called.
+commands.spawn_bundle(rigid_body)
+        .insert_bundle(collider);
+```
+```rust
+fn modify_collider_position_wrt_parent(mut collider_parents: Query<&mut ColliderParent>) {
+    for mut co_parent in collider_parents.iter_mut() {
+        co_parent.pos_wrt_parent.translation = Vec2::new(1.0, 2.0).into();
+        co_parent.pos_wrt_parent.rotation = Rotation::new(0.4);
+        // Set both the translation and rotation at once.
+        co_parent.pos_wrt_parent = (Vec2::new(1.0, 2.0), 0.4).into();
+        assert_eq!(co_parent.pos_wrt_parent.translation.vector, vector![1.0, 2.0]);
+        assert_eq!(co_parent.pos_wrt_parent.rotation.angle(), 0.4);
+    }
+}
+```
+
+  </TabItem>
+  <TabItem value="3D">
+
+```rust
+let rigid_body = RigidBodyBundle::default();
+let collider = ColliderBundle {
+    // Translation only:
+    position: Vec3::new(1.0, 2.0, 3.0).into(),
+    // Both translation and rotation:
+    position: (Vec3::new(1.0, 2.0, 3.0), Quat::from_rotation_x(0.4)).into(),
+    ..Default::default()
+};
+
+// Attach the collider to the rigid-body. The collider's position wrt. the rigid-body
+// is automatically set to the collider current position when this method is called.
+commands.spawn_bundle(rigid_body)
+        .insert_bundle(collider);
+```
+```rust
+fn modify_collider_position_wrt_parent(mut collider_parents: Query<&mut ColliderParent>) {
+    for mut co_parent in collider_parents.iter_mut() {
+        co_parent.pos_wrt_parent.translation = Vec3::new(1.0, 2.0, 3.0).into();
+        co_parent.pos_wrt_parent.rotation = Quat::from_rotation_x(0.4).into();
+        // Set both the translation and rotation at once.
+        co_parent.pos_wrt_parent = (Vec3::new(1.0, 2.0, 3.0), Quat::from_rotation_x(0.4)).into();
+        assert_eq!(co_parent.pos_wrt_parent.translation.vector, vector![1.0, 2.0, 3.0]);
+        assert_eq!(co_parent.pos_wrt_parent.rotation.scaled_axis(), vector![0.4, 0.0, 0.0]);
+    }
+}
+```
+
+  </TabItem>
+</Tabs>
+
+</bevy>
+<js>
+
+<Tabs
+groupId="dim"
+defaultValue="2D"
+values={[
+{label: 'Example 2D', value: '2D'},
+{label: 'Example 3D', value: '3D'},
+]}>
+<TabItem value="2D">
+
+```js
+let rigidBodyDesc = RigidBodyDesc.newDynamic();
+let rigidBody = world.createRigidBody(rigidBodyDesc);
+let colliderDesc = ColliderDesc.ball(0.5)
+    .setTranslation(1.0, 2.0);
+// Attach the collider to the rigid-body. The collider's position wrt. the rigid-body
+// is automatically set to the collider current position when this method is called.
+let collider = world.createCollider(colliderDesc, rigidBody.handle);
+```
+```js
+/* Set the collider position wrt. its parent after the collider creation. */
+let collider = world.getCollider(colliderHandle);
+collider.setTranslationWrtParent({ x: 1.0, y: 2.0 });
+```
+
+  </TabItem>
+  <TabItem value="3D">
+
+```js
+let rigidBodyDesc = RigidBodyDesc.newDynamic();
+let rigidBody = world.createRigidBody(rigidBodyDesc);
+let colliderDesc = ColliderDesc.ball(0.5)
+    .setTranslation(1.0, 2.0, 3.0);
+// Attach the collider to the rigid-body. The collider's position wrt. the rigid-body
+// is automatically set to the collider current position when this method is called.
+let collider = world.createCollider(colliderDesc, rigidBody.handle);
+```
+```js
+/* Set the collider position wrt. its parent after the collider creation. */
+let collider = world.getCollider(colliderHandle);
+collider.setTranslationWrtParent({ x: 1.0, y: 2.0, z: 3.0 });
+```
+
+  </TabItem>
+</Tabs>
+
+</js>

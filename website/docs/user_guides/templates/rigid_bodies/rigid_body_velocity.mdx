@@ -1,0 +1,201 @@
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+The velocity of a dynamic rigid-body controls how fast it is moving in time. The velocity is applied at the **center-of-mass**
+of the rigid-body, and is composed of two independent parts:
+1. The **linear velocity** is specified as a vector representing the direction an magnitude of the movement.
+2. In 3D, the **angular velocity** is given as a vector representing the rotation
+   axis multiplied by the the rotation angular speed in `rad/s` (axis-angle representation). In 2D, the **angular velocity** is
+   given as a real representing the angular speed in `rad/s`.
+
+:::info
+The velocity is only relevant to **dynamic** rigid-bodies. It has not effect on static rigid-bodies and the
+velocity of kinematic rigid-bodies are automatically computed at each timestep based on their next kinematic
+positions.
+:::
+
+The velocity of a rigid-body is automatically updated by the physics pipeline after taking forces, contacts,
+and joints into account. It can be set when the rigid-body is created or after its creation:
+
+<rapier>
+
+<Tabs
+groupId="dim"
+defaultValue="2D"
+values={[
+{label: 'Example 2D', value: '2D'},
+{label: 'Example 3D', value: '3D'},
+]}>
+<TabItem value="2D">
+
+```rust
+/* Set the velocities when the rigid-body is created. */
+let rigid_body = RigidBodyBuilder::new_dynamic()
+    // The linear velocity of this body.
+    // Default: zero velocity.
+    .linvel(vector![1.0, 3.0])
+    // The angular velocity of this body.
+    // Default: zero velocity.
+    .angvel(3.0)
+    // All done, actually build the rigid-body.
+    .build();
+```
+```rust
+/* Set the velocities after the rigid-body creation. */
+let rigid_body = rigid_body_set.get_mut(rigid_body_handle).unwrap();
+// The `true` argument makes sure the rigid-body is awake.
+rigid_body.set_linvel(vector![1.0, 3.0], true);
+rigid_body.set_angvel(3.0, true);
+assert_eq!(*rigid_body.linvel(), vector![1.0, 3.0]);
+assert_eq!(rigid_body.angvel(), 3.0);
+```
+
+  </TabItem>
+  <TabItem value="3D">
+
+```rust
+/* Set the velocities when the rigid-body is created. */
+let rigid_body = RigidBodyBuilder::new_dynamic()
+    // The linear velocity of this body.
+    // Default: zero velocity.
+    .linvel(vector![1.0, 3.0, 4.0])
+    // The angular velocity of this body.
+    // Default: zero velocity.
+    .angvel(vector![3.0, 0.0, 0.0])
+    // All done, actually build the rigid-body.
+    .build();
+```
+```rust
+/* Set the velocities after the rigid-body creation. */
+let rigid_body = rigid_body_set.get_mut(rigid_body_handle).unwrap();
+// The `true` argument makes sure the rigid-body is awake.
+rigid_body.set_linvel(vector![1.0, 3.0, 4.0], true);
+rigid_body.set_angvel(vector![3.0, 0.0, 0.0], true);
+assert_eq!(*rigid_body.linvel(), vector![1.0, 3.0, 4.0]);
+assert_eq!(*rigid_body.angvel(), vector![3.0, 0.0, 0.0]);
+```
+
+  </TabItem>
+</Tabs>
+
+</rapier>
+
+<bevy>
+
+<Tabs
+groupId="dim"
+defaultValue="2D"
+values={[
+{label: 'Example 2D', value: '2D'},
+{label: 'Example 3D', value: '3D'},
+]}>
+<TabItem value="2D">
+
+```rust
+/* Set the velocities when the rigid-body is created. */
+let rigid_body = RigidBodyBundle {
+    velocity: RigidBodyVelocity {
+        linvel: Vec2::new(1.0, 2.0).into(),
+        angvel: 0.4
+    },
+    ..Default::default()
+};
+commands.spawn_bundle(rigid_body);
+```
+```rust
+/* Set the velocities inside of a system. */
+fn modify_body_velocity(mut velocities: Query<&mut RigidBodyVelocity>) {
+    for mut rb_vel in velocities.iter_mut() {
+        rb_vel.linvel = Vec2::new(1.0, 2.0).into();
+        rb_vel.angvel = 0.4;
+    }
+}
+```
+
+  </TabItem>
+  <TabItem value="3D">
+
+```rust
+/* Set the velocities when the rigid-body is created. */
+let rigid_body = RigidBodyBundle {
+    velocity: RigidBodyVelocity { 
+        linvel: Vec3::new(1.0, 2.0, 3.0).into(),
+        angvel: Vec3::new(0.2, 0.4, 0.8).into()
+    },
+    ..Default::default()
+};
+commands.spawn_bundle(rigid_body);
+```
+```rust
+/* Set the velocities inside of a system. */
+fn modify_body_velocity(mut velocities: Query<&mut RigidBodyVelocity>) {
+    for mut rb_vel in velocities.iter_mut() {
+        rb_vel.linvel = Vec3::new(1.0, 2.0, 3.0).into();
+        rb_vel.angvel = Vec3::new(0.2, 0.4, 0.8).into();
+    }
+}
+```
+
+  </TabItem>
+</Tabs>
+
+</bevy>
+<js>
+
+<Tabs
+groupId="dim"
+defaultValue="2D"
+values={[
+{label: 'Example 2D', value: '2D'},
+{label: 'Example 3D', value: '3D'},
+]}>
+<TabItem value="2D">
+
+```js
+/* Set the velocities when the rigid-body is created. */
+let rigidBodyDesc = RigidBodyDesc.newDynamic()
+    // The linear velocity of this body.
+    // Default: zero velocity.
+    .setLinvel(1.0, 3.0)
+    // The angular velocity of this body.
+    // Default: zero velocity.
+    .setAngvel(3.0);
+let rigidBody = world.createRigidBody(rigidBodyDesc);
+```
+```js
+/* Set the velocities after the rigid-body creation. */
+let rigidBody = world.getRigidBody(rigidBodyHandle);
+// The `true` argument makes sure the rigid-body is awake.
+rigidBody.setLinvel({ x: 1.0, y: 3.0 }, true);
+rigidBody.setAngvel(3.0, true);
+```
+
+  </TabItem>
+  <TabItem value="3D">
+
+```js
+/* Set the velocities when the rigid-body is created. */
+let rigidBodyDesc = RigidBodyDesc.newDynamic()
+    // The linear velocity of this body.
+    // Default: zero velocity.
+    .setLinvel(1.0, 3.0, 4.0)
+    // The angular velocity of this body.
+    // Default: zero velocity.
+    .setAngvel(3.0, 0.0, 0.0);
+let rigidBody = world.createRigidBody(rigidBodyDesc);
+```
+```js
+/* Set the velocities after the rigid-body creation. */
+let rigidBody = world.getRigidBody(rigidBodyHandle);
+// The `true` argument makes sure the rigid-body is awake.
+rigidBody.setLinvel({ x: 1.0, y: 3.0, z: 4.0 }, true);
+rigidBody.setAngvel({ x: 3.0, y: 0.0, z: 0.0 }, true);
+```
+
+  </TabItem>
+</Tabs>
+
+</js>
+
+Alternatively, the velocity of a dynamic rigid-body can be altered indirectly by
+[applying a force or an impulse](#forces-and-impulses).

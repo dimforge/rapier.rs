@@ -1,0 +1,322 @@
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+<rapier>
+
+A rigid-body is created by a `RigidBodyBuilder` structure that is based on the builder pattern. Then it needs
+to be inserted into the `RigidBodySet` that will be processed by the physics-pipeline or query-pipeline.
+
+:::info
+The following example shows several setters that can be called to customize the
+rigid-body being built. The input values are just random so using this example
+as-is will not lead to a useful result.
+:::
+
+<Tabs
+groupId="dim"
+defaultValue="2D"
+values={[
+{label: 'Example 2D', value: '2D'},
+{label: 'Example 3D', value: '3D'},
+]}>
+<TabItem value="2D">
+
+```rust
+use rapier2d::prelude::*;
+
+// The set that will contain our rigid-bodies.
+let mut rigid_body_set = RigidBodySet::new();
+
+// Builder for a static rigid-body.
+let _ = RigidBodyBuilder::new_static();
+// Builder for a dynamic rigid-body.
+let _ = RigidBodyBuilder::new_dynamic();
+// Builder for a kinematic rigid-body controlled at the velocity level.
+let _ = RigidBodyBuilder::new_kinematic_velocity_based();
+// Builder for a kinematic rigid-body controlled at the position level.
+let _ = RigidBodyBuilder::new_kinematic_position_based();
+// Builder for a body with a status specified by an enum.
+let rigid_body = RigidBodyBuilder::new(RigidBodyType::Dynamic)
+    // The rigid body translation.
+    // Default: zero vector.
+    .translation(vector![0.0, 5.0])
+    // The rigid body rotation.
+    // Default: no rotation.
+    .rotation(5.0)
+    // The rigid body position. Will override `.translation(...)` and `.rotation(...)`.
+    // Default: the identity isometry.
+    .position(Isometry::new(vector![1.0, 2.0], 0.4))
+    // The linear velocity of this body.
+    // Default: zero velocity.
+    .linvel(vector![1.0, 2.0])
+    // The angular velocity of this body.
+    // Default: zero velocity.
+    .angvel(2.0)
+    // The scaling factor applied to the gravity affecting the rigid-body.
+    // Default: 1.0
+    .gravity_scale(0.5)
+    // Whether or not this body can sleep.
+    // Default: true
+    .can_sleep(true)
+    // Whether or not CCD is enabled for this rigid-body.
+    // Default: false
+    .ccd_enabled(false)
+    // All done, actually build the rigid-body.
+    .build();
+
+// Insert the rigid-body into the set.
+let handle = rigid_body_set.insert(rigid_body);
+```
+
+  </TabItem>
+  <TabItem value="3D">
+
+```rust
+use rapier3d::prelude::*;
+
+// The set that will contain our rigid-bodies.
+let mut rigid_body_set = RigidBodySet::new();
+
+// Builder for a static rigid-body.
+let _ = RigidBodyBuilder::new_static();
+// Builder for a dynamic rigid-body.
+let _ = RigidBodyBuilder::new_dynamic();
+// Builder for a kinematic rigid-body controlled at the velocity level.
+let _ = RigidBodyBuilder::new_kinematic_velocity_based();
+// Builder for a kinematic rigid-body controlled at the position level.
+let _ = RigidBodyBuilder::new_kinematic_position_based();
+// Builder for a body with a status specified by an enum.
+let rigid_body = RigidBodyBuilder::new(RigidBodyType::Dynamic)
+    // The rigid body translation.
+    // Default: zero vector.
+    .translation(vector![0.0, 5.0, 1.0])
+    // The rigid body rotation.
+    // Default: no rotation.
+    .rotation(vector![0.0, 0.0, 5.0])
+    // The rigid body position. Will override `.translation(...)` and `.rotation(...)`.
+    // Default: the identity isometry.
+    .position(Isometry::new(vector![1.0, 3.0, 2.0], vector![0.0, 0.0, 0.4]))
+    // The linear velocity of this body.
+    // Default: zero velocity.
+    .linvel(vector![1.0, 3.0, 4.0])
+    // The angular velocity of this body.
+    // Default: zero velocity.
+    .angvel(vector![3.0, 0.0, 1.0])
+    // The scaling factor applied to the gravity affecting the rigid-body.
+    // Default: 1.0
+    .gravity_scale(0.5)
+    // Whether or not this body can sleep.
+    // Default: true
+    .can_sleep(true)
+    // Whether or not CCD is enabled for this rigid-body.
+    // Default: false
+    .ccd_enabled(false)
+    // All done, actually build the rigid-body.
+    .build();
+
+// Insert the rigid-body into the set.
+let handle = rigid_body_set.insert(rigid_body);
+```
+
+  </TabItem>
+</Tabs>
+
+
+All the properties are optional. The only calls that are required are `RigidBodyBuilder::new(status)`,
+`RigidBodyBuilder::new_static()`, `RigidBodyBuilder::new_dynamic()`, `RigidBodyBuilder::new_kinematic_velocity_based()`,
+or  , to
+initialize the builder, and `.build()` to actually build the rigid-body.
+
+</rapier>
+
+<bevy>
+
+A rigid-body is created by adding all the components part of the `RigidBodyBundle` bundle.
+It is important for all the components in the bundle to be added at the same time. To remove
+the rigid-body, the complete bundle must be removed simultaneously too. Adding/removing only
+some of these components may end up in a panic.
+
+:::info
+The following example shows several initialization of components to customize
+rigid-body being built. The input values are just random so using this example
+as-is will not lead to a useful result.
+:::
+
+<Tabs
+groupId="dim"
+defaultValue="2D"
+values={[
+{label: 'Example 2D', value: '2D'},
+{label: 'Example 3D', value: '3D'},
+]}>
+<TabItem value="2D">
+
+```rust
+use bevy::prelude::*;
+use bevy_rapier2d::prelude::*;
+
+let rigid_body = RigidBodyBundle {
+    position: Vec2::new(0.0, 5.0).into(),
+    velocity: RigidBodyVelocity { 
+        linvel: Vec2::new(1.0, 2.0).into(), 
+        angvel: 0.2 
+    },
+    forces: RigidBodyForces { gravity_scale: 0.5, ..Default::default() },
+    activation: RigidBodyActivation::cannot_sleep(),
+    ccd: RigidBodyCcd { ccd_enabled: true, ..Default::default() },
+    ..Default::default()
+};
+
+commands.spawn_bundle(rigid_body);
+```
+
+  </TabItem>
+  <TabItem value="3D">
+
+```rust
+use bevy::prelude::*;
+use bevy_rapier3d::prelude::*;
+
+let rigid_body = RigidBodyBundle {
+    position: Vec3::new(0.0, 5.0, 3.0).into(),
+    velocity: RigidBodyVelocity { 
+        linvel: Vec3::new(1.0, 2.0, 3.0).into(), 
+        angvel: Vec3::new(0.2, 0.0, 0.0).into() 
+    },
+    forces: RigidBodyForces { gravity_scale: 0.5, ..Default::default() },
+    activation: RigidBodyActivation::cannot_sleep(),
+    ccd: RigidBodyCcd { ccd_enabled: true, ..Default::default() },
+    ..Default::default()
+};
+
+commands.spawn_bundle(rigid_body);
+```
+
+  </TabItem>
+</Tabs>
+
+All the components part of the `RigidBodyBundle` can be queried and modified from Bevy systems.
+
+</bevy>
+
+<js>
+
+A rigid-body is created by a `World.createRigidBody` method. The initial state of
+the rigid-body to create is described by an instance of the `RigidBodyDesc` class.
+
+Each rigid-body create by the physics world is given an integer identifier `rigidBody.handle`. This identifier
+is guaranteed to the different from any identifier of rigid-bodies still existing in the physics
+world. However, the identifier may be equal to the identifier of an older rigid-body that has
+already been removed from the physics world with `World.removeRigidBody`.
+
+:::info
+The following example shows several setters that can be called to customize the
+rigid-body being built. The input values are just random so using this example
+as-is will not lead to a useful result.
+:::
+
+<Tabs
+groupId="dim"
+defaultValue="2D"
+values={[
+{label: 'Example 2D', value: '2D'},
+{label: 'Example 3D', value: '3D'},
+]}>
+<TabItem value="2D">
+
+```js
+// The world that will contain our rigid-bodies.
+let world = new RAPIER.World({ x: 0.0, y: -9.81 });
+
+// Builder for a static rigid-body.
+let _ = RigidBodyDesc.newStatic();
+// Builder for a dynamic rigid-body.
+let _ = RigidBodyDesc.newDynamic();
+// Builder for a kinematic rigid-body controlled at the velocity level.
+let _ = RigidBodyDesc.newKinematicVelocityBased();
+// Builder for a kinematic rigid-body controlled at the position level.
+let _ = RigidBodyDesc.newKinematicPositionBased();
+// Builder for a body with a status specified by an enum.
+let rigidBodyDesc = new RigidBodyDesc(RAPIER.RigidBodyType.Dynamic)
+    // The rigid body translation.
+    // Default: zero vector.
+    .setTranslation(0.0, 5.0)
+    // The rigid body rotation.
+    // Default: no rotation.
+    .setRotation(5.0)
+    // The linear velocity of this body.
+    // Default: zero velocity.
+    .setLinvel(1.0, 2.0)
+    // The angular velocity of this body.
+    // Default: zero velocity.
+    .setAngvel(2.0)
+    // The scaling factor applied to the gravity affecting the rigid-body.
+    // Default: 1.0
+    .setGravityScale(0.5)
+    // Whether or not this body can sleep.
+    // Default: true
+    .setCanSleep(true)
+    // Whether or not CCD is enabled for this rigid-body.
+    // Default: false
+    .setCcdEnabled(false);
+
+// All done, actually build the rigid-body.
+let rigidBody = world.createRigidBody(rigidBodyDesc);
+// The integer handle of the rigid-body can be read from the `handle` field. 
+let rigidBodyHandle = rigidBody.handle;
+```
+
+  </TabItem>
+  <TabItem value="3D">
+
+```js
+// The world that will contain our rigid-bodies.
+let world = new RAPIER.World({ x: 0.0, y: -9.81 });
+
+// Builder for a static rigid-body.
+let _ = RigidBodyDesc.newStatic();
+// Builder for a dynamic rigid-body.
+let _ = RigidBodyDesc.newDynamic();
+// Builder for a kinematic rigid-body controlled at the velocity level.
+let _ = RigidBodyDesc.newKinematicVelocityBased();
+// Builder for a kinematic rigid-body controlled at the position level.
+let _ = RigidBodyDesc.newKinematicPositionBased();
+// Builder for a body with a status specified by an enum.
+let rigidBodyDesc = new RigidBodyDesc(RAPIER.RigidBodyType.Dynamic)
+    // The rigid body translation.
+    // Default: zero vector.
+    .setTranslation(0.0, 5.0, 1.0)
+    // The rigid body rotation, given as a quaternion.
+    // Default: no rotation.
+    .setRotation(1.0, 0.0, 0.0, 0.0)
+    // The linear velocity of this body.
+    // Default: zero velocity.
+    .setLinvel(1.0, 3.0, 4.0)
+    // The angular velocity of this body.
+    // Default: zero velocity.
+    .setAngvel(3.0, 0.0, 1.0)
+    // The scaling factor applied to the gravity affecting the rigid-body.
+    // Default: 1.0
+    .setGravityScale(0.5)
+    // Whether or not this body can sleep.
+    // Default: true
+    .setCanSleep(true)
+    // Whether or not CCD is enabled for this rigid-body.
+    // Default: false
+    .setCcdEnabled(false);
+
+// All done, actually build the rigid-body.
+let rigidBody = world.createRigidBody(rigidBodyDesc);
+// The integer handle of the rigid-body can be read from the `handle` field. 
+let rigidBodyHandle = rigidBody.handle;
+```
+
+  </TabItem>
+</Tabs>
+
+</js>
+
+:::info
+Typically, the inertia and center of mass are automatically set to the inertia and center of mass resulting from the
+shapes of the [colliders](#colliders) attached to the rigid-body. But they can also be set manually.
+:::

@@ -1,0 +1,228 @@
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+The mass properties of a rigid-body is composed of three parts:
+- The **mass** which determines the resistance of the rigid-body wrt. linear movements. A high mass implies that
+  larger forces are needed to make the rigid-body translate.
+- The **angular inertia** determines the resistance of the rigid-body wrt. the angular movements. A high angular
+  inertia implies that larger torques are needed to make the rigid-body rotate.
+- The **center-of-mass** determines relative to what points torques are applied to the rigid-body.
+
+:::note
+Zero is a special value for masses and angular inertias. A mass equal to zero is interpreted as an infinite mass.
+An angular inertia equal to zero is interpreted as an infinite angular inertia. Therefore, a rigid-body with a
+mass equal to zero will not be affected by any force, and a rigid-body with an angular inertia equal to zero will
+not be affected by any torque.
+:::
+
+Computing the mass and angular-inertia can often be difficult because they depend on the geometric shape of the
+object being simulated. This is why they are automatically computed by Rapier when a [collider](#collider) is
+attached to the rigid-body: the collider add its own mass and angular-inertia contribution (computed based on the
+collider's shape and density) to the rigid-body it is attached to:
+
+<rapier>
+
+```rust
+let rigid_body = RigidBodyBuilder::new_dynamic().build();
+let rigid_body_handle = rigid_body_set.insert(rigid_body);
+// The default density is 1.0, we are setting 2.0 for this example.
+let collider = ColliderBuilder::ball(1.0).density(2.0).build();
+// When the collider is attached, the rigid-body's mass and angular
+// inertia is automatically updated to take the collider into account.
+collider_set.insert_with_parent(collider, rigid_body_handle, &mut rigid_body_set);
+```
+
+</rapier>
+
+<bevy>
+
+```rust
+let rigid_body = RigidBodyBundle::default();
+let collider = ColliderBundle {
+    shape: ColliderShape::ball(1.0),
+    // The default density is 1.0, we are setting 2.0 for this example.
+    mass_properties: ColliderMassProps::Density(2.0),
+    ..Default::default()
+};
+
+// When the collider is attached, the rigid-body's mass and angular
+// inertia will be automatically updated to take the collider into account.
+commands.spawn_bundle(rigid_body)
+       .insert_bundle(collider);
+```
+
+</bevy>
+<js>
+
+```js
+let rigidBodyDesc = RigidBodyDesc.new_dynamic();
+let rigidBody = world.createRigidBody(rigidBodyDesc);
+// The default density is 1.0, we are setting 2.0 for this example.
+let colliderDesc = ColliderDesc.ball(1.0).setDensity(2.0);
+// When the collider is attached, the rigid-body's mass and angular
+// inertia is automatically updated to take the collider into account.
+world.createCollider(collider, rigidBody.handle);
+```
+
+</js>
+
+Alternatively, it is possible to set the mass properties of a rigid-body when it is created. Keep in mind that
+this won't prevent the colliders' contributions to be added to these values. So make sure to set the attached
+colliders' densities to zero if you want your explicit values to be the final mass-properties values.
+
+<rapier>
+
+<Tabs
+groupId="dim"
+defaultValue="2D"
+values={[
+{label: 'Example 2D', value: '2D'},
+{label: 'Example 3D', value: '3D'},
+]}>
+<TabItem value="2D">
+
+```rust
+/* Set the mass-properties when the rigid-body is created. */
+let rigid_body = RigidBodyBuilder::new_dynamic()
+    .additional_mass(0.5)
+    .additional_principal_angular_inertia(0.3)
+    // Sets both the mass and angular inertia at once.
+    .additional_mass_properties(MassProperties::new(point![0.0, 1.0], 0.5, 0.3))
+    .build();
+```
+```rust
+/* Set the mass-properties after the rigid-body creation. */
+let rigid_body = rigid_body_set.get_mut(rigid_body_handle).unwrap();
+// The `true` argument makes sure the rigid-body is awake.
+rigid_body.set_mass_properties(MassProperties::new(point![0.0, 1.0], 0.5, 0.3), true);
+```
+
+  </TabItem>
+  <TabItem value="3D">
+
+```rust
+/* Set the mass-properties when the rigid-body is created. */
+    let rigid_body = RigidBodyBuilder::new_dynamic()
+        .additional_mass(0.5)
+        .additional_principal_angular_inertia(vector![0.3, 0.2, 0.1])
+        // Sets both the mass and angular inertia at once.
+        .additional_mass_properties(MassProperties::new(
+            point![0.0, 1.0, 0.0],
+            0.5,
+            vector![0.3, 0.2, 0.1],
+        ))
+        .build();
+```
+```rust
+/* Set the mass-properties after the rigid-body creation. */
+let rigid_body = rigid_body_set.get_mut(rigid_body_handle).unwrap();
+// The `true` argument makes sure the rigid-body is awake.
+rigid_body.set_mass_properties(
+    MassProperties::new(point![0.0, 1.0, 0.0], 0.5, vector![0.3, 0.2, 0.1]),
+    true,
+);
+```
+
+  </TabItem>
+</Tabs>
+
+</rapier>
+<bevy>
+
+<Tabs
+groupId="dim"
+defaultValue="2D"
+values={[
+{label: 'Example 2D', value: '2D'},
+{label: 'Example 3D', value: '3D'},
+]}>
+<TabItem value="2D">
+
+```rust
+/* Set the mass properties when the rigid-body bundle is created. */
+let rigid_body = RigidBodyBundle {
+    mass_properties: MassProperties::new(Vec2::new(1.0, 2.0).into(), 10.0, 0.5).into(),
+    ..Default::default()
+};
+commands.spawn_bundle(rigid_body);
+```
+```rust
+/* Change the mass-properties inside of a system. */
+fn modify_body_mass_props(mut mprops: Query<&mut RigidBodyMassProps>) {
+    for mut rb_mprops in mprops.iter_mut() {
+        rb_mprops.local_mprops.set_mass(100.0, true);
+    }
+}
+```
+
+  </TabItem>
+  <TabItem value="3D">
+
+```rust
+/* Set the mass properties when the rigid-body bundle is created. */
+let rigid_body = RigidBodyBundle {
+    mass_properties: MassProperties::new(Vec3::new(1.0, 2.0, 0.0).into(), 10.0, Vec3::new(0.3, 0.4, 0.5).into()).into(),
+    ..Default::default()
+};
+commands.spawn_bundle(rigid_body);
+```
+```rust
+/* Change the mass-properties inside of a system. */
+fn modify_body_mass_props(mut mprops: Query<&mut RigidBodyMassProps>) {
+    for mut rb_mprops in mprops.iter_mut() {
+        rb_mprops.local_mprops.set_mass(100.0, true);
+    }
+}
+```
+
+  </TabItem>
+</Tabs>
+
+</bevy>
+<js>
+
+<Tabs
+groupId="dim"
+defaultValue="2D"
+values={[
+{label: 'Example 2D', value: '2D'},
+{label: 'Example 3D', value: '3D'},
+]}>
+<TabItem value="2D">
+
+```js
+/* Set the mass-properties when the rigid-body is created. */
+let rigidBodyDesc = RigidBodyDesc.newDynamic()
+    .setAdditionalMass(0.5)
+    .setAdditionalPrincipalAngularInertia(0.3)
+    // Sets both the mass and angular inertia at once.
+    .setAdditionalMassProperties(
+        0.5,                // Mass.
+        { x: 0.0, y: 1.0 }, // Center of mass.
+        0.3                 // Principal angular inertia.
+    );
+let rigidBody = world.createRigidBody(rigidBodyDesc);
+```
+
+  </TabItem>
+  <TabItem value="3D">
+
+```js
+/* Set the mass-properties when the rigid-body is created. */
+let rigidBodyDesc = RigidBodyDesc.newDynamic()
+    .setAdditionalMass(0.5)
+    .setAdditionalPrincipalAngularInertia({ x: 0.3, y: 0.2, z: 0.1 })
+    // Sets both the mass and angular inertia at once.
+    .setAdditionalMassProperties(
+        0.5,                        // Mass.
+        { x: 0.0, y: 1.0, z: 0.0 }, // Center of mass.
+        { x: 0.3, y: 0.2, z: 0.1 }, // Principal angular inertia.
+        { w: 1.0, x: 0.0, y: 0.0, z: 0.0 } // Principal angular inertia frame (unit quaternion).
+    );
+let rigidBody = world.createRigidBody(rigidBodyDesc);
+```
+
+  </TabItem>
+</Tabs>
+
+</js>

@@ -1,0 +1,68 @@
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+Damping lets you slow down a rigid-body automatically. This can be used to achieve a wide variety of effects like
+fake air friction. Each rigid-body is given a **linear damping coefficient** (affecting its linear velocity) and an
+**angular damping coefficient** (affecting its angular velocity). Larger values of the damping coefficients lead to
+a stronger slow-downs. Their default values are `0.0` (no damping at all).
+
+
+This damping coefficients can be set when the rigid-body is created or after its creation:
+
+<rapier>
+
+```rust
+/* Set the damping coefficients when the rigid-body is created. */
+let rigid_body = RigidBodyBuilder::new_dynamic()
+    .linear_damping(0.5)
+    .angular_damping(1.0)
+    .build();
+```
+```rust
+/* Set the damping coefficients after the rigid-body creation. */
+let rigid_body = rigid_body_set.get_mut(rigid_body_handle).unwrap();
+rigid_body.set_linear_damping(0.5);
+rigid_body.set_angular_damping(1.0);
+assert_eq!(rigid_body.linear_damping(), 0.5);
+assert_eq!(rigid_body.angular_damping(), 1.0);
+```
+
+</rapier>
+<bevy>
+
+```rust
+/* Set damping when the rigid-body bundle is created. */
+let rigid_body = RigidBodyBundle {
+    damping: RigidBodyDamping { linear_damping: 0.5, angular_damping: 1.0 },
+    ..Default::default()
+};
+commands.spawn_bundle(rigid_body);
+```
+```rust
+/* Set damping inside of a system. */
+fn modify_body_damping(mut dampings: Query<&mut RigidBodyDamping>) {
+    for mut rb_damping in dampings.iter_mut() {
+        rb_damping.linear_damping = 0.5;
+        rb_damping.angular_damping = 1.0;
+    }
+}
+```
+
+</bevy>
+<js>
+
+```js
+/* Set the damping coefficients when the rigid-body is created. */
+let rigidBodyDesc = RigidBodyDesc.newDynamic()
+    .setLinearDamping(0.5)
+    .setAngularDamping(1.0);
+let rigidBody = world.creatRigidBody(rigidBodyDesc);
+```
+```js
+/* Set the damping coefficients after the rigid-body creation. */
+let rigidBody = world.getRigidBody(rigidBodyHandle);
+rigidBody.setLinearDamping(0.5);
+rigidBody.setAngularDamping(1.0);
+```
+
+</js>

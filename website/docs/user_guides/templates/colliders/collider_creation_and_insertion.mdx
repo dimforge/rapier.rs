@@ -1,0 +1,332 @@
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+
+<rapier>
+
+A collider is created by a `ColliderBuilder` structure that is based on the builder pattern. Then it needs
+to be inserted into the `ColliderSet` that will be processed by the physics-pipeline, collision-pipeline, or
+query-pipeline.
+
+:::info
+The following example shows several setters that can be called to customize the
+collider being built. The input values are just random so using this example as-is will not
+lead to a useful result.
+:::
+
+<Tabs
+groupId="dim"
+defaultValue="2D"
+values={[
+{label: 'Example 2D', value: '2D'},
+{label: 'Example 3D', value: '3D'},
+]}>
+<TabItem value="2D">
+
+```rust
+use rapier2d::prelude::*;
+use std::f32::consts::PI;
+
+// The set that will contain our colliders.
+let mut collider_set = ColliderSet::new();
+
+// Builder for a ball-shaped collider.
+let _ = ColliderBuilder::ball(0.5);
+// Builder for a cuboid-shaped collider.
+let _ = ColliderBuilder::cuboid(0.5, 0.2);
+// Builder for a capsule-shaped collider. The capsule principal axis is the `x` coordinate axis.
+let _ = ColliderBuilder::capsule_x(0.5, 0.2);
+// Builder for a capsule-shaped collider. The capsule principal axis is the `y` coordinate axis.
+let _ = ColliderBuilder::capsule_y(0.5, 0.2);
+// Builder for a triangle-mesh-shaped collider.
+let _ = ColliderBuilder::trimesh(vertices, indices);
+// Builder for a heightfield-shaped collider.
+let _ = ColliderBuilder::heightfield(heights, scale);
+// Builder for a collider with the given shape.
+let collider = ColliderBuilder::new(SharedShape::ball(0.5))
+    // The collider translation wrt. the body it is attached to.
+    // Default: the zero vector.
+    .translation(vector![1.0, 2.0])
+    // The collider rotation wrt. the body it is attached to.
+    // Default: the identity rotation.
+    .rotation(PI)
+    // The collider position wrt. the body it is attached to.
+    // Default: the identity isometry.
+    .position(Isometry::new(vector![1.0, 2.0], PI))
+    // The collider density. If non-zero the collider's mass and angular inertia will be added
+    // to the inertial properties of the body it is attached to.
+    // Default: 1.0
+    .density(1.3)
+    // The friction coefficient of this collider.
+    // Default: ColliderBuilder::default_friction() == 0.5
+    .friction(0.8)
+    // Whether this collider is a sensor, i.e., generate only intersection events.
+    // Default: false
+    .sensor(true)
+    // All done, actually build the collider.
+    .build();
+
+// Insert the collider into the set, without attaching it to a rigid-body.
+let handle = collider_set.insert(collider);
+// Or insert the collider into the set and attach it to a rigid-body.
+let handle = collider_set.insert_with_parent(collider, rigid_body_handle, &mut rigid_body_set);
+```
+
+  </TabItem>
+  <TabItem value="3D">
+
+```rust
+use rapier3d::prelude::*;
+use std::f32::consts::PI;
+
+// The set that will contain our colliders.
+let mut collider_set = ColliderSet::new();
+
+// Builder for a ball-shaped collider.
+let _ = ColliderBuilder::ball(0.5);
+// Builder for a cuboid-shaped collider.
+let _ = ColliderBuilder::cuboid(0.5, 0.2, 0.1);
+// Builder for a capsule-shaped collider. The capsule principal axis is the `x` coordinate axis.
+let _ = ColliderBuilder::capsule_x(0.5, 0.2);
+// Builder for a capsule-shaped collider. The capsule principal axis is the `y` coordinate axis.
+let _ = ColliderBuilder::capsule_y(0.5, 0.2);
+// Builder for a capsule-shaped collider. The capsule principal axis is the `z` coordinate axis.
+let _ = ColliderBuilder::capsule_z(0.5, 0.2);
+// Builder for a triangle-mesh-shaped collider.
+let _ = ColliderBuilder::trimesh(vertices, indices);
+// Builder for a heightfield-shaped collider.
+let _ = ColliderBuilder::heightfield(heights, scale);
+// Builder for a collider with the given shape.
+let collider = ColliderBuilder::new(SharedShape::ball(0.5))
+    // The collider translation wrt. the body it is attached to.
+    // Default: the zero vector.
+    .translation(vector![1.0, 2.0, 3.0])
+    // The collider rotation wrt. the body it is attached to.
+    // Default: the identity rotation.
+    .rotation(vector![0.0, PI, 0.0])
+    // The collider position wrt. the body it is attached to.
+    // Default: the identity isometry.
+    .position(Isometry::new(vector![1.0, 2.0, 3.0], vector![0.0, PI, 0.0]))
+    // The collider density. If non-zero the collider's mass and angular inertia will be added
+    // to the inertial properties of the body it is attached to.
+    // Default: 1.0
+    .density(1.3)
+    // The friction coefficient of this collider.
+    // Default: ColliderBuilder::default_friction() == 0.5
+    .friction(0.8)
+    // Whether this collider is a sensor, i.e., generate only intersection events.
+    // Default: false
+    .sensor(true)
+    // All done, actually build the collider.
+    .build();
+
+// Insert the collider into the set, without attaching to a rigid-body.
+let handle = collider_set.insert(collider);
+// Or insert the collider into the set and attach it to a rigid-body.
+let handle = collider_set.insert_with_parent(collider, rigid_body_handle, &mut rigid_body_set);
+```
+
+  </TabItem>
+</Tabs>
+
+</rapier>
+<bevy>
+
+A collider is created by adding all the components part of the `ColliderBundle` bundle.
+It is important for all the components in the bundle to be added at the same time. To remove
+the collider, the complete bundle must be removed simultaneously too. Adding/removing only
+some of these components may end up in a panic.
+
+:::info
+The following example shows several initializations of components to customize
+collider being built. The input values are just random so using this example
+as-is will not lead to a useful result.
+:::
+
+
+<Tabs
+groupId="dim"
+defaultValue="2D"
+values={[
+{label: 'Example 2D', value: '2D'},
+{label: 'Example 3D', value: '3D'},
+]}>
+<TabItem value="2D">
+
+```rust
+use bevy_rapier2d::prelude::*;
+
+let collider = ColliderBundle {
+    shape: ColliderShape::cuboid(1.0, 2.0),
+    collider_type: ColliderType::Sensor,
+    position: (Vec2::new(2.0, 0.0), 0.4).into(),
+    material: ColliderMaterial { friction: 0.7, restitution: 0.3, ..Default::default() },
+    mass_properties: ColliderMassProps::Density(2.0),
+    ..Default::default()
+};
+
+commands.spawn_bundle(collider);
+```
+
+  </TabItem>
+  <TabItem value="3D">
+
+```rust
+use bevy_rapier3d::prelude::*;
+
+let collider = ColliderBundle {
+    shape: ColliderShape::cuboid(1.0, 2.0, 3.0),
+    collider_type: ColliderType::Sensor,
+    position: (Vec3::new(2.0, 0.0, 3.0), Quat::from_rotation_x(0.4)).into(),
+    material: ColliderMaterial { friction: 0.7, restitution: 0.3, ..Default::default() },
+    mass_properties: ColliderMassProps::Density(2.0),
+    ..Default::default()
+};
+
+commands.spawn_bundle(collider);
+```
+
+  </TabItem>
+</Tabs>
+
+A collider can optionally be attached to a rigid-body. Attaching a collider to a rigid-body will result in the
+rigid-body being affected by collisions. The collider's position will be automatically updated from the position
+of the rigid-body it is attached to. There are three ways of attaching a collider to a rigid-body (the second
+and third ways allows you to attach multiple colliders to the same rigid-body):
+- Attach the `ColliderBundle` to the same entity as the `RigidBodyBundle`.
+- Attach the `ColliderBundle` to an entity that is a children of the entity containing the `RigidBodyBundle`.
+- Attach the `ColliderBundle` as well as the `ColliderParent` component to any entity. The entity containing
+  the rigid-body can be configured by setting:
+
+```rust
+let collider = ColliderBundle::default();
+let collider_parent = ColliderParent {
+    handle: entity_with_rigid_body.handle(),
+    pos_wrt_parent: Vec2::ZERO.into(),
+};
+commands.spawn_bundle(collider)
+        .insert(collider_parent);
+```
+
+All the components part of the `ColliderBundle` can be queried and modified from Bevy systems.
+
+
+</bevy>
+<js>
+
+A collider is created by a `World.createCollider` method. The initial state of
+the collider to create is described by an instance of the `ColliderDesc` class.
+
+Each collider create by the physics world is given an integer identifier. This identifier
+is guaranteed to the different from any identifier of colliders still existing in the physics
+world. However, the identifier may be equal to the identifier of an older collider that has
+already been removed from the physics world with `World.removeCollider`.
+
+:::info
+The following example shows several setters that can be called to customize the
+collider being built. The input values are just random so using this example as-is will not
+lead to a useful result.
+:::
+
+<Tabs
+groupId="dim"
+defaultValue="2D"
+values={[
+{label: 'Example 2D', value: '2D'},
+{label: 'Example 3D', value: '3D'},
+]}>
+<TabItem value="2D">
+
+```js
+// The physics world.
+let world = new World({ x: 0.0, y: -9.81 });
+
+// Builder for a ball-shaped collider.
+let _ = ColliderDesc.ball(0.5);
+// Builder for a cuboid-shaped collider.
+let _ = ColliderDesc.cuboid(0.5, 0.2);
+// Builder for a capsule-shaped collider. The capsule principal axis is the `x` coordinate axis.
+let _ = ColliderDesc.capsule_x(0.5, 0.2);
+// Builder for a capsule-shaped collider. The capsule principal axis is the `y` coordinate axis.
+let _ = ColliderDesc.capsule_y(0.5, 0.2);
+// Builder for a triangle-mesh-shaped collider.
+let _ = ColliderDesc.trimesh(vertices, indices);
+// Builder for a heightfield-shaped collider.
+let _ = ColliderDesc.heightfield(heights, scale);
+// Builder for a collider with the given shape.
+let colliderDesc = ColliderDesc.new(SharedShape::ball(0.5))
+    // The collider translation wrt. the body it is attached to.
+    // Default: the zero vector.
+    .setTranslation(1.0, 2.0)
+    // The collider rotation wrt. the body it is attached to.
+    // Default: the identity rotation.
+    .setRotation(3.14)
+    // The collider density. If non-zero the collider's mass and angular inertia will be added
+    // to the inertial properties of the body it is attached to.
+    // Default: 1.0
+    .setDensity(1.3)
+    // The friction coefficient of this collider.
+        // Default: ColliderDesc.default_friction() == 0.5
+    .setFriction(0.8)
+    // Whether this collider is a sensor, i.e., generate only intersection events.
+    // Default: false
+    .setSensor(true);
+
+// Create the collider, without attaching it to a rigid-body.
+let handle = world.createCollider(colliderDesc);
+// Or create the collider and attach it to a rigid-body.
+let rigidBody = world.createRigidBody(RigidBodyDesc.newDynamic());
+let collider = world.createCollider(colliderDesc, rigidBody.handle);
+```
+
+  </TabItem>
+  <TabItem value="3D">
+
+```js
+// The physics world.
+let world = new World({ x: 0.0, y: -9.81, z: 0.0 });
+
+// Builder for a ball-shaped collider.
+let _ = ColliderDesc.ball(0.5);
+// Builder for a cuboid-shaped collider.
+let _ = ColliderDesc.cuboid(0.5, 0.2, 0.1);
+// Builder for a capsule-shaped collider. The capsule principal axis is the `x` coordinate axis.
+let _ = ColliderDesc.capsule_x(0.5, 0.2);
+// Builder for a capsule-shaped collider. The capsule principal axis is the `y` coordinate axis.
+let _ = ColliderDesc.capsule_y(0.5, 0.2);
+// Builder for a capsule-shaped collider. The capsule principal axis is the `z` coordinate axis.
+let _ = ColliderDesc.capsule_z(0.5, 0.2);
+// Builder for a triangle-mesh-shaped collider.
+let _ = ColliderDesc.trimesh(vertices, indices);
+// Builder for a heightfield-shaped collider.
+let _ = ColliderDesc.heightfield(heights, scale);
+// Builder for a collider with the given shape.
+let collider = ColliderDesc.new(SharedShape::ball(0.5))
+    // The collider translation wrt. the body it is attached to.
+    // Default: the zero vector.
+    .setTranslation(1.0, 2.0, 3.0)
+    // The collider rotation wrt. the body it is attached to, as a unit quaternion.
+    // Default: the identity rotation.
+    .setRotation({ w: 1.0, x: 0.0, y: 0.0, z: 0.0 })
+    // The collider density. If non-zero the collider's mass and angular inertia will be added
+    // to the inertial properties of the body it is attached to.
+    // Default: 1.0
+    .setDensity(1.3)
+    // The friction coefficient of this collider.
+    // Default: 0.5
+    .setFriction(0.8)
+    // Whether this collider is a sensor, i.e., generate only intersection events.
+    // Default: false
+    .setSensor(true);
+
+// Create the collider, without attaching it to a rigid-body.
+let handle = world.createCollider(colliderDesc);
+// Or create the collider and attach it to a rigid-body.
+let rigidBody = world.createRigidBody(RigidBodyDesc.newDynamic());
+let collider = world.createCollider(colliderDesc, rigidBody.handle);
+```
+
+  </TabItem>
+</Tabs>
+
+</js>

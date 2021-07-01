@@ -1,0 +1,245 @@
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+The position of a rigid-body represents its location (translation) in 2D or 3D world-space, as well as its orientation (rotation).
+It translational part is represented as a vector and its rotational part as an unit quaternion (in 3D) or a unit complex
+number (in 2D). <notjs>Both are combined into an isometry</notjs><bevy> stored in the `RigidBodyPosition` component</bevy>.
+
+The position of a rigid-body can be set when creating it. It can also be set after
+its creation as illustrated bellow.
+
+:::warning
+Directly changing the position of a rigid-body is equivalent to teleporting it: this is a not a
+physically realistic action! Teleporting a dynamic or kinematic bodies may result in odd behaviors
+especially if it teleports into a space occupied by other objects. For dynamic bodies, [forces,
+impulses](#forces-and-impulses), or [velocity modification](#velocity) should be preferred.
+For kinematic bodies, see the discussion after the examples bellow.
+:::
+
+<rapier>
+
+<Tabs
+groupId="dim"
+defaultValue="2D"
+values={[
+{label: 'Example 2D', value: '2D'},
+{label: 'Example 3D', value: '3D'},
+]}>
+<TabItem value="2D">
+
+```rust
+/* Set the position when the rigid-body is created. */
+let rigid_body = RigidBodyBuilder::new_dynamic()
+    // The rigid body translation.
+    // Default: zero vector.
+    .translation(vector![0.0, 5.0])
+    // The rigid body rotation.
+    // Default: no rotation.
+    .rotation(5.0)
+    // The rigid body position. Will override `.translation(...)` and `.rotation(...)`.
+    // Default: the identity isometry.
+    .position(Isometry::new(vector![1.0, 2.0], 0.4))
+    // All done, actually build the rigid-body.
+    .build();
+```
+```rust
+/* Set the position after the rigid-body creation. */
+let rigid_body = rigid_body_set.get_mut(rigid_body_handle).unwrap();
+// The `true` argument makes sure the rigid-body is awake.
+rigid_body.set_translation(vector![0.0, 5.0], true);
+rigid_body.set_rotation(0.2, true);
+assert_eq!(*rigid_body.translation(), vector![0.0, 5.0]);
+assert_eq!(rigid_body.rotation().angle(), 0.2);
+
+rigid_body.set_position(Isometry::new(vector![1.0, 2.0], 0.4), true);
+assert_eq!(*rigid_body.position(), Isometry::new(vector![1.0, 2.0], 0.4));
+```
+
+  </TabItem>
+  <TabItem value="3D">
+
+```rust
+/* Set the position when the rigid-body is created. */
+let rigid_body = RigidBodyBuilder::new_dynamic()
+    // The rigid body translation.
+    // Default: zero vector.
+    .translation(vector![0.0, 5.0, 1.0])
+    // The rigid body rotation.
+    // Default: no rotation.
+    .rotation(vector![0.2, 0.0, 0.0])
+    // The rigid body position. Will override `.translation(...)` and `.rotation(...)`.
+    // Default: the identity isometry.
+    .position(Isometry::new(vector![1.0, 2.0, 3.0], vector![0.2, 0.0, 0.0]))
+    // All done, actually build the rigid-body.
+    .build();
+```
+```rust
+/* Set the position after the rigid-body creation. */
+let rigid_body = rigid_body_set.get_mut(rigid_body_handle).unwrap();
+// The `true` argument makes sure the rigid-body is awake.
+rigid_body.set_translation(vector![0.0, 5.0, 1.0], true);
+rigid_body.set_rotation(vector![0.2, 0.0, 0.0], true);
+assert_eq!(*rigid_body.translation(), vector![0.0, 5.0, 1.0]);
+assert_eq!(rigid_body.rotation().scaled_axis(), vector![0.2, 0.0, 0.0]);
+
+rigid_body.set_position(Isometry::new(vector![1.0, 2.0, 3.0], vector![0.0, 0.4, 0.0]), true);
+assert_eq!(*rigid_body.position(), Isometry::new(vector![1.0, 2.0, 3.0], vector![0.0, 0.4, 0.0]));
+```
+
+  </TabItem>
+</Tabs>
+
+</rapier>
+<bevy>
+
+<Tabs
+groupId="dim"
+defaultValue="2D"
+values={[
+{label: 'Example 2D', value: '2D'},
+{label: 'Example 3D', value: '3D'},
+]}>
+<TabItem value="2D">
+
+```rust
+/* Set the position when the rigid-body bundle is created. */
+let rigid_body = RigidBodyBundle {
+    // NOTE: pick one of the following.
+    position: (Vec2::new(0.0, 5.0), 5.0).into(), // Translation and rotation.
+    position: Vec2::new(0.0, 5.0).into(), // Translation only.
+    ..Default::default()
+};
+commands.spawn_bundle(rigid_body);
+```
+```rust
+/* Change the position inside of a system. */
+fn modify_body_translation(mut positions: Query<&mut RigidBodyPosition>) {
+    for mut rb_pos in positions.iter_mut() {
+        rb_pos.position.translation = Vec2::new(0.0, 5.0).into();
+    }
+}
+```
+
+  </TabItem>
+  <TabItem value="3D">
+
+```rust
+/* Set the position when the rigid-body bundle is created. */
+let rigid_body = RigidBodyBundle {
+    // NOTE: pick one of the following.
+    position: (Vec3::new(0.0, 5.0, 6.0), Quat::from_rotation_x(0.4)).into(), // Translation and rotation.
+    position: Vec3::new(0.0, 5.0, 6.0).into(),   // Translation only.
+    position: Quat::from_rotation_x(0.4).into(), // Rotation only.
+    ..Default::default()
+};
+commands.spawn_bundle(rigid_body);
+```
+```rust
+/* Change the position inside of a system. */
+fn modify_body_translation(mut positions: Query<&mut RigidBodyPosition>) {
+    for mut rb_pos in positions.iter_mut() {
+        rb_pos.position.translation = Vec3::new(0.0, 5.0, 6.0).into();
+    }
+}
+```
+
+  </TabItem>
+</Tabs>
+
+</bevy>
+<js>
+
+<Tabs
+groupId="dim"
+defaultValue="2D"
+values={[
+{label: 'Example 2D', value: '2D'},
+{label: 'Example 3D', value: '3D'},
+]}>
+<TabItem value="2D">
+
+```js
+/* Set the position when the rigid-body is created. */
+let rigidBodyDesc = RigidBodyDesc.newDynamic()
+    // The rigid body translation.
+    // Default: zero vector.
+    .setTranslation(0.0, 5.0)
+    // The rigid body rotation.
+    // Default: no rotation.
+    .setRotation(5.0);
+let rigidBody = world.createRigidBody(rigidBodyDesc);
+```
+```js
+/* Set the position after the rigid-body creation. */
+let rigidBody = world.getRigidBody(rigidBodyHandle);
+// The `true` argument makes sure the rigid-body is awake.
+rigidBody.setTranslation({ x: 0.0, y: 5.0 }, true);
+rigidBody.setRotation(0.2, true);
+```
+
+  </TabItem>
+  <TabItem value="3D">
+
+```js
+/* Set the position when the rigid-body is created. */
+let rigidBodyDesc = RigidBodyDesc.newDynamic()
+    // The rigid body translation.
+    // Default: zero vector.
+    .setTranslation(0.0, 5.0, 1.0)
+    // The rigid body rotation as a quaternion.
+    // Default: no rotation.
+    .setRotation({ w: 1.0, x: 0.0, y: 0.0, z: 0.0 });
+let rigidBody = world.createRigidBody(rigidBodyDesc);
+```
+```js
+/* Set the position after the rigid-body creation. */
+let rigidBody = world.getRigidBody(rigidBodyHandle);
+// The `true` argument makes sure the rigid-body is awake.
+rigidBody.setTranslation({ x: 0.0, y: 5.0, z: 1.0 }, true);
+rigidBody.setRotation({ w: 1.0, x: 0.0, y: 0.0, z: 0.0 }, true);
+```
+
+  </TabItem>
+</Tabs>
+
+</js>
+
+In order to move a dynamic rigid-body it is strongly discouraged to set its position directly as it
+may results in weird behaviors: it's as if the rigid-body teleports itself, which is a non-physical behavior. For dynamic
+bodies, it is recommended to either set its [velocity](#velocity) or to apply [forces or impulses](#forces-and-impulses).
+
+<rapier>
+
+For **velocity-based** kinematic bodies, it is recommended to set its velocity instead of setting its position directly.
+For **position-based** kinematic bodies, it is recommended to use the special methods:
+- `RigidBody::set_next_kinematic_position`
+- `RigidBody::set_next_kinematic_rotation`
+- `RigidBody::set_next_kinematic_translation`
+
+These methods will let the physics pipeline compute the fictitious velocity of the position-based kinematic body for more realistic
+interactions with other rigid-bodies. These methods won't immediately modify the position of the kinematic body itself.
+The position of the kinematic body will be automatically set to these values during the next physics pipeline update.
+
+</rapier>
+<bevy>
+
+For **velocity-based** kinematic bodies, it is recommended to set its velocity instead of setting its position directly.
+For **position-based** kinematic bodies, it is recommended to modify the `next_position` field of the `RigidBodyPosition` component instead
+of its `position` field. This will let the physics engine compute the fictitious velocity of the kinematic body for more
+realistic intersections with other rigid-bodies. The `position` field of the kinematic body will automatically be set
+to the `next_position` value during the next physics update.
+
+</bevy>
+<js>
+
+For **velocity-based** kinematic bodies, it is recommended to set its velocity instead of setting its position directly.
+For **position-based** kinematic bodies, it is recommended to use the special methods:
+- `RigidBody.setNextKinematicPosition`
+- `RigidBody.setNextKinematicRotation`
+- `RigidBody.setNextKinematicTranslation`
+
+These methods will let the physics pipeline compute the fictitious velocity of the position-based kinematic body for more realistic
+interactions with other rigid-bodies. These methods won't immediately modify the position of the kinematic body itself.
+The position of the kinematic body will be automatically set to these values during the next physics pipeline update.
+
+</js>

@@ -1,0 +1,76 @@
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+Dominance is a non-realistic, but sometimes useful, feature. It can be used to make one rigid-body immune to forces
+originating from contacts with some other bodies. For example this can be used to model a player represented as a
+dynamic rigid-body that cannot be "pushed back" by any, or some, other dynamic rigid-bodies part of the environment.
+
+
+Each rigid-body is part of a dominance group in `[-127; 127]` (the default group is `0`). If the colliders from two rigid-bodies
+are in contact, the one with the highest dominance will act as if it has an infinite mass, making it immune to the
+contact forces the other body would apply on it. If both bodies are part of the same dominance group, then their
+contacts will work in the usual way (both are affected by opposite forces with the same magnitude).
+
+For example, if a dynamic body `A` is in the dominance group `10`, and a dynamic body `B` in the dominance group `-20`, then
+a contact between a collider attached to `A` and a collider attached `B` will result in `A` remaining immobile and `B` being
+pushed by `A` (independently from their mass).
+
+:::info
+A non-dynamic rigid-body is always considered as being part of a dominance group greater than any dynamic rigid-body.
+This means that dynamic/static and dynamic/kinematic contacts will continue to work normally, independently from the
+dominance group they were given by the user.
+:::
+
+The dominance group can be set when the rigid-body is created or after its creation:
+
+<rapier>
+
+```rust
+/* Set the dominance group when the rigid-body is created. */
+let rigid_body = RigidBodyBuilder::new_dynamic()
+    .dominance_group(10)
+    .build();
+```
+```rust
+/* Set the dominance group after the rigid-body creation. */
+let rigid_body = rigid_body_set.get_mut(rigid_body_handle).unwrap();
+rigid_body.set_dominance_group(10);
+assert_eq!(rigid_body.dominance_group(), 10);
+```
+
+</rapier>
+<bevy>
+
+```rust
+/* Set dominance when the rigid-body bundle is created. */
+let rigid_body = RigidBodyBundle {
+    dominance: RigidBodyDominance(10),
+    ..Default::default()
+};
+commands.spawn_bundle(rigid_body);
+```
+```rust
+/* Set dominance inside of a system. */
+fn modify_body_dominance(mut dominances: Query<&mut RigidBodyDominance>) {
+    for mut rb_dominance in dominances.iter_mut() {
+        rb_dominance.0 = 10;
+    }
+}
+```
+
+</bevy>
+<js>
+
+```js
+/* Set the damping coefficients when the rigid-body is created. */
+let rigidBodyDesc = RigidBodyDesc.newDynamic()
+    .setDominanceGroup(10);
+let rigidBody = world.creatRigidBody(rigidBodyDesc);
+```
+```js
+/* Set the damping coefficients after the rigid-body creation. */
+let rigidBody = world.getRigidBody(rigidBodyHandle);
+rigidBody.setDominanceGroup(10);
+```
+
+</js>

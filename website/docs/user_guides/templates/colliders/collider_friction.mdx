@@ -1,0 +1,106 @@
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+
+Friction is a force that opposes the relative tangential motion between two rigid-bodies with colliders in contact.
+This force has a direction orthogonal to the contact normal and opposite to the relative rigid-body motion at
+the contact point. Following the Coulomb friction model, the maximum magnitude of this force is the magnitude of the
+force along the contact normal multiplied by a **friction coefficient**. A friction coefficient
+of 0 implies no friction at all (completely sliding contact) and a coefficient greater or equal to 1 implies a
+very strong friction. Values greater than 1 are allowed.
+
+:::note
+Rapier does not make any distinction between the static and dynamic friction coefficients currently.
+:::
+
+Each collider has its own friction coefficient. This means that when two colliders are in contact, we need to apply a
+rule that combines the friction  coefficients of these two colliders into a single coefficient that will be used for
+the contact. This rule is described by the `CoefficientCombineRule` enum:
+- <notjs>`CoefficientCombineRule::Average`</notjs><js>`CoefficientCombineRule.Average`</js>: the average of the two coefficients is used for the contact.
+- <notjs>`CoefficientCombineRule::Min`</notjs><js>`CoefficientCombineRule.Min`</js>: the minimum among the two coefficients is used for the contact.
+- <notjs>`CoefficientCombineRule::Multiply`</notjs><js>`CoefficientCombineRule.Multiply`</js>: the product of the two coefficients is used for the contact.
+- <notjs>`CoefficientCombineRule::Max`</notjs><js>`CoefficientCombineRule.Max`</js>: the maximum among the two coefficients is used for the contact.
+
+By default, the `Average` rule is used. Each collider can be given its own friction combine rule. When two colliders are in
+contact, we need to select one of their combine rule. The following precedence is used: `Max > Multiply > Min > Average`.
+
+For example if one collider with the `Multiply` friction combine rule is in contact with a collider with the `Average` friction
+combine rule, then the `Multiply` rule will be applied for the friction coefficient of this contact (i.e. the coefficients
+of both colliders will be multiplied to obtain the coefficient used by the contact).
+
+:::info
+The `CoefficientCombineRule` system exists to cover a wide variety of use-cases efficiently. If this is not flexible
+enough, it is possible to get  full control over the selection of friction coefficients for each contact point using
+[contact modification](advanced_collision_detection#contact-modification). For example, contact modification allows the
+simulation of colliders with non-uniform friction coefficients.
+:::
+
+The friction coefficient and friction combine rule can both be set when the collider is created or after its creation:
+
+<rapier>
+
+```rust
+/* Set the friction coefficient and friction combine rule
+  when the collider is created. */
+let collider = ColliderBuilder::ball(0.5)
+    .friction(0.7)
+    .friction_combine_rule(CoefficientCombineRule::Min)
+    .build();
+```
+```rust
+/* Set the friction coefficient and friction combine rule
+   after the collider creation. */
+let collider = collider_set.get_mut(collider_handle).unwrap();
+collider.set_friction(0.7);
+collider.set_friction_combine_rule(CoefficientCombineRule::Min);
+assert_eq!(collider.friction(), 0.7);
+assert_eq!(collider.friction_combine_rule(), CoefficientCombineRule::Min);
+```
+
+</rapier>
+<bevy>
+
+```rust
+/* Set the friction coefficient and friction combine rule
+   when the collider is created. */
+let collider = ColliderBundle {
+    material: ColliderMaterial { 
+        friction: 0.7,
+        friction_combine_rule: CoefficientCombineRule::Min,
+        ..Default::default() 
+    },
+    ..Default::default()
+};
+commands.spawn_bundle(collider);
+```
+```rust
+/* Set the friction coefficient and friction combine rule
+   inside of a system. */
+fn modify_collider_friction(mut materials: Query<&mut ColliderMaterial>) {
+    for mut co_material in materials.iter_mut() {
+        co_material.friction = 0.7;
+        co_material.friction_combine_rule = CoefficientCombineRule::Min;
+    }
+}
+```
+
+</bevy>
+<js>
+
+```js
+/* Set the friction coefficient and friction combine rule
+  when the collider is created. */
+let colliderDesc = ColliderDesc.ball(0.5)
+    .setFriction(0.7)
+    .setFrictionCombineRule(CoefficientCombineRule.Min);
+let collider = world.createCollider(colliderDesc);
+```
+```js
+/* Set the friction coefficient and friction combine rule
+   after the collider creation. */
+let collider = world.getCollider(collideHandle);
+collider.setFriction(0.7);
+collider.setFrictionCombineRule(CoefficientCombineRule.Min);
+```
+
+</js>
