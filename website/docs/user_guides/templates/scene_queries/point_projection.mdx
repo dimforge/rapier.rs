@@ -1,0 +1,154 @@
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+
+Point projection will either project a point on the closest collider of the scene (`QueryPipeline::project_point`),
+or will enumerate every collider containing given point (`QueryPipeline::intersections_with_point`).
+
+<rapier>
+
+<Tabs
+    groupId="dim"
+    defaultValue="2D"
+    values={[
+        {label: 'Example 2D', value: '2D'},
+        {label: 'Example 3D', value: '3D'},
+    ]}>
+<TabItem value="2D">
+
+```rust
+let point = point![1.0, 2.0];
+let solid = true;
+let groups = InteractionGroups::all();
+let filter = None;
+
+if let Some((handle, projection)) = query_pipeline.project_point(
+    &collider_set, &point, solid, groups, filter
+) {
+    // The collider closest to the point has this `handle`.
+    println!("Projected point on collider {:?}. Point projection: {}", handle, projection.point);
+    println!("Point was inside of the collider shape: {}", projection.is_inside);
+}
+
+query_pipeline.intersections_with_point(
+    &collider_set, &point, groups, filter, |handle| {
+        // Callback called on each collider with a shape containing the point.
+        println!("The collider {:?} contains the point.", handle);
+        // Return `false` instead if we want to stop searching for other colliders containing this point.
+        true
+    }
+);
+```
+
+</TabItem>
+<TabItem value="3D">
+
+```rust
+let point = point![1.0, 2.0, 3.0];
+let solid = true;
+let groups = InteractionGroups::all();
+let filter = None;
+
+if let Some((handle, projection)) = query_pipeline.project_point(
+    &collider_set, &point, solid, groups, filter
+) {
+    // The collider closest to the point has this `handle`.
+    println!("Projected point on collider {:?}. Point projection: {}", handle, projection.point);
+    println!("Point was inside of the collider shape: {}", projection.is_inside);
+}
+
+query_pipeline.intersections_with_point(
+    &collider_set, &point, groups, filter, |handle| {
+        // Callback called on each collider with a shape containing the point.
+        println!("The collider {:?} contains the point.", handle);
+        // Return `false` instead if we want to stop searching for other colliders containing this point.
+        true
+    }
+);
+```
+
+</TabItem>
+</Tabs>
+
+</rapier>
+<bevy>
+
+<Tabs
+groupId="dim"
+defaultValue="2D"
+values={[
+{label: 'Example 2D', value: '2D'},
+{label: 'Example 3D', value: '3D'},
+]}>
+<TabItem value="2D">
+
+```rust
+/* Project a point inside of a system. */
+fn project_point(query_pipeline: Res<QueryPipeline>, collider_query: QueryPipelineColliderComponentsQuery) {
+    // Wrap the bevy query so it can be used by the query pipeline.
+    let collider_set = QueryPipelineColliderComponentsSet(&collider_query);
+
+    let point = Vec2::new(1.0, 2.0).into();
+    let solid = true;
+    let groups = InteractionGroups::all();
+    let filter = None;
+
+    if let Some((handle, projection)) = query_pipeline.project_point(
+        &collider_set, &point, solid, groups, filter
+    ) {
+        // The collider closest to the point has this `handle`.
+        println!("Projected point on entity {:?}. Point projection: {}", handle.entity(), projection.point);
+        println!("Point was inside of the collider shape: {}", projection.is_inside);
+    }
+
+    query_pipeline.intersections_with_point(
+        &collider_set, &point, groups, filter, |handle| {
+            // Callback called on each collider with a shape containing the point.
+            println!("The entity {:?} contains the point.", handle.entity());
+            // Return `false` instead if we want to stop searching for other colliders containing this point.
+            true
+        }
+    );
+}
+```
+
+</TabItem>
+<TabItem value="3D">
+
+```rust
+/* Project a point inside of a system. */
+fn project_point(query_pipeline: Res<QueryPipeline>, collider_query: QueryPipelineColliderComponentsQuery) {
+    // Wrap the bevy query so it can be used by the query pipeline.
+    let collider_set = QueryPipelineColliderComponentsSet(&collider_query);
+
+    let point = Vec3::new(1.0, 2.0, 3.0).into();
+    let solid = true;
+    let groups = InteractionGroups::all();
+    let filter = None;
+
+    if let Some((handle, projection)) = query_pipeline.project_point(
+        &collider_set, &point, solid, groups, filter
+    ) {
+        // The collider closest to the point has this `handle`.
+        println!("Projected point on entity {:?}. Point projection: {}", handle.entity(), projection.point);
+        println!("Point was inside of the collider shape: {}", projection.is_inside);
+    }
+
+    query_pipeline.intersections_with_point(
+        &collider_set, &point, groups, filter, |handle| {
+        // Callback called on each collider with a shape containing the point.
+        println!("The entity {:?} contains the point.", handle.entity());
+        // Return `false` instead if we want to stop searching for other colliders containing this point.
+        true
+        }
+    );
+}
+```
+
+</TabItem>
+</Tabs>
+
+</bevy>
+
+The `solid`, `group` and `filter` arguments are used to control the way point-projection works: by ignoring the shape
+interiors and/or ignoring some colliders. See their description on the [ray-casting](#ray-casting) section.

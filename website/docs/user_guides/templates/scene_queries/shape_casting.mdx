@@ -1,0 +1,149 @@
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+
+Shape-casting (aka. sweep tests) is the big brother of ray-casting. The only difference with ray-cast is that instead of being a point
+travelling along a straight line, we have a complete shape travelling along a straight line. This is typically used for
+character controllers in games to determine by how much the player can move before it hits the environment.
+
+:::info
+Just like ray-casting, it is possible to control the behavior of the shape-casting like limiting the distance
+travelled by the shape cast, and ignoring some colliders. See the details about the `max_toi`, `groups` and
+`filter` arguments in the [ray-casting](#ray-casting) section.
+:::
+
+There is only one shape-casting method: `QueryPipeline::cast_shape`. This method has similar arguments as
+`QueryPipeline::cast_ray` except that the `Ray` is replaced by three arguments:
+the **shape** being cast, the **initial position** of the shape (this is analog to `ray.origin`) and the **linear velocity** the
+shape is travelling at (this is analog to `ray.dir`):
+
+<rapier>
+
+<Tabs
+groupId="dim"
+defaultValue="2D"
+values={[
+    {label: 'Example 2D', value: '2D'},
+    {label: 'Example 3D', value: '3D'},
+]}>
+<TabItem value="2D">
+
+```rust
+let shape = Cuboid::new(vector![1.0, 2.0]);
+let shape_pos = Isometry::new(vector![0.0, 1.0], 0.8);
+let shape_vel = vector![0.1, 0.4];
+let max_toi = 4.0;
+let groups = InteractionGroups::all();
+let filter = None;
+
+if let Some((handle, hit)) = query_pipeline.cast_shape(
+    &collider_set, &shape_pos, &shape_vel, &shape, max_toi, groups, filter
+) {
+    // The first collider hit has the handle `handle`. The `hit` is a
+    // structure containing details about the hit configuration.
+    println!("Hit the collider {:?} with the configuration: {:?}", handle, hit);
+}
+```
+
+</TabItem>
+<TabItem value="3D">
+
+```rust
+let shape = Cuboid::new(vector![1.0, 2.0, 3.0]);
+let shape_pos = Isometry::new(vector![0.0, 1.0, 0.0], vector![0.2, 0.7, 0.1]);
+let shape_vel = vector![0.1, 0.4, 0.2];
+let max_toi = 4.0;
+let groups = InteractionGroups::all();
+let filter = None;
+
+if let Some((handle, hit)) = query_pipeline.cast_shape(
+    &collider_set, &shape_pos, &shape_vel, &shape, max_toi, groups, filter
+) {
+    // The first collider hit has the handle `handle`. The `hit` is a
+    // structure containing details about the hit configuration.
+    println!("Hit the collider {:?} with the configuration: {:?}", handle, hit);
+}
+```
+
+</TabItem>
+</Tabs>
+
+</rapier>
+<bevy>
+
+<Tabs
+groupId="dim"
+defaultValue="2D"
+values={[
+{label: 'Example 2D', value: '2D'},
+{label: 'Example 3D', value: '3D'},
+]}>
+<TabItem value="2D">
+
+```rust
+/* Cast a shape inside of a system. */
+fn cast_shape(query_pipeline: Res<QueryPipeline>, collider_query: QueryPipelineColliderComponentsQuery) {
+    // Wrap the bevy query so it can be used by the query pipeline.
+    let collider_set = QueryPipelineColliderComponentsSet(&collider_query);
+
+    let shape = Cuboid::new(Vec2::new(1.0, 2.0).into());
+    let shape_pos = (Vec2::new(1.0, 2.0), 0.8).into();
+    let shape_vel = Vec2::new(0.1, 0.4).into();
+    let max_toi = 4.0;
+    let groups = InteractionGroups::all();
+    let filter = None;
+
+    if let Some((handle, hit)) = query_pipeline.cast_shape(
+        &collider_set, &shape_pos, &shape_vel, &shape, max_toi, groups, filter
+    ) {
+        // The first collider hit has the handle `handle`. The `hit` is a
+        // structure containing details about the hit configuration.
+        println!("Hit the entity {:?} with the configuration: {:?}", handle.entity(), hit);
+    }
+}
+```
+
+</TabItem>
+<TabItem value="3D">
+
+```rust
+/* Cast a shape inside of a system. */
+fn cast_shape(query_pipeline: Res<QueryPipeline>, collider_query: QueryPipelineColliderComponentsQuery) {
+    // Wrap the bevy query so it can be used by the query pipeline.
+    let collider_set = QueryPipelineColliderComponentsSet(&collider_query);
+
+    let shape = Cuboid::new(Vec3::new(1.0, 2.0, 3.0).into());
+    let shape_pos = (Vec3::new(0.0, 1.0, 0.0), Quat::from_rotation_x(0.4)).into();
+    let shape_vel = Vec3::new(0.1, 0.4, 0.2).into();
+    let max_toi = 4.0;
+    let groups = InteractionGroups::all();
+    let filter = None;
+
+    if let Some((handle, hit)) = query_pipeline.cast_shape(
+        &collider_set, &shape_pos, &shape_vel, &shape, max_toi, groups, filter
+    ) {
+        // The first collider hit has the handle `handle`. The `hit` is a
+        // structure containing details about the hit configuration.
+        println!("Hit the entity {:?} with the configuration: {:?}", handle.entity(), hit);
+    }
+}
+```
+
+</TabItem>
+</Tabs>
+
+</bevy>
+
+The result of `QueryPipeline::cast_shape` includes the handle of the first collider being hit, as well as
+detailed information about the geometry of the hit:
+- **`hit.toi`**: indicates the time of impact between the shape and the collider hit. This means that
+after travelling a distance of `shape_vel * hit.toi` the collider and the cast shape are exactly
+touching. If `hit.toi == 0.0` then the shape is already intersecting a collider at its initial position.
+- **`hit.witness1`**: indicates the contact point when the cast shape and the collider are touching, expressed in the
+local-space of the collider hit by the shape.
+- **`hit.witness2`**: indicates the contact point when the cast shape and the collider are touching, expressed in the
+local-space of the cast shape.
+- **`hit.normal1`**: indicates the normal at the contact point `hit.witness1`, expressed in the local-space of
+the collider hit by the shape.
+- **`hit.normal2`**: indicates the normal at the contact point `hit.witness2`, expressed in the local-space of
+the cast shape.
