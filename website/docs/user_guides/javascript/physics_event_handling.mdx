@@ -8,12 +8,12 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
 During the course of a physics simulation, colliders will collides, and sensors will be activated. These events can
-be retrieved in order to apply custom game logics. There are currently two types of events:
+be retrieved in order to apply custom game logic. There are currently two types of events:
 - Contact events triggered when two colliders start or stop having contact points.
 - Intersection events triggered when one sensor collider and another collider start or stop touching.
 
 In order to listen to these physics events, we need to:
-1. Create and `EventQueue` which is responsible for collecting events occurring during one timestep.
+1. Create an `EventQueue` which is responsible for collecting events occurring during one timestep.
 2. Call `world.step(eventQueue)` instead of `world.step()` to advance the simulation.
 3. Iterate through the events using `eventQueue.drainContactEvents` and `eventsQueue.drainIntersectionEvents`.
 
@@ -91,10 +91,10 @@ events that occurred before the last call to `step` will be lost.
 
 Handling the events is achieved by calling the corresponding drain function. This function will clear the event queue
 and pass all its items to a JS closure:
-- The `eventQueue.drainContactEvents` drains all the contact events. The input closure is expected to take three arguments:
-two integers and one boolean. The twe integers are the handles of the colliders involved in the contact. We can retrieve
+- `eventQueue.drainContactEvents` drains all the contact events. The input closure is expected to take three arguments:
+two integers and one boolean. The two integers are the handles of the colliders involved in the contact. We can retrieve
 the actual collider reference form its integer handle using `world.getCollider(handle)`. The boolean indicates whether the
-two colliders are starting to be in contact (true) or no longer have any contact point (false).
-- The `eventQueue.drainIntersectionEvents` drain all the proximity events. The input closure is expected to take three arguments,
+two colliders are starting to be in contact (true) or no longer have any contact points (false).
+- `eventQueue.drainIntersectionEvents` drains all the proximity events. The input closure is expected to take three arguments,
 two integers and one boolean. The two integers are the handles of the colliders
 involved in the proximity. The boolean indicates if they are intersecting.
