@@ -2,8 +2,8 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
 
-Point projection will either project a point on the closest collider of the scene (`QueryPipeline::project_point`),
-or will enumerate every collider containing given point (`QueryPipeline::intersections_with_point`).
+Point projection will either project a point on the closest collider of the scene (<notjs>`QueryPipeline::project_point`</notjs><js>`World.projectPoint`</js>),
+or will enumerate every collider containing given point (<notjs>`QueryPipeline::intersections_with_point`</notjs><js>`World.intersectionsWithPoint`</js>).
 
 <rapier>
 
@@ -149,6 +149,65 @@ fn project_point(query_pipeline: Res<QueryPipeline>, collider_query: QueryPipeli
 </Tabs>
 
 </bevy>
+<js>
 
-The `solid`, `group` and `filter` arguments are used to control the way point-projection works: by ignoring the shape
-interiors and/or ignoring some colliders. See their description on the [ray-casting](#ray-casting) section.
+<Tabs
+groupId="dim"
+defaultValue="2D"
+values={[
+{label: 'Example 2D', value: '2D'},
+{label: 'Example 3D', value: '3D'},
+]}>
+<TabItem value="2D">
+
+```js
+let point = { x: 1.0, y: 2.0 };
+let solid = true;
+let groups = 0xffffffff;
+
+let proj = world.projectPoint(point, solid, groups);
+if (proj != null) {
+    // The collider closest to the point has this `handle`.
+    console.log("Projected point on collider ", proj.colliderHandle, ". Point projection: ", proj.point);
+    console.log("Point was inside of the collider shape: {}", proj.isInside);
+}
+
+world.intersectionsWithPoint(point, groups, (handle) => {
+    // Callback called on each collider with a shape containing the point.
+    console.log("The collider", handle, "contains the point.");
+    // Return `false` instead if we want to stop searching for other colliders containing this point.
+    return true;
+});
+```
+
+</TabItem>
+<TabItem value="3D">
+
+```js
+let point = { x: 1.0, y: 2.0, z: 3.0 };
+let solid = true;
+let groups = 0xffffffff;
+
+let proj = world.projectPoint(point, solid, groups);
+if (proj != null) {
+    // The collider closest to the point has this `handle`.
+    console.log("Projected point on collider ", proj.colliderHandle, ". Point projection: ", proj.point);
+    console.log("Point was inside of the collider shape: {}", proj.isInside);
+}
+
+world.intersectionsWithPoint(point, groups, (handle) => {
+    // Callback called on each collider with a shape containing the point.
+    console.log("The collider", handle, "contains the point.");
+    // Return `false` instead if we want to stop searching for other colliders containing this point.
+    return true;
+});
+```
+
+</TabItem>
+</Tabs>
+
+</js>
+
+The `solid`, <js>and</js> `group` <notjs>and `filter`</notjs> arguments are used to control the way point-projection
+works: by ignoring the shape interiors and/or ignoring some colliders. See their description on the
+[ray-casting](#ray-casting) section.

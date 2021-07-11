@@ -241,7 +241,7 @@ if (hit != null) {
     // The first collider hit has the handle `hit.colliderHandle` and it hit after
     // the ray travelled a distance equal to `ray.dir * toi`.
     let hitPoint = ray.pointAt(hit.toi); // Same as: `ray.origin + ray.dir * toi`
-    console.log("Collider ", hit.colliderHandle, " hit at point ", hitPoint);
+    console.log("Collider", hit.colliderHandle, "hit at point", hitPoint);
 }
 
 let hit = world.castRayAndGetNormal(ray, maxToi, solid, groups);
@@ -249,13 +249,13 @@ if (hit != null) {
     // This is similar to `world.castRay` illustrated above except
     // that it also returns the normal of the collider shape at the hit point.
     let hitPoint = ray.pointAt(intersection.toi);
-    console.log("Collider ", hit.colliderHandle, " hit at point ", hitPoint, " with normal ", hit.normal);
+    console.log("Collider", hit.colliderHandle, "hit at point", hitPoint, "with normal", hit.normal);
 }
 
 world.intersectionsWithRay(ray, maxToi, solid, groups, (hit) => {
     // Callback called on each collider hit by the ray.
     let hitPoint = ray.pointAt(hit.toi);
-    console.log("Collider ", hit.colliderHandle, " hit at point ", hitPoint, " with normal ", hit.normal);
+    console.log("Collider", hit.colliderHandle, "hit at point", hitPoint, "with normal", hit.normal);
     return true; // Return `false` instead if we want to stop searching for other hits.
 });
 ```
@@ -273,8 +273,8 @@ let hit = world.castRay(ray, maxToi, solid, groups);
 if (hit != null) {
     // The first collider hit has the handle `hit.colliderHandle` and it hit after
     // the ray travelled a distance equal to `ray.dir * toi`.
-    let hitPoint = ray.poiauieauientAt(toi); // Same as: `ray.origin + ray.dir * toi`
-    console.log("Collider ", hit.colliderHandle, " hit at point ", hitPoint);
+    let hitPoint = ray.pointAt(toi); // Same as: `ray.origin + ray.dir * toi`
+    console.log("Collider", hit.colliderHandle, "hit at point", hitPoint);
 }
 
 let hit = world.castRayAndGetNormal(ray, maxToi, solid, groups);
@@ -282,16 +282,16 @@ if (hit != null) {
     // This is similar to `QueryPipeline::cast_ray` illustrated above except
     // that it also returns the normal of the collider shape at the hit point.
     let hitPoint = ray.pointAt(intersection.toi);
-    console.log("Collider ", hit.colliderHandle, " hit at point ", hitPoint, " with normal ", hit.normal);
+    console.log("Collider", hit.colliderHandle, "hit at point", hitPoint, "with normal", hit.normal);
 }
 
 world.intersectionWithRay(ray, maxToi, solid, groups, (hit) => {
     // Callback called on each collider hit by the ray.
     let hitPoint = ray.pointAt(hit.toi);
-    console.log("Collider ", hit.colliderHandle, " hit at point ", hitPoint, " with normal ", hit.normal);
+    console.log("Collider", hit.colliderHandle, "hit at point", hitPoint, "with normal", hit.normal);
     return true; // Return `false` instead if we want to stop searching for other hits.
 });
-```auieeeee
+```
 
 </TabItem>
 </Tabs>

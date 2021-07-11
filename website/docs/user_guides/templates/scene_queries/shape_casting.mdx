@@ -12,8 +12,8 @@ travelled by the shape cast, and ignoring some colliders. See the details about 
 `filter` arguments in the [ray-casting](#ray-casting) section.
 :::
 
-There is only one shape-casting method: `QueryPipeline::cast_shape`. This method has similar arguments as
-`QueryPipeline::cast_ray` except that the `Ray` is replaced by three arguments:
+There is only one shape-casting method: <notjs>`QueryPipeline::cast_shape`</notjs><js>`World.castShape`</js>. This method has similar arguments as
+<notjs>`QueryPipeline::cast_ray`</notjs><js>`World.castRay`</js> except that the `Ray` is replaced by three arguments:
 the **shape** being cast, the **initial position** of the shape (this is analog to `ray.origin`) and the **linear velocity** the
 shape is travelling at (this is analog to `ray.dir`):
 
@@ -133,12 +133,63 @@ fn cast_shape(query_pipeline: Res<QueryPipeline>, collider_query: QueryPipelineC
 </Tabs>
 
 </bevy>
+<js>
 
-The result of `QueryPipeline::cast_shape` includes the handle of the first collider being hit, as well as
+<Tabs
+groupId="dim"
+defaultValue="2D"
+values={[
+{label: 'Example 2D', value: '2D'},
+{label: 'Example 3D', value: '3D'},
+]}>
+<TabItem value="2D">
+
+```js
+let shape = new Cuboid(1.0, 2.0);
+let shapePos = { x: 0.0, y: 1.0 };
+let shapeRot = 0.2;
+let shapeVel = vector![0.1, 0.4];
+let maxToi = 4.0;
+let groups = 0xffffffff;
+
+let hit = world.castShape(shapePos, shapeRot, shapeVel, shape, maxToi, groups);
+if (hit != null) {
+    // The first collider hit has the handle `handle`. The `hit` is a
+    // structure containing details about the hit configuration.
+    console.log("Hit the collider", hit.colliderHandle, "at time", hit.toi);
+}
+```
+
+</TabItem>
+<TabItem value="3D">
+
+```js
+let shape = new Cuboid(1.0, 2.0, 3.0);
+let shapePos = { x: 0.0, y: 1.0, z: 0.0 };
+let shapeRot = { w: 1.0, x: 0.0, y: 0.0, z: 0.0 };
+let shapeVel = { x: 0.2, y: 0.4, z: 0.8 };
+let maxToi = 4.0;
+let groups = 0xffffffff;
+
+let hit = world.castShape(shapePos, shapeRot, shapeVel, shape, maxToi, groups);
+if (hit != null) {
+    // The first collider hit has the handle `handle`. The `hit` is a
+    // structure containing details about the hit configuration.
+    console.log("Hit the collider", hit.colliderHandle, "at time", hit.toi);
+}
+```
+
+</TabItem>
+</Tabs>
+
+</js>
+
+The result of the shape-casting includes the handle of the first collider being hit, as well as
 detailed information about the geometry of the hit:
 - **`hit.toi`**: indicates the time of impact between the shape and the collider hit. This means that
-after travelling a distance of `shape_vel * hit.toi` the collider and the cast shape are exactly
-touching. If `hit.toi == 0.0` then the shape is already intersecting a collider at its initial position.
+after travelling a distance of <notjs>`shape_vel * hit.toi`</notjs><js>`shapeVel * hit.toi`</js> the collider and the
+cast shape are exactly touching. If `hit.toi == 0.0` then the shape is already intersecting a collider at its initial
+position.
 - **`hit.witness1`**: indicates the contact point when the cast shape and the collider are touching, expressed in the
 local-space of the collider hit by the shape.
 - **`hit.witness2`**: indicates the contact point when the cast shape and the collider are touching, expressed in the

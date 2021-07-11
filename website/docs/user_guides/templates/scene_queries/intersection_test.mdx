@@ -3,9 +3,9 @@ import TabItem from '@theme/TabItem';
 
 Intersection tests will find all the colliders with a shape intersecting a given shape. This can be useful for, e.g.,
 selecting all the objects that intersect a given area. There are two kind of intersection tests:
-- The exact intersection test `QueryPipeline::intersections_with_shape` searches for all the colliders with shapes
-intersecting the given shape.
-- The approximate intersection test `QueryPipeline::colliders_with_aabb_intersecting_aabb` searches for all the
+- The exact intersection test <notjs>`QueryPipeline::intersections_with_shape`</notjs><js>`World.intersectionsWithShape`</js>
+  searches for all the colliders with shapes intersecting the given shape.
+- The approximate intersection test <notjs>`QueryPipeline::colliders_with_aabb_intersecting_aabb`</notjs><js>`World.collidersWithAabbIntersectingAabb`</js> searches for all the
 colliders with an AABB intersecting the given AABB. This does not check if the actual shapes of these colliders
 intersect the AABB.
 
@@ -141,6 +141,62 @@ fn test_intersections(query_pipeline: Res<QueryPipeline>, collider_query: QueryP
 </Tabs>
 
 </bevy>
+<js>
 
-Use the `group` and `filter` arguments to exclude some colliders from these intersection tests.
+<Tabs
+groupId="dim"
+defaultValue="2D"
+values={[
+{label: 'Example 2D', value: '2D'},
+{label: 'Example 3D', value: '3D'},
+]}>
+<TabItem value="2D">
+
+```js
+let shape = new Cuboid(1.0, 2.0);
+let shapePos = { x: 1.0, y: 2.0 };
+let shapeRot = 0.1;
+let groups = 0xffffffff;
+
+world.intersectionsWithShape(shapePos, shapeRot, shape, groups, (handle) => {
+    console.log("The collider", handle, "intersects our shape.");
+    return true; // Return `false` instead if we want to stop searching for other colliders that contain this point.
+});
+
+let aabbCenter = { x: -1.0, y: -2.0 };
+let aabbHalfExtents = { x: 0.5, y: 0.6 };
+world.collidersWithAabbIntersectingAabb(aabbCenter, aabbHalfExtents, (handle) => {
+    console.log("The collider", handle, "has an AABB intersecting our test AABB");
+    return true; // Return `false` instead if we want to stop searching for other colliders that contain this point.
+});
+```
+
+</TabItem>
+<TabItem value="3D">
+
+```js
+let shape = new Cuboid(1.0, 2.0, 3.0);
+let shapePos = { x: 1.0, y: 2.0, z: 3.0 };
+let shapeRot = { w: 1.0, x: 0.0, y: 0.0, z: 0.0 };
+let groups = 0xffffffff;
+
+world.intersectionsWithShape(shapePos, shapeRot, shape, groups, (handle) => {
+    console.log("The collider", handle, "intersects our shape.");
+    return true; // Return `false` instead if we want to stop searching for other colliders that contain this point.
+});
+
+let aabbCenter = { x: -1.0, y: -2.0, z: -3.0 };
+let aabbHalfExtents = { x: 0.5, y: 0.6, z: 0.5 };
+world.collidersWithAabbIntersectingAabb(aabbCenter, aabbHalfExtents, (handle) => {
+    console.log("The collider", handle, "has an AABB intersecting our test AABB");
+    return true; // Return `false` instead if we want to stop searching for other colliders that contain this point.
+});
+```
+
+</TabItem>
+</Tabs>
+
+</js>
+
+Use the `group` <notjs>and `filter` arguments</notjs><js>argument</js> to exclude some colliders from these intersection tests.
 See their description on the [ray-casting](#ray-casting) section.

@@ -4,6 +4,7 @@ let template = {
   '<Templates>': [
     'user_guides/templates/getting_started',
     'user_guides/templates/getting_started_bevy',
+    'user_guides/templates/getting_started_js',
     'user_guides/templates/introduction_to_nalgebra',
     'user_guides/templates/simulation_structures',
     'user_guides/templates/rigid_bodies',
@@ -11,6 +12,7 @@ let template = {
     'user_guides/templates/joints',
     'user_guides/templates/scene_queries',
     'user_guides/templates/advanced_collision_detection',
+    'user_guides/templates/advanced_collision_detection_js',
     // 'user_guides/templates/integration_parameters',
     'user_guides/templates/serialization',
     'user_guides/templates/determinism',
