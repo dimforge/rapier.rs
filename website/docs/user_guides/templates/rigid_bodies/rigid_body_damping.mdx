@@ -53,10 +53,10 @@ fn modify_body_damping(mut dampings: Query<&mut RigidBodyDamping>) {
 
 ```js
 /* Set the damping coefficients when the rigid-body is created. */
-let rigidBodyDesc = RigidBodyDesc.newDynamic()
+let rigidBodyDesc = RAPIER.RigidBodyDesc.newDynamic()
     .setLinearDamping(0.5)
     .setAngularDamping(1.0);
-let rigidBody = world.creatRigidBody(rigidBodyDesc);
+let rigidBody = world.createRigidBody(rigidBodyDesc);
 ```
 ```js
 /* Set the damping coefficients after the rigid-body creation. */

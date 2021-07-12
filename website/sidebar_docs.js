@@ -19,11 +19,6 @@ let template = {
     'user_guides/templates/common_mistakes',
     // 'user_guides/templates/the_rapier_testbed',
     // 'user_guides/templates/common_recipes',
-  ],
-  'JavaScript': [
-    'user_guides/javascript/getting_started',
-    'user_guides/javascript/rigid_body_simulation',
-    'user_guides/javascript/physics_event_handling'
   ]
 };
 
@@ -56,9 +51,15 @@ let specialized_guides = {
       'user_guides/bevy_plugin/common_mistakes',
     ],
     'JavaScript': [
-      'user_guides/javascript/getting_started',
-      'user_guides/javascript/rigid_body_simulation',
-      'user_guides/javascript/physics_event_handling'
+      'user_guides/javascript/getting_started_js',
+      'user_guides/javascript/rigid_bodies',
+      'user_guides/javascript/colliders',
+      'user_guides/javascript/joints',
+      'user_guides/javascript/scene_queries',
+      'user_guides/javascript/advanced_collision_detection_js',
+      'user_guides/javascript/serialization',
+      'user_guides/javascript/determinism',
+      'user_guides/javascript/common_mistakes',
     ],
 };
 

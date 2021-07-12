@@ -134,21 +134,21 @@ values={[
 <TabItem value="2D">
 
 ```js
-let params = JointParams.fixed({ x: 0.0, y: 0.0 }, 0.0, { x: 0.0, y: -2.0 }, 0.0);
-let joint = world.createJoint(params, bodyHandle1, bodyHandle2);
+let params = RAPIER.JointParams.fixed({ x: 0.0, y: 0.0 }, 0.0, { x: 0.0, y: -2.0 }, 0.0);
+let joint = world.createJoint(params, body1, body2);
 ```
 
   </TabItem>
   <TabItem value="3D">
 
 ```js
-let params = JointParams.fixed(
+let params = RAPIER.JointParams.fixed(
     { x: 0.0, y: 0.0, z: 0.0 }, 
     { w: 1.0, x: 0.0, y: 0.0, z: 0.0 },
     { x: 0.0, y: -2.0, z: 0.0 },
     { w: 1.0, x: 0.0, y: 0.0, z: 0.0 }
 );
-let joint = world.createJoint(params, bodyHandle1, bodyHandle2);
+let joint = world.createJoint(params, body1, body2);
 ```
 
   </TabItem>
@@ -231,16 +231,16 @@ values={[
 <TabItem value="2D">
 
 ```js
-let desc = JointDesc.ball({ x: 0.0, y: 0.0 }, { x: 0.0, y: -3.0 });
-let joint = world.createJoint(desc, bodyHandle1, bodyHandle2);
+let params = RAPIER.JointParams.ball({ x: 0.0, y: 0.0 }, { x: 0.0, y: -3.0 });
+let joint = world.createJoint(params, body1, body2);
 ```
 
   </TabItem>
   <TabItem value="3D">
 
 ```js
-let desc = JointDesc.ball({ x: 0.0, y: 0.0, z: 0.0 }, { x: 0.0, y: -3.0, z: 0.0 });
-let joint = world.createJoint(desc, bodyHandle1, bodyHandle2);
+let params = RAPIER.JointParams.ball({ x: 0.0, y: 0.0, z: 0.0 }, { x: 0.0, y: -3.0, z: 0.0 });
+let joint = world.createJoint(params, body1, body2);
 ```
 
   </TabItem>
@@ -275,8 +275,8 @@ commands.spawn().insert(JointBuilderComponent::new(joint, entity1, entity2));
 
 ```js
 let x = { x: 1.0, y: 0.0, z: 0.0 };
-let desc = JointDesc.revolute({ x: 0.0, y: 0.0, z: 1.0 }, x, { x: 0.0, y. 0.0, z: -3.0 }, x);
-let joint = world.createJoint(desc, bodyHandle1, bodyHandle2);
+let params = RAPIER.JointParams.revolute({ x: 0.0, y: 0.0, z: 1.0 }, x, { x: 0.0, y: 0.0, z: -3.0 }, x);
+let joint = world.createJoint(params, body1, body2);
 ```
 
 </js>
@@ -376,10 +376,10 @@ values={[
 
 ```js
 let x = { x: 1.0, y: 0.0 };
-let desc = JointDesc.prismatic({ x: 0.0, y: 0.0 }, x, { x: 0.0, y: -3.0 }, x);
-desc.limitsEnabled = true;
-desc.limits = [-2.0, 5.0];
-let joint = world.createJoint(desc, bodyHandle1, bodyHandle2);
+let params = RAPIER.JointParams.prismatic({ x: 0.0, y: 0.0 }, x, { x: 0.0, y: -3.0 }, x);
+params.limitsEnabled = true;
+params.limits = [-2.0, 5.0];
+let joint = world.createJoint(params, body1, body2);
 ```
 
   </TabItem>
@@ -388,10 +388,10 @@ let joint = world.createJoint(desc, bodyHandle1, bodyHandle2);
 ```js
 let x = { x: 1.0, y: 0.0, z: 0.0 };
 let z = { x: 0.0, y: 0.0, z: 1.0 };
-let desc = JointDesc.prismatic({ x: 0.0, y: 0.0, z: 1.0 }, x, z, { x: 0.0, y: 0.0, z: -3.0 }, x, z);
-desc.limitsEnabled = true;
-desc.limits = [-2.0, 5.0];
-let joint = world.createJoint(desc, bodyHandle1, bodyHandle2);
+let params = RAPIER.JointParams.prismatic({ x: 0.0, y: 0.0, z: 1.0 }, x, z, { x: 0.0, y: 0.0, z: -3.0 }, x, z);
+params.limitsEnabled = true;
+params.limits = [-2.0, 5.0];
+let joint = world.createJoint(params, body1, body2);
 ```
 
   </TabItem>
@@ -505,9 +505,9 @@ values={[
 
 ```js
 let x = { x: 1.0, y: 0.0 };
-let desc = JointDesc.prismatic({ x: 0.0, y: 0.0 }, x, { x: 0.0, y: -3.0 }, x);
-let joint = world.createJoint(desc, bodyHandle1, bodyHandle2);
-joint.configure_motor_velocity(1.0, 0.5);
+let params = RAPIER.JointParams.prismatic({ x: 0.0, y: 0.0 }, x, { x: 0.0, y: -3.0 }, x);
+let joint = world.createJoint(params, body1, body2);
+(joint as RAPIER.PrismaticJoint).configureMotorVelocity(1.0, 0.5);
 ```
 
   </TabItem>
@@ -516,9 +516,9 @@ joint.configure_motor_velocity(1.0, 0.5);
 ```js
 let x = { x: 1.0, y: 0.0, z: 0.0 };
 let z = { x: 0.0, y: 0.0, z: 1.0 };
-let desc = JointDesc.prismatic({ x: 0.0, y: 0.0, z: 1.0 }, x, z, { x: 0.0, y: 0.0, z: -3.0 }, x, z);
-let joint = world.createJoint(desc, bodyHandle1, bodyHandle2);
-joint.configure_motor_velocity(1.0, 0.5);
+let params = RAPIER.JointParams.prismatic({ x: 0.0, y: 0.0, z: 1.0 }, x, z, { x: 0.0, y: 0.0, z: -3.0 }, x, z);
+let joint = world.createJoint(params, body1, body2);
+(joint as RAPIER.PrismaticJoint).configureMotorVelocity(1.0, 0.5);
 ```
 
   </TabItem>

@@ -231,10 +231,10 @@ fn cast_ray(query_pipeline: Res<QueryPipeline>, collider_query: QueryPipelineCol
 <TabItem value="2D">
 
 ```js
-let ray = new Ray({ x: 1.0, y: 2.0 }, { x: 0.0, y: 1.0 });
-let max_toi = 4.0;
+let ray = new RAPIER.Ray({ x: 1.0, y: 2.0 }, { x: 0.0, y: 1.0 });
+let maxToi = 4.0;
 let solid = true;
-let groups = 0xffffffff;
+let groups = 0xfffffffff;
 
 let hit = world.castRay(ray, maxToi, solid, groups);
 if (hit != null) {
@@ -244,12 +244,12 @@ if (hit != null) {
     console.log("Collider", hit.colliderHandle, "hit at point", hitPoint);
 }
 
-let hit = world.castRayAndGetNormal(ray, maxToi, solid, groups);
-if (hit != null) {
-    // This is similar to `world.castRay` illustrated above except
+let hitWithNormal = world.castRayAndGetNormal(ray, maxToi, solid, groups);
+if (hitWithNormal != null) {
+    // This is similar to `QueryPipeline::cast_ray` illustrated above except
     // that it also returns the normal of the collider shape at the hit point.
-    let hitPoint = ray.pointAt(intersection.toi);
-    console.log("Collider", hit.colliderHandle, "hit at point", hitPoint, "with normal", hit.normal);
+    let hitPoint = ray.pointAt(hitWithNormal.toi);
+    console.log("Collider", hitWithNormal.colliderHandle, "hit at point", hitPoint, "with normal", hitWithNormal.normal);
 }
 
 world.intersectionsWithRay(ray, maxToi, solid, groups, (hit) => {
@@ -264,7 +264,7 @@ world.intersectionsWithRay(ray, maxToi, solid, groups, (hit) => {
 <TabItem value="3D">
 
 ```js
-let ray = new Ray({ x: 1.0, y: 2.0, z: 3.0 }, { x: 0.0, y: 1.0, z: 0.0 });
+let ray = new RAPIER.Ray({ x: 1.0, y: 2.0, z: 3.0 }, { x: 0.0, y: 1.0, z: 0.0 });
 let maxToi = 4.0;
 let solid = true;
 let groups = 0xfffffffff;
@@ -273,19 +273,19 @@ let hit = world.castRay(ray, maxToi, solid, groups);
 if (hit != null) {
     // The first collider hit has the handle `hit.colliderHandle` and it hit after
     // the ray travelled a distance equal to `ray.dir * toi`.
-    let hitPoint = ray.pointAt(toi); // Same as: `ray.origin + ray.dir * toi`
+    let hitPoint = ray.pointAt(hit.toi); // Same as: `ray.origin + ray.dir * toi`
     console.log("Collider", hit.colliderHandle, "hit at point", hitPoint);
 }
 
-let hit = world.castRayAndGetNormal(ray, maxToi, solid, groups);
-if (hit != null) {
+let hitWithNormal = world.castRayAndGetNormal(ray, maxToi, solid, groups);
+if (hitWithNormal != null) {
     // This is similar to `QueryPipeline::cast_ray` illustrated above except
     // that it also returns the normal of the collider shape at the hit point.
-    let hitPoint = ray.pointAt(intersection.toi);
-    console.log("Collider", hit.colliderHandle, "hit at point", hitPoint, "with normal", hit.normal);
+    let hitPoint = ray.pointAt(hitWithNormal.toi);
+    console.log("Collider", hitWithNormal.colliderHandle, "hit at point", hitPoint, "with normal", hitWithNormal.normal);
 }
 
-world.intersectionWithRay(ray, maxToi, solid, groups, (hit) => {
+world.intersectionsWithRay(ray, maxToi, solid, groups, (hit) => {
     // Callback called on each collider hit by the ray.
     let hitPoint = ray.pointAt(hit.toi);
     console.log("Collider", hit.colliderHandle, "hit at point", hitPoint, "with normal", hit.normal);

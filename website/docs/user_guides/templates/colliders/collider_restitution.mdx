@@ -90,9 +90,9 @@ fn modify_collider_restitution(mut materials: Query<&mut ColliderMaterial>) {
 ```js
 /* Set the restitution coefficient and restitution combine rule
   when the collider is created. */
-let colliderDesc = ColliderDesc.ball(0.5)
+let colliderDesc = RAPIER.ColliderDesc.ball(0.5)
     .setRestitution(0.7)
-    .setRestitutionCombineRule(CoefficientCombineRule.Min);
+    .setRestitutionCombineRule(RAPIER.CoefficientCombineRule.Min);
 let collider = world.createCollider(colliderDesc);
 ```
 ```js
@@ -100,7 +100,7 @@ let collider = world.createCollider(colliderDesc);
    after the collider creation. */
 let collider = world.getCollider(collideHandle);
 collider.setRestitution(0.7);
-collider.setRestitutionCombineRule(CoefficientCombineRule.Min);
+collider.setRestitutionCombineRule(RAPIER.CoefficientCombineRule.Min);
 ```
 
 </js>

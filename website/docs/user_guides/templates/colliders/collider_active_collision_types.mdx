@@ -50,16 +50,16 @@ fn modify_collider_active_collision_types(mut flags: Query<&mut ColliderFlags>) 
 
 ```js
 /* Set the active collision types when the collider is created. */
-let colliderDesc = ColliderDesc.ball(0.5)
-    .setActiveCollisionTypes(ActiveCollisionTypes.DEFAULT | 
-                             ActiveCollisionTypes.KINEMATIC_STATIC);
+let colliderDesc = RAPIER.ColliderDesc.ball(0.5)
+    .setActiveCollisionTypes(RAPIER.ActiveCollisionTypes.DEFAULT | 
+                             RAPIER.ActiveCollisionTypes.KINEMATIC_STATIC);
 let collider = world.createCollider(colliderDesc);
 ```
 ```js
 /* Set the active collision types after the collider creation. */
 let collider = world.getCollider(colliderHandle);
-collider.setActiveCollisionTypes(ActiveCollisionTypes.DEFAULT|
-                                 ActiveCollisionTypes.KINEMATIC_STATIC);
+collider.setActiveCollisionTypes(RAPIER.ActiveCollisionTypes.DEFAULT|
+                                 RAPIER.ActiveCollisionTypes.KINEMATIC_STATIC);
 ```
 
 </js>
@@ -79,7 +79,7 @@ ActiveCollisionTypes::default() | ActiveCollisionTypes::KINEMATIC_STATIC
 <js>
 
 ```js
-ActiveCollisionTypes.DEFAULT | ActiveCollisionTypes.KINEMATIC_STATIC
+RAPIER.ActiveCollisionTypes.DEFAULT | RAPIER.ActiveCollisionTypes.KINEMATIC_STATIC
 ```
 
 </js>

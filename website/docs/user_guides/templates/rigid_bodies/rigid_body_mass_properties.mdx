@@ -192,7 +192,7 @@ values={[
 
 ```js
 /* Set the mass-properties when the rigid-body is created. */
-let rigidBodyDesc = RigidBodyDesc.newDynamic()
+let rigidBodyDesc = RAPIER.RigidBodyDesc.newDynamic()
     .setAdditionalMass(0.5)
     .setAdditionalPrincipalAngularInertia(0.3)
     // Sets both the mass and angular inertia at once.
@@ -209,7 +209,7 @@ let rigidBody = world.createRigidBody(rigidBodyDesc);
 
 ```js
 /* Set the mass-properties when the rigid-body is created. */
-let rigidBodyDesc = RigidBodyDesc.newDynamic()
+let rigidBodyDesc = RAPIER.RigidBodyDesc.newDynamic()
     .setAdditionalMass(0.5)
     .setAdditionalPrincipalAngularInertia({ x: 0.3, y: 0.2, z: 0.1 })
     // Sets both the mass and angular inertia at once.

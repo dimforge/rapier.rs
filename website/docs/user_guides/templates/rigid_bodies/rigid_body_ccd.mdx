@@ -59,7 +59,7 @@ fn modify_body_ccd(mut ccds: Query<&mut RigidBodyCcd>) {
 
 ```js
 /* Enable CCD when the rigid-body is created. */
-let rigidBodyDesc = RigidBodyDesc.newDynamic()
+let rigidBodyDesc = RAPIER.RigidBodyDesc.newDynamic()
     .setCcdEnabled(true);
 let rigidBody =  world.createRigidBody(rigidBodyDesc);
 ```

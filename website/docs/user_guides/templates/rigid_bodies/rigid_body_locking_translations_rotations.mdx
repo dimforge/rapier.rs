@@ -124,7 +124,7 @@ values={[
 
 ```js
 /* Lock translations/rotations when the rigid-body is created. */
-let rigidBodyDesc = RigidBodyDesc.newDynamic()
+let rigidBodyDesc = RAPIER.RigidBodyDesc.newDynamic()
     .lockTranslations() // prevent translations along along all axes.
     .lockRotations();   // prevent rotations.
 let rigidBody = world.createRigidBody(rigidBodyDesc);
@@ -143,7 +143,7 @@ rigidBody.lockRotations(true, true);
 
 ```js
 /* Lock translations/rotations when the rigid-body is created. */
-let rigidBody = RigidBodyDesc.newDynamic()
+let rigidBodyDesc = RAPIER.RigidBodyDesc.newDynamic()
     .lockTranslations() // prevent translations along along all axes.
     .lockRotations()    // prevent rotations along all axes.
     .restrictRotations(true, false, false); // prevent rotations along the Y and Z axes.

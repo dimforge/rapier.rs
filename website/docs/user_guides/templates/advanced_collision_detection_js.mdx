@@ -21,7 +21,7 @@ There events can be collected by optionally passing an instance of `EventQueue` 
 The colliders involved in each event is identified by its integer handle.
 
 ```js
-let eventQueue = new EventQueue(true);
+let eventQueue = new RAPIER.EventQueue(true);
 world.step(eventQueue);
 
 eventQueue.drainContactEvents((handle1, handle2, started) => {

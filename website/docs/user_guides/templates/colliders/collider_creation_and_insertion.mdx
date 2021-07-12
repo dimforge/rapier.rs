@@ -239,22 +239,20 @@ values={[
 
 ```js
 // The physics world.
-let world = new World({ x: 0.0, y: -9.81 });
+let world = new RAPIER.World({ x: 0.0, y: -9.81 });
 
 // Builder for a ball-shaped collider.
-let _ = ColliderDesc.ball(0.5);
+let example1 = RAPIER.ColliderDesc.ball(0.5);
 // Builder for a cuboid-shaped collider.
-let _ = ColliderDesc.cuboid(0.5, 0.2);
-// Builder for a capsule-shaped collider. The capsule principal axis is the `x` coordinate axis.
-let _ = ColliderDesc.capsule_x(0.5, 0.2);
+let example2 = RAPIER.ColliderDesc.cuboid(0.5, 0.2);
 // Builder for a capsule-shaped collider. The capsule principal axis is the `y` coordinate axis.
-let _ = ColliderDesc.capsule_y(0.5, 0.2);
+let example3 = RAPIER.ColliderDesc.capsule(0.5, 0.2);
 // Builder for a triangle-mesh-shaped collider.
-let _ = ColliderDesc.trimesh(vertices, indices);
+let example4 = RAPIER.ColliderDesc.trimesh(vertices, indices);
 // Builder for a heightfield-shaped collider.
-let _ = ColliderDesc.heightfield(heights, scale);
+let example5 = RAPIER.ColliderDesc.heightfield(heights, scale);
 // Builder for a collider with the given shape.
-let colliderDesc = ColliderDesc.new(SharedShape::ball(0.5))
+let colliderDesc = new RAPIER.ColliderDesc(new RAPIER.Ball(0.5))
     // The collider translation wrt. the body it is attached to.
     // Default: the zero vector.
     .setTranslation(1.0, 2.0)
@@ -275,7 +273,7 @@ let colliderDesc = ColliderDesc.new(SharedShape::ball(0.5))
 // Create the collider, without attaching it to a rigid-body.
 let handle = world.createCollider(colliderDesc);
 // Or create the collider and attach it to a rigid-body.
-let rigidBody = world.createRigidBody(RigidBodyDesc.newDynamic());
+let rigidBody = world.createRigidBody(RAPIER.RigidBodyDesc.newDynamic());
 let collider = world.createCollider(colliderDesc, rigidBody.handle);
 ```
 
@@ -287,21 +285,17 @@ let collider = world.createCollider(colliderDesc, rigidBody.handle);
 let world = new World({ x: 0.0, y: -9.81, z: 0.0 });
 
 // Builder for a ball-shaped collider.
-let _ = ColliderDesc.ball(0.5);
+let example1 = RAPIER.ColliderDesc.ball(0.5);
 // Builder for a cuboid-shaped collider.
-let _ = ColliderDesc.cuboid(0.5, 0.2, 0.1);
-// Builder for a capsule-shaped collider. The capsule principal axis is the `x` coordinate axis.
-let _ = ColliderDesc.capsule_x(0.5, 0.2);
+let example2 = RAPIER.ColliderDesc.cuboid(0.5, 0.2, 0.1);
 // Builder for a capsule-shaped collider. The capsule principal axis is the `y` coordinate axis.
-let _ = ColliderDesc.capsule_y(0.5, 0.2);
-// Builder for a capsule-shaped collider. The capsule principal axis is the `z` coordinate axis.
-let _ = ColliderDesc.capsule_z(0.5, 0.2);
+let example3 = RAPIER.ColliderDesc.capsule(0.5, 0.2);
 // Builder for a triangle-mesh-shaped collider.
-let _ = ColliderDesc.trimesh(vertices, indices);
+let example4 = RAPIER.ColliderDesc.trimesh(vertices, indices);
 // Builder for a heightfield-shaped collider.
-let _ = ColliderDesc.heightfield(heights, scale);
+let example5 = RAPIER.ColliderDesc.heightfield(10, 10, heights, scale);
 // Builder for a collider with the given shape.
-let collider = ColliderDesc.new(SharedShape::ball(0.5))
+let colliderDesc = new RAPIER.ColliderDesc(new RAPIER.Ball(0.5))
     // The collider translation wrt. the body it is attached to.
     // Default: the zero vector.
     .setTranslation(1.0, 2.0, 3.0)
@@ -322,7 +316,7 @@ let collider = ColliderDesc.new(SharedShape::ball(0.5))
 // Create the collider, without attaching it to a rigid-body.
 let handle = world.createCollider(colliderDesc);
 // Or create the collider and attach it to a rigid-body.
-let rigidBody = world.createRigidBody(RigidBodyDesc.newDynamic());
+let rigidBody = world.createRigidBody(RAPIER.RigidBodyDesc.newDynamic());
 let collider = world.createCollider(colliderDesc, rigidBody.handle);
 ```
 

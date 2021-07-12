@@ -70,14 +70,14 @@ fn modify_body_gravity_scale(mut forces: Query<&mut RigidBodyForces>) {
 
 ```js
 /* Set the gravity scale when the rigid-body is created. */
-let rigidBodyDesc = RigidBodyDesc.newDynamic()
+let rigidBodyDesc = RAPIER.RigidBodyDesc.newDynamic()
     .setGravityScale(2.0);
-let rigidBody = world.creatRigidBody(rigidBodyDesc);
+let rigidBody = world.createRigidBody(rigidBodyDesc);
 ```
 ```js
 /* Set the gravity scale after the rigid-body creation. */
 let rigidBody = world.getRigidBody(rigidBodyHandle);
-rigidBody.setGravityScale(2.0);
+rigidBody.setGravityScale(2.0, true);
 ```
 
 </js>

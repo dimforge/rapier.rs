@@ -145,10 +145,10 @@ values={[
 <TabItem value="2D">
 
 ```js
-let shape = new Cuboid(1.0, 2.0);
+let shape = new RAPIER.Cuboid(1.0, 2.0);
 let shapePos = { x: 0.0, y: 1.0 };
 let shapeRot = 0.2;
-let shapeVel = vector![0.1, 0.4];
+let shapeVel = { x: 0.1, y: 0.4 };
 let maxToi = 4.0;
 let groups = 0xffffffff;
 
@@ -164,7 +164,7 @@ if (hit != null) {
 <TabItem value="3D">
 
 ```js
-let shape = new Cuboid(1.0, 2.0, 3.0);
+let shape = new RAPIER.Cuboid(1.0, 2.0, 3.0);
 let shapePos = { x: 0.0, y: 1.0, z: 0.0 };
 let shapeRot = { w: 1.0, x: 0.0, y: 0.0, z: 0.0 };
 let shapeVel = { x: 0.2, y: 0.4, z: 0.8 };

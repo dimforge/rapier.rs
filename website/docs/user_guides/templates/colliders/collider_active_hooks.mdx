@@ -12,9 +12,9 @@ by setting its corresponding active hooks bit to `1`:
 - Setting the <notjs>`ActiveHooks::FILTER_INTERSECTION_PAIRS`</notjs><js>`ActiveHooks.FILTER_INTERSECTION_PAIRS`</js>bit
   to 1 enables the manual [filtering of all the contact pairs](advanced_collision_detection#contact-and-intersection-filtering)
   involving the collider.
-- Setting the <notjs>`ActiveHooks::MODIFY_SOLVER_CONTACTS`</notjs><js>`ActiveHooks.MODIFY_SOLVER_CONTACTS`</js> bit to 1
+<notjs>- Setting the `ActiveHooks::MODIFY_SOLVER_CONTACTS` bit to 1
   enables the manual [contact modification](advanced_collision_detection#contact-modification) for all the contact
-  manifolds involving the collider.
+  manifolds involving the collider.</notjs>
 
 The active hooks of a collider can be set when the collider is created or after its creation:
 
@@ -52,7 +52,7 @@ commands.spawn_bundle(collider);
 fn modify_collider_active_hooks(mut flags: Query<&mut ColliderFlags>) {
     for mut co_flags in flags.iter_mut() {
         co_flags.active_hooks = ActiveHooks::FILTER_CONTACT_PAIRS |
-                                    ActiveHooks::MODIFY_SOLVER_CONTACTS;
+                                ActiveHooks::MODIFY_SOLVER_CONTACTS;
     }
 }
 ```
@@ -62,16 +62,14 @@ fn modify_collider_active_hooks(mut flags: Query<&mut ColliderFlags>) {
 
 ```js
 /* Set the active hooks when the collider is created. */
-let colliderDesc = ColliderDesc.ball(0.5)
-    .setActiveHooks(ActiveHooks.FILTER_CONTACT_PAIRS |
-                  ActiveHooks.MODIFY_SOLVER_CONTACTS);
-let collider = world.cleateCollider(colliderDesc);
+let colliderDesc = RAPIER.ColliderDesc.ball(0.5)
+    .setActiveHooks(RAPIER.ActiveHooks.FILTER_CONTACT_PAIRS);
+let collider = world.createCollider(colliderDesc);
 ```
 ```js
 /* Set the active hooks after the collider creation. */
 let collider = world.getCollider(colliderHandle);
-collider.setActiveHooks(ActiveHooks.FILTER_CONTACT_PAIRS |
-                          ActiveHooks.MODIFY_SOLVER_CONTACTS);
+collider.setActiveHooks(RAPIER.ActiveHooks.FILTER_CONTACT_PAIRS);
 ```
 
 </js>
