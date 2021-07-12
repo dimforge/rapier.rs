@@ -1,0 +1,72 @@
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+Continuous Collision Detection (CCD) is used to make sure that fast-moving objects don't miss any contacts (a problem
+usually called **tunneling**). This  is done by using motion-clamping, i.e., each fast-moving rigid-body with CCD enabled
+will be stopped at the time where their first contact happen, taking they continuous motion into account. This will result
+in some "time loss" for that rigid-body. This loss of time can be reduced by increasing the maximum number of CCD
+substeps executed (the default being 1) in the [IntegrationParameters](simulation_structures#integration-parameters)
+(by changing the <notjs>`IntegrationParameters::max_ccd_substeps`</notjs><js>`IntegrationParameters.maxCcdSubsteps`</js> field).
+
+Rapier implements nonlinear CCD, meaning that it takes into account both the angular and translational motion of the
+rigid-body.
+
+:::info
+CCD takes action only if the CCD-enabled rigid-body is moving fast relative to another rigid-body. Therefore
+it is useless to enable CCD on static rigid-bodies and rigid-bodies that are expected to move slowly.
+:::
+
+By default, CCD is disabled for all the rigid-bodies because it requires additional computations. It can be enabled
+when creating a rigid-body or after its creation:
+
+<rapier>
+
+```rust
+/* Enable CCD when the rigid-body is created. */
+let rigid_body = RigidBodyBuilder::new_dynamic()
+    .ccd_enabled(true)
+    .build();
+```
+```rust
+/* Enable CCD after the rigid-body creation. */
+let rigid_body = rigid_body_set.get_mut(rigid_body_handle).unwrap();
+rigid_body.enable_ccd(true);
+assert_eq!(rigid_body.is_ccd_enabled(), true);
+```
+
+</rapier>
+<bevy>
+
+```rust
+/* Enable CCD when the rigid-body bundle is created. */
+let rigid_body = RigidBodyBundle {
+    ccd: RigidBodyCcd { ccd_enabled: true, ..Default::default() },
+    ..Default::default()
+};
+commands.spawn_bundle(rigid_body);
+```
+```rust
+/* Enable CCD inside of a system. */
+fn modify_body_ccd(mut ccds: Query<&mut RigidBodyCcd>) {
+    for mut rb_ccd in ccds.iter_mut() {
+        rb_ccd.ccd_enabled = true;
+    }
+}
+```
+
+</bevy>
+<js>
+
+```js
+/* Enable CCD when the rigid-body is created. */
+let rigidBodyDesc = RAPIER.RigidBodyDesc.newDynamic()
+    .setCcdEnabled(true);
+let rigidBody =  world.createRigidBody(rigidBodyDesc);
+```
+```js
+/* Enable CCD after the rigid-body creation. */
+let rigidBody = world.getRigidBody(rigidBodyHandle);
+rigidBody.enableCcd(true);
+```
+
+</js>

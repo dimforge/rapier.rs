@@ -122,6 +122,39 @@ commands.spawn().insert(JointBuilderComponent::new(joint, entity1, entity2));
 </Tabs>
 
 </bevy>
+<js>
+
+<Tabs
+groupId="dim"
+defaultValue="2D"
+values={[
+{label: 'Example 2D', value: '2D'},
+{label: 'Example 3D', value: '3D'},
+]}>
+<TabItem value="2D">
+
+```js
+let params = RAPIER.JointParams.fixed({ x: 0.0, y: 0.0 }, 0.0, { x: 0.0, y: -2.0 }, 0.0);
+let joint = world.createJoint(params, body1, body2);
+```
+
+  </TabItem>
+  <TabItem value="3D">
+
+```js
+let params = RAPIER.JointParams.fixed(
+    { x: 0.0, y: 0.0, z: 0.0 }, 
+    { w: 1.0, x: 0.0, y: 0.0, z: 0.0 },
+    { x: 0.0, y: -2.0, z: 0.0 },
+    { w: 1.0, x: 0.0, y: 0.0, z: 0.0 }
+);
+let joint = world.createJoint(params, body1, body2);
+```
+
+  </TabItem>
+</Tabs>
+
+</js>
 
 
 ## Ball joint
@@ -186,7 +219,34 @@ commands.spawn().insert(JointBuilderComponent::new(joint, entity1, entity2));
 </Tabs>
 
 </bevy>
+<js>
 
+<Tabs
+groupId="dim"
+defaultValue="2D"
+values={[
+{label: 'Example 2D', value: '2D'},
+{label: 'Example 3D', value: '3D'},
+]}>
+<TabItem value="2D">
+
+```js
+let params = RAPIER.JointParams.ball({ x: 0.0, y: 0.0 }, { x: 0.0, y: -3.0 });
+let joint = world.createJoint(params, body1, body2);
+```
+
+  </TabItem>
+  <TabItem value="3D">
+
+```js
+let params = RAPIER.JointParams.ball({ x: 0.0, y: 0.0, z: 0.0 }, { x: 0.0, y: -3.0, z: 0.0 });
+let joint = world.createJoint(params, body1, body2);
+```
+
+  </TabItem>
+</Tabs>
+
+</js>
 
 ## Revolute joint
 The revolute joint prevents any relative movement between two rigid-bodies, except for relative rotations
@@ -211,6 +271,15 @@ commands.spawn().insert(JointBuilderComponent::new(joint, entity1, entity2));
 ```
 
 </bevy>
+<js>
+
+```js
+let x = { x: 1.0, y: 0.0, z: 0.0 };
+let params = RAPIER.JointParams.revolute({ x: 0.0, y: 0.0, z: 1.0 }, x, { x: 0.0, y: 0.0, z: -3.0 }, x);
+let joint = world.createJoint(params, body1, body2);
+```
+
+</js>
 
 :::note
 In 2D, revolute joints are ball joints are the same thing. Therefore, there is no `RevoluteJoint` type in
@@ -294,6 +363,41 @@ commands.spawn().insert(JointBuilderComponent::new(joint, entity1, entity2));
 </Tabs>
 
 </bevy>
+<js>
+
+<Tabs
+groupId="dim"
+defaultValue="2D"
+values={[
+{label: 'Example 2D', value: '2D'},
+{label: 'Example 3D', value: '3D'},
+]}>
+<TabItem value="2D">
+
+```js
+let x = { x: 1.0, y: 0.0 };
+let params = RAPIER.JointParams.prismatic({ x: 0.0, y: 0.0 }, x, { x: 0.0, y: -3.0 }, x);
+params.limitsEnabled = true;
+params.limits = [-2.0, 5.0];
+let joint = world.createJoint(params, body1, body2);
+```
+
+  </TabItem>
+  <TabItem value="3D">
+
+```js
+let x = { x: 1.0, y: 0.0, z: 0.0 };
+let z = { x: 0.0, y: 0.0, z: 1.0 };
+let params = RAPIER.JointParams.prismatic({ x: 0.0, y: 0.0, z: 1.0 }, x, z, { x: 0.0, y: 0.0, z: -3.0 }, x, z);
+params.limitsEnabled = true;
+params.limits = [-2.0, 5.0];
+let joint = world.createJoint(params, body1, body2);
+```
+
+  </TabItem>
+</Tabs>
+
+</js>
 
 ## Joint motors
 Ball, revolute, and prismatic joints support **joint motors**.
@@ -305,15 +409,17 @@ the PD controller controls the strength of the force that will be applied to mak
 positions along the free DOFs. The `damping` of the PD controller controls the strength of the force that will be applied
 to make the bodies reach the target relative velocities along the free DOFs. All joints supporting motors have the
 following methods:
-- `configure_motor_position(target_pos, stiffness, damping)`: this tells the joint motor that we want the relative position
-  of the rigid-bodies along the free DOFs to be equal to `target_pos`, and that the relative velocity when it reaches
-  that position should be zero.
-- `configure_motor_velocity(target_vel, damping)`: this tells the joint motor that we want the relative relative velocity
-  of the rigid-bodies along the free DOFs to be equal to `target_vel`. There is no restriction on the relative position
+- <notjs> `configure_motor_position(target_pos, stiffness, damping)` </notjs><js> `configureMotorPosition(targetPos, stiffness, damping)` </js>:
+  this tells the joint motor that we want the relative position
+  of the rigid-bodies along the free DOFs to be equal to <notjs> `target_pos` </notjs><js> `target_pos` </js>, and that
+  the relative velocity when it reaches that position should be zero.
+- <notjs>`configure_motor_velocity(target_vel, damping)`</notjs><js>`configureMotorVelocity(targetVel, damping)`</js>:
+  this tells the joint motor that we want the relative relative velocity of the rigid-bodies along the free DOFs to be
+  equal to <notjs>`target_vel`</notjs><js>`targeVel`</js>. There is no restriction on the relative position
   along the free DOF.
-- `configure_motor(target_pos, target_vel, stiffness, damping)`: this lets you control all the parameters of the motor's
-  spring-like equation. This should be used only of the other configuration methods are not flexible enough.
-- `configure_motor_model(model)`: this selects the mathematical model for the motor's controller. All the available
+- <notjs>`configure_motor(target_pos, target_vel, stiffness, damping)`</notjs><js>`configureMotor(targetPos, targetVel, stiffness, damping)`</js>:
+  this lets you control all the parameters of the motor's spring-like equation. This should be used only of the other configuration methods are not flexible enough.
+- <notjs>`configure_motor_model(model)`</notjs><js>`configureMotorModel(model)`</js>: this selects the mathematical model for the motor's controller. All the available
   models use a __spring-like__ equation. See the [API documentation of SpringModel](https://docs.rs/rapier3d/latest/rapier3d/dynamics/enum.SpringModel.html)
   for details.
   
@@ -386,3 +492,36 @@ commands.spawn().insert(JointBuilderComponent::new(joint, entity1, entity2));
 </Tabs>
 
 </bevy>
+<js>
+
+<Tabs
+groupId="dim"
+defaultValue="2D"
+values={[
+{label: 'Example 2D', value: '2D'},
+{label: 'Example 3D', value: '3D'},
+]}>
+<TabItem value="2D">
+
+```js
+let x = { x: 1.0, y: 0.0 };
+let params = RAPIER.JointParams.prismatic({ x: 0.0, y: 0.0 }, x, { x: 0.0, y: -3.0 }, x);
+let joint = world.createJoint(params, body1, body2);
+(joint as RAPIER.PrismaticJoint).configureMotorVelocity(1.0, 0.5);
+```
+
+  </TabItem>
+  <TabItem value="3D">
+
+```js
+let x = { x: 1.0, y: 0.0, z: 0.0 };
+let z = { x: 0.0, y: 0.0, z: 1.0 };
+let params = RAPIER.JointParams.prismatic({ x: 0.0, y: 0.0, z: 1.0 }, x, z, { x: 0.0, y: 0.0, z: -3.0 }, x, z);
+let joint = world.createJoint(params, body1, body2);
+(joint as RAPIER.PrismaticJoint).configureMotorVelocity(1.0, 0.5);
+```
+
+  </TabItem>
+</Tabs>
+
+</js>

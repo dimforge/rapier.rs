@@ -7,6 +7,8 @@ sidebar_label: Serialization
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
+<notjs>
+
 When the `serde-serialize` feature of Rapier is enabled, most data structures of Rapier become serializable using [serde](http://serde.rs).
 Serialization can be useful to save the complete state of the simulation, e.g., to send it over the network, or to restore
 this state later. In order to fully serialize the simulation state, it is necessary to serialize every structure
@@ -47,3 +49,12 @@ requirements](determinism), then you have the guarantee that running the exact s
 will result in the exact same byte vectors if the physics state is serialized on both machines after the same
 number of timesteps.
 :::
+
+</notjs>
+<js>
+
+It is possible to take a snapshot of the whole physics world with `world.takeSnapshot`. This results in a byte array
+of type `Uint8Array` that may be saved on the disk, sent through the network, etc. The snapshot can then be restored
+with `let world = World.restoreSnapshot(snapshot);`.
+
+</js>

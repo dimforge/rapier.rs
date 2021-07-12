@@ -72,3 +72,11 @@ bevy {
 rapier {
   color: green;
 }
+
+js {
+  color: blueviolet;
+}
+
+notjs {
+  color: mediumvioletred;
+}

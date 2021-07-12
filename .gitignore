@@ -25,4 +25,5 @@ build
 
 # Ignore these because they are generated automatically from website/docs/user_guides/templates
 website/docs/user_guides/rust
-website/docs/user_guides/rust_bevy_plugin
+website/docs/user_guides/bevy_plugin
+website/docs/user_guides/javascript

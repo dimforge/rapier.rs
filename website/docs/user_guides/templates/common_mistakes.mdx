@@ -7,6 +7,8 @@ sidebar_label: Common mistakes
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
+<notjs>
+
 ## My local build of Rapier is slower than the online demos
 Make sure you are building your project (or just the Rapier dependency) in release mode, e.g., `cargo build --release`.
 Rapier can be 100 times slower without optimizations enabled. Keep in mind that it is possible to compile your project
@@ -44,6 +46,8 @@ codegen-units = 1
 ```
 :::
 
+</notjs>
+
 ## Rigid-body isn't affected by gravity
 If you expect your rigid-body to fall because of gravity but it doesn't, please make sure to double-check
 the following:
@@ -71,9 +75,9 @@ If applying a force or an impulse to a rigid-body doesn't work, please make sure
 <rapier>
 
 - The rigid-body is a dynamic rigid-body.
+- The rigid-body has a non-zero mass (or non-zero angular inertia for torques).
 - The force or impulse must be strong enough to actually push the rigid-body. You may for example try with a very
       high force/impulse value (say, with a magnitude of `100_000.0`) and see if this stronger force works.
-- The rigid-body has a non-zero mass (or non-zero angular inertia for torques).
 - The rigid-body is [awake](rigid_bodies#sleeping), either by calling `RigidBody::wake_up(true)` explicitly, or by using `true` as the
   last argument of the force/impulse application method.
   
@@ -83,11 +87,21 @@ If applying a force or an impulse to a rigid-body doesn't work, please make sure
 <bevy>
 
 - The rigid-body is a dynamic rigid-body.
+- The rigid-body has a non-zero mass (or non-zero angular inertia for torques).
 - The force or impulse must be strong enough to actually push the rigid-body. You may for example try with a very
   high force/impulse value (say, with a magnitude of `100_000.0`) and see if this stronger force works.
-- The rigid-body has a non-zero mass (or non-zero angular inertia for torques).
 
 </bevy>
+
+
+<js>
+
+- The rigid-body is a dynamic rigid-body.
+- The rigid-body has a non-zero mass (or non-zero angular inertia for torques).
+- The force or impulse must be strong enough to actually push the rigid-body. You may for example try with a very
+  high force/impulse value (say, with a magnitude of `100000.0`) and see if this stronger force works.
+
+</js>
 
 :::note
 If the rigid-body has no collider attached to it, its mass will be zero unless you gave it a mass (or mass properties)
@@ -99,6 +113,8 @@ collider).
 Currently, colliders with triangle-meshes won't have their mass properties computed automatically. So if a rigid-body
 only has triangle-mesh colliders attached to it, you need to set its mass/angular inertia manually.
 :::
+
+<notjs>
 
 ## The simulation panics!
 It may happen that Rapier panics with the following panic message:
@@ -120,11 +136,12 @@ Currently, colliders with triangle-meshes won't have their mass properties compu
 only has triangle-mesh colliders attached to it, you need to set its mass/angular inertia manually.
 :::
 
+</notjs>
 
 ## Why is everything moving in slow-motion?
 A common mistake, especially in 2D, is to use pixels as the length unit in the physics world. Let's say that in 2D
 you have a 100x100 pixels sprite for your player. It may be tempting to use a 100x100 cuboid collider for this
-sprite: <rapier>`ColliderBuilder::cuboid(50.0, 50.0)`</rapier><bevy>`ColliderShape::cuboid(50.0, 50.0)`</bevy> (we set `50.0`
+sprite: <rapier>`ColliderBuilder::cuboid(50.0, 50.0)`</rapier><bevy>`ColliderShape::cuboid(50.0, 50.0)`</bevy><js>`ColliderDesc.cuboid(50.0, 50.0)`</js> (we set `50.0`
 because this is the half-width of the cuboid). Doing this will make it look like the simulation runs in __slow-motion__
 because the cuboid will be huge compared to the magnitude of the default gravity (-9.81).
 
@@ -155,3 +172,9 @@ all the positions synchronized by the [`ColliderPositionSync`](colliders#sync-wi
 they are written into the `Transform` component.
 
 </bevy>
+<js>
+
+All we need to do to keep measures in sync is to multiply by our scaling factor 50 all the positions given by the
+physics engine before rendering.
+
+</js>

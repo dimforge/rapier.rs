@@ -1,0 +1,75 @@
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+
+[Physics hooks](advanced_collision_detection#physics-hooks) are user-defined callbacks used to filter-out some contact
+pairs, or modify contacts, based on arbitrary user code. In order to enable a physics hook for a pair of colliders, at
+least one of the involved colliders must have the corresponding hook set as active. A hook is activated for a collider
+by setting its corresponding active hooks bit to `1`:
+- Setting the <notjs>`ActiveHooks::FILTER_CONTACT_PAIRS`</notjs><js>`ActiveHooks.FILTER_CONTACT_PAIRS`</js> bit to 1
+  enables the manual [filtering of all the contact pairs](advanced_collision_detection#contact-and-intersection-filtering)
+  involving the collider.
+- Setting the <notjs>`ActiveHooks::FILTER_INTERSECTION_PAIRS`</notjs><js>`ActiveHooks.FILTER_INTERSECTION_PAIRS`</js>bit
+  to 1 enables the manual [filtering of all the contact pairs](advanced_collision_detection#contact-and-intersection-filtering)
+  involving the collider.
+<notjs>- Setting the `ActiveHooks::MODIFY_SOLVER_CONTACTS` bit to 1
+  enables the manual [contact modification](advanced_collision_detection#contact-modification) for all the contact
+  manifolds involving the collider.</notjs>
+
+The active hooks of a collider can be set when the collider is created or after its creation:
+
+<rapier>
+
+```rust
+/* Set the active hooks when the collider is created. */
+let collider = ColliderBuilder::ball(0.5)
+    .active_hooks(ActiveHooks::FILTER_CONTACT_PAIRS |
+                  ActiveHooks::MODIFY_SOLVER_CONTACTS)
+.build();
+```
+```rust
+/* Set the active hooks after the collider creation. */
+let collider = collider_set.get_mut(collider_handle).unwrap();
+collider.set_active_hooks(ActiveHooks::FILTER_CONTACT_PAIRS |
+                          ActiveHooks::MODIFY_SOLVER_CONTACTS);
+assert!(collider.active_hooks().contains(ActiveHooks::FILTER_CONTACT_PAIRS));
+assert!(collider.active_hooks().contains(ActiveHooks::MODIFY_SOLVER_CONTACTS));
+```
+
+</rapier>
+<bevy>
+
+```rust
+/* Set the active hooks when the collider is created. */
+let collider = ColliderBundle {
+    flags: (ActiveHooks::FILTER_CONTACT_PAIRS | ActiveHooks::MODIFY_SOLVER_CONTACTS).into(),
+    ..Default::default()
+};
+commands.spawn_bundle(collider);
+```
+```rust
+/* Set the active hooks inside of a system. */
+fn modify_collider_active_hooks(mut flags: Query<&mut ColliderFlags>) {
+    for mut co_flags in flags.iter_mut() {
+        co_flags.active_hooks = ActiveHooks::FILTER_CONTACT_PAIRS |
+                                ActiveHooks::MODIFY_SOLVER_CONTACTS;
+    }
+}
+```
+
+</bevy>
+<js>
+
+```js
+/* Set the active hooks when the collider is created. */
+let colliderDesc = RAPIER.ColliderDesc.ball(0.5)
+    .setActiveHooks(RAPIER.ActiveHooks.FILTER_CONTACT_PAIRS);
+let collider = world.createCollider(colliderDesc);
+```
+```js
+/* Set the active hooks after the collider creation. */
+let collider = world.getCollider(colliderHandle);
+collider.setActiveHooks(RAPIER.ActiveHooks.FILTER_CONTACT_PAIRS);
+```
+
+</js>

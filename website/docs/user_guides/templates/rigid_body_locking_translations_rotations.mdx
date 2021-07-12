@@ -1,0 +1,165 @@
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+It is sometimes useful to prevent a rigid-body from rotating or translating. One typical use-case for locking rotations
+is to prevent a player modeled as a dynamic rigid-body from tilting. These kind of degree-of-freedom restrictions could
+be achieved by [joints](#joints), but locking translations/rotations of a single rigid-body wrt. the cartesian coordinate
+axes can be done  in a much more efficient and numerically stable way. That's why rigid-bodies have
+dedicated <rapier>methods</rapier><bevy>flags</bevy><js>methods</js> for this.
+
+<rapier>
+
+<Tabs
+groupId="dim"
+defaultValue="2D"
+values={[
+{label: 'Example 2D', value: '2D'},
+{label: 'Example 3D', value: '3D'},
+]}>
+<TabItem value="2D">
+
+```rust
+/* Lock translations/rotations when the rigid-body is created. */
+let rigid_body = RigidBodyBuilder::new_dynamic()
+    .lock_translations() // prevent translations along along all axes.
+    .lock_rotations()    // prevent rotations.
+    .build();
+```
+
+```rust
+/* Lock translations/rotations after the rigid-body creation. */
+let rigid_body = rigid_body_set.get_mut(rigid_body_handle).unwrap();
+// The last `true` argument makes sure the rigid-body is awake.
+rigid_body.lock_translations(true, true);
+rigid_body.lock_rotations(true, true);
+```
+
+  </TabItem>
+  <TabItem value="3D">
+
+```rust
+/* Lock translations/rotations when the rigid-body is created. */
+let rigid_body = RigidBodyBuilder::new_dynamic()
+    .lock_translations() // prevent translations along along all axes.
+    .lock_rotations()    // prevent rotations along all axes.
+    .restrict_rotations(true, false, false) // prevent rotations along the Y and Z axes.
+    .build();
+```
+
+```rust
+/* Lock translations/rotations after the rigid-body creation. */
+let rigid_body = rigid_body_set.get_mut(rigid_body_handle).unwrap();
+// The last `true` argument makes sure the rigid-body is awake.
+rigid_body.lock_translations(true, true);
+rigid_body.lock_rotations(true, true);
+rigid_body.restrict_rotations(true, false, false, true);
+```
+
+  </TabItem>
+</Tabs>
+
+</rapier>
+<bevy>
+
+<Tabs
+groupId="dim"
+defaultValue="2D"
+values={[
+{label: 'Example 2D', value: '2D'},
+{label: 'Example 3D', value: '3D'},
+]}>
+<TabItem value="2D">
+
+```rust
+/* Lock translations and/or rotations when the rigid-body bundle is created. */
+let rigid_body = RigidBodyBundle {
+    mass_properties: (RigidBodyMassPropsFlags::TRANSLATION_LOCKED | RigidBodyMassPropsFlags::ROTATION_LOCKED).into(),
+    ..Default::default()
+};
+commands.spawn_bundle(rigid_body);
+```
+```rust
+/* Lock translations and/or rotations inside of a system. */
+fn modify_body_locked_flags(mut mprops: Query<&mut RigidBodyMassProps>) {
+    for mut rb_mprops in mprops.iter_mut() {
+        rb_mprops.flags = RigidBodyMassPropsFlags::ROTATION_LOCKED;
+    }
+}
+```
+
+  </TabItem>
+  <TabItem value="3D">
+
+```rust
+/* Lock translations and/or rotations when the rigid-body bundle is created. */
+let rigid_body = RigidBodyBundle {
+    mass_properties: (RigidBodyMassPropsFlags::TRANSLATION_LOCKED | RigidBodyMassPropsFlags::ROTATION_LOCKED_X).into(),
+    ..Default::default()
+};
+commands.spawn_bundle(rigid_body);
+```
+```rust
+/* Lock translations and/or rotations inside of a system. */
+fn modify_body_locked_flags(mut mprops: Query<&mut RigidBodyMassProps>) {
+    for mut rb_mprops in mprops.iter_mut() {
+        rb_mprops.flags = RigidBodyMassPropsFlags::ROTATION_LOCKED_Y;
+    }
+}
+```
+
+  </TabItem>
+</Tabs>
+
+</bevy>
+<js>
+
+<Tabs
+groupId="dim"
+defaultValue="2D"
+values={[
+{label: 'Example 2D', value: '2D'},
+{label: 'Example 3D', value: '3D'},
+]}>
+<TabItem value="2D">
+
+```js
+/* Lock translations/rotations when the rigid-body is created. */
+let rigidBodyDesc = RAPIER.RigidBodyDesc.newDynamic()
+    .lockTranslations() // prevent translations along along all axes.
+    .lockRotations();   // prevent rotations.
+let rigidBody = world.createRigidBody(rigidBodyDesc);
+```
+
+```js
+/* Lock translations/rotations after the rigid-body creation. */
+let rigidBody = world.getRigidBody(rigidBodyRandle);
+// The last `true` argument makes sure the rigid-body is awake.
+rigidBody.lockTranslations(true, true);
+rigidBody.lockRotations(true, true);
+```
+
+  </TabItem>
+  <TabItem value="3D">
+
+```js
+/* Lock translations/rotations when the rigid-body is created. */
+let rigidBodyDesc = RAPIER.RigidBodyDesc.newDynamic()
+    .lockTranslations() // prevent translations along along all axes.
+    .lockRotations()    // prevent rotations along all axes.
+    .restrictRotations(true, false, false); // prevent rotations along the Y and Z axes.
+let rigidBody = world.createRigidBody(rigidBodyDesc);
+```
+
+```js
+/* Lock translations/rotations after the rigid-body creation. */
+let rigidBody = world.getRigidBody(rigidBodyRandle);
+// The last `true` argument makes sure the rigid-body is awake.
+rigidBody.lockTranslations(true, true);
+rigidBody.lockRotations(true, true);
+rigidBody.restrictRotations(true, false, false, true);
+```
+
+  </TabItem>
+</Tabs>
+
+</js>

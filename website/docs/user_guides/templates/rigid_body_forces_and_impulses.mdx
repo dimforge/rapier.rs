@@ -1,0 +1,183 @@
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+In addition to [gravity](#gravity), it is possible to apply custom forces (or torques) and impluses (or torque impulses)
+to dynamic rigid-bodies in order to make  them move in specific ways. Forces affect the rigid-body's acceleration
+whereas impulses affect the rigid-body's velocity. They are both based on the familiar equations:
+- **Forces:** the acceleration change is equal to the force divided by the mass: $\Delta{}a = m^{-1}f$
+- **Impulses:** the velocity change is equal to the impulse divided by the mass: $\Delta{}v = m^{-1}i$
+
+Forces and impulses can be applied to a rigid-body <rapier>after it has been created</rapier><bevy>when it is created or after
+its creation</bevy><js>after it has been created</js>:
+
+<rapier>
+
+<Tabs
+groupId="dim"
+defaultValue="2D"
+values={[
+{label: 'Example 2D', value: '2D'},
+{label: 'Example 3D', value: '3D'},
+]}>
+<TabItem value="2D">
+
+```rust
+let rigid_body = rigid_body_set.get_mut(rigid_body_handle).unwrap();
+
+// The `true` argument makes sure the rigid-body is awake.
+rigid_body.apply_force(vector![0.0, 1000.0], true);
+rigid_body.apply_torque(100.0, true);
+rigid_body.apply_force_at_point(vector![0.0, 1000.0], point![1.0, 2.0], true);
+
+rigid_body.apply_impulse(vector![0.0, 1000.0], true);
+rigid_body.apply_torque_impulse(100.0, true);
+rigid_body.apply_impulse_at_point(vector![0.0, 1000.0], point![1.0, 2.0], true);
+```
+
+  </TabItem>
+  <TabItem value="3D">
+
+```rust
+let rigid_body = rigid_body_set.get_mut(rigid_body_handle).unwrap();
+
+// The `true` argument makes sure the rigid-body is awake.
+rigid_body.apply_force(vector![0.0, 1000.0, 0.0], true);
+rigid_body.apply_torque(vector![100.0, 0.0, 0.0], true);
+rigid_body.apply_force_at_point(vector![0.0, 1000.0, 0.0], point![1.0, 2.0, 3.0], true);
+
+rigid_body.apply_impulse(vector![0.0, 1000.0, 0.0], true);
+rigid_body.apply_torque_impulse(vector![100.0, 0.0, 0.0], true);
+rigid_body.apply_impulse_at_point(vector![0.0, 1000.0, 0.0], point![1.0, 2.0, 3.0], true);
+```
+
+  </TabItem>
+</Tabs>
+
+</rapier>
+<bevy>
+
+<Tabs
+groupId="dim"
+defaultValue="2D"
+values={[
+{label: 'Example 2D', value: '2D'},
+{label: 'Example 3D', value: '3D'},
+]}>
+<TabItem value="2D">
+
+```rust
+/* Apply forces when the rigid-body is created. */
+let rigid_body = RigidBodyBundle {
+    forces: RigidBodyForces {
+        force: Vec2::new(1000.0, 2000.0).into(),
+        torque: 140.0,
+        ..Default::default()
+    },
+    ..Default::default()
+};
+commands.spawn_bundle(rigid_body);
+```
+```rust
+/* Apply forces and impulses inside of a system. */
+fn apply_forces(mut rigid_bodies: Query<(&mut RigidBodyForces, &mut RigidBodyVelocity, &RigidBodyMassProps)>) {
+    for (mut rb_forces, mut rb_vel, rb_mprops) in rigid_bodies.iter_mut() {
+        // Apply forces.
+        rb_forces.force = Vec2::new(1.0, 2.0).into();
+        rb_forces.torque = 0.4;
+
+        // Apply impulses.
+        rb_vel.apply_impulse(rb_mprops, Vec2::new(100.0, 200.0).into());
+        rb_vel.apply_torque_impulse(rb_mprops, 80.0);
+    }
+}
+```
+
+  </TabItem>
+  <TabItem value="3D">
+
+```rust
+/* Apply forces when the rigid-body is created. */
+let rigid_body = RigidBodyBundle {
+    forces: RigidBodyForces {
+        force: Vec3::new(1000.0, 2000.0, 3000.0).into(),
+        torque: Vec3::new(140.0, 80.0, 20.0).into(),
+        ..Default::default()
+    },
+    ..Default::default()
+};
+commands.spawn_bundle(rigid_body);
+```
+```rust
+/* Apply forces and impulses inside of a system. */
+fn apply_forces(mut rigid_bodies: Query<(&mut RigidBodyForces, &mut RigidBodyVelocity, &RigidBodyMassProps)>) {
+    for (mut rb_forces, mut rb_vel, rb_mprops) in rigid_bodies.iter_mut() {
+        // Apply forces.
+        rb_forces.force = Vec3::new(1.0, 2.0, 3.0).into();
+        rb_forces.torque = Vec3::new(0.2, 0.4, 0.8).into();
+        
+        // Apply impulses.
+        rb_vel.apply_impulse(rb_mprops, Vec3::new(100.0, 200.0, 300.0).into());
+        rb_vel.apply_torque_impulse(rb_mprops, Vec3::new(140.0, 80.0, 20.0).into());
+    }
+}
+```
+
+  </TabItem>
+</Tabs>
+
+</bevy>
+<js>
+
+<Tabs
+groupId="dim"
+defaultValue="2D"
+values={[
+{label: 'Example 2D', value: '2D'},
+{label: 'Example 3D', value: '3D'},
+]}>
+<TabItem value="2D">
+
+```js
+let rigidBody = world.getRigidBody(rigidBodyHandle);
+
+// The `true` argument makes sure the rigid-body is awake.
+rigidBody.applyForce({ x: 0.0, y: 1000.0 }, true);
+rigidBody.applyTorque(100.0, true);
+rigidBody.applyForceAtPoint({ x: 0.0, y: 1000.0 }, { x: 1.0, y: 2.0 }, true);
+
+rigidBody.applyImpulse({ x: 0.0, y: 1000.0 }, true);
+rigidBody.applyTorqueImpulse(100.0, true);
+rigidBody.applyImpulseAtPoint({ x: 0.0, y: 1000.0 }, { x: 1.0, y: 2.0 }, true);
+```
+
+  </TabItem>
+  <TabItem value="3D">
+
+```js
+let rigidBody = world.getRigidBody(rigidBodyRandle);
+
+// The `true` argument makes sure the rigid-body is awake.
+rigidBody.applyForce({ x: 0.0, y: 1000.0, z: 0.0 }, true);
+rigidBody.applyTorque({ x: 100.0, y: 0.0, z: 0.0 }, true);
+rigidBody.applyForceAtPoint({ x: 0.0, y: 1000.0, z: 0.0 }, { x: 1.0, y: 2.0, z: 3.0 }, true);
+
+rigidBody.applyImpulse({ x: 0.0, y: 1000.0, z: 0.0 }, true);
+rigidBody.applyTorqueImpulse({ x: 100.0, y: 0.0, z: 0.0 }, true);
+rigidBody.applyImpulseAtPoint({ x: 0.0, y: 1000.0, z: 0.0 }, { x: 1.0, y: 2.0, z: 3.0 }, true);
+```
+
+  </TabItem>
+</Tabs>
+
+</js>
+
+:::info
+Keep in mind that a dynamic rigid-body with a zero mass won't be affected by a linear force/impulse, and a rigid-body with a zero
+angular inertia won't be affected by torques/torque impulses. So if your force doesn't appear to do anything, make sure that:
+1. The rigid-body is dynamic.
+2. It is strong enough to make the rigid-body move (try a very large value and see if it does something).
+3. The rigid-body has a non-zero mass or angular inertia either because they were set explicitly, or because they
+   were computed automatically from colliders with non-zero densities.
+
+<rapier>4. The rigid-body is awake (by waking it up manually or setting the last `wake_up` parameter to `true`).</rapier>
+:::

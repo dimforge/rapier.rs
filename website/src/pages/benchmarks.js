@@ -1,18 +1,16 @@
 import React from 'react';
-import clsx from 'clsx';
 import Layout from '@theme/Layout';
-import Link from '@docusaurus/Link';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
-import useBaseUrl from '@docusaurus/useBaseUrl';
-import styles from './styles.module.css';
 
 function iframeLoaded() {
-  var iFrameID = document.getElementById('bench-iframe');
-  if(iFrameID) {
-    let newHeight = (iFrameID.contentWindow.document.body.scrollHeight + 100) + "px";
-    if (iFrameID.height != newHeight)
-        iFrameID.height = newHeight;
-  }
+    if (typeof document !== 'undefined') {
+        var iFrameID = document.getElementById('bench-iframe');
+        if (iFrameID) {
+            let newHeight = (iFrameID.contentWindow.document.body.scrollHeight + 100) + "px";
+            if (iFrameID.height != newHeight)
+                iFrameID.height = newHeight;
+        }
+    }
 }
 
 function Benchmarks() {
