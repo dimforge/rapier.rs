@@ -3,7 +3,7 @@ import TabItem from '@theme/TabItem';
 
 Continuous Collision Detection (CCD) is used to make sure that fast-moving objects don't miss any contacts (a problem
 usually called **tunneling**). This  is done by using motion-clamping, i.e., each fast-moving rigid-body with CCD enabled
-will be stopped at the time where their first contact happen, taking they continuous motion into account. This will result
+will be stopped at the time where their first contact happen, taking their continuous motion into account. This will result
 in some "time loss" for that rigid-body. This loss of time can be reduced by increasing the maximum number of CCD
 substeps executed (the default being 1) in the [IntegrationParameters](simulation_structures#integration-parameters)
 (by changing the <notjs>`IntegrationParameters::max_ccd_substeps`</notjs><js>`IntegrationParameters.maxCcdSubsteps`</js> field).
