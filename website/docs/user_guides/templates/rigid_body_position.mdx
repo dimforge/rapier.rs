@@ -6,14 +6,14 @@ It translational part is represented as a vector and its rotational part as an u
 number (in 2D). <notjs>Both are combined into an isometry</notjs><bevy> stored in the `RigidBodyPosition` component</bevy>.
 
 The position of a rigid-body can be set when creating it. It can also be set after
-its creation as illustrated bellow.
+its creation as illustrated below.
 
 :::warning
 Directly changing the position of a rigid-body is equivalent to teleporting it: this is a not a
 physically realistic action! Teleporting a dynamic or kinematic bodies may result in odd behaviors
 especially if it teleports into a space occupied by other objects. For dynamic bodies, [forces,
 impulses](#forces-and-impulses), or [velocity modification](#velocity) should be preferred.
-For kinematic bodies, see the discussion after the examples bellow.
+For kinematic bodies, see the discussion after the examples below.
 :::
 
 <rapier>
