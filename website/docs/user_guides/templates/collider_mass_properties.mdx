@@ -84,7 +84,7 @@ let rigid_body = RigidBodyBundle::default();
 // First option: by setting the density of the collider (or we could just leave
 //               its default value 1.0).
 let collider = ColliderBundle {
-    mass_properties: ColliderMassProps::Density(2.0),
+    mass_properties: ColliderMassProps::Density(2.0).into(),
     ..Default::default ()
 };
 // Second option: by setting the mass-properties explicitly.
@@ -106,7 +106,7 @@ let rigid_body = RigidBodyBundle::default();
 // First option: by setting the density of the collider (or we could just leave
 //               its default value 1.0).
 let collider = ColliderBundle {
-    mass_properties: ColliderMassProps::Density(2.0),
+    mass_properties: ColliderMassProps::Density(2.0).into(),
     ..Default::default ()
 };
 // Second option: by setting the mass-properties explicitly.

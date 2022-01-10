@@ -33,14 +33,14 @@ assert_eq!(rigid_body.angular_damping(), 1.0);
 ```rust
 /* Set damping when the rigid-body bundle is created. */
 let rigid_body = RigidBodyBundle {
-    damping: RigidBodyDamping { linear_damping: 0.5, angular_damping: 1.0 },
+    damping: RigidBodyDamping { linear_damping: 0.5, angular_damping: 1.0 }.into(),
     ..Default::default()
 };
 commands.spawn_bundle(rigid_body);
 ```
 ```rust
 /* Set damping inside of a system. */
-fn modify_body_damping(mut dampings: Query<&mut RigidBodyDamping>) {
+fn modify_body_damping(mut dampings: Query<&mut RigidBodyDampingComponent>) {
     for mut rb_damping in dampings.iter_mut() {
         rb_damping.linear_damping = 0.5;
         rb_damping.angular_damping = 1.0;

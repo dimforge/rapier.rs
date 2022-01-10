@@ -149,12 +149,20 @@ function Home() {
               Rapier is supported by the community and companies.
               <hr/>
               <h2>Platinum Sponsors</h2>
-                  <br/>
-                  <p>
-                      <a href="https://embark-studios.com">
-                          <img src="https://www.embark.dev/img/logo_black.png" width="400px"/>
-                      </a>
-                  </p>
+              <br/>
+              <p>
+                  <a href="https://embark-studios.com">
+                      <img src="https://www.embark.dev/img/logo_black.png" width="400px"/>
+                  </a>
+              </p>
+              <hr/>
+              <h2>Gold Sponsors</h2>
+              <br/>
+              <p>
+                  <a href="https://fragcolor.com/">
+                      <img src="img/fragcolor_logo1_color_black.svg" width="250px"/>
+                  </a>
+              </p>
               </div>
           </section>
       </main>

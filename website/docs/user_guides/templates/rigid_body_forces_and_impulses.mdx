@@ -72,14 +72,14 @@ let rigid_body = RigidBodyBundle {
         force: Vec2::new(1000.0, 2000.0).into(),
         torque: 140.0,
         ..Default::default()
-    },
+    }.into(),
     ..Default::default()
 };
 commands.spawn_bundle(rigid_body);
 ```
 ```rust
 /* Apply forces and impulses inside of a system. */
-fn apply_forces(mut rigid_bodies: Query<(&mut RigidBodyForces, &mut RigidBodyVelocity, &RigidBodyMassProps)>) {
+fn apply_forces(mut rigid_bodies: Query<(&mut RigidBodyForcesComponent, &mut RigidBodyVelocityComponent, &RigidBodyMassPropsComponent)>) {
     for (mut rb_forces, mut rb_vel, rb_mprops) in rigid_bodies.iter_mut() {
         // Apply forces.
         rb_forces.force = Vec2::new(1.0, 2.0).into();
@@ -102,14 +102,14 @@ let rigid_body = RigidBodyBundle {
         force: Vec3::new(1000.0, 2000.0, 3000.0).into(),
         torque: Vec3::new(140.0, 80.0, 20.0).into(),
         ..Default::default()
-    },
+    }.into(),
     ..Default::default()
 };
 commands.spawn_bundle(rigid_body);
 ```
 ```rust
 /* Apply forces and impulses inside of a system. */
-fn apply_forces(mut rigid_bodies: Query<(&mut RigidBodyForces, &mut RigidBodyVelocity, &RigidBodyMassProps)>) {
+fn apply_forces(mut rigid_bodies: Query<(&mut RigidBodyForcesComponent, &mut RigidBodyVelocityComponent, &RigidBodyMassPropsComponent)>) {
     for (mut rb_forces, mut rb_vel, rb_mprops) in rigid_bodies.iter_mut() {
         // Apply forces.
         rb_forces.force = Vec3::new(1.0, 2.0, 3.0).into();

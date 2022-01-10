@@ -39,9 +39,9 @@ collider_set.insert_with_parent(collider, rigid_body_handle, &mut rigid_body_set
 ```rust
 let rigid_body = RigidBodyBundle::default();
 let collider = ColliderBundle {
-    shape: ColliderShape::ball(1.0),
+    shape: ColliderShape::ball(1.0).into(),
     // The default density is 1.0, we are setting 2.0 for this example.
-    mass_properties: ColliderMassProps::Density(2.0),
+    mass_properties: ColliderMassProps::Density(2.0).into(),
     ..Default::default()
 };
 
@@ -148,7 +148,7 @@ commands.spawn_bundle(rigid_body);
 ```
 ```rust
 /* Change the mass-properties inside of a system. */
-fn modify_body_mass_props(mut mprops: Query<&mut RigidBodyMassProps>) {
+fn modify_body_mass_props(mut mprops: Query<&mut RigidBodyMassPropsComponent>) {
     for mut rb_mprops in mprops.iter_mut() {
         rb_mprops.local_mprops.set_mass(100.0, true);
     }
@@ -168,7 +168,7 @@ commands.spawn_bundle(rigid_body);
 ```
 ```rust
 /* Change the mass-properties inside of a system. */
-fn modify_body_mass_props(mut mprops: Query<&mut RigidBodyMassProps>) {
+fn modify_body_mass_props(mut mprops: Query<&mut RigidBodyMassPropsComponent>) {
     for mut rb_mprops in mprops.iter_mut() {
         rb_mprops.local_mprops.set_mass(100.0, true);
     }

@@ -33,13 +33,13 @@ assert!(collider.is_sensor());
 ```rust
 /* Set the collider type when the collider is created. */
 let collider = ColliderBundle {
-    collider_type: ColliderType::Sensor,
+    collider_type: ColliderType::Sensor.into(),
     ..Default::default()
 };
 ```
 ```rust
 /* Change the collider type inside of a system. */
-fn modify_collider_type(mut collider_types: Query<&mut ColliderType>) {
+fn modify_collider_type(mut collider_types: Query<&mut ColliderTypeComponent>) {
     for mut co_type in collider_types.iter_mut() {
         *co_type = ColliderType::Sensor;
     }

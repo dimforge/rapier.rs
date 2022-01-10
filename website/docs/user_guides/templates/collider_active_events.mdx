@@ -46,7 +46,7 @@ commands.spawn_bundle(collider);
 ```
 ```rust
 /* Set the active events inside of a system. */
-fn modify_collider_active_events(mut flags: Query<&mut ColliderFlags>) {
+fn modify_collider_active_events(mut flags: Query<&mut ColliderFlagsComponent>) {
     for mut co_flags in flags.iter_mut() {
         co_flags.active_events = ActiveEvents::CONTACT_EVENTS |
                                     ActiveEvents::INTERSECTION_EVENTS;

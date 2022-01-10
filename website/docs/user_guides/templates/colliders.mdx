@@ -138,7 +138,7 @@ ColliderBuilder::compound(vec![(pos1, shape1), (pos2, shape2)])
 
 ```rust
 let collider = ColliderBundle {
-    shape: ColliderShape::compound(vec![(pos1, shape1), (pos2, shape2)]),
+    shape: ColliderShape::compound(vec![(pos1, shape1), (pos2, shape2)]).into(),
     ..Default::default()
 }
 ```
@@ -186,7 +186,7 @@ import Position from './collider_position.mdx'
 <bevy>
 
 ### Sync. with Bevy Transform
-If the entity containing the `ColliderPosition` component also has a `Transform` component, it is possible to
+If the entity containing the `ColliderPositionComponent` component also has a `Transform` component, it is possible to
 tell the plugin to automatically update the `Transform` component at each frame using the `ColliderPosition`,
 by adding the `ColliderPositionSync` component to the same entity:
 

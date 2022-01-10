@@ -40,14 +40,14 @@ assert_eq!(rigid_body.is_ccd_enabled(), true);
 ```rust
 /* Enable CCD when the rigid-body bundle is created. */
 let rigid_body = RigidBodyBundle {
-    ccd: RigidBodyCcd { ccd_enabled: true, ..Default::default() },
+    ccd: RigidBodyCcd { ccd_enabled: true, ..Default::default() }.into(),
     ..Default::default()
 };
 commands.spawn_bundle(rigid_body);
 ```
 ```rust
 /* Enable CCD inside of a system. */
-fn modify_body_ccd(mut ccds: Query<&mut RigidBodyCcd>) {
+fn modify_body_ccd(mut ccds: Query<&mut RigidBodyCcdComponent>) {
     for mut rb_ccd in ccds.iter_mut() {
         rb_ccd.ccd_enabled = true;
     }

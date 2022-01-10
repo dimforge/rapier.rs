@@ -46,7 +46,7 @@ for rigid_body_handle in island_manager.active_dynamic_bodies() {
 <bevy>
 
 ```rust
-fn print_active_bodies_positions(island_manager: Res<IslandManager>, positions: Query<&RigidBodyPosition>) {
+fn print_active_bodies_positions(island_manager: Res<IslandManager>, positions: Query<&RigidBodyPositionComponent>) {
     // Iter on each dynamic rigid-bodies that moved.
     for rigid_body_handle in island_manager.active_dynamic_bodies() {
         if let Ok(rb_pos) = positions.get(rigid_body_handle.entity()) {
@@ -130,7 +130,7 @@ given a unique handle.
 Learn more about colliders in [the dedicated page](colliders).
 
 ## Joint set
-The `JointSet` contains all the **joints** that needs to be simulated. This set is represented as a
+The `ImpulseJointSet` contains all the **impulse-based joints** that needs to be simulated. This set is represented as a
 generational-arena, i.e., a vector where each element is indexed using a __handle__ that combines
 an `u32` index and an `u32` generation number. This ensures that every joint is
 given a unique handle.

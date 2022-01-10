@@ -49,7 +49,7 @@ commands.spawn_bundle(collider);
 ```
 ```rust
 /* Set the active hooks inside of a system. */
-fn modify_collider_active_hooks(mut flags: Query<&mut ColliderFlags>) {
+fn modify_collider_active_hooks(mut flags: Query<&mut ColliderFlagsComponent>) {
     for mut co_flags in flags.iter_mut() {
         co_flags.active_hooks = ActiveHooks::FILTER_CONTACT_PAIRS |
                                 ActiveHooks::MODIFY_SOLVER_CONTACTS;

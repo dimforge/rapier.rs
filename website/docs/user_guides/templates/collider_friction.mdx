@@ -68,7 +68,7 @@ let collider = ColliderBundle {
         friction: 0.7,
         friction_combine_rule: CoefficientCombineRule::Min,
         ..Default::default() 
-    },
+    }.into(),
     ..Default::default()
 };
 commands.spawn_bundle(collider);
@@ -76,7 +76,7 @@ commands.spawn_bundle(collider);
 ```rust
 /* Set the friction coefficient and friction combine rule
    inside of a system. */
-fn modify_collider_friction(mut materials: Query<&mut ColliderMaterial>) {
+fn modify_collider_friction(mut materials: Query<&mut ColliderMaterialComponent>) {
     for mut co_material in materials.iter_mut() {
         co_material.friction = 0.7;
         co_material.friction_combine_rule = CoefficientCombineRule::Min;

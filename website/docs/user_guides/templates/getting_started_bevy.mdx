@@ -41,7 +41,8 @@ values={[
 ```toml
 [dependencies]
 # TODO: Replace the * by the latest version numbers.
-bevy_rapier2d = *
+bevy = "*"
+bevy_rapier2d = "*"
 ```
 
   </TabItem>
@@ -50,7 +51,8 @@ bevy_rapier2d = *
 ```toml
 [dependencies]
 # TODO: Replace the * by the latest version numbers.
-bevy_rapier3d = *
+bevy = "*"
+bevy_rapier3d = "*"
 ```
 
   </TabItem>
@@ -72,6 +74,7 @@ values={[
 ```toml
 [dependencies]
 # TODO: Replace the * by the latest version numbers.
+bevy = "*"
 bevy_rapier2d = { version = "*", features = [ "simd-stable" ] }
 ```
 
@@ -81,6 +84,7 @@ bevy_rapier2d = { version = "*", features = [ "simd-stable" ] }
 ```toml
 [dependencies]
 # TODO: Replace the * by the latest version numbers.
+bevy = "*"
 bevy_rapier3d = { version = "*", features = [ "simd-stable" ] }
 ```
 
@@ -112,7 +116,7 @@ use bevy::prelude::*;
 use bevy_rapier2d::prelude::*;
 
 fn main() {
-    App::build()
+    App::new()
         .add_plugins(DefaultPlugins)
         .add_plugin(RapierPhysicsPlugin::<NoUserData>::default())
         .add_startup_system(setup_physics.system())
@@ -123,7 +127,7 @@ fn main() {
 fn setup_physics(mut commands: Commands) {
     /* Create the ground. */
     let collider = ColliderBundle {
-        shape: ColliderShape::cuboid(100.0, 0.1),
+        shape: ColliderShape::cuboid(100.0, 0.1).into(),
         ..Default::default()
     };
     commands.spawn_bundle(collider);
@@ -134,18 +138,18 @@ fn setup_physics(mut commands: Commands) {
         ..Default::default()
     };
     let collider = ColliderBundle {
-        shape: ColliderShape::ball(0.5),
+        shape: ColliderShape::ball(0.5).into(),
         material: ColliderMaterial {
             restitution: 0.7,
             ..Default::default()
-        },
+        }.into(),
         ..Default::default()
     };
     commands.spawn_bundle(rigid_body)
         .insert_bundle(collider);
 }
 
-fn print_ball_altitude(positions: Query<&RigidBodyPosition>) {
+fn print_ball_altitude(positions: Query<&RigidBodyPositionComponent>) {
     for rb_pos in positions.iter() {
         println!("Ball altitude: {}", rb_pos.position.translation.vector.y);
     }
@@ -160,7 +164,7 @@ use bevy::prelude::*;
 use bevy_rapier3d::prelude::*;
 
 fn main() {
-    App::build()
+    App::new()
         .add_plugins(DefaultPlugins)
         .add_plugin(RapierPhysicsPlugin::<NoUserData>::default())
         .add_startup_system(setup_physics.system())
@@ -171,7 +175,7 @@ fn main() {
 fn setup_physics(mut commands: Commands) {
     /* Create the ground. */
     let collider = ColliderBundle {
-        shape: ColliderShape::cuboid(100.0, 0.1, 100.0),
+        shape: ColliderShape::cuboid(100.0, 0.1, 100.0).into(),
         ..Default::default()
     };
     commands.spawn_bundle(collider);
@@ -182,18 +186,18 @@ fn setup_physics(mut commands: Commands) {
         ..Default::default()
     };
     let collider = ColliderBundle {
-        shape: ColliderShape::ball(0.5),
+        shape: ColliderShape::ball(0.5).into(),
         material: ColliderMaterial {
             restitution: 0.7,
             ..Default::default()
-        },
+        }.into(),
         ..Default::default()
     };
     commands.spawn_bundle(rigid_body)
         .insert_bundle(collider);
 }
 
-fn print_ball_altitude(positions: Query<&RigidBodyPosition>) {
+fn print_ball_altitude(positions: Query<&RigidBodyPositionComponent>) {
     for rb_pos in positions.iter() {
         println!("Ball altitude: {}", rb_pos.position.translation.vector.y);
     }
@@ -231,7 +235,7 @@ use bevy::prelude::*;
 use bevy_rapier3d::prelude::*;
 
 fn main() {
-    App::build()
+    App::new()
         ...
         .add_plugin(RapierRenderPlugin)
         ...
@@ -240,7 +244,7 @@ fn main() {
 
 fn setup_physics() {
     let collider = ColliderBundle {
-        shape: ColliderShape::ball(0.4),
+        shape: ColliderShape::ball(0.4).into(),
         ..Default::default()
     };
     commands.spawn_bundle(collider)

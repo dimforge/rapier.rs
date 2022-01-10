@@ -51,14 +51,14 @@ let rigid_body = RigidBodyBundle {
     forces: RigidBodyForces {
         gravity_scale: 2.0,
         ..Default::default()
-    },
+    }.into(),
     ..Default::default()
 };
 commands.spawn_bundle(rigid_body);
 ```
 ```rust
 /* Set the gravity scale inside of a system. */
-fn modify_body_gravity_scale(mut forces: Query<&mut RigidBodyForces>) {
+fn modify_body_gravity_scale(mut forces: Query<&mut RigidBodyForcesComponent>) {
     for mut rb_forces in forces.iter_mut() {
         rb_forces.gravity_scale = 2.0;
     }

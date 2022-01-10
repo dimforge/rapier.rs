@@ -37,7 +37,7 @@ commands.spawn_bundle(collider);
 ```
 ```rust
 /* Set the active collision types inside of a system. */
-fn modify_collider_active_collision_types(mut flags: Query<&mut ColliderFlags>) {
+fn modify_collider_active_collision_types(mut flags: Query<&mut ColliderFlagsComponent>) {
     for mut co_flags in flags.iter_mut() {
         co_flags.active_collision_types = (ActiveCollisionTypes::default() |
                                             ActiveCollisionTypes::KINEMATIC_STATIC);

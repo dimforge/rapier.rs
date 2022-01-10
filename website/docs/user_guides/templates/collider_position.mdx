@@ -95,7 +95,7 @@ commands.spawn_bundle(collider);
 ```
 ```rust
 /* Set the collider position inside of a system. */
-fn modify_collider_position(mut positions: Query<&mut ColliderPosition>) {
+fn modify_collider_position(mut positions: Query<&mut ColliderPositionComponent>) {
     for mut co_pos in positions.iter_mut() {
         co_pos.0.translation = Vec2::new(1.0, 2.0).into();
         co_pos.0.rotation = Rotation::new(0.4);
@@ -123,7 +123,7 @@ commands.spawn_bundle(collider);
 ```
 ```rust
 /* Set the collider position inside of a system. */
-fn modify_collider_position(mut positions: Query<&mut ColliderPosition>) {
+fn modify_collider_position(mut positions: Query<&mut ColliderPositionComponent>) {
     for mut co_pos in positions.iter_mut() {
         co_pos.0.translation = Vec3::new(1.0, 2.0, 3.0).into();
         co_pos.0.rotation = Quat::from_rotation_x(0.4).into();
@@ -274,7 +274,7 @@ commands.spawn_bundle(rigid_body)
         .insert_bundle(collider);
 ```
 ```rust
-fn modify_collider_position_wrt_parent(mut collider_parents: Query<&mut ColliderParent>) {
+fn modify_collider_position_wrt_parent(mut collider_parents: Query<&mut ColliderParentComponent>) {
     for mut co_parent in collider_parents.iter_mut() {
         co_parent.pos_wrt_parent.translation = Vec2::new(1.0, 2.0).into();
         co_parent.pos_wrt_parent.rotation = Rotation::new(0.4);
@@ -305,7 +305,7 @@ commands.spawn_bundle(rigid_body)
         .insert_bundle(collider);
 ```
 ```rust
-fn modify_collider_position_wrt_parent(mut collider_parents: Query<&mut ColliderParent>) {
+fn modify_collider_position_wrt_parent(mut collider_parents: Query<&mut ColliderParentComponent>) {
     for mut co_parent in collider_parents.iter_mut() {
         co_parent.pos_wrt_parent.translation = Vec3::new(1.0, 2.0, 3.0).into();
         co_parent.pos_wrt_parent.rotation = Quat::from_rotation_x(0.4).into();

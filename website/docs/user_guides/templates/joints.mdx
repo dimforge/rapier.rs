@@ -9,14 +9,14 @@ import TabItem from '@theme/TabItem';
 
 One of the most appealing features of a physics engine is to simulate articulations. Articulations, aka. _joints_, allow
 the restriction of the motion of one body relative to another body. For example, one well-known joint is the ball-in-socket
-joint also known as the ball joint: it allows one object to rotate freely with regard to the other but not to translate.
+joint also known as the spherical joint: it allows one object to rotate freely with regard to the other but not to translate.
 This is typically used to simulate shoulders of a ragdoll.
 
 <bevy>
 
 :::warning
 The API for using Rapier joints with Bevy isn't very ergonomic right now because all joints must be stored inside
-of the `JointSet` resource (instead of being actual components). This will be improved in the future.
+of the `ImpulseJointSet` resource (instead of being actual components). This will be improved in the future.
 :::
 
 </bevy>
@@ -30,7 +30,7 @@ We can also say a 3D rigid-body has a total of **6 DOF**. The 2D case is similar
 a 2D rigid-body has 2 translational DOF and only 1 rotational DOF (which forms a total of 3 DOF). The number of **relative DOF**
 of a body wrt. another body is the number of possible relative translations and rotations.
 
-The goal of a joint is to reduce the number of DOF a body has. For example, the aforementioned ball joint removes all relative
+The goal of a joint is to reduce the number of DOF a body has. For example, the aforementioned spherical joint removes all relative
 translations between two bodies. Therefore, it allows only the 3 rotational DOF in 3D simulations or the 1 rotational DOF
 in 2D simulations. Other joints exist allowing other combinations of relative DOF. Note that because there are less possible
 motions in 2D, some joints are only defined in 3D. This is illustrated by empty cells in the following table for joints
@@ -42,7 +42,7 @@ that are not defined in 2D:
 | _Free joint_        | All            | All
 | _Prismatic joint_   | 1 Translation  | 1 Translation |
 | _Revolute joint_    | 1 Rotation     | 1 Rotation    |
-| _Ball joint_        | 1 Rotation     | 3 Rotations |
+| _Spherical joint_        | 1 Rotation     | 3 Rotations |
 | _Cartesian joint_   | 2 Translations | 3 Translations |
 | _Planar joint_      |                | 2 Translations + 1 Rotation |
 | _Cylindrical joint_ |                | 1 Translation + 1 Rotation (along the same axis) |
@@ -50,8 +50,8 @@ that are not defined in 2D:
 | _Rectangular joint_ |                | 2 Translations |
 | _Universal joint_   |                | 2 Rotations |
 
-Currently, Rapier supports **fixed**, **ball**, **prismatic**, and **revolute** joints. Joints must be inserted into a
-`JointSet`. Each joint is attached to two distinct rigid-bodies identified by they rigid-body handles.
+Currently, Rapier supports **fixed**, **spherical**, **prismatic**, and **revolute** joints. Joints must be inserted into a
+`ImpulseJointSet`. Each joint is attached to two distinct rigid-bodies identified by they rigid-body handles.
 
 ## Fixed joint
 A fixed joint ensures that two rigid-bodies don't move relative to each other. Fixed joints are characterized by
@@ -78,7 +78,7 @@ values={[
 <TabItem value="2D">
 
 ```rust
-let joint = FixedJoint::new(Isometry::identity(), Isometry::translation(0.0, -2.0));
+let joint = FixedJoint::new().local_anchor(point![0.0, -2.0]);
 joint_set.insert(&mut rigid_body_set, body_handle1, body_handle2, joint);
 ```
 
@@ -86,7 +86,7 @@ joint_set.insert(&mut rigid_body_set, body_handle1, body_handle2, joint);
   <TabItem value="3D">
 
 ```rust
-let joint = FixedJoint::new(Isometry::identity(), Isometry::translation(0.0, 0.0, -2.0));
+let joint = FixedJoint::new().local_anchor(point![0.0, 0.0, -2.0]);
 joint_set.insert(&mut rigid_body_set, body_handle1, body_handle2, joint);
 ```
 
@@ -106,7 +106,7 @@ values={[
 <TabItem value="2D">
 
 ```rust
-let joint = FixedJoint::new(Isometry::identity(), Isometry::translation(0.0, -2.0));
+let joint = FixedJoint::new().local_anchor(point![0.0, -2.0]);
 commands.spawn().insert(JointBuilderComponent::new(joint, entity1, entity2));
 ```
 
@@ -114,7 +114,7 @@ commands.spawn().insert(JointBuilderComponent::new(joint, entity1, entity2));
   <TabItem value="3D">
 
 ```rust
-let joint = FixedJoint::new(Isometry::identity(), Isometry::translation(0.0, 0.0, -2.0));
+let joint = FixedJoint::new().local_anchor(point![0.0, 0.0, -2.0]);
 commands.spawn().insert(JointBuilderComponent::new(joint, entity1, entity2));
 ```
 
@@ -157,96 +157,46 @@ let joint = world.createJoint(params, body1, body2);
 </js>
 
 
-## Ball joint
-The ball joint ensures that two points on the local-spaces of two rigid-bodies always coincide (it prevents any
+## Spherical joint
+The spherical joint ensures that two points on the local-spaces of two rigid-bodies always coincide (it prevents any
 relative translational motion at this points). This is typically used to simulate ragdolls arms, pendulums, etc.
 They are characterized by one **local anchor** on each rigid-body. Each anchor represents the location
 of the points that need to coincide on the local-space of each rigid-body.
 
 <rapier>
 
-<Tabs
-groupId="dim"
-defaultValue="2D"
-values={[
-{label: 'Example 2D', value: '2D'},
-{label: 'Example 3D', value: '3D'},
-]}>
-<TabItem value="2D">
-
 ```rust
-let joint = BallJoint::new(point![0.0, 0.0], point![0.0, -3.0]);
+let joint = SphericalJoint::new()
+    .local_anchor1(point![0.0, 0.0, 1.0])
+    .local_anchor2(point![0.0, 0.0, -3.0]);
 joint_set.insert(&mut rigid_body_set, body_handle1, body_handle2, joint);
 ```
-
-  </TabItem>
-  <TabItem value="3D">
-
-```rust
-let joint = BallJoint::new(point![0.0, 0.0, 1.0], point![0.0, 0.0, -3.0]);
-joint_set.insert(&mut rigid_body_set, body_handle1, body_handle2, joint);
-```
-
-  </TabItem>
-</Tabs>
 
 </rapier>
 <bevy>
 
-<Tabs
-groupId="dim"
-defaultValue="2D"
-values={[
-{label: 'Example 2D', value: '2D'},
-{label: 'Example 3D', value: '3D'},
-]}>
-<TabItem value="2D">
-
 ```rust
-let joint = BallJoint::new(Vec2::ZERO.into(), Vec2::new(0.0, -3.0).into());
+let joint = SphericalJoint::new()
+    .local_anchor1(point![0.0, 0.0, 1.0])
+    .local_anchor2(point![0.0, 0.0, -3.0]);
 commands.spawn().insert(JointBuilderComponent::new(joint, entity1, entity2));
 ```
-
-  </TabItem>
-  <TabItem value="3D">
-
-```rust
-let joint = BallJoint::new(Vec3::new(0.0, 0.0, 1.0).into(), Vec3::new(0.0, 0.0, -3.0).into());
-commands.spawn().insert(JointBuilderComponent::new(joint, entity1, entity2));
-```
-
-  </TabItem>
-</Tabs>
 
 </bevy>
 <js>
 
-<Tabs
-groupId="dim"
-defaultValue="2D"
-values={[
-{label: 'Example 2D', value: '2D'},
-{label: 'Example 3D', value: '3D'},
-]}>
-<TabItem value="2D">
-
 ```js
-let params = RAPIER.JointParams.ball({ x: 0.0, y: 0.0 }, { x: 0.0, y: -3.0 });
+let params = RAPIER.JointParams.spherical({ x: 0.0, y: 0.0, z: 1.0 }, { x: 0.0, y: 0.0, z: -3.0 });
 let joint = world.createJoint(params, body1, body2);
 ```
-
-  </TabItem>
-  <TabItem value="3D">
-
-```js
-let params = RAPIER.JointParams.ball({ x: 0.0, y: 0.0, z: 0.0 }, { x: 0.0, y: -3.0, z: 0.0 });
-let joint = world.createJoint(params, body1, body2);
-```
-
-  </TabItem>
-</Tabs>
 
 </js>
+
+
+:::note
+In 2D, revolute joints are spherical joints are the same thing. Therefore, there is no `SphericalJoint` type in
+2D (use the `RevoluteJoint` type instead).
+:::
 
 ## Revolute joint
 The revolute joint prevents any relative movement between two rigid-bodies, except for relative rotations
@@ -255,23 +205,88 @@ anchor** as well as one **local axis** on each rigid-body.
 
 <rapier>
 
+<Tabs
+groupId="dim"
+defaultValue="2D"
+values={[
+{label: 'Example 2D', value: '2D'},
+{label: 'Example 3D', value: '3D'},
+]}>
+<TabItem value="2D">
+
 ```rust
-let x = Vector::x_axis();
-let joint = RevoluteJoint::new(point![0.0, 0.0, 1.0], x, point![0.0, 0.0, -3.0], x);
+let joint = RevoluteJoint::new()
+    .local_anchor1(point![0.0, 1.0])
+    .local_anchor2(point![0.0, -3.0]);
 joint_set.insert(&mut rigid_body_set, body_handle1, body_handle2, joint);
 ```
+
+  </TabItem>
+  <TabItem value="3D">
+
+```rust
+let x = Vector::x_axis();
+let joint = RevoluteJoint::new(x)
+    .local_anchor1(point![0.0, 0.0, 1.0])
+    .local_anchor2(point![0.0, 0.0, -3.0]);
+joint_set.insert(&mut rigid_body_set, body_handle1, body_handle2, joint);
+```
+
+  </TabItem>
+</Tabs>
 
 </rapier>
 <bevy>
 
+<Tabs
+groupId="dim"
+defaultValue="2D"
+values={[
+{label: 'Example 2D', value: '2D'},
+{label: 'Example 3D', value: '3D'},
+]}>
+<TabItem value="2D">
+
 ```rust
-let x = Vector::x_axis();
-let joint = RevoluteJoint::new(Vec3::new(0.0, 0.0, 1.0).into(), x, Vec3::new(0.0, 0.0, -3.0).into(), x);
+let joint = RevoluteJoint::new()
+    .local_anchor1(point![0.0, 1.0])
+    .local_anchor2(point![0.0, -3.0]);
 commands.spawn().insert(JointBuilderComponent::new(joint, entity1, entity2));
 ```
 
+  </TabItem>
+  <TabItem value="3D">
+
+```rust
+let x = Vector::x_axis();
+let joint = RevoluteJoint::new(x)
+    .local_anchor1(point![0.0, 0.0, 1.0])
+    .local_anchor2(point![0.0, 0.0, -3.0]);
+commands.spawn().insert(JointBuilderComponent::new(joint, entity1, entity2));
+```
+
+  </TabItem>
+</Tabs>
+
 </bevy>
 <js>
+
+<Tabs
+groupId="dim"
+defaultValue="2D"
+values={[
+{label: 'Example 2D', value: '2D'},
+{label: 'Example 3D', value: '3D'},
+]}>
+<TabItem value="2D">
+
+```js
+let params = RAPIER.JointParams.revolute({ x: 0.0, y: 1.0 }, { x: 0.0, y: -3.0 });
+let joint = world.createJoint(params, body1, body2);
+```
+
+  </TabItem>
+  <TabItem value="3D">
 
 ```js
 let x = { x: 1.0, y: 0.0, z: 0.0 };
@@ -279,12 +294,10 @@ let params = RAPIER.JointParams.revolute({ x: 0.0, y: 0.0, z: 1.0 }, x, { x: 0.0
 let joint = world.createJoint(params, body1, body2);
 ```
 
-</js>
+  </TabItem>
+</Tabs>
 
-:::note
-In 2D, revolute joints are ball joints are the same thing. Therefore, there is no `RevoluteJoint` type in
-2D (use the `BallJoint` type instead).
-:::
+</js>
 
 ## Prismatic joint
 The prismatic joint prevents any relative movement between two rigid-bodies, except for relative translations
@@ -310,8 +323,10 @@ values={[
 
 ```rust
 let x = Vector::x_axis();
-let mut joint = PrismaticJoint::new(point![0.0, 0.0], x, point![0.0, -3.0], x);
-joint.limits = [-2.0, 5.0];
+let mut joint = PrismaticJoint::new(x)
+    .local_anchor1(point![0.0, 1.0])
+    .local_anchor2(point![0.0, -3.0])
+    .limit_axis([-2.0, 5.0]);
 joint_set.insert(&mut rigid_body_set, body_handle1, body_handle2, joint);
 ```
 
@@ -320,9 +335,10 @@ joint_set.insert(&mut rigid_body_set, body_handle1, body_handle2, joint);
 
 ```rust
 let x = Vector::x_axis();
-let z = Vector::z();
-let mut joint = PrismaticJoint::new(point![0.0, 0.0, 1.0], x, z, point![0.0, 0.0, -3.0], x, z);
-joint.limits = [-2.0, 5.0];
+let mut joint = PrismaticJoint::new(x)
+    .local_anchor1(point![0.0, 0.0, 1.0])
+    .local_anchor2(point![0.0, 0.0, -3.0])
+    .limit_axis([-2.0, 5.0]);
 joint_set.insert(&mut rigid_body_set, body_handle1, body_handle2, joint);
 ```
 
@@ -343,8 +359,10 @@ values={[
 
 ```rust
 let x = Vector::x_axis();
-let mut joint = PrismaticJoint::new(Vec2::ZERO.into(), x, Vec2::new(0.0, -3.0).into(), x);
-joint.limits = [-2.0, 5.0];
+let mut joint = PrismaticJoint::new(x)
+    .local_anchor1(point![0.0, 1.0])
+    .local_anchor2(point![0.0, -3.0])
+    .limit_axis([-2.0, 5.0]);
 commands.spawn().insert(JointBuilderComponent::new(joint, entity1, entity2));
 ```
 
@@ -353,9 +371,10 @@ commands.spawn().insert(JointBuilderComponent::new(joint, entity1, entity2));
 
 ```rust
 let x = Vector::x_axis();
-let z = Vector::z();
-let mut joint = PrismaticJoint::new(Vec3::new(0.0, 0.0, 1.0).into(), x, z, Vec3::new(0.0, 0.0, -3.0).into(), x, z);
-joint.limits = [-2.0, 5.0];
+let mut joint = PrismaticJoint::new(x)
+    .local_anchor1(point![0.0, 0.0, 1.0])
+    .local_anchor2(point![0.0, 0.0, -3.0])
+    .limit_axis([-2.0, 5.0]);
 commands.spawn().insert(JointBuilderComponent::new(joint, entity1, entity2));
 ```
 
@@ -400,7 +419,7 @@ let joint = world.createJoint(params, body1, body2);
 </js>
 
 ## Joint motors
-Ball, revolute, and prismatic joints support **joint motors**.
+Spherical, revolute, and prismatic joints support **joint motors**.
 
 Motors allow you to make the linked rigid-bodies move relative to one another, along the free degrees of freedoms left
 by the joint, as if a motor was pushing them. The joint motor is simulated with a PD controller (Proportional Derivative controller) where you
@@ -439,8 +458,10 @@ values={[
 
 ```rust
 let x = Vector::x_axis();
-let mut joint = PrismaticJoint::new(point![0.0, 0.0], x, point![0.0, -3.0], x);
-joint.configure_motor_velocity(1.0, 0.5);
+let mut joint = PrismaticJoint::new(x)
+    .local_anchor1(point![0.0, 1.0])
+    .local_anchor2(point![0.0, -3.0])
+    .motor_velocity(1.0, 0.5);
 joint_set.insert(&mut rigid_body_set, body_handle1, body_handle2, joint);
 ```
 
@@ -449,9 +470,10 @@ joint_set.insert(&mut rigid_body_set, body_handle1, body_handle2, joint);
 
 ```rust
 let x = Vector::x_axis();
-let z = Vector::z();
-let mut joint = PrismaticJoint::new(point![0.0, 0.0, 1.0], x, z, point![0.0, 0.0, -3.0], x, z);
-joint.configure_motor_velocity(1.0, 0.5);
+let mut joint = PrismaticJoint::new(x)
+    .local_anchor1(point![0.0, 0.0, 1.0])
+    .local_anchor2(point![0.0, 0.0, -3.0])
+    .motor_velocity(1.0, 0.5);
 joint_set.insert(&mut rigid_body_set, body_handle1, body_handle2, joint);
 ```
 
@@ -472,8 +494,10 @@ values={[
 
 ```rust
 let x = Vector::x_axis();
-let mut joint = PrismaticJoint::new(Vec2::ZERO.into(), x, Vec2::new(0.0, -3.0).into(), x);
-joint.configure_motor_velocity(1.0, 0.5);
+let mut joint = PrismaticJoint::new(x)
+    .local_anchor1(point![0.0, 1.0])
+    .local_anchor2(point![0.0, -3.0])
+    .motor_velocity(1.0, 0.5);
 commands.spawn().insert(JointBuilderComponent::new(joint, entity1, entity2));
 ```
 
@@ -482,9 +506,10 @@ commands.spawn().insert(JointBuilderComponent::new(joint, entity1, entity2));
 
 ```rust
 let x = Vector::x_axis();
-let z = Vector::z();
-let mut joint = PrismaticJoint::new(Vec3::new(0.0, 0.0, 1.0).into(), x, z, Vec3::new(0.0, 0.0, -3.0).into(), x, z);
-joint.configure_motor_velocity(1.0, 0.5);
+let mut joint = PrismaticJoint::new(x)
+    .local_anchor1(point![0.0, 0.0, 1.0])
+    .local_anchor2(point![0.0, 0.0, -3.0])
+    .motor_velocity(1.0, 0.5);
 commands.spawn().insert(JointBuilderComponent::new(joint, entity1, entity2));
 ```
 

@@ -160,10 +160,10 @@ let rigid_body = RigidBodyBundle {
     velocity: RigidBodyVelocity { 
         linvel: Vec2::new(1.0, 2.0).into(), 
         angvel: 0.2 
-    },
-    forces: RigidBodyForces { gravity_scale: 0.5, ..Default::default() },
-    activation: RigidBodyActivation::cannot_sleep(),
-    ccd: RigidBodyCcd { ccd_enabled: true, ..Default::default() },
+    }.into(),
+    forces: RigidBodyForces { gravity_scale: 0.5, ..Default::default() }.into(),
+    activation: RigidBodyActivation::cannot_sleep().into(),
+    ccd: RigidBodyCcd { ccd_enabled: true, ..Default::default() }.into(),
     ..Default::default()
 };
 
@@ -182,10 +182,10 @@ let rigid_body = RigidBodyBundle {
     velocity: RigidBodyVelocity { 
         linvel: Vec3::new(1.0, 2.0, 3.0).into(), 
         angvel: Vec3::new(0.2, 0.0, 0.0).into() 
-    },
-    forces: RigidBodyForces { gravity_scale: 0.5, ..Default::default() },
-    activation: RigidBodyActivation::cannot_sleep(),
-    ccd: RigidBodyCcd { ccd_enabled: true, ..Default::default() },
+    }.into(),
+    forces: RigidBodyForces { gravity_scale: 0.5, ..Default::default() }.into(),
+    activation: RigidBodyActivation::cannot_sleep().into(),
+    ccd: RigidBodyCcd { ccd_enabled: true, ..Default::default() }.into(),
     ..Default::default()
 };
 

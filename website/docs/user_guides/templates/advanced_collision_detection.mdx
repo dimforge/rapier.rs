@@ -495,7 +495,7 @@ impl<'a> PhysicsHooksWithQuery<&'a CustomFilterTag> for SameUserDataFilter {
     fn filter_contact_pair(
         &self,
         context: &PairFilterContext<RigidBodyComponentsSet, ColliderComponentsSet>,
-        custom_tag: &Query<&'a CustomFilterTag>,
+        custom_tag: &Query<&'a CustomFilterTagComponent>,
     ) -> Option<SolverFlags> {
         if custom_tag.get(context.collider1.entity()).ok().copied()
             == custom_tag.get(context.collider2.entity()).ok().copied()
@@ -510,7 +510,7 @@ impl<'a> PhysicsHooksWithQuery<&'a CustomFilterTag> for SameUserDataFilter {
     fn filter_intersection_pair(
         &self,
         context: &PairFilterContext<RigidBodyComponentsSet, ColliderComponentsSet>,
-        custom_tag: &Query<&'a CustomFilterTag>,
+        custom_tag: &Query<&'a CustomFilterTagComponent>,
     ) -> bool {
         custom_tag.get(context.collider1.entity()).ok().copied()
             == custom_tag.get(context.collider2.entity()).ok().copied()
@@ -533,7 +533,7 @@ fn setup_physics(mut commands: Commands) {
             active_hooks: ActiveHooks::FILTER_CONTACT_PAIRS 
                 | ActiveHooks::FILTER_INTERSECTION_PAIRS,
             ..Default::default()
-        },
+        }.into(),
         ..Default::default()
     };
     commands.spawn_bundle(collider)
@@ -667,7 +667,7 @@ fn setup_physics(mut commands: Commands) {
             ..Default::default()
         },
         ..Default::default()
-    };
+    }.into();
     commands.spawn_bundle(collider);
 
     // TODO: add other colliders in a similar way.

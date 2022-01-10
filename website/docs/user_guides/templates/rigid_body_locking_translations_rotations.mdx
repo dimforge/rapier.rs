@@ -80,7 +80,7 @@ commands.spawn_bundle(rigid_body);
 ```
 ```rust
 /* Lock translations and/or rotations inside of a system. */
-fn modify_body_locked_flags(mut mprops: Query<&mut RigidBodyMassProps>) {
+fn modify_body_locked_flags(mut mprops: Query<&mut RigidBodyMassPropsComponent>) {
     for mut rb_mprops in mprops.iter_mut() {
         rb_mprops.flags = RigidBodyMassPropsFlags::ROTATION_LOCKED;
     }
@@ -100,7 +100,7 @@ commands.spawn_bundle(rigid_body);
 ```
 ```rust
 /* Lock translations and/or rotations inside of a system. */
-fn modify_body_locked_flags(mut mprops: Query<&mut RigidBodyMassProps>) {
+fn modify_body_locked_flags(mut mprops: Query<&mut RigidBodyMassPropsComponent>) {
     for mut rb_mprops in mprops.iter_mut() {
         rb_mprops.flags = RigidBodyMassPropsFlags::ROTATION_LOCKED_Y;
     }

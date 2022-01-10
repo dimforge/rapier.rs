@@ -26,7 +26,7 @@ struct PhysicsState {
     pub narrow_phase: NarrowPhase,
     pub bodies: RigidBodySet,
     pub colliders: ColliderSet,
-    pub joints: JointSet,
+    pub joints: ImpulseJointSet,
     pub ccd_solver: CCDSolver,
     pub query_pipeline: QueryPipeline,
     pub integration_parameters: IntegrationParameters,

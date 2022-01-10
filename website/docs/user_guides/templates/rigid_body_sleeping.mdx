@@ -12,7 +12,7 @@ starts interacting with them (either with a joint, or with one of its attached c
 When using the `bevy_rapier` plugin, rigid-bodies are also automatically woken up whenever one of the
 components of the rigid-body is modified (to apply forces, change its position, etc.) They will **not** be awaken
 automatically when changing the gravity though. So you may sometimes want to wake a rigid-body manually by calling
-`RigidBodyActivation::wake_up(true)` on the `RigidBodyActivation` component.
+`RigidBodyActivationComponent::wake_up(true)` on the `RigidBodyActivationComponent` component.
 
 </bevy>
 
@@ -22,7 +22,7 @@ However, a sleeping rigid-body won't respond to any user action. This is why it 
 manually with `RigidBody::wake_up`. Some rigid-body methods take an additional `wake_up` boolean argument that, if
 true, ensures that the rigid-body wakes up before the action takes place. For example:
 - `RigidBody::apply_force(force, true)` will wake-up the rigid-body before applying the force.
-- `JointSet::remove(..., true)` will wake-up the two rigid-bodies attached by the removed joints.
+- `ImpulseJointSet::remove(..., true)` will wake-up the two rigid-bodies attached by the removed joints.
 - `ColliderSet::remove(..., true)` will wake-up the rigid-body the removed collider is attached to.
 
 Unless you want to achieve special effects, it is recommended to always set the `wake_up` argument to `true`.

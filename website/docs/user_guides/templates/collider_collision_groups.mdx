@@ -69,14 +69,14 @@ let collider = ColliderBundle {
         collision_groups: InteractionGroups::new(0b1101, 0b0100),
         solver_groups: InteractionGroups::new(0b0011, 0b1011),
         ..Default::default()
-    },
+    }.into(),
     ..Default::default()
 };
 commands.spawn_bundle(collider);
 ```
 ```rust
 /* Set the collision and/or solver groups inside of a system. */
-fn modify_collider_groups(mut flags: Query<&mut ColliderFlags>) {
+fn modify_collider_groups(mut flags: Query<&mut ColliderFlagsComponent>) {
     for mut co_flags in flags.iter_mut() {
         co_flags.collision_groups = InteractionGroups::new(0b1101, 0b0100);
         co_flags.solver_groups = InteractionGroups::new(0b0011, 0b1011);
