@@ -67,11 +67,8 @@
 			<section class="tsd-panel tsd-comment">
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
-						<p>The narrow-phase used for precise collision-detection.
-						The narrow-phase used for precise collision-detection.</p>
+						<p>The narrow-phase used for precise collision-detection.</p>
 					</div>
-					<p>To avoid leaking WASM resources, this MUST be freed manually with <code>narrowPhase.free()</code>
-					once you are done using it.</p>
 					<p>To avoid leaking WASM resources, this MUST be freed manually with <code>narrowPhase.free()</code>
 					once you are done using it.</p>
 				</div>
@@ -121,23 +118,8 @@
 					<h3>constructor</h3>
 					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
 						<li class="tsd-signature tsd-kind-icon">new <wbr>Narrow<wbr>Phase<span class="tsd-signature-symbol">(</span>raw<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">RawNarrowPhase</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="narrowphase.html" class="tsd-signature-type">NarrowPhase</a></li>
-						<li class="tsd-signature tsd-kind-icon">new <wbr>Narrow<wbr>Phase<span class="tsd-signature-symbol">(</span>raw<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">RawNarrowPhase</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="narrowphase.html" class="tsd-signature-type">NarrowPhase</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in geometry/narrow_phase.ts:21</li>
-								</ul>
-							</aside>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5><span class="tsd-flag ts-flagOptional">Optional</span> raw: <span class="tsd-signature-type">RawNarrowPhase</span></h5>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <a href="narrowphase.html" class="tsd-signature-type">NarrowPhase</a></h4>
-						</li>
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
@@ -163,7 +145,6 @@
 					<div class="tsd-signature tsd-kind-icon">raw<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">RawNarrowPhase</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in geometry/narrow_phase.ts:12</li>
 							<li>Defined in geometry/narrow_phase.d.ts:11</li>
 						</ul>
 					</aside>
@@ -174,7 +155,6 @@
 					<div class="tsd-signature tsd-kind-icon">temp<wbr>Manifold<span class="tsd-signature-symbol">:</span> <a href="tempcontactmanifold.html" class="tsd-signature-type">TempContactManifold</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in geometry/narrow_phase.ts:13</li>
 							<li>Defined in geometry/narrow_phase.d.ts:12</li>
 						</ul>
 					</aside>
@@ -186,67 +166,9 @@
 					<a name="contactpair" class="tsd-anchor"></a>
 					<h3>contact<wbr>Pair</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">contact<wbr>Pair<span class="tsd-signature-symbol">(</span>collider1<span class="tsd-signature-symbol">: </span><a href="" class="tsd-signature-type">ColliderHandle</a>, collider2<span class="tsd-signature-symbol">: </span><a href="" class="tsd-signature-type">ColliderHandle</a>, f<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>manifold<span class="tsd-signature-symbol">: </span><a href="tempcontactmanifold.html" class="tsd-signature-type">TempContactManifold</a>, flipped<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-						<li class="tsd-signature tsd-kind-icon">contact<wbr>Pair<span class="tsd-signature-symbol">(</span>collider1<span class="tsd-signature-symbol">: </span><a href="" class="tsd-signature-type">ColliderHandle</a>, collider2<span class="tsd-signature-symbol">: </span><a href="" class="tsd-signature-type">ColliderHandle</a>, f<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>manifold<span class="tsd-signature-symbol">: </span><a href="tempcontactmanifold.html" class="tsd-signature-type">TempContactManifold</a>, flipped<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+						<li class="tsd-signature tsd-kind-icon">contact<wbr>Pair<span class="tsd-signature-symbol">(</span>collider1<span class="tsd-signature-symbol">: </span><a href="../globals.html#colliderhandle" class="tsd-signature-type">ColliderHandle</a>, collider2<span class="tsd-signature-symbol">: </span><a href="../globals.html#colliderhandle" class="tsd-signature-type">ColliderHandle</a>, f<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>manifold<span class="tsd-signature-symbol">: </span><a href="tempcontactmanifold.html" class="tsd-signature-type">TempContactManifold</a>, flipped<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in geometry/narrow_phase.ts:55</li>
-								</ul>
-							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>Iterates through all the contact manifolds between the given pair of colliders.</p>
-								</div>
-							</div>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>collider1: <a href="" class="tsd-signature-type">ColliderHandle</a></h5>
-									<div class="tsd-comment tsd-typography">
-										<p>The first collider involved in the contact.</p>
-									</div>
-								</li>
-								<li>
-									<h5>collider2: <a href="" class="tsd-signature-type">ColliderHandle</a></h5>
-									<div class="tsd-comment tsd-typography">
-										<p>The second collider involved in the contact.</p>
-									</div>
-								</li>
-								<li>
-									<h5>f: <span class="tsd-signature-symbol">(</span>manifold<span class="tsd-signature-symbol">: </span><a href="tempcontactmanifold.html" class="tsd-signature-type">TempContactManifold</a>, flipped<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></h5>
-									<div class="tsd-comment tsd-typography">
-										<p>Closure that will be called on each contact manifold between the two colliders. If the second argument
-											passed to this closure is <code>true</code>, then the contact manifold data is flipped, i.e., methods like <code>localNormal1</code>
-										actually apply to the <code>collider2</code> and fields like <code>localNormal2</code> apply to the <code>collider1</code>.</p>
-									</div>
-									<ul class="tsd-parameters">
-										<li class="tsd-parameter-signature">
-											<ul class="tsd-signatures tsd-kind-type-literal">
-												<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>manifold<span class="tsd-signature-symbol">: </span><a href="tempcontactmanifold.html" class="tsd-signature-type">TempContactManifold</a>, flipped<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-											</ul>
-											<ul class="tsd-descriptions">
-												<li class="tsd-description">
-													<h4 class="tsd-parameters-title">Parameters</h4>
-													<ul class="tsd-parameters">
-														<li>
-															<h5>manifold: <a href="tempcontactmanifold.html" class="tsd-signature-type">TempContactManifold</a></h5>
-														</li>
-														<li>
-															<h5>flipped: <span class="tsd-signature-type">boolean</span></h5>
-														</li>
-													</ul>
-													<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-												</li>
-											</ul>
-										</li>
-									</ul>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-						</li>
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
@@ -261,13 +183,13 @@
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>collider1: <a href="" class="tsd-signature-type">ColliderHandle</a></h5>
+									<h5>collider1: <a href="../globals.html#colliderhandle" class="tsd-signature-type">ColliderHandle</a></h5>
 									<div class="tsd-comment tsd-typography">
 										<p>The first collider involved in the contact.</p>
 									</div>
 								</li>
 								<li>
-									<h5>collider2: <a href="" class="tsd-signature-type">ColliderHandle</a></h5>
+									<h5>collider2: <a href="../globals.html#colliderhandle" class="tsd-signature-type">ColliderHandle</a></h5>
 									<div class="tsd-comment tsd-typography">
 										<p>The second collider involved in the contact.</p>
 									</div>
@@ -310,56 +232,9 @@
 					<a name="contactswith" class="tsd-anchor"></a>
 					<h3>contacts<wbr>With</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">contacts<wbr>With<span class="tsd-signature-symbol">(</span>collider1<span class="tsd-signature-symbol">: </span><a href="" class="tsd-signature-type">ColliderHandle</a>, f<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>collider2<span class="tsd-signature-symbol">: </span><a href="" class="tsd-signature-type">ColliderHandle</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-						<li class="tsd-signature tsd-kind-icon">contacts<wbr>With<span class="tsd-signature-symbol">(</span>collider1<span class="tsd-signature-symbol">: </span><a href="" class="tsd-signature-type">ColliderHandle</a>, f<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>collider2<span class="tsd-signature-symbol">: </span><a href="" class="tsd-signature-type">ColliderHandle</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+						<li class="tsd-signature tsd-kind-icon">contacts<wbr>With<span class="tsd-signature-symbol">(</span>collider1<span class="tsd-signature-symbol">: </span><a href="../globals.html#colliderhandle" class="tsd-signature-type">ColliderHandle</a>, f<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>collider2<span class="tsd-signature-symbol">: </span><a href="../globals.html#colliderhandle" class="tsd-signature-type">ColliderHandle</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in geometry/narrow_phase.ts:34</li>
-								</ul>
-							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>Enumerates all the colliders potentially in contact with the given collider.</p>
-								</div>
-							</div>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>collider1: <a href="" class="tsd-signature-type">ColliderHandle</a></h5>
-									<div class="tsd-comment tsd-typography">
-										<p>The second collider involved in the contact.</p>
-									</div>
-								</li>
-								<li>
-									<h5>f: <span class="tsd-signature-symbol">(</span>collider2<span class="tsd-signature-symbol">: </span><a href="" class="tsd-signature-type">ColliderHandle</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></h5>
-									<div class="tsd-comment tsd-typography">
-										<p>Closure that will be called on each collider that is in contact with <code>collider1</code>.</p>
-									</div>
-									<ul class="tsd-parameters">
-										<li class="tsd-parameter-signature">
-											<ul class="tsd-signatures tsd-kind-type-literal">
-												<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>collider2<span class="tsd-signature-symbol">: </span><a href="" class="tsd-signature-type">ColliderHandle</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-											</ul>
-											<ul class="tsd-descriptions">
-												<li class="tsd-description">
-													<h4 class="tsd-parameters-title">Parameters</h4>
-													<ul class="tsd-parameters">
-														<li>
-															<h5>collider2: <a href="" class="tsd-signature-type">ColliderHandle</a></h5>
-														</li>
-													</ul>
-													<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-												</li>
-											</ul>
-										</li>
-									</ul>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-						</li>
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
@@ -374,27 +249,27 @@
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>collider1: <a href="" class="tsd-signature-type">ColliderHandle</a></h5>
+									<h5>collider1: <a href="../globals.html#colliderhandle" class="tsd-signature-type">ColliderHandle</a></h5>
 									<div class="tsd-comment tsd-typography">
 										<p>The second collider involved in the contact.</p>
 									</div>
 								</li>
 								<li>
-									<h5>f: <span class="tsd-signature-symbol">(</span>collider2<span class="tsd-signature-symbol">: </span><a href="" class="tsd-signature-type">ColliderHandle</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></h5>
+									<h5>f: <span class="tsd-signature-symbol">(</span>collider2<span class="tsd-signature-symbol">: </span><a href="../globals.html#colliderhandle" class="tsd-signature-type">ColliderHandle</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></h5>
 									<div class="tsd-comment tsd-typography">
 										<p>Closure that will be called on each collider that is in contact with <code>collider1</code>.</p>
 									</div>
 									<ul class="tsd-parameters">
 										<li class="tsd-parameter-signature">
 											<ul class="tsd-signatures tsd-kind-type-literal">
-												<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>collider2<span class="tsd-signature-symbol">: </span><a href="" class="tsd-signature-type">ColliderHandle</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+												<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>collider2<span class="tsd-signature-symbol">: </span><a href="../globals.html#colliderhandle" class="tsd-signature-type">ColliderHandle</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 											</ul>
 											<ul class="tsd-descriptions">
 												<li class="tsd-description">
 													<h4 class="tsd-parameters-title">Parameters</h4>
 													<ul class="tsd-parameters">
 														<li>
-															<h5>collider2: <a href="" class="tsd-signature-type">ColliderHandle</a></h5>
+															<h5>collider2: <a href="../globals.html#colliderhandle" class="tsd-signature-type">ColliderHandle</a></h5>
 														</li>
 													</ul>
 													<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -413,22 +288,8 @@
 					<h3>free</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
 						<li class="tsd-signature tsd-kind-icon">free<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-						<li class="tsd-signature tsd-kind-icon">free<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in geometry/narrow_phase.ts:18</li>
-								</ul>
-							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>Release the WASM memory occupied by this narrow-phase.</p>
-								</div>
-							</div>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-						</li>
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
@@ -448,38 +309,9 @@
 					<a name="intersectionpair" class="tsd-anchor"></a>
 					<h3>intersection<wbr>Pair</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">intersection<wbr>Pair<span class="tsd-signature-symbol">(</span>collider1<span class="tsd-signature-symbol">: </span><a href="" class="tsd-signature-type">ColliderHandle</a>, collider2<span class="tsd-signature-symbol">: </span><a href="" class="tsd-signature-type">ColliderHandle</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
-						<li class="tsd-signature tsd-kind-icon">intersection<wbr>Pair<span class="tsd-signature-symbol">(</span>collider1<span class="tsd-signature-symbol">: </span><a href="" class="tsd-signature-type">ColliderHandle</a>, collider2<span class="tsd-signature-symbol">: </span><a href="" class="tsd-signature-type">ColliderHandle</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+						<li class="tsd-signature tsd-kind-icon">intersection<wbr>Pair<span class="tsd-signature-symbol">(</span>collider1<span class="tsd-signature-symbol">: </span><a href="../globals.html#colliderhandle" class="tsd-signature-type">ColliderHandle</a>, collider2<span class="tsd-signature-symbol">: </span><a href="../globals.html#colliderhandle" class="tsd-signature-type">ColliderHandle</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in geometry/narrow_phase.ts:82</li>
-								</ul>
-							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>Returns <code>true</code> if <code>collider1</code> and <code>collider2</code> intersect and at least one of them is a sensor.</p>
-								</div>
-							</div>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>collider1: <a href="" class="tsd-signature-type">ColliderHandle</a></h5>
-									<div class="tsd-comment tsd-typography">
-										<p>− The first collider involved in the intersection.</p>
-									</div>
-								</li>
-								<li>
-									<h5>collider2: <a href="" class="tsd-signature-type">ColliderHandle</a></h5>
-									<div class="tsd-comment tsd-typography">
-										<p>− The second collider involved in the intersection.</p>
-									</div>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
-						</li>
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
@@ -494,13 +326,13 @@
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>collider1: <a href="" class="tsd-signature-type">ColliderHandle</a></h5>
+									<h5>collider1: <a href="../globals.html#colliderhandle" class="tsd-signature-type">ColliderHandle</a></h5>
 									<div class="tsd-comment tsd-typography">
 										<p>− The first collider involved in the intersection.</p>
 									</div>
 								</li>
 								<li>
-									<h5>collider2: <a href="" class="tsd-signature-type">ColliderHandle</a></h5>
+									<h5>collider2: <a href="../globals.html#colliderhandle" class="tsd-signature-type">ColliderHandle</a></h5>
 									<div class="tsd-comment tsd-typography">
 										<p>− The second collider involved in the intersection.</p>
 									</div>
@@ -514,51 +346,9 @@
 					<a name="intersectionswith" class="tsd-anchor"></a>
 					<h3>intersections<wbr>With</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">intersections<wbr>With<span class="tsd-signature-symbol">(</span>collider1<span class="tsd-signature-symbol">: </span><a href="" class="tsd-signature-type">ColliderHandle</a>, f<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>collider2<span class="tsd-signature-symbol">: </span><a href="" class="tsd-signature-type">ColliderHandle</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-						<li class="tsd-signature tsd-kind-icon">intersections<wbr>With<span class="tsd-signature-symbol">(</span>collider1<span class="tsd-signature-symbol">: </span><a href="" class="tsd-signature-type">ColliderHandle</a>, f<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>collider2<span class="tsd-signature-symbol">: </span><a href="" class="tsd-signature-type">ColliderHandle</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+						<li class="tsd-signature tsd-kind-icon">intersections<wbr>With<span class="tsd-signature-symbol">(</span>collider1<span class="tsd-signature-symbol">: </span><a href="../globals.html#colliderhandle" class="tsd-signature-type">ColliderHandle</a>, f<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>collider2<span class="tsd-signature-symbol">: </span><a href="../globals.html#colliderhandle" class="tsd-signature-type">ColliderHandle</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in geometry/narrow_phase.ts:42</li>
-								</ul>
-							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>Enumerates all the colliders intersecting the given colliders, assuming one of them
-									is a sensor.</p>
-								</div>
-							</div>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>collider1: <a href="" class="tsd-signature-type">ColliderHandle</a></h5>
-								</li>
-								<li>
-									<h5>f: <span class="tsd-signature-symbol">(</span>collider2<span class="tsd-signature-symbol">: </span><a href="" class="tsd-signature-type">ColliderHandle</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></h5>
-									<ul class="tsd-parameters">
-										<li class="tsd-parameter-signature">
-											<ul class="tsd-signatures tsd-kind-type-literal">
-												<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>collider2<span class="tsd-signature-symbol">: </span><a href="" class="tsd-signature-type">ColliderHandle</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-											</ul>
-											<ul class="tsd-descriptions">
-												<li class="tsd-description">
-													<h4 class="tsd-parameters-title">Parameters</h4>
-													<ul class="tsd-parameters">
-														<li>
-															<h5>collider2: <a href="" class="tsd-signature-type">ColliderHandle</a></h5>
-														</li>
-													</ul>
-													<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-												</li>
-											</ul>
-										</li>
-									</ul>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-						</li>
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
@@ -574,21 +364,21 @@
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>collider1: <a href="" class="tsd-signature-type">ColliderHandle</a></h5>
+									<h5>collider1: <a href="../globals.html#colliderhandle" class="tsd-signature-type">ColliderHandle</a></h5>
 								</li>
 								<li>
-									<h5>f: <span class="tsd-signature-symbol">(</span>collider2<span class="tsd-signature-symbol">: </span><a href="" class="tsd-signature-type">ColliderHandle</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></h5>
+									<h5>f: <span class="tsd-signature-symbol">(</span>collider2<span class="tsd-signature-symbol">: </span><a href="../globals.html#colliderhandle" class="tsd-signature-type">ColliderHandle</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></h5>
 									<ul class="tsd-parameters">
 										<li class="tsd-parameter-signature">
 											<ul class="tsd-signatures tsd-kind-type-literal">
-												<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>collider2<span class="tsd-signature-symbol">: </span><a href="" class="tsd-signature-type">ColliderHandle</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+												<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>collider2<span class="tsd-signature-symbol">: </span><a href="../globals.html#colliderhandle" class="tsd-signature-type">ColliderHandle</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 											</ul>
 											<ul class="tsd-descriptions">
 												<li class="tsd-description">
 													<h4 class="tsd-parameters-title">Parameters</h4>
 													<ul class="tsd-parameters">
 														<li>
-															<h5>collider2: <a href="" class="tsd-signature-type">ColliderHandle</a></h5>
+															<h5>collider2: <a href="../globals.html#colliderhandle" class="tsd-signature-type">ColliderHandle</a></h5>
 														</li>
 													</ul>
 													<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -673,6 +463,7 @@
 			</ul>
 			<ul class="tsd-legend">
 				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected method</span></li>
 			</ul>
 			<ul class="tsd-legend">
 				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private property</span></li>

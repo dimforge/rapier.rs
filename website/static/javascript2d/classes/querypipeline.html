@@ -67,11 +67,8 @@
 			<section class="tsd-panel tsd-comment">
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
-						<p>A pipeline for performing queries on all the colliders of a scene.
-						A pipeline for performing queries on all the colliders of a scene.</p>
+						<p>A pipeline for performing queries on all the colliders of a scene.</p>
 					</div>
-					<p>To avoid leaking WASM resources, this MUST be freed manually with <code>queryPipeline.free()</code>
-					once you are done using it (and all the rigid-bodies it created).</p>
 					<p>To avoid leaking WASM resources, this MUST be freed manually with <code>queryPipeline.free()</code>
 					once you are done using it (and all the rigid-bodies it created).</p>
 				</div>
@@ -126,23 +123,8 @@
 					<h3>constructor</h3>
 					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
 						<li class="tsd-signature tsd-kind-icon">new <wbr>Query<wbr>Pipeline<span class="tsd-signature-symbol">(</span>raw<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">RawQueryPipeline</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="querypipeline.html" class="tsd-signature-type">QueryPipeline</a></li>
-						<li class="tsd-signature tsd-kind-icon">new <wbr>Query<wbr>Pipeline<span class="tsd-signature-symbol">(</span>raw<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">RawQueryPipeline</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="querypipeline.html" class="tsd-signature-type">QueryPipeline</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in pipeline/query_pipeline.ts:28</li>
-								</ul>
-							</aside>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5><span class="tsd-flag ts-flagOptional">Optional</span> raw: <span class="tsd-signature-type">RawQueryPipeline</span></h5>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <a href="querypipeline.html" class="tsd-signature-type">QueryPipeline</a></h4>
-						</li>
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
@@ -168,7 +150,6 @@
 					<div class="tsd-signature tsd-kind-icon">raw<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">RawQueryPipeline</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in pipeline/query_pipeline.ts:20</li>
 							<li>Defined in pipeline/query_pipeline.d.ts:12</li>
 						</ul>
 					</aside>
@@ -181,58 +162,8 @@
 					<h3>cast<wbr>Ray</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
 						<li class="tsd-signature tsd-kind-icon">cast<wbr>Ray<span class="tsd-signature-symbol">(</span>colliders<span class="tsd-signature-symbol">: </span><a href="colliderset.html" class="tsd-signature-type">ColliderSet</a>, ray<span class="tsd-signature-symbol">: </span><a href="ray.html" class="tsd-signature-type">Ray</a>, maxToi<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, solid<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span>, groups<span class="tsd-signature-symbol">: </span><a href="../globals.html#interactiongroups" class="tsd-signature-type">InteractionGroups</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="raycollidertoi.html" class="tsd-signature-type">RayColliderToi</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span></li>
-						<li class="tsd-signature tsd-kind-icon">cast<wbr>Ray<span class="tsd-signature-symbol">(</span>colliders<span class="tsd-signature-symbol">: </span><a href="colliderset.html" class="tsd-signature-type">ColliderSet</a>, ray<span class="tsd-signature-symbol">: </span><a href="ray.html" class="tsd-signature-type">Ray</a>, maxToi<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, solid<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span>, groups<span class="tsd-signature-symbol">: </span><a href="../globals.html#interactiongroups" class="tsd-signature-type">InteractionGroups</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="raycollidertoi.html" class="tsd-signature-type">RayColliderToi</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in pipeline/query_pipeline.ts:55</li>
-								</ul>
-							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>Find the closest intersection between a ray and a set of collider.</p>
-								</div>
-							</div>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>colliders: <a href="colliderset.html" class="tsd-signature-type">ColliderSet</a></h5>
-									<div class="tsd-comment tsd-typography">
-										<p>The set of colliders taking part in this pipeline.</p>
-									</div>
-								</li>
-								<li>
-									<h5>ray: <a href="ray.html" class="tsd-signature-type">Ray</a></h5>
-									<div class="tsd-comment tsd-typography">
-										<p>The ray to cast.</p>
-									</div>
-								</li>
-								<li>
-									<h5>maxToi: <span class="tsd-signature-type">number</span></h5>
-									<div class="tsd-comment tsd-typography">
-										<p>The maximum time-of-impact that can be reported by this cast. This effectively
-										limits the length of the ray to <code>ray.dir.norm() * maxToi</code>.</p>
-									</div>
-								</li>
-								<li>
-									<h5>solid: <span class="tsd-signature-type">boolean</span></h5>
-									<div class="tsd-comment tsd-typography">
-										<p>If <code>false</code> then the ray will attempt to hit the boundary of a shape, even if its
-											origin already lies inside of a shape. In other terms, <code>true</code> implies that all shapes are plain,
-										whereas <code>false</code> implies that all shapes are hollow for this ray-cast.</p>
-									</div>
-								</li>
-								<li>
-									<h5>groups: <a href="../globals.html#interactiongroups" class="tsd-signature-type">InteractionGroups</a></h5>
-									<div class="tsd-comment tsd-typography">
-										<p>Used to filter the colliders that can or cannot be hit by the ray.</p>
-									</div>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <a href="raycollidertoi.html" class="tsd-signature-type">RayColliderToi</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span></h4>
-						</li>
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
@@ -289,59 +220,8 @@
 					<h3>cast<wbr>Ray<wbr>And<wbr>Get<wbr>Normal</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
 						<li class="tsd-signature tsd-kind-icon">cast<wbr>Ray<wbr>And<wbr>Get<wbr>Normal<span class="tsd-signature-symbol">(</span>colliders<span class="tsd-signature-symbol">: </span><a href="colliderset.html" class="tsd-signature-type">ColliderSet</a>, ray<span class="tsd-signature-symbol">: </span><a href="ray.html" class="tsd-signature-type">Ray</a>, maxToi<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, solid<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span>, groups<span class="tsd-signature-symbol">: </span><a href="../globals.html#interactiongroups" class="tsd-signature-type">InteractionGroups</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="raycolliderintersection.html" class="tsd-signature-type">RayColliderIntersection</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span></li>
-						<li class="tsd-signature tsd-kind-icon">cast<wbr>Ray<wbr>And<wbr>Get<wbr>Normal<span class="tsd-signature-symbol">(</span>colliders<span class="tsd-signature-symbol">: </span><a href="colliderset.html" class="tsd-signature-type">ColliderSet</a>, ray<span class="tsd-signature-symbol">: </span><a href="ray.html" class="tsd-signature-type">Ray</a>, maxToi<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, solid<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span>, groups<span class="tsd-signature-symbol">: </span><a href="../globals.html#interactiongroups" class="tsd-signature-type">InteractionGroups</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="raycolliderintersection.html" class="tsd-signature-type">RayColliderIntersection</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in pipeline/query_pipeline.ts:93</li>
-								</ul>
-							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>Find the closest intersection between a ray and a set of collider.</p>
-								</div>
-								<p>This also computes the normal at the hit point.</p>
-							</div>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>colliders: <a href="colliderset.html" class="tsd-signature-type">ColliderSet</a></h5>
-									<div class="tsd-comment tsd-typography">
-										<p>The set of colliders taking part in this pipeline.</p>
-									</div>
-								</li>
-								<li>
-									<h5>ray: <a href="ray.html" class="tsd-signature-type">Ray</a></h5>
-									<div class="tsd-comment tsd-typography">
-										<p>The ray to cast.</p>
-									</div>
-								</li>
-								<li>
-									<h5>maxToi: <span class="tsd-signature-type">number</span></h5>
-									<div class="tsd-comment tsd-typography">
-										<p>The maximum time-of-impact that can be reported by this cast. This effectively
-										limits the length of the ray to <code>ray.dir.norm() * maxToi</code>.</p>
-									</div>
-								</li>
-								<li>
-									<h5>solid: <span class="tsd-signature-type">boolean</span></h5>
-									<div class="tsd-comment tsd-typography">
-										<p>If <code>false</code> then the ray will attempt to hit the boundary of a shape, even if its
-											origin already lies inside of a shape. In other terms, <code>true</code> implies that all shapes are plain,
-										whereas <code>false</code> implies that all shapes are hollow for this ray-cast.</p>
-									</div>
-								</li>
-								<li>
-									<h5>groups: <a href="../globals.html#interactiongroups" class="tsd-signature-type">InteractionGroups</a></h5>
-									<div class="tsd-comment tsd-typography">
-										<p>Used to filter the colliders that can or cannot be hit by the ray.</p>
-									</div>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <a href="raycolliderintersection.html" class="tsd-signature-type">RayColliderIntersection</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span></h4>
-						</li>
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
@@ -399,71 +279,8 @@
 					<h3>cast<wbr>Shape</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
 						<li class="tsd-signature tsd-kind-icon">cast<wbr>Shape<span class="tsd-signature-symbol">(</span>colliders<span class="tsd-signature-symbol">: </span><a href="colliderset.html" class="tsd-signature-type">ColliderSet</a>, shapePos<span class="tsd-signature-symbol">: </span><a href="../interfaces/vector.html" class="tsd-signature-type">Vector</a>, shapeRot<span class="tsd-signature-symbol">: </span><a href="../globals.html#rotation" class="tsd-signature-type">Rotation</a>, shapeVel<span class="tsd-signature-symbol">: </span><a href="../interfaces/vector.html" class="tsd-signature-type">Vector</a>, shape<span class="tsd-signature-symbol">: </span><a href="../globals.html#shape" class="tsd-signature-type">Shape</a>, maxToi<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, groups<span class="tsd-signature-symbol">: </span><a href="../globals.html#interactiongroups" class="tsd-signature-type">InteractionGroups</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="shapecollidertoi.html" class="tsd-signature-type">ShapeColliderTOI</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span></li>
-						<li class="tsd-signature tsd-kind-icon">cast<wbr>Shape<span class="tsd-signature-symbol">(</span>colliders<span class="tsd-signature-symbol">: </span><a href="colliderset.html" class="tsd-signature-type">ColliderSet</a>, shapePos<span class="tsd-signature-symbol">: </span><a href="../interfaces/vector.html" class="tsd-signature-type">Vector</a>, shapeRot<span class="tsd-signature-symbol">: </span><a href="../globals.html#rotation" class="tsd-signature-type">Rotation</a>, shapeVel<span class="tsd-signature-symbol">: </span><a href="../interfaces/vector.html" class="tsd-signature-type">Vector</a>, shape<span class="tsd-signature-symbol">: </span><a href="../globals.html#shape" class="tsd-signature-type">Shape</a>, maxToi<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, groups<span class="tsd-signature-symbol">: </span><a href="../globals.html#interactiongroups" class="tsd-signature-type">InteractionGroups</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="shapecollidertoi.html" class="tsd-signature-type">ShapeColliderTOI</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in pipeline/query_pipeline.ts:270</li>
-								</ul>
-							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>Casts a shape at a constant linear velocity and retrieve the first collider it hits.
-										This is similar to ray-casting except that we are casting a whole shape instead of
-									just a point (the ray origin).</p>
-								</div>
-							</div>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>colliders: <a href="colliderset.html" class="tsd-signature-type">ColliderSet</a></h5>
-									<div class="tsd-comment tsd-typography">
-										<p>The set of colliders taking part in this pipeline.</p>
-									</div>
-								</li>
-								<li>
-									<h5>shapePos: <a href="../interfaces/vector.html" class="tsd-signature-type">Vector</a></h5>
-									<div class="tsd-comment tsd-typography">
-										<p>The initial position of the shape to cast.</p>
-									</div>
-								</li>
-								<li>
-									<h5>shapeRot: <a href="../globals.html#rotation" class="tsd-signature-type">Rotation</a></h5>
-									<div class="tsd-comment tsd-typography">
-										<p>The initial rotation of the shape to cast.</p>
-									</div>
-								</li>
-								<li>
-									<h5>shapeVel: <a href="../interfaces/vector.html" class="tsd-signature-type">Vector</a></h5>
-									<div class="tsd-comment tsd-typography">
-										<p>The constant velocity of the shape to cast (i.e. the cast direction).</p>
-									</div>
-								</li>
-								<li>
-									<h5>shape: <a href="../globals.html#shape" class="tsd-signature-type">Shape</a></h5>
-									<div class="tsd-comment tsd-typography">
-										<p>The shape to cast.</p>
-									</div>
-								</li>
-								<li>
-									<h5>maxToi: <span class="tsd-signature-type">number</span></h5>
-									<div class="tsd-comment tsd-typography">
-										<p>The maximum time-of-impact that can be reported by this cast. This effectively
-										limits the distance traveled by the shape to <code>shapeVel.norm() * maxToi</code>.</p>
-									</div>
-								</li>
-								<li>
-									<h5>groups: <a href="../globals.html#interactiongroups" class="tsd-signature-type">InteractionGroups</a></h5>
-									<div class="tsd-comment tsd-typography">
-										<p>The bit groups and filter associated to the shape to cast, in order to only
-										test on colliders with collision groups compatible with this group.</p>
-									</div>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <a href="shapecollidertoi.html" class="tsd-signature-type">ShapeColliderTOI</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span></h4>
-						</li>
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
@@ -532,63 +349,9 @@
 					<a name="colliderswithaabbintersectingaabb" class="tsd-anchor"></a>
 					<h3>colliders<wbr>With<wbr>Aabb<wbr>Intersecting<wbr>Aabb</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">colliders<wbr>With<wbr>Aabb<wbr>Intersecting<wbr>Aabb<span class="tsd-signature-symbol">(</span>aabbCenter<span class="tsd-signature-symbol">: </span><a href="../interfaces/vector.html" class="tsd-signature-type">Vector</a>, aabbHalfExtents<span class="tsd-signature-symbol">: </span><a href="../interfaces/vector.html" class="tsd-signature-type">Vector</a>, callback<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>handle<span class="tsd-signature-symbol">: </span><a href="" class="tsd-signature-type">ColliderHandle</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-						<li class="tsd-signature tsd-kind-icon">colliders<wbr>With<wbr>Aabb<wbr>Intersecting<wbr>Aabb<span class="tsd-signature-symbol">(</span>aabbCenter<span class="tsd-signature-symbol">: </span><a href="../interfaces/vector.html" class="tsd-signature-type">Vector</a>, aabbHalfExtents<span class="tsd-signature-symbol">: </span><a href="../interfaces/vector.html" class="tsd-signature-type">Vector</a>, callback<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>handle<span class="tsd-signature-symbol">: </span><a href="" class="tsd-signature-type">ColliderHandle</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+						<li class="tsd-signature tsd-kind-icon">colliders<wbr>With<wbr>Aabb<wbr>Intersecting<wbr>Aabb<span class="tsd-signature-symbol">(</span>aabbCenter<span class="tsd-signature-symbol">: </span><a href="../interfaces/vector.html" class="tsd-signature-type">Vector</a>, aabbHalfExtents<span class="tsd-signature-symbol">: </span><a href="../interfaces/vector.html" class="tsd-signature-type">Vector</a>, callback<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>handle<span class="tsd-signature-symbol">: </span><a href="../globals.html#colliderhandle" class="tsd-signature-type">ColliderHandle</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in pipeline/query_pipeline.ts:347</li>
-								</ul>
-							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>Finds the handles of all the colliders with an AABB intersecting the given AABB.</p>
-								</div>
-							</div>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>aabbCenter: <a href="../interfaces/vector.html" class="tsd-signature-type">Vector</a></h5>
-									<div class="tsd-comment tsd-typography">
-										<p>The center of the AABB to test.</p>
-									</div>
-								</li>
-								<li>
-									<h5>aabbHalfExtents: <a href="../interfaces/vector.html" class="tsd-signature-type">Vector</a></h5>
-									<div class="tsd-comment tsd-typography">
-										<p>The half-extents of the AABB to test.</p>
-									</div>
-								</li>
-								<li>
-									<h5>callback: <span class="tsd-signature-symbol">(</span>handle<span class="tsd-signature-symbol">: </span><a href="" class="tsd-signature-type">ColliderHandle</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">boolean</span></h5>
-									<div class="tsd-comment tsd-typography">
-										<p>The callback that will be called with the handles of all the colliders
-										currently intersecting the given AABB.</p>
-									</div>
-									<ul class="tsd-parameters">
-										<li class="tsd-parameter-signature">
-											<ul class="tsd-signatures tsd-kind-type-literal">
-												<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>handle<span class="tsd-signature-symbol">: </span><a href="" class="tsd-signature-type">ColliderHandle</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
-											</ul>
-											<ul class="tsd-descriptions">
-												<li class="tsd-description">
-													<h4 class="tsd-parameters-title">Parameters</h4>
-													<ul class="tsd-parameters">
-														<li>
-															<h5>handle: <a href="" class="tsd-signature-type">ColliderHandle</a></h5>
-														</li>
-													</ul>
-													<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
-												</li>
-											</ul>
-										</li>
-									</ul>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-						</li>
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
@@ -615,7 +378,7 @@
 									</div>
 								</li>
 								<li>
-									<h5>callback: <span class="tsd-signature-symbol">(</span>handle<span class="tsd-signature-symbol">: </span><a href="" class="tsd-signature-type">ColliderHandle</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">boolean</span></h5>
+									<h5>callback: <span class="tsd-signature-symbol">(</span>handle<span class="tsd-signature-symbol">: </span><a href="../globals.html#colliderhandle" class="tsd-signature-type">ColliderHandle</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">boolean</span></h5>
 									<div class="tsd-comment tsd-typography">
 										<p>The callback that will be called with the handles of all the colliders
 										currently intersecting the given AABB.</p>
@@ -623,14 +386,14 @@
 									<ul class="tsd-parameters">
 										<li class="tsd-parameter-signature">
 											<ul class="tsd-signatures tsd-kind-type-literal">
-												<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>handle<span class="tsd-signature-symbol">: </span><a href="" class="tsd-signature-type">ColliderHandle</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+												<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>handle<span class="tsd-signature-symbol">: </span><a href="../globals.html#colliderhandle" class="tsd-signature-type">ColliderHandle</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
 											</ul>
 											<ul class="tsd-descriptions">
 												<li class="tsd-description">
 													<h4 class="tsd-parameters-title">Parameters</h4>
 													<ul class="tsd-parameters">
 														<li>
-															<h5>handle: <a href="" class="tsd-signature-type">ColliderHandle</a></h5>
+															<h5>handle: <a href="../globals.html#colliderhandle" class="tsd-signature-type">ColliderHandle</a></h5>
 														</li>
 													</ul>
 													<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
@@ -649,22 +412,8 @@
 					<h3>free</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
 						<li class="tsd-signature tsd-kind-icon">free<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-						<li class="tsd-signature tsd-kind-icon">free<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in pipeline/query_pipeline.ts:25</li>
-								</ul>
-							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>Release the WASM memory occupied by this query pipeline.</p>
-								</div>
-							</div>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-						</li>
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
@@ -684,57 +433,9 @@
 					<a name="intersectionwithshape" class="tsd-anchor"></a>
 					<h3>intersection<wbr>With<wbr>Shape</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">intersection<wbr>With<wbr>Shape<span class="tsd-signature-symbol">(</span>colliders<span class="tsd-signature-symbol">: </span><a href="colliderset.html" class="tsd-signature-type">ColliderSet</a>, shapePos<span class="tsd-signature-symbol">: </span><a href="../interfaces/vector.html" class="tsd-signature-type">Vector</a>, shapeRot<span class="tsd-signature-symbol">: </span><a href="../globals.html#rotation" class="tsd-signature-type">Rotation</a>, shape<span class="tsd-signature-symbol">: </span><a href="../globals.html#shape" class="tsd-signature-type">Shape</a>, groups<span class="tsd-signature-symbol">: </span><a href="../globals.html#interactiongroups" class="tsd-signature-type">InteractionGroups</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="" class="tsd-signature-type">ColliderHandle</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span></li>
-						<li class="tsd-signature tsd-kind-icon">intersection<wbr>With<wbr>Shape<span class="tsd-signature-symbol">(</span>colliders<span class="tsd-signature-symbol">: </span><a href="colliderset.html" class="tsd-signature-type">ColliderSet</a>, shapePos<span class="tsd-signature-symbol">: </span><a href="../interfaces/vector.html" class="tsd-signature-type">Vector</a>, shapeRot<span class="tsd-signature-symbol">: </span><a href="../globals.html#rotation" class="tsd-signature-type">Rotation</a>, shape<span class="tsd-signature-symbol">: </span><a href="../globals.html#shape" class="tsd-signature-type">Shape</a>, groups<span class="tsd-signature-symbol">: </span><a href="../globals.html#interactiongroups" class="tsd-signature-type">InteractionGroups</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="" class="tsd-signature-type">ColliderHandle</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span></li>
+						<li class="tsd-signature tsd-kind-icon">intersection<wbr>With<wbr>Shape<span class="tsd-signature-symbol">(</span>colliders<span class="tsd-signature-symbol">: </span><a href="colliderset.html" class="tsd-signature-type">ColliderSet</a>, shapePos<span class="tsd-signature-symbol">: </span><a href="../interfaces/vector.html" class="tsd-signature-type">Vector</a>, shapeRot<span class="tsd-signature-symbol">: </span><a href="../globals.html#rotation" class="tsd-signature-type">Rotation</a>, shape<span class="tsd-signature-symbol">: </span><a href="../globals.html#shape" class="tsd-signature-type">Shape</a>, groups<span class="tsd-signature-symbol">: </span><a href="../globals.html#interactiongroups" class="tsd-signature-type">InteractionGroups</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../globals.html#colliderhandle" class="tsd-signature-type">ColliderHandle</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in pipeline/query_pipeline.ts:170</li>
-								</ul>
-							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>Gets the handle of up to one collider intersecting the given shape.</p>
-								</div>
-							</div>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>colliders: <a href="colliderset.html" class="tsd-signature-type">ColliderSet</a></h5>
-									<div class="tsd-comment tsd-typography">
-										<p>The set of colliders taking part in this pipeline.</p>
-									</div>
-								</li>
-								<li>
-									<h5>shapePos: <a href="../interfaces/vector.html" class="tsd-signature-type">Vector</a></h5>
-									<div class="tsd-comment tsd-typography">
-										<p>The position of the shape used for the intersection test.</p>
-									</div>
-								</li>
-								<li>
-									<h5>shapeRot: <a href="../globals.html#rotation" class="tsd-signature-type">Rotation</a></h5>
-									<div class="tsd-comment tsd-typography">
-										<p>The orientation of the shape used for the intersection test.</p>
-									</div>
-								</li>
-								<li>
-									<h5>shape: <a href="../globals.html#shape" class="tsd-signature-type">Shape</a></h5>
-									<div class="tsd-comment tsd-typography">
-										<p>The shape used for the intersection test.</p>
-									</div>
-								</li>
-								<li>
-									<h5>groups: <a href="../globals.html#interactiongroups" class="tsd-signature-type">InteractionGroups</a></h5>
-									<div class="tsd-comment tsd-typography">
-										<p>The bit groups and filter associated to the ray, in order to only
-										hit the colliders with collision groups compatible with the ray&#39;s group.</p>
-									</div>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <a href="" class="tsd-signature-type">ColliderHandle</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span></h4>
-						</li>
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
@@ -780,7 +481,7 @@
 									</div>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <a href="" class="tsd-signature-type">ColliderHandle</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span></h4>
+							<h4 class="tsd-returns-title">Returns <a href="../globals.html#colliderhandle" class="tsd-signature-type">ColliderHandle</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -788,70 +489,9 @@
 					<a name="intersectionswithpoint" class="tsd-anchor"></a>
 					<h3>intersections<wbr>With<wbr>Point</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">intersections<wbr>With<wbr>Point<span class="tsd-signature-symbol">(</span>colliders<span class="tsd-signature-symbol">: </span><a href="colliderset.html" class="tsd-signature-type">ColliderSet</a>, point<span class="tsd-signature-symbol">: </span><a href="../interfaces/vector.html" class="tsd-signature-type">Vector</a>, groups<span class="tsd-signature-symbol">: </span><a href="../globals.html#interactiongroups" class="tsd-signature-type">InteractionGroups</a>, callback<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>ColliderHandle<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-						<li class="tsd-signature tsd-kind-icon">intersections<wbr>With<wbr>Point<span class="tsd-signature-symbol">(</span>colliders<span class="tsd-signature-symbol">: </span><a href="colliderset.html" class="tsd-signature-type">ColliderSet</a>, point<span class="tsd-signature-symbol">: </span><a href="../interfaces/vector.html" class="tsd-signature-type">Vector</a>, groups<span class="tsd-signature-symbol">: </span><a href="../globals.html#interactiongroups" class="tsd-signature-type">InteractionGroups</a>, callback<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>ColliderHandle<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+						<li class="tsd-signature tsd-kind-icon">intersections<wbr>With<wbr>Point<span class="tsd-signature-symbol">(</span>colliders<span class="tsd-signature-symbol">: </span><a href="colliderset.html" class="tsd-signature-type">ColliderSet</a>, point<span class="tsd-signature-symbol">: </span><a href="../interfaces/vector.html" class="tsd-signature-type">Vector</a>, groups<span class="tsd-signature-symbol">: </span><a href="../globals.html#interactiongroups" class="tsd-signature-type">InteractionGroups</a>, callback<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>handle<span class="tsd-signature-symbol">: </span><a href="../globals.html#colliderhandle" class="tsd-signature-type">ColliderHandle</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in pipeline/query_pipeline.ts:237</li>
-								</ul>
-							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>Find all the colliders containing the given point.</p>
-								</div>
-							</div>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>colliders: <a href="colliderset.html" class="tsd-signature-type">ColliderSet</a></h5>
-									<div class="tsd-comment tsd-typography">
-										<p>The set of colliders taking part in this pipeline.</p>
-									</div>
-								</li>
-								<li>
-									<h5>point: <a href="../interfaces/vector.html" class="tsd-signature-type">Vector</a></h5>
-									<div class="tsd-comment tsd-typography">
-										<p>The point used for the containment test.</p>
-									</div>
-								</li>
-								<li>
-									<h5>groups: <a href="../globals.html#interactiongroups" class="tsd-signature-type">InteractionGroups</a></h5>
-									<div class="tsd-comment tsd-typography">
-										<p>The bit groups and filter associated to the point to test, in order to only
-										test on colliders with collision groups compatible with the ray&#39;s group.</p>
-									</div>
-								</li>
-								<li>
-									<h5>callback: <span class="tsd-signature-symbol">(</span>ColliderHandle<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">boolean</span></h5>
-									<div class="tsd-comment tsd-typography">
-										<p>A function called with the handles of each collider with a shape
-										containing the <code>point</code>.</p>
-									</div>
-									<ul class="tsd-parameters">
-										<li class="tsd-parameter-signature">
-											<ul class="tsd-signatures tsd-kind-type-literal">
-												<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>ColliderHandle<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
-											</ul>
-											<ul class="tsd-descriptions">
-												<li class="tsd-description">
-													<h4 class="tsd-parameters-title">Parameters</h4>
-													<ul class="tsd-parameters">
-														<li>
-															<h5>ColliderHandle: <span class="tsd-signature-type">any</span></h5>
-														</li>
-													</ul>
-													<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
-												</li>
-											</ul>
-										</li>
-									</ul>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-						</li>
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
@@ -885,7 +525,7 @@
 									</div>
 								</li>
 								<li>
-									<h5>callback: <span class="tsd-signature-symbol">(</span>ColliderHandle<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">boolean</span></h5>
+									<h5>callback: <span class="tsd-signature-symbol">(</span>handle<span class="tsd-signature-symbol">: </span><a href="../globals.html#colliderhandle" class="tsd-signature-type">ColliderHandle</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">boolean</span></h5>
 									<div class="tsd-comment tsd-typography">
 										<p>A function called with the handles of each collider with a shape
 										containing the <code>point</code>.</p>
@@ -893,14 +533,14 @@
 									<ul class="tsd-parameters">
 										<li class="tsd-parameter-signature">
 											<ul class="tsd-signatures tsd-kind-type-literal">
-												<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>ColliderHandle<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+												<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>handle<span class="tsd-signature-symbol">: </span><a href="../globals.html#colliderhandle" class="tsd-signature-type">ColliderHandle</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
 											</ul>
 											<ul class="tsd-descriptions">
 												<li class="tsd-description">
 													<h4 class="tsd-parameters-title">Parameters</h4>
 													<ul class="tsd-parameters">
 														<li>
-															<h5>ColliderHandle: <span class="tsd-signature-type">any</span></h5>
+															<h5>handle: <a href="../globals.html#colliderhandle" class="tsd-signature-type">ColliderHandle</a></h5>
 														</li>
 													</ul>
 													<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
@@ -918,84 +558,9 @@
 					<a name="intersectionswithray" class="tsd-anchor"></a>
 					<h3>intersections<wbr>With<wbr>Ray</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">intersections<wbr>With<wbr>Ray<span class="tsd-signature-symbol">(</span>colliders<span class="tsd-signature-symbol">: </span><a href="colliderset.html" class="tsd-signature-type">ColliderSet</a>, ray<span class="tsd-signature-symbol">: </span><a href="ray.html" class="tsd-signature-type">Ray</a>, maxToi<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, solid<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span>, groups<span class="tsd-signature-symbol">: </span><a href="../globals.html#interactiongroups" class="tsd-signature-type">InteractionGroups</a>, callback<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>RayColliderIntersection<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-						<li class="tsd-signature tsd-kind-icon">intersections<wbr>With<wbr>Ray<span class="tsd-signature-symbol">(</span>colliders<span class="tsd-signature-symbol">: </span><a href="colliderset.html" class="tsd-signature-type">ColliderSet</a>, ray<span class="tsd-signature-symbol">: </span><a href="ray.html" class="tsd-signature-type">Ray</a>, maxToi<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, solid<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span>, groups<span class="tsd-signature-symbol">: </span><a href="../globals.html#interactiongroups" class="tsd-signature-type">InteractionGroups</a>, callback<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>RayColliderIntersection<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+						<li class="tsd-signature tsd-kind-icon">intersections<wbr>With<wbr>Ray<span class="tsd-signature-symbol">(</span>colliders<span class="tsd-signature-symbol">: </span><a href="colliderset.html" class="tsd-signature-type">ColliderSet</a>, ray<span class="tsd-signature-symbol">: </span><a href="ray.html" class="tsd-signature-type">Ray</a>, maxToi<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, solid<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span>, groups<span class="tsd-signature-symbol">: </span><a href="../globals.html#interactiongroups" class="tsd-signature-type">InteractionGroups</a>, callback<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>intersect<span class="tsd-signature-symbol">: </span><a href="raycolliderintersection.html" class="tsd-signature-type">RayColliderIntersection</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in pipeline/query_pipeline.ts:132</li>
-								</ul>
-							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>Cast a ray and collects all the intersections between a ray and the scene.</p>
-								</div>
-							</div>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>colliders: <a href="colliderset.html" class="tsd-signature-type">ColliderSet</a></h5>
-									<div class="tsd-comment tsd-typography">
-										<p>The set of colliders taking part in this pipeline.</p>
-									</div>
-								</li>
-								<li>
-									<h5>ray: <a href="ray.html" class="tsd-signature-type">Ray</a></h5>
-									<div class="tsd-comment tsd-typography">
-										<p>The ray to cast.</p>
-									</div>
-								</li>
-								<li>
-									<h5>maxToi: <span class="tsd-signature-type">number</span></h5>
-									<div class="tsd-comment tsd-typography">
-										<p>The maximum time-of-impact that can be reported by this cast. This effectively
-										limits the length of the ray to <code>ray.dir.norm() * maxToi</code>.</p>
-									</div>
-								</li>
-								<li>
-									<h5>solid: <span class="tsd-signature-type">boolean</span></h5>
-									<div class="tsd-comment tsd-typography">
-										<p>If <code>false</code> then the ray will attempt to hit the boundary of a shape, even if its
-											origin already lies inside of a shape. In other terms, <code>true</code> implies that all shapes are plain,
-										whereas <code>false</code> implies that all shapes are hollow for this ray-cast.</p>
-									</div>
-								</li>
-								<li>
-									<h5>groups: <a href="../globals.html#interactiongroups" class="tsd-signature-type">InteractionGroups</a></h5>
-									<div class="tsd-comment tsd-typography">
-										<p>Used to filter the colliders that can or cannot be hit by the ray.</p>
-									</div>
-								</li>
-								<li>
-									<h5>callback: <span class="tsd-signature-symbol">(</span>RayColliderIntersection<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">boolean</span></h5>
-									<div class="tsd-comment tsd-typography">
-										<p>The callback called once per hit (in no particular order) between a ray and a collider.
-										If this callback returns <code>false</code>, then the cast will stop and no further hits will be detected/reported.</p>
-									</div>
-									<ul class="tsd-parameters">
-										<li class="tsd-parameter-signature">
-											<ul class="tsd-signatures tsd-kind-type-literal">
-												<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>RayColliderIntersection<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
-											</ul>
-											<ul class="tsd-descriptions">
-												<li class="tsd-description">
-													<h4 class="tsd-parameters-title">Parameters</h4>
-													<ul class="tsd-parameters">
-														<li>
-															<h5>RayColliderIntersection: <span class="tsd-signature-type">any</span></h5>
-														</li>
-													</ul>
-													<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
-												</li>
-											</ul>
-										</li>
-									</ul>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-						</li>
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
@@ -1043,7 +608,7 @@
 									</div>
 								</li>
 								<li>
-									<h5>callback: <span class="tsd-signature-symbol">(</span>RayColliderIntersection<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">boolean</span></h5>
+									<h5>callback: <span class="tsd-signature-symbol">(</span>intersect<span class="tsd-signature-symbol">: </span><a href="raycolliderintersection.html" class="tsd-signature-type">RayColliderIntersection</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">boolean</span></h5>
 									<div class="tsd-comment tsd-typography">
 										<p>The callback called once per hit (in no particular order) between a ray and a collider.
 										If this callback returns <code>false</code>, then the cast will stop and no further hits will be detected/reported.</p>
@@ -1051,14 +616,14 @@
 									<ul class="tsd-parameters">
 										<li class="tsd-parameter-signature">
 											<ul class="tsd-signatures tsd-kind-type-literal">
-												<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>RayColliderIntersection<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+												<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>intersect<span class="tsd-signature-symbol">: </span><a href="raycolliderintersection.html" class="tsd-signature-type">RayColliderIntersection</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
 											</ul>
 											<ul class="tsd-descriptions">
 												<li class="tsd-description">
 													<h4 class="tsd-parameters-title">Parameters</h4>
 													<ul class="tsd-parameters">
 														<li>
-															<h5>RayColliderIntersection: <span class="tsd-signature-type">any</span></h5>
+															<h5>intersect: <a href="raycolliderintersection.html" class="tsd-signature-type">RayColliderIntersection</a></h5>
 														</li>
 													</ul>
 													<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
@@ -1076,81 +641,9 @@
 					<a name="intersectionswithshape" class="tsd-anchor"></a>
 					<h3>intersections<wbr>With<wbr>Shape</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">intersections<wbr>With<wbr>Shape<span class="tsd-signature-symbol">(</span>colliders<span class="tsd-signature-symbol">: </span><a href="colliderset.html" class="tsd-signature-type">ColliderSet</a>, shapePos<span class="tsd-signature-symbol">: </span><a href="../interfaces/vector.html" class="tsd-signature-type">Vector</a>, shapeRot<span class="tsd-signature-symbol">: </span><a href="../globals.html#rotation" class="tsd-signature-type">Rotation</a>, shape<span class="tsd-signature-symbol">: </span><a href="../globals.html#shape" class="tsd-signature-type">Shape</a>, groups<span class="tsd-signature-symbol">: </span><a href="../globals.html#interactiongroups" class="tsd-signature-type">InteractionGroups</a>, callback<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>handle<span class="tsd-signature-symbol">: </span><a href="" class="tsd-signature-type">ColliderHandle</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-						<li class="tsd-signature tsd-kind-icon">intersections<wbr>With<wbr>Shape<span class="tsd-signature-symbol">(</span>colliders<span class="tsd-signature-symbol">: </span><a href="colliderset.html" class="tsd-signature-type">ColliderSet</a>, shapePos<span class="tsd-signature-symbol">: </span><a href="../interfaces/vector.html" class="tsd-signature-type">Vector</a>, shapeRot<span class="tsd-signature-symbol">: </span><a href="../globals.html#rotation" class="tsd-signature-type">Rotation</a>, shape<span class="tsd-signature-symbol">: </span><a href="../globals.html#shape" class="tsd-signature-type">Shape</a>, groups<span class="tsd-signature-symbol">: </span><a href="../globals.html#interactiongroups" class="tsd-signature-type">InteractionGroups</a>, callback<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>handle<span class="tsd-signature-symbol">: </span><a href="" class="tsd-signature-type">ColliderHandle</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+						<li class="tsd-signature tsd-kind-icon">intersections<wbr>With<wbr>Shape<span class="tsd-signature-symbol">(</span>colliders<span class="tsd-signature-symbol">: </span><a href="colliderset.html" class="tsd-signature-type">ColliderSet</a>, shapePos<span class="tsd-signature-symbol">: </span><a href="../interfaces/vector.html" class="tsd-signature-type">Vector</a>, shapeRot<span class="tsd-signature-symbol">: </span><a href="../globals.html#rotation" class="tsd-signature-type">Rotation</a>, shape<span class="tsd-signature-symbol">: </span><a href="../globals.html#shape" class="tsd-signature-type">Shape</a>, groups<span class="tsd-signature-symbol">: </span><a href="../globals.html#interactiongroups" class="tsd-signature-type">InteractionGroups</a>, callback<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>handle<span class="tsd-signature-symbol">: </span><a href="../globals.html#colliderhandle" class="tsd-signature-type">ColliderHandle</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in pipeline/query_pipeline.ts:313</li>
-								</ul>
-							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>Retrieve all the colliders intersecting the given shape.</p>
-								</div>
-							</div>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>colliders: <a href="colliderset.html" class="tsd-signature-type">ColliderSet</a></h5>
-									<div class="tsd-comment tsd-typography">
-										<p>The set of colliders taking part in this pipeline.</p>
-									</div>
-								</li>
-								<li>
-									<h5>shapePos: <a href="../interfaces/vector.html" class="tsd-signature-type">Vector</a></h5>
-									<div class="tsd-comment tsd-typography">
-										<p>The position of the shape to test.</p>
-									</div>
-								</li>
-								<li>
-									<h5>shapeRot: <a href="../globals.html#rotation" class="tsd-signature-type">Rotation</a></h5>
-									<div class="tsd-comment tsd-typography">
-										<p>The orientation of the shape to test.</p>
-									</div>
-								</li>
-								<li>
-									<h5>shape: <a href="../globals.html#shape" class="tsd-signature-type">Shape</a></h5>
-									<div class="tsd-comment tsd-typography">
-										<p>The shape to test.</p>
-									</div>
-								</li>
-								<li>
-									<h5>groups: <a href="../globals.html#interactiongroups" class="tsd-signature-type">InteractionGroups</a></h5>
-									<div class="tsd-comment tsd-typography">
-										<p>The bit groups and filter associated to the shape to test, in order to only
-										test on colliders with collision groups compatible with this group.</p>
-									</div>
-								</li>
-								<li>
-									<h5>callback: <span class="tsd-signature-symbol">(</span>handle<span class="tsd-signature-symbol">: </span><a href="" class="tsd-signature-type">ColliderHandle</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">boolean</span></h5>
-									<div class="tsd-comment tsd-typography">
-										<p>A function called with the handles of each collider intersecting the <code>shape</code>.</p>
-									</div>
-									<ul class="tsd-parameters">
-										<li class="tsd-parameter-signature">
-											<ul class="tsd-signatures tsd-kind-type-literal">
-												<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>handle<span class="tsd-signature-symbol">: </span><a href="" class="tsd-signature-type">ColliderHandle</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
-											</ul>
-											<ul class="tsd-descriptions">
-												<li class="tsd-description">
-													<h4 class="tsd-parameters-title">Parameters</h4>
-													<ul class="tsd-parameters">
-														<li>
-															<h5>handle: <a href="" class="tsd-signature-type">ColliderHandle</a></h5>
-														</li>
-													</ul>
-													<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
-												</li>
-											</ul>
-										</li>
-									</ul>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-						</li>
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
@@ -1196,21 +689,21 @@
 									</div>
 								</li>
 								<li>
-									<h5>callback: <span class="tsd-signature-symbol">(</span>handle<span class="tsd-signature-symbol">: </span><a href="" class="tsd-signature-type">ColliderHandle</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">boolean</span></h5>
+									<h5>callback: <span class="tsd-signature-symbol">(</span>handle<span class="tsd-signature-symbol">: </span><a href="../globals.html#colliderhandle" class="tsd-signature-type">ColliderHandle</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">boolean</span></h5>
 									<div class="tsd-comment tsd-typography">
 										<p>A function called with the handles of each collider intersecting the <code>shape</code>.</p>
 									</div>
 									<ul class="tsd-parameters">
 										<li class="tsd-parameter-signature">
 											<ul class="tsd-signatures tsd-kind-type-literal">
-												<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>handle<span class="tsd-signature-symbol">: </span><a href="" class="tsd-signature-type">ColliderHandle</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+												<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>handle<span class="tsd-signature-symbol">: </span><a href="../globals.html#colliderhandle" class="tsd-signature-type">ColliderHandle</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
 											</ul>
 											<ul class="tsd-descriptions">
 												<li class="tsd-description">
 													<h4 class="tsd-parameters-title">Parameters</h4>
 													<ul class="tsd-parameters">
 														<li>
-															<h5>handle: <a href="" class="tsd-signature-type">ColliderHandle</a></h5>
+															<h5>handle: <a href="../globals.html#colliderhandle" class="tsd-signature-type">ColliderHandle</a></h5>
 														</li>
 													</ul>
 													<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
@@ -1229,54 +722,8 @@
 					<h3>project<wbr>Point</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
 						<li class="tsd-signature tsd-kind-icon">project<wbr>Point<span class="tsd-signature-symbol">(</span>colliders<span class="tsd-signature-symbol">: </span><a href="colliderset.html" class="tsd-signature-type">ColliderSet</a>, point<span class="tsd-signature-symbol">: </span><a href="../interfaces/vector.html" class="tsd-signature-type">Vector</a>, solid<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span>, groups<span class="tsd-signature-symbol">: </span><a href="../globals.html#interactiongroups" class="tsd-signature-type">InteractionGroups</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="pointcolliderprojection.html" class="tsd-signature-type">PointColliderProjection</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span></li>
-						<li class="tsd-signature tsd-kind-icon">project<wbr>Point<span class="tsd-signature-symbol">(</span>colliders<span class="tsd-signature-symbol">: </span><a href="colliderset.html" class="tsd-signature-type">ColliderSet</a>, point<span class="tsd-signature-symbol">: </span><a href="../interfaces/vector.html" class="tsd-signature-type">Vector</a>, solid<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span>, groups<span class="tsd-signature-symbol">: </span><a href="../globals.html#interactiongroups" class="tsd-signature-type">InteractionGroups</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="pointcolliderprojection.html" class="tsd-signature-type">PointColliderProjection</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in pipeline/query_pipeline.ts:208</li>
-								</ul>
-							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>Find the projection of a point on the closest collider.</p>
-								</div>
-							</div>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>colliders: <a href="colliderset.html" class="tsd-signature-type">ColliderSet</a></h5>
-									<div class="tsd-comment tsd-typography">
-										<p>The set of colliders taking part in this pipeline.</p>
-									</div>
-								</li>
-								<li>
-									<h5>point: <a href="../interfaces/vector.html" class="tsd-signature-type">Vector</a></h5>
-									<div class="tsd-comment tsd-typography">
-										<p>The point to project.</p>
-									</div>
-								</li>
-								<li>
-									<h5>solid: <span class="tsd-signature-type">boolean</span></h5>
-									<div class="tsd-comment tsd-typography">
-										<p>If this is set to <code>true</code> then the collider shapes are considered to
-											be plain (if the point is located inside of a plain shape, its projection is the point
-											itself). If it is set to <code>false</code> the collider shapes are considered to be hollow
-											(if the point is located inside of an hollow shape, it is projected on the shape&#39;s
-										boundary).</p>
-									</div>
-								</li>
-								<li>
-									<h5>groups: <a href="../globals.html#interactiongroups" class="tsd-signature-type">InteractionGroups</a></h5>
-									<div class="tsd-comment tsd-typography">
-										<p>The bit groups and filter associated to the point to project, in order to only
-										project on colliders with collision groups compatible with the ray&#39;s group.</p>
-									</div>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <a href="pointcolliderprojection.html" class="tsd-signature-type">PointColliderProjection</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span></h4>
-						</li>
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
@@ -1329,40 +776,8 @@
 					<h3>update</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
 						<li class="tsd-signature tsd-kind-icon">update<span class="tsd-signature-symbol">(</span>islands<span class="tsd-signature-symbol">: </span><a href="islandmanager.html" class="tsd-signature-type">IslandManager</a>, bodies<span class="tsd-signature-symbol">: </span><a href="rigidbodyset.html" class="tsd-signature-type">RigidBodySet</a>, colliders<span class="tsd-signature-symbol">: </span><a href="colliderset.html" class="tsd-signature-type">ColliderSet</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-						<li class="tsd-signature tsd-kind-icon">update<span class="tsd-signature-symbol">(</span>islands<span class="tsd-signature-symbol">: </span><a href="islandmanager.html" class="tsd-signature-type">IslandManager</a>, bodies<span class="tsd-signature-symbol">: </span><a href="rigidbodyset.html" class="tsd-signature-type">RigidBodySet</a>, colliders<span class="tsd-signature-symbol">: </span><a href="colliderset.html" class="tsd-signature-type">ColliderSet</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in pipeline/query_pipeline.ts:39</li>
-								</ul>
-							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>Updates the acceleration structure of the query pipeline.</p>
-								</div>
-							</div>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>islands: <a href="islandmanager.html" class="tsd-signature-type">IslandManager</a></h5>
-								</li>
-								<li>
-									<h5>bodies: <a href="rigidbodyset.html" class="tsd-signature-type">RigidBodySet</a></h5>
-									<div class="tsd-comment tsd-typography">
-										<p>The set of rigid-bodies taking part in this pipeline.</p>
-									</div>
-								</li>
-								<li>
-									<h5>colliders: <a href="colliderset.html" class="tsd-signature-type">ColliderSet</a></h5>
-									<div class="tsd-comment tsd-typography">
-										<p>The set of colliders taking part in this pipeline.</p>
-									</div>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-						</li>
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
@@ -1482,6 +897,7 @@
 			</ul>
 			<ul class="tsd-legend">
 				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected method</span></li>
 			</ul>
 			<ul class="tsd-legend">
 				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private property</span></li>
