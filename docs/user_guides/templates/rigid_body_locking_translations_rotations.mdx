@@ -20,7 +20,7 @@ values={[
 
 ```rust
 /* Lock translations/rotations when the rigid-body is created. */
-let rigid_body = RigidBodyBuilder::new_dynamic()
+let rigid_body = RigidBodyBuilder::dynamic()
     .lock_translations() // prevent translations along along all axes.
     .lock_rotations()    // prevent rotations.
     .build();
@@ -39,7 +39,7 @@ rigid_body.lock_rotations(true, true);
 
 ```rust
 /* Lock translations/rotations when the rigid-body is created. */
-let rigid_body = RigidBodyBuilder::new_dynamic()
+let rigid_body = RigidBodyBuilder::dynamic()
     .lock_translations() // prevent translations along along all axes.
     .lock_rotations()    // prevent rotations along all axes.
     .restrict_rotations(true, false, false) // prevent rotations along the Y and Z axes.
@@ -72,17 +72,15 @@ values={[
 
 ```rust
 /* Lock translations and/or rotations when the rigid-body bundle is created. */
-let rigid_body = RigidBodyBundle {
-    mass_properties: (RigidBodyMassPropsFlags::TRANSLATION_LOCKED | RigidBodyMassPropsFlags::ROTATION_LOCKED).into(),
-    ..Default::default()
-};
-commands.spawn_bundle(rigid_body);
+commands.spawn()
+    .insert(RigidBody::Dynamic)
+    .insert(LockedAxes::TRANSLATION_LOCKED);
 ```
 ```rust
 /* Lock translations and/or rotations inside of a system. */
-fn modify_body_locked_flags(mut mprops: Query<&mut RigidBodyMassPropsComponent>) {
-    for mut rb_mprops in mprops.iter_mut() {
-        rb_mprops.flags = RigidBodyMassPropsFlags::ROTATION_LOCKED;
+fn modify_body_locked_flags(mut locked_axes: Query<&mut LockedAxes>) {
+    for mut locked_axes in locked_axes.iter_mut() {
+        *locked_axes = LockedAxes::ROTATION_LOCKED;
     }
 }
 ```
@@ -92,17 +90,15 @@ fn modify_body_locked_flags(mut mprops: Query<&mut RigidBodyMassPropsComponent>)
 
 ```rust
 /* Lock translations and/or rotations when the rigid-body bundle is created. */
-let rigid_body = RigidBodyBundle {
-    mass_properties: (RigidBodyMassPropsFlags::TRANSLATION_LOCKED | RigidBodyMassPropsFlags::ROTATION_LOCKED_X).into(),
-    ..Default::default()
-};
-commands.spawn_bundle(rigid_body);
+commands.spawn()
+    .insert(RigidBody::Dynamic)
+    .insert(LockedAxes::TRANSLATION_LOCKED | LockedAxes::ROTATION_LOCKED_X);
 ```
 ```rust
 /* Lock translations and/or rotations inside of a system. */
-fn modify_body_locked_flags(mut mprops: Query<&mut RigidBodyMassPropsComponent>) {
-    for mut rb_mprops in mprops.iter_mut() {
-        rb_mprops.flags = RigidBodyMassPropsFlags::ROTATION_LOCKED_Y;
+fn modify_body_locked_flags(mut locked_axes: Query<&mut LockedAxes>) {
+    for mut locked_axes in locked_axes.iter_mut() {
+        *locked_axes = LockedAxes::ROTATION_LOCKED;
     }
 }
 ```

@@ -126,45 +126,44 @@ query_pipeline.intersections_with_ray(
 
 ```rust
 /* Cast a ray inside of a system. */
-fn cast_ray(query_pipeline: Res<QueryPipeline>, collider_query: QueryPipelineColliderComponentsQuery) {
-    // Wrap the bevy query so it can be used by the query pipeline.
-    let collider_set = QueryPipelineColliderComponentsSet(&collider_query);
-
-    let ray = Ray::new(Vec2::new(1.0, 2.0).into(), Vec2::new(0.0, 1.0).into());
+fn cast_ray(rapier_context: Res<RapierContext>) {
+    let ray_pos = Vec2::new(1.0, 2.0);
+    let ray_dir = Vec2::new(0.0, 1.0);
     let max_toi = 4.0;
     let solid = true;
     let groups = InteractionGroups::all();
     let filter = None;
 
-if let Some((handle, toi)) = query_pipeline.cast_ray(
-    &collider_set, &ray, max_toi, solid, groups, filter
-) {
-    // The first collider hit has the handle `handle` and it hit after
-    // the ray travelled a distance equal to `ray.dir * toi`.
-    let hit_point = ray.point_at(toi); // Same as: `ray.origin + ray.dir * toi`
-    println!("Entity {:?} hit at point {}", handle.entity(), hit_point);
-}
+    if let Some((entity, toi)) = query_pipeline.cast_ray(
+        ray_pos, ray_dir, max_toi, solid, groups, filter
+    ) {
+        // The first collider hit has the entity `entity` and it hit after
+        // the ray travelled a distance equal to `ray_dir * toi`.
+        let hit_point = ray_pos + ray_dir * toi;
+        println!("Entity {:?} hit at point {}", entity, hit_point);
+    }
 
 
-if let Some((handle, intersection)) = query_pipeline.cast_ray_and_get_normal(
-    &collider_set, &ray, max_toi, solid, groups, filter
-) {
-    // This is similar to `QueryPipeline::cast_ray` illustrated above except
-    // that it also returns the normal of the collider shape at the hit point.
-    let hit_point = ray.point_at(intersection.toi);
-    let hit_normal = intersection.normal;
-    println!("Entity {:?} hit at point {} with normal {}", handle.entity(), hit_point, hit_normal);
-}
-
-query_pipeline.intersections_with_ray(
-    &collider_set, &ray, max_toi, solid, groups, filter,
-    |handle, intersection| {
-        // Callback called on each collider hit by the ray.
-        let hit_point = ray.point_at(intersection.toi);
+    if let Some((entity, intersection)) = query_pipeline.cast_ray_and_get_normal(
+        ray_pos, ray_dir, max_toi, solid, groups, filter
+    ) {
+        // This is similar to `QueryPipeline::cast_ray` illustrated above except
+        // that it also returns the normal of the collider shape at the hit point.
+        let hit_point = intersection.point;
         let hit_normal = intersection.normal;
-        println!("Entity {:?} hit at point {} with normal {}", handle.entity(), hit_point, hit_normal);
-        true // Return `false` instead if we want to stop searching for other hits.
-    });
+        println!("Entity {:?} hit at point {} with normal {}", entity, hit_point, hit_normal);
+    }
+
+    query_pipeline.intersections_with_ray(
+        ray_pos, ray_dir, max_toi, solid, groups, filter,
+        |entity, intersection| {
+            // Callback called on each collider hit by the ray.
+            let hit_point = intersection.point;
+            let hit_normal = intersection.normal;
+            println!("Entity {:?} hit at point {} with normal {}", entity, hit_point, hit_normal);
+            true // Return `false` instead if we want to stop searching for other hits.
+        });
+    }
 }
 ```
 
@@ -173,45 +172,44 @@ query_pipeline.intersections_with_ray(
 
 ```rust
 /* Cast a ray inside of a system. */
-fn cast_ray(query_pipeline: Res<QueryPipeline>, collider_query: QueryPipelineColliderComponentsQuery) {
-    // Wrap the bevy query so it can be used by the query pipeline.
-    let collider_set = QueryPipelineColliderComponentsSet(&collider_query);
-
-    let ray = Ray::new(Vec3::new(1.0, 2.0, 3.0).into(), Vec3::new(0.0, 1.0, 0.0).into());
+fn cast_ray(rapier_context: Res<RapierContext>) {
+    let ray_pos = Vec3::new(1.0, 2.0, 3.0);
+    let ray_dir = Vec3::new(0.0, 1.0, 0.0);
     let max_toi = 4.0;
     let solid = true;
     let groups = InteractionGroups::all();
     let filter = None;
 
-    if let Some((handle, toi)) = query_pipeline.cast_ray(
-        &collider_set, &ray, max_toi, solid, groups, filter
+    if let Some((entity, toi)) = query_pipeline.cast_ray(
+        ray_pos, ray_dir, max_toi, solid, groups, filter
     ) {
-        // The first collider hit has the handle `handle` and it hit after
-        // the ray travelled a distance equal to `ray.dir * toi`.
-        let hit_point = ray.point_at(toi); // Same as: `ray.origin + ray.dir * toi`
-        println!("Entity {:?} hit at point {}", handle.entity(), hit_point);
+        // The first collider hit has the entity `entity` and it hit after
+        // the ray travelled a distance equal to `ray_dir * toi`.
+        let hit_point = ray_pos + ray_dir * toi;
+        println!("Entity {:?} hit at point {}", entity, hit_point);
     }
 
 
-    if let Some((handle, intersection)) = query_pipeline.cast_ray_and_get_normal(
-        &collider_set, &ray, max_toi, solid, groups, filter
+    if let Some((entity, intersection)) = query_pipeline.cast_ray_and_get_normal(
+        ray_pos, ray_dir, max_toi, solid, groups, filter
     ) {
         // This is similar to `QueryPipeline::cast_ray` illustrated above except
         // that it also returns the normal of the collider shape at the hit point.
-        let hit_point = ray.point_at(intersection.toi);
+        let hit_point = intersection.point;
         let hit_normal = intersection.normal;
-        println!("Entity {:?} hit at point {} with normal {}", handle.entity(), hit_point, hit_normal);
+        println!("Entity {:?} hit at point {} with normal {}", entity, hit_point, hit_normal);
     }
 
     query_pipeline.intersections_with_ray(
-        &collider_set, &ray, max_toi, solid, groups, filter,
-        |handle, intersection| {
-        // Callback called on each collider hit by the ray.
-        let hit_point = ray.point_at(intersection.toi);
-        let hit_normal = intersection.normal;
-        println!("Entity {:?} hit at point {} with normal {}", handle.entity(), hit_point, hit_normal);
-        true // Return `false` instead if we want to stop searching for other hits.
-    });
+        ray_pos, ray_dir, max_toi, solid, groups, filter,
+        |entity, intersection| {
+            // Callback called on each collider hit by the ray.
+            let hit_point = intersection.point;
+            let hit_normal = intersection.normal;
+            println!("Entity {:?} hit at point {} with normal {}", entity, hit_point, hit_normal);
+            true // Return `false` instead if we want to stop searching for other hits.
+        });
+    }
 }
 ```
 

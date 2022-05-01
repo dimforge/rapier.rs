@@ -3,10 +3,10 @@ import TabItem from '@theme/TabItem';
 
 Intersection tests will find all the colliders with a shape intersecting a given shape. This can be useful for, e.g.,
 selecting all the objects that intersect a given area. There are two kind of intersection tests:
-- The exact intersection test <notjs>`QueryPipeline::intersections_with_shape`</notjs><js>`World.intersectionsWithShape`</js>
+- The exact intersection test <rapier>`QueryPipeline::intersections_with_shape`</rapier><bevy>`RapierContext::intersections_with_shape`</bevy><js>`World.intersectionsWithShape`</js>
   searches for all the colliders with shapes intersecting the given shape.
-- The approximate intersection test <notjs>`QueryPipeline::colliders_with_aabb_intersecting_aabb`</notjs><js>`World.collidersWithAabbIntersectingAabb`</js> searches for all the
-colliders with an AABB intersecting the given AABB. This does not check if the actual shapes of these colliders
+- The approximate intersection test <rapier>`QueryPipeline::colliders_with_aabb_intersecting_aabb`</rapier><bevy>`RapierContext::colliders_with_aabb_intersecting_aabb`</bevy><js>`World.collidersWithAabbIntersectingAabb`</js> searches
+for all the colliders with an AABB intersecting the given AABB. This does not check if the actual shapes of these colliders
 intersect the AABB.
 
 :::info
@@ -86,24 +86,22 @@ query_pipeline.colliders_with_aabb_intersecting_aabb(&aabb, |handle| {
 
 ```rust
 /* Test intersections inside of a system. */
-fn test_intersections(query_pipeline: Res<QueryPipeline>, collider_query: QueryPipelineColliderComponentsQuery) {
-    // Wrap the bevy query so it can be used by the query pipeline.
-    let collider_set = QueryPipelineColliderComponentsSet(&collider_query);
-
-    let shape = Cuboid::new(Vec2::new(1.0, 2.0).into());
-    let shape_pos = (Vec2::new(0.0, 1.0), 0.8).into();
+fn test_intersections(rapier_context: Res<RapierContext>) {
+    let shape = Collider::cuboid(1.0, 2.0);
+    let shape_pos = Vec2::new(0.0, 1.0);
+    let shape_rot = 0.8;
     let groups = InteractionGroups::all();
     let filter = None;
 
-    query_pipeline.intersections_with_shape(
-        &collider_set, &shape_pos, &shape, groups, filter, |handle| {
-        println!("The entity {:?} intersects our shape.", handle.entity());
+    rapier_context.intersections_with_shape(
+        &shape_pos, &shape_rot, &shape, groups, filter, |entity| {
+        println!("The entity {:?} intersects our shape.", entity);
         true // Return `false` instead if we want to stop searching for other colliders that contain this point.
     });
 
-    let aabb = AABB::new(Vec2::new(-1.0, -2.0).into(), Vec2::new(1.0, 2.0).into());
-    query_pipeline.colliders_with_aabb_intersecting_aabb(&aabb, |handle| {
-        println!("The entity {:?} has an AABB intersecting our test AABB", handle.entity());
+    let aabb = Aabb::from_min_max(Vec3::new(-1.0, -2.0, 0.0), Vec3::new(1.0, 2.0, 0.0));
+    query_pipeline.colliders_with_aabb_intersecting_aabb(&aabb, |entity| {
+        println!("The entity {:?} has an AABB intersecting our test AABB", entity);
         true // Return `false` instead if we want to stop searching for other colliders that contain this point.
     });
 }
@@ -114,24 +112,22 @@ fn test_intersections(query_pipeline: Res<QueryPipeline>, collider_query: QueryP
 
 ```rust
 /* Test intersections inside of a system. */
-fn test_intersections(query_pipeline: Res<QueryPipeline>, collider_query: QueryPipelineColliderComponentsQuery) {
-    // Wrap the bevy query so it can be used by the query pipeline.
-    let collider_set = QueryPipelineColliderComponentsSet(&collider_query);
-
-    let shape = Cuboid::new(Vec3::new(1.0, 2.0, 3.0).into());
-    let shape_pos = Isometry::new(Vec3::new(0.0, 1.0, 0.0).into(), Vec3::new(0.2, 0.7, 0.1).into());
+fn test_intersections(rapier_context: Res<RapierContext>) {
+    let shape = Collider::cuboid(1.0, 2.0, 3.0);
+    let shape_pos = Vec3::new(0.0, 1.0, 2.0);
+    let shape_rot = Quat::from_rotation_z(0.8);
     let groups = InteractionGroups::all();
     let filter = None;
 
-    query_pipeline.intersections_with_shape(
-        &collider_set, &shape_pos, &shape, groups, filter, |handle| {
-        println!("The entity {:?} intersects our shape.", handle.entity());
+    rapier_context.intersections_with_shape(
+        &shape_pos, &shape_rot, &shape, groups, filter, |entity| {
+        println!("The entity {:?} intersects our shape.", entity);
         true // Return `false` instead if we want to stop searching for other colliders that contain this point.
     });
 
-    let aabb = AABB::new(Vec3::new(-1.0, -2.0, -3.0).into(), Vec3::new(1.0, 2.0, 3.0).into());
-    query_pipeline.colliders_with_aabb_intersecting_aabb(&aabb, |handle| {
-        println!("The entity {:?} has an AABB intersecting our test AABB", handle.entity());
+    let aabb = Aabb::from_min_max(Vec3::new(-1.0, -2.0, -3.0), Vec3::new(1.0, 2.0, 3.0));
+    query_pipeline.colliders_with_aabb_intersecting_aabb(&aabb, |entity| {
+        println!("The entity {:?} has an AABB intersecting our test AABB", entity);
         true // Return `false` instead if we want to stop searching for other colliders that contain this point.
     });
 }

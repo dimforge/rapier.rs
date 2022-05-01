@@ -28,13 +28,13 @@ use rapier2d::prelude::*;
 let mut rigid_body_set = RigidBodySet::new();
 
 // Builder for a fixed rigid-body.
-let _ = RigidBodyBuilder::new_static();
+let _ = RigidBodyBuilder::fixed();
 // Builder for a dynamic rigid-body.
-let _ = RigidBodyBuilder::new_dynamic();
+let _ = RigidBodyBuilder::dynamic();
 // Builder for a kinematic rigid-body controlled at the velocity level.
-let _ = RigidBodyBuilder::new_kinematic_velocity_based();
+let _ = RigidBodyBuilder::kinematic_velocity_based();
 // Builder for a kinematic rigid-body controlled at the position level.
-let _ = RigidBodyBuilder::new_kinematic_position_based();
+let _ = RigidBodyBuilder::kinematic_position_based();
 // Builder for a body with a status specified by an enum.
 let rigid_body = RigidBodyBuilder::new(RigidBodyType::Dynamic)
     // The rigid body translation.
@@ -78,13 +78,13 @@ use rapier3d::prelude::*;
 let mut rigid_body_set = RigidBodySet::new();
 
 // Builder for a fixed rigid-body.
-let _ = RigidBodyBuilder::new_static();
+let _ = RigidBodyBuilder::fixed();
 // Builder for a dynamic rigid-body.
-let _ = RigidBodyBuilder::new_dynamic();
+let _ = RigidBodyBuilder::dynamic();
 // Builder for a kinematic rigid-body controlled at the velocity level.
-let _ = RigidBodyBuilder::new_kinematic_velocity_based();
+let _ = RigidBodyBuilder::kinematic_velocity_based();
 // Builder for a kinematic rigid-body controlled at the position level.
-let _ = RigidBodyBuilder::new_kinematic_position_based();
+let _ = RigidBodyBuilder::kinematic_position_based();
 // Builder for a body with a status specified by an enum.
 let rigid_body = RigidBodyBuilder::new(RigidBodyType::Dynamic)
     // The rigid body translation.
@@ -123,18 +123,17 @@ let handle = rigid_body_set.insert(rigid_body);
 
 
 All the properties are optional. The only calls that are required are `RigidBodyBuilder::new(status)`,
-`RigidBodyBuilder::new_static()`, `RigidBodyBuilder::new_dynamic()`, `RigidBodyBuilder::new_kinematic_velocity_based()`,
-or `RigidBodyBuilder::new_kinematic_position_based()`, to
+`RigidBodyBuilder::fixed()`, `RigidBodyBuilder::dynamic()`, `RigidBodyBuilder::kinematic_velocity_based()`,
+or `RigidBodyBuilder::kinematic_position_based()`, to
 initialize the builder, and `.build()` to actually build the rigid-body.
 
 </rapier>
 
 <bevy>
 
-A rigid-body is created by adding all the components part of the `RigidBodyBundle` bundle.
-It is important for all the components in the bundle to be added at the same time. To remove
-the rigid-body, the complete bundle must be removed simultaneously too. Adding/removing only
-some of these components may end up in a panic.
+A rigid-body is created by adding the `RigidBody` component to an entity. Other components
+like `Transform`, `Velocity`, `Ccd`, etc. can be added for further customization of the
+rigid-body.
 
 :::info
 The following example shows several initialization of components to customize
@@ -155,19 +154,16 @@ values={[
 use bevy::prelude::*;
 use bevy_rapier2d::prelude::*;
 
-let rigid_body = RigidBodyBundle {
-    position: Vec2::new(0.0, 5.0).into(),
-    velocity: RigidBodyVelocity { 
-        linvel: Vec2::new(1.0, 2.0).into(), 
-        angvel: 0.2 
-    }.into(),
-    forces: RigidBodyForces { gravity_scale: 0.5, ..Default::default() }.into(),
-    activation: RigidBodyActivation::cannot_sleep().into(),
-    ccd: RigidBodyCcd { ccd_enabled: true, ..Default::default() }.into(),
-    ..Default::default()
-};
-
-commands.spawn_bundle(rigid_body);
+commands.spawn()
+        .insert(RigidBody::Dynamic)
+        .insert(Transform::from_xyz(0.0, 5.0, 0.0))
+        .insert(Velocity {
+            linvel: Vec2::new(1.0, 2.0),
+            angvel: 0.2
+        })
+        .insert(GravityScale(0.5))
+        .insert(Sleeping::disabled())
+        .insert(Ccd::enabled());
 ```
 
   </TabItem>
@@ -177,25 +173,20 @@ commands.spawn_bundle(rigid_body);
 use bevy::prelude::*;
 use bevy_rapier3d::prelude::*;
 
-let rigid_body = RigidBodyBundle {
-    position: Vec3::new(0.0, 5.0, 3.0).into(),
-    velocity: RigidBodyVelocity { 
-        linvel: Vec3::new(1.0, 2.0, 3.0).into(), 
-        angvel: Vec3::new(0.2, 0.0, 0.0).into() 
-    }.into(),
-    forces: RigidBodyForces { gravity_scale: 0.5, ..Default::default() }.into(),
-    activation: RigidBodyActivation::cannot_sleep().into(),
-    ccd: RigidBodyCcd { ccd_enabled: true, ..Default::default() }.into(),
-    ..Default::default()
-};
-
-commands.spawn_bundle(rigid_body);
+commands.spawn()
+        .insert(RigidBody::Dynamic)
+        .insert(Transform::from_xyz(0.0, 5.0, 0.0))
+        .insert(Velocity {
+            linvel: Vec3::new(1.0, 2.0, 3.0),
+            angvel: Vec3::new(0.2, 0.0, 0.0),
+        })
+        .insert(GravityScale(0.5))
+        .insert(Sleeping::disabled())
+        .insert(Ccd::enabled());
 ```
 
   </TabItem>
 </Tabs>
-
-All the components part of the `RigidBodyBundle` can be queried and modified from Bevy systems.
 
 </bevy>
 

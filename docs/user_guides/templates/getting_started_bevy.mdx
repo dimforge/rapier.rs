@@ -14,6 +14,7 @@ of components, systems, and resources that share a common objective.
 The [**bevy_rapier2d**](https://crates.io/crates/bevy_rapier2d) and [**bevy_rapier3d**](https://crates.io/crates/bevy_rapier3d)
 crates which integrate **Rapier** to **Bevy** using their plugin system.
 To get the best of **bevy-rapier** multiple features can be enabled optionally:
+- `debug-render`: enables the debug-renderer plugin.
 - `simd-stable`: enables explicit SIMD optimizations using the [`wide` crate](https://crates.io/crates/wide).
   Has limited cross-platform support but can be used with a stable version of the Rust compiler.
 - `simd-nightly`: enables explicit SIMD optimizations using the [`packed_simd` crate](https://crates.io/crates/packed_simd).
@@ -75,7 +76,7 @@ values={[
 [dependencies]
 # TODO: Replace the * by the latest version numbers.
 bevy = "*"
-bevy_rapier2d = { version = "*", features = [ "simd-stable" ] }
+bevy_rapier2d = { version = "*", features = [ "simd-stable", "debug-render" ] }
 ```
 
   </TabItem>
@@ -85,7 +86,7 @@ bevy_rapier2d = { version = "*", features = [ "simd-stable" ] }
 [dependencies]
 # TODO: Replace the * by the latest version numbers.
 bevy = "*"
-bevy_rapier3d = { version = "*", features = [ "simd-stable" ] }
+bevy_rapier3d = { version = "*", features = [ "simd-stable", "debug-render" ] }
 ```
 
   </TabItem>
@@ -118,38 +119,36 @@ use bevy_rapier2d::prelude::*;
 fn main() {
     App::new()
         .add_plugins(DefaultPlugins)
-        .add_plugin(RapierPhysicsPlugin::<NoUserData>::pixel_per_meter(100.0))
-        .add_startup_system(setup_physics.system())
-        .add_system(print_ball_altitude.system())
+        .add_plugin(RapierPhysicsPlugin::<NoUserData>::pixels_per_meter(100.0))
+        .add_plugin(RapierDebugRenderPlugin::default())
+        .add_startup_system(setup_graphics)
+        .add_startup_system(setup_physics)
+        .add_system(print_ball_altitude)
         .run();
+}
+
+fn setup_graphics(mut commands: Commands) {
+    // Add a camera so we can see the debug-render.
+    commands.spawn_bundle(OrthographicCameraBundle::new_2d());
 }
 
 fn setup_physics(mut commands: Commands) {
     /* Create the ground. */
-    commands.spawn().insert(Collider::cuboid(1000.0, 10.0));
+    commands
+        .spawn()
+        .insert(Collider::cuboid(500.0, 50.0))
+        .insert(Transform::from_xyz(0.0, -100.0, 0.0));
 
     /* Create the bouncing ball. */
-    let rigid_body = RigidBodyBundle {
-        position: Vec2::new(0.0, 10.0).into(),
-        ..Default::default()
-    };
-    let collider = ColliderBundle {
-        shape: ColliderShape::ball(0.5).into(),
-        material: ColliderMaterial {
-            restitution: 0.7,
-            ..Default::default()
-        }.into(),
-        ..Default::default()
-    };
     commands
-        .spawn_bundle()
-        .insert(RigidBody::Dynamic())
-        .insert(Collider::ball(0.5))
-        .insert(Restitution::new(0.7))
-        .insert(Transform::from_xyz(0.0, 10.0, 0.0));
+        .spawn()
+        .insert(RigidBody::Dynamic)
+        .insert(Collider::ball(50.0))
+        .insert(Restitution::coefficient(0.7))
+        .insert(Transform::from_xyz(0.0, 400.0, 0.0));
 }
 
-fn print_ball_altitude(positions: Query<&Transform>) {
+fn print_ball_altitude(positions: Query<&Transform, With<RigidBody>>) {
     for transform in positions.iter() {
         println!("Ball altitude: {}", transform.translation.y);
     }
@@ -167,18 +166,27 @@ fn main() {
     App::new()
         .add_plugins(DefaultPlugins)
         .add_plugin(RapierPhysicsPlugin::<NoUserData>::default())
-        .add_startup_system(setup_physics.system())
-        .add_system(print_ball_altitude.system())
+        .add_plugin(RapierDebugRenderPlugin::default())
+        .add_startup_system(setup_graphics)
+        .add_startup_system(setup_physics)
+        .add_system(print_ball_altitude)
         .run();
+}
+
+fn setup_graphics(mut commands: Commands) {
+    // Add a camera so we can see the debug-render.
+    commands.spawn_bundle(PerspectiveCameraBundle {
+        transform: Transform::from_xyz(-3.0, 3.0, 10.0).looking_at(Vec3::ZERO, Vec3::Y),
+        ..Default::default()
+    });
 }
 
 fn setup_physics(mut commands: Commands) {
     /* Create the ground. */
-    let collider = ColliderBundle {
-        shape: ColliderShape::cuboid(100.0, 0.1, 100.0).into(),
-        ..Default::default()
-    };
-    commands.spawn().insert(Collider::cuboid(100.0, 0.1, 100.0));
+    commands
+        .spawn()
+        .insert(Collider::cuboid(100.0, 0.1, 100.0))
+        .insert(Transform::from_xyz(0.0, -2.0, 0.0));
 
     /* Create the bouncing ball. */
     commands
@@ -186,10 +194,10 @@ fn setup_physics(mut commands: Commands) {
         .insert(RigidBody::Dynamic)
         .insert(Collider::ball(0.5))
         .insert(Restitution::new(0.7))
-        .insert(Transform::from_xyz(0.0, 10.0, 0.0);
+        .insert(Transform::from_xyz(0.0, 4.0, 0.0));
 }
 
-fn print_ball_altitude(positions: Query<&Transform>) {
+fn print_ball_altitude(positions: Query<&Transform, With<RigidBody>>) {
     for transform in positions.iter() {
         println!("Ball altitude: {}", transform.translation.y);
     }
@@ -206,3 +214,5 @@ can help fixing some bugs like colliders not being properly aligned with your gr
 The debug-renderer is be enabled by:
 1. Enabling the `render` cargo feature of bevy-rapier.
 2. Adding the plugin `RapierDebugRenderPlugin` to the Bevy app.
+
+![debug-render](/img/rapier_debug_render.png)

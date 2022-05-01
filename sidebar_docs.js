@@ -39,10 +39,9 @@ let specialized_guides = {
       // 'user_guides/rust/the_rapier_testbed',
       // 'user_guides/rust/common_recipes',
     ],
-    'Rust Bevy Plugin': [
+    'Bevy Plugin': [
       'user_guides/bevy_plugin/getting_started_bevy',
-      'user_guides/bevy_plugin/introduction_to_nalgebra',
-      'user_guides/bevy_plugin/simulation_structures',
+      // 'user_guides/bevy_plugin/simulation_structures',
       'user_guides/bevy_plugin/rigid_bodies',
       'user_guides/bevy_plugin/colliders',
       'user_guides/bevy_plugin/joints',

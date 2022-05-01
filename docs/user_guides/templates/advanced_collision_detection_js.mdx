@@ -9,14 +9,12 @@ import TabItem from '@theme/TabItem';
 
 Collision-detection is a two-steps process. First the broad-phase detects pairs of colliders
 that are potentially in contact or intersecting. Second, the narrow-phase processes all these pairs in order
-to compute contacts points and generate [contact or intersection events](#contact-and-intersection-events).
+to compute contacts points and generate [collision events](#collision-events).
 
 All the pairs detected by the broad-phase can be accessed from the physics `World` class.
 
-## Contact and intersection events
-The narrow-phase can generate two types of events: [contact events](#contact-events) between two non-sensor colliders
-or [intersection events](#intersection-events) between one sensor collider and another collider.
-
+## Collision events
+The narrow-phase can generate [collision events](#contact-events) between two colliders.
 There events can be collected by optionally passing an instance of `EventQueue` to `World.step(eventQueue)`.
 The colliders involved in each event is identified by its integer handle.
 
@@ -24,24 +22,17 @@ The colliders involved in each event is identified by its integer handle.
 let eventQueue = new RAPIER.EventQueue(true);
 world.step(eventQueue);
 
-eventQueue.drainContactEvents((handle1, handle2, started) => {
-    /* Handle the contact event. */
-});
-
-eventQueue.drainIntersectionEvents((handle1, handle2, intersecting) => {
-    /* Handle the intersection event. */
+eventQueue.drainCollisionEvents((handle1, handle2, started) => {
+    /* Handle the collision event. */
 });
 ```
 
-Intersection events are triggered when two colliders (where at least one of them is a sensor) transition between
-intersecting or not. Contact events are triggered when two non-sensor colliders transition between having zero contact
-points and having at least one contact point. Transitioning between having one contact point to having more than one
-contact points is not reported an event.
+Collision events are triggered when two colliders transition between intersecting or not. Transitioning between having
+one contact point to having more than one contact points is not reported an event.
 
 :::warning
-Intersection (resp. contact) events are only generated between two colliders (where at least one of the is a sensor) if at
-least one of them has the `ActiveEvents.INTERSECTION_EVENTS` (resp. `ActiveEvents.CONTACT_EVENTS`) flag in its
-[active events](colliders#active-events).
+Collision events are only generated between two colliders  if at least one of them has the
+`ActiveEvents.COLLISION_EVENTS` flag in its [active events](colliders#active-events).
 :::
 
 ## The contact graph

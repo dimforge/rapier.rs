@@ -112,7 +112,7 @@ fn main() {
   collider_set.insert(collider);
 
   /* Create the bouncing ball. */
-  let rigid_body = RigidBodyBuilder::new_dynamic()
+  let rigid_body = RigidBodyBuilder::dynamic()
           .translation(vector![0.0, 10.0])
           .build();
   let collider = ColliderBuilder::ball(0.5).restitution(0.7).build();
@@ -171,7 +171,7 @@ fn main() {
   collider_set.insert(collider);
 
   /* Create the bounding ball. */
-  let rigid_body = RigidBodyBuilder::new_dynamic()
+  let rigid_body = RigidBodyBuilder::dynamic()
           .translation(vector![0.0, 10.0, 0.0])
           .build();
   let collider = ColliderBuilder::ball(0.5).restitution(0.7).build();

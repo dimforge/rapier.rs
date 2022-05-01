@@ -60,7 +60,7 @@ let collider = ColliderBuilder::new(SharedShape::ball(0.5))
     // The friction coefficient of this collider.
     // Default: ColliderBuilder::default_friction() == 0.5
     .friction(0.8)
-    // Whether this collider is a sensor, i.e., generate only intersection events.
+    // Whether this collider is a sensor.
     // Default: false
     .sensor(true)
     // All done, actually build the collider.
@@ -114,7 +114,7 @@ let collider = ColliderBuilder::new(SharedShape::ball(0.5))
     // The friction coefficient of this collider.
     // Default: ColliderBuilder::default_friction() == 0.5
     .friction(0.8)
-    // Whether this collider is a sensor, i.e., generate only intersection events.
+    // Whether this collider is a sensor.
     // Default: false
     .sensor(true)
     // All done, actually build the collider.
@@ -132,10 +132,8 @@ let handle = collider_set.insert_with_parent(collider, rigid_body_handle, &mut r
 </rapier>
 <bevy>
 
-A collider is created by adding all the components part of the `ColliderBundle` bundle.
-It is important for all the components in the bundle to be added at the same time. To remove
-the collider, the complete bundle must be removed simultaneously too. Adding/removing only
-some of these components may end up in a panic.
+A collider is created by adding the `Collider` component. Other components like `Transform`,
+`Sensor`, `Friction`, etc. can be added to customize the collider.
 
 :::info
 The following example shows several initializations of components to customize
@@ -156,16 +154,13 @@ values={[
 ```rust
 use bevy_rapier2d::prelude::*;
 
-let collider = ColliderBundle {
-    shape: ColliderShape::cuboid(1.0, 2.0).into(),
-    collider_type: ColliderType::Sensor.into(),
-    position: (Vec2::new(2.0, 0.0), 0.4).into(),
-    material: ColliderMaterial { friction: 0.7, restitution: 0.3, ..Default::default() }.into(),
-    mass_properties: ColliderMassProps::Density(2.0).into(),
-    ..Default::default()
-};
-
-commands.spawn_bundle(collider);
+commands.spawn()
+    .insert(Collider::cuboid(1.0, 2.0))
+    .insert(Sensor(true))
+    .insert(Transform::from_xyz(2.0, 0.0, 0.0))
+    .insert(Friction::coefficient(0.7))
+    .insert(Restitution::coefficient(0.3))
+    .insert(ColliderMassProperties::Density(2.0));
 ```
 
   </TabItem>
@@ -174,13 +169,13 @@ commands.spawn_bundle(collider);
 ```rust
 use bevy_rapier3d::prelude::*;
 
-let collider = ColliderBundle {
-    shape: ColliderShape::cuboid(1.0, 2.0, 3.0).into(),
-    collider_type: ColliderType::Sensor.into(),
-    position: (Vec3::new(2.0, 0.0, 3.0), Quat::from_rotation_x(0.4)).into(),
-    material: ColliderMaterial { friction: 0.7, restitution: 0.3, ..Default::default() }.into(),
-    mass_properties: ColliderMassProps::Density(2.0).into(),
-    ..Default::default()
+commands.spawn()
+    .insert(Collider::cuboid(1.0, 2.0, 3.0))
+    .insert(Sensor(true))
+    .insert(Transform::from_xyz(2.0, 0.0, 0.0))
+    .insert(Friction::coefficient(0.7))
+    .insert(Restitution::coefficient(0.3))
+    .insert(ColliderMassProperties::Density(2.0));
 };
 
 commands.spawn_bundle(collider);
@@ -191,24 +186,31 @@ commands.spawn_bundle(collider);
 
 A collider can optionally be attached to a rigid-body. Attaching a collider to a rigid-body will result in the
 rigid-body being affected by collisions. The collider's position will be automatically updated from the position
-of the rigid-body it is attached to. There are three ways of attaching a collider to a rigid-body (the second
-and third ways allows you to attach multiple colliders to the same rigid-body):
-- Attach the `ColliderBundle` to the same entity as the `RigidBodyBundle`.
-- Attach the `ColliderBundle` to an entity that is a children of the entity containing the `RigidBodyBundle`.
-- Attach the `ColliderBundle` as well as the `ColliderParentComponent` component to any entity. The entity containing
-  the rigid-body can be configured by setting:
+of the rigid-body it is attached to. There are two ways of attaching a collider to a rigid-body. The second
+way allows you to attach multiple colliders to the same rigid-body:
+1. Attach the `Collider` to the same entity as the `RigidBody`.
+2. Attach the `Collider` to an entity that is a children of the entity containing the `RigidBody`.
 
 ```rust
-let collider = ColliderBundle::default();
-let collider_parent: ColliderParentComponent = ColliderParent {
-    handle: entity_with_rigid_body.handle(),
-    pos_wrt_parent: Vec2::ZERO.into(),
-}.into();
-commands.spawn_bundle(collider)
-        .insert(collider_parent);
-```
+// Attach a single collider to a rigid-body.
+commands.spawn()
+    .insert(RigidBody::Dynamic)
+    .insert(Collider::ball(0.5));
 
-All the components part of the `ColliderBundle` can be queried and modified from Bevy systems.
+// Attach a multiple colliders to a rigid-body.
+commands.spawn()
+    .insert(RigidBody::Dynamic)
+    .with_children(|children| {
+        children.spawn()
+            .insert(Collider::ball(0.5))
+            // Position the collider relative to the rigid-body.
+            .insert(Transform::from_xyz(0.0, 0.0, -1.0));
+        children.spawn()
+            .insert(Collider::ball(0.5))
+            // Position the collider relative to the rigid-body.
+            .insert(Transform::from_xyz(0.0, 0.0, 1.0));
+    });
+```
 
 
 </bevy>
@@ -266,7 +268,7 @@ let colliderDesc = new RAPIER.ColliderDesc(new RAPIER.Ball(0.5))
     // The friction coefficient of this collider.
         // Default: ColliderDesc.default_friction() == 0.5
     .setFriction(0.8)
-    // Whether this collider is a sensor, i.e., generate only intersection events.
+    // Whether this collider is a sensor.
     // Default: false
     .setSensor(true);
 
@@ -309,7 +311,7 @@ let colliderDesc = new RAPIER.ColliderDesc(new RAPIER.Ball(0.5))
     // The friction coefficient of this collider.
     // Default: 0.5
     .setFriction(0.8)
-    // Whether this collider is a sensor, i.e., generate only intersection events.
+    // Whether this collider is a sensor.
     // Default: false
     .setSensor(true);
 

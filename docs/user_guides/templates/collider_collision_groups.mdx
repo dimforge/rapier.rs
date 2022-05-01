@@ -64,22 +64,21 @@ assert_eq!(collider.solver_groups(), InteractionGroups::new(0b0011, 0b1011));
 
 ```rust
 /* Set the collision and/or solver groups when the collider is created. */
-let collider = ColliderBundle {
-    flags: ColliderFlags {
-        collision_groups: InteractionGroups::new(0b1101, 0b0100),
-        solver_groups: InteractionGroups::new(0b0011, 0b1011),
-        ..Default::default()
-    }.into(),
-    ..Default::default()
-};
-commands.spawn_bundle(collider);
+commands.spawn()
+    .insert(CollisionGroups::new(0b1101, 0b0100))
+    .insert(SolverGroups::new(0b0011, 0b1011));
 ```
 ```rust
 /* Set the collision and/or solver groups inside of a system. */
-fn modify_collider_groups(mut flags: Query<&mut ColliderFlagsComponent>) {
-    for mut co_flags in flags.iter_mut() {
-        co_flags.collision_groups = InteractionGroups::new(0b1101, 0b0100);
-        co_flags.solver_groups = InteractionGroups::new(0b0011, 0b1011);
+fn modify_collider_groups(mut collision_groups: Query<&mut CollisionGroups>, mut solver_groups: Query<&mut SolverGroups>) {
+    for mut collision_groups in flags.iter_mut() {
+        collision_groups.memberships = 0b1101;
+        collision_groups.filters = 0b0100;
+    }
+
+    for mut solver_groups in flags.iter_mut() {
+        solver_groups.memberships = 0b0011;
+        solver_groups.filters = 0b1011;
     }
 }
 ```

@@ -13,7 +13,7 @@ This damping coefficients can be set when the rigid-body is created or after its
 
 ```rust
 /* Set the damping coefficients when the rigid-body is created. */
-let rigid_body = RigidBodyBuilder::new_dynamic()
+let rigid_body = RigidBodyBuilder::dynamic()
     .linear_damping(0.5)
     .angular_damping(1.0)
     .build();
@@ -32,15 +32,13 @@ assert_eq!(rigid_body.angular_damping(), 1.0);
 
 ```rust
 /* Set damping when the rigid-body bundle is created. */
-let rigid_body = RigidBodyBundle {
-    damping: RigidBodyDamping { linear_damping: 0.5, angular_damping: 1.0 }.into(),
-    ..Default::default()
-};
-commands.spawn_bundle(rigid_body);
+commands.spawn()
+    .insert(RigidBody::Dynamic)
+    .insert(Damping { linear_damping: 0.5, angular_damping: 1.0 });
 ```
 ```rust
 /* Set damping inside of a system. */
-fn modify_body_damping(mut dampings: Query<&mut RigidBodyDampingComponent>) {
+fn modify_body_damping(mut dampings: Query<&mut Damping>) {
     for mut rb_damping in dampings.iter_mut() {
         rb_damping.linear_damping = 0.5;
         rb_damping.angular_damping = 1.0;

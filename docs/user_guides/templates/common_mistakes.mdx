@@ -109,10 +109,6 @@ explicitly. If the rigid-body has colliders attached to it and you didn't give t
 sure that at least one of the colliders has a non-zero density (or non-zero mass if you set it explicitly on the
 collider).
 :::
-:::warning
-Currently, colliders with triangle-meshes won't have their mass properties computed automatically. So if a rigid-body
-only has triangle-mesh colliders attached to it, you need to set its mass/angular inertia manually.
-:::
 
 <notjs>
 
@@ -131,17 +127,13 @@ explicitly. If the rigid-body has colliders attached to it and you didn't give t
 sure that at least one of the colliders has a non-zero density (or non-zero mass if you set it explicitly on the
 collider).
 :::
-:::warning
-Currently, colliders with triangle-meshes won't have their mass properties computed automatically. So if a rigid-body
-only has triangle-mesh colliders attached to it, you need to set its mass/angular inertia manually.
-:::
 
 </notjs>
 
 ## Why is everything moving in slow-motion?
 A common mistake, especially in 2D, is to use pixels as the length unit in the physics world. Let's say that in 2D
 you have a 100x100 pixels sprite for your player. It may be tempting to use a 100x100 cuboid collider for this
-sprite: <rapier>`ColliderBuilder::cuboid(50.0, 50.0)`</rapier><bevy>`ColliderShape::cuboid(50.0, 50.0)`</bevy><js>`ColliderDesc.cuboid(50.0, 50.0)`</js> (we set `50.0`
+sprite: <rapier>`ColliderBuilder::cuboid(50.0, 50.0)`</rapier><bevy>`Collider::cuboid(50.0, 50.0)`</bevy><js>`ColliderDesc.cuboid(50.0, 50.0)`</js> (we set `50.0`
 because this is the half-width of the cuboid). Doing this will make it look like the simulation runs in __slow-motion__
 because the cuboid will be huge compared to the magnitude of the default gravity (-9.81).
 
@@ -166,10 +158,9 @@ sprite.set_rotation(rigid_body.rotation().angle());
 </rapier>
 <bevy>
 
-In this example, we could set the `RapierConfiguration::scale` field to `50.0` so that the translational part of 
-all the positions synchronized by the [`ColliderPositionSync`](colliders#sync-with-bevy-transform) and
-[`RigidBodyPositionSync`](rigid_bodies#sync-with-bevy-transform) are automatically multiplied by `50.0` when
-they are written into the `Transform` component.
+In this example, we could set `RapierPhysicsPlugin::pixels_per_meter(50.0)` so that while all the transforms,
+collider size, positions, etc. are expressed in pixels on your end, `bevy_rapier` will automatically divide
+them by 50.0 whenever it inputs/reads data into/from Rapier itself.
 
 </bevy>
 <js>

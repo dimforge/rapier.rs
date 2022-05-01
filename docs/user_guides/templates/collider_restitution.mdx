@@ -63,23 +63,20 @@ assert_eq!(collider.restitution_combine_rule(), CoefficientCombineRule::Min);
 ```rust
 /* Set the restitution coefficient and restitution combine rule
    when the collider is created. */
-let collider = ColliderBundle {
-    material: ColliderMaterial { 
-        restitution: 0.7, 
-        restitution_combine_rule: CoefficientCombineRule::Min,
-        ..Default::default() 
-    }.into(),
-    ..Default::default()
-};
-commands.spawn_bundle(collider);
+commands.spawn()
+    .insert(Collider::ball(0.5))
+    .insert(Restitution {
+        coefficient: 0.7,
+        combine_rule: CoefficientCombineRule::Min,
+    });
 ```
 ```rust
 /* Set the restitution coefficient and restitution combine rule
    inside of a system. */
-fn modify_collider_restitution(mut materials: Query<&mut ColliderMaterialComponent>) {
-    for mut co_material in materials.iter_mut() {
-        co_material.restitution = 0.7;
-        co_material.restitution_combine_rule = CoefficientCombineRule::Min;
+fn modify_collider_restitution(mut restitutions: Query<&mut Restitution>) {
+    for mut restitution in restitutions.iter_mut() {
+        restitution.coefficient = 0.7;
+        restitution.combine_rule = CoefficientCombineRule::Min;
     }
 }
 ```

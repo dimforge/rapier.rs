@@ -29,7 +29,7 @@ This gravity scale factor can be set when the rigid-body is created or after its
 
 ```rust
 /* Set the gravity scale when the rigid-body is created. */
-let rigid_body = RigidBodyBuilder::new_dynamic()
+let rigid_body = RigidBodyBuilder::dynamic()
     // Divide by 2 the strength of gravity for this rigid-body.
     .gravity_scale(0.5)
     .build();
@@ -47,20 +47,15 @@ assert_eq!(rigid_body.gravity_scale(), 0.5);
 
 ```rust
 /* Set the gravity scale when the rigid-body is created. */
-let rigid_body = RigidBodyBundle {
-    forces: RigidBodyForces {
-        gravity_scale: 2.0,
-        ..Default::default()
-    }.into(),
-    ..Default::default()
-};
-commands.spawn_bundle(rigid_body);
+commands.spawn()
+    .insert(RigidBody::Dynamic)
+    .insert(GravityScale(2.0));
 ```
 ```rust
 /* Set the gravity scale inside of a system. */
-fn modify_body_gravity_scale(mut forces: Query<&mut RigidBodyForcesComponent>) {
-    for mut rb_forces in forces.iter_mut() {
-        rb_forces.gravity_scale = 2.0;
+fn modify_body_gravity_scale(mut grav_scale: Query<&mut GravityScale>) {
+    for mut grav_scale in grav_scale.iter_mut() {
+        grav_scale.0 = 2.0;
     }
 }
 ```

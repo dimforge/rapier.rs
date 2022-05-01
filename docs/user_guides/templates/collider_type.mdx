@@ -31,17 +31,16 @@ assert!(collider.is_sensor());
 <bevy>
 
 ```rust
-/* Set the collider type when the collider is created. */
-let collider = ColliderBundle {
-    collider_type: ColliderType::Sensor.into(),
-    ..Default::default()
-};
+/* Set the collider sensor when the collider is created. */
+commands.spawn()
+    .insert(Collider::ball(0.5))
+    .insert(Sensor(true));
 ```
 ```rust
-/* Change the collider type inside of a system. */
-fn modify_collider_type(mut collider_types: Query<&mut ColliderTypeComponent>) {
-    for mut co_type in collider_types.iter_mut() {
-        *co_type = ColliderType::Sensor;
+/* Change the collider sensor status inside of a system. */
+fn modify_collider_type(mut sensors: Query<&mut Sensor>) {
+    for mut sensor in collider_types.iter_mut() {
+        sensor.0 = true;
     }
 }
 ```

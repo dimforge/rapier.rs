@@ -12,7 +12,8 @@ available through the [QueryPipeline](simulation_structures#the-query-pipeline).
 
 <rapier>
 
-Keep in mind that scene queries will only work as expected if no collider moved since the last call to `QueryPipeline::update`:
+Keep in mind that scene queries will only take into account the colliders (and their positions) known during the
+last call to `QueryPipeline::update`:
 
 ```rust
 // Update the query pipeline to take the latest collider positions into account.

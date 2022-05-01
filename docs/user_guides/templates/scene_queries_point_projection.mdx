@@ -2,8 +2,8 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
 
-Point projection will either project a point on the closest collider of the scene (<notjs>`QueryPipeline::project_point`</notjs><js>`World.projectPoint`</js>),
-or will enumerate every collider containing given point (<notjs>`QueryPipeline::intersections_with_point`</notjs><js>`World.intersectionsWithPoint`</js>).
+Point projection will either project a point on the closest collider of the scene (<rapier>`QueryPipeline::project_point`</rapier><bevy>`RapierContext::project_point`</bevy><js>`World.projectPoint`</js>),
+or will enumerate every collider containing given point (<rapier>`QueryPipeline::intersections_with_point`</rapier><bevy>`RapierContext::intersections_with_point`</bevy><js>`World.intersectionsWithPoint`</js>).
 
 <rapier>
 
@@ -84,27 +84,24 @@ values={[
 
 ```rust
 /* Project a point inside of a system. */
-fn project_point(query_pipeline: Res<QueryPipeline>, collider_query: QueryPipelineColliderComponentsQuery) {
-    // Wrap the bevy query so it can be used by the query pipeline.
-    let collider_set = QueryPipelineColliderComponentsSet(&collider_query);
-
-    let point = Vec2::new(1.0, 2.0).into();
+fn project_point(rapier_context: Res<RapierContext>) {
+    let point = Vec2::new(1.0, 2.0);
     let solid = true;
     let groups = InteractionGroups::all();
     let filter = None;
 
-    if let Some((handle, projection)) = query_pipeline.project_point(
-        &collider_set, &point, solid, groups, filter
+    if let Some((entity, projection)) = rapier_context.project_point(
+        &point, solid, groups, filter
     ) {
         // The collider closest to the point has this `handle`.
-        println!("Projected point on entity {:?}. Point projection: {}", handle.entity(), projection.point);
+        println!("Projected point on entity {:?}. Point projection: {}", entity, projection.point);
         println!("Point was inside of the collider shape: {}", projection.is_inside);
     }
 
-    query_pipeline.intersections_with_point(
-        &collider_set, &point, groups, filter, |handle| {
+    rapier_context.intersections_with_point(
+        &point, groups, filter, |entity| {
             // Callback called on each collider with a shape containing the point.
-            println!("The entity {:?} contains the point.", handle.entity());
+            println!("The entity {:?} contains the point.", entity);
             // Return `false` instead if we want to stop searching for other colliders containing this point.
             true
         }
@@ -117,29 +114,26 @@ fn project_point(query_pipeline: Res<QueryPipeline>, collider_query: QueryPipeli
 
 ```rust
 /* Project a point inside of a system. */
-fn project_point(query_pipeline: Res<QueryPipeline>, collider_query: QueryPipelineColliderComponentsQuery) {
-    // Wrap the bevy query so it can be used by the query pipeline.
-    let collider_set = QueryPipelineColliderComponentsSet(&collider_query);
-
-    let point = Vec3::new(1.0, 2.0, 3.0).into();
+fn project_point(rapier_context: Res<RapierContext>) {
+    let point = Vec3::new(1.0, 2.0, 3.0);
     let solid = true;
     let groups = InteractionGroups::all();
     let filter = None;
 
-    if let Some((handle, projection)) = query_pipeline.project_point(
-        &collider_set, &point, solid, groups, filter
+    if let Some((entity, projection)) = rapier_context.project_point(
+        &point, solid, groups, filter
     ) {
         // The collider closest to the point has this `handle`.
-        println!("Projected point on entity {:?}. Point projection: {}", handle.entity(), projection.point);
+        println!("Projected point on entity {:?}. Point projection: {}", entity, projection.point);
         println!("Point was inside of the collider shape: {}", projection.is_inside);
     }
 
-    query_pipeline.intersections_with_point(
-        &collider_set, &point, groups, filter, |handle| {
-        // Callback called on each collider with a shape containing the point.
-        println!("The entity {:?} contains the point.", handle.entity());
-        // Return `false` instead if we want to stop searching for other colliders containing this point.
-        true
+    rapier_context.intersections_with_point(
+        &point, groups, filter, |entity| {
+            // Callback called on each collider with a shape containing the point.
+            println!("The entity {:?} contains the point.", entity);
+            // Return `false` instead if we want to stop searching for other colliders containing this point.
+            true
         }
     );
 }

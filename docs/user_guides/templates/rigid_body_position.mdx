@@ -2,8 +2,8 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
 The position of a rigid-body represents its location (translation) in 2D or 3D world-space, as well as its orientation (rotation).
-It translational part is represented as a vector and its rotational part as an unit quaternion (in 3D) or a unit complex
-number (in 2D). <notjs>Both are combined into an isometry</notjs><bevy> stored in the `RigidBodyPositionComponent` component</bevy>.
+<rapier>It translational part is represented as a vector and its rotational part as an unit quaternion (in 3D) or a unit complex
+number (in 2D). Both are combined into an isometry</rapier><bevy> stored in the standard Bevy `Transform` component</bevy>.
 
 The position of a rigid-body can be set when creating it. It can also be set after
 its creation as illustrated below.
@@ -29,7 +29,7 @@ values={[
 
 ```rust
 /* Set the position when the rigid-body is created. */
-let rigid_body = RigidBodyBuilder::new_dynamic()
+let rigid_body = RigidBodyBuilder::dynamic()
     // The rigid body translation.
     // Default: zero vector.
     .translation(vector![0.0, 5.0])
@@ -60,7 +60,7 @@ assert_eq!(*rigid_body.position(), Isometry::new(vector![1.0, 2.0], 0.4));
 
 ```rust
 /* Set the position when the rigid-body is created. */
-let rigid_body = RigidBodyBuilder::new_dynamic()
+let rigid_body = RigidBodyBuilder::dynamic()
     // The rigid body translation.
     // Default: zero vector.
     .translation(vector![0.0, 5.0, 1.0])
@@ -103,19 +103,15 @@ values={[
 
 ```rust
 /* Set the position when the rigid-body bundle is created. */
-let rigid_body = RigidBodyBundle {
-    // NOTE: pick one of the following.
-    position: (Vec2::new(0.0, 5.0), 5.0).into(), // Translation and rotation.
-    position: Vec2::new(0.0, 5.0).into(), // Translation only.
-    ..Default::default()
-};
-commands.spawn_bundle(rigid_body);
+commands.spawn()
+    .insert(RigidBody::Dynamic)
+    .insert(Transform::from_xyz(0.0, 5.0, 0.0));
 ```
 ```rust
 /* Change the position inside of a system. */
-fn modify_body_translation(mut positions: Query<&mut RigidBodyPositionComponent>) {
-    for mut rb_pos in positions.iter_mut() {
-        rb_pos.position.translation = Vec2::new(0.0, 5.0).into();
+fn modify_body_translation(mut positions: Query<&mut Transform, With<RigidBody>>) {
+    for mut position in positions.iter_mut() {
+        position.translation.y += 0.1;
     }
 }
 ```
@@ -125,20 +121,17 @@ fn modify_body_translation(mut positions: Query<&mut RigidBodyPositionComponent>
 
 ```rust
 /* Set the position when the rigid-body bundle is created. */
-let rigid_body = RigidBodyBundle {
-    // NOTE: pick one of the following.
-    position: (Vec3::new(0.0, 5.0, 6.0), Quat::from_rotation_x(0.4)).into(), // Translation and rotation.
-    position: Vec3::new(0.0, 5.0, 6.0).into(),   // Translation only.
-    position: Quat::from_rotation_x(0.4).into(), // Rotation only.
-    ..Default::default()
-};
-commands.spawn_bundle(rigid_body);
+```rust
+/* Set the position when the rigid-body bundle is created. */
+commands.spawn()
+    .insert(RigidBody::Dynamic)
+    .insert(Transform::from_xyz(0.0, 5.0, 0.0));
 ```
 ```rust
 /* Change the position inside of a system. */
-fn modify_body_translation(mut positions: Query<&mut RigidBodyPositionComponent>) {
-    for mut rb_pos in positions.iter_mut() {
-        rb_pos.position.translation = Vec3::new(0.0, 5.0, 6.0).into();
+fn modify_body_translation(mut positions: Query<&mut Transform, With<RigidBody>>) {
+    for mut position in positions.iter_mut() {
+        position.translation.y += 0.1;
     }
 }
 ```
@@ -224,10 +217,9 @@ The position of the kinematic body will be automatically set to these values dur
 <bevy>
 
 For **velocity-based** kinematic bodies, it is recommended to set its velocity instead of setting its position directly.
-For **position-based** kinematic bodies, it is recommended to modify the `next_position` field of the `RigidBodyPositionComponent` component instead
-of its `position` field. This will let the physics engine compute the fictitious velocity of the kinematic body for more
-realistic intersections with other rigid-bodies. The `position` field of the kinematic body will automatically be set
-to the `next_position` value during the next physics update.
+For **position-based** kinematic bodies, it is recommended to modify its `Transform` (changing its velocity won’t have
+any effect). This will let the physics engine compute the fictitious velocity of the kinematic body for more
+realistic intersections with other rigid-bodies.
 
 </bevy>
 <js>

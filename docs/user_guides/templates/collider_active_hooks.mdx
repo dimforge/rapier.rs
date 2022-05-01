@@ -41,18 +41,15 @@ assert!(collider.active_hooks().contains(ActiveHooks::MODIFY_SOLVER_CONTACTS));
 
 ```rust
 /* Set the active hooks when the collider is created. */
-let collider = ColliderBundle {
-    flags: (ActiveHooks::FILTER_CONTACT_PAIRS | ActiveHooks::MODIFY_SOLVER_CONTACTS).into(),
-    ..Default::default()
-};
-commands.spawn_bundle(collider);
+commands.spawn()
+    .insert(Collider::ball(0.5))
+    .insert(ActiveHooks::FILTER_CONTACT_PAIRS | ActiveHooks::MODIFY_SOLVER_CONTACTS);
 ```
 ```rust
 /* Set the active hooks inside of a system. */
-fn modify_collider_active_hooks(mut flags: Query<&mut ColliderFlagsComponent>) {
-    for mut co_flags in flags.iter_mut() {
-        co_flags.active_hooks = ActiveHooks::FILTER_CONTACT_PAIRS |
-                                ActiveHooks::MODIFY_SOLVER_CONTACTS;
+fn modify_collider_active_hooks(mut active_hooks: Query<&mut ColliderFlagsComponent>) {
+    for mut active_hooks in active_hooks.iter_mut() {
+        *active_hooks = ActiveHooks::FILTER_CONTACT_PAIRS | ActiveHooks::MODIFY_SOLVER_CONTACTS;
     }
 }
 ```

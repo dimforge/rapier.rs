@@ -28,7 +28,7 @@ values={[
 <TabItem value="2D">
 
 ```rust
-let rigid_body = RigidBodyBuilder::new_dynamic().build();
+let rigid_body = RigidBodyBuilder::dynamic().build();
 let rigid_body_handle = rigid_body_set.insert(rigid_body);
 // First option: by setting the density of the collider (or we could just leave
 //               its default value 1.0).
@@ -48,7 +48,7 @@ collider_set.insert_with_parent(collider, rigid_body_handle, &mut rigid_body_set
   <TabItem value="3D">
 
 ```rust
-let rigid_body = RigidBodyBuilder::new_dynamic().build();
+let rigid_body = RigidBodyBuilder::dynamic().build();
 let rigid_body_handle = rigid_body_set.insert(rigid_body);
 // First option: by setting the density of the collider (or we could just leave
 //               its default value 1.0).

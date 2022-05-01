@@ -30,7 +30,7 @@ values={[
 
 ```rust
 /* Set the velocities when the rigid-body is created. */
-let rigid_body = RigidBodyBuilder::new_dynamic()
+let rigid_body = RigidBodyBuilder::dynamic()
     // The linear velocity of this body.
     // Default: zero velocity.
     .linvel(vector![1.0, 3.0])
@@ -55,7 +55,7 @@ assert_eq!(rigid_body.angvel(), 3.0);
 
 ```rust
 /* Set the velocities when the rigid-body is created. */
-let rigid_body = RigidBodyBuilder::new_dynamic()
+let rigid_body = RigidBodyBuilder::dynamic()
     // The linear velocity of this body.
     // Default: zero velocity.
     .linvel(vector![1.0, 3.0, 4.0])
@@ -93,21 +93,19 @@ values={[
 
 ```rust
 /* Set the velocities when the rigid-body is created. */
-let rigid_body = RigidBodyBundle {
-    velocity: RigidBodyVelocity {
-        linvel: Vec2::new(1.0, 2.0).into(),
-        angvel: 0.4
-    }.into(),
-    ..Default::default()
-};
-commands.spawn_bundle(rigid_body);
+commands.spawn()
+    .insert(RigidBody::Dynamic)
+    .insert(Velocity {
+        linvel: Vec2::new(1.0, 2.0),
+        angvel: 0.4,
+    });
 ```
 ```rust
 /* Set the velocities inside of a system. */
-fn modify_body_velocity(mut velocities: Query<&mut RigidBodyVelocityComponent>) {
-    for mut rb_vel in velocities.iter_mut() {
-        rb_vel.linvel = Vec2::new(1.0, 2.0).into();
-        rb_vel.angvel = 0.4;
+fn modify_body_velocity(mut velocities: Query<&mut Velocity>) {
+    for mut vel in velocities.iter_mut() {
+        vel.linvel = Vec2::new(1.0, 2.0);
+        vel.angvel = 0.4;
     }
 }
 ```
@@ -116,22 +114,21 @@ fn modify_body_velocity(mut velocities: Query<&mut RigidBodyVelocityComponent>) 
   <TabItem value="3D">
 
 ```rust
+```rust
 /* Set the velocities when the rigid-body is created. */
-let rigid_body = RigidBodyBundle {
-    velocity: RigidBodyVelocity { 
-        linvel: Vec3::new(1.0, 2.0, 3.0).into(),
-        angvel: Vec3::new(0.2, 0.4, 0.8).into()
-    }.into(),
-    ..Default::default()
-};
-commands.spawn_bundle(rigid_body);
+commands.spawn()
+    .insert(RigidBody::Dynamic)
+    .insert(Velocity {
+        linvel: Vec3::new(1.0, 2.0, 3.0),
+        angvel: Vec3::new(0.2, 0.4, 0.8),
+    });
 ```
 ```rust
 /* Set the velocities inside of a system. */
-fn modify_body_velocity(mut velocities: Query<&mut RigidBodyVelocityComponent>) {
-    for mut rb_vel in velocities.iter_mut() {
-        rb_vel.linvel = Vec3::new(1.0, 2.0, 3.0).into();
-        rb_vel.angvel = Vec3::new(0.2, 0.4, 0.8).into();
+fn modify_body_velocity(mut velocities: Query<&mut Velocity>) {
+    for mut vel in velocities.iter_mut() {
+        vel.linvel = Vec3::new(1.0, 2.0, 3.0);
+        vel.angvel = Vec3::new(0.2, 0.4, 0.8);
     }
 }
 ```

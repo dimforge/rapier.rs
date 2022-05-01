@@ -11,8 +11,8 @@ starts interacting with them (either with a joint, or with one of its attached c
 
 When using the `bevy_rapier` plugin, rigid-bodies are also automatically woken up whenever one of the
 components of the rigid-body is modified (to apply forces, change its position, etc.) They will **not** be awaken
-automatically when changing the gravity though. So you may sometimes want to wake a rigid-body manually by calling
-`RigidBodyActivationComponent::wake_up(true)` on the `RigidBodyActivationComponent` component.
+automatically when changing the gravity though. So you may sometimes want to wake a rigid-body manually by setting
+the component field `Sleeping::sleeping` to `true`.
 
 </bevy>
 

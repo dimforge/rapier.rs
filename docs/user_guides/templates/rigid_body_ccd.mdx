@@ -6,7 +6,7 @@ usually called **tunneling**). This  is done by using motion-clamping, i.e., eac
 will be stopped at the time where their first contact happen, taking their continuous motion into account. This will result
 in some "time loss" for that rigid-body. This loss of time can be reduced by increasing the maximum number of CCD
 substeps executed (the default being 1) in the [IntegrationParameters](simulation_structures#integration-parameters)
-(by changing the <notjs>`IntegrationParameters::max_ccd_substeps`</notjs><js>`IntegrationParameters.maxCcdSubsteps`</js> field).
+(by changing the <rapier>`IntegrationParameters::max_ccd_substeps`</rapier><rapier>`RapierContext::integration_parameters::max_ccd_substeps`</rapier><js>`IntegrationParameters.maxCcdSubsteps`</js> field).
 
 Rapier implements nonlinear CCD, meaning that it takes into account both the angular and translational motion of the
 rigid-body.
@@ -23,7 +23,7 @@ when creating a rigid-body or after its creation:
 
 ```rust
 /* Enable CCD when the rigid-body is created. */
-let rigid_body = RigidBodyBuilder::new_dynamic()
+let rigid_body = RigidBodyBuilder::dynamic()
     .ccd_enabled(true)
     .build();
 ```
@@ -39,17 +39,15 @@ assert_eq!(rigid_body.is_ccd_enabled(), true);
 
 ```rust
 /* Enable CCD when the rigid-body bundle is created. */
-let rigid_body = RigidBodyBundle {
-    ccd: RigidBodyCcd { ccd_enabled: true, ..Default::default() }.into(),
-    ..Default::default()
-};
-commands.spawn_bundle(rigid_body);
+commands.spawn()
+    .insert(RigidBody::Dynamic)
+    .insert(Ccd::enabled());
 ```
 ```rust
 /* Enable CCD inside of a system. */
-fn modify_body_ccd(mut ccds: Query<&mut RigidBodyCcdComponent>) {
+fn modify_body_ccd(mut ccds: Query<&mut Ccd>) {
     for mut rb_ccd in ccds.iter_mut() {
-        rb_ccd.ccd_enabled = true;
+        rb_ccd.enabled = true;
     }
 }
 ```

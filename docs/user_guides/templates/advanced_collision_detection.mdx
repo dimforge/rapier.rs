@@ -9,7 +9,7 @@ import TabItem from '@theme/TabItem';
 
 Collision-detection is a two-steps process. First the `BroadPhase` detects pairs of colliders
 that are potentially in contact or intersecting. Second, the `NarrowPhase` processes all these pairs in order
-to compute contacts points and generate [contact or intersection events](#contact-and-intersection-events).
+to compute contacts points and generate [collision events](#collision-events).
 
 All the pairs detected by the broad-phase are stored into two graph structures:
 - The [**contact graph**](#the-contact-graph) stores all the potential contact pairs (between two non-sensor colliders)
@@ -21,10 +21,18 @@ These two graphs are part of the `NarrowPhase` structure and are automatically u
 or the `CollisionPipeline`. Each node of these graph contains a collide handle
 and there is one graph edge per pair detected by the broad-phase.
 
-## Contact and intersection events
-The narrow-phase can generate two types of events: [contact events](#contact-events) between two non-sensor colliders
-or [intersection events](#intersection-events) between one sensor collider and another collider. <rapier>In order to handle
-these events, it is necessary to collect them using a structure implementing the `EventHandler` trait.
+## Collision events
+The narrow-phase can generate collision events between two colliders. Each collision event is given optional flags:
+- `CollisionEventFlags::SENSOR` is set if at least one of the colliders involved in the collision is a sensor.
+- `CollisionEventFlags::REMOVED` is set if a collision stopped because at least one of the colliders involved in the
+  collision was removed from the physics scene.
+
+:::warning
+Collision events are only generated between two colliders if at least one of them has the
+`ActiveEvents::COLLISION_EVENTS` flag in its [active events](colliders#active-events).
+:::
+
+<rapier>In order to handle these events, it is necessary to collect them using a structure implementing the `EventHandler` trait.
 Because Rapier can be paralellized, this event handler must also implement `Send + Sync`.</rapier>
 
 <rapier>
@@ -35,9 +43,8 @@ during each call to `PhysicsPipeline::step`:
 
 ```rust
 // Initialize the event collector.
-let (contact_send, contact_recv) = crossbeam::channel::unbounded();
-let (intersection_send, intersection_recv) = crossbeam::channel::unbounded();
-let event_handler = ChannelEventCollector::new(intersection_send, contact_send);
+let (collision_send, collision_recv) = crossbeam::channel::unbounded();
+let event_handler = ChannelEventCollector::new(intersection_send, collision_send);
 
 physics_pipeline.step(
     &gravity,
@@ -53,25 +60,20 @@ physics_pipeline.step(
     &event_handler
 );
 
-while let Ok(intersection_event) = intersection_recv.try_recv() {
-    // Handle the intersection event.
-    println!("Received intersection event: {:?}", intersection_event);
-}
-
-while let Ok(contact_event) = contact_recv.try_recv() {
-    // Handle the contact event.
-    println!("Received contact event: {:?}", contact_event);
+while let Ok(collision_event) = collision_recv.try_recv() {
+    // Handle the collision event.
+    println!("Received collision event: {:?}", collision_event);
 }
 ```
 
 Note however that if you need to access the contact information at the exact time a contact event happens, you may
-provide your own `EventHandler` implementation to access the contact pair given to `EventHandler::handle_contact_event`.
+provide your own `EventHandler` implementation to access the contact pair given to `EventHandler::handle_collision_event`.
 You may just query the `NarrowPhase` instead (after the timestep compleetd), but there are some rare cases when the contact
 information is no longer available at the end of the timestep (e.g. when running multi-step CCD and the contact start
 during one substep and steps at a substeps right after).
 
 :::info
-Contact and intersection events identify the involved colliders by their handle. It is possible to retrieve the handle of
+Collision events identify the involved colliders by their handle. It is possible to retrieve the handle of
 the rigid-body a collider is attached to: `collider_set.get(collider_handle).unwrap().parent()`
 :::
 
@@ -83,60 +85,15 @@ These events can be read using Bevy's event system with `EventReader`:
 ```rust
 /* A system that displays the events. */
 fn display_events(
-    mut intersection_events: EventReader<IntersectionEvent>,
-    mut contact_events: EventReader<ContactEvent>,
+    mut collision_events: EventReader<CollisionEvent>,
 ) {
-    for intersection_event in intersection_events.iter() {
-        println!("Received intersection event: {:?}", intersection_event);
-    }
-
-    for contact_event in contact_events.iter() {
-        println!("Received contact event: {:?}", contact_event);
+    for collision_event in collision_events.iter() {
+        println!("Received collision event: {:?}", collision_event);
     }
 }
 ```
 
-:::info
-Contact and intersection events identify the involved colliders by their handle. It is possible to retrieve the
-corresponding entity by calling `handle.entity()`.
-:::
-
 </bevy>
-
-
-### Intersection events
-Intersection events are triggered when two colliders (where at least one of them is a sensor) transition between
-intersecting or not. One intersection event has the type `IntersectionEvent`:
-
-| Field         | Description |
-|--             | --          |
-| `collider1`   | The handle of the first collider involved in the intersection. |
-| `collider2`   | The handle of the second collider involved in the intersection. |
-| `intersecting` | Set to `true` if the colliders shapes are intersecting. |
-
-:::warning
-Intersection events are only generated between two colliders (where at least one of the is a sensor) if at
-least one of them has the `ActiveEvents::INTERSECTION_EVENTS` flag in its [active events](colliders#active-events).
-:::
-
-### Contact events
-Contact events are triggered when two non-sensor colliders transition between having zero contact points and having
-at least one contact point. Transitioning between having one contact point to having more than one contact points is
-not reported an event. The `ContactEvent` enum has two variants:
-
-1. `ContactEvent::Started(h1, h2)` to indicate the transition between
-   0 to at least one contact point.
-2. `ContactEvent::Stopped(h1, h2)` to indicate the transition between
-   at least one contact point to 0.
-
-Here `h1` and `h2` identify the handles of the colliders involved in the contact. The `EventHandler::handle_contact_event`
-also provides the contact pair.
-
-
-:::warning
-Contact events are only generated between two non-sensor colliders if at least one of them has
-the `ActiveEvents::CONTACT_EVENTS` flag in its [active events](colliders#active-events).
-:::
 
 
 ## The contact graph
@@ -232,53 +189,53 @@ for contact_pair in narrow_phase.contacts_with(collider_handle) {
 <bevy>
 
 ```rust
-fn display_contact_info(narrow_phase: Res<NarrowPhase>) {
-    let entity1 = ...; // The first entity with a collider bundle attached.
-    let entity2 = ...; // The second entity with a collider bundle attached.
+fn display_contact_info(rapier_context: Res<RapierContext>) {
+    let entity1 = ...; // A first entity with a collider attached.
+    let entity2 = ...; // A second entity with a collider attached.
     
     /* Find the contact pair, if it exists, between two colliders. */
-    if let Some(contact_pair) = narrow_phase.contact_pair(entity1.handle(), entity2.handle()) {
+    if let Some(contact_pair) = rapier_context.contact_pair(entity1, entity2) {
         // The contact pair exists meaning that the broad-phase identified a potential contact.
-        if contact_pair.has_any_active_contact {
+        if contact_pair.has_any_active_contact() {
             // The contact pair has active contacts, meaning that it
             // contains contacts for which contact forces were computed.
         }
 
         // We may also read the contact manifolds to access the contact geometry.
-        for manifold in &contact_pair.manifolds {
-            println!("Local-space contact normal: {}", manifold.local_n1);
-            println!("Local-space contact normal: {}", manifold.local_n2);
-            println!("World-space contact normal: {}", manifold.data.normal);
+        for manifold in contact_pair.manifolds() {
+            println!("Local-space contact normal: {}", manifold.local_n1());
+            println!("Local-space contact normal: {}", manifold.local_n2());
+            println!("World-space contact normal: {}", manifold.normal());
 
             // Read the geometric contacts.
-            for contact_point in &manifold.points {
+            for contact_point in manifold.points() {
                 // Keep in mind that all the geometric contact data are expressed in the local-space of the colliders.
-                println!("Found local contact point 1: {:?}", contact_point.local_p1);
-                println!("Found contact distance: {:?}", contact_point.dist); // Negative if there is a penetration.
-                println!("Found contact impulse: {}", contact_point.data.impulse);
-                println!("Found friction impulse: {}", contact_point.data.tangent_impulse);
+                println!("Found local contact point 1: {:?}", contact_point.local_p1();
+                println!("Found contact distance: {:?}", contact_point.dist()); // Negative if there is a penetration.
+                println!("Found contact impulse: {}", contact_point.data.impulse());
+                println!("Found friction impulse: {}", contact_point.data.tangent_impulse());
             }
 
             // Read the solver contacts.
-            for solver_contact in &manifold.data.solver_contacts {
+            for solver_contact in manifold.data.solver_contacts() {
                 // Keep in mind that all the solver contact data are expressed in world-space.
-                println!("Found solver contact point: {:?}", solver_contact.point);
-                println!("Found solver contact distance: {:?}", solver_contact.dist); // Negative if there is a penetration.
+                println!("Found solver contact point: {:?}", solver_contact.point());
+                println!("Found solver contact distance: {:?}", solver_contact.dist()); // Negative if there is a penetration.
             }
         }
     }
 }
 ```
 ```rust
-fn display_contact_info(narrow_phase: Res<NarrowPhase>) {
-    let entity = ...; // Entity with a collider bundle attached.F
+fn display_contact_info(rapier_context: Res<RapierContext>) {
+    let entity = ...; // An entity with a collider attached.
     
     /* Iterate through all the contact pairs involving a specific collider. */
-    for contact_pair in narrow_phase.contacts_with(entity.handle()) {
-        let other_collider = if contact_pair.collider1 == entity.handle() {
-            contact_pair.collider2
+    for contact_pair in rapier_context.contacts_with(entity) {
+        let other_collider = if contact_pair.collider1() == entity {
+            contact_pair.collider2()
         } else {
-            contact_pair.collider1
+            contact_pair.collider1()
         };
 
         // Process the contact pair in a way similar to what we did in
@@ -340,23 +297,23 @@ for (collider1, collider2, intersecting) in narrow_phase.intersections_with(coll
 
 ```rust
 fn display_intersection_info(narrow_phase: Res<NarrowPhase>) {
-    let entity1 = ...; // The first entity with a collider bundle attached.
-    let entity2 = ...; // The second entity with a collider bundle attached.
+    let entity1 = ...; // A first entity with a collider attached.
+    let entity2 = ...; // A second entity with a collider attached.
     
     /* Find the intersection pair, if it exists, between two colliders. */
-    if narrow_phase.intersection_pair(entity1.handle(), entity2.handle()) == Some(true) {
+    if narrow_phase.intersection_pair(entity1, entity2) == Some(true) {
         println!("The entities {:?} and {:?} have intersecting colliders!", entity1, entity2);
     }
 }
 ```
 ```rust
 fn display_intersection_info(narrow_phase: Res<NarrowPhase>) {
-    let entity = ...; // Entity with a collider bundle attached.
+    let entity = ...; // Entity with a collider attached.
 
     /* Iterate through all the intersection pairs involving a specific collider. */
-    for (collider1, collider2, intersecting) in narrow_phase.intersections_with(entity.handle()) {
+    for (collider1, collider2, intersecting) in narrow_phase.intersections_with(entity) {
         if intersecting {
-            println!("The entities {:?} and {:?} have intersecting colliders!", collider1.entity(), collider2.entity());
+            println!("The entities {:?} and {:?} have intersecting colliders!", collider1, collider2);
         }
     }
 }
@@ -624,8 +581,8 @@ struct MyPhysicsHooks;
 impl PhysicsHooksWithQuery<NoUserData<'_>> for MyPhysicsHooks {
     fn modify_solver_contacts(
         &self, 
-        context: &mut ContactModificationContext<RigidBodyComponentsSet, ColliderComponentsSet>, 
-        _: &Query<NoUserData>
+        context: ContactModificationContextView,
+        _user_data: &Query<NoUserData>
     ) {
         // This is a silly example of contact modifier that does silly things
         // for illustration purpose:
@@ -661,14 +618,9 @@ fn setup_physics(mut commands: Commands) {
     // Add colliders with a `CustomFilterTag` component. Only colliders
     // with the same `CustomFilterTag` variant will collider thanks to
     // our custom physics hooks:
-    let collider = ColliderBundle {
-        material: ColliderMaterial {
-            active_hooks: ActiveHooks::MODIFY_SOLVER_CONTACTS,
-            ..Default::default()
-        },
-        ..Default::default()
-    }.into();
-    commands.spawn_bundle(collider);
+    commands.spawn()
+        .insert(Collider::ball(0.5))
+        .insert(ActiveHooks::MODIFY_SOLVER_CONTACTS);
 
     // TODO: add other colliders in a similar way.
 }

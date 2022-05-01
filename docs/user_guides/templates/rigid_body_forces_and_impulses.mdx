@@ -67,27 +67,30 @@ values={[
 
 ```rust
 /* Apply forces when the rigid-body is created. */
-let rigid_body = RigidBodyBundle {
-    forces: RigidBodyForces {
-        force: Vec2::new(1000.0, 2000.0).into(),
+commands.spawn()
+    .insert(RigidBody::Dynamic)
+    .insert(ExternalForce {
+        force: Vec2::new(1000.0, 2000.0),
         torque: 140.0,
-        ..Default::default()
-    }.into(),
-    ..Default::default()
-};
-commands.spawn_bundle(rigid_body);
+    })
+    .insert(ExternalImpulse {
+        impulse: Vec2::new(100.0, 200.0),
+        torque_impulse: 14.0,
+    });
 ```
 ```rust
 /* Apply forces and impulses inside of a system. */
-fn apply_forces(mut rigid_bodies: Query<(&mut RigidBodyForcesComponent, &mut RigidBodyVelocityComponent, &RigidBodyMassPropsComponent)>) {
-    for (mut rb_forces, mut rb_vel, rb_mprops) in rigid_bodies.iter_mut() {
-        // Apply forces.
-        rb_forces.force = Vec2::new(1.0, 2.0).into();
-        rb_forces.torque = 0.4;
+fn apply_forces(mut ext_forces: Query<&mut ExternalForce>, ext_impulses: Query<&mut ExternalImpulse)>) {
+    // Apply forces.
+    for mut ext_force in ext_forces.iter_mut() {
+        ext_force.force = Vec2::new(1000.0, 2000.0);
+        ext_force.torque = 0.4;
+    }
 
-        // Apply impulses.
-        rb_vel.apply_impulse(rb_mprops, Vec2::new(100.0, 200.0).into());
-        rb_vel.apply_torque_impulse(rb_mprops, 80.0);
+    // Apply impulses.
+    for mut ext_impulse in ext_impulses.iter_mut() {
+        ext_impulse.impulse = Vec2::new(100.0, 200.0);
+        ext_impulse.torque_impulse = 0.4;
     }
 }
 ```
@@ -97,27 +100,30 @@ fn apply_forces(mut rigid_bodies: Query<(&mut RigidBodyForcesComponent, &mut Rig
 
 ```rust
 /* Apply forces when the rigid-body is created. */
-let rigid_body = RigidBodyBundle {
-    forces: RigidBodyForces {
-        force: Vec3::new(1000.0, 2000.0, 3000.0).into(),
-        torque: Vec3::new(140.0, 80.0, 20.0).into(),
-        ..Default::default()
-    }.into(),
-    ..Default::default()
-};
-commands.spawn_bundle(rigid_body);
+commands.spawn()
+    .insert(RigidBody::Dynamic)
+    .insert(ExternalForce {
+        force: Vec3::new(10.0, 20.0, 30.0),
+        torque: Vec3::new(1.0, 2.0, 3.0),
+    })
+    .insert(ExternalImpulse {
+        force: Vec3::new(1.0, 2.0, 3.0),
+        torque: Vec3::new(0.1, 0.2, 0.3),
+    });
 ```
 ```rust
 /* Apply forces and impulses inside of a system. */
-fn apply_forces(mut rigid_bodies: Query<(&mut RigidBodyForcesComponent, &mut RigidBodyVelocityComponent, &RigidBodyMassPropsComponent)>) {
-    for (mut rb_forces, mut rb_vel, rb_mprops) in rigid_bodies.iter_mut() {
-        // Apply forces.
-        rb_forces.force = Vec3::new(1.0, 2.0, 3.0).into();
-        rb_forces.torque = Vec3::new(0.2, 0.4, 0.8).into();
-        
-        // Apply impulses.
-        rb_vel.apply_impulse(rb_mprops, Vec3::new(100.0, 200.0, 300.0).into());
-        rb_vel.apply_torque_impulse(rb_mprops, Vec3::new(140.0, 80.0, 20.0).into());
+fn apply_forces(mut ext_forces: Query<&mut ExternalForce>, ext_impulses: Query<&mut ExternalImpulse)>) {
+    // Apply forces.
+    for mut ext_force in ext_forces.iter_mut() {
+        ext_force.force = Vec3::new(1000.0, 2000.0, 3000.0);
+        ext_force.torque = Vec3::new(0.4, 0.5, 0.6);
+    }
+
+    // Apply impulses.
+    for mut ext_impulse in ext_impulses.iter_mut() {
+        ext_impulse.impulse = Vec3::new(100.0, 200.0, 300.0);
+        ext_impulse.torque_impulse = Vec3::new(0.4, 0.5, 0.6);
     }
 }
 ```

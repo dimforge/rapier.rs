@@ -7,7 +7,7 @@ sidebar_label: Colliders
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-Colliders represent the geometric shapes that generate contacts and intersection events when they touch.
+Colliders represent the geometric shapes that generate contacts and collision events when they touch.
 Attaching one or multiple colliders to a rigid body allow the rigid-body to be affected by contact forces.
 
 ## Creation and insertion
@@ -37,13 +37,13 @@ also part of the shape:
 ![convex versus non-convex](/img/convex_concave_crossing.svg)
 
 There are two ways of creating a collider with a convex shape:
-1. Using <rapier>`ColliderBuilder::convex_hull(points)`</rapier><bevy>`ColliderShape::convex_hull(points)`</bevy><js>`ColliderDesc.convexHull(points)`</js>. This is the simplest approach: it will automatically compute the convex
+1. Using <rapier>`ColliderBuilder::convex_hull(points)`</rapier><bevy>`Collider::convex_hull(points)`</bevy><js>`ColliderDesc.convexHull(points)`</js>. This is the simplest approach: it will automatically compute the convex
    hull of the given set of points. A __convex hull__ is the smallest convex shape that contains all the given points.
-2. Using <rapier>`ColliderBuilder::convex_mesh(points, indices)`</rapier><bevy>`ColliderShape::convex_mesh(points, indices)`</bevy><js>`ColliderDesc.convexMesh(points, indices)`</js> in
-   3D or <rapier>`ColliderBuilder::convex_polyline(points)`</rapier><bevy>`ColliderShape::convex_polyline(points)`</bevy><js>`ColliderDesc.convexPolyline(points`</js> in 2D.
+2. Using <rapier>`ColliderBuilder::convex_mesh(points, indices)`</rapier><bevy>`Collider::convex_mesh(points, indices)`</bevy><js>`ColliderDesc.convexMesh(points, indices)`</js> in
+   3D or <rapier>`ColliderBuilder::convex_polyline(points)`</rapier><bevy>`Collider::convex_polyline(points)`</bevy><js>`ColliderDesc.convexPolyline(points`</js> in 2D.
    This takes a mesh described by its vertex buffer and index
    buffer and assumes it is already convex (you need to ensure that it is convex yourself). This will be more efficient that
-   the <rapier>`ColliderBuilder::convex_hull`</rapier><bevy>`ColliderShape::convex_hull`</bevy><js>`ColliderDesc.convexHull`</js> constructor because this
+   the <rapier>`ColliderBuilder::convex_hull`</rapier><bevy>`Collider::convex_hull`</bevy><js>`ColliderDesc.convexHull`</js> constructor because this
    won't do any calculation to ensure convexity. However, if the input mesh isn't actually convex, collision-detection
    with that shape will give incorrect result.
    
@@ -61,13 +61,13 @@ point-containment tests won't work intuitively because the triangle mesh is assu
 :::
 
 A **triangle-mesh** collider can be built
-with <rapier>`ColliderBuilder::trimesh(vertices, indices)`</rapier><bevy>`ColliderShape::trimesh(vertices, indices)`</bevy><js>`ColliderDesc.trimesh(vertices, indices)`</js> where
+with <rapier>`ColliderBuilder::trimesh(vertices, indices)`</rapier><bevy>`Collider::trimesh(vertices, indices)`</bevy><js>`ColliderDesc.trimesh(vertices, indices)`</js> where
 `vertices` is the buffer containing tall the vertices of the mesh, and `indices` is a set of indices indicating what vertex is used by
 what triangle. The vertex buffer and index buffer may have different lengths, and any vertex can be shared
 by multiple triangles.
 
 A **polyline** collider can be built
-with <rapier>`ColliderBuilder::polyline(vertices, indices)`</rapier><bevy>`ColliderShape::polyline(vertices, indices)`</bevy><js>`ColliderDesc.polyline(vertices, indices)`</js> where
+with <rapier>`ColliderBuilder::polyline(vertices, indices)`</rapier><bevy>`Collider::polyline(vertices, indices)`</bevy><js>`ColliderDesc.polyline(vertices, indices)`</js> where
 `vertices` is the buffer containing tall the vertices of the polyline, and `indices` is an optional set of indices
 indicating what vertex is used by what segment. The vertex buffer and index buffer may have different lengths, and any
 vertex can be shared by multiple segments. If the given vertex buffer is `None` then the input vertices are assumed to
@@ -90,7 +90,7 @@ and use much less memory. Therefore heightfields are useful to define large part
 A **3D heightfield** is basically large rectangle in the `X-Z` plane, subdivided in a grid pattern at regular intervals. Each
 vertex of this subdivision is given a height, i.e., the coordinate of that point along the `Y` axis. A 3D heightfield
 collider can be created
-with <rapier>`ColliderBuilder::heightfield(heights, scale)`</rapier><bevy>`ColliderShape::heightfield(heights, scale)`</bevy><js>`ColliderDesc.heightfield(heights, scale)`</js> where
+with <rapier>`ColliderBuilder::heightfield(heights, scale)`</rapier><bevy>`Collider::heightfield(heights, scale)`</bevy><js>`ColliderDesc.heightfield(heights, scale)`</js> where
 `heights` is a matrix indicating the altitude of each subdivision point of that heightfield. The number of rows of that
 matrix is the number of subdivision along the `X` axis, and the number of columns is the number of subdivision along the
 `Z` axis. The `scale` argument indicates the size of the rectangle of the `X-Z` plane.
@@ -102,7 +102,7 @@ A heightfield collider can be given any orientation by changing the orientation 
 A **2D heightfield** is a large segment along the `X` axis, subdivided at regular intervals. Each vertex of this
 subdivision is given a height, i.e., the coordinate of that point along the `Y` axis. A 2D heightfield collider
 can be created
-with <rapier>`ColliderBuilder::heightfield(heights, scale)`</rapier><bevy>`ColliderShape::heightfield(heights, scale)`</bevy><js>`ColliderDesc.heightfield(heights, scale)`</js> where
+with <rapier>`ColliderBuilder::heightfield(heights, scale)`</rapier><bevy>`Collider::heightfield(heights, scale)`</bevy><js>`ColliderDesc.heightfield(heights, scale)`</js> where
 `heights` is a vector indicating the altitude of each subdivision point of that heightfield. The number of elements on
 that vector is the number of subdivision of the heightfield. The `scale` argument indicates the length of the subdivided
 segment along the `X` axis.
@@ -137,16 +137,14 @@ ColliderBuilder::compound(vec![(pos1, shape1), (pos2, shape2)])
 <bevy>
 
 ```rust
-let collider = ColliderBundle {
-    shape: ColliderShape::compound(vec![(pos1, shape1), (pos2, shape2)]).into(),
-    ..Default::default()
-}
+commands.spawn()
+    .insert(Collider::compound(vec![(pos1, rot1, shape1), (pos2, rot2, shape2)]));
 ```
 
 </bevy>
 
 It is also possible to build a compound shape modelling the convex decomposition of a 3D triangle mesh or 2D polyline
-using the <rapier>`ColliderBuilder::convex_decomposition(vertices, indices)`</rapier><bevy>`ColliderShape::convex_decomposition(vertices, indices)`</bevy>
+using the <rapier>`ColliderBuilder::convex_decomposition(vertices, indices)`</rapier><bevy>`Collider::convex_decomposition(vertices, indices)`</bevy>
 method. This will automatically create a compound shape
 composed of multiple convex meshes obtained from the approximate convex decomposition of the triangle mesh (or polyline in 2D)
 using the [VHACD algorithm](https://github.com/kmammou/v-hacd). Here are examples of a 2D concave polygon decomposed into two
@@ -170,7 +168,7 @@ collision-detection with **round-cuboids** will be slower than collision-detecti
 :::
 
 Colliders with round shapes are built in a way very similar to their non-round
-counterparts, e.g., <rapier>`ColliderBuilder::round_cuboid`</rapier><bevy>`ColliderShape::round_cuboid`</bevy><js>`ColliderDesc.roundCuboid`</js>.
+counterparts, e.g., <rapier>`ColliderBuilder::round_cuboid`</rapier><bevy>`Collider::round_cuboid`</bevy><js>`ColliderDesc.roundCuboid`</js>.
 These constructors take one additional parameter: the size of the added thickness called <notjs>`border_radius`</notjs><js>`borderRadius`</js>.
 
 ## Mass properties
@@ -182,31 +180,6 @@ import MassProperties from './collider_mass_properties.mdx'
 import Position from './collider_position.mdx'
 
 <Position />
-
-<bevy>
-
-### Sync. with Bevy Transform
-If the entity containing the `ColliderPositionComponent` component also has a `Transform` component, it is possible to
-tell the plugin to automatically update the `Transform` component at each frame using the `ColliderPosition`,
-by adding the `ColliderPositionSync` component to the same entity:
-
-```rust
-let collider = ColliderBundle::default();
-commands.spawn_bundle(collider)
-        .insert(Transform::default())
-        .insert(ColliderPositionSync::Discrete);
-```
-
-When running this update, the translation part of the transform is automatically multiplied by the
-`RapierConfiguration::scale` value (this is typically used in 2D for automatically converting between physics
-units (meters) to graphics units pixels).
-
-:::warning
-This synchronization between `ColliderPosition` and `Transform` is one-way: modifying the `Transform` will **not**
-result in the automatic modification of the `ColliderPosition`.
-:::
-
-</bevy>
 
 ## Friction
 import Friction from './collider_friction.mdx'

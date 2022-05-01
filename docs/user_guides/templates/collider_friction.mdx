@@ -63,23 +63,20 @@ assert_eq!(collider.friction_combine_rule(), CoefficientCombineRule::Min);
 ```rust
 /* Set the friction coefficient and friction combine rule
    when the collider is created. */
-let collider = ColliderBundle {
-    material: ColliderMaterial { 
-        friction: 0.7,
-        friction_combine_rule: CoefficientCombineRule::Min,
-        ..Default::default() 
-    }.into(),
-    ..Default::default()
-};
-commands.spawn_bundle(collider);
+commands.spawn()
+    .insert(Collider::ball(0.5))
+    .insert(Friction {
+        coefficient: 0.7,
+        combine_rule: CoefficientCombineRule::Min,
+    });
 ```
 ```rust
 /* Set the friction coefficient and friction combine rule
    inside of a system. */
-fn modify_collider_friction(mut materials: Query<&mut ColliderMaterialComponent>) {
-    for mut co_material in materials.iter_mut() {
-        co_material.friction = 0.7;
-        co_material.friction_combine_rule = CoefficientCombineRule::Min;
+fn modify_collider_friction(mut frictions: Query<&mut Friction>) {
+    for mut friction in frictions.iter_mut() {
+        friction.coefficient = 0.7;
+        friction.combine_rule = CoefficientCombineRule::Min;
     }
 }
 ```

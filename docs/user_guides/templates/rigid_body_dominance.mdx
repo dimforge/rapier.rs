@@ -27,7 +27,7 @@ The dominance group can be set when the rigid-body is created or after its creat
 
 ```rust
 /* Set the dominance group when the rigid-body is created. */
-let rigid_body = RigidBodyBuilder::new_dynamic()
+let rigid_body = RigidBodyBuilder::dynamic()
     .dominance_group(10)
     .build();
 ```
@@ -43,17 +43,15 @@ assert_eq!(rigid_body.dominance_group(), 10);
 
 ```rust
 /* Set dominance when the rigid-body bundle is created. */
-let rigid_body = RigidBodyBundle {
-    dominance: RigidBodyDominance(10).into(),
-    ..Default::default()
-};
-commands.spawn_bundle(rigid_body);
+commands.spawn()
+    .insert(RigidBody::Dynamic)
+    .insert(Dominance::group(10));
 ```
 ```rust
 /* Set dominance inside of a system. */
-fn modify_body_dominance(mut dominances: Query<&mut RigidBodyDominanceComponent>) {
+fn modify_body_dominance(mut dominances: Query<&mut Dominance>) {
     for mut rb_dominance in dominances.iter_mut() {
-        rb_dominance.0.0 = 10;
+        rb_dominance.groups = 10;
     }
 }
 ```
