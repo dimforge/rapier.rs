@@ -94,7 +94,7 @@ bevy_rapier3d = { version = "*", features = [ "simd-stable" ] }
 
 ## Basic simulation example
 
-Here is a basic example of `main.rs` file. This creates a ball bouncing on a static ground. Details about the
+Here is a basic example of `main.rs` file. This creates a ball bouncing on a fixed ground. Details about the
 elements used in this examples are given in subsequent pages of this guide.
 
 :::info
@@ -118,7 +118,7 @@ use bevy_rapier2d::prelude::*;
 fn main() {
     App::new()
         .add_plugins(DefaultPlugins)
-        .add_plugin(RapierPhysicsPlugin::<NoUserData>::default())
+        .add_plugin(RapierPhysicsPlugin::<NoUserData>::pixel_per_meter(100.0))
         .add_startup_system(setup_physics.system())
         .add_system(print_ball_altitude.system())
         .run();
@@ -126,11 +126,7 @@ fn main() {
 
 fn setup_physics(mut commands: Commands) {
     /* Create the ground. */
-    let collider = ColliderBundle {
-        shape: ColliderShape::cuboid(100.0, 0.1).into(),
-        ..Default::default()
-    };
-    commands.spawn_bundle(collider);
+    commands.spawn().insert(Collider::cuboid(1000.0, 10.0));
 
     /* Create the bouncing ball. */
     let rigid_body = RigidBodyBundle {
@@ -145,13 +141,17 @@ fn setup_physics(mut commands: Commands) {
         }.into(),
         ..Default::default()
     };
-    commands.spawn_bundle(rigid_body)
-        .insert_bundle(collider);
+    commands
+        .spawn_bundle()
+        .insert(RigidBody::Dynamic())
+        .insert(Collider::ball(0.5))
+        .insert(Restitution::new(0.7))
+        .insert(Transform::from_xyz(0.0, 10.0, 0.0));
 }
 
-fn print_ball_altitude(positions: Query<&RigidBodyPositionComponent>) {
-    for rb_pos in positions.iter() {
-        println!("Ball altitude: {}", rb_pos.position.translation.vector.y);
+fn print_ball_altitude(positions: Query<&Transform>) {
+    for transform in positions.iter() {
+        println!("Ball altitude: {}", transform.translation.y);
     }
 }
 ```
@@ -178,28 +178,20 @@ fn setup_physics(mut commands: Commands) {
         shape: ColliderShape::cuboid(100.0, 0.1, 100.0).into(),
         ..Default::default()
     };
-    commands.spawn_bundle(collider);
+    commands.spawn().insert(Collider::cuboid(100.0, 0.1, 100.0));
 
     /* Create the bouncing ball. */
-    let rigid_body = RigidBodyBundle {
-        position: Vec3::new(0.0, 10.0, 0.0).into(),
-        ..Default::default()
-    };
-    let collider = ColliderBundle {
-        shape: ColliderShape::ball(0.5).into(),
-        material: ColliderMaterial {
-            restitution: 0.7,
-            ..Default::default()
-        }.into(),
-        ..Default::default()
-    };
-    commands.spawn_bundle(rigid_body)
-        .insert_bundle(collider);
+    commands
+        .spawn()
+        .insert(RigidBody::Dynamic)
+        .insert(Collider::ball(0.5))
+        .insert(Restitution::new(0.7))
+        .insert(Transform::from_xyz(0.0, 10.0, 0.0);
 }
 
-fn print_ball_altitude(positions: Query<&RigidBodyPositionComponent>) {
-    for rb_pos in positions.iter() {
-        println!("Ball altitude: {}", rb_pos.position.translation.vector.y);
+fn print_ball_altitude(positions: Query<&Transform>) {
+    for transform in positions.iter() {
+        println!("Ball altitude: {}", transform.translation.y);
     }
 }
 ```
@@ -209,46 +201,8 @@ fn print_ball_altitude(positions: Query<&RigidBodyPositionComponent>) {
 
 
 ## The debug renderer
-:::warning
-The debug-renderer is very limited right now. It won't be able to render every shape type,
-and doesn't render other elements like contacts, rigid-body frames, etc. Contributions are
-welcome!
-:::
-The `bevy_rapier` plugin comes with a debug-render to help debugging physics bugs. This can be enabled by:
+The `bevy_rapier` plugin comes with a debug-render to help visualize exactly what the physics-engine sees. This
+can help fixing some bugs like colliders not being properly aligned with your graphics representation.
+The debug-renderer is be enabled by:
 1. Enabling the `render` cargo feature of bevy-rapier.
-2. Adding the plugin `RapierRenderPlugin` to the Bevy app.
-3. Adding the `ColliderDebugRender` component to an entity containing a collider. Please note
-   that this will only work if the entity doesn't have a mesh already attached to it.
-4. (optional) Adding the `ColliderPositionSync` component to the same entity. This
-   is not needed if you have your own way of synchronizing the collider's position with the
-   entity's `Transform`.
-
-```toml
-[dependencies]
-# Make sure the "render" feature is enabled.
-bevy_rapier2d = { version = "*", features = [ "simd-stable", "render" ] }
-bevy_rapier3d = { version = "*", features = [ "simd-stable", "render" ] }
-```
-   
-```rust
-use bevy::prelude::*;
-use bevy_rapier3d::prelude::*;
-
-fn main() {
-    App::new()
-        ...
-        .add_plugin(RapierRenderPlugin)
-        ...
-        .run();
-}
-
-fn setup_physics() {
-    let collider = ColliderBundle {
-        shape: ColliderShape::ball(0.4).into(),
-        ..Default::default()
-    };
-    commands.spawn_bundle(collider)
-        .insert(ColliderPositionSync::Discrete)
-        .insert(ColliderDebugRender::with_id(1)); // The id selects one of the predefined colors.
-}
-```
+2. Adding the plugin `RapierDebugRenderPlugin` to the Bevy app.

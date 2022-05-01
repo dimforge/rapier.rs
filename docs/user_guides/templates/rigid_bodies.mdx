@@ -32,31 +32,6 @@ import Position from './rigid_body_position.mdx'
 
 <Position />
 
-<bevy>
-
-### Sync. with Bevy Transform
-If the entity containing the `RigidBodyPositionComponent` component also has a `Transform` component, it is possible to
-tell the plugin to automatically update the `Transform` component at each frame using the `RigidBodyPosition`,
-by adding the `RigidBodyPositionSync` component to the same entity:
-
-```rust
-let rigid_body = RigidBodyBundle::default();
-commands.spawn_bundle(rigid_body)
-        .insert(Transform::default())
-        .insert(RigidBodyPositionSync::Discrete);
-```
-
-When running this update, the translation part of the transform is automatically multiplied by the
-`RapierConfiguration::scale` value (this is typically used in 2D for automatically converting between physics
-units (meters) to graphics units pixels).
-
-:::warning
-This synchronization between `RigidBodyPosition` and `Transform` is one-way: modifying the `Transform` will **not**
-result in the automatic modification of the `RigidBodyPosition`.
-:::
-
-</bevy>
-
 ## Velocity
 import Velocity from './rigid_body_velocity.mdx'
 

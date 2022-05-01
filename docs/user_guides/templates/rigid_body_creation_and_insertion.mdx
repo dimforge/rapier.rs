@@ -27,7 +27,7 @@ use rapier2d::prelude::*;
 // The set that will contain our rigid-bodies.
 let mut rigid_body_set = RigidBodySet::new();
 
-// Builder for a static rigid-body.
+// Builder for a fixed rigid-body.
 let _ = RigidBodyBuilder::new_static();
 // Builder for a dynamic rigid-body.
 let _ = RigidBodyBuilder::new_dynamic();
@@ -77,7 +77,7 @@ use rapier3d::prelude::*;
 // The set that will contain our rigid-bodies.
 let mut rigid_body_set = RigidBodySet::new();
 
-// Builder for a static rigid-body.
+// Builder for a fixed rigid-body.
 let _ = RigidBodyBuilder::new_static();
 // Builder for a dynamic rigid-body.
 let _ = RigidBodyBuilder::new_dynamic();
@@ -228,7 +228,7 @@ values={[
 // The world that will contain our rigid-bodies.
 let world = new RAPIER.World({ x: 0.0, y: -9.81 });
 
-// Builder for a static rigid-body.
+// Builder for a fixed rigid-body.
 let _ = RigidBodyDesc.newStatic();
 // Builder for a dynamic rigid-body.
 let _ = RigidBodyDesc.newDynamic();
@@ -273,7 +273,7 @@ let rigidBodyHandle = rigidBody.handle;
 // The world that will contain our rigid-bodies.
 let world = new RAPIER.World({ x: 0.0, y: -9.81, z: 0.0 });
 
-// Builder for a static rigid-body.
+// Builder for a fixed rigid-body.
 let example1 = RAPIER.RigidBodyDesc.newStatic();
 // Builder for a dynamic rigid-body.
 let example2 = RAPIER.RigidBodyDesc.newDynamic();
