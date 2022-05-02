@@ -2,10 +2,10 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
 There are two types of colliders:
-- <notjs>`ColliderType::Solid`: **solid colliders**</notjs><js>A **solid collider**</js> represents a geometric shape
+- <rapier>`ColliderType::Solid`: **solid colliders**</rapier><bevy>A **solid collider**</bevy><js>A **solid collider**</js> represents a geometric shape
   that can have contact points with other colliders to generate contact forces to prevent objects from
   penetrating-each-others.
-- <notjs>`ColliderType::Sensor`: **sensor colliders**</notjs><js>**Sensor colliders**</js> on the other end don't
+- <rapier>`ColliderType::Sensor`: **sensor colliders**</rapier><bevy>**Sensor colliders**</bevy><js>**Sensor colliders**</js> on the other end don't
   generate contacts: they only generate intersection events when one sensor collider and another collider start/stop
   touching. Sensor colliders are generally used to detect when something enters an area.
 
