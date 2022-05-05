@@ -296,22 +296,22 @@ for (collider1, collider2, intersecting) in narrow_phase.intersections_with(coll
 <bevy>
 
 ```rust
-fn display_intersection_info(narrow_phase: Res<NarrowPhase>) {
+fn display_intersection_info(rapier_context: Res<RapierContext>) {
     let entity1 = ...; // A first entity with a collider attached.
     let entity2 = ...; // A second entity with a collider attached.
     
     /* Find the intersection pair, if it exists, between two colliders. */
-    if narrow_phase.intersection_pair(entity1, entity2) == Some(true) {
+    if rapier_context.intersection_pair(entity1, entity2) == Some(true) {
         println!("The entities {:?} and {:?} have intersecting colliders!", entity1, entity2);
     }
 }
 ```
 ```rust
-fn display_intersection_info(narrow_phase: Res<NarrowPhase>) {
+fn display_intersection_info(rapier_context: Res<RapierContext>) {
     let entity = ...; // Entity with a collider attached.
 
     /* Iterate through all the intersection pairs involving a specific collider. */
-    for (collider1, collider2, intersecting) in narrow_phase.intersections_with(entity) {
+    for (collider1, collider2, intersecting) in rapier_context.intersections_with(entity) {
         if intersecting {
             println!("The entities {:?} and {:?} have intersecting colliders!", collider1, collider2);
         }
