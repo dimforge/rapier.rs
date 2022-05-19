@@ -115,7 +115,7 @@ fn cast_shape(rapier_context: Res<RapierContext>) {
     let groups = InteractionGroups::all();
     let filter = None;
 
-    if let Some((entity, hit)) = query_pipeline.cast_shape(
+    if let Some((entity, hit)) = rapier_context.cast_shape(
         shape_pos, shape_rot, shape_vel, &shape, max_toi, groups, filter
     ) {
         // The first collider hit has the entity `entity`. The `hit` is a
