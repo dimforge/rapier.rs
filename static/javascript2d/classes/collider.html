@@ -1,1391 +1,197 @@
-<!doctype html>
-<html class="default no-js">
-<head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Collider | @dimforge/rapier2d</title>
-	<meta name="description" content="Documentation for @dimforge/rapier2d">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="../assets/css/main.css">
-</head>
-<body>
-<header>
-	<div class="tsd-page-toolbar">
-		<div class="container">
-			<div class="table-wrap">
-				<div class="table-cell" id="tsd-search" data-index="../assets/js/search.json" data-base="..">
-					<div class="field">
-						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
-						<input id="tsd-search-field" type="text" />
-					</div>
-					<ul class="results">
-						<li class="state loading">Preparing search index...</li>
-						<li class="state failure">The search index is not available</li>
-					</ul>
-					<a href="../index.html" class="title">@dimforge/rapier2d</a>
-				</div>
-				<div class="table-cell" id="tsd-widgets">
-					<div id="tsd-filter">
-						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
-						<div class="tsd-filter-group">
-							<div class="tsd-select" id="tsd-filter-visibility">
-								<span class="tsd-select-label">All</span>
-								<ul class="tsd-select-list">
-									<li data-value="public">Public</li>
-									<li data-value="protected">Public/Protected</li>
-									<li data-value="private" class="selected">All</li>
-								</ul>
-							</div>
-							<input type="checkbox" id="tsd-filter-inherited" checked />
-							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
-							<input type="checkbox" id="tsd-filter-only-exported" />
-							<label class="tsd-widget" for="tsd-filter-only-exported">Only exported</label>
-						</div>
-					</div>
-					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="tsd-page-title">
-		<div class="container">
-			<ul class="tsd-breadcrumb">
-				<li>
-					<a href="../globals.html">Globals</a>
-				</li>
-				<li>
-					<a href="collider.html">Collider</a>
-				</li>
-			</ul>
-			<h1>Class Collider</h1>
-		</div>
-	</div>
-</header>
-<div class="container container-main">
-	<div class="row">
-		<div class="col-8 col-content">
-			<section class="tsd-panel tsd-comment">
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>A geometric entity that can be attached to a body so it can be affected
-						by contacts and proximity queries.</p>
-					</div>
-				</div>
-			</section>
-			<section class="tsd-panel tsd-hierarchy">
-				<h3>Hierarchy</h3>
-				<ul class="tsd-hierarchy">
-					<li>
-						<span class="target">Collider</span>
-					</li>
-				</ul>
-			</section>
-			<section class="tsd-panel-group tsd-index-group">
-				<h2>Index</h2>
-				<section class="tsd-panel tsd-index-panel">
-					<div class="tsd-index-content">
-						<section class="tsd-index-section ">
-							<h3>Constructors</h3>
-							<ul class="tsd-index-list">
-								<li class="tsd-kind-constructor tsd-parent-kind-class"><a href="collider.html#constructor" class="tsd-kind-icon">constructor</a></li>
-							</ul>
-						</section>
-						<section class="tsd-index-section ">
-							<h3>Properties</h3>
-							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-class"><a href="collider.html#handle" class="tsd-kind-icon">handle</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="collider.html#rawset" class="tsd-kind-icon">raw<wbr>Set</a></li>
-							</ul>
-						</section>
-						<section class="tsd-index-section ">
-							<h3>Methods</h3>
-							<ul class="tsd-index-list">
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="collider.html#activecollisiontypes" class="tsd-kind-icon">active<wbr>Collision<wbr>Types</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="collider.html#activeevents" class="tsd-kind-icon">active<wbr>Events</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="collider.html#activehooks" class="tsd-kind-icon">active<wbr>Hooks</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="collider.html#collisiongroups" class="tsd-kind-icon">collision<wbr>Groups</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="collider.html#density" class="tsd-kind-icon">density</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="collider.html#friction" class="tsd-kind-icon">friction</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="collider.html#frictioncombinerule" class="tsd-kind-icon">friction<wbr>Combine<wbr>Rule</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="collider.html#halfextents" class="tsd-kind-icon">half<wbr>Extents</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="collider.html#halfheight" class="tsd-kind-icon">half<wbr>Height</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="collider.html#heightfieldheights" class="tsd-kind-icon">heightfield<wbr>Heights</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="collider.html#heightfieldscale" class="tsd-kind-icon">heightfield<wbr>Scale</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="collider.html#indices" class="tsd-kind-icon">indices</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="collider.html#issensor" class="tsd-kind-icon">is<wbr>Sensor</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="collider.html#isvalid" class="tsd-kind-icon">is<wbr>Valid</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="collider.html#parent" class="tsd-kind-icon">parent</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="collider.html#radius" class="tsd-kind-icon">radius</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="collider.html#restitution" class="tsd-kind-icon">restitution</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="collider.html#restitutioncombinerule" class="tsd-kind-icon">restitution<wbr>Combine<wbr>Rule</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="collider.html#rotation" class="tsd-kind-icon">rotation</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="collider.html#roundradius" class="tsd-kind-icon">round<wbr>Radius</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="collider.html#setactivecollisiontypes" class="tsd-kind-icon">set<wbr>Active<wbr>Collision<wbr>Types</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="collider.html#setactiveevents" class="tsd-kind-icon">set<wbr>Active<wbr>Events</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="collider.html#setactivehooks" class="tsd-kind-icon">set<wbr>Active<wbr>Hooks</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="collider.html#setcollisiongroups" class="tsd-kind-icon">set<wbr>Collision<wbr>Groups</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="collider.html#setfriction" class="tsd-kind-icon">set<wbr>Friction</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="collider.html#setfrictioncombinerule" class="tsd-kind-icon">set<wbr>Friction<wbr>Combine<wbr>Rule</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="collider.html#setrestitution" class="tsd-kind-icon">set<wbr>Restitution</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="collider.html#setrestitutioncombinerule" class="tsd-kind-icon">set<wbr>Restitution<wbr>Combine<wbr>Rule</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="collider.html#setrotation" class="tsd-kind-icon">set<wbr>Rotation</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="collider.html#setrotationwrtparent" class="tsd-kind-icon">set<wbr>Rotation<wbr>Wrt<wbr>Parent</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="collider.html#setsensor" class="tsd-kind-icon">set<wbr>Sensor</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="collider.html#setshape" class="tsd-kind-icon">set<wbr>Shape</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="collider.html#setsolvergroups" class="tsd-kind-icon">set<wbr>Solver<wbr>Groups</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="collider.html#settranslation" class="tsd-kind-icon">set<wbr>Translation</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="collider.html#settranslationwrtparent" class="tsd-kind-icon">set<wbr>Translation<wbr>Wrt<wbr>Parent</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="collider.html#shapetype" class="tsd-kind-icon">shape<wbr>Type</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="collider.html#solvergroups" class="tsd-kind-icon">solver<wbr>Groups</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="collider.html#translation" class="tsd-kind-icon">translation</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="collider.html#vertices" class="tsd-kind-icon">vertices</a></li>
-							</ul>
-						</section>
-					</div>
-				</section>
-			</section>
-			<section class="tsd-panel-group tsd-member-group ">
-				<h2>Constructors</h2>
-				<section class="tsd-panel tsd-member tsd-kind-constructor tsd-parent-kind-class">
-					<a name="constructor" class="tsd-anchor"></a>
-					<h3>constructor</h3>
-					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">new <wbr>Collider<span class="tsd-signature-symbol">(</span>rawSet<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">RawColliderSet</span>, handle<span class="tsd-signature-symbol">: </span><a href="../globals.html#colliderhandle" class="tsd-signature-type">ColliderHandle</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="collider.html" class="tsd-signature-type">Collider</a></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in geometry/collider.d.ts:27</li>
-								</ul>
-							</aside>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>rawSet: <span class="tsd-signature-type">RawColliderSet</span></h5>
-								</li>
-								<li>
-									<h5>handle: <a href="../globals.html#colliderhandle" class="tsd-signature-type">ColliderHandle</a></h5>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <a href="collider.html" class="tsd-signature-type">Collider</a></h4>
-						</li>
-					</ul>
-				</section>
-			</section>
-			<section class="tsd-panel-group tsd-member-group ">
-				<h2>Properties</h2>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-					<a name="handle" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> handle</h3>
-					<div class="tsd-signature tsd-kind-icon">handle<span class="tsd-signature-symbol">:</span> <a href="../globals.html#colliderhandle" class="tsd-signature-type">ColliderHandle</a></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in geometry/collider.d.ts:27</li>
-						</ul>
-					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
-					<a name="rawset" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagPrivate">Private</span> raw<wbr>Set</h3>
-					<div class="tsd-signature tsd-kind-icon">raw<wbr>Set<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in geometry/collider.d.ts:26</li>
-						</ul>
-					</aside>
-				</section>
-			</section>
-			<section class="tsd-panel-group tsd-member-group ">
-				<h2>Methods</h2>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="activecollisiontypes" class="tsd-anchor"></a>
-					<h3>active<wbr>Collision<wbr>Types</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">active<wbr>Collision<wbr>Types<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../enums/activecollisiontypes.html" class="tsd-signature-type">ActiveCollisionTypes</a></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in geometry/collider.d.ts:134</li>
-								</ul>
-							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>Gets the collision types active for this collider.</p>
-								</div>
-							</div>
-							<h4 class="tsd-returns-title">Returns <a href="../enums/activecollisiontypes.html" class="tsd-signature-type">ActiveCollisionTypes</a></h4>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="activeevents" class="tsd-anchor"></a>
-					<h3>active<wbr>Events</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">active<wbr>Events<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../enums/activeevents.html" class="tsd-signature-type">ActiveEvents</a></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in geometry/collider.d.ts:122</li>
-								</ul>
-							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>The events active for this collider.</p>
-								</div>
-							</div>
-							<h4 class="tsd-returns-title">Returns <a href="../enums/activeevents.html" class="tsd-signature-type">ActiveEvents</a></h4>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="activehooks" class="tsd-anchor"></a>
-					<h3>active<wbr>Hooks</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">active<wbr>Hooks<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in geometry/collider.d.ts:110</li>
-								</ul>
-							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>Get the physics hooks active for this collider.</p>
-								</div>
-							</div>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="collisiongroups" class="tsd-anchor"></a>
-					<h3>collision<wbr>Groups</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">collision<wbr>Groups<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../globals.html#interactiongroups" class="tsd-signature-type">InteractionGroups</a></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in geometry/collider.d.ts:229</li>
-								</ul>
-							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>The collision groups of this collider.</p>
-								</div>
-							</div>
-							<h4 class="tsd-returns-title">Returns <a href="../globals.html#interactiongroups" class="tsd-signature-type">InteractionGroups</a></h4>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="density" class="tsd-anchor"></a>
-					<h3>density</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">density<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in geometry/collider.d.ts:225</li>
-								</ul>
-							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>The density of this collider.</p>
-								</div>
-							</div>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="friction" class="tsd-anchor"></a>
-					<h3>friction</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">friction<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in geometry/collider.d.ts:217</li>
-								</ul>
-							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>The friction coefficient of this collider.</p>
-								</div>
-							</div>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="frictioncombinerule" class="tsd-anchor"></a>
-					<h3>friction<wbr>Combine<wbr>Rule</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">friction<wbr>Combine<wbr>Rule<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../enums/coefficientcombinerule.html" class="tsd-signature-type">CoefficientCombineRule</a></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in geometry/collider.d.ts:68</li>
-								</ul>
-							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>Gets the rule used to combine the friction coefficients of two colliders
-									colliders involved in a contact.</p>
-								</div>
-							</div>
-							<h4 class="tsd-returns-title">Returns <a href="../enums/coefficientcombinerule.html" class="tsd-signature-type">CoefficientCombineRule</a></h4>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="halfextents" class="tsd-anchor"></a>
-					<h3>half<wbr>Extents</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">half<wbr>Extents<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/vector.html" class="tsd-signature-type">Vector</a></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in geometry/collider.d.ts:176</li>
-								</ul>
-							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>The half-extents of this collider if it is a cuboid shape.</p>
-								</div>
-							</div>
-							<h4 class="tsd-returns-title">Returns <a href="../interfaces/vector.html" class="tsd-signature-type">Vector</a></h4>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="halfheight" class="tsd-anchor"></a>
-					<h3>half<wbr>Height</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">half<wbr>Height<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in geometry/collider.d.ts:188</li>
-								</ul>
-							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>The half height of this collider if it is a cylinder, capsule, or cone shape.</p>
-								</div>
-							</div>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="heightfieldheights" class="tsd-anchor"></a>
-					<h3>heightfield<wbr>Heights</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">heightfield<wbr>Heights<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Float32Array</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in geometry/collider.d.ts:204</li>
-								</ul>
-							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>If this collider has a heightfield shape, this returns the heights buffer of
-										the heightfield.
-									In 3D, the returned height matrix is provided in column-major order.</p>
-								</div>
-							</div>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Float32Array</span></h4>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="heightfieldscale" class="tsd-anchor"></a>
-					<h3>heightfield<wbr>Scale</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">heightfield<wbr>Scale<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/vector.html" class="tsd-signature-type">Vector</a></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in geometry/collider.d.ts:209</li>
-								</ul>
-							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>If this collider has a heightfield shape, this returns the scale
-									applied to it.</p>
-								</div>
-							</div>
-							<h4 class="tsd-returns-title">Returns <a href="../interfaces/vector.html" class="tsd-signature-type">Vector</a></h4>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="indices" class="tsd-anchor"></a>
-					<h3>indices</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">indices<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Uint32Array</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in geometry/collider.d.ts:198</li>
-								</ul>
-							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>If this collider has a triangle mesh, polyline, or convex polyhedron shape,
-									this returns the index buffer of said shape.</p>
-								</div>
-							</div>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Uint32Array</span></h4>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="issensor" class="tsd-anchor"></a>
-					<h3>is<wbr>Sensor</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">is<wbr>Sensor<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in geometry/collider.d.ts:45</li>
-								</ul>
-							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>Is this collider a sensor?</p>
-								</div>
-							</div>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="isvalid" class="tsd-anchor"></a>
-					<h3>is<wbr>Valid</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">is<wbr>Valid<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in geometry/collider.d.ts:33</li>
-								</ul>
-							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>Checks if this collider is still valid (i.e. that it has
-									not been deleted from the collider set yet.</p>
-								</div>
-							</div>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="parent" class="tsd-anchor"></a>
-					<h3>parent</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">parent<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../globals.html#rigidbodyhandle" class="tsd-signature-type">RigidBodyHandle</a></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in geometry/collider.d.ts:213</li>
-								</ul>
-							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>The unique integer identifier of the rigid-body this collider is attached to.</p>
-								</div>
-							</div>
-							<h4 class="tsd-returns-title">Returns <a href="../globals.html#rigidbodyhandle" class="tsd-signature-type">RigidBodyHandle</a></h4>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="radius" class="tsd-anchor"></a>
-					<h3>radius</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">radius<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in geometry/collider.d.ts:180</li>
-								</ul>
-							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>The radius of this collider if it is a ball, cylinder, capsule, or cone shape.</p>
-								</div>
-							</div>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="restitution" class="tsd-anchor"></a>
-					<h3>restitution</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">restitution<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in geometry/collider.d.ts:221</li>
-								</ul>
-							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>The restitution coefficient of this collider.</p>
-								</div>
-							</div>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="restitutioncombinerule" class="tsd-anchor"></a>
-					<h3>restitution<wbr>Combine<wbr>Rule</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">restitution<wbr>Combine<wbr>Rule<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../enums/coefficientcombinerule.html" class="tsd-signature-type">CoefficientCombineRule</a></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in geometry/collider.d.ts:80</li>
-								</ul>
-							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>Gets the rule used to combine the restitution coefficients of two colliders
-									colliders involved in a contact.</p>
-								</div>
-							</div>
-							<h4 class="tsd-returns-title">Returns <a href="../enums/coefficientcombinerule.html" class="tsd-signature-type">CoefficientCombineRule</a></h4>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="rotation" class="tsd-anchor"></a>
-					<h3>rotation</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">rotation<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../globals.html#rotation" class="tsd-signature-type">Rotation</a></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in geometry/collider.d.ts:41</li>
-								</ul>
-							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>The world-space orientation of this rigid-body.</p>
-								</div>
-							</div>
-							<h4 class="tsd-returns-title">Returns <a href="../globals.html#rotation" class="tsd-signature-type">Rotation</a></h4>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="roundradius" class="tsd-anchor"></a>
-					<h3>round<wbr>Radius</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">round<wbr>Radius<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in geometry/collider.d.ts:184</li>
-								</ul>
-							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>The radius of the round edges of this collider if it is a round cylinder.</p>
-								</div>
-							</div>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="setactivecollisiontypes" class="tsd-anchor"></a>
-					<h3>set<wbr>Active<wbr>Collision<wbr>Types</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">set<wbr>Active<wbr>Collision<wbr>Types<span class="tsd-signature-symbol">(</span>activeCollisionTypes<span class="tsd-signature-symbol">: </span><a href="../enums/activecollisiontypes.html" class="tsd-signature-type">ActiveCollisionTypes</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in geometry/collider.d.ts:140</li>
-								</ul>
-							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>Set the collision types active for this collider.</p>
-								</div>
-							</div>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>activeCollisionTypes: <a href="../enums/activecollisiontypes.html" class="tsd-signature-type">ActiveCollisionTypes</a></h5>
-									<div class="tsd-comment tsd-typography">
-										<p>The hooks active for contact/intersection pairs involving this collider.</p>
-									</div>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="setactiveevents" class="tsd-anchor"></a>
-					<h3>set<wbr>Active<wbr>Events</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">set<wbr>Active<wbr>Events<span class="tsd-signature-symbol">(</span>activeEvents<span class="tsd-signature-symbol">: </span><a href="../enums/activeevents.html" class="tsd-signature-type">ActiveEvents</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in geometry/collider.d.ts:130</li>
-								</ul>
-							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>Set the events active for this collider.</p>
-								</div>
-								<p>Use this to enable contact and/or intersection event reporting for this collider.</p>
-							</div>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>activeEvents: <a href="../enums/activeevents.html" class="tsd-signature-type">ActiveEvents</a></h5>
-									<div class="tsd-comment tsd-typography">
-										<p>The events active for contact/intersection pairs involving this collider.</p>
-									</div>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="setactivehooks" class="tsd-anchor"></a>
-					<h3>set<wbr>Active<wbr>Hooks</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">set<wbr>Active<wbr>Hooks<span class="tsd-signature-symbol">(</span>activeHooks<span class="tsd-signature-symbol">: </span><a href="../enums/activehooks.html" class="tsd-signature-type">ActiveHooks</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in geometry/collider.d.ts:118</li>
-								</ul>
-							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>Set the physics hooks active for this collider.</p>
-								</div>
-								<p>Use this to enable custom filtering rules for contact/intersecstion pairs involving this collider.</p>
-							</div>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>activeHooks: <a href="../enums/activehooks.html" class="tsd-signature-type">ActiveHooks</a></h5>
-									<div class="tsd-comment tsd-typography">
-										<p>The hooks active for contact/intersection pairs involving this collider.</p>
-									</div>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="setcollisiongroups" class="tsd-anchor"></a>
-					<h3>set<wbr>Collision<wbr>Groups</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">set<wbr>Collision<wbr>Groups<span class="tsd-signature-symbol">(</span>groups<span class="tsd-signature-symbol">: </span><a href="../globals.html#interactiongroups" class="tsd-signature-type">InteractionGroups</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in geometry/collider.d.ts:96</li>
-								</ul>
-							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>Sets the collision groups used by this collider.</p>
-								</div>
-								<p>Two colliders will interact iff. their collision groups are compatible.
-								See the documentation of <code>InteractionGroups</code> for details on teh used bit pattern.</p>
-							</div>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>groups: <a href="../globals.html#interactiongroups" class="tsd-signature-type">InteractionGroups</a></h5>
-									<div class="tsd-comment tsd-typography">
-										<p>The collision groups used for the collider being built.</p>
-									</div>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="setfriction" class="tsd-anchor"></a>
-					<h3>set<wbr>Friction</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">set<wbr>Friction<span class="tsd-signature-symbol">(</span>friction<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in geometry/collider.d.ts:63</li>
-								</ul>
-							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>Sets the friction coefficient of the collider to be created.</p>
-								</div>
-							</div>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>friction: <span class="tsd-signature-type">number</span></h5>
-									<div class="tsd-comment tsd-typography">
-										<p>The friction coefficient. Must be greater or equal to 0. This is generally smaller than 1. The
-											higher the coefficient, the stronger friction forces will be for contacts with the collider
-										being built.</p>
-									</div>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="setfrictioncombinerule" class="tsd-anchor"></a>
-					<h3>set<wbr>Friction<wbr>Combine<wbr>Rule</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">set<wbr>Friction<wbr>Combine<wbr>Rule<span class="tsd-signature-symbol">(</span>rule<span class="tsd-signature-symbol">: </span><a href="../enums/coefficientcombinerule.html" class="tsd-signature-type">CoefficientCombineRule</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in geometry/collider.d.ts:75</li>
-								</ul>
-							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>Sets the rule used to combine the friction coefficients of two colliders
-									colliders involved in a contact.</p>
-								</div>
-							</div>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>rule: <a href="../enums/coefficientcombinerule.html" class="tsd-signature-type">CoefficientCombineRule</a></h5>
-									<div class="tsd-comment tsd-typography">
-										<p>− The combine rule to apply.</p>
-									</div>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="setrestitution" class="tsd-anchor"></a>
-					<h3>set<wbr>Restitution</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">set<wbr>Restitution<span class="tsd-signature-symbol">(</span>restitution<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in geometry/collider.d.ts:55</li>
-								</ul>
-							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>Sets the restitution coefficient of the collider to be created.</p>
-								</div>
-							</div>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>restitution: <span class="tsd-signature-type">number</span></h5>
-									<div class="tsd-comment tsd-typography">
-										<p>The restitution coefficient in <code>[0, 1]</code>. A value of 0 (the default) means no bouncing behavior
-											while 1 means perfect bouncing (though energy may still be lost due to numerical errors of the
-										constraints solver).</p>
-									</div>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="setrestitutioncombinerule" class="tsd-anchor"></a>
-					<h3>set<wbr>Restitution<wbr>Combine<wbr>Rule</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">set<wbr>Restitution<wbr>Combine<wbr>Rule<span class="tsd-signature-symbol">(</span>rule<span class="tsd-signature-symbol">: </span><a href="../enums/coefficientcombinerule.html" class="tsd-signature-type">CoefficientCombineRule</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in geometry/collider.d.ts:87</li>
-								</ul>
-							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>Sets the rule used to combine the restitution coefficients of two colliders
-									colliders involved in a contact.</p>
-								</div>
-							</div>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>rule: <a href="../enums/coefficientcombinerule.html" class="tsd-signature-type">CoefficientCombineRule</a></h5>
-									<div class="tsd-comment tsd-typography">
-										<p>− The combine rule to apply.</p>
-									</div>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="setrotation" class="tsd-anchor"></a>
-					<h3>set<wbr>Rotation</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">set<wbr>Rotation<span class="tsd-signature-symbol">(</span>angle<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in geometry/collider.d.ts:160</li>
-								</ul>
-							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>Sets the rotation angle of this collider.</p>
-								</div>
-							</div>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>angle: <span class="tsd-signature-type">number</span></h5>
-									<div class="tsd-comment tsd-typography">
-										<p>The rotation angle, in radians.</p>
-									</div>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="setrotationwrtparent" class="tsd-anchor"></a>
-					<h3>set<wbr>Rotation<wbr>Wrt<wbr>Parent</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">set<wbr>Rotation<wbr>Wrt<wbr>Parent<span class="tsd-signature-symbol">(</span>angle<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in geometry/collider.d.ts:168</li>
-								</ul>
-							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>Sets the rotation angle of this collider relative to its parent rigid-body.</p>
-								</div>
-								<p>Does nothing if this collider isn&#39;t attached to a rigid-body.</p>
-							</div>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>angle: <span class="tsd-signature-type">number</span></h5>
-									<div class="tsd-comment tsd-typography">
-										<p>The rotation angle, in radians.</p>
-									</div>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="setsensor" class="tsd-anchor"></a>
-					<h3>set<wbr>Sensor</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">set<wbr>Sensor<span class="tsd-signature-symbol">(</span>isSensor<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in geometry/collider.d.ts:46</li>
-								</ul>
-							</aside>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>isSensor: <span class="tsd-signature-type">boolean</span></h5>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="setshape" class="tsd-anchor"></a>
-					<h3>set<wbr>Shape</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">set<wbr>Shape<span class="tsd-signature-symbol">(</span>shape<span class="tsd-signature-symbol">: </span><a href="../globals.html#shape" class="tsd-signature-type">Shape</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in geometry/collider.d.ts:47</li>
-								</ul>
-							</aside>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>shape: <a href="../globals.html#shape" class="tsd-signature-type">Shape</a></h5>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="setsolvergroups" class="tsd-anchor"></a>
-					<h3>set<wbr>Solver<wbr>Groups</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">set<wbr>Solver<wbr>Groups<span class="tsd-signature-symbol">(</span>groups<span class="tsd-signature-symbol">: </span><a href="../globals.html#interactiongroups" class="tsd-signature-type">InteractionGroups</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in geometry/collider.d.ts:106</li>
-								</ul>
-							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>Sets the solver groups used by this collider.</p>
-								</div>
-								<p>Forces between two colliders in contact will be computed iff their solver
-									groups are compatible.
-								See the documentation of <code>InteractionGroups</code> for details on the used bit pattern.</p>
-							</div>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>groups: <a href="../globals.html#interactiongroups" class="tsd-signature-type">InteractionGroups</a></h5>
-									<div class="tsd-comment tsd-typography">
-										<p>The solver groups used for the collider being built.</p>
-									</div>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="settranslation" class="tsd-anchor"></a>
-					<h3>set<wbr>Translation</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">set<wbr>Translation<span class="tsd-signature-symbol">(</span>tra<span class="tsd-signature-symbol">: </span><a href="../interfaces/vector.html" class="tsd-signature-type">Vector</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in geometry/collider.d.ts:146</li>
-								</ul>
-							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>Sets the translation of this collider.</p>
-								</div>
-							</div>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>tra: <a href="../interfaces/vector.html" class="tsd-signature-type">Vector</a></h5>
-									<div class="tsd-comment tsd-typography">
-										<p>The world-space position of the collider.</p>
-									</div>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="settranslationwrtparent" class="tsd-anchor"></a>
-					<h3>set<wbr>Translation<wbr>Wrt<wbr>Parent</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">set<wbr>Translation<wbr>Wrt<wbr>Parent<span class="tsd-signature-symbol">(</span>tra<span class="tsd-signature-symbol">: </span><a href="../interfaces/vector.html" class="tsd-signature-type">Vector</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in geometry/collider.d.ts:154</li>
-								</ul>
-							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>Sets the translation of this collider relative to its parent rigid-body.</p>
-								</div>
-								<p>Does nothing if this collider isn&#39;t attached to a rigid-body.</p>
-							</div>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>tra: <a href="../interfaces/vector.html" class="tsd-signature-type">Vector</a></h5>
-									<div class="tsd-comment tsd-typography">
-										<p>The new translation of the collider relative to its parent.</p>
-									</div>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="shapetype" class="tsd-anchor"></a>
-					<h3>shape<wbr>Type</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">shape<wbr>Type<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../enums/shapetype.html" class="tsd-signature-type">ShapeType</a></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in geometry/collider.d.ts:172</li>
-								</ul>
-							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>The type of the shape of this collider.</p>
-								</div>
-							</div>
-							<h4 class="tsd-returns-title">Returns <a href="../enums/shapetype.html" class="tsd-signature-type">ShapeType</a></h4>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="solvergroups" class="tsd-anchor"></a>
-					<h3>solver<wbr>Groups</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">solver<wbr>Groups<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../globals.html#interactiongroups" class="tsd-signature-type">InteractionGroups</a></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in geometry/collider.d.ts:233</li>
-								</ul>
-							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>The solver groups of this collider.</p>
-								</div>
-							</div>
-							<h4 class="tsd-returns-title">Returns <a href="../globals.html#interactiongroups" class="tsd-signature-type">InteractionGroups</a></h4>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="translation" class="tsd-anchor"></a>
-					<h3>translation</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">translation<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/vector.html" class="tsd-signature-type">Vector</a></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in geometry/collider.d.ts:37</li>
-								</ul>
-							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>The world-space translation of this rigid-body.</p>
-								</div>
-							</div>
-							<h4 class="tsd-returns-title">Returns <a href="../interfaces/vector.html" class="tsd-signature-type">Vector</a></h4>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="vertices" class="tsd-anchor"></a>
-					<h3>vertices</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">vertices<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Float32Array</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in geometry/collider.d.ts:193</li>
-								</ul>
-							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>If this collider has a triangle mesh, polyline, convex polygon, or convex polyhedron shape,
-									this returns the vertex buffer of said shape.</p>
-								</div>
-							</div>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Float32Array</span></h4>
-						</li>
-					</ul>
-				</section>
-			</section>
-		</div>
-		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
-			<nav class="tsd-navigation primary">
-				<ul>
-					<li class="globals  ">
-						<a href="../globals.html"><em>Globals</em></a>
-					</li>
-				</ul>
-			</nav>
-			<nav class="tsd-navigation secondary menu-sticky">
-				<ul class="before-current">
-				</ul>
-				<ul class="current">
-					<li class="current tsd-kind-class">
-						<a href="collider.html" class="tsd-kind-icon">Collider</a>
-						<ul>
-							<li class=" tsd-kind-constructor tsd-parent-kind-class">
-								<a href="collider.html#constructor" class="tsd-kind-icon">constructor</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class">
-								<a href="collider.html#handle" class="tsd-kind-icon">handle</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
-								<a href="collider.html#rawset" class="tsd-kind-icon">raw<wbr>Set</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="collider.html#activecollisiontypes" class="tsd-kind-icon">active<wbr>Collision<wbr>Types</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="collider.html#activeevents" class="tsd-kind-icon">active<wbr>Events</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="collider.html#activehooks" class="tsd-kind-icon">active<wbr>Hooks</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="collider.html#collisiongroups" class="tsd-kind-icon">collision<wbr>Groups</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="collider.html#density" class="tsd-kind-icon">density</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="collider.html#friction" class="tsd-kind-icon">friction</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="collider.html#frictioncombinerule" class="tsd-kind-icon">friction<wbr>Combine<wbr>Rule</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="collider.html#halfextents" class="tsd-kind-icon">half<wbr>Extents</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="collider.html#halfheight" class="tsd-kind-icon">half<wbr>Height</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="collider.html#heightfieldheights" class="tsd-kind-icon">heightfield<wbr>Heights</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="collider.html#heightfieldscale" class="tsd-kind-icon">heightfield<wbr>Scale</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="collider.html#indices" class="tsd-kind-icon">indices</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="collider.html#issensor" class="tsd-kind-icon">is<wbr>Sensor</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="collider.html#isvalid" class="tsd-kind-icon">is<wbr>Valid</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="collider.html#parent" class="tsd-kind-icon">parent</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="collider.html#radius" class="tsd-kind-icon">radius</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="collider.html#restitution" class="tsd-kind-icon">restitution</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="collider.html#restitutioncombinerule" class="tsd-kind-icon">restitution<wbr>Combine<wbr>Rule</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="collider.html#rotation" class="tsd-kind-icon">rotation</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="collider.html#roundradius" class="tsd-kind-icon">round<wbr>Radius</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="collider.html#setactivecollisiontypes" class="tsd-kind-icon">set<wbr>Active<wbr>Collision<wbr>Types</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="collider.html#setactiveevents" class="tsd-kind-icon">set<wbr>Active<wbr>Events</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="collider.html#setactivehooks" class="tsd-kind-icon">set<wbr>Active<wbr>Hooks</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="collider.html#setcollisiongroups" class="tsd-kind-icon">set<wbr>Collision<wbr>Groups</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="collider.html#setfriction" class="tsd-kind-icon">set<wbr>Friction</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="collider.html#setfrictioncombinerule" class="tsd-kind-icon">set<wbr>Friction<wbr>Combine<wbr>Rule</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="collider.html#setrestitution" class="tsd-kind-icon">set<wbr>Restitution</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="collider.html#setrestitutioncombinerule" class="tsd-kind-icon">set<wbr>Restitution<wbr>Combine<wbr>Rule</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="collider.html#setrotation" class="tsd-kind-icon">set<wbr>Rotation</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="collider.html#setrotationwrtparent" class="tsd-kind-icon">set<wbr>Rotation<wbr>Wrt<wbr>Parent</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="collider.html#setsensor" class="tsd-kind-icon">set<wbr>Sensor</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="collider.html#setshape" class="tsd-kind-icon">set<wbr>Shape</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="collider.html#setsolvergroups" class="tsd-kind-icon">set<wbr>Solver<wbr>Groups</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="collider.html#settranslation" class="tsd-kind-icon">set<wbr>Translation</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="collider.html#settranslationwrtparent" class="tsd-kind-icon">set<wbr>Translation<wbr>Wrt<wbr>Parent</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="collider.html#shapetype" class="tsd-kind-icon">shape<wbr>Type</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="collider.html#solvergroups" class="tsd-kind-icon">solver<wbr>Groups</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="collider.html#translation" class="tsd-kind-icon">translation</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="collider.html#vertices" class="tsd-kind-icon">vertices</a>
-							</li>
-						</ul>
-					</li>
-				</ul>
-				<ul class="after-current">
-				</ul>
-			</nav>
-		</div>
-	</div>
-</div>
-<footer class="with-border-bottom">
-	<div class="container">
-		<h2>Legend</h2>
-		<div class="tsd-legend-group">
-			<ul class="tsd-legend">
-				<li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li>
-				<li class="tsd-kind-property tsd-parent-kind-class"><span class="tsd-kind-icon">Property</span></li>
-				<li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li>
-				<li class="tsd-kind-accessor tsd-parent-kind-class"><span class="tsd-kind-icon">Accessor</span></li>
-			</ul>
-			<ul class="tsd-legend">
-				<li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited constructor</span></li>
-				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited property</span></li>
-				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited method</span></li>
-			</ul>
-			<ul class="tsd-legend">
-				<li class="tsd-kind-property tsd-parent-kind-interface"><span class="tsd-kind-icon">Property</span></li>
-				<li class="tsd-kind-method tsd-parent-kind-interface"><span class="tsd-kind-icon">Method</span></li>
-			</ul>
-			<ul class="tsd-legend">
-				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected property</span></li>
-				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected method</span></li>
-			</ul>
-			<ul class="tsd-legend">
-				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private property</span></li>
-			</ul>
-			<ul class="tsd-legend">
-				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static method</span></li>
-			</ul>
-		</div>
-	</div>
-</footer>
-<div class="container tsd-generator">
-	<p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p>
-</div>
-<div class="overlay"></div>
-<script src="../assets/js/main.js"></script>
-</body>
-</html>
+<!DOCTYPE html><html class="default"><head><meta charSet="utf-8"/><meta http-equiv="x-ua-compatible" content="IE=edge"/><title>Collider | @dimforge/rapier2d</title><meta name="description" content="Documentation for @dimforge/rapier2d"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="../assets/style.css"/><link rel="stylesheet" href="../assets/highlight.css"/><script async src="../assets/search.js" id="search-script"></script></head><body><script>document.body.classList.add(localStorage.getItem("tsd-theme") || "os")</script><header><div class="tsd-page-toolbar"><div class="container"><div class="table-wrap"><div class="table-cell" id="tsd-search" data-base=".."><div class="field"><label for="tsd-search-field" class="tsd-widget search no-caption">Search</label><input type="text" id="tsd-search-field"/></div><ul class="results"><li class="state loading">Preparing search index...</li><li class="state failure">The search index is not available</li></ul><a href="../index.html" class="title">@dimforge/rapier2d</a></div><div class="table-cell" id="tsd-widgets"><div id="tsd-filter"><a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a><div class="tsd-filter-group"><div class="tsd-select" id="tsd-filter-visibility"><span class="tsd-select-label">All</span><ul class="tsd-select-list"><li data-value="public">Public</li><li data-value="protected">Public/Protected</li><li data-value="private" class="selected">All</li></ul></div> <input type="checkbox" id="tsd-filter-inherited" checked/><label class="tsd-widget" for="tsd-filter-inherited">Inherited</label></div></div><a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a></div></div></div></div><div class="tsd-page-title"><div class="container"><ul class="tsd-breadcrumb"><li><a href="../index.html">@dimforge/rapier2d</a></li><li><a href="Collider.html">Collider</a></li></ul><h1>Class Collider </h1></div></div></header><div class="container container-main"><div class="row"><div class="col-8 col-content"><section class="tsd-panel tsd-comment"><div class="tsd-comment tsd-typography"><div class="lead">
+<p>A geometric entity that can be attached to a body so it can be affected
+by contacts and proximity queries.</p>
+</div></div></section><section class="tsd-panel tsd-hierarchy"><h3>Hierarchy</h3><ul class="tsd-hierarchy"><li><span class="target">Collider</span></li></ul></section><section class="tsd-panel-group tsd-index-group"><h2>Index</h2><section class="tsd-panel tsd-index-panel"><div class="tsd-index-content"><section class="tsd-index-section "><h3>Constructors</h3><ul class="tsd-index-list"><li class="tsd-kind-constructor tsd-parent-kind-class"><a href="Collider.html#constructor" class="tsd-kind-icon">constructor</a></li></ul></section><section class="tsd-index-section "><h3>Properties</h3><ul class="tsd-index-list"><li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="Collider.html#_parent" class="tsd-kind-icon">_parent</a></li><li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="Collider.html#_shape" class="tsd-kind-icon">_shape</a></li><li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="Collider.html#colliderSet" class="tsd-kind-icon">collider<wbr/>Set</a></li><li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="Collider.html#ensureShapeIsCached" class="tsd-kind-icon">ensure<wbr/>Shape<wbr/>Is<wbr/>Cached</a></li><li class="tsd-kind-property tsd-parent-kind-class"><a href="Collider.html#handle" class="tsd-kind-icon">handle</a></li></ul></section><section class="tsd-index-section "><h3>Accessors</h3><ul class="tsd-index-list"><li class="tsd-kind-get-signature tsd-parent-kind-class"><a href="Collider.html#shape" class="tsd-kind-icon">shape</a></li></ul></section><section class="tsd-index-section "><h3>Methods</h3><ul class="tsd-index-list"><li class="tsd-kind-method tsd-parent-kind-class"><a href="Collider.html#activeCollisionTypes" class="tsd-kind-icon">active<wbr/>Collision<wbr/>Types</a></li><li class="tsd-kind-method tsd-parent-kind-class"><a href="Collider.html#activeEvents" class="tsd-kind-icon">active<wbr/>Events</a></li><li class="tsd-kind-method tsd-parent-kind-class"><a href="Collider.html#activeHooks" class="tsd-kind-icon">active<wbr/>Hooks</a></li><li class="tsd-kind-method tsd-parent-kind-class"><a href="Collider.html#castCollider" class="tsd-kind-icon">cast<wbr/>Collider</a></li><li class="tsd-kind-method tsd-parent-kind-class"><a href="Collider.html#castRay" class="tsd-kind-icon">cast<wbr/>Ray</a></li><li class="tsd-kind-method tsd-parent-kind-class"><a href="Collider.html#castRayAndGetNormal" class="tsd-kind-icon">cast<wbr/>Ray<wbr/>And<wbr/>Get<wbr/>Normal</a></li><li class="tsd-kind-method tsd-parent-kind-class"><a href="Collider.html#castShape" class="tsd-kind-icon">cast<wbr/>Shape</a></li><li class="tsd-kind-method tsd-parent-kind-class"><a href="Collider.html#collisionGroups" class="tsd-kind-icon">collision<wbr/>Groups</a></li><li class="tsd-kind-method tsd-parent-kind-class"><a href="Collider.html#contactCollider" class="tsd-kind-icon">contact<wbr/>Collider</a></li><li class="tsd-kind-method tsd-parent-kind-class"><a href="Collider.html#contactShape" class="tsd-kind-icon">contact<wbr/>Shape</a></li><li class="tsd-kind-method tsd-parent-kind-class"><a href="Collider.html#containsPoint" class="tsd-kind-icon">contains<wbr/>Point</a></li><li class="tsd-kind-method tsd-parent-kind-class"><a href="Collider.html#density" class="tsd-kind-icon">density</a></li><li class="tsd-kind-method tsd-parent-kind-class"><a href="Collider.html#finalizeDeserialization" class="tsd-kind-icon">finalize<wbr/>Deserialization</a></li><li class="tsd-kind-method tsd-parent-kind-class"><a href="Collider.html#friction" class="tsd-kind-icon">friction</a></li><li class="tsd-kind-method tsd-parent-kind-class"><a href="Collider.html#frictionCombineRule" class="tsd-kind-icon">friction<wbr/>Combine<wbr/>Rule</a></li><li class="tsd-kind-method tsd-parent-kind-class"><a href="Collider.html#halfExtents" class="tsd-kind-icon">half<wbr/>Extents</a></li><li class="tsd-kind-method tsd-parent-kind-class"><a href="Collider.html#halfHeight" class="tsd-kind-icon">half<wbr/>Height</a></li><li class="tsd-kind-method tsd-parent-kind-class"><a href="Collider.html#heightfieldHeights" class="tsd-kind-icon">heightfield<wbr/>Heights</a></li><li class="tsd-kind-method tsd-parent-kind-class"><a href="Collider.html#heightfieldScale" class="tsd-kind-icon">heightfield<wbr/>Scale</a></li><li class="tsd-kind-method tsd-parent-kind-class"><a href="Collider.html#indices" class="tsd-kind-icon">indices</a></li><li class="tsd-kind-method tsd-parent-kind-class"><a href="Collider.html#intersectsRay" class="tsd-kind-icon">intersects<wbr/>Ray</a></li><li class="tsd-kind-method tsd-parent-kind-class"><a href="Collider.html#intersectsShape" class="tsd-kind-icon">intersects<wbr/>Shape</a></li><li class="tsd-kind-method tsd-parent-kind-class"><a href="Collider.html#isSensor" class="tsd-kind-icon">is<wbr/>Sensor</a></li><li class="tsd-kind-method tsd-parent-kind-class"><a href="Collider.html#isValid" class="tsd-kind-icon">is<wbr/>Valid</a></li><li class="tsd-kind-method tsd-parent-kind-class"><a href="Collider.html#parent" class="tsd-kind-icon">parent</a></li><li class="tsd-kind-method tsd-parent-kind-class"><a href="Collider.html#projectPoint" class="tsd-kind-icon">project<wbr/>Point</a></li><li class="tsd-kind-method tsd-parent-kind-class"><a href="Collider.html#radius" class="tsd-kind-icon">radius</a></li><li class="tsd-kind-method tsd-parent-kind-class"><a href="Collider.html#restitution" class="tsd-kind-icon">restitution</a></li><li class="tsd-kind-method tsd-parent-kind-class"><a href="Collider.html#restitutionCombineRule" class="tsd-kind-icon">restitution<wbr/>Combine<wbr/>Rule</a></li><li class="tsd-kind-method tsd-parent-kind-class"><a href="Collider.html#rotation" class="tsd-kind-icon">rotation</a></li><li class="tsd-kind-method tsd-parent-kind-class"><a href="Collider.html#roundRadius" class="tsd-kind-icon">round<wbr/>Radius</a></li><li class="tsd-kind-method tsd-parent-kind-class"><a href="Collider.html#setActiveCollisionTypes" class="tsd-kind-icon">set<wbr/>Active<wbr/>Collision<wbr/>Types</a></li><li class="tsd-kind-method tsd-parent-kind-class"><a href="Collider.html#setActiveEvents" class="tsd-kind-icon">set<wbr/>Active<wbr/>Events</a></li><li class="tsd-kind-method tsd-parent-kind-class"><a href="Collider.html#setActiveHooks" class="tsd-kind-icon">set<wbr/>Active<wbr/>Hooks</a></li><li class="tsd-kind-method tsd-parent-kind-class"><a href="Collider.html#setCollisionGroups" class="tsd-kind-icon">set<wbr/>Collision<wbr/>Groups</a></li><li class="tsd-kind-method tsd-parent-kind-class"><a href="Collider.html#setFriction" class="tsd-kind-icon">set<wbr/>Friction</a></li><li class="tsd-kind-method tsd-parent-kind-class"><a href="Collider.html#setFrictionCombineRule" class="tsd-kind-icon">set<wbr/>Friction<wbr/>Combine<wbr/>Rule</a></li><li class="tsd-kind-method tsd-parent-kind-class"><a href="Collider.html#setRestitution" class="tsd-kind-icon">set<wbr/>Restitution</a></li><li class="tsd-kind-method tsd-parent-kind-class"><a href="Collider.html#setRestitutionCombineRule" class="tsd-kind-icon">set<wbr/>Restitution<wbr/>Combine<wbr/>Rule</a></li><li class="tsd-kind-method tsd-parent-kind-class"><a href="Collider.html#setRotation" class="tsd-kind-icon">set<wbr/>Rotation</a></li><li class="tsd-kind-method tsd-parent-kind-class"><a href="Collider.html#setRotationWrtParent" class="tsd-kind-icon">set<wbr/>Rotation<wbr/>Wrt<wbr/>Parent</a></li><li class="tsd-kind-method tsd-parent-kind-class"><a href="Collider.html#setSensor" class="tsd-kind-icon">set<wbr/>Sensor</a></li><li class="tsd-kind-method tsd-parent-kind-class"><a href="Collider.html#setShape" class="tsd-kind-icon">set<wbr/>Shape</a></li><li class="tsd-kind-method tsd-parent-kind-class"><a href="Collider.html#setSolverGroups" class="tsd-kind-icon">set<wbr/>Solver<wbr/>Groups</a></li><li class="tsd-kind-method tsd-parent-kind-class"><a href="Collider.html#setTranslation" class="tsd-kind-icon">set<wbr/>Translation</a></li><li class="tsd-kind-method tsd-parent-kind-class"><a href="Collider.html#setTranslationWrtParent" class="tsd-kind-icon">set<wbr/>Translation<wbr/>Wrt<wbr/>Parent</a></li><li class="tsd-kind-method tsd-parent-kind-class"><a href="Collider.html#shapeType" class="tsd-kind-icon">shape<wbr/>Type</a></li><li class="tsd-kind-method tsd-parent-kind-class"><a href="Collider.html#solverGroups" class="tsd-kind-icon">solver<wbr/>Groups</a></li><li class="tsd-kind-method tsd-parent-kind-class"><a href="Collider.html#translation" class="tsd-kind-icon">translation</a></li><li class="tsd-kind-method tsd-parent-kind-class"><a href="Collider.html#vertices" class="tsd-kind-icon">vertices</a></li></ul></section></div></section></section><section class="tsd-panel-group tsd-member-group "><h2>Constructors</h2><section class="tsd-panel tsd-member tsd-kind-constructor tsd-parent-kind-class"><a id="constructor" class="tsd-anchor"></a><h3 class="tsd-anchor-link">constructor<a href="#constructor" aria-label="Permalink" class="tsd-anchor-icon"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5"></path><path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5"></path></svg></a></h3><ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class"><li class="tsd-signature tsd-kind-icon">new <wbr/>Collider<span class="tsd-signature-symbol">(</span>colliderSet<span class="tsd-signature-symbol">: </span><a href="ColliderSet.html" class="tsd-signature-type" data-tsd-kind="Class">ColliderSet</a>, handle<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, parent<span class="tsd-signature-symbol">: </span><a href="RigidBody.html" class="tsd-signature-type" data-tsd-kind="Class">RigidBody</a>, shape<span class="tsd-signature-symbol">?: </span><a href="Shape.html" class="tsd-signature-type" data-tsd-kind="Class">Shape</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="Collider.html" class="tsd-signature-type" data-tsd-kind="Class">Collider</a></li></ul><ul class="tsd-descriptions"><li class="tsd-description"><aside class="tsd-sources"><ul><li>Defined in geometry/collider.d.ts:34</li></ul></aside><h4 class="tsd-parameters-title">Parameters</h4><ul class="tsd-parameters"><li><h5>colliderSet: <a href="ColliderSet.html" class="tsd-signature-type" data-tsd-kind="Class">ColliderSet</a></h5></li><li><h5>handle: <span class="tsd-signature-type">number</span></h5></li><li><h5>parent: <a href="RigidBody.html" class="tsd-signature-type" data-tsd-kind="Class">RigidBody</a></h5></li><li><h5><span class="tsd-flag ts-flagOptional">Optional</span> shape: <a href="Shape.html" class="tsd-signature-type" data-tsd-kind="Class">Shape</a></h5></li></ul><h4 class="tsd-returns-title">Returns <a href="Collider.html" class="tsd-signature-type" data-tsd-kind="Class">Collider</a></h4></li></ul></section></section><section class="tsd-panel-group tsd-member-group "><h2>Properties</h2><section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private"><a id="_parent" class="tsd-anchor"></a><h3 class="tsd-anchor-link"><span class="tsd-flag ts-flagPrivate">Private</span> _parent<a href="#_parent" aria-label="Permalink" class="tsd-anchor-icon"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5"></path><path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5"></path></svg></a></h3><div class="tsd-signature tsd-kind-icon">_parent<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div><aside class="tsd-sources"><ul><li>Defined in geometry/collider.d.ts:33</li></ul></aside></section><section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private"><a id="_shape" class="tsd-anchor"></a><h3 class="tsd-anchor-link"><span class="tsd-flag ts-flagPrivate">Private</span> _shape<a href="#_shape" aria-label="Permalink" class="tsd-anchor-icon"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5"></path><path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5"></path></svg></a></h3><div class="tsd-signature tsd-kind-icon">_shape<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div><aside class="tsd-sources"><ul><li>Defined in geometry/collider.d.ts:32</li></ul></aside></section><section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private"><a id="colliderSet" class="tsd-anchor"></a><h3 class="tsd-anchor-link"><span class="tsd-flag ts-flagPrivate">Private</span> collider<wbr/>Set<a href="#colliderSet" aria-label="Permalink" class="tsd-anchor-icon"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5"></path><path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5"></path></svg></a></h3><div class="tsd-signature tsd-kind-icon">collider<wbr/>Set<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div><aside class="tsd-sources"><ul><li>Defined in geometry/collider.d.ts:30</li></ul></aside></section><section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private"><a id="ensureShapeIsCached" class="tsd-anchor"></a><h3 class="tsd-anchor-link"><span class="tsd-flag ts-flagPrivate">Private</span> ensure<wbr/>Shape<wbr/>Is<wbr/>Cached<a href="#ensureShapeIsCached" aria-label="Permalink" class="tsd-anchor-icon"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5"></path><path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5"></path></svg></a></h3><div class="tsd-signature tsd-kind-icon">ensure<wbr/>Shape<wbr/>Is<wbr/>Cached<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div><aside class="tsd-sources"><ul><li>Defined in geometry/collider.d.ts:37</li></ul></aside></section><section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="handle" class="tsd-anchor"></a><h3 class="tsd-anchor-link"><span class="tsd-flag ts-flagReadonly">Readonly</span> handle<a href="#handle" aria-label="Permalink" class="tsd-anchor-icon"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5"></path><path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5"></path></svg></a></h3><div class="tsd-signature tsd-kind-icon">handle<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div><aside class="tsd-sources"><ul><li>Defined in geometry/collider.d.ts:31</li></ul></aside></section></section><section class="tsd-panel-group tsd-member-group "><h2>Accessors</h2><section class="tsd-panel tsd-member tsd-kind-get-signature tsd-parent-kind-class"><a id="shape" class="tsd-anchor"></a><h3 class="tsd-anchor-link">shape<a href="#shape" aria-label="Permalink" class="tsd-anchor-icon"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5"></path><path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5"></path></svg></a></h3><ul class="tsd-signatures tsd-kind-get-signature tsd-parent-kind-class"><li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> shape<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="Shape.html" class="tsd-signature-type" data-tsd-kind="Class">Shape</a></li></ul><ul class="tsd-descriptions"><li class="tsd-description"><aside class="tsd-sources"><ul><li>Defined in geometry/collider.d.ts:41</li></ul></aside><div class="tsd-comment tsd-typography"><div class="lead">
+<p>The shape of this collider.</p>
+</div></div><h4 class="tsd-returns-title">Returns <a href="Shape.html" class="tsd-signature-type" data-tsd-kind="Class">Shape</a></h4></li></ul></section></section><section class="tsd-panel-group tsd-member-group "><h2>Methods</h2><section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="activeCollisionTypes" class="tsd-anchor"></a><h3 class="tsd-anchor-link">active<wbr/>Collision<wbr/>Types<a href="#activeCollisionTypes" aria-label="Permalink" class="tsd-anchor-icon"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5"></path><path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5"></path></svg></a></h3><ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class"><li class="tsd-signature tsd-kind-icon">active<wbr/>Collision<wbr/>Types<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../enums/ActiveCollisionTypes.html" class="tsd-signature-type" data-tsd-kind="Enumeration">ActiveCollisionTypes</a></li></ul><ul class="tsd-descriptions"><li class="tsd-description"><aside class="tsd-sources"><ul><li>Defined in geometry/collider.d.ts:155</li></ul></aside><div class="tsd-comment tsd-typography"><div class="lead">
+<p>Gets the collision types active for this collider.</p>
+</div></div><h4 class="tsd-returns-title">Returns <a href="../enums/ActiveCollisionTypes.html" class="tsd-signature-type" data-tsd-kind="Enumeration">ActiveCollisionTypes</a></h4></li></ul></section><section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="activeEvents" class="tsd-anchor"></a><h3 class="tsd-anchor-link">active<wbr/>Events<a href="#activeEvents" aria-label="Permalink" class="tsd-anchor-icon"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5"></path><path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5"></path></svg></a></h3><ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class"><li class="tsd-signature tsd-kind-icon">active<wbr/>Events<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../enums/ActiveEvents.html#COLLISION_EVENTS" class="tsd-signature-type" data-tsd-kind="Enumeration Member">COLLISION_EVENTS</a></li></ul><ul class="tsd-descriptions"><li class="tsd-description"><aside class="tsd-sources"><ul><li>Defined in geometry/collider.d.ts:143</li></ul></aside><div class="tsd-comment tsd-typography"><div class="lead">
+<p>The events active for this collider.</p>
+</div></div><h4 class="tsd-returns-title">Returns <a href="../enums/ActiveEvents.html#COLLISION_EVENTS" class="tsd-signature-type" data-tsd-kind="Enumeration Member">COLLISION_EVENTS</a></h4></li></ul></section><section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="activeHooks" class="tsd-anchor"></a><h3 class="tsd-anchor-link">active<wbr/>Hooks<a href="#activeHooks" aria-label="Permalink" class="tsd-anchor-icon"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5"></path><path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5"></path></svg></a></h3><ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class"><li class="tsd-signature tsd-kind-icon">active<wbr/>Hooks<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li></ul><ul class="tsd-descriptions"><li class="tsd-description"><aside class="tsd-sources"><ul><li>Defined in geometry/collider.d.ts:131</li></ul></aside><div class="tsd-comment tsd-typography"><div class="lead">
+<p>Get the physics hooks active for this collider.</p>
+</div></div><h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4></li></ul></section><section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="castCollider" class="tsd-anchor"></a><h3 class="tsd-anchor-link">cast<wbr/>Collider<a href="#castCollider" aria-label="Permalink" class="tsd-anchor-icon"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5"></path><path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5"></path></svg></a></h3><ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class"><li class="tsd-signature tsd-kind-icon">cast<wbr/>Collider<span class="tsd-signature-symbol">(</span>collider1Vel<span class="tsd-signature-symbol">: </span><a href="../interfaces/Vector.html" class="tsd-signature-type" data-tsd-kind="Interface">Vector</a>, collider2<span class="tsd-signature-symbol">: </span><a href="Collider.html" class="tsd-signature-type" data-tsd-kind="Class">Collider</a>, collider2Vel<span class="tsd-signature-symbol">: </span><a href="../interfaces/Vector.html" class="tsd-signature-type" data-tsd-kind="Interface">Vector</a>, maxToi<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="ShapeColliderTOI.html" class="tsd-signature-type" data-tsd-kind="Class">ShapeColliderTOI</a></li></ul><ul class="tsd-descriptions"><li class="tsd-description"><aside class="tsd-sources"><ul><li>Defined in geometry/collider.d.ts:290</li></ul></aside><h4 class="tsd-parameters-title">Parameters</h4><ul class="tsd-parameters"><li><h5>collider1Vel: <a href="../interfaces/Vector.html" class="tsd-signature-type" data-tsd-kind="Interface">Vector</a></h5></li><li><h5>collider2: <a href="Collider.html" class="tsd-signature-type" data-tsd-kind="Class">Collider</a></h5></li><li><h5>collider2Vel: <a href="../interfaces/Vector.html" class="tsd-signature-type" data-tsd-kind="Interface">Vector</a></h5></li><li><h5>maxToi: <span class="tsd-signature-type">number</span></h5></li></ul><h4 class="tsd-returns-title">Returns <a href="ShapeColliderTOI.html" class="tsd-signature-type" data-tsd-kind="Class">ShapeColliderTOI</a></h4></li></ul></section><section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="castRay" class="tsd-anchor"></a><h3 class="tsd-anchor-link">cast<wbr/>Ray<a href="#castRay" aria-label="Permalink" class="tsd-anchor-icon"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5"></path><path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5"></path></svg></a></h3><ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class"><li class="tsd-signature tsd-kind-icon">cast<wbr/>Ray<span class="tsd-signature-symbol">(</span>ray<span class="tsd-signature-symbol">: </span><a href="Ray.html" class="tsd-signature-type" data-tsd-kind="Class">Ray</a>, maxToi<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, solid<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li></ul><ul class="tsd-descriptions"><li class="tsd-description"><aside class="tsd-sources"><ul><li>Defined in geometry/collider.d.ts:310</li></ul></aside><h4 class="tsd-parameters-title">Parameters</h4><ul class="tsd-parameters"><li><h5>ray: <a href="Ray.html" class="tsd-signature-type" data-tsd-kind="Class">Ray</a></h5></li><li><h5>maxToi: <span class="tsd-signature-type">number</span></h5></li><li><h5>solid: <span class="tsd-signature-type">boolean</span></h5></li></ul><h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4></li></ul></section><section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="castRayAndGetNormal" class="tsd-anchor"></a><h3 class="tsd-anchor-link">cast<wbr/>Ray<wbr/>And<wbr/>Get<wbr/>Normal<a href="#castRayAndGetNormal" aria-label="Permalink" class="tsd-anchor-icon"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5"></path><path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5"></path></svg></a></h3><ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class"><li class="tsd-signature tsd-kind-icon">cast<wbr/>Ray<wbr/>And<wbr/>Get<wbr/>Normal<span class="tsd-signature-symbol">(</span>ray<span class="tsd-signature-symbol">: </span><a href="Ray.html" class="tsd-signature-type" data-tsd-kind="Class">Ray</a>, maxToi<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, solid<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="RayIntersection.html" class="tsd-signature-type" data-tsd-kind="Class">RayIntersection</a></li></ul><ul class="tsd-descriptions"><li class="tsd-description"><aside class="tsd-sources"><ul><li>Defined in geometry/collider.d.ts:322</li></ul></aside><div class="tsd-comment tsd-typography"><div class="lead">
+<p>Find the closest intersection between a ray and this collider.</p>
+</div><div><p>This also computes the normal at the hit point.</p>
+</div></div><h4 class="tsd-parameters-title">Parameters</h4><ul class="tsd-parameters"><li><h5>ray: <a href="Ray.html" class="tsd-signature-type" data-tsd-kind="Class">Ray</a></h5><div class="tsd-comment tsd-typography"><div class="lead">
+<p>The ray to cast.</p>
+</div></div></li><li><h5>maxToi: <span class="tsd-signature-type">number</span></h5><div class="tsd-comment tsd-typography"><div class="lead">
+<p>The maximum time-of-impact that can be reported by this cast. This effectively
+  limits the length of the ray to <code>ray.dir.norm() * maxToi</code>.</p>
+</div></div></li><li><h5>solid: <span class="tsd-signature-type">boolean</span></h5><div class="tsd-comment tsd-typography"><div class="lead">
+<p>If <code>false</code> then the ray will attempt to hit the boundary of a shape, even if its
+  origin already lies inside of a shape. In other terms, <code>true</code> implies that all shapes are plain,
+  whereas <code>false</code> implies that all shapes are hollow for this ray-cast.</p>
+</div></div></li></ul><h4 class="tsd-returns-title">Returns <a href="RayIntersection.html" class="tsd-signature-type" data-tsd-kind="Class">RayIntersection</a></h4></li></ul></section><section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="castShape" class="tsd-anchor"></a><h3 class="tsd-anchor-link">cast<wbr/>Shape<a href="#castShape" aria-label="Permalink" class="tsd-anchor-icon"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5"></path><path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5"></path></svg></a></h3><ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class"><li class="tsd-signature tsd-kind-icon">cast<wbr/>Shape<span class="tsd-signature-symbol">(</span>collider1Vel<span class="tsd-signature-symbol">: </span><a href="../interfaces/Vector.html" class="tsd-signature-type" data-tsd-kind="Interface">Vector</a>, shape2<span class="tsd-signature-symbol">: </span><a href="Shape.html" class="tsd-signature-type" data-tsd-kind="Class">Shape</a>, shape2Pos<span class="tsd-signature-symbol">: </span><a href="../interfaces/Vector.html" class="tsd-signature-type" data-tsd-kind="Interface">Vector</a>, shape2Rot<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, shape2Vel<span class="tsd-signature-symbol">: </span><a href="../interfaces/Vector.html" class="tsd-signature-type" data-tsd-kind="Interface">Vector</a>, maxToi<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="ShapeTOI.html" class="tsd-signature-type" data-tsd-kind="Class">ShapeTOI</a></li></ul><ul class="tsd-descriptions"><li class="tsd-description"><aside class="tsd-sources"><ul><li>Defined in geometry/collider.d.ts:289</li></ul></aside><h4 class="tsd-parameters-title">Parameters</h4><ul class="tsd-parameters"><li><h5>collider1Vel: <a href="../interfaces/Vector.html" class="tsd-signature-type" data-tsd-kind="Interface">Vector</a></h5></li><li><h5>shape2: <a href="Shape.html" class="tsd-signature-type" data-tsd-kind="Class">Shape</a></h5></li><li><h5>shape2Pos: <a href="../interfaces/Vector.html" class="tsd-signature-type" data-tsd-kind="Interface">Vector</a></h5></li><li><h5>shape2Rot: <span class="tsd-signature-type">number</span></h5></li><li><h5>shape2Vel: <a href="../interfaces/Vector.html" class="tsd-signature-type" data-tsd-kind="Interface">Vector</a></h5></li><li><h5>maxToi: <span class="tsd-signature-type">number</span></h5></li></ul><h4 class="tsd-returns-title">Returns <a href="ShapeTOI.html" class="tsd-signature-type" data-tsd-kind="Class">ShapeTOI</a></h4></li></ul></section><section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="collisionGroups" class="tsd-anchor"></a><h3 class="tsd-anchor-link">collision<wbr/>Groups<a href="#collisionGroups" aria-label="Permalink" class="tsd-anchor-icon"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5"></path><path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5"></path></svg></a></h3><ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class"><li class="tsd-signature tsd-kind-icon">collision<wbr/>Groups<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li></ul><ul class="tsd-descriptions"><li class="tsd-description"><aside class="tsd-sources"><ul><li>Defined in geometry/collider.d.ts:259</li></ul></aside><div class="tsd-comment tsd-typography"><div class="lead">
+<p>The collision groups of this collider.</p>
+</div></div><h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4></li></ul></section><section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="contactCollider" class="tsd-anchor"></a><h3 class="tsd-anchor-link">contact<wbr/>Collider<a href="#contactCollider" aria-label="Permalink" class="tsd-anchor-icon"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5"></path><path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5"></path></svg></a></h3><ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class"><li class="tsd-signature tsd-kind-icon">contact<wbr/>Collider<span class="tsd-signature-symbol">(</span>collider2<span class="tsd-signature-symbol">: </span><a href="Collider.html" class="tsd-signature-type" data-tsd-kind="Class">Collider</a>, prediction<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="ShapeContact.html" class="tsd-signature-type" data-tsd-kind="Class">ShapeContact</a></li></ul><ul class="tsd-descriptions"><li class="tsd-description"><aside class="tsd-sources"><ul><li>Defined in geometry/collider.d.ts:309</li></ul></aside><div class="tsd-comment tsd-typography"><div class="lead">
+<p>Computes one pair of contact points between the collider and the given collider.</p>
+</div></div><h4 class="tsd-parameters-title">Parameters</h4><ul class="tsd-parameters"><li><h5>collider2: <a href="Collider.html" class="tsd-signature-type" data-tsd-kind="Class">Collider</a></h5><div class="tsd-comment tsd-typography"><div class="lead">
+<p>The second collider.</p>
+</div></div></li><li><h5>prediction: <span class="tsd-signature-type">number</span></h5><div class="tsd-comment tsd-typography"><div class="lead">
+<p>The prediction value, if the shapes are separated by a distance greater than this value, test will fail.</p>
+</div></div></li></ul><h4 class="tsd-returns-title">Returns <a href="ShapeContact.html" class="tsd-signature-type" data-tsd-kind="Class">ShapeContact</a></h4><div><p><code>null</code> if the shapes are separated by a distance greater than prediction, otherwise contact details. The result is given in world-space.</p>
+</div></li></ul></section><section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="contactShape" class="tsd-anchor"></a><h3 class="tsd-anchor-link">contact<wbr/>Shape<a href="#contactShape" aria-label="Permalink" class="tsd-anchor-icon"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5"></path><path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5"></path></svg></a></h3><ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class"><li class="tsd-signature tsd-kind-icon">contact<wbr/>Shape<span class="tsd-signature-symbol">(</span>shape2<span class="tsd-signature-symbol">: </span><a href="Shape.html" class="tsd-signature-type" data-tsd-kind="Class">Shape</a>, shape2Pos<span class="tsd-signature-symbol">: </span><a href="../interfaces/Vector.html" class="tsd-signature-type" data-tsd-kind="Interface">Vector</a>, shape2Rot<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, prediction<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="ShapeContact.html" class="tsd-signature-type" data-tsd-kind="Class">ShapeContact</a></li></ul><ul class="tsd-descriptions"><li class="tsd-description"><aside class="tsd-sources"><ul><li>Defined in geometry/collider.d.ts:301</li></ul></aside><div class="tsd-comment tsd-typography"><div class="lead">
+<p>Computes one pair of contact points between the shape owned by this collider and the given shape.</p>
+</div></div><h4 class="tsd-parameters-title">Parameters</h4><ul class="tsd-parameters"><li><h5>shape2: <a href="Shape.html" class="tsd-signature-type" data-tsd-kind="Class">Shape</a></h5><div class="tsd-comment tsd-typography"><div class="lead">
+<p>The second shape.</p>
+</div></div></li><li><h5>shape2Pos: <a href="../interfaces/Vector.html" class="tsd-signature-type" data-tsd-kind="Interface">Vector</a></h5><div class="tsd-comment tsd-typography"><div class="lead">
+<p>The initial position of the second shape.</p>
+</div></div></li><li><h5>shape2Rot: <span class="tsd-signature-type">number</span></h5><div class="tsd-comment tsd-typography"><div class="lead">
+<p>The rotation of the second shape.</p>
+</div></div></li><li><h5>prediction: <span class="tsd-signature-type">number</span></h5><div class="tsd-comment tsd-typography"><div class="lead">
+<p>The prediction value, if the shapes are separated by a distance greater than this value, test will fail.</p>
+</div></div></li></ul><h4 class="tsd-returns-title">Returns <a href="ShapeContact.html" class="tsd-signature-type" data-tsd-kind="Class">ShapeContact</a></h4><div><p><code>null</code> if the shapes are separated by a distance greater than prediction, otherwise contact details. The result is given in world-space.</p>
+</div></li></ul></section><section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="containsPoint" class="tsd-anchor"></a><h3 class="tsd-anchor-link">contains<wbr/>Point<a href="#containsPoint" aria-label="Permalink" class="tsd-anchor-icon"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5"></path><path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5"></path></svg></a></h3><ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class"><li class="tsd-signature tsd-kind-icon">contains<wbr/>Point<span class="tsd-signature-symbol">(</span>point<span class="tsd-signature-symbol">: </span><a href="../interfaces/Vector.html" class="tsd-signature-type" data-tsd-kind="Interface">Vector</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li></ul><ul class="tsd-descriptions"><li class="tsd-description"><aside class="tsd-sources"><ul><li>Defined in geometry/collider.d.ts:269</li></ul></aside><div class="tsd-comment tsd-typography"><div class="lead">
+<p>Tests if this collider contains a point.</p>
+</div></div><h4 class="tsd-parameters-title">Parameters</h4><ul class="tsd-parameters"><li><h5>point: <a href="../interfaces/Vector.html" class="tsd-signature-type" data-tsd-kind="Interface">Vector</a></h5><div class="tsd-comment tsd-typography"><div class="lead">
+<p>The point to test.</p>
+</div></div></li></ul><h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4></li></ul></section><section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="density" class="tsd-anchor"></a><h3 class="tsd-anchor-link">density<a href="#density" aria-label="Permalink" class="tsd-anchor-icon"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5"></path><path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5"></path></svg></a></h3><ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class"><li class="tsd-signature tsd-kind-icon">density<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li></ul><ul class="tsd-descriptions"><li class="tsd-description"><aside class="tsd-sources"><ul><li>Defined in geometry/collider.d.ts:255</li></ul></aside><div class="tsd-comment tsd-typography"><div class="lead">
+<p>The density of this collider.</p>
+</div></div><h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4></li></ul></section><section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="finalizeDeserialization" class="tsd-anchor"></a><h3 class="tsd-anchor-link">finalize<wbr/>Deserialization<a href="#finalizeDeserialization" aria-label="Permalink" class="tsd-anchor-icon"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5"></path><path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5"></path></svg></a></h3><ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class"><li class="tsd-signature tsd-kind-icon">finalize<wbr/>Deserialization<span class="tsd-signature-symbol">(</span>bodies<span class="tsd-signature-symbol">: </span><a href="RigidBodySet.html" class="tsd-signature-type" data-tsd-kind="Class">RigidBodySet</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li></ul><ul class="tsd-descriptions"><li class="tsd-description"><aside class="tsd-sources"><ul><li>Defined in geometry/collider.d.ts:36</li></ul></aside><div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"><dt>internal</dt><dd></dd></dl></div><h4 class="tsd-parameters-title">Parameters</h4><ul class="tsd-parameters"><li><h5>bodies: <a href="RigidBodySet.html" class="tsd-signature-type" data-tsd-kind="Class">RigidBodySet</a></h5></li></ul><h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4></li></ul></section><section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="friction" class="tsd-anchor"></a><h3 class="tsd-anchor-link">friction<a href="#friction" aria-label="Permalink" class="tsd-anchor-icon"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5"></path><path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5"></path></svg></a></h3><ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class"><li class="tsd-signature tsd-kind-icon">friction<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li></ul><ul class="tsd-descriptions"><li class="tsd-description"><aside class="tsd-sources"><ul><li>Defined in geometry/collider.d.ts:247</li></ul></aside><div class="tsd-comment tsd-typography"><div class="lead">
+<p>The friction coefficient of this collider.</p>
+</div></div><h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4></li></ul></section><section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="frictionCombineRule" class="tsd-anchor"></a><h3 class="tsd-anchor-link">friction<wbr/>Combine<wbr/>Rule<a href="#frictionCombineRule" aria-label="Permalink" class="tsd-anchor-icon"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5"></path><path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5"></path></svg></a></h3><ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class"><li class="tsd-signature tsd-kind-icon">friction<wbr/>Combine<wbr/>Rule<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../enums/CoefficientCombineRule.html" class="tsd-signature-type" data-tsd-kind="Enumeration">CoefficientCombineRule</a></li></ul><ul class="tsd-descriptions"><li class="tsd-description"><aside class="tsd-sources"><ul><li>Defined in geometry/collider.d.ts:89</li></ul></aside><div class="tsd-comment tsd-typography"><div class="lead">
+<p>Gets the rule used to combine the friction coefficients of two colliders
+colliders involved in a contact.</p>
+</div></div><h4 class="tsd-returns-title">Returns <a href="../enums/CoefficientCombineRule.html" class="tsd-signature-type" data-tsd-kind="Enumeration">CoefficientCombineRule</a></h4></li></ul></section><section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="halfExtents" class="tsd-anchor"></a><h3 class="tsd-anchor-link">half<wbr/>Extents<a href="#halfExtents" aria-label="Permalink" class="tsd-anchor-icon"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5"></path><path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5"></path></svg></a></h3><ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class"><li class="tsd-signature tsd-kind-icon">half<wbr/>Extents<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/Vector.html" class="tsd-signature-type" data-tsd-kind="Interface">Vector</a></li></ul><ul class="tsd-descriptions"><li class="tsd-description"><aside class="tsd-sources"><ul><li>Defined in geometry/collider.d.ts:199</li></ul></aside><div class="tsd-comment tsd-typography"><div class="lead">
+<p>The half-extents of this collider if it is a cuboid shape.</p>
+</div><dl class="tsd-comment-tags"><dt>deprecated</dt><dd><p>this field will be removed in the future, please access this field on <code>shape</code> member instead.</p>
+</dd></dl></div><h4 class="tsd-returns-title">Returns <a href="../interfaces/Vector.html" class="tsd-signature-type" data-tsd-kind="Interface">Vector</a></h4></li></ul></section><section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="halfHeight" class="tsd-anchor"></a><h3 class="tsd-anchor-link">half<wbr/>Height<a href="#halfHeight" aria-label="Permalink" class="tsd-anchor-icon"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5"></path><path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5"></path></svg></a></h3><ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class"><li class="tsd-signature tsd-kind-icon">half<wbr/>Height<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li></ul><ul class="tsd-descriptions"><li class="tsd-description"><aside class="tsd-sources"><ul><li>Defined in geometry/collider.d.ts:214</li></ul></aside><div class="tsd-comment tsd-typography"><div class="lead">
+<p>The half height of this collider if it is a cylinder, capsule, or cone shape.</p>
+</div><dl class="tsd-comment-tags"><dt>deprecated</dt><dd><p>this field will be removed in the future, please access this field on <code>shape</code> member instead.</p>
+</dd></dl></div><h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4></li></ul></section><section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="heightfieldHeights" class="tsd-anchor"></a><h3 class="tsd-anchor-link">heightfield<wbr/>Heights<a href="#heightfieldHeights" aria-label="Permalink" class="tsd-anchor-icon"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5"></path><path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5"></path></svg></a></h3><ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class"><li class="tsd-signature tsd-kind-icon">heightfield<wbr/>Heights<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Float32Array</span></li></ul><ul class="tsd-descriptions"><li class="tsd-description"><aside class="tsd-sources"><ul><li>Defined in geometry/collider.d.ts:233</li></ul></aside><div class="tsd-comment tsd-typography"><div class="lead">
+<p>If this collider has a heightfield shape, this returns the heights buffer of
+the heightfield.
+In 3D, the returned height matrix is provided in column-major order.</p>
+</div><dl class="tsd-comment-tags"><dt>deprecated</dt><dd><p>this field will be removed in the future, please access this field on <code>shape</code> member instead.</p>
+</dd></dl></div><h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Float32Array</span></h4></li></ul></section><section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="heightfieldScale" class="tsd-anchor"></a><h3 class="tsd-anchor-link">heightfield<wbr/>Scale<a href="#heightfieldScale" aria-label="Permalink" class="tsd-anchor-icon"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5"></path><path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5"></path></svg></a></h3><ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class"><li class="tsd-signature tsd-kind-icon">heightfield<wbr/>Scale<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/Vector.html" class="tsd-signature-type" data-tsd-kind="Interface">Vector</a></li></ul><ul class="tsd-descriptions"><li class="tsd-description"><aside class="tsd-sources"><ul><li>Defined in geometry/collider.d.ts:239</li></ul></aside><div class="tsd-comment tsd-typography"><div class="lead">
+<p>If this collider has a heightfield shape, this returns the scale
+applied to it.</p>
+</div><dl class="tsd-comment-tags"><dt>deprecated</dt><dd><p>this field will be removed in the future, please access this field on <code>shape</code> member instead.</p>
+</dd></dl></div><h4 class="tsd-returns-title">Returns <a href="../interfaces/Vector.html" class="tsd-signature-type" data-tsd-kind="Interface">Vector</a></h4></li></ul></section><section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="indices" class="tsd-anchor"></a><h3 class="tsd-anchor-link">indices<a href="#indices" aria-label="Permalink" class="tsd-anchor-icon"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5"></path><path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5"></path></svg></a></h3><ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class"><li class="tsd-signature tsd-kind-icon">indices<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Uint32Array</span></li></ul><ul class="tsd-descriptions"><li class="tsd-description"><aside class="tsd-sources"><ul><li>Defined in geometry/collider.d.ts:226</li></ul></aside><div class="tsd-comment tsd-typography"><div class="lead">
+<p>If this collider has a triangle mesh, polyline, or convex polyhedron shape,
+this returns the index buffer of said shape.</p>
+</div><dl class="tsd-comment-tags"><dt>deprecated</dt><dd><p>this field will be removed in the future, please access this field on <code>shape</code> member instead.</p>
+</dd></dl></div><h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Uint32Array</span></h4></li></ul></section><section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="intersectsRay" class="tsd-anchor"></a><h3 class="tsd-anchor-link">intersects<wbr/>Ray<a href="#intersectsRay" aria-label="Permalink" class="tsd-anchor-icon"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5"></path><path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5"></path></svg></a></h3><ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class"><li class="tsd-signature tsd-kind-icon">intersects<wbr/>Ray<span class="tsd-signature-symbol">(</span>ray<span class="tsd-signature-symbol">: </span><a href="Ray.html" class="tsd-signature-type" data-tsd-kind="Class">Ray</a>, maxToi<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li></ul><ul class="tsd-descriptions"><li class="tsd-description"><aside class="tsd-sources"><ul><li>Defined in geometry/collider.d.ts:288</li></ul></aside><div class="tsd-comment tsd-typography"><div class="lead">
+<p>Tests if this collider intersects the given ray.</p>
+</div></div><h4 class="tsd-parameters-title">Parameters</h4><ul class="tsd-parameters"><li><h5>ray: <a href="Ray.html" class="tsd-signature-type" data-tsd-kind="Class">Ray</a></h5><div class="tsd-comment tsd-typography"><div class="lead">
+<p>The ray to cast.</p>
+</div></div></li><li><h5>maxToi: <span class="tsd-signature-type">number</span></h5><div class="tsd-comment tsd-typography"><div class="lead">
+<p>The maximum time-of-impact that can be reported by this cast. This effectively
+  limits the length of the ray to <code>ray.dir.norm() * maxToi</code>.</p>
+</div></div></li></ul><h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4></li></ul></section><section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="intersectsShape" class="tsd-anchor"></a><h3 class="tsd-anchor-link">intersects<wbr/>Shape<a href="#intersectsShape" aria-label="Permalink" class="tsd-anchor-icon"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5"></path><path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5"></path></svg></a></h3><ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class"><li class="tsd-signature tsd-kind-icon">intersects<wbr/>Shape<span class="tsd-signature-symbol">(</span>shape2<span class="tsd-signature-symbol">: </span><a href="Shape.html" class="tsd-signature-type" data-tsd-kind="Class">Shape</a>, shapePos2<span class="tsd-signature-symbol">: </span><a href="../interfaces/Vector.html" class="tsd-signature-type" data-tsd-kind="Interface">Vector</a>, shapeRot2<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li></ul><ul class="tsd-descriptions"><li class="tsd-description"><aside class="tsd-sources"><ul><li>Defined in geometry/collider.d.ts:291</li></ul></aside><h4 class="tsd-parameters-title">Parameters</h4><ul class="tsd-parameters"><li><h5>shape2: <a href="Shape.html" class="tsd-signature-type" data-tsd-kind="Class">Shape</a></h5></li><li><h5>shapePos2: <a href="../interfaces/Vector.html" class="tsd-signature-type" data-tsd-kind="Interface">Vector</a></h5></li><li><h5>shapeRot2: <span class="tsd-signature-type">number</span></h5></li></ul><h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4></li></ul></section><section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="isSensor" class="tsd-anchor"></a><h3 class="tsd-anchor-link">is<wbr/>Sensor<a href="#isSensor" aria-label="Permalink" class="tsd-anchor-icon"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5"></path><path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5"></path></svg></a></h3><ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class"><li class="tsd-signature tsd-kind-icon">is<wbr/>Sensor<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li></ul><ul class="tsd-descriptions"><li class="tsd-description"><aside class="tsd-sources"><ul><li>Defined in geometry/collider.d.ts:58</li></ul></aside><div class="tsd-comment tsd-typography"><div class="lead">
+<p>Is this collider a sensor?</p>
+</div></div><h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4></li></ul></section><section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="isValid" class="tsd-anchor"></a><h3 class="tsd-anchor-link">is<wbr/>Valid<a href="#isValid" aria-label="Permalink" class="tsd-anchor-icon"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5"></path><path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5"></path></svg></a></h3><ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class"><li class="tsd-signature tsd-kind-icon">is<wbr/>Valid<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li></ul><ul class="tsd-descriptions"><li class="tsd-description"><aside class="tsd-sources"><ul><li>Defined in geometry/collider.d.ts:46</li></ul></aside><div class="tsd-comment tsd-typography"><div class="lead">
+<p>Checks if this collider is still valid (i.e. that it has
+not been deleted from the collider set yet).</p>
+</div></div><h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4></li></ul></section><section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="parent" class="tsd-anchor"></a><h3 class="tsd-anchor-link">parent<a href="#parent" aria-label="Permalink" class="tsd-anchor-icon"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5"></path><path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5"></path></svg></a></h3><ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class"><li class="tsd-signature tsd-kind-icon">parent<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="RigidBody.html" class="tsd-signature-type" data-tsd-kind="Class">RigidBody</a></li></ul><ul class="tsd-descriptions"><li class="tsd-description"><aside class="tsd-sources"><ul><li>Defined in geometry/collider.d.ts:243</li></ul></aside><div class="tsd-comment tsd-typography"><div class="lead">
+<p>The rigid-body this collider is attached to.</p>
+</div></div><h4 class="tsd-returns-title">Returns <a href="RigidBody.html" class="tsd-signature-type" data-tsd-kind="Class">RigidBody</a></h4></li></ul></section><section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="projectPoint" class="tsd-anchor"></a><h3 class="tsd-anchor-link">project<wbr/>Point<a href="#projectPoint" aria-label="Permalink" class="tsd-anchor-icon"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5"></path><path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5"></path></svg></a></h3><ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class"><li class="tsd-signature tsd-kind-icon">project<wbr/>Point<span class="tsd-signature-symbol">(</span>point<span class="tsd-signature-symbol">: </span><a href="../interfaces/Vector.html" class="tsd-signature-type" data-tsd-kind="Interface">Vector</a>, solid<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="PointProjection.html" class="tsd-signature-type" data-tsd-kind="Class">PointProjection</a></li></ul><ul class="tsd-descriptions"><li class="tsd-description"><aside class="tsd-sources"><ul><li>Defined in geometry/collider.d.ts:280</li></ul></aside><div class="tsd-comment tsd-typography"><div class="lead">
+<p>Find the projection of a point on this collider.</p>
+</div></div><h4 class="tsd-parameters-title">Parameters</h4><ul class="tsd-parameters"><li><h5>point: <a href="../interfaces/Vector.html" class="tsd-signature-type" data-tsd-kind="Interface">Vector</a></h5><div class="tsd-comment tsd-typography"><div class="lead">
+<p>The point to project.</p>
+</div></div></li><li><h5>solid: <span class="tsd-signature-type">boolean</span></h5><div class="tsd-comment tsd-typography"><div class="lead">
+<p>If this is set to <code>true</code> then the collider shapes are considered to
+  be plain (if the point is located inside of a plain shape, its projection is the point
+  itself). If it is set to <code>false</code> the collider shapes are considered to be hollow
+  (if the point is located inside of an hollow shape, it is projected on the shape&#39;s
+  boundary).</p>
+</div></div></li></ul><h4 class="tsd-returns-title">Returns <a href="PointProjection.html" class="tsd-signature-type" data-tsd-kind="Class">PointProjection</a></h4></li></ul></section><section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="radius" class="tsd-anchor"></a><h3 class="tsd-anchor-link">radius<a href="#radius" aria-label="Permalink" class="tsd-anchor-icon"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5"></path><path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5"></path></svg></a></h3><ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class"><li class="tsd-signature tsd-kind-icon">radius<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li></ul><ul class="tsd-descriptions"><li class="tsd-description"><aside class="tsd-sources"><ul><li>Defined in geometry/collider.d.ts:204</li></ul></aside><div class="tsd-comment tsd-typography"><div class="lead">
+<p>The radius of this collider if it is a ball, cylinder, capsule, or cone shape.</p>
+</div><dl class="tsd-comment-tags"><dt>deprecated</dt><dd><p>this field will be removed in the future, please access this field on <code>shape</code> member instead.</p>
+</dd></dl></div><h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4></li></ul></section><section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="restitution" class="tsd-anchor"></a><h3 class="tsd-anchor-link">restitution<a href="#restitution" aria-label="Permalink" class="tsd-anchor-icon"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5"></path><path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5"></path></svg></a></h3><ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class"><li class="tsd-signature tsd-kind-icon">restitution<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li></ul><ul class="tsd-descriptions"><li class="tsd-description"><aside class="tsd-sources"><ul><li>Defined in geometry/collider.d.ts:251</li></ul></aside><div class="tsd-comment tsd-typography"><div class="lead">
+<p>The restitution coefficient of this collider.</p>
+</div></div><h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4></li></ul></section><section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="restitutionCombineRule" class="tsd-anchor"></a><h3 class="tsd-anchor-link">restitution<wbr/>Combine<wbr/>Rule<a href="#restitutionCombineRule" aria-label="Permalink" class="tsd-anchor-icon"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5"></path><path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5"></path></svg></a></h3><ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class"><li class="tsd-signature tsd-kind-icon">restitution<wbr/>Combine<wbr/>Rule<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../enums/CoefficientCombineRule.html" class="tsd-signature-type" data-tsd-kind="Enumeration">CoefficientCombineRule</a></li></ul><ul class="tsd-descriptions"><li class="tsd-description"><aside class="tsd-sources"><ul><li>Defined in geometry/collider.d.ts:101</li></ul></aside><div class="tsd-comment tsd-typography"><div class="lead">
+<p>Gets the rule used to combine the restitution coefficients of two colliders
+colliders involved in a contact.</p>
+</div></div><h4 class="tsd-returns-title">Returns <a href="../enums/CoefficientCombineRule.html" class="tsd-signature-type" data-tsd-kind="Enumeration">CoefficientCombineRule</a></h4></li></ul></section><section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="rotation" class="tsd-anchor"></a><h3 class="tsd-anchor-link">rotation<a href="#rotation" aria-label="Permalink" class="tsd-anchor-icon"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5"></path><path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5"></path></svg></a></h3><ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class"><li class="tsd-signature tsd-kind-icon">rotation<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li></ul><ul class="tsd-descriptions"><li class="tsd-description"><aside class="tsd-sources"><ul><li>Defined in geometry/collider.d.ts:54</li></ul></aside><div class="tsd-comment tsd-typography"><div class="lead">
+<p>The world-space orientation of this rigid-body.</p>
+</div></div><h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4></li></ul></section><section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="roundRadius" class="tsd-anchor"></a><h3 class="tsd-anchor-link">round<wbr/>Radius<a href="#roundRadius" aria-label="Permalink" class="tsd-anchor-icon"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5"></path><path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5"></path></svg></a></h3><ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class"><li class="tsd-signature tsd-kind-icon">round<wbr/>Radius<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li></ul><ul class="tsd-descriptions"><li class="tsd-description"><aside class="tsd-sources"><ul><li>Defined in geometry/collider.d.ts:209</li></ul></aside><div class="tsd-comment tsd-typography"><div class="lead">
+<p>The radius of the round edges of this collider if it is a round cylinder.</p>
+</div><dl class="tsd-comment-tags"><dt>deprecated</dt><dd><p>this field will be removed in the future, please access this field on <code>shape</code> member instead.</p>
+</dd></dl></div><h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4></li></ul></section><section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="setActiveCollisionTypes" class="tsd-anchor"></a><h3 class="tsd-anchor-link">set<wbr/>Active<wbr/>Collision<wbr/>Types<a href="#setActiveCollisionTypes" aria-label="Permalink" class="tsd-anchor-icon"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5"></path><path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5"></path></svg></a></h3><ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class"><li class="tsd-signature tsd-kind-icon">set<wbr/>Active<wbr/>Collision<wbr/>Types<span class="tsd-signature-symbol">(</span>activeCollisionTypes<span class="tsd-signature-symbol">: </span><a href="../enums/ActiveCollisionTypes.html" class="tsd-signature-type" data-tsd-kind="Enumeration">ActiveCollisionTypes</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li></ul><ul class="tsd-descriptions"><li class="tsd-description"><aside class="tsd-sources"><ul><li>Defined in geometry/collider.d.ts:161</li></ul></aside><div class="tsd-comment tsd-typography"><div class="lead">
+<p>Set the collision types active for this collider.</p>
+</div></div><h4 class="tsd-parameters-title">Parameters</h4><ul class="tsd-parameters"><li><h5>activeCollisionTypes: <a href="../enums/ActiveCollisionTypes.html" class="tsd-signature-type" data-tsd-kind="Enumeration">ActiveCollisionTypes</a></h5><div class="tsd-comment tsd-typography"><div class="lead">
+<p>The hooks active for contact/intersection pairs involving this collider.</p>
+</div></div></li></ul><h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4></li></ul></section><section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="setActiveEvents" class="tsd-anchor"></a><h3 class="tsd-anchor-link">set<wbr/>Active<wbr/>Events<a href="#setActiveEvents" aria-label="Permalink" class="tsd-anchor-icon"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5"></path><path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5"></path></svg></a></h3><ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class"><li class="tsd-signature tsd-kind-icon">set<wbr/>Active<wbr/>Events<span class="tsd-signature-symbol">(</span>activeEvents<span class="tsd-signature-symbol">: </span><a href="../enums/ActiveEvents.html#COLLISION_EVENTS" class="tsd-signature-type" data-tsd-kind="Enumeration Member">COLLISION_EVENTS</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li></ul><ul class="tsd-descriptions"><li class="tsd-description"><aside class="tsd-sources"><ul><li>Defined in geometry/collider.d.ts:151</li></ul></aside><div class="tsd-comment tsd-typography"><div class="lead">
+<p>Set the events active for this collider.</p>
+</div><div><p>Use this to enable contact and/or intersection event reporting for this collider.</p>
+</div></div><h4 class="tsd-parameters-title">Parameters</h4><ul class="tsd-parameters"><li><h5>activeEvents: <a href="../enums/ActiveEvents.html#COLLISION_EVENTS" class="tsd-signature-type" data-tsd-kind="Enumeration Member">COLLISION_EVENTS</a></h5><div class="tsd-comment tsd-typography"><div class="lead">
+<p>The events active for contact/intersection pairs involving this collider.</p>
+</div></div></li></ul><h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4></li></ul></section><section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="setActiveHooks" class="tsd-anchor"></a><h3 class="tsd-anchor-link">set<wbr/>Active<wbr/>Hooks<a href="#setActiveHooks" aria-label="Permalink" class="tsd-anchor-icon"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5"></path><path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5"></path></svg></a></h3><ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class"><li class="tsd-signature tsd-kind-icon">set<wbr/>Active<wbr/>Hooks<span class="tsd-signature-symbol">(</span>activeHooks<span class="tsd-signature-symbol">: </span><a href="../enums/ActiveHooks.html" class="tsd-signature-type" data-tsd-kind="Enumeration">ActiveHooks</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li></ul><ul class="tsd-descriptions"><li class="tsd-description"><aside class="tsd-sources"><ul><li>Defined in geometry/collider.d.ts:139</li></ul></aside><div class="tsd-comment tsd-typography"><div class="lead">
+<p>Set the physics hooks active for this collider.</p>
+</div><div><p>Use this to enable custom filtering rules for contact/intersecstion pairs involving this collider.</p>
+</div></div><h4 class="tsd-parameters-title">Parameters</h4><ul class="tsd-parameters"><li><h5>activeHooks: <a href="../enums/ActiveHooks.html" class="tsd-signature-type" data-tsd-kind="Enumeration">ActiveHooks</a></h5><div class="tsd-comment tsd-typography"><div class="lead">
+<p>The hooks active for contact/intersection pairs involving this collider.</p>
+</div></div></li></ul><h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4></li></ul></section><section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="setCollisionGroups" class="tsd-anchor"></a><h3 class="tsd-anchor-link">set<wbr/>Collision<wbr/>Groups<a href="#setCollisionGroups" aria-label="Permalink" class="tsd-anchor-icon"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5"></path><path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5"></path></svg></a></h3><ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class"><li class="tsd-signature tsd-kind-icon">set<wbr/>Collision<wbr/>Groups<span class="tsd-signature-symbol">(</span>groups<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li></ul><ul class="tsd-descriptions"><li class="tsd-description"><aside class="tsd-sources"><ul><li>Defined in geometry/collider.d.ts:117</li></ul></aside><div class="tsd-comment tsd-typography"><div class="lead">
+<p>Sets the collision groups used by this collider.</p>
+</div><div><p>Two colliders will interact iff. their collision groups are compatible.
+See the documentation of <code>InteractionGroups</code> for details on teh used bit pattern.</p>
+</div></div><h4 class="tsd-parameters-title">Parameters</h4><ul class="tsd-parameters"><li><h5>groups: <span class="tsd-signature-type">number</span></h5><div class="tsd-comment tsd-typography"><div class="lead">
+<p>The collision groups used for the collider being built.</p>
+</div></div></li></ul><h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4></li></ul></section><section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="setFriction" class="tsd-anchor"></a><h3 class="tsd-anchor-link">set<wbr/>Friction<a href="#setFriction" aria-label="Permalink" class="tsd-anchor-icon"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5"></path><path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5"></path></svg></a></h3><ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class"><li class="tsd-signature tsd-kind-icon">set<wbr/>Friction<span class="tsd-signature-symbol">(</span>friction<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li></ul><ul class="tsd-descriptions"><li class="tsd-description"><aside class="tsd-sources"><ul><li>Defined in geometry/collider.d.ts:84</li></ul></aside><div class="tsd-comment tsd-typography"><div class="lead">
+<p>Sets the friction coefficient of the collider to be created.</p>
+</div></div><h4 class="tsd-parameters-title">Parameters</h4><ul class="tsd-parameters"><li><h5>friction: <span class="tsd-signature-type">number</span></h5><div class="tsd-comment tsd-typography"><div class="lead">
+<p>The friction coefficient. Must be greater or equal to 0. This is generally smaller than 1. The
+                  higher the coefficient, the stronger friction forces will be for contacts with the collider
+                  being built.</p>
+</div></div></li></ul><h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4></li></ul></section><section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="setFrictionCombineRule" class="tsd-anchor"></a><h3 class="tsd-anchor-link">set<wbr/>Friction<wbr/>Combine<wbr/>Rule<a href="#setFrictionCombineRule" aria-label="Permalink" class="tsd-anchor-icon"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5"></path><path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5"></path></svg></a></h3><ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class"><li class="tsd-signature tsd-kind-icon">set<wbr/>Friction<wbr/>Combine<wbr/>Rule<span class="tsd-signature-symbol">(</span>rule<span class="tsd-signature-symbol">: </span><a href="../enums/CoefficientCombineRule.html" class="tsd-signature-type" data-tsd-kind="Enumeration">CoefficientCombineRule</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li></ul><ul class="tsd-descriptions"><li class="tsd-description"><aside class="tsd-sources"><ul><li>Defined in geometry/collider.d.ts:96</li></ul></aside><div class="tsd-comment tsd-typography"><div class="lead">
+<p>Sets the rule used to combine the friction coefficients of two colliders
+colliders involved in a contact.</p>
+</div></div><h4 class="tsd-parameters-title">Parameters</h4><ul class="tsd-parameters"><li><h5>rule: <a href="../enums/CoefficientCombineRule.html" class="tsd-signature-type" data-tsd-kind="Enumeration">CoefficientCombineRule</a></h5><div class="tsd-comment tsd-typography"><div class="lead">
+<p>− The combine rule to apply.</p>
+</div></div></li></ul><h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4></li></ul></section><section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="setRestitution" class="tsd-anchor"></a><h3 class="tsd-anchor-link">set<wbr/>Restitution<a href="#setRestitution" aria-label="Permalink" class="tsd-anchor-icon"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5"></path><path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5"></path></svg></a></h3><ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class"><li class="tsd-signature tsd-kind-icon">set<wbr/>Restitution<span class="tsd-signature-symbol">(</span>restitution<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li></ul><ul class="tsd-descriptions"><li class="tsd-description"><aside class="tsd-sources"><ul><li>Defined in geometry/collider.d.ts:76</li></ul></aside><div class="tsd-comment tsd-typography"><div class="lead">
+<p>Sets the restitution coefficient of the collider to be created.</p>
+</div></div><h4 class="tsd-parameters-title">Parameters</h4><ul class="tsd-parameters"><li><h5>restitution: <span class="tsd-signature-type">number</span></h5><div class="tsd-comment tsd-typography"><div class="lead">
+<p>The restitution coefficient in <code>[0, 1]</code>. A value of 0 (the default) means no bouncing behavior
+                  while 1 means perfect bouncing (though energy may still be lost due to numerical errors of the
+                  constraints solver).</p>
+</div></div></li></ul><h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4></li></ul></section><section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="setRestitutionCombineRule" class="tsd-anchor"></a><h3 class="tsd-anchor-link">set<wbr/>Restitution<wbr/>Combine<wbr/>Rule<a href="#setRestitutionCombineRule" aria-label="Permalink" class="tsd-anchor-icon"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5"></path><path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5"></path></svg></a></h3><ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class"><li class="tsd-signature tsd-kind-icon">set<wbr/>Restitution<wbr/>Combine<wbr/>Rule<span class="tsd-signature-symbol">(</span>rule<span class="tsd-signature-symbol">: </span><a href="../enums/CoefficientCombineRule.html" class="tsd-signature-type" data-tsd-kind="Enumeration">CoefficientCombineRule</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li></ul><ul class="tsd-descriptions"><li class="tsd-description"><aside class="tsd-sources"><ul><li>Defined in geometry/collider.d.ts:108</li></ul></aside><div class="tsd-comment tsd-typography"><div class="lead">
+<p>Sets the rule used to combine the restitution coefficients of two colliders
+colliders involved in a contact.</p>
+</div></div><h4 class="tsd-parameters-title">Parameters</h4><ul class="tsd-parameters"><li><h5>rule: <a href="../enums/CoefficientCombineRule.html" class="tsd-signature-type" data-tsd-kind="Enumeration">CoefficientCombineRule</a></h5><div class="tsd-comment tsd-typography"><div class="lead">
+<p>− The combine rule to apply.</p>
+</div></div></li></ul><h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4></li></ul></section><section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="setRotation" class="tsd-anchor"></a><h3 class="tsd-anchor-link">set<wbr/>Rotation<a href="#setRotation" aria-label="Permalink" class="tsd-anchor-icon"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5"></path><path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5"></path></svg></a></h3><ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class"><li class="tsd-signature tsd-kind-icon">set<wbr/>Rotation<span class="tsd-signature-symbol">(</span>angle<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li></ul><ul class="tsd-descriptions"><li class="tsd-description"><aside class="tsd-sources"><ul><li>Defined in geometry/collider.d.ts:181</li></ul></aside><div class="tsd-comment tsd-typography"><div class="lead">
+<p>Sets the rotation angle of this collider.</p>
+</div></div><h4 class="tsd-parameters-title">Parameters</h4><ul class="tsd-parameters"><li><h5>angle: <span class="tsd-signature-type">number</span></h5><div class="tsd-comment tsd-typography"><div class="lead">
+<p>The rotation angle, in radians.</p>
+</div></div></li></ul><h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4></li></ul></section><section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="setRotationWrtParent" class="tsd-anchor"></a><h3 class="tsd-anchor-link">set<wbr/>Rotation<wbr/>Wrt<wbr/>Parent<a href="#setRotationWrtParent" aria-label="Permalink" class="tsd-anchor-icon"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5"></path><path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5"></path></svg></a></h3><ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class"><li class="tsd-signature tsd-kind-icon">set<wbr/>Rotation<wbr/>Wrt<wbr/>Parent<span class="tsd-signature-symbol">(</span>angle<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li></ul><ul class="tsd-descriptions"><li class="tsd-description"><aside class="tsd-sources"><ul><li>Defined in geometry/collider.d.ts:189</li></ul></aside><div class="tsd-comment tsd-typography"><div class="lead">
+<p>Sets the rotation angle of this collider relative to its parent rigid-body.</p>
+</div><div><p>Does nothing if this collider isn&#39;t attached to a rigid-body.</p>
+</div></div><h4 class="tsd-parameters-title">Parameters</h4><ul class="tsd-parameters"><li><h5>angle: <span class="tsd-signature-type">number</span></h5><div class="tsd-comment tsd-typography"><div class="lead">
+<p>The rotation angle, in radians.</p>
+</div></div></li></ul><h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4></li></ul></section><section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="setSensor" class="tsd-anchor"></a><h3 class="tsd-anchor-link">set<wbr/>Sensor<a href="#setSensor" aria-label="Permalink" class="tsd-anchor-icon"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5"></path><path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5"></path></svg></a></h3><ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class"><li class="tsd-signature tsd-kind-icon">set<wbr/>Sensor<span class="tsd-signature-symbol">(</span>isSensor<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li></ul><ul class="tsd-descriptions"><li class="tsd-description"><aside class="tsd-sources"><ul><li>Defined in geometry/collider.d.ts:63</li></ul></aside><div class="tsd-comment tsd-typography"><div class="lead">
+<p>Sets whether or not this collider is a sensor.</p>
+</div></div><h4 class="tsd-parameters-title">Parameters</h4><ul class="tsd-parameters"><li><h5>isSensor: <span class="tsd-signature-type">boolean</span></h5><div class="tsd-comment tsd-typography"><div class="lead">
+<p>If <code>true</code>, the collider will be a sensor.</p>
+</div></div></li></ul><h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4></li></ul></section><section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="setShape" class="tsd-anchor"></a><h3 class="tsd-anchor-link">set<wbr/>Shape<a href="#setShape" aria-label="Permalink" class="tsd-anchor-icon"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5"></path><path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5"></path></svg></a></h3><ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class"><li class="tsd-signature tsd-kind-icon">set<wbr/>Shape<span class="tsd-signature-symbol">(</span>shape<span class="tsd-signature-symbol">: </span><a href="Shape.html" class="tsd-signature-type" data-tsd-kind="Class">Shape</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li></ul><ul class="tsd-descriptions"><li class="tsd-description"><aside class="tsd-sources"><ul><li>Defined in geometry/collider.d.ts:68</li></ul></aside><div class="tsd-comment tsd-typography"><div class="lead">
+<p>Sets the new shape of the collider.</p>
+</div></div><h4 class="tsd-parameters-title">Parameters</h4><ul class="tsd-parameters"><li><h5>shape: <a href="Shape.html" class="tsd-signature-type" data-tsd-kind="Class">Shape</a></h5><div class="tsd-comment tsd-typography"><div class="lead">
+<p>The collider’s new shape.</p>
+</div></div></li></ul><h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4></li></ul></section><section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="setSolverGroups" class="tsd-anchor"></a><h3 class="tsd-anchor-link">set<wbr/>Solver<wbr/>Groups<a href="#setSolverGroups" aria-label="Permalink" class="tsd-anchor-icon"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5"></path><path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5"></path></svg></a></h3><ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class"><li class="tsd-signature tsd-kind-icon">set<wbr/>Solver<wbr/>Groups<span class="tsd-signature-symbol">(</span>groups<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li></ul><ul class="tsd-descriptions"><li class="tsd-description"><aside class="tsd-sources"><ul><li>Defined in geometry/collider.d.ts:127</li></ul></aside><div class="tsd-comment tsd-typography"><div class="lead">
+<p>Sets the solver groups used by this collider.</p>
+</div><div><p>Forces between two colliders in contact will be computed iff their solver
+groups are compatible.
+See the documentation of <code>InteractionGroups</code> for details on the used bit pattern.</p>
+</div></div><h4 class="tsd-parameters-title">Parameters</h4><ul class="tsd-parameters"><li><h5>groups: <span class="tsd-signature-type">number</span></h5><div class="tsd-comment tsd-typography"><div class="lead">
+<p>The solver groups used for the collider being built.</p>
+</div></div></li></ul><h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4></li></ul></section><section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="setTranslation" class="tsd-anchor"></a><h3 class="tsd-anchor-link">set<wbr/>Translation<a href="#setTranslation" aria-label="Permalink" class="tsd-anchor-icon"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5"></path><path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5"></path></svg></a></h3><ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class"><li class="tsd-signature tsd-kind-icon">set<wbr/>Translation<span class="tsd-signature-symbol">(</span>tra<span class="tsd-signature-symbol">: </span><a href="../interfaces/Vector.html" class="tsd-signature-type" data-tsd-kind="Interface">Vector</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li></ul><ul class="tsd-descriptions"><li class="tsd-description"><aside class="tsd-sources"><ul><li>Defined in geometry/collider.d.ts:167</li></ul></aside><div class="tsd-comment tsd-typography"><div class="lead">
+<p>Sets the translation of this collider.</p>
+</div></div><h4 class="tsd-parameters-title">Parameters</h4><ul class="tsd-parameters"><li><h5>tra: <a href="../interfaces/Vector.html" class="tsd-signature-type" data-tsd-kind="Interface">Vector</a></h5><div class="tsd-comment tsd-typography"><div class="lead">
+<p>The world-space position of the collider.</p>
+</div></div></li></ul><h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4></li></ul></section><section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="setTranslationWrtParent" class="tsd-anchor"></a><h3 class="tsd-anchor-link">set<wbr/>Translation<wbr/>Wrt<wbr/>Parent<a href="#setTranslationWrtParent" aria-label="Permalink" class="tsd-anchor-icon"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5"></path><path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5"></path></svg></a></h3><ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class"><li class="tsd-signature tsd-kind-icon">set<wbr/>Translation<wbr/>Wrt<wbr/>Parent<span class="tsd-signature-symbol">(</span>tra<span class="tsd-signature-symbol">: </span><a href="../interfaces/Vector.html" class="tsd-signature-type" data-tsd-kind="Interface">Vector</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li></ul><ul class="tsd-descriptions"><li class="tsd-description"><aside class="tsd-sources"><ul><li>Defined in geometry/collider.d.ts:175</li></ul></aside><div class="tsd-comment tsd-typography"><div class="lead">
+<p>Sets the translation of this collider relative to its parent rigid-body.</p>
+</div><div><p>Does nothing if this collider isn&#39;t attached to a rigid-body.</p>
+</div></div><h4 class="tsd-parameters-title">Parameters</h4><ul class="tsd-parameters"><li><h5>tra: <a href="../interfaces/Vector.html" class="tsd-signature-type" data-tsd-kind="Interface">Vector</a></h5><div class="tsd-comment tsd-typography"><div class="lead">
+<p>The new translation of the collider relative to its parent.</p>
+</div></div></li></ul><h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4></li></ul></section><section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="shapeType" class="tsd-anchor"></a><h3 class="tsd-anchor-link">shape<wbr/>Type<a href="#shapeType" aria-label="Permalink" class="tsd-anchor-icon"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5"></path><path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5"></path></svg></a></h3><ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class"><li class="tsd-signature tsd-kind-icon">shape<wbr/>Type<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../enums/ShapeType.html" class="tsd-signature-type" data-tsd-kind="Enumeration">ShapeType</a></li></ul><ul class="tsd-descriptions"><li class="tsd-description"><aside class="tsd-sources"><ul><li>Defined in geometry/collider.d.ts:194</li></ul></aside><div class="tsd-comment tsd-typography"><div class="lead">
+<p>The type of the shape of this collider.</p>
+</div><dl class="tsd-comment-tags"><dt>deprecated</dt><dd><p>this field will be removed in the future, please access this field on <code>shape</code> member instead.</p>
+</dd></dl></div><h4 class="tsd-returns-title">Returns <a href="../enums/ShapeType.html" class="tsd-signature-type" data-tsd-kind="Enumeration">ShapeType</a></h4></li></ul></section><section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="solverGroups" class="tsd-anchor"></a><h3 class="tsd-anchor-link">solver<wbr/>Groups<a href="#solverGroups" aria-label="Permalink" class="tsd-anchor-icon"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5"></path><path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5"></path></svg></a></h3><ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class"><li class="tsd-signature tsd-kind-icon">solver<wbr/>Groups<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li></ul><ul class="tsd-descriptions"><li class="tsd-description"><aside class="tsd-sources"><ul><li>Defined in geometry/collider.d.ts:263</li></ul></aside><div class="tsd-comment tsd-typography"><div class="lead">
+<p>The solver groups of this collider.</p>
+</div></div><h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4></li></ul></section><section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="translation" class="tsd-anchor"></a><h3 class="tsd-anchor-link">translation<a href="#translation" aria-label="Permalink" class="tsd-anchor-icon"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5"></path><path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5"></path></svg></a></h3><ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class"><li class="tsd-signature tsd-kind-icon">translation<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/Vector.html" class="tsd-signature-type" data-tsd-kind="Interface">Vector</a></li></ul><ul class="tsd-descriptions"><li class="tsd-description"><aside class="tsd-sources"><ul><li>Defined in geometry/collider.d.ts:50</li></ul></aside><div class="tsd-comment tsd-typography"><div class="lead">
+<p>The world-space translation of this rigid-body.</p>
+</div></div><h4 class="tsd-returns-title">Returns <a href="../interfaces/Vector.html" class="tsd-signature-type" data-tsd-kind="Interface">Vector</a></h4></li></ul></section><section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="vertices" class="tsd-anchor"></a><h3 class="tsd-anchor-link">vertices<a href="#vertices" aria-label="Permalink" class="tsd-anchor-icon"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5"></path><path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5"></path></svg></a></h3><ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class"><li class="tsd-signature tsd-kind-icon">vertices<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Float32Array</span></li></ul><ul class="tsd-descriptions"><li class="tsd-description"><aside class="tsd-sources"><ul><li>Defined in geometry/collider.d.ts:220</li></ul></aside><div class="tsd-comment tsd-typography"><div class="lead">
+<p>If this collider has a triangle mesh, polyline, convex polygon, or convex polyhedron shape,
+this returns the vertex buffer of said shape.</p>
+</div><dl class="tsd-comment-tags"><dt>deprecated</dt><dd><p>this field will be removed in the future, please access this field on <code>shape</code> member instead.</p>
+</dd></dl></div><h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Float32Array</span></h4></li></ul></section></section></div><div class="col-4 col-menu menu-sticky-wrap menu-highlight"><nav class="tsd-navigation primary"><ul><li class=""><a href="../index.html">Exports</a></li><li class=" tsd-kind-namespace"><a href="../modules/default.html">default</a></li></ul></nav><nav class="tsd-navigation secondary menu-sticky"><ul><li class="current tsd-kind-class"><a href="Collider.html" class="tsd-kind-icon">Collider</a><ul><li class="tsd-kind-constructor tsd-parent-kind-class"><a href="Collider.html#constructor" class="tsd-kind-icon">constructor</a></li><li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="Collider.html#_parent" class="tsd-kind-icon">_parent</a></li><li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="Collider.html#_shape" class="tsd-kind-icon">_shape</a></li><li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="Collider.html#colliderSet" class="tsd-kind-icon">collider<wbr/>Set</a></li><li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="Collider.html#ensureShapeIsCached" class="tsd-kind-icon">ensure<wbr/>Shape<wbr/>Is<wbr/>Cached</a></li><li class="tsd-kind-property tsd-parent-kind-class"><a href="Collider.html#handle" class="tsd-kind-icon">handle</a></li><li class="tsd-kind-get-signature tsd-parent-kind-class"><a href="Collider.html#shape" class="tsd-kind-icon">shape</a></li><li class="tsd-kind-method tsd-parent-kind-class"><a href="Collider.html#activeCollisionTypes" class="tsd-kind-icon">active<wbr/>Collision<wbr/>Types</a></li><li class="tsd-kind-method tsd-parent-kind-class"><a href="Collider.html#activeEvents" class="tsd-kind-icon">active<wbr/>Events</a></li><li class="tsd-kind-method tsd-parent-kind-class"><a href="Collider.html#activeHooks" class="tsd-kind-icon">active<wbr/>Hooks</a></li><li class="tsd-kind-method tsd-parent-kind-class"><a href="Collider.html#castCollider" class="tsd-kind-icon">cast<wbr/>Collider</a></li><li class="tsd-kind-method tsd-parent-kind-class"><a href="Collider.html#castRay" class="tsd-kind-icon">cast<wbr/>Ray</a></li><li class="tsd-kind-method tsd-parent-kind-class"><a href="Collider.html#castRayAndGetNormal" class="tsd-kind-icon">cast<wbr/>Ray<wbr/>And<wbr/>Get<wbr/>Normal</a></li><li class="tsd-kind-method tsd-parent-kind-class"><a href="Collider.html#castShape" class="tsd-kind-icon">cast<wbr/>Shape</a></li><li class="tsd-kind-method tsd-parent-kind-class"><a href="Collider.html#collisionGroups" class="tsd-kind-icon">collision<wbr/>Groups</a></li><li class="tsd-kind-method tsd-parent-kind-class"><a href="Collider.html#contactCollider" class="tsd-kind-icon">contact<wbr/>Collider</a></li><li class="tsd-kind-method tsd-parent-kind-class"><a href="Collider.html#contactShape" class="tsd-kind-icon">contact<wbr/>Shape</a></li><li class="tsd-kind-method tsd-parent-kind-class"><a href="Collider.html#containsPoint" class="tsd-kind-icon">contains<wbr/>Point</a></li><li class="tsd-kind-method tsd-parent-kind-class"><a href="Collider.html#density" class="tsd-kind-icon">density</a></li><li class="tsd-kind-method tsd-parent-kind-class"><a href="Collider.html#finalizeDeserialization" class="tsd-kind-icon">finalize<wbr/>Deserialization</a></li><li class="tsd-kind-method tsd-parent-kind-class"><a href="Collider.html#friction" class="tsd-kind-icon">friction</a></li><li class="tsd-kind-method tsd-parent-kind-class"><a href="Collider.html#frictionCombineRule" class="tsd-kind-icon">friction<wbr/>Combine<wbr/>Rule</a></li><li class="tsd-kind-method tsd-parent-kind-class"><a href="Collider.html#halfExtents" class="tsd-kind-icon">half<wbr/>Extents</a></li><li class="tsd-kind-method tsd-parent-kind-class"><a href="Collider.html#halfHeight" class="tsd-kind-icon">half<wbr/>Height</a></li><li class="tsd-kind-method tsd-parent-kind-class"><a href="Collider.html#heightfieldHeights" class="tsd-kind-icon">heightfield<wbr/>Heights</a></li><li class="tsd-kind-method tsd-parent-kind-class"><a href="Collider.html#heightfieldScale" class="tsd-kind-icon">heightfield<wbr/>Scale</a></li><li class="tsd-kind-method tsd-parent-kind-class"><a href="Collider.html#indices" class="tsd-kind-icon">indices</a></li><li class="tsd-kind-method tsd-parent-kind-class"><a href="Collider.html#intersectsRay" class="tsd-kind-icon">intersects<wbr/>Ray</a></li><li class="tsd-kind-method tsd-parent-kind-class"><a href="Collider.html#intersectsShape" class="tsd-kind-icon">intersects<wbr/>Shape</a></li><li class="tsd-kind-method tsd-parent-kind-class"><a href="Collider.html#isSensor" class="tsd-kind-icon">is<wbr/>Sensor</a></li><li class="tsd-kind-method tsd-parent-kind-class"><a href="Collider.html#isValid" class="tsd-kind-icon">is<wbr/>Valid</a></li><li class="tsd-kind-method tsd-parent-kind-class"><a href="Collider.html#parent" class="tsd-kind-icon">parent</a></li><li class="tsd-kind-method tsd-parent-kind-class"><a href="Collider.html#projectPoint" class="tsd-kind-icon">project<wbr/>Point</a></li><li class="tsd-kind-method tsd-parent-kind-class"><a href="Collider.html#radius" class="tsd-kind-icon">radius</a></li><li class="tsd-kind-method tsd-parent-kind-class"><a href="Collider.html#restitution" class="tsd-kind-icon">restitution</a></li><li class="tsd-kind-method tsd-parent-kind-class"><a href="Collider.html#restitutionCombineRule" class="tsd-kind-icon">restitution<wbr/>Combine<wbr/>Rule</a></li><li class="tsd-kind-method tsd-parent-kind-class"><a href="Collider.html#rotation" class="tsd-kind-icon">rotation</a></li><li class="tsd-kind-method tsd-parent-kind-class"><a href="Collider.html#roundRadius" class="tsd-kind-icon">round<wbr/>Radius</a></li><li class="tsd-kind-method tsd-parent-kind-class"><a href="Collider.html#setActiveCollisionTypes" class="tsd-kind-icon">set<wbr/>Active<wbr/>Collision<wbr/>Types</a></li><li class="tsd-kind-method tsd-parent-kind-class"><a href="Collider.html#setActiveEvents" class="tsd-kind-icon">set<wbr/>Active<wbr/>Events</a></li><li class="tsd-kind-method tsd-parent-kind-class"><a href="Collider.html#setActiveHooks" class="tsd-kind-icon">set<wbr/>Active<wbr/>Hooks</a></li><li class="tsd-kind-method tsd-parent-kind-class"><a href="Collider.html#setCollisionGroups" class="tsd-kind-icon">set<wbr/>Collision<wbr/>Groups</a></li><li class="tsd-kind-method tsd-parent-kind-class"><a href="Collider.html#setFriction" class="tsd-kind-icon">set<wbr/>Friction</a></li><li class="tsd-kind-method tsd-parent-kind-class"><a href="Collider.html#setFrictionCombineRule" class="tsd-kind-icon">set<wbr/>Friction<wbr/>Combine<wbr/>Rule</a></li><li class="tsd-kind-method tsd-parent-kind-class"><a href="Collider.html#setRestitution" class="tsd-kind-icon">set<wbr/>Restitution</a></li><li class="tsd-kind-method tsd-parent-kind-class"><a href="Collider.html#setRestitutionCombineRule" class="tsd-kind-icon">set<wbr/>Restitution<wbr/>Combine<wbr/>Rule</a></li><li class="tsd-kind-method tsd-parent-kind-class"><a href="Collider.html#setRotation" class="tsd-kind-icon">set<wbr/>Rotation</a></li><li class="tsd-kind-method tsd-parent-kind-class"><a href="Collider.html#setRotationWrtParent" class="tsd-kind-icon">set<wbr/>Rotation<wbr/>Wrt<wbr/>Parent</a></li><li class="tsd-kind-method tsd-parent-kind-class"><a href="Collider.html#setSensor" class="tsd-kind-icon">set<wbr/>Sensor</a></li><li class="tsd-kind-method tsd-parent-kind-class"><a href="Collider.html#setShape" class="tsd-kind-icon">set<wbr/>Shape</a></li><li class="tsd-kind-method tsd-parent-kind-class"><a href="Collider.html#setSolverGroups" class="tsd-kind-icon">set<wbr/>Solver<wbr/>Groups</a></li><li class="tsd-kind-method tsd-parent-kind-class"><a href="Collider.html#setTranslation" class="tsd-kind-icon">set<wbr/>Translation</a></li><li class="tsd-kind-method tsd-parent-kind-class"><a href="Collider.html#setTranslationWrtParent" class="tsd-kind-icon">set<wbr/>Translation<wbr/>Wrt<wbr/>Parent</a></li><li class="tsd-kind-method tsd-parent-kind-class"><a href="Collider.html#shapeType" class="tsd-kind-icon">shape<wbr/>Type</a></li><li class="tsd-kind-method tsd-parent-kind-class"><a href="Collider.html#solverGroups" class="tsd-kind-icon">solver<wbr/>Groups</a></li><li class="tsd-kind-method tsd-parent-kind-class"><a href="Collider.html#translation" class="tsd-kind-icon">translation</a></li><li class="tsd-kind-method tsd-parent-kind-class"><a href="Collider.html#vertices" class="tsd-kind-icon">vertices</a></li></ul></li></ul></nav></div></div></div><footer class="with-border-bottom"><div class="container"><h2>Legend</h2><div class="tsd-legend-group"><ul class="tsd-legend"><li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li><li class="tsd-kind-property tsd-parent-kind-class"><span class="tsd-kind-icon">Property</span></li><li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li><li class="tsd-kind-accessor tsd-parent-kind-class"><span class="tsd-kind-icon">Accessor</span></li></ul><ul class="tsd-legend"><li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited constructor</span></li><li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited property</span></li><li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited method</span></li></ul><ul class="tsd-legend"><li class="tsd-kind-property tsd-parent-kind-interface"><span class="tsd-kind-icon">Property</span></li><li class="tsd-kind-method tsd-parent-kind-interface"><span class="tsd-kind-icon">Method</span></li></ul><ul class="tsd-legend"><li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected property</span></li><li class="tsd-kind-method tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected method</span></li></ul><ul class="tsd-legend"><li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private property</span></li></ul><ul class="tsd-legend"><li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static method</span></li></ul></div><h2>Settings</h2><p>Theme <select id="theme"><option value="os">OS</option><option value="light">Light</option><option value="dark">Dark</option></select></p></div></footer><div class="container tsd-generator"><p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p></div><div class="overlay"></div><script src="../assets/main.js"></script></body></html>
