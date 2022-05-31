@@ -61,13 +61,12 @@ fn modify_body_dominance(mut dominances: Query<&mut Dominance>) {
 
 ```js
 /* Set the damping coefficients when the rigid-body is created. */
-let rigidBodyDesc = RAPIER.RigidBodyDesc.newDynamic()
+let rigidBodyDesc = RAPIER.RigidBodyDesc.dynamic()
     .setDominanceGroup(10);
 let rigidBody = world.createRigidBody(rigidBodyDesc);
 ```
 ```js
 /* Set the damping coefficients after the rigid-body creation. */
-let rigidBody = world.getRigidBody(rigidBodyHandle);
 rigidBody.setDominanceGroup(10);
 ```
 

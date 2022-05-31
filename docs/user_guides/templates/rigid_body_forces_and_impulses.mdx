@@ -144,8 +144,6 @@ values={[
 <TabItem value="2D">
 
 ```js
-let rigidBody = world.getRigidBody(rigidBodyHandle);
-
 // The `true` argument makes sure the rigid-body is awake.
 rigidBody.applyForce({ x: 0.0, y: 1000.0 }, true);
 rigidBody.applyTorque(100.0, true);
@@ -160,8 +158,6 @@ rigidBody.applyImpulseAtPoint({ x: 0.0, y: 1000.0 }, { x: 1.0, y: 2.0 }, true);
   <TabItem value="3D">
 
 ```js
-let rigidBody = world.getRigidBody(rigidBodyRandle);
-
 // The `true` argument makes sure the rigid-body is awake.
 rigidBody.applyForce({ x: 0.0, y: 1000.0, z: 0.0 }, true);
 rigidBody.applyTorque({ x: 100.0, y: 0.0, z: 0.0 }, true);

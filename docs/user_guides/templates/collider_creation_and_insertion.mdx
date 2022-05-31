@@ -157,7 +157,7 @@ use bevy_rapier2d::prelude::*;
 commands.spawn()
     .insert(Collider::cuboid(1.0, 2.0))
     .insert(Sensor(true))
-    .insert(Transform::from_xyz(2.0, 0.0, 0.0))
+    .insert_bundle(TransformBundle::from(Transform::from_xyz(2.0, 0.0, 0.0)))
     .insert(Friction::coefficient(0.7))
     .insert(Restitution::coefficient(0.3))
     .insert(ColliderMassProperties::Density(2.0));
@@ -172,7 +172,7 @@ use bevy_rapier3d::prelude::*;
 commands.spawn()
     .insert(Collider::cuboid(1.0, 2.0, 3.0))
     .insert(Sensor(true))
-    .insert(Transform::from_xyz(2.0, 0.0, 0.0))
+    .insert_bundle(TransformBundle::from(Transform::from_xyz(2.0, 0.0, 0.0)))
     .insert(Friction::coefficient(0.7))
     .insert(Restitution::coefficient(0.3))
     .insert(ColliderMassProperties::Density(2.0));
@@ -204,11 +204,11 @@ commands.spawn()
         children.spawn()
             .insert(Collider::ball(0.5))
             // Position the collider relative to the rigid-body.
-            .insert(Transform::from_xyz(0.0, 0.0, -1.0));
+            .insert_bundle(TransformBundle::from(Transform::from_xyz(0.0, 0.0, -1.0)));
         children.spawn()
             .insert(Collider::ball(0.5))
             // Position the collider relative to the rigid-body.
-            .insert(Transform::from_xyz(0.0, 0.0, 1.0));
+            .insert_bundle(TransformBundle::from(Transform::from_xyz(0.0, 0.0, 1.0)));
     });
 ```
 
@@ -275,8 +275,8 @@ let colliderDesc = new RAPIER.ColliderDesc(new RAPIER.Ball(0.5))
 // Create the collider, without attaching it to a rigid-body.
 let handle = world.createCollider(colliderDesc);
 // Or create the collider and attach it to a rigid-body.
-let rigidBody = world.createRigidBody(RAPIER.RigidBodyDesc.newDynamic());
-let collider = world.createCollider(colliderDesc, rigidBody.handle);
+let rigidBody = world.createRigidBody(RAPIER.RigidBodyDesc.dynamic());
+let collider = world.createCollider(colliderDesc, rigidBody);
 ```
 
   </TabItem>
@@ -318,8 +318,8 @@ let colliderDesc = new RAPIER.ColliderDesc(new RAPIER.Ball(0.5))
 // Create the collider, without attaching it to a rigid-body.
 let handle = world.createCollider(colliderDesc);
 // Or create the collider and attach it to a rigid-body.
-let rigidBody = world.createRigidBody(RAPIER.RigidBodyDesc.newDynamic());
-let collider = world.createCollider(colliderDesc, rigidBody.handle);
+let rigidBody = world.createRigidBody(RAPIER.RigidBodyDesc.dynamic());
+let collider = world.createCollider(colliderDesc, rigidBody);
 ```
 
   </TabItem>

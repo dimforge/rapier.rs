@@ -61,13 +61,13 @@ import('@dimforge/rapier2d').then(RAPIER => {
     world.createCollider(groundColliderDesc);
 
     // Create a dynamic rigid-body.
-    let rigidBodyDesc = RAPIER.RigidBodyDesc.newDynamic()
+    let rigidBodyDesc = RAPIER.RigidBodyDesc.dynamic()
             .setTranslation(0.0, 1.0);
     let rigidBody = world.createRigidBody(rigidBodyDesc);
 
     // Create a cuboid collider attached to the dynamic rigidBody.
     let colliderDesc = RAPIER.ColliderDesc.cuboid(0.5, 0.5);
-    let collider = world.createCollider(colliderDesc, rigidBody.handle);
+    let collider = world.createCollider(colliderDesc, rigidBody);
 
     // Game loop. Replace by your own game loop system.
     let gameLoop = () => {
@@ -99,13 +99,13 @@ import('@dimforge/rapier3d').then(RAPIER => {
     world.createCollider(groundColliderDesc);
   
     // Create a dynamic rigid-body.
-    let rigidBodyDesc = RAPIER.RigidBodyDesc.newDynamic()
+    let rigidBodyDesc = RAPIER.RigidBodyDesc.dynamic()
             .setTranslation(0.0, 1.0, 0.0);
     let rigidBody = world.createRigidBody(rigidBodyDesc);
   
     // Create a cuboid collider attached to the dynamic rigidBody.
     let colliderDesc = RAPIER.ColliderDesc.cuboid(0.5, 0.5, 0.5);
-    let collider = world.createCollider(colliderDesc, rigidBody.handle);
+    let collider = world.createCollider(colliderDesc, rigidBody);
   
     // Game loop. Replace by your own game loop system.
     let gameLoop = () => {

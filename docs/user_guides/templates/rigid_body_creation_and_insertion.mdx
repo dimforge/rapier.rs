@@ -156,7 +156,7 @@ use bevy_rapier2d::prelude::*;
 
 commands.spawn()
         .insert(RigidBody::Dynamic)
-        .insert(Transform::from_xyz(0.0, 5.0, 0.0))
+        .insert_bundle(TransformBundle::from(Transform::from_xyz(0.0, 5.0, 0.0)))
         .insert(Velocity {
             linvel: Vec2::new(1.0, 2.0),
             angvel: 0.2
@@ -175,7 +175,7 @@ use bevy_rapier3d::prelude::*;
 
 commands.spawn()
         .insert(RigidBody::Dynamic)
-        .insert(Transform::from_xyz(0.0, 5.0, 0.0))
+        .insert_bundle(TransformBundle::from(Transform::from_xyz(0.0, 5.0, 0.0)))
         .insert(Velocity {
             linvel: Vec3::new(1.0, 2.0, 3.0),
             angvel: Vec3::new(0.2, 0.0, 0.0),
@@ -196,9 +196,8 @@ A rigid-body is created by a `World.createRigidBody` method. The initial state o
 the rigid-body to create is described by an instance of the `RigidBodyDesc` class.
 
 Each rigid-body create by the physics world is given an integer identifier `rigidBody.handle`. This identifier
-is guaranteed to the different from any identifier of rigid-bodies still existing in the physics
-world. However, the identifier may be equal to the identifier of an older rigid-body that has
-already been removed from the physics world with `World.removeRigidBody`.
+is guaranteed to the different from any identifier of rigid-bodies still existing (or that existed) in the physics
+world.
 
 :::info
 The following example shows several setters that can be called to customize the
@@ -220,13 +219,13 @@ values={[
 let world = new RAPIER.World({ x: 0.0, y: -9.81 });
 
 // Builder for a fixed rigid-body.
-let _ = RigidBodyDesc.newStatic();
+let _ = RigidBodyDesc.fixed();
 // Builder for a dynamic rigid-body.
-let _ = RigidBodyDesc.newDynamic();
+let _ = RigidBodyDesc.dynamic();
 // Builder for a kinematic rigid-body controlled at the velocity level.
-let _ = RigidBodyDesc.newKinematicVelocityBased();
+let _ = RigidBodyDesc.kinematicVelocityBased();
 // Builder for a kinematic rigid-body controlled at the position level.
-let _ = RigidBodyDesc.newKinematicPositionBased();
+let _ = RigidBodyDesc.kinematicPositionBased();
 // Builder for a body with a status specified by an enum.
 let rigidBodyDesc = new RigidBodyDesc(RAPIER.RigidBodyType.Dynamic)
     // The rigid body translation.
@@ -265,13 +264,13 @@ let rigidBodyHandle = rigidBody.handle;
 let world = new RAPIER.World({ x: 0.0, y: -9.81, z: 0.0 });
 
 // Builder for a fixed rigid-body.
-let example1 = RAPIER.RigidBodyDesc.newStatic();
+let example1 = RAPIER.RigidBodyDesc.fixed();
 // Builder for a dynamic rigid-body.
-let example2 = RAPIER.RigidBodyDesc.newDynamic();
+let example2 = RAPIER.RigidBodyDesc.dynamic();
 // Builder for a kinematic rigid-body controlled at the velocity level.
-let example3 = RAPIER.RigidBodyDesc.newKinematicVelocityBased();
+let example3 = RAPIER.RigidBodyDesc.kinematicVelocityBased();
 // Builder for a kinematic rigid-body controlled at the position level.
-let example4 = RAPIER.RigidBodyDesc.newKinematicPositionBased();
+let example4 = RAPIER.RigidBodyDesc.kinematicPositionBased();
 // Builder for a body with a status specified by an enum.
 let rigidBodyDesc = new RAPIER.RigidBodyDesc(RAPIER.RigidBodyType.Dynamic)
     // The rigid body translation.

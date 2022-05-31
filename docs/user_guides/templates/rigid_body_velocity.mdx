@@ -150,7 +150,7 @@ values={[
 
 ```js
 /* Set the velocities when the rigid-body is created. */
-let rigidBodyDesc = RAPIER.RigidBodyDesc.newDynamic()
+let rigidBodyDesc = RAPIER.RigidBodyDesc.dynamic()
     // The linear velocity of this body.
     // Default: zero velocity.
     .setLinvel(1.0, 3.0)
@@ -161,7 +161,6 @@ let rigidBody = world.createRigidBody(rigidBodyDesc);
 ```
 ```js
 /* Set the velocities after the rigid-body creation. */
-let rigidBody = world.getRigidBody(rigidBodyHandle);
 // The `true` argument makes sure the rigid-body is awake.
 rigidBody.setLinvel({ x: 1.0, y: 3.0 }, true);
 rigidBody.setAngvel(3.0, true);
@@ -172,7 +171,7 @@ rigidBody.setAngvel(3.0, true);
 
 ```js
 /* Set the velocities when the rigid-body is created. */
-let rigidBodyDesc = RAPIER.RigidBodyDesc.newDynamic()
+let rigidBodyDesc = RAPIER.RigidBodyDesc.dynamic()
     // The linear velocity of this body.
     // Default: zero velocity.
     .setLinvel(1.0, 3.0, 4.0)
@@ -183,7 +182,6 @@ let rigidBody = world.createRigidBody(rigidBodyDesc);
 ```
 ```js
 /* Set the velocities after the rigid-body creation. */
-let rigidBody = world.getRigidBody(rigidBodyHandle);
 // The `true` argument makes sure the rigid-body is awake.
 rigidBody.setLinvel({ x: 1.0, y: 3.0, z: 4.0 }, true);
 rigidBody.setAngvel({ x: 3.0, y: 0.0, z: 0.0 }, true);

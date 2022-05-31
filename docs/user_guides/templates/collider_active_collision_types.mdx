@@ -12,16 +12,16 @@ and a collider attached to a fixed rigid-body. This can be done by modifying the
 /* Set the active collision types when the collider is created. */
 let collider = ColliderBuilder::ball(0.5)
     .active_collision_types(ActiveCollisionTypes::default() | 
-                            ActiveCollisionTypes::KINEMATIC_STATIC)
+                            ActiveCollisionTypes::KINEMATIC_FIXED)
     .build();
 ```
 ```rust
 /* Set the active collision types after the collider creation. */
 let collider = collider_set.get_mut(collider_handle).unwrap();
 collider.set_active_collision_types(ActiveCollisionTypes::default() |
-                                    ActiveCollisionTypes::KINEMATIC_STATIC);
+                                    ActiveCollisionTypes::KINEMATIC_FIXED);
 assert!(collider.active_collision_types().contains(ActiveCollisionTypes::DYNAMIC_KINEMATIC));
-assert!(collider.active_collision_types().contains(ActiveCollisionTypes::KINEMATIC_STATIC));
+assert!(collider.active_collision_types().contains(ActiveCollisionTypes::KINEMATIC_FIXED));
 ```
 
 </rapier>
@@ -31,13 +31,13 @@ assert!(collider.active_collision_types().contains(ActiveCollisionTypes::KINEMAT
 /* Set the active collision types when the collider is created. */
 commands.spawn()
     .insert(Collider::ball(0.5))
-    .insert(ActiveCollisionTypes::default() | ActiveCollisionTypes::KINEMATIC_STATIC);
+    .insert(ActiveCollisionTypes::default() | ActiveCollisionTypes::KINEMATIC_FIXED);
 ```
 ```rust
 /* Set the active collision types inside of a system. */
 fn modify_collider_active_collision_types(mut active_types: Query<&mut ActiveCollisionTypes>) {
     for mut active_types in active_types.iter_mut() {
-        *active_types = (ActiveCollisionTypes::default() | ActiveCollisionTypes::KINEMATIC_STATIC);
+        *active_types = (ActiveCollisionTypes::default() | ActiveCollisionTypes::KINEMATIC_FIXED);
     }
 }
 ```
@@ -49,14 +49,13 @@ fn modify_collider_active_collision_types(mut active_types: Query<&mut ActiveCol
 /* Set the active collision types when the collider is created. */
 let colliderDesc = RAPIER.ColliderDesc.ball(0.5)
     .setActiveCollisionTypes(RAPIER.ActiveCollisionTypes.DEFAULT | 
-                             RAPIER.ActiveCollisionTypes.KINEMATIC_STATIC);
+                             RAPIER.ActiveCollisionTypes.KINEMATIC_FIXED);
 let collider = world.createCollider(colliderDesc);
 ```
 ```js
 /* Set the active collision types after the collider creation. */
-let collider = world.getCollider(colliderHandle);
 collider.setActiveCollisionTypes(RAPIER.ActiveCollisionTypes.DEFAULT|
-                                 RAPIER.ActiveCollisionTypes.KINEMATIC_STATIC);
+                                 RAPIER.ActiveCollisionTypes.KINEMATIC_FIXED);
 ```
 
 </js>
@@ -68,7 +67,7 @@ set its active collision types to:
 <notjs>
 
 ```rust
-ActiveCollisionTypes::default() | ActiveCollisionTypes::KINEMATIC_STATIC
+ActiveCollisionTypes::default() | ActiveCollisionTypes::KINEMATIC_FIXED
 ```
 
 </notjs>
@@ -76,7 +75,7 @@ ActiveCollisionTypes::default() | ActiveCollisionTypes::KINEMATIC_STATIC
 <js>
 
 ```js
-RAPIER.ActiveCollisionTypes.DEFAULT | RAPIER.ActiveCollisionTypes.KINEMATIC_STATIC
+RAPIER.ActiveCollisionTypes.DEFAULT | RAPIER.ActiveCollisionTypes.KINEMATIC_FIXED
 ```
 
 </js>

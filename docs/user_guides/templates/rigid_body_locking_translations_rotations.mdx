@@ -120,7 +120,7 @@ values={[
 
 ```js
 /* Lock translations/rotations when the rigid-body is created. */
-let rigidBodyDesc = RAPIER.RigidBodyDesc.newDynamic()
+let rigidBodyDesc = RAPIER.RigidBodyDesc.dynamic()
     .lockTranslations() // prevent translations along along all axes.
     .lockRotations();   // prevent rotations.
 let rigidBody = world.createRigidBody(rigidBodyDesc);
@@ -128,7 +128,6 @@ let rigidBody = world.createRigidBody(rigidBodyDesc);
 
 ```js
 /* Lock translations/rotations after the rigid-body creation. */
-let rigidBody = world.getRigidBody(rigidBodyRandle);
 // The last `true` argument makes sure the rigid-body is awake.
 rigidBody.lockTranslations(true, true);
 rigidBody.lockRotations(true, true);
@@ -139,7 +138,7 @@ rigidBody.lockRotations(true, true);
 
 ```js
 /* Lock translations/rotations when the rigid-body is created. */
-let rigidBodyDesc = RAPIER.RigidBodyDesc.newDynamic()
+let rigidBodyDesc = RAPIER.RigidBodyDesc.dynamic()
     .lockTranslations() // prevent translations along along all axes.
     .lockRotations()    // prevent rotations along all axes.
     .restrictRotations(true, false, false); // prevent rotations along the Y and Z axes.
@@ -148,7 +147,6 @@ let rigidBody = world.createRigidBody(rigidBodyDesc);
 
 ```js
 /* Lock translations/rotations after the rigid-body creation. */
-let rigidBody = world.getRigidBody(rigidBodyRandle);
 // The last `true` argument makes sure the rigid-body is awake.
 rigidBody.lockTranslations(true, true);
 rigidBody.lockRotations(true, true);
