@@ -1,14 +1,15 @@
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-In addition to [gravity](#gravity), it is possible to apply custom forces (or torques) and impluses (or torque impulses)
+In addition to [gravity](#gravity), it is possible to add custom forces (or torques) or apply impulses (or torque impulses)
 to dynamic rigid-bodies in order to make  them move in specific ways. Forces affect the rigid-body's acceleration
 whereas impulses affect the rigid-body's velocity. They are both based on the familiar equations:
 - **Forces:** the acceleration change is equal to the force divided by the mass: $\Delta{}a = m^{-1}f$
 - **Impulses:** the velocity change is equal to the impulse divided by the mass: $\Delta{}v = m^{-1}i$
 
-Forces and impulses can be applied to a rigid-body <rapier>after it has been created</rapier><bevy>when it is created or after
-its creation</bevy><js>after it has been created</js>:
+Forces can be added, and impulses can be applied, to a rigid-body <rapier>after it has been created</rapier><bevy>when it is created or after
+its creation</bevy><js>after it has been created</js>. Added forces are persistent across simulation steps, and can be
+cleared manually.
 
 <rapier>
 
@@ -25,9 +26,11 @@ values={[
 let rigid_body = rigid_body_set.get_mut(rigid_body_handle).unwrap();
 
 // The `true` argument makes sure the rigid-body is awake.
-rigid_body.apply_force(vector![0.0, 1000.0], true);
-rigid_body.apply_torque(100.0, true);
-rigid_body.apply_force_at_point(vector![0.0, 1000.0], point![1.0, 2.0], true);
+rigid_body.reset_forces(true);  // Reset the forces to zero.
+rigid_body.reset_torques(true); // Reset the torques to zero.
+rigid_body.add_force(vector![0.0, 1000.0], true);
+rigid_body.add_torque(100.0, true);
+rigid_body.add_force_at_point(vector![0.0, 1000.0], point![1.0, 2.0], true);
 
 rigid_body.apply_impulse(vector![0.0, 1000.0], true);
 rigid_body.apply_torque_impulse(100.0, true);
@@ -41,9 +44,11 @@ rigid_body.apply_impulse_at_point(vector![0.0, 1000.0], point![1.0, 2.0], true);
 let rigid_body = rigid_body_set.get_mut(rigid_body_handle).unwrap();
 
 // The `true` argument makes sure the rigid-body is awake.
-rigid_body.apply_force(vector![0.0, 1000.0, 0.0], true);
-rigid_body.apply_torque(vector![100.0, 0.0, 0.0], true);
-rigid_body.apply_force_at_point(vector![0.0, 1000.0, 0.0], point![1.0, 2.0, 3.0], true);
+rigid_body.reset_forces(true);  // Reset the forces to zero.
+rigid_body.reset_torques(true); // Reset the torques to zero.
+rigid_body.add_force(vector![0.0, 1000.0, 0.0], true);
+rigid_body.add_torque(vector![100.0, 0.0, 0.0], true);
+rigid_body.add_force_at_point(vector![0.0, 1000.0, 0.0], point![1.0, 2.0, 3.0], true);
 
 rigid_body.apply_impulse(vector![0.0, 1000.0, 0.0], true);
 rigid_body.apply_torque_impulse(vector![100.0, 0.0, 0.0], true);
@@ -145,9 +150,11 @@ values={[
 
 ```js
 // The `true` argument makes sure the rigid-body is awake.
-rigidBody.applyForce({ x: 0.0, y: 1000.0 }, true);
-rigidBody.applyTorque(100.0, true);
-rigidBody.applyForceAtPoint({ x: 0.0, y: 1000.0 }, { x: 1.0, y: 2.0 }, true);
+rigid_body.resetForces(true);  // Reset the forces to zero.
+rigid_body.resetTorques(true); // Reset the torques to zero.
+rigidBody.addForce({ x: 0.0, y: 1000.0 }, true);
+rigidBody.addTorque(100.0, true);
+rigidBody.addForceAtPoint({ x: 0.0, y: 1000.0 }, { x: 1.0, y: 2.0 }, true);
 
 rigidBody.applyImpulse({ x: 0.0, y: 1000.0 }, true);
 rigidBody.applyTorqueImpulse(100.0, true);
@@ -159,9 +166,11 @@ rigidBody.applyImpulseAtPoint({ x: 0.0, y: 1000.0 }, { x: 1.0, y: 2.0 }, true);
 
 ```js
 // The `true` argument makes sure the rigid-body is awake.
-rigidBody.applyForce({ x: 0.0, y: 1000.0, z: 0.0 }, true);
-rigidBody.applyTorque({ x: 100.0, y: 0.0, z: 0.0 }, true);
-rigidBody.applyForceAtPoint({ x: 0.0, y: 1000.0, z: 0.0 }, { x: 1.0, y: 2.0, z: 3.0 }, true);
+rigid_body.resetForces(true);  // Reset the forces to zero.
+rigid_body.resetTorques(true); // Reset the torques to zero.
+rigidBody.addForce({ x: 0.0, y: 1000.0, z: 0.0 }, true);
+rigidBody.addTorque({ x: 100.0, y: 0.0, z: 0.0 }, true);
+rigidBody.addForceAtPoint({ x: 0.0, y: 1000.0, z: 0.0 }, { x: 1.0, y: 2.0, z: 3.0 }, true);
 
 rigidBody.applyImpulse({ x: 0.0, y: 1000.0, z: 0.0 }, true);
 rigidBody.applyTorqueImpulse({ x: 100.0, y: 0.0, z: 0.0 }, true);
