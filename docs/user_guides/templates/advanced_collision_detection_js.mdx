@@ -59,12 +59,12 @@ will be multiple contact manifolds, one for each piece that may result in an act
 :::
 
 ```js
-world.contactsWith(colliderHandle, (otherColliderHandle) => {
-    // This closure is called on the handle of each collider potentially
-    // in contact with `colliderHandle`.
+world.contactsWith(collider, (otherCollider) => {
+    // This closure is called on each collider object potentially
+    // in contact with `collider`.
 });
 
-world.contactPair(handle1, handle2, (manifold, flipped) => {
+world.contactPair(collider1, collider2, (manifold, flipped) => {
    // Contact information can be read from `manifold`. 
 });
 ```
@@ -85,12 +85,12 @@ instead of the intersection graph.
 :::
 
 ```js
-world.intersectionsWith(colliderHandle, (otherColliderHandle) => {
-    // This closure is called on the handle of each collider potentially
-    // intersecting the collider with handle `colliderHandle`.
+world.intersectionsWith(collider, (otherCollider) => {
+    // This closure is called on each collider potentially
+    // intersecting the collider `collider`.
 });
 
-let intersections = world.intersectionPair(handle1, handle2);
+let intersections = world.intersectionPair(collider1, collider2);
 ```
 
 ## Physics hooks
