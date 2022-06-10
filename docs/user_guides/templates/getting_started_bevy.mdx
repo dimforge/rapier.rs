@@ -212,7 +212,7 @@ fn print_ball_altitude(positions: Query<&Transform, With<RigidBody>>) {
 The `bevy_rapier` plugin comes with a debug-render to help visualize exactly what the physics-engine sees. This
 can help fixing some bugs like colliders not being properly aligned with your graphics representation.
 The debug-renderer is be enabled by:
-1. Enabling the `render` cargo feature of bevy-rapier.
+1. Enabling the `debug-render` cargo feature of bevy-rapier.
 2. Adding the plugin `RapierDebugRenderPlugin` to the Bevy app.
 
 ![debug-render](/img/rapier_debug_render.png)
