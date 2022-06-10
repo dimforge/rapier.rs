@@ -150,8 +150,8 @@ values={[
 
 ```js
 // The `true` argument makes sure the rigid-body is awake.
-rigid_body.resetForces(true);  // Reset the forces to zero.
-rigid_body.resetTorques(true); // Reset the torques to zero.
+rigidBody.resetForces(true);  // Reset the forces to zero.
+rigidBody.resetTorques(true); // Reset the torques to zero.
 rigidBody.addForce({ x: 0.0, y: 1000.0 }, true);
 rigidBody.addTorque(100.0, true);
 rigidBody.addForceAtPoint({ x: 0.0, y: 1000.0 }, { x: 1.0, y: 2.0 }, true);
@@ -166,8 +166,8 @@ rigidBody.applyImpulseAtPoint({ x: 0.0, y: 1000.0 }, { x: 1.0, y: 2.0 }, true);
 
 ```js
 // The `true` argument makes sure the rigid-body is awake.
-rigid_body.resetForces(true);  // Reset the forces to zero.
-rigid_body.resetTorques(true); // Reset the torques to zero.
+rigidBody.resetForces(true);  // Reset the forces to zero.
+rigidBody.resetTorques(true); // Reset the torques to zero.
 rigidBody.addForce({ x: 0.0, y: 1000.0, z: 0.0 }, true);
 rigidBody.addTorque({ x: 100.0, y: 0.0, z: 0.0 }, true);
 rigidBody.addForceAtPoint({ x: 0.0, y: 1000.0, z: 0.0 }, { x: 1.0, y: 2.0, z: 3.0 }, true);
