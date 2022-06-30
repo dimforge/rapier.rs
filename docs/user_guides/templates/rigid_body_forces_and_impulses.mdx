@@ -85,7 +85,7 @@ commands.spawn()
 ```
 ```rust
 /* Apply forces and impulses inside of a system. */
-fn apply_forces(mut ext_forces: Query<&mut ExternalForce>, ext_impulses: Query<&mut ExternalImpulse)>) {
+fn apply_forces(mut ext_forces: Query<&mut ExternalForce>, mut ext_impulses: Query<&mut ExternalImpulse>) {
     // Apply forces.
     for mut ext_force in ext_forces.iter_mut() {
         ext_force.force = Vec2::new(1000.0, 2000.0);
@@ -118,7 +118,7 @@ commands.spawn()
 ```
 ```rust
 /* Apply forces and impulses inside of a system. */
-fn apply_forces(mut ext_forces: Query<&mut ExternalForce>, ext_impulses: Query<&mut ExternalImpulse)>) {
+fn apply_forces(mut ext_forces: Query<&mut ExternalForce>, mut ext_impulses: Query<&mut ExternalImpulse>) {
     // Apply forces.
     for mut ext_force in ext_forces.iter_mut() {
         ext_force.force = Vec3::new(1000.0, 2000.0, 3000.0);
