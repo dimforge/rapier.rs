@@ -129,7 +129,7 @@ values={[
 <TabItem value="2D">
 
 ```js
-let params = RAPIER.JointParams.fixed({ x: 0.0, y: 0.0 }, 0.0, { x: 0.0, y: -2.0 }, 0.0);
+let params = RAPIER.JointData.fixed({ x: 0.0, y: 0.0 }, 0.0, { x: 0.0, y: -2.0 }, 0.0);
 let joint = world.createImpulseJoint(params, body1, body2, true);
 ```
 
@@ -137,7 +137,7 @@ let joint = world.createImpulseJoint(params, body1, body2, true);
   <TabItem value="3D">
 
 ```js
-let params = RAPIER.JointParams.fixed(
+let params = RAPIER.JointData.fixed(
     { x: 0.0, y: 0.0, z: 0.0 }, 
     { w: 1.0, x: 0.0, y: 0.0, z: 0.0 },
     { x: 0.0, y: -2.0, z: 0.0 },
@@ -183,7 +183,7 @@ commands.spawn()
 <js>
 
 ```js
-let params = RAPIER.JointParams.spherical({ x: 0.0, y: 0.0, z: 1.0 }, { x: 0.0, y: 0.0, z: -3.0 });
+let params = RAPIER.JointData.spherical({ x: 0.0, y: 0.0, z: 1.0 }, { x: 0.0, y: 0.0, z: -3.0 });
 let joint = world.createImpulseJoint(params, body1, body2, true);
 ```
 
@@ -282,7 +282,7 @@ values={[
 <TabItem value="2D">
 
 ```js
-let params = RAPIER.JointParams.revolute({ x: 0.0, y: 1.0 }, { x: 0.0, y: -3.0 });
+let params = RAPIER.JointData.revolute({ x: 0.0, y: 1.0 }, { x: 0.0, y: -3.0 });
 let joint = world.createImpulseJoint(params, body1, body2, true);
 ```
 
@@ -291,7 +291,7 @@ let joint = world.createImpulseJoint(params, body1, body2, true);
 
 ```js
 let x = { x: 1.0, y: 0.0, z: 0.0 };
-let params = RAPIER.JointParams.revolute({ x: 0.0, y: 0.0, z: 1.0 }, x, { x: 0.0, y: 0.0, z: -3.0 }, x);
+let params = RAPIER.JointData.revolute({ x: 0.0, y: 0.0, z: 1.0 }, { x: 0.0, y: 0.0, z: -3.0 }, x);
 let joint = world.createImpulseJoint(params, body1, body2, true);
 ```
 
@@ -398,7 +398,7 @@ values={[
 
 ```js
 let x = { x: 1.0, y: 0.0 };
-let params = RAPIER.JointParams.prismatic({ x: 0.0, y: 0.0 }, x, { x: 0.0, y: -3.0 }, x);
+let params = RAPIER.JointData.prismatic({ x: 0.0, y: 0.0 }, x, { x: 0.0, y: -3.0 }, x);
 params.limitsEnabled = true;
 params.limits = [-2.0, 5.0];
 let joint = world.createImpulseJoint(params, body1, body2, true);
@@ -410,7 +410,7 @@ let joint = world.createImpulseJoint(params, body1, body2, true);
 ```js
 let x = { x: 1.0, y: 0.0, z: 0.0 };
 let z = { x: 0.0, y: 0.0, z: 1.0 };
-let params = RAPIER.JointParams.prismatic({ x: 0.0, y: 0.0, z: 1.0 }, x, z, { x: 0.0, y: 0.0, z: -3.0 }, x, z);
+let params = RAPIER.JointData.prismatic({ x: 0.0, y: 0.0, z: 1.0 }, x, z, { x: 0.0, y: 0.0, z: -3.0 }, x, z);
 params.limitsEnabled = true;
 params.limits = [-2.0, 5.0];
 let joint = world.createImpulseJoint(params, body1, body2, true);
@@ -535,9 +535,9 @@ values={[
 
 ```js
 let x = { x: 1.0, y: 0.0 };
-let params = RAPIER.JointParams.prismatic({ x: 0.0, y: 0.0 }, x, { x: 0.0, y: -3.0 }, x);
+let params = RAPIER.JointData.prismatic({ x: 0.0, y: 0.0 }, { x: 0.0, y: -3.0 }, x);
 let joint = world.createImpulseJoint(params, body1, body2, true);
-(joint as RAPIER.PrismaticJoint).configureMotorVelocity(1.0, 0.5);
+(joint as RAPIER.PrismaticImpulseJoint).configureMotorVelocity(1.0, 0.5);
 ```
 
   </TabItem>
@@ -546,9 +546,9 @@ let joint = world.createImpulseJoint(params, body1, body2, true);
 ```js
 let x = { x: 1.0, y: 0.0, z: 0.0 };
 let z = { x: 0.0, y: 0.0, z: 1.0 };
-let params = RAPIER.JointParams.prismatic({ x: 0.0, y: 0.0, z: 1.0 }, x, z, { x: 0.0, y: 0.0, z: -3.0 }, x, z);
+let params = RAPIER.JointData.prismatic({ x: 0.0, y: 0.0, z: 1.0 }, { x: 0.0, y: 0.0, z: -3.0 }, x);
 let joint = world.createImpulseJoint(params, body1, body2, true);
-(joint as RAPIER.PrismaticJoint).configureMotorVelocity(1.0, 0.5);
+(joint as RAPIER.PrismaticImpulseJoint).configureMotorVelocity(1.0, 0.5);
 ```
 
   </TabItem>
