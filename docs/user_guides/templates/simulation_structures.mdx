@@ -103,7 +103,7 @@ or `PhysicsPipeline`:
 ```rust
 // Game loop.
 loop {
-  physics_pipeline.update(...);
+  physics_pipeline.step(...);
   query_pipeline.update(...);
   // Now we can read the results of the physics simulation,
   // and we can do advanced scene queries on the colliders.
