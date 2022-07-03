@@ -83,6 +83,16 @@ module.exports = {
         'api/javascript/JavaScript3D',
         {
           type: 'link',
+          label: 'bevy_rapier2d ↪',
+          href: 'https://docs.rs/bevy_rapier2d'
+        },
+        {
+          type: 'link',
+          label: 'bevy_rapier3d ↪',
+          href: 'https://docs.rs/bevy_rapier3d'
+        },
+        {
+          type: 'link',
           label: 'rapier2d ↪',
           href: 'https://docs.rs/rapier2d'
         },
