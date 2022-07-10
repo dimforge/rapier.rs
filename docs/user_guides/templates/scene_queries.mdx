@@ -8,7 +8,7 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
 Scene queries are geometric queries that take all the colliders of the physics world into account. These queries are
-available through the [QueryPipeline](simulation_structures#the-query-pipeline).
+available through the <rapier>[QueryPipeline](simulation_structures#the-query-pipeline)</rapier><bevy>`RapierContext` resource</bevy><js>`World` class</js>.
 
 <rapier>
 
@@ -23,8 +23,8 @@ query_pipeline.update(&island_manager, &rigid_body_set, &collider_set);
 
 :::note
 Right now, the query pipeline takes the `IslandManager` and `RigidBodySet` as arguments. These two arguments
-may look superfluous, especially if the colliders are not attached to rigid-bodies. A new update method that takes
-a `ColliderSet` as its only argument will be added in the future.
+may look superfluous, especially if the colliders are not attached to rigid-bodies. Another update method that only
+takes a `ColliderSet` as its only argument will be added in the future.
 :::
 
 </rapier>
@@ -48,3 +48,8 @@ import PointProjection from './scene_queries_point_projection.mdx'
 import IntersectionTest from './scene_queries_intersection_test.mdx'
 
 <IntersectionTest />
+
+## Query filters
+import QueryFilters from './scene_queries_filters.mdx'
+
+<QueryFilters />

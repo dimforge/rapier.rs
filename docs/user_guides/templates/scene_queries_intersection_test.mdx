@@ -29,11 +29,10 @@ a point.
 ```rust
 let shape = Cuboid::new(vector![1.0, 2.0]);
 let shape_pos = Isometry::new(vector![0.0, 1.0], 0.8);
-let groups = InteractionGroups::all();
-let filter = None;
+let filter = QueryFilter::default();
 
 query_pipeline.intersections_with_shape(
-    &collider_set, &shape_pos, &shape, groups, filter, |handle| {
+    &collider_set, &shape_pos, &shape, filter, |handle| {
         println!("The collider {:?} intersects our shape.", handle);
         true // Return `false` instead if we want to stop searching for other colliders that contain this point.
     }
@@ -52,11 +51,10 @@ query_pipeline.colliders_with_aabb_intersecting_aabb(&aabb, |handle| {
 ```rust
 let shape = Cuboid::new(vector![1.0, 2.0, 3.0]);
 let shape_pos = Isometry::new(vector![0.0, 1.0, 0.0], vector![0.2, 0.7, 0.1]);
-let groups = InteractionGroups::all();
-let filter = None;
+let filter = QueryFilter::default();
 
 query_pipeline.intersections_with_shape(
-    &collider_set, &shape_pos, &shape, groups, filter, |handle| {
+    &collider_set, &shape_pos, &shape, filter, |handle| {
         println!("The collider {:?} intersects our shape.", handle);
         true // Return `false` instead if we want to stop searching for other colliders that contain this point.
     }
@@ -90,11 +88,10 @@ fn test_intersections(rapier_context: Res<RapierContext>) {
     let shape = Collider::cuboid(1.0, 2.0);
     let shape_pos = Vec2::new(0.0, 1.0);
     let shape_rot = 0.8;
-    let groups = InteractionGroups::all();
-    let filter = None;
+    let filter = QueryFilter::default();
 
     rapier_context.intersections_with_shape(
-        &shape_pos, &shape_rot, &shape, groups, filter, |entity| {
+        &shape_pos, &shape_rot, &shape, filter, |entity| {
         println!("The entity {:?} intersects our shape.", entity);
         true // Return `false` instead if we want to stop searching for other colliders that contain this point.
     });
@@ -116,11 +113,10 @@ fn test_intersections(rapier_context: Res<RapierContext>) {
     let shape = Collider::cuboid(1.0, 2.0, 3.0);
     let shape_pos = Vec3::new(0.0, 1.0, 2.0);
     let shape_rot = Quat::from_rotation_z(0.8);
-    let groups = InteractionGroups::all();
-    let filter = None;
+    let filter = QueryFilter::default();
 
     rapier_context.intersections_with_shape(
-        &shape_pos, &shape_rot, &shape, groups, filter, |entity| {
+        &shape_pos, &shape_rot, &shape, filter, |entity| {
         println!("The entity {:?} intersects our shape.", entity);
         true // Return `false` instead if we want to stop searching for other colliders that contain this point.
     });
@@ -152,9 +148,8 @@ values={[
 let shape = new RAPIER.Cuboid(1.0, 2.0);
 let shapePos = { x: 1.0, y: 2.0 };
 let shapeRot = 0.1;
-let groups = 0xffffffff;
 
-world.intersectionsWithShape(shapePos, shapeRot, shape, groups, (handle) => {
+world.intersectionsWithShape(shapePos, shapeRot, shape, (handle) => {
     console.log("The collider", handle, "intersects our shape.");
     return true; // Return `false` instead if we want to stop searching for other colliders that contain this point.
 });
@@ -174,9 +169,8 @@ world.collidersWithAabbIntersectingAabb(aabbCenter, aabbHalfExtents, (handle) =>
 let shape = new RAPIER.Cuboid(1.0, 2.0, 3.0);
 let shapePos = { x: 1.0, y: 2.0, z: 3.0 };
 let shapeRot = { w: 1.0, x: 0.0, y: 0.0, z: 0.0 };
-let groups = 0xffffffff;
 
-world.intersectionsWithShape(shapePos, shapeRot, shape, groups, (handle) => {
+world.intersectionsWithShape(shapePos, shapeRot, shape, (handle) => {
     console.log("The collider", handle, "intersects our shape.");
     return true; // Return `false` instead if we want to stop searching for other colliders that contain this point.
 });
@@ -194,5 +188,4 @@ world.collidersWithAabbIntersectingAabb(aabbCenter, aabbHalfExtents, (handle) =>
 
 </js>
 
-Use the `group` <notjs>and `filter` arguments</notjs><js>argument</js> to exclude some colliders from these intersection tests.
-See their description on the [ray-casting](#ray-casting) section.
+It is possible to only apply the scene query to a subsets of the colliders using [a query filter](#query-filters)

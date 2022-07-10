@@ -9,14 +9,20 @@ import TabItem from '@theme/TabItem';
 
 Collision-detection is a two-steps process. First the broad-phase detects pairs of colliders
 that are potentially in contact or intersecting. Second, the narrow-phase processes all these pairs in order
-to compute contacts points and generate [collision events](#collision-events).
-
+to compute contacts points and generate [collision events](#collision-and-contact-force-events). Based on these points,
+the constraints solver computes forces that may generate [contact force events](#contact-force-events).
 All the pairs detected by the broad-phase can be accessed from the physics `World` class.
 
-## Collision events
-The narrow-phase can generate [collision events](#contact-events) between two colliders.
-There events can be collected by optionally passing an instance of `EventQueue` to `World.step(eventQueue)`.
-The colliders involved in each event is identified by its integer handle.
+## Collision and contact force events
+Collision events are triggered when two colliders transition between intersecting or not. Transitioning between having
+one contact point to having more than one contact points is not reported an event.
+
+In addition, after forces are computed by the constraints solver, contact force events may be
+generated between two colliders. There events can be collected by optionally passing an instance of `EventQueue` to
+`World.step(eventQueue)`. The colliders involved in each event is identified by its handle.
+
+Events can be collected by passing an instance of `EventQueue` to `World.step(eventQueue)`. The colliders
+involved in each event is identified by its handle.
 
 ```js
 let eventQueue = new RAPIER.EventQueue(true);
@@ -25,15 +31,24 @@ world.step(eventQueue);
 eventQueue.drainCollisionEvents((handle1, handle2, started) => {
     /* Handle the collision event. */
 });
+
+eventQueue.drainContactForceEvents(event => {
+    let handle1 = event.collider1(); // Handle of the first collider involved in the event.
+    let handle2 = event.collider2(); // Handle of the second collider involved in the event.
+    /* Handle the contact force event. */
+});
 ```
 
-Collision events are triggered when two colliders transition between intersecting or not. Transitioning between having
-one contact point to having more than one contact points is not reported an event.
-
 :::warning
-Collision events are only generated between two colliders  if at least one of them has the
-`ActiveEvents.COLLISION_EVENTS` flag in its [active events](colliders#active-events).
+Collision events (resp. contact force events) are only generated between two colliders  if at least one of them has the
+`ActiveEvents.COLLISION_EVENTS` flag (resp. `ActiveEvents.CONTACT_FORCE_EVENTS` flag) in its [active events](colliders#active-events).
 :::
+
+Generally, the user isn’t interested in contact force events unless the force magnitudes exceed some threshold. In order
+to skip low-force events, the engine will compute the sum of the magnitude of all the contacts between the two colliders
+and only trigger a contact force event if that magnitude is larger than the threshold set with
+`Collider.setContactForceEventThreshold` (defaults to 0) for any of the two colliders with the
+`ActiveEvents.CONTACT_FORCE_EVENTS` flag enabled.
 
 ## The contact graph
 The contact graph (encapsulated by the `World` class) can be read in order to determine whether two specific

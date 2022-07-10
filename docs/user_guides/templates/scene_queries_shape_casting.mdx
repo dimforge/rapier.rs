@@ -33,11 +33,10 @@ let shape = Cuboid::new(vector![1.0, 2.0]);
 let shape_pos = Isometry::new(vector![0.0, 1.0], 0.8);
 let shape_vel = vector![0.1, 0.4];
 let max_toi = 4.0;
-let groups = InteractionGroups::all();
-let filter = None;
+let filter = QueryFilter::default();
 
 if let Some((handle, hit)) = query_pipeline.cast_shape(
-    &collider_set, &shape_pos, &shape_vel, &shape, max_toi, groups, filter
+    &collider_set, &shape_pos, &shape_vel, &shape, max_toi, filter
 ) {
     // The first collider hit has the handle `handle`. The `hit` is a
     // structure containing details about the hit configuration.
@@ -53,11 +52,10 @@ let shape = Cuboid::new(vector![1.0, 2.0, 3.0]);
 let shape_pos = Isometry::new(vector![0.0, 1.0, 0.0], vector![0.2, 0.7, 0.1]);
 let shape_vel = vector![0.1, 0.4, 0.2];
 let max_toi = 4.0;
-let groups = InteractionGroups::all();
-let filter = None;
+let filter = QueryFilter::default();
 
 if let Some((handle, hit)) = query_pipeline.cast_shape(
-    &collider_set, &shape_pos, &shape_vel, &shape, max_toi, groups, filter
+    &collider_set, &shape_pos, &shape_vel, &shape, max_toi, filter
 ) {
     // The first collider hit has the handle `handle`. The `hit` is a
     // structure containing details about the hit configuration.
@@ -88,11 +86,10 @@ fn cast_shape(rapier_context: Res<RapierContext>) {
     let shape_rot = 0.8;
     let shape_vel = Vec2::new(0.1, 0.4);
     let max_toi = 4.0;
-    let groups = InteractionGroups::all();
-    let filter = None;
+    let filter = QueryFilter::default();
 
     if let Some((entity, hit)) = query_pipeline.cast_shape(
-        shape_pos, shape_rot, shape_vel, &shape, max_toi, groups, filter
+        shape_pos, shape_rot, shape_vel, &shape, max_toi, filter
     ) {
         // The first collider hit has the entity `entity`. The `hit` is a
         // structure containing details about the hit configuration.
@@ -112,11 +109,10 @@ fn cast_shape(rapier_context: Res<RapierContext>) {
     let shape_rot = Quat::from_rotation_z(0.8);
     let shape_vel = Vec3::new(0.1, 0.4, 0.2);
     let max_toi = 4.0;
-    let groups = InteractionGroups::all();
-    let filter = None;
+    let filter = QueryFilter::default();
 
     if let Some((entity, hit)) = rapier_context.cast_shape(
-        shape_pos, shape_rot, shape_vel, &shape, max_toi, groups, filter
+        shape_pos, shape_rot, shape_vel, &shape, max_toi, filter
     ) {
         // The first collider hit has the entity `entity`. The `hit` is a
         // structure containing details about the hit configuration.
@@ -146,9 +142,8 @@ let shapePos = { x: 0.0, y: 1.0 };
 let shapeRot = 0.2;
 let shapeVel = { x: 0.1, y: 0.4 };
 let maxToi = 4.0;
-let groups = 0xffffffff;
 
-let hit = world.castShape(shapePos, shapeRot, shapeVel, shape, maxToi, groups);
+let hit = world.castShape(shapePos, shapeRot, shapeVel, shape, maxToi);
 if (hit != null) {
     // The first collider hit has the handle `handle`. The `hit` is a
     // structure containing details about the hit configuration.
@@ -165,9 +160,8 @@ let shapePos = { x: 0.0, y: 1.0, z: 0.0 };
 let shapeRot = { w: 1.0, x: 0.0, y: 0.0, z: 0.0 };
 let shapeVel = { x: 0.2, y: 0.4, z: 0.8 };
 let maxToi = 4.0;
-let groups = 0xffffffff;
 
-let hit = world.castShape(shapePos, shapeRot, shapeVel, shape, maxToi, groups);
+let hit = world.castShape(shapePos, shapeRot, shapeVel, shape, maxToi);
 if (hit != null) {
     // The first collider hit has the handle `handle`. The `hit` is a
     // structure containing details about the hit configuration.

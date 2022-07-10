@@ -33,11 +33,10 @@ get, the more computationally expensive the ray-cast will be.
 let ray = Ray::new(point![1.0, 2.0], vector![0.0, 1.0]);
 let max_toi = 4.0;
 let solid = true;
-let groups = InteractionGroups::all();
-let filter = None;
+let filter = QueryFilter::default();
 
 if let Some((handle, toi)) = query_pipeline.cast_ray(
-    &collider_set, &ray, max_toi, solid, groups, filter
+    &collider_set, &ray, max_toi, solid, filter
 ) {
     // The first collider hit has the handle `handle` and it hit after
     // the ray travelled a distance equal to `ray.dir * toi`.
@@ -47,7 +46,7 @@ if let Some((handle, toi)) = query_pipeline.cast_ray(
 
 
 if let Some((handle, intersection)) = query_pipeline.cast_ray_and_get_normal(
-    &collider_set, &ray, max_toi, solid, groups, filter
+    &collider_set, &ray, max_toi, solid, filter
 ) {
     // This is similar to `QueryPipeline::cast_ray` illustrated above except
     // that it also returns the normal of the collider shape at the hit point.
@@ -57,7 +56,7 @@ if let Some((handle, intersection)) = query_pipeline.cast_ray_and_get_normal(
 }
 
 query_pipeline.intersections_with_ray(
-    &collider_set, &ray, max_toi, solid, groups, filter,
+    &collider_set, &ray, max_toi, solid, filter,
     |handle, intersection| {
     // Callback called on each collider hit by the ray.
         let hit_point = ray.point_at(intersection.toi);
@@ -75,11 +74,10 @@ query_pipeline.intersections_with_ray(
 let ray = Ray::new(point![1.0, 2.0, 3.0], vector![0.0, 1.0, 0.0]);
 let max_toi = 4.0;
 let solid = true;
-let groups = InteractionGroups::all();
-let filter = None;
+let filter = QueryFilter::default();
 
 if let Some((handle, toi)) = query_pipeline.cast_ray(
-    &collider_set, &ray, max_toi, solid, groups, filter
+    &collider_set, &ray, max_toi, solid, filter
 ) {
     // The first collider hit has the handle `handle` and it hit after
     // the ray travelled a distance equal to `ray.dir * toi`.
@@ -89,7 +87,7 @@ if let Some((handle, toi)) = query_pipeline.cast_ray(
 
 
 if let Some((handle, intersection)) = query_pipeline.cast_ray_and_get_normal(
-    &collider_set, &ray, max_toi, solid, groups, filter
+    &collider_set, &ray, max_toi, solid, filter
 ) {
     // This is similar to `QueryPipeline::cast_ray` illustrated above except
     // that it also returns the normal of the collider shape at the hit point.
@@ -99,7 +97,7 @@ if let Some((handle, intersection)) = query_pipeline.cast_ray_and_get_normal(
 }
 
 query_pipeline.intersections_with_ray(
-    &collider_set, &ray, max_toi, solid, groups, filter,
+    &collider_set, &ray, max_toi, solid, filter,
     |handle, intersection| {
     // Callback called on each collider hit by the ray.
     let hit_point = ray.point_at(intersection.toi);
@@ -131,11 +129,10 @@ fn cast_ray(rapier_context: Res<RapierContext>) {
     let ray_dir = Vec2::new(0.0, 1.0);
     let max_toi = 4.0;
     let solid = true;
-    let groups = InteractionGroups::all();
-    let filter = None;
+    let filter = QueryFilter::default();
 
     if let Some((entity, toi)) = rapier_context.cast_ray(
-        ray_pos, ray_dir, max_toi, solid, groups, filter
+        ray_pos, ray_dir, max_toi, solid, filter
     ) {
         // The first collider hit has the entity `entity` and it hit after
         // the ray travelled a distance equal to `ray_dir * toi`.
@@ -145,7 +142,7 @@ fn cast_ray(rapier_context: Res<RapierContext>) {
 
 
     if let Some((entity, intersection)) = rapier_context.cast_ray_and_get_normal(
-        ray_pos, ray_dir, max_toi, solid, groups, filter
+        ray_pos, ray_dir, max_toi, solid, filter
     ) {
         // This is similar to `QueryPipeline::cast_ray` illustrated above except
         // that it also returns the normal of the collider shape at the hit point.
@@ -155,7 +152,7 @@ fn cast_ray(rapier_context: Res<RapierContext>) {
     }
 
     rapier_context.intersections_with_ray(
-        ray_pos, ray_dir, max_toi, solid, groups, filter,
+        ray_pos, ray_dir, max_toi, solid, filter,
         |entity, intersection| {
             // Callback called on each collider hit by the ray.
             let hit_point = intersection.point;
@@ -181,7 +178,7 @@ fn cast_ray(rapier_context: Res<RapierContext>) {
     let filter = None;
 
     if let Some((entity, toi)) = rapier_context.cast_ray(
-        ray_pos, ray_dir, max_toi, solid, groups, filter
+        ray_pos, ray_dir, max_toi, solid, filter
     ) {
         // The first collider hit has the entity `entity` and it hit after
         // the ray travelled a distance equal to `ray_dir * toi`.
@@ -191,7 +188,7 @@ fn cast_ray(rapier_context: Res<RapierContext>) {
 
 
     if let Some((entity, intersection)) = rapier_context.cast_ray_and_get_normal(
-        ray_pos, ray_dir, max_toi, solid, groups, filter
+        ray_pos, ray_dir, max_toi, solid, filter
     ) {
         // This is similar to `QueryPipeline::cast_ray` illustrated above except
         // that it also returns the normal of the collider shape at the hit point.
@@ -201,7 +198,7 @@ fn cast_ray(rapier_context: Res<RapierContext>) {
     }
 
     rapier_context.intersections_with_ray(
-        ray_pos, ray_dir, max_toi, solid, groups, filter,
+        ray_pos, ray_dir, max_toi, solid, filter,
         |entity, intersection| {
             // Callback called on each collider hit by the ray.
             let hit_point = intersection.point;
@@ -232,9 +229,8 @@ fn cast_ray(rapier_context: Res<RapierContext>) {
 let ray = new RAPIER.Ray({ x: 1.0, y: 2.0 }, { x: 0.0, y: 1.0 });
 let maxToi = 4.0;
 let solid = true;
-let groups = 0xfffffffff;
 
-let hit = world.castRay(ray, maxToi, solid, groups);
+let hit = world.castRay(ray, maxToi, solid);
 if (hit != null) {
     // The first collider hit has the handle `hit.colliderHandle` and it hit after
     // the ray travelled a distance equal to `ray.dir * toi`.
@@ -242,7 +238,7 @@ if (hit != null) {
     console.log("Collider", hit.colliderHandle, "hit at point", hitPoint);
 }
 
-let hitWithNormal = world.castRayAndGetNormal(ray, maxToi, solid, groups);
+let hitWithNormal = world.castRayAndGetNormal(ray, maxToi, solid);
 if (hitWithNormal != null) {
     // This is similar to `QueryPipeline::cast_ray` illustrated above except
     // that it also returns the normal of the collider shape at the hit point.
@@ -250,7 +246,7 @@ if (hitWithNormal != null) {
     console.log("Collider", hitWithNormal.colliderHandle, "hit at point", hitPoint, "with normal", hitWithNormal.normal);
 }
 
-world.intersectionsWithRay(ray, maxToi, solid, groups, (hit) => {
+world.intersectionsWithRay(ray, maxToi, solid, (hit) => {
     // Callback called on each collider hit by the ray.
     let hitPoint = ray.pointAt(hit.toi);
     console.log("Collider", hit.colliderHandle, "hit at point", hitPoint, "with normal", hit.normal);
@@ -265,9 +261,8 @@ world.intersectionsWithRay(ray, maxToi, solid, groups, (hit) => {
 let ray = new RAPIER.Ray({ x: 1.0, y: 2.0, z: 3.0 }, { x: 0.0, y: 1.0, z: 0.0 });
 let maxToi = 4.0;
 let solid = true;
-let groups = 0xfffffffff;
 
-let hit = world.castRay(ray, maxToi, solid, groups);
+let hit = world.castRay(ray, maxToi, solid);
 if (hit != null) {
     // The first collider hit has the handle `hit.colliderHandle` and it hit after
     // the ray travelled a distance equal to `ray.dir * toi`.
@@ -275,7 +270,7 @@ if (hit != null) {
     console.log("Collider", hit.colliderHandle, "hit at point", hitPoint);
 }
 
-let hitWithNormal = world.castRayAndGetNormal(ray, maxToi, solid, groups);
+let hitWithNormal = world.castRayAndGetNormal(ray, maxToi, solid);
 if (hitWithNormal != null) {
     // This is similar to `QueryPipeline::cast_ray` illustrated above except
     // that it also returns the normal of the collider shape at the hit point.
@@ -283,7 +278,7 @@ if (hitWithNormal != null) {
     console.log("Collider", hitWithNormal.colliderHandle, "hit at point", hitPoint, "with normal", hitWithNormal.normal);
 }
 
-world.intersectionsWithRay(ray, maxToi, solid, groups, (hit) => {
+world.intersectionsWithRay(ray, maxToi, solid, (hit) => {
     // Callback called on each collider hit by the ray.
     let hitPoint = ray.pointAt(hit.toi);
     console.log("Collider", hit.colliderHandle, "hit at point", hitPoint, "with normal", hit.normal);
@@ -313,10 +308,5 @@ the difference between the two scenarios. The ray is in green and the resulting 
 
 </div>
 
-- **`groups`**: just like colliders, the ray is given a [collision group](colliders#collision-groups-and-solver-groups).
-The ray-cast will only test intersections with colliders with collision groups compatible with the ray's
-collision group (using the bitwise test described in the
-[collision groups section](colliders#collision-groups-and-solver-groups)).
+In addition, it is possible to only apply the scene query to a subsets of the colliders using [a query filter](#query-filters).
 
-<notjs>- **`filter`**: if collision groups are not flexible enough, a custom closure can be given optionally. The ray-cast
-will only test intersection with colliders for which the `filter` closure returns `true`.</notjs>

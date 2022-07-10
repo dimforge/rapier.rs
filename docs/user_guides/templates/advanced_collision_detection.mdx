@@ -9,7 +9,8 @@ import TabItem from '@theme/TabItem';
 
 Collision-detection is a two-steps process. First the `BroadPhase` detects pairs of colliders
 that are potentially in contact or intersecting. Second, the `NarrowPhase` processes all these pairs in order
-to compute contacts points and generate [collision events](#collision-events).
+to compute contacts points and generate [collision events](#collision-and-contact-force-events). Based on these points, the
+constraints solver computes forces that may generate [contact force events](#contact-force-events).
 
 All the pairs detected by the broad-phase are stored into two graph structures:
 - The [**contact graph**](#the-contact-graph) stores all the potential contact pairs (between two non-sensor colliders)
@@ -21,19 +22,27 @@ These two graphs are part of the `NarrowPhase` structure and are automatically u
 or the `CollisionPipeline`. Each node of these graph contains a collide handle
 and there is one graph edge per pair detected by the broad-phase.
 
-## Collision events
+## Collision and contact force events
 The narrow-phase can generate collision events between two colliders. Each collision event is given optional flags:
 - `CollisionEventFlags::SENSOR` is set if at least one of the colliders involved in the collision is a sensor.
 - `CollisionEventFlags::REMOVED` is set if a collision stopped because at least one of the colliders involved in the
   collision was removed from the physics scene.
 
+In addition, after forces are computed by the constraints solver, contact force events may be generated between two
+colliders subject to non-zero contact forces. Generally, the user isn’t interested in contact force events unless the
+force magnitudes exceed some threshold. In order to skip low-force events, the engine will compute the sum of the
+magnitude of all the contacts between the two colliders and only trigger a contact force event if that magnitude is
+larger than the threshold set with `ColliderBuilder::contact_force_event_threshold` or
+`Collider::set_contact_force_event_threshold` (defaults to 0) for any of the two colliders with the
+`ActiveEvents::CONTACT_FORCE_EVENTS` flag enabled.
+
 :::warning
-Collision events are only generated between two colliders if at least one of them has the
-`ActiveEvents::COLLISION_EVENTS` flag in its [active events](colliders#active-events).
+Collision events (resp. contact force events) are only generated between two colliders if at least one of them has the
+`ActiveEvents::COLLISION_EVENTS` flag (resp. `ActiveEvents::CONTACT_FORCE_EVENTS` flags) in its [active events](colliders#active-events).
 :::
 
 <rapier>In order to handle these events, it is necessary to collect them using a structure implementing the `EventHandler` trait.
-Because Rapier can be paralellized, this event handler must also implement `Send + Sync`.</rapier>
+Because Rapier can be parallelized, this event handler must also implement `Send + Sync`.</rapier>
 
 <rapier>
 
@@ -44,7 +53,8 @@ during each call to `PhysicsPipeline::step`:
 ```rust
 // Initialize the event collector.
 let (collision_send, collision_recv) = crossbeam::channel::unbounded();
-let event_handler = ChannelEventCollector::new(intersection_send, collision_send);
+let (contact_force_send, contact_force_recv) = crossbeam::channel::unbounded();
+let event_handler = ChannelEventCollector::new(collision_send, contact_force_send);
 
 physics_pipeline.step(
     &gravity,
@@ -64,11 +74,16 @@ while let Ok(collision_event) = collision_recv.try_recv() {
     // Handle the collision event.
     println!("Received collision event: {:?}", collision_event);
 }
+
+while let Ok(contact_force_event) = contact_force_recv.try_recv() {
+    // Handle the contact force event.
+    println!("Received contact force event: {:?}", contact_force_event);
+}
 ```
 
 Note however that if you need to access the contact information at the exact time a contact event happens, you may
 provide your own `EventHandler` implementation to access the contact pair given to `EventHandler::handle_collision_event`.
-You may just query the `NarrowPhase` instead (after the timestep compleetd), but there are some rare cases when the contact
+You may just query the `NarrowPhase` instead (after the timestep completed), but there are some cases when the contact
 information is no longer available at the end of the timestep (e.g. when running multi-step CCD and the contact start
 during one substep and steps at a substeps right after).
 
@@ -86,9 +101,14 @@ These events can be read using Bevy's event system with `EventReader`:
 /* A system that displays the events. */
 fn display_events(
     mut collision_events: EventReader<CollisionEvent>,
+    mut contact_force_events: EventReader<ContactForceEvent>,
 ) {
     for collision_event in collision_events.iter() {
         println!("Received collision event: {:?}", collision_event);
+    }
+
+    for contact_force_event in contact_force_events.iter() {
+        println!("Received contact force event: {:?}", contact_force_event);
     }
 }
 ```
@@ -110,7 +130,7 @@ manifolds stored in a contact pair:
    calculation (aka. the **solver contacts**). These **solver contacts** are a subset of the contacts detected by the narrow-phase,
    expressed in a way that is more efficient for the constraints solver to process. These solver contacts can be modified
    or deleted by the user using [contact modification](#contact-modification).
-   
+
 All the **geometric contact** data are expressed in the local-space of the colliders. The **solver contacts** are
 expressed in world-space.
    

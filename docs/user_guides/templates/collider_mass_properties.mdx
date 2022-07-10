@@ -5,14 +5,15 @@ import TabItem from '@theme/TabItem';
 The [mass properties of a rigid-body](rigid_bodies#mass-properties) is computed as the sum of the mass-properties
 manually set by the user for the rigid-body, plus the **mass-properties of the colliders** attached to it. There are two
 ways to define the mass-properties of a collider:
-1. The **easiest, automatic, way**: by giving the collider a non-zero density (the default density is 1.0). This will make sure the
-   mass-properties are computed automatically from the collider's shape.
+1. The **easiest, automatic, way**: by giving the collider a non-zero density (the default density is 1.0) or a non-zero
+   mass. This will make sure the other mass-properties like the angular inertia tensor are computed automatically from
+   the collider's shape.
 2. The **manual way**: by giving an explicit mass and angular inertia to the collider.
 
-It is recommended to use the first, density-based, approach as it will ensure the automatically-computed mass-properties
-are coherent with the geometric shape. Wrong mass-properties (especially the angular inertia part and center-of-mass
-location) may lead to odd behaviors. The second, manual, approach is usually useful when modeling real-world
-objects for which you already know the real-world mass and angular inertia.
+It is recommended to use the density-based or mass-based approaches as it will ensure the automatically-computed
+mass-properties are coherent with the geometric shape. Wrong mass-properties (especially the angular inertia part and
+center-of-mass location) may lead to odd behaviors. The manual approach is usually useful when modeling real-world
+objects for which you already know the real-world mass, center-of-mass, and angular inertia tensor.
 
 The mass-properties of a collider can only be set when the collider is created:
 
@@ -35,7 +36,11 @@ let rigid_body_handle = rigid_body_set.insert(rigid_body);
 let collider = ColliderBuilder::cuboid(1.0, 2.0)
     .density(2.0)
     .build();
-// Second option: by setting the mass-properties explicitly.
+// Second option: by setting the mass of the collider.
+let collider = ColliderBuilder::cuboid(1.0, 2.0)
+    .mass(0.8)
+    .build();
+// Third option: by setting the mass-properties explicitly.
 let collider = ColliderBuilder::cuboid(1.0, 2.0)
     .mass_properties(MassProperties::new(point![0.0, 1.0], 0.5, 0.3))
     .build();
@@ -55,7 +60,11 @@ let rigid_body_handle = rigid_body_set.insert(rigid_body);
 let collider = ColliderBuilder::cuboid(1.0, 2.0, 3.0)
     .density(2.0)
     .build();
-// Second option: by setting the mass-properties explicitly.
+// Second option: by setting the mass of the collider.
+let collider = ColliderBuilder::cuboid(1.0, 2.0, 3.0)
+    .mass(0.8)
+    .build();
+// Third option: by setting the mass-properties explicitly.
 let collider = ColliderBuilder::cuboid(1.0, 2.0, 3.0)
     .mass_properties(MassProperties::new(point![0.0, 1.0, 0.0], 0.5, vector![0.3, 0.2, 0.1]))
     .build();
@@ -87,7 +96,12 @@ let collider = ColliderBundle {
     mass_properties: ColliderMassProps::Density(2.0).into(),
     ..Default::default ()
 };
-// Second option: by setting the mass-properties explicitly.
+// Second option: by setting the mass of the collider.
+let collider = ColliderBundle {
+    mass_properties: ColliderMassProps::Mass(0.8).into(),
+    ..Default::default ()
+};
+// Third option: by setting the mass-properties explicitly.
 let collider = ColliderBundle {
     mass_properties: MassProperties::new(Vec2::new(0.0, 1.0).into(), 0.5, 0.3).into(),
     ..Default::default()
@@ -109,7 +123,12 @@ let collider = ColliderBundle {
     mass_properties: ColliderMassProps::Density(2.0).into(),
     ..Default::default ()
 };
-// Second option: by setting the mass-properties explicitly.
+// Second option: by setting the mass of the collider.
+let collider = ColliderBundle {
+    mass_properties: ColliderMassProps::Mass(0.8).into(),
+    ..Default::default ()
+};
+// Third option: by setting the mass-properties explicitly.
 let collider = ColliderBundle {
     mass_properties: MassProperties::new(Vec3::new(0.0, 1.0, 0.0).into(), 0.5, Vec3::new(0.3, 0.2, 0.1).into()).into(),
     ..Default::default()
@@ -143,7 +162,10 @@ let rigidBody = world.createRigidBody(rigidBodyDesc);
 //               its default value 1.0).
 let colliderDesc = RAPIER.ColliderDesc.cuboid(1.0, 2.0)
     .setDensity(2.0);
-// Second option: by setting the mass-properties explicitly.
+// Second option: by setting the mass of the collider.
+let colliderDesc = RAPIER.ColliderDesc.cuboid(1.0, 2.0)
+    .setMass(0.8);
+// Third option: by setting the mass-properties explicitly.
 let colliderDesc = RAPIER.ColliderDesc.cuboid(1.0, 2.0)
     .setMassProperties(0.5, { x: 0.0, y: 1.0 }, 0.3);
 // When the collider is attached, the rigid-body's mass and angular
@@ -161,7 +183,10 @@ let rigidBody = world.createRigidBody(rigidBodyDesc);
 //               its default value 1.0).
 let colliderDesc = RAPIER.ColliderDesc.cuboid(1.0, 2.0, 3.0)
     .setDensity(2.0);
-// Second option: by setting the mass-properties explicitly.
+// Second option: by setting the mass of the collider.
+let colliderDesc = RAPIER.ColliderDesc.cuboid(1.0, 2.0, 3.0)
+    .setMass(0.8);
+// Third option: by setting the mass-properties explicitly.
 let colliderDesc = RAPIER.ColliderDesc.cuboid(1.0, 2.0, 3.0)
     .setMassProperties(0.5, { x: 0.0, y: 1.0, z: 0.0 }, { x: 0.3, y: 0.2, z: 0.1 }, { w: 1.0, x: 0.0, y: 0.0, z: 0.0 });
 // When the collider is attached, the rigid-body's mass and angular

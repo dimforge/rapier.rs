@@ -42,7 +42,7 @@ rigid_body.lock_rotations(true, true);
 let rigid_body = RigidBodyBuilder::dynamic()
     .lock_translations() // prevent translations along along all axes.
     .lock_rotations()    // prevent rotations along all axes.
-    .restrict_rotations(true, false, false) // prevent rotations along the Y and Z axes.
+    .enabled_rotations(true, false, false) // only enable rotations along the X axis.
     .build();
 ```
 
@@ -52,7 +52,7 @@ let rigid_body = rigid_body_set.get_mut(rigid_body_handle).unwrap();
 // The last `true` argument makes sure the rigid-body is awake.
 rigid_body.lock_translations(true, true);
 rigid_body.lock_rotations(true, true);
-rigid_body.restrict_rotations(true, false, false, true);
+rigid_body.set_enabled_rotations(true, false, false, true);
 ```
 
   </TabItem>
@@ -141,7 +141,7 @@ rigidBody.lockRotations(true, true);
 let rigidBodyDesc = RAPIER.RigidBodyDesc.dynamic()
     .lockTranslations() // prevent translations along along all axes.
     .lockRotations()    // prevent rotations along all axes.
-    .restrictRotations(true, false, false); // prevent rotations along the Y and Z axes.
+    .setEnabledRotations(true, false, false); // only enable rotations along the X axis.
 let rigidBody = world.createRigidBody(rigidBodyDesc);
 ```
 
@@ -150,7 +150,7 @@ let rigidBody = world.createRigidBody(rigidBodyDesc);
 // The last `true` argument makes sure the rigid-body is awake.
 rigidBody.lockTranslations(true, true);
 rigidBody.lockRotations(true, true);
-rigidBody.restrictRotations(true, false, false, true);
+rigidBody.setEnabledRotations(true, false, false, true);
 ```
 
   </TabItem>

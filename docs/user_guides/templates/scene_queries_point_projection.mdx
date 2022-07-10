@@ -19,11 +19,10 @@ or will enumerate every collider containing given point (<rapier>`QueryPipeline:
 ```rust
 let point = point![1.0, 2.0];
 let solid = true;
-let groups = InteractionGroups::all();
-let filter = None;
+let filter = QueryFilter::default();
 
 if let Some((handle, projection)) = query_pipeline.project_point(
-    &collider_set, &point, solid, groups, filter
+    &collider_set, &point, solid, filter
 ) {
     // The collider closest to the point has this `handle`.
     println!("Projected point on collider {:?}. Point projection: {}", handle, projection.point);
@@ -31,7 +30,7 @@ if let Some((handle, projection)) = query_pipeline.project_point(
 }
 
 query_pipeline.intersections_with_point(
-    &collider_set, &point, groups, filter, |handle| {
+    &collider_set, &point, filter, |handle| {
         // Callback called on each collider with a shape containing the point.
         println!("The collider {:?} contains the point.", handle);
         // Return `false` instead if we want to stop searching for other colliders containing this point.
@@ -46,11 +45,10 @@ query_pipeline.intersections_with_point(
 ```rust
 let point = point![1.0, 2.0, 3.0];
 let solid = true;
-let groups = InteractionGroups::all();
-let filter = None;
+let filter = QueryFilter::default();
 
 if let Some((handle, projection)) = query_pipeline.project_point(
-    &collider_set, &point, solid, groups, filter
+    &collider_set, &point, solid, filter
 ) {
     // The collider closest to the point has this `handle`.
     println!("Projected point on collider {:?}. Point projection: {}", handle, projection.point);
@@ -58,7 +56,7 @@ if let Some((handle, projection)) = query_pipeline.project_point(
 }
 
 query_pipeline.intersections_with_point(
-    &collider_set, &point, groups, filter, |handle| {
+    &collider_set, &point, filter, |handle| {
         // Callback called on each collider with a shape containing the point.
         println!("The collider {:?} contains the point.", handle);
         // Return `false` instead if we want to stop searching for other colliders containing this point.
@@ -87,11 +85,10 @@ values={[
 fn project_point(rapier_context: Res<RapierContext>) {
     let point = Vec2::new(1.0, 2.0);
     let solid = true;
-    let groups = InteractionGroups::all();
-    let filter = None;
+    let filter = QueryFilter::default();
 
     if let Some((entity, projection)) = rapier_context.project_point(
-        &point, solid, groups, filter
+        &point, solid, filter
     ) {
         // The collider closest to the point has this `handle`.
         println!("Projected point on entity {:?}. Point projection: {}", entity, projection.point);
@@ -99,7 +96,7 @@ fn project_point(rapier_context: Res<RapierContext>) {
     }
 
     rapier_context.intersections_with_point(
-        &point, groups, filter, |entity| {
+        &point, filter, |entity| {
             // Callback called on each collider with a shape containing the point.
             println!("The entity {:?} contains the point.", entity);
             // Return `false` instead if we want to stop searching for other colliders containing this point.
@@ -117,11 +114,10 @@ fn project_point(rapier_context: Res<RapierContext>) {
 fn project_point(rapier_context: Res<RapierContext>) {
     let point = Vec3::new(1.0, 2.0, 3.0);
     let solid = true;
-    let groups = InteractionGroups::all();
-    let filter = None;
+    let filter = QueryFilter::default();
 
     if let Some((entity, projection)) = rapier_context.project_point(
-        &point, solid, groups, filter
+        &point, solid, filter
     ) {
         // The collider closest to the point has this `handle`.
         println!("Projected point on entity {:?}. Point projection: {}", entity, projection.point);
@@ -129,7 +125,7 @@ fn project_point(rapier_context: Res<RapierContext>) {
     }
 
     rapier_context.intersections_with_point(
-        &point, groups, filter, |entity| {
+        &point, filter, |entity| {
             // Callback called on each collider with a shape containing the point.
             println!("The entity {:?} contains the point.", entity);
             // Return `false` instead if we want to stop searching for other colliders containing this point.
@@ -157,16 +153,15 @@ values={[
 ```js
 let point = { x: 1.0, y: 2.0 };
 let solid = true;
-let groups = 0xffffffff;
 
-let proj = world.projectPoint(point, solid, groups);
+let proj = world.projectPoint(point, solid);
 if (proj != null) {
     // The collider closest to the point has this `handle`.
     console.log("Projected point on collider ", proj.colliderHandle, ". Point projection: ", proj.point);
     console.log("Point was inside of the collider shape: {}", proj.isInside);
 }
 
-world.intersectionsWithPoint(point, groups, (handle) => {
+world.intersectionsWithPoint(point, (handle) => {
     // Callback called on each collider with a shape containing the point.
     console.log("The collider", handle, "contains the point.");
     // Return `false` instead if we want to stop searching for other colliders containing this point.
@@ -182,14 +177,14 @@ let point = { x: 1.0, y: 2.0, z: 3.0 };
 let solid = true;
 let groups = 0xffffffff;
 
-let proj = world.projectPoint(point, solid, groups);
+let proj = world.projectPoint(point, solid);
 if (proj != null) {
     // The collider closest to the point has this `handle`.
     console.log("Projected point on collider ", proj.colliderHandle, ". Point projection: ", proj.point);
     console.log("Point was inside of the collider shape: {}", proj.isInside);
 }
 
-world.intersectionsWithPoint(point, groups, (handle) => {
+world.intersectionsWithPoint(point, (handle) => {
     // Callback called on each collider with a shape containing the point.
     console.log("The collider", handle, "contains the point.");
     // Return `false` instead if we want to stop searching for other colliders containing this point.
@@ -202,6 +197,4 @@ world.intersectionsWithPoint(point, groups, (handle) => {
 
 </js>
 
-The `solid`, <js>and</js> `group` <notjs>and `filter`</notjs> arguments are used to control the way point-projection
-works: by ignoring the shape interiors and/or ignoring some colliders. See their description on the
-[ray-casting](#ray-casting) section.
+It is possible to only apply the scene query to a subsets of the colliders using [a query filter](#query-filters)
