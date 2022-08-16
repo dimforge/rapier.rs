@@ -144,7 +144,7 @@ fn cast_ray(rapier_context: Res<RapierContext>) {
     if let Some((entity, intersection)) = rapier_context.cast_ray_and_get_normal(
         ray_pos, ray_dir, max_toi, solid, filter
     ) {
-        // This is similar to `QueryPipeline::cast_ray` illustrated above except
+        // This is similar to `RapierContext::cast_ray` illustrated above except
         // that it also returns the normal of the collider shape at the hit point.
         let hit_point = intersection.point;
         let hit_normal = intersection.normal;
