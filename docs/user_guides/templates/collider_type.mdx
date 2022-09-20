@@ -34,7 +34,7 @@ assert!(collider.is_sensor());
 /* Set the collider sensor when the collider is created. */
 commands.spawn()
     .insert(Collider::ball(0.5))
-    .insert(Sensor(true));
+    .insert(Sensor);
 ```
 ```rust
 /* Change the collider sensor status inside of a system. */
