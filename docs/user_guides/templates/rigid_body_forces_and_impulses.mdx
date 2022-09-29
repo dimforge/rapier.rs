@@ -112,8 +112,8 @@ commands.spawn()
         torque: Vec3::new(1.0, 2.0, 3.0),
     })
     .insert(ExternalImpulse {
-        force: Vec3::new(1.0, 2.0, 3.0),
-        torque: Vec3::new(0.1, 0.2, 0.3),
+        impulse: Vec3::new(1.0, 2.0, 3.0),
+        torque_impulse: Vec3::new(0.1, 0.2, 0.3),
     });
 ```
 ```rust
