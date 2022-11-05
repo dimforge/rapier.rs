@@ -156,7 +156,7 @@ use bevy_rapier2d::prelude::*;
 
 commands.spawn()
     .insert(Collider::cuboid(1.0, 2.0))
-    .insert(Sensor(true))
+    .insert(Sensor)
     .insert_bundle(TransformBundle::from(Transform::from_xyz(2.0, 0.0, 0.0)))
     .insert(Friction::coefficient(0.7))
     .insert(Restitution::coefficient(0.3))
@@ -171,7 +171,7 @@ use bevy_rapier3d::prelude::*;
 
 commands.spawn()
     .insert(Collider::cuboid(1.0, 2.0, 3.0))
-    .insert(Sensor(true))
+    .insert(Sensor)
     .insert_bundle(TransformBundle::from(Transform::from_xyz(2.0, 0.0, 0.0)))
     .insert(Friction::coefficient(0.7))
     .insert(Restitution::coefficient(0.3))
