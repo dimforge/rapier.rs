@@ -62,13 +62,13 @@ point-containment tests won't work intuitively because the triangle mesh is assu
 
 A **triangle-mesh** collider can be built
 with <rapier>`ColliderBuilder::trimesh(vertices, indices)`</rapier><bevy>`Collider::trimesh(vertices, indices)`</bevy><js>`ColliderDesc.trimesh(vertices, indices)`</js> where
-`vertices` is the buffer containing tall the vertices of the mesh, and `indices` is a set of indices indicating what vertex is used by
+`vertices` is the buffer containing all the vertices of the mesh, and `indices` is a set of indices indicating what vertex is used by
 what triangle. The vertex buffer and index buffer may have different lengths, and any vertex can be shared
 by multiple triangles.
 
 A **polyline** collider can be built
 with <rapier>`ColliderBuilder::polyline(vertices, indices)`</rapier><bevy>`Collider::polyline(vertices, indices)`</bevy><js>`ColliderDesc.polyline(vertices, indices)`</js> where
-`vertices` is the buffer containing tall the vertices of the polyline, and `indices` is an optional set of indices
+`vertices` is the buffer containing all the vertices of the polyline, and `indices` is an optional set of indices
 indicating what vertex is used by what segment. The vertex buffer and index buffer may have different lengths, and any
 vertex can be shared by multiple segments. If the given vertex buffer is `None` then the input vertices are assumed to
 form a line strip, i.e., the polyline is formed from the  segments `[vertices[0], vertices[1]], [vertices[1], vertices[2]], etc.`
