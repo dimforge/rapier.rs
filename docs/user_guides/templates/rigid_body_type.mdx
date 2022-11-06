@@ -19,3 +19,13 @@ There are three types of rigid-bodies, identified by the <rapier>`RigidBodyType`
 
 Both position-based and velocity-based kinematic bodies are mostly the same. Choosing between both is mostly a matter of
 preference between position-based control and velocity-based control.
+
+:::info
+The whole point of kinematic bodies is to let the user have **total control over their trajectory**. This means that
+kinematic bodies will simply ignore any contact force and go through walls and the ground.
+In other words: if you tell the kinematic to go somewhere, it will go there, no questions asked.
+
+Taking obstacles into
+account needs to be done manually either by using [scene queries](scene_queries) to detect nearby obstacles, or by using the built-in
+[character controller](character_controller).
+:::

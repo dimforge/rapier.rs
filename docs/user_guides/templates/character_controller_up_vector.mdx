@@ -1,0 +1,103 @@
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+The **up** vector instructs the character controller of what direction should be considered _vertical_. The horizontal
+plane is the plane orthogonal to this up vector. There are two equivalent ways to evaluate the slope of the floor: by
+taking the angle between the floor and the horizontal plane (in 2D), or by taking the angle between the up-vector and
+the normal of the floor (in 2D and 3D). By default, the up vector is the positive **y** axis, but it can be modified to
+be any (unit) vector that suits the application.
+
+![up vector and slope angles](/img/cct_up_vector.svg)
+
+<rapier>
+
+```rust
+// Set the up-vector to the positive X axis.
+character_controller.up = Vector::x_axis();
+```
+
+</rapier>
+<bevy>
+
+<Tabs
+groupId="dim"
+defaultValue="2D"
+values={[
+{label: 'Example 2D', value: '2D'},
+{label: 'Example 3D', value: '3D'},
+]}>
+<TabItem value="2D">
+
+```rust
+/* Character controller with the positive X axis as the up vector. */
+commands.spawn()
+    .insert(Collider::ball(0.5))
+    .insert(KinematicCharacterController {
+        up: Vec2::X,
+        ..default()
+    });
+```
+```rust
+/* Modify the character controller’s up vector inside of a system. */
+fn modify_character_controller_autostep(mut character_controller: Query<&mut KinematicCharacterController>) {
+    for mut character_controller in character_controllers.iter_mut() {
+        character_controller.up = Vec2::X;
+    }
+}
+```
+
+  </TabItem>
+  <TabItem value="3D">
+
+```rust
+/* Character controller with the positive Z axis as the up vector. */
+commands.spawn()
+    .insert(Collider::ball(0.5))
+    .insert(KinematicCharacterController {
+        up: Vec3::Z,
+        ..default()
+    });
+```
+```rust
+/* Modify the character controller’s up vector inside of a system. */
+fn modify_character_controller_autostep(mut character_controller: Query<&mut KinematicCharacterController>) {
+    for mut character_controller in character_controllers.iter_mut() {
+        character_controller.up = Vec3::Z;
+    }
+}
+```
+
+  </TabItem>
+</Tabs>
+
+</bevy>
+<js>
+
+<Tabs
+groupId="dim"
+defaultValue="2D"
+values={[
+{label: 'Example 2D', value: '2D'},
+{label: 'Example 3D', value: '3D'},
+]}>
+<TabItem value="2D">
+
+```js
+let characterController = world.createCharacterController(0.01);
+// Change the character controller’s up vector to the positive X axis.
+characterController.setUp({ x: 1.0, y: 0.0 });
+```
+
+  </TabItem>
+  <TabItem value="3D">
+
+```js
+let characterController = world.createCharacterController(0.01);
+// Change the character controller’s up vector to the positive Z axis.
+characterController.setUp({ x: 0.0, y: 0.0, z: 1.0 });
+```
+
+  </TabItem>
+</Tabs>
+
+</js>

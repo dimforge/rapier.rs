@@ -1,0 +1,140 @@
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+As the character moves along its path, it will hit grounds and obstacles before sliding or stepping on them. Knowing what
+collider was hit on this path, and where the hit took place, can be valuable to apply various logic (custom forces,
+sound effects, etc.) This is why a set of character collision events are collected during the calculation of its
+trajectory.
+
+:::info
+The character collision events are given in chronological order. For example, if, during the resolution of the character
+motion, the character hits an obstacle A, then slides against it, and then hits another obstacle B. The collision
+with A will be reported first, and the collision with B will be reported second.
+:::
+
+<rapier>
+
+```rust
+let character_controller = KinematicCharacterController::default();
+// Use a closure to handle or collect the collisions while
+// the character is being moved.
+character_controller.move_shape(
+    dt,
+    bodies,
+    colliders,
+    queries,
+    character_shape,
+    character_pos,
+    desired_translation,
+    filter,
+    |collision| { /* Handle or collect the collision in this closure. */ }
+)
+```
+
+</rapier>
+<bevy>
+
+```rust
+/* Read the character controller collisions stored in the character controller’s output. */
+fn modify_character_controller_slopes(mut character_controller_outputs: Query<&mut KinematicCharacterControllerOutput>) {
+    for mut output in outputs.iter_mut() {
+        for collision in &output.collisions {
+            // Do something with that collision information.
+        }
+    }
+}
+```
+
+</bevy>
+<js>
+
+```js
+let characterController = world.createCharacterController(0.01);
+characterController.computeColliderMovement(collider, desiredMovementVector);
+
+// After the collider movement calculation is done, we can read the
+// collision events.
+for (let i = 0; i < characterController.numComputedCollisions(); i++) {
+    let collision = characterController.computedCollision(i);
+    // Do something with that collision information.
+}
+```
+
+</js>
+
+Unless dynamic bodies are filtered-out by the character controller’s filters, they may be hit during the resolution
+of the character movement. If that happens, these dynamic bodies will generally not react to (i.e. not be pushed by) the
+character because the character controller’s offset prevents actual contacts from happening.
+
+In these situations forces need to be applied manually to there rigid-bodies. The character controller can apply these
+forces for you if needed:
+
+<rapier>
+
+```rust
+let character_controller = KinematicCharacterController::default();
+
+// First, collect all the collisions.
+let mut collisions = vec![];
+character_controller.move_shape(
+    dt,
+    &bodies,
+    &colliders,
+    &queries,
+    character_shape,
+    character_pos,
+    desired_translation,
+    filter,
+    |collision| { collisions.push(collision) }
+);
+
+// Then, let the character controller solve (and apply) the collision impulses
+// to the dynamic rigid-bodies hit along its path.
+character_controller.solve_character_collision_impulses(
+    dt,
+    &mut bodies,
+    &colliders,
+    &queries,
+    character_shape,
+    character_mass,
+    &collisions,
+    filter,
+);
+```
+
+</rapier>
+<bevy>
+
+```rust
+/* Configure the character controller when the collider is created. */
+commands.spawn()
+    .insert(Collider::ball(0.5))
+    .insert(KinematicCharacterController {
+        // Enable the automatic application of impulses to the dynamic bodies
+        // hit by the character along its path.
+        apply_impulse_to_dynamic_bodies: true,
+        ..default()
+    });
+```
+```rust
+/* Configure dynamic impulses inside of a system. */
+fn modify_character_controller_impulses(mut character_controller: Query<&mut KinematicCharacterController>) {
+    for mut character_controller in character_controllers.iter_mut() {
+        // Enable the automatic application of impulses to the dynamic bodies
+        // hit by the character along its path.
+        character_controller.apply_impulse_to_dynamic_bodies = true;
+    }
+}
+```
+
+</bevy>
+<js>
+
+```js
+let characterController = world.createCharacterController(0.01);
+// Enable the automatic application of impulses to the dynamic bodies
+// hit by the character along its path.
+characterController.setApplyImpulsesToDynamicBodies(true);
+```
+
+</js>

@@ -32,9 +32,9 @@ In addition, after forces are computed by the constraints solver, contact force 
 colliders subject to non-zero contact forces. Generally, the user isn’t interested in contact force events unless the
 force magnitudes exceed some threshold. In order to skip low-force events, the engine will compute the sum of the
 magnitude of all the contacts between the two colliders and only trigger a contact force event if that magnitude is
-larger than the threshold set with `ColliderBuilder::contact_force_event_threshold` or
-`Collider::set_contact_force_event_threshold` (defaults to 0) for any of the two colliders with the
-`ActiveEvents::CONTACT_FORCE_EVENTS` flag enabled.
+larger than the threshold set with <rapier>`ColliderBuilder::contact_force_event_threshold` or
+`Collider::set_contact_force_event_threshold`</rapier><bevy>the `ContactForceEventThreshold` component</bevy>
+(defaults to 0) for any of the two colliders with the `ActiveEvents::CONTACT_FORCE_EVENTS` flag enabled.
 
 :::warning
 Collision events (resp. contact force events) are only generated between two colliders if at least one of them has the
@@ -366,14 +366,14 @@ a physics hooks that does nothing particular.
 </rapier>
 <bevy>
 
-Physics hooks are given as a resource of type `PhysicsHooksWithQueryObject<UserData>` where `UserData` is an arbitrary
+Physics hooks are given as a resource of type `PhysicsHooksWithQueryResource<UserData>` where `UserData` is an arbitrary
 component type that you would like to access inside of the hook methods (useful for example to access custom data
 attached to the entities to guide contact filtering). For physics hooks to work, the following steps must be taken:
 - The `RapierPhysicsPlugin` must be parametrized by the same `UserData` as your physics hooks, e.g., `app.add_plugin(RapierPhysicsPlugin::<&MyUserData>::default())`.
 - The custom physics hooks must implement the `PhysicsHooksWithQuery<&MyUserData>` trait.
 - The hooks must be inserted as a resource:
 ```rust
-commands.add_resource(PhysicsHooksWithQueryObject(Box::new(my_hooks)));
+commands.add_resource(PhysicsHooksWithQueryResource(Box::new(my_hooks)));
 ```
 
 :::note
@@ -497,7 +497,7 @@ impl<'a> PhysicsHooksWithQuery<&'a CustomFilterTag> for SameUserDataFilter {
 fn setup_physics(mut commands: Commands) {
     // Register our physics hooks.
     commands.insert_resource(
-        PhysicsHooksWithQueryObject(
+        PhysicsHooksWithQueryResource(
             Box::new(SameUserDataFilter {})
         )
     );
@@ -598,7 +598,7 @@ fn main() {
 
 struct MyPhysicsHooks;
 
-impl PhysicsHooksWithQuery<NoUserData<'_>> for MyPhysicsHooks {
+impl PhysicsHooksWithQuery<NoUserData for MyPhysicsHooks {
     fn modify_solver_contacts(
         &self, 
         context: ContactModificationContextView,
@@ -611,13 +611,13 @@ impl PhysicsHooksWithQuery<NoUserData<'_>> for MyPhysicsHooks {
         // - Set the friction coefficients to 0.3
         // - Set the restitution coefficients to 0.4
         // - Set the tangent velocities to X * 10.0
-        *context.normal = -*context.normal;
+        *context.raw.normal = -*context.raw.normal;
 
-        if !context.solver_contacts.is_empty() {
-            context.solver_contacts.swap_remove(0);
+        if !context.raw.solver_contacts.is_empty() {
+            context.raw.solver_contacts.swap_remove(0);
         }
 
-        for solver_contact in &mut *context.solver_contacts {
+        for solver_contact in &mut *context.raw.solver_contacts {
             solver_contact.friction = 0.3;
             solver_contact.restitution = 0.4;
             solver_contact.tangent_velocity.x = 10.0;
@@ -626,14 +626,14 @@ impl PhysicsHooksWithQuery<NoUserData<'_>> for MyPhysicsHooks {
         // Use the persistent user-data to count the number of times
         // contact modification was called for this contact manifold
         // since its creation.
-        *context.user_data += 1;
-        println!("Contact manifold has been modified {} times since its creation.", *context.user_data);
+        *context.raw.user_data += 1;
+        println!("Contact manifold has been modified {} times since its creation.", *context.raw.user_data);
     }
 }
 
 fn setup_physics(mut commands: Commands) {
     // Register our physics hooks.
-    commands.insert_resource(PhysicsHooksWithQueryObject(Box::new(MyPhysicsHooks {})));
+    commands.insert_resource(PhysicsHooksWithQueryResource(Box::new(MyPhysicsHooks {})));
 
     // Add colliders with a `CustomFilterTag` component. Only colliders
     // with the same `CustomFilterTag` variant will collider thanks to

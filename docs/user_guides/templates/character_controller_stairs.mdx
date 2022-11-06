@@ -1,0 +1,103 @@
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+If enabled, the **autostep** setting allows the character to climb stairs automatically and walk over small obstacles.
+Autostepping requires the following parameters:
+- The **maximum height** the character can step over. If the vertical movement needed to step over this obstacle is larger
+than this value, then the character will be stopped by the obstacle.
+- The **minimum (horizontal) width** available on top of the obstacle. If, after the character is teleported on top of the obstacle, it
+cannot move forward by a distance larger than this minimum width, then the character will just be stopped by the obstacle
+(without being moved to the top of the obstacle).
+- Whether or not autostepping is **enabled for dynamic bodies**. If it is not enabled for dynamic bodies, the character
+won’t attempt to automatically step over small dynamic bodies. Disabling this can be useful if we want the character to
+push these small objects (see [interaction with dynamic bodies](#interaction-with-dynamic-bodies)) instead of just stepping over them.
+
+The following depicts (top) one configuration where all the autostepping conditions are satisfied, and, (bottom) two
+configurations where these conditions are not all satisfied (left: because the width of the step is too small, right:
+because the height of the step is too large):
+
+![autostepping](/img/cct_autostep.svg)
+
+:::info
+Autostepping will only activate if the character is touching the floor right before the obstacle.
+This prevents the player from being teleported on to of a platform while it is in the air.
+:::
+
+<rapier>
+
+```rust
+// Set autostep to None to disable it.
+character_controller.autostep = None;
+// Autostep if the step height is smaller than 0.5, and its width larger than 0.2.
+character_controller.autostep = Some(CharacterAutostep {
+    max_height: CharacterLength::Absolute(0.5),
+    min_width: CharacterLength::Absolute(0.2),
+    include_dynamic_bodies: true,
+});
+// Autostep if the step height is smaller than 0.5 multiplied by the character’s height,
+// and its width larger than 0.5 multiplied by the character’s width (i.e. half the character’s
+// width).
+character_controller.autostep = Some(CharacterAutostep {
+    max_height: CharacterLength::Relative(0.3),
+    min_width: CharacterLength::Relative(0.5),
+    include_dynamic_bodies: true,
+});
+```
+
+</rapier>
+<bevy>
+
+```rust
+/* Configure the character controller when the collider is created. */
+// Autostep if the step height is smaller than 0.5, and its width larger than 0.2.
+commands.spawn()
+    .insert(Collider::ball(0.5))
+    .insert(KinematicCharacterController {
+        autostep: Some(CharacterAutostep {
+            max_height: CharacterLength::Absolute(0.5),
+            min_width: CharacterLength::Absolute(0.2),
+            include_dynamic_bodies: true,
+        }),
+        ..default()
+    });
+
+// Autostep if the step height is smaller than 0.5 multiplied by the character’s height,
+// and its width larger than 0.5 multiplied by the character’s width (i.e. half the character’s
+// width).
+commands.spawn()
+    .insert(Collider::ball(0.5))
+    .insert(KinematicCharacterController {
+        autostep: Some(CharacterAutostep {
+            max_height: CharacterLength::Relative(0.3),
+            min_width: CharacterLength::Relative(0.5),
+            include_dynamic_bodies: true,
+        }),
+        ..default()
+    });
+```
+```rust
+/* Configure autostep inside of a system. */
+fn modify_character_controller_autostep(mut character_controller: Query<&mut KinematicCharacterController>) {
+    for mut character_controller in character_controllers.iter_mut() {
+        character_controller.autostep = Some(CharacterAutostep {
+           max_height: CharacterLength::Absolute(0.5),
+           min_width: CharacterLength::Absolute(0.2),
+           include_dynamic_bodies: true,
+       });
+    }
+}
+```
+
+</bevy>
+<js>
+
+```js
+let characterController = world.createCharacterController(0.01);
+// Autostep if the step height is smaller than 0.5, its width is larger than 0.2,
+// and allow stepping on dynamic bodies.
+characterController.enableAutostep(0.5, 0.2, true);
+// Disable autostep.
+characterController.disableAutostep();
+```
+
+</js>

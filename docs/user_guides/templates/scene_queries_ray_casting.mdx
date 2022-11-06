@@ -174,7 +174,6 @@ fn cast_ray(rapier_context: Res<RapierContext>) {
     let ray_dir = Vec3::new(0.0, 1.0, 0.0);
     let max_toi = 4.0;
     let solid = true;
-    let groups = InteractionGroups::all();
     let filter = None;
 
     if let Some((entity, toi)) = rapier_context.cast_ray(

@@ -42,7 +42,7 @@ true, ensures that the rigid-body wakes up before the action takes place. For ex
 
 Unless you want to achieve special effects, it is recommended to always set the `wakeUp` argument to `true`.
 One example of case where setting the argument of `wakeUp` to `false` makes sense is to simulate a custom
-constant gravity with `RigidBody.applyForce(force, false)`. This will result in the force being applied
+constant gravity with `RigidBody.addForce(force, false)`. This will result in the force being applied
 to the rigid-body, but will allow the rigid-body to fall asleep if it reaches a dynamic equilibrium.
 
 </js>

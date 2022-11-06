@@ -69,7 +69,10 @@ values={[
 <TabItem value="2D">
 
 ```rust
-let joint = FixedJointBuilder::new().local_anchor(point![0.0, -2.0]);
+// NOTE: setting the local anchors sets the translation part of the local frames.
+let joint = FixedJointBuilder::new()
+    .local_anchor1(point![0.0, 1.0])
+    .local_anchor2(point![0.0, -3.0]);
 joint_set.insert(&mut rigid_body_set, body_handle1, body_handle2, joint, true);
 ```
 
@@ -77,7 +80,10 @@ joint_set.insert(&mut rigid_body_set, body_handle1, body_handle2, joint, true);
   <TabItem value="3D">
 
 ```rust
-let joint = FixedJointBuilder::new().local_anchor(point![0.0, 0.0, -2.0]);
+// NOTE: setting the local anchors sets the translation part of the local frames.
+let joint = FixedJointBuilder::new()
+    .local_anchor1(point![0.0, 1.0, 0.0])
+    .local_anchor2(point![0.0, -3.0, 0.0]);
 joint_set.insert(&mut rigid_body_set, body_handle1, body_handle2, joint, true);
 ```
 

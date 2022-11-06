@@ -1,0 +1,64 @@
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+If sliding is enabled, the character can automatically climb slopes if they are not too steep, or slide down slopes if
+they are too steep. Sliding is configured by the following parameters:
+- The **max slope climb angle**: if the angle between the slope to climb and the horizontal floor is larger than this
+value, then the character won’t be able to slide up this slope.
+- The **min slope slide angle**: if the angle between the slope and the horizontal floor is smaller than this value,
+then the vertical component of the character’s movement won’t result in any sliding.
+
+:::info
+As always in Rapier, angles are specified in radians.
+:::
+
+
+<rapier>
+
+```rust
+// Don’t allow climbing slopes larger than 45 degrees.
+character_controller.max_slope_climb_angle = 45.0.to_radians();
+// Automatically slide down on slopes smaller than 30 degrees.
+character_controller.min_slope_slide_angle = 30.0.to_radians();
+```
+
+</rapier>
+<bevy>
+
+```rust
+/* Configure the character controller when the collider is created. */
+// Snap to the ground if the vertical distance to the ground is smaller than 0.5.
+commands.spawn()
+    .insert(Collider::ball(0.5))
+    .insert(KinematicCharacterController {
+        // Don’t allow climbing slopes larger than 45 degrees.
+        max_slope_climb_angle: 45.0.to_radians(),
+        // Automatically slide down on slopes smaller than 30 degrees.
+        min_slope_slide_angle: 30.0.to_radians(),
+        ..default()
+    });
+```
+```rust
+/* Configure snap-to-ground inside of a system. */
+fn modify_character_controller_slopes(mut character_controller: Query<&mut KinematicCharacterController>) {
+    for mut character_controller in character_controllers.iter_mut() {
+        // Don’t allow climbing slopes larger than 45 degrees.
+        character_controller.max_slope_climb_angle = 45.0.to_radians();
+        // Automatically slide down on slopes smaller than 30 degrees.
+        character_controller.min_slope_slide_angle = 30.0.to_radians();
+    }
+}
+```
+
+</bevy>
+<js>
+
+```js
+let characterController = world.createCharacterController(0.01);
+// Don’t allow climbing slopes larger than 45 degrees.
+characterController.setMaxSlopeClimbAngle(45 * 3.14 / 180);
+// Automatically slide down on slopes smaller than 30 degrees.
+characterController.setMinSlopeSlideAngle(30 * 3.14 / 180);
+```
+
+</js>

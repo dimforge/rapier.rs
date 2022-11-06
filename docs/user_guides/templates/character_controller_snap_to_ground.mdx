@@ -1,0 +1,68 @@
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+If enabled, **snap-to-ground** will force the character to stick to the ground if the following conditions are met
+simultaneously:
+- At the start of the movement, the character touches the ground.
+- The movement has no up component (i.e. the character isn’t jumping).
+- At the end of the desired movement, the character would be separated from the ground by a distance smaller than the
+distance provided by the **snap-to-ground** parameter.
+
+If these conditions are met, the character is automatically teleported down to the ground at the end of its motion.
+Typical usages of snap-to-ground include going downstairs or remaining in contact with the floor when moving downhill.
+
+![snap-to-ground](/img/cct_snap_to_ground.svg)
+
+<rapier>
+
+```rust
+// Set snap-to-ground to None to disable it.
+character_controller.snap_to_ground = None;
+// Snap to the ground if the vertical distance to the ground is smaller than 0.5.
+character_controller.snap_to_ground = Some(CharacterLength::Absolute(0.5));
+// Snap to the ground if the vertical distance to the ground is smaller than 0.2 times the character’s height.
+character_controller.snap_to_ground = Some(CharacterLength::Relative(0.2));
+```
+
+</rapier>
+<bevy>
+
+```rust
+/* Configure the character controller when the collider is created. */
+// Snap to the ground if the vertical distance to the ground is smaller than 0.5.
+commands.spawn()
+    .insert(Collider::ball(0.5))
+    .insert(KinematicCharacterController {
+        snap_to_ground: Some(CharacterLength::Absolute(0.5)),
+        ..default()
+    });
+
+// Snap to the ground if the vertical distance to the ground is smaller than 0.2 times the character’s height
+commands.spawn()
+    .insert(Collider::ball(0.5))
+    .insert(KinematicCharacterController {
+        snap_to_ground: Some(CharacterLength::Relative(0.2)),
+        ..default()
+    });
+```
+```rust
+/* Configure snap-to-ground inside of a system. */
+fn modify_character_controller_snap_to_ground(mut character_controller: Query<&mut KinematicCharacterController>) {
+    for mut character_controller in character_controllers.iter_mut() {
+        character_controller.snap_to_ground = Some(CharacterLength::Absolute(0.5));
+    }
+}
+```
+
+</bevy>
+<js>
+
+```js
+let characterController = world.createCharacterController(0.01);
+// Snap to the ground if the vertical distance to the ground is smaller than 0.5.
+characterController.enableSnapToGround(0.5);
+// Disable snap-to-ground.
+characterController.disableSnapToGround();
+```
+
+</js>

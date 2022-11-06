@@ -46,17 +46,17 @@ during or after its creation:
 ```rust
 /* Set the collision groups and solver groups when the collider is created. */
 let collider = ColliderBuilder::ball(0.5)
-    .collision_groups(InteractionGroups::new(0b1101, 0b0100))
-    .solver_groups(InteractionGroups::new(0b0011, 0b1011))
+    .collision_groups(InteractionGroups::new(0b1101.into(), 0b0100.into())
+    .solver_groups(InteractionGroups::new(0b0011.into(), 0b1011.into())
     .build();
 ```
 ```rust
 /* Set the collision groups and solver groups after the collider creation. */
 let collider = collider_set.get_mut(collider_handle).unwrap();
-collider.set_collision_groups(InteractionGroups::new(0b1101, 0b0100));
-collider.set_solver_groups(InteractionGroups::new(0b0011, 0b1011));
-assert_eq!(collider.collision_groups(), InteractionGroups::new(0b1101, 0b0100));
-assert_eq!(collider.solver_groups(), InteractionGroups::new(0b0011, 0b1011));
+collider.set_collision_groups(InteractionGroups::new(0b1101.into(), 0b0100.into());
+collider.set_solver_groups(InteractionGroups::new(0b0011.into(), 0b1011.into());
+assert_eq!(collider.collision_groups(), InteractionGroups::new(0b1101.into(), 0b0100.into());
+assert_eq!(collider.solver_groups(), InteractionGroups::new(0b0011.into(), 0b1011.into());
 ```
 
 </rapier>
@@ -65,20 +65,20 @@ assert_eq!(collider.solver_groups(), InteractionGroups::new(0b0011, 0b1011));
 ```rust
 /* Set the collision and/or solver groups when the collider is created. */
 commands.spawn()
-    .insert(CollisionGroups::new(0b1101, 0b0100))
-    .insert(SolverGroups::new(0b0011, 0b1011));
+    .insert(CollisionGroups::new(0b1101.into(), 0b0100.into())
+    .insert(SolverGroups::new(0b0011.into(), 0b1011.into());
 ```
 ```rust
 /* Set the collision and/or solver groups inside of a system. */
 fn modify_collider_groups(mut collision_groups: Query<&mut CollisionGroups>, mut solver_groups: Query<&mut SolverGroups>) {
     for mut collision_groups in flags.iter_mut() {
-        collision_groups.memberships = 0b1101;
-        collision_groups.filters = 0b0100;
+        collision_groups.memberships = 0b1101.into();
+        collision_groups.filters = 0b0100.into();
     }
 
     for mut solver_groups in flags.iter_mut() {
-        solver_groups.memberships = 0b0011;
-        solver_groups.filters = 0b1011;
+        solver_groups.memberships = 0b0011.into();
+        solver_groups.filters = 0b1011.into();
     }
 }
 ```

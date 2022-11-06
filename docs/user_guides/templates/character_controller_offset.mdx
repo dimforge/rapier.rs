@@ -1,0 +1,55 @@
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+For performance an numerical stability reasons, the character controller will attempt to preserve a small gap between
+the character shape and the environment. This small gap is named `offset` and acts as a small margin around the character
+shape. A good value for this offset is something sufficiently small to make the gap unnoticeable, but sufficiently large
+to avoid numerical issues (if the character seems to get stuck inexplicably, try increasing the offset).
+
+![character offset](/img/cct_character_offset.svg)
+
+<rapier>
+
+```rust
+// The character offset is set to 0.01.
+character_controller.offset = CharacterLength::Absolute(0.01);
+// The character offset is set to 0.01 multiplied by the shape’s height.
+character_controller.offset = CharacterLength::Relative(0.01);
+```
+
+</rapier>
+<bevy>
+
+```rust
+/* Configure the character controller when the collider is created. */
+commands.spawn()
+    .insert(Collider::ball(0.5))
+    .insert(KinematicCharacterController {
+        // The character offset is set to 0.01.
+        offset: CharacterLength::Absolute(0.01),
+        ..default()
+    });
+
+commands.spawn()
+    .insert(Collider::ball(0.5))
+    .insert(KinematicCharacterController {
+        // The character offset is set to 0.01 multiplied by the collider’s height.
+        offset: CharacterLength::Absolute(0.01),
+        ..default()
+    });
+```
+
+</bevy>
+<js>
+
+```js
+// Here the character controller is initialized with an offset of 0.01.
+let offset = 0.01;
+let characterController = world.createCharacterController(0.01);
+```
+
+</js>
+
+:::warning
+Is is **not recommended** to change the offset after the creation of the character controller.
+:::

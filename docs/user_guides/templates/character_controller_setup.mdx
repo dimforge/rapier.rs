@@ -1,0 +1,220 @@
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+
+<rapier>
+
+The character controller implementation is exposed as the `KinematicCharacterController` structure. This structure only
+contains information about the character controller’s behavior. It does not contain any collider-specific or
+rigid-body-specific information like handles, velocities, positions, etc. Therefore, the same instance of `KinematicCharacterController`
+can be used to control multiple rigid-bodies/colliders if they rely on the same set of parameters.
+The `KinematicCharacterController` exposes only two methods:
+- `move_shape` is responsible for calculating the possible movement of a character based on
+  the desired movement, obstacles, and character controller options.
+- `solve_character_collision_impulses` is detailed in the [collisions section](#collisions).
+
+
+<Tabs
+groupId="dim"
+defaultValue="2D"
+values={[
+{label: 'Example 2D', value: '2D'},
+{label: 'Example 3D', value: '3D'},
+]}>
+<TabItem value="2D">
+
+```rust
+// The translation we would like to apply if there were no obstacles.
+let desired_translation = vector![1.0, -2.0];
+// Create the character controller, here with the default configuration.
+let character_controller = KinematicCharacterController::default();
+// Calculate the possible movement.
+let corrected_movement = character_controller.move_shape(
+    dt,              // The timestep length (can be set to SimulationSettings::dt).
+    &bodies,         // The RigidBodySet.
+    &colliders,      // The ColliderSet.
+    &queries,        // The QueryPipeline.
+    character_shape, // The character’s shape.
+    character_pos,   // The character’s initial position.
+    desired_translation,
+    QueryFilter::default()
+        // Make sure the the character we are trying to move isn’t considered an obstacle.
+        .exclude_rigid_body(character_handle),
+    |_| {} // We don’t care about events in this example.
+);
+
+// TODO: apply the `corrected_movement.translation` to the rigid-body or collider based on the rules described bellow.
+```
+
+  </TabItem>
+  <TabItem value="3D">
+
+```rust
+// The translation we would like to apply if there were no obstacles.
+let desired_translation = vector![1.0, -2.0, 3.0];
+// Create the character controller, here with the default configuration.
+let character_controller = KinematicCharacterController::default();
+// Calculate the possible movement.
+let corrected_movement = character_controller.move_shape(
+    dt,              // The timestep length (can be set to SimulationSettings::dt).
+    &bodies,         // The RigidBodySet.
+    &colliders,      // The ColliderSet.
+    &queries,        // The QueryPipeline.
+    character_shape, // The character’s shape.
+    character_pos,   // The character’s initial position.
+    desired_translation,
+    QueryFilter::default()
+        // Make sure the the character we are trying to move isn’t considered an obstacle.
+        .exclude_rigid_body(character_handle),
+    |_| {} // We don’t care about events in this example.
+);
+
+// TODO: apply the `corrected_movement.translation` to the rigid-body or collider based on the rules described bellow.
+```
+
+  </TabItem>
+</Tabs>
+
+The recommended way to update the character’s position depends on its representation:
+- A **collider** not attached to any rigid-body: set the collider’s position directly to the corrected movement added to its current position.
+- A **velocity-based kinematic rigid-body**: set its velocity to the computed movement divided by the timestep length.
+- A **position-based kinematic rigid-body**: set its next kinematic position to the corrected movement added to its current position.
+
+</rapier>
+
+<bevy>
+
+There are two ways to use the character-controller with `bevy_rapier`: using the `KinematicCharacterController` component
+or using the `RapierContext::move_shape` method. The component approach is more convenient, but the `move_shape` approach
+can be slightly more flexible in terms of filtering.
+
+:::note
+Refer to the API documentation of `RapierContext::move_shape` for details on how to use it.
+:::
+
+The `KinematicCharacterController` component must be added to the same entity as a `TransformBundle` bundle. If the field
+`KinematicCharacterController::custom_shape` isn’t set, then the entity it is attached to must also contain a `Collider` component.
+That collider optionally be attached to a rigid-body. At each frame, the `KinematicCharacterController::translation`
+field can be set to the desired translation for that character.
+
+During the next physics update step, that translation will
+be resolved against obstacles, and the resulting movement will be automatically applied to the entity’s transform, or the
+transform of the entity containing the rigid-body the collider to move is attached to.
+
+The applied character motion, and the information of whether the character
+is touching the ground at its final position, can be read with the `KinematicCharacterControllerOutput` component
+(inserted automatically to the same entity as the `KinematicCharacterController` component).
+
+<Tabs
+groupId="dim"
+defaultValue="2D"
+values={[
+{label: 'Example 2D', value: '2D'},
+{label: 'Example 3D', value: '3D'},
+]}>
+<TabItem value="2D">
+
+```rust
+fn init_system(mut commands: Commands) {
+    command.spawn()
+        .insert(RigidBody::KinematicPositionBased)
+        .insert(Collider::ball(0.5))
+        .insert(KinematicCharacterController::default();
+}
+
+fn update_system(mut controllers: Query<&mut KinematicCharacterController>) {
+    for mut controller in controllers.iter_mut() {
+        controller.translation = Some(Vec2::new(1.0, -0.5));
+    }
+}
+
+fn read_result_system(controllers: Query<Entity, &KinematicCharacterControllerOutput>) {
+    for (entity, output) in controllers.iter() {
+        println!("Entity {:?} moved by {:?} and touches the ground: {:?}",
+                  entity, output.effective_translation, output.grounded);
+    }
+}
+```
+
+  </TabItem>
+  <TabItem value="3D">
+
+```rust
+fn init_system(mut commands: Commands) {
+    command.spawn()
+        .insert(RigidBody::KinematicPositionBased)
+        .insert(Collider::ball(0.5))
+        .insert(KinematicCharacterController::default();
+}
+
+fn update_system(mut controllers: Query<&mut KinematicCharacterController>) {
+    for mut controller in controllers.iter_mut() {
+        controller.translation = Some(Vec3::new(1.0, -0.5, 1.0));
+    }
+}
+
+fn read_result_system(controllers: Query<Entity, &KinematicCharacterControllerOutput>) {
+    for (entity, output) in controllers.iter() {
+        println!("Entity {:?} moved by {:?} and touches the ground: {:?}",
+                  entity, output.effective_translation, output.grounded);
+    }
+}
+```
+
+  </TabItem>
+</Tabs>
+
+</bevy>
+
+<js>
+
+A new character controller can be created and removed by the physics `World`:
+
+```js
+// The gap the controller will leave between the character and its environment.
+let offset = 0.01;
+// Create the controller.
+let characterController = world.createCharacterController(offset);
+// Remove the controller once we are done with it.
+world.removeCharacterController(characterController);
+```
+
+Note that the character controller does not store a reference to the rigid-body and collider it controls. Therefore, the
+same instance of the `CharacterController` class can be used to control different colliders. This can be useful if
+you want to apply the same kind of character control settings to multiple characters.
+
+The created character controller can then be used to control the movement of a collider taking into account obstacles
+on its path. This is done in two steps:
+1. Given a desired translation, compute the actual translation that we can apply to the collider based on the obstacles.
+2. Read the result and apply it to the rigid-body or collider (if it isn’t attached to a rigid-body) by setting its
+   position, kinematic velocity, or next kinematic position, depending on the situation.
+
+```js
+let characterController = world.createCharacterController(offset);
+characterController.computeColliderMovement(
+    collider,           // The collider we would like to move.
+    desiredTranslation, // The movement we would like to apply if there wasn’t any obstacle.
+);
+// Read the result.
+let correctedMovement = characterController.computedMovement();
+// TODO: apply this corrected movement by following the rules described bellow.
+```
+
+The recommended way to update the character’s position depends on its representation:
+- A **collider not attached** to any rigid-body: set the collider’s position directly (with `collider.setTranslation`)
+  to the corrected movement added to its current position.
+- A **velocity-based kinematic rigid-body**: set its velocity (with `rigidBody.setLinvel`) to the computed movement
+  divided by the timestep length.
+- A **position-based kinematic rigid-body**: set its next kinematic position (with `rigidBody.setNextKinematicTranslation`)
+  to the corrected movement added to its current position.
+
+</js>
+
+:::info
+The character’s shape may be any shape supported by Rapier. However, it is recommended to either use a cuboid,
+a ball, or a capsule since they involve less computations and less numerical approximations.
+:::
+
+:::warning
+The built-in character controller **does not** support rotational movement. It only supports translations.
+:::
