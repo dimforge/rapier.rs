@@ -56,9 +56,9 @@ fn modify_character_controller_slopes(mut character_controller: Query<&mut Kinem
 ```js
 let characterController = world.createCharacterController(0.01);
 // Don’t allow climbing slopes larger than 45 degrees.
-characterController.setMaxSlopeClimbAngle(45 * 3.14 / 180);
+characterController.setMaxSlopeClimbAngle(45 * Math.PI / 180);
 // Automatically slide down on slopes smaller than 30 degrees.
-characterController.setMinSlopeSlideAngle(30 * 3.14 / 180);
+characterController.setMinSlopeSlideAngle(30 * Math.PI / 180);
 ```
 
 </js>
