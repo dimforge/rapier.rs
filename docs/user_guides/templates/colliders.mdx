@@ -42,10 +42,10 @@ There are two ways of creating a collider with a convex shape:
 2. Using <rapier>`ColliderBuilder::convex_mesh(points, indices)`</rapier><bevy>`Collider::convex_mesh(points, indices)`</bevy><js>`ColliderDesc.convexMesh(points, indices)`</js> in
    3D or <rapier>`ColliderBuilder::convex_polyline(points)`</rapier><bevy>`Collider::convex_polyline(points)`</bevy><js>`ColliderDesc.convexPolyline(points`</js> in 2D.
    This takes a mesh described by its vertex buffer and index
-   buffer and assumes it is already convex (you need to ensure that it is convex yourself). This will be more efficient that
-   the <rapier>`ColliderBuilder::convex_hull`</rapier><bevy>`Collider::convex_hull`</bevy><js>`ColliderDesc.convexHull`</js> constructor because this
-   won't do any calculation to ensure convexity. However, if the input mesh isn't actually convex, collision-detection
-   with that shape will give incorrect result.
+   buffer and assumes it is already convex (you need to ensure that it is convex yourself). This will be more efficient than
+   the <rapier>`ColliderBuilder::convex_hull`</rapier><bevy>`Collider::convex_hull`</bevy><js>`ColliderDesc.convexHull`</js> constructor because it
+   won't perform any calculations to ensure convexity. However, if the input mesh isn't actually convex, the collision-detection
+   for that shape will give an incorrect result.
    
 ### Triangle meshes and polylines
 Triangle meshes (in 3D) and polylines (in 2D) can be used to describe the boundary of any kind of shape. This is
@@ -124,7 +124,7 @@ compound shape. The main differences between the two approaches is about collisi
 individual collision start/stop events.
 :::
 
-To build a compound shape, it is possible to provide directly the set of shapes as well as their position in the
+To build a compound shape, it is possible to directly provide the set of shapes as well as their position in the
 compound shape's local space:
 
 <rapier>
