@@ -389,12 +389,12 @@ Sometimes, [collision groups and solver groups](colliders#collision-groups-and-s
 to achieve the desired behavior. In that case, the contact filtering hooks let you apply custom rules to filter contact
 pairs and intersection pairs:
 - For each potential contact pair (between two non-sensor colliders) detected by the broad-phase, if at least one
-  of the colliders involved in the pair has the bit `ActiveHooks::FILTER_CONTACT_PAIRS` enabled in its
+  of the colliders involved in the pair has the bit `ActiveHooks::FILTER_CONTACT_PAIR` enabled in its
   [active hooks](colliders#active-hooks), then `PhysicsHooks::filter_contact_pair` will be called. If this filter
   returns `None` then no contact computation will happen for this pair of colliders. If it returns `Some` then the
   narrow-phase will compute contact points.
 - For each potential intersection pair (between a sensor colliders and another collider) detected by the broad-phase, if
-  at least one of the colliders involved in the pair has the bit `ActiveHooks::FILTER_INTERSECTION_PAIRS` enabled
+  at least one of the colliders involved in the pair has the bit `ActiveHooks::FILTER_INTERSECTION_PAIR` enabled
   in its [active hooks](colliders#active-hooks), then `PhysicsHooks::filter_intersection_pair` will be called. If this
   filter returns `false` then no intersection computation will happen for this pair of colliders. If it returns `true`
   then the narrow-phase will test whether or not they are intersecting.
@@ -505,15 +505,9 @@ fn setup_physics(mut commands: Commands) {
     // Add colliders with a `CustomFilterTag` component. Only colliders
     // with the same `CustomFilterTag` variant will collider thanks to
     // our custom physics hooks:
-    let collider = ColliderBundle {
-        material: ColliderMaterial {
-            active_hooks: ActiveHooks::FILTER_CONTACT_PAIRS 
-                | ActiveHooks::FILTER_INTERSECTION_PAIRS,
-            ..Default::default()
-        }.into(),
-        ..Default::default()
-    };
-    commands.spawn_bundle(collider)
+    commands.spawn(Collider::Ball(0.5))
+        .insert(ActiveHooks::FILTER_CONTACT_PAIR
+            | ActiveHooks::FILTER_INTERSECTION_PAIR)
         .insert(CustomFilterTag::GroupA);
     
     // TODO: add other colliders in a similar way.

@@ -89,7 +89,6 @@ values={[
 <TabItem value="2D">
 
 ```rust
-let rigid_body = RigidBodyBundle::default();
 // First option: by setting the density of the collider (or we could just leave
 //               its default value 1.0).
 let collider_mprops = ColliderMassProperties::Density(2.0);
@@ -112,7 +111,6 @@ commands.spawn(RigidBody::Dynamic)
   <TabItem value="3D">
 
 ```rust
-let rigid_body = RigidBodyBundle::default();
 // First option: by setting the density of the collider (or we could just leave
 //               its default value 1.0).
 let collider_mprops = ColliderMassProperties::Density(2.0);

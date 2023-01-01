@@ -6,10 +6,10 @@ import TabItem from '@theme/TabItem';
 pairs, or modify contacts, based on arbitrary user code. In order to enable a physics hook for a pair of colliders, at
 least one of the involved colliders must have the corresponding hook set as active. A hook is activated for a collider
 by setting its corresponding active hooks bit to `1`:
-- Setting the <notjs>`ActiveHooks::FILTER_CONTACT_PAIRS`</notjs><js>`ActiveHooks.FILTER_CONTACT_PAIRS`</js> bit to 1
+- Setting the <notjs>`ActiveHooks::FILTER_CONTACT_PAIR`</notjs><js>`ActiveHooks.FILTER_CONTACT_PAIR`</js> bit to 1
   enables the manual [filtering of all the contact pairs](advanced_collision_detection#contact-and-intersection-filtering)
   involving the collider.
-- Setting the <notjs>`ActiveHooks::FILTER_INTERSECTION_PAIRS`</notjs><js>`ActiveHooks.FILTER_INTERSECTION_PAIRS`</js>bit
+- Setting the <notjs>`ActiveHooks::FILTER_INTERSECTION_PAIR`</notjs><js>`ActiveHooks.FILTER_INTERSECTION_PAIR`</js>bit
   to 1 enables the manual [filtering of all the contact pairs](advanced_collision_detection#contact-and-intersection-filtering)
   involving the collider.
 <notjs>- Setting the `ActiveHooks::MODIFY_SOLVER_CONTACTS` bit to 1
