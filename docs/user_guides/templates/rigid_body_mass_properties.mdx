@@ -124,59 +124,20 @@ rigid_body.set_mass_properties(
 </rapier>
 <bevy>
 
-<Tabs
-groupId="dim"
-defaultValue="2D"
-values={[
-{label: 'Example 2D', value: '2D'},
-{label: 'Example 3D', value: '3D'},
-]}>
-<TabItem value="2D">
-
 ```rust
-/* Set the mass properties when the rigid-body bundle is created. */
+/* Set the additional mass properties when the rigid-body bundle is created. */
 commands.spawn()
     .insert(RigidBody::Dynamic)
-    .insert(MassProperties {
-        local_center_of_mass: Vec2::new(1.0, 2.0),
-        mass: 10.0,
-        principal_inertia: 0.5,
-    });
+    .insert(AdditionalMassProperties::Mass(10.0));
 ```
 ```rust
-/* Change the mass-properties inside of a system. */
-fn modify_body_mass_props(mut mprops: Query<&mut MassProperties>) {
+/* Change the additional mass-properties inside of a system. */
+fn modify_body_mass_props(mut mprops: Query<&mut AdditionalMassProperties>) {
     for mut mprops in mprops.iter_mut() {
-        mprops.mass = 100.0;
+        *mprops = AdditionalMassProperties::Mass(100.0);
     }
 }
 ```
-
-  </TabItem>
-  <TabItem value="3D">
-
-```rust
-/* Set the mass properties when the rigid-body bundle is created. */
-commands.spawn()
-    .insert(RigidBody::Dynamic)
-    .insert(MassProperties {
-        local_center_of_mass: Vec3::new(1.0, 2.0, 3.0),
-        mass: 10.0,
-        principal_inertia: Vec3::new(0.5, 0.6, 0.7),
-        ..Default::default()
-    });
-```
-```rust
-/* Change the mass-properties inside of a system. */
-fn modify_body_mass_props(mut mprops: Query<&mut MassProperties>) {
-    for mut mprops in mprops.iter_mut() {
-        mprops.mass = 100.0;
-    }
-}
-```
-
-  </TabItem>
-</Tabs>
 
 </bevy>
 <js>
