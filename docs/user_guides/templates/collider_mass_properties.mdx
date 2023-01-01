@@ -92,24 +92,20 @@ values={[
 let rigid_body = RigidBodyBundle::default();
 // First option: by setting the density of the collider (or we could just leave
 //               its default value 1.0).
-let collider = ColliderBundle {
-    mass_properties: ColliderMassProps::Density(2.0).into(),
-    ..Default::default ()
-};
+let collider_mprops = ColliderMassProperties::Density(2.0);
 // Second option: by setting the mass of the collider.
-let collider = ColliderBundle {
-    mass_properties: ColliderMassProps::Mass(0.8).into(),
-    ..Default::default ()
-};
+let collider_mprops = ColliderMassProperties::Mass(0.8);
 // Third option: by setting the mass-properties explicitly.
-let collider = ColliderBundle {
-    mass_properties: MassProperties::new(Vec2::new(0.0, 1.0).into(), 0.5, 0.3).into(),
-    ..Default::default()
-};
+let collider_mprops = ColliderMassProperties::MassProperties(MassProperties {
+    local_center_of_mass: Vec2::new(0.0, 1.0),
+    mass: 0.5,
+    principal_inertia: 0.3
+});
 // When the collider is attached, the rigid-body's mass and angular
 // inertia will be automatically updated to take the collider into account.
-commands.spawn_bundle(rigid_body)
-        .insert_bundle(collider);
+commands.spawn(RigidBody::Dynamic)
+        .insert(Collider::ball(0.5))
+        .insert(collider_mprops);
 ```
 
   </TabItem>
@@ -119,24 +115,21 @@ commands.spawn_bundle(rigid_body)
 let rigid_body = RigidBodyBundle::default();
 // First option: by setting the density of the collider (or we could just leave
 //               its default value 1.0).
-let collider = ColliderBundle {
-    mass_properties: ColliderMassProps::Density(2.0).into(),
-    ..Default::default ()
-};
+let collider_mprops = ColliderMassProperties::Density(2.0);
 // Second option: by setting the mass of the collider.
-let collider = ColliderBundle {
-    mass_properties: ColliderMassProps::Mass(0.8).into(),
-    ..Default::default ()
-};
+let collider_mprops = ColliderMassProperties::Mass(0.8);
 // Third option: by setting the mass-properties explicitly.
-let collider = ColliderBundle {
-    mass_properties: MassProperties::new(Vec3::new(0.0, 1.0, 0.0).into(), 0.5, Vec3::new(0.3, 0.2, 0.1).into()).into(),
-    ..Default::default()
-};
+let collider_mprops = ColliderMassProperties::MassProperties(MassProperties {
+    local_center_of_mass: Vec3::new(0.0, 1.0, 2.0),
+    mass: 0.5,
+    principal_inertia_local_frame: Quat::IDENTIY,
+    principal_inertia: Vec3::new(0.3, 0.4, 0.5)
+});
 // When the collider is attached, the rigid-body's mass and angular
 // inertia will be automatically updated to take the collider into account.
-commands.spawn_bundle(rigid_body)
-        .insert_bundle(collider);
+commands.spawn(RigidBody::Dynamic)
+        .insert(Collider::ball(0.5))
+        .insert(collider_mprops);
 ```
 
   </TabItem>
