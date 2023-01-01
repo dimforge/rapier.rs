@@ -47,8 +47,7 @@ assert_eq!(rigid_body.gravity_scale(), 0.5);
 
 ```rust
 /* Set the gravity scale when the rigid-body is created. */
-commands.spawn()
-    .insert(RigidBody::Dynamic)
+commands.spawn(RigidBody::Dynamic)
     .insert(GravityScale(2.0));
 ```
 ```rust

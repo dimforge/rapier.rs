@@ -72,8 +72,7 @@ values={[
 
 ```rust
 /* Lock translations and/or rotations when the rigid-body bundle is created. */
-commands.spawn()
-    .insert(RigidBody::Dynamic)
+commands.spawn(RigidBody::Dynamic)
     .insert(LockedAxes::TRANSLATION_LOCKED);
 ```
 ```rust
@@ -90,8 +89,7 @@ fn modify_body_locked_flags(mut locked_axes: Query<&mut LockedAxes>) {
 
 ```rust
 /* Lock translations and/or rotations when the rigid-body bundle is created. */
-commands.spawn()
-    .insert(RigidBody::Dynamic)
+commands.spawn(RigidBody::Dynamic)
     .insert(LockedAxes::TRANSLATION_LOCKED | LockedAxes::ROTATION_LOCKED_X);
 ```
 ```rust

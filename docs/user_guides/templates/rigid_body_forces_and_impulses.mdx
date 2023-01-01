@@ -72,8 +72,7 @@ values={[
 
 ```rust
 /* Apply forces when the rigid-body is created. */
-commands.spawn()
-    .insert(RigidBody::Dynamic)
+commands.spawn(RigidBody::Dynamic)
     .insert(ExternalForce {
         force: Vec2::new(1000.0, 2000.0),
         torque: 140.0,
@@ -105,8 +104,7 @@ fn apply_forces(mut ext_forces: Query<&mut ExternalForce>, mut ext_impulses: Que
 
 ```rust
 /* Apply forces when the rigid-body is created. */
-commands.spawn()
-    .insert(RigidBody::Dynamic)
+commands.spawn(RigidBody::Dynamic)
     .insert(ExternalForce {
         force: Vec3::new(10.0, 20.0, 30.0),
         torque: Vec3::new(1.0, 2.0, 3.0),

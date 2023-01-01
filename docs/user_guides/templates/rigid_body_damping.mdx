@@ -32,8 +32,7 @@ assert_eq!(rigid_body.angular_damping(), 1.0);
 
 ```rust
 /* Set damping when the rigid-body bundle is created. */
-commands.spawn()
-    .insert(RigidBody::Dynamic)
+commands.spawn(RigidBody::Dynamic)
     .insert(Damping { linear_damping: 0.5, angular_damping: 1.0 });
 ```
 ```rust

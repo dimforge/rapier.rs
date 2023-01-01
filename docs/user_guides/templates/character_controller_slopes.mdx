@@ -28,8 +28,7 @@ character_controller.min_slope_slide_angle = 30.0.to_radians();
 ```rust
 /* Configure the character controller when the collider is created. */
 // Snap to the ground if the vertical distance to the ground is smaller than 0.5.
-commands.spawn()
-    .insert(Collider::ball(0.5))
+commands.spawn(Collider::ball(0.5))
     .insert(KinematicCharacterController {
         // Don’t allow climbing slopes larger than 45 degrees.
         max_slope_climb_angle: 45.0.to_radians(),

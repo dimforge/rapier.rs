@@ -64,7 +64,7 @@ assert_eq!(collider.solver_groups(), InteractionGroups::new(0b0011.into(), 0b101
 
 ```rust
 /* Set the collision and/or solver groups when the collider is created. */
-commands.spawn()
+commands.spawn(Collider::ball(0.5))
     .insert(CollisionGroups::new(0b1101.into(), 0b0100.into())
     .insert(SolverGroups::new(0b0011.into(), 0b1011.into());
 ```

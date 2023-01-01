@@ -41,8 +41,7 @@ assert!(collider.active_hooks().contains(ActiveHooks::MODIFY_SOLVER_CONTACTS));
 
 ```rust
 /* Set the active hooks when the collider is created. */
-commands.spawn()
-    .insert(Collider::ball(0.5))
+commands.spawn(Collider::ball(0.5))
     .insert(ActiveHooks::FILTER_CONTACT_PAIRS | ActiveHooks::MODIFY_SOLVER_CONTACTS);
 ```
 ```rust

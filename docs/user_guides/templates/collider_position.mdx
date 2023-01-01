@@ -86,8 +86,7 @@ values={[
 
 ```rust
 /* Set the collider position when the collider is created. */
-commands.spawn()
-    .insert(Collider::cuboid(0.5, 0.5))
+commands.spawn(Collider::cuboid(0.5, 0.5))
     .insert_bundle(TransformBundle::from(Transform::from_xyz(1.0, 2.0, 0.0));
 ```
 ```rust
@@ -104,8 +103,7 @@ fn modify_collider_position(mut positions: Query<&mut Transform, With<Collider>)
 
 ```rust
 /* Set the collider position when the collider is created. */
-commands.spawn()
-    .insert(Collider::cuboid(0.5, 0.5, 0.5))
+commands.spawn(Collider::cuboid(0.5, 0.5, 0.5))
     .insert_bundle(TransformBundle::from(Transform::from_xyz(1.0, 2.0, 3.0)));
 ```
 ```rust
@@ -247,11 +245,9 @@ values={[
 // Attach the collider to the rigid-body. The collider is attached as its
 // children, so the collider’s `Transform` components sets its position
 // relative to the parent rigid-body.
-commands.spawn()
-    .insert(RigidBody::Dynamic)
+commands.spawn(RigidBody::Dynamic)
     .with_children(|children| {
-        children.spawn()
-            .insert(Collider::cuboid(0.5, 0.5))
+        children.spawn(Collider::cuboid(0.5, 0.5))
             .insert_bundle(TransformBundle::from(Transform::from_xyz(1.0, 2.0, 0.0)));
     });
 ```
@@ -263,11 +259,9 @@ commands.spawn()
 // Attach the collider to the rigid-body. The collider is attached as its
 // children, so the collider’s `Transform` components sets its position
 // relative to the parent rigid-body.
-commands.spawn()
-    .insert(RigidBody::Dynamic)
+commands.spawn(RigidBody::Dynamic)
     .with_children(|children| {
-        children.spawn()
-            .insert(Collider::cuboid(0.5, 0.5, 0.5))
+        children.spawn(Collider::cuboid(0.5, 0.5, 0.5))
             .insert_bundle(TransformBundle(Transform::from_xyz(1.0, 2.0, 3.0)));
     });
 ```

@@ -43,8 +43,7 @@ assert_eq!(rigid_body.dominance_group(), 10);
 
 ```rust
 /* Set dominance when the rigid-body bundle is created. */
-commands.spawn()
-    .insert(RigidBody::Dynamic)
+commands.spawn(RigidBody::Dynamic)
     .insert(Dominance::group(10));
 ```
 ```rust

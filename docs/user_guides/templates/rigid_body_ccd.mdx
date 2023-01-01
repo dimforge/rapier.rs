@@ -39,8 +39,7 @@ assert_eq!(rigid_body.is_ccd_enabled(), true);
 
 ```rust
 /* Enable CCD when the rigid-body bundle is created. */
-commands.spawn()
-    .insert(RigidBody::Dynamic)
+commands.spawn(RigidBody::Dynamic)
     .insert(Ccd::enabled());
 ```
 ```rust

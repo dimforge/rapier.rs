@@ -50,8 +50,7 @@ character_controller.autostep = Some(CharacterAutostep {
 ```rust
 /* Configure the character controller when the collider is created. */
 // Autostep if the step height is smaller than 0.5, and its width larger than 0.2.
-commands.spawn()
-    .insert(Collider::ball(0.5))
+commands.spawn(Collider::ball(0.5))
     .insert(KinematicCharacterController {
         autostep: Some(CharacterAutostep {
             max_height: CharacterLength::Absolute(0.5),
@@ -64,8 +63,7 @@ commands.spawn()
 // Autostep if the step height is smaller than 0.5 multiplied by the character’s height,
 // and its width larger than 0.5 multiplied by the character’s width (i.e. half the character’s
 // width).
-commands.spawn()
-    .insert(Collider::ball(0.5))
+commands.spawn(Collider::ball(0.5))
     .insert(KinematicCharacterController {
         autostep: Some(CharacterAutostep {
             max_height: CharacterLength::Relative(0.3),

@@ -137,8 +137,7 @@ ColliderBuilder::compound(vec![(pos1, shape1), (pos2, shape2)])
 <bevy>
 
 ```rust
-commands.spawn()
-    .insert(Collider::compound(vec![(pos1, rot1, shape1), (pos2, rot2, shape2)]));
+commands.spawn(Collider::compound(vec![(pos1, rot1, shape1), (pos2, rot2, shape2)]));
 ```
 
 </bevy>
