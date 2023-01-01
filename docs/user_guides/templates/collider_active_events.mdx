@@ -32,11 +32,6 @@ assert!(collider.active_events().contains(ActiveEvents::COLLISION_EVENTS));
 
 ```rust
 /* Set the active events when the collider is created. */
-let collider = ColliderBundle {
-    flags: (ActiveEvents::COLLISION_EVENTS).into(),
-    ..Default::default()
-};
-commands.spawn_bundle(collider);
 commands.spawn(Collider::ball(0.5))
     .insert(ActiveEvents::COLLISION_EVENTS);
 ```

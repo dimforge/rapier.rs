@@ -123,7 +123,7 @@ pairs and intersection pairs:
   returns `null` then no contact computation will happen for this pair of colliders. If it returns a `SolverFlags` value then the
   narrow-phase will compute contact points.
 - For each potential intersection pair (between a sensor colliders and another collider) detected by the broad-phase, if
-  at least one of the colliders involved in the pair has the bit `ActiveHooks.FILTER_INTERSECTION_PAIRS` enabled
+  at least one of the colliders involved in the pair has the bit `ActiveHooks.FILTER_INTERSECTION_PAIR` enabled
   in its [active hooks](colliders#active-hooks), then `PhysicsHooks.filterIntersectionPair` will be called. If this
   filter returns `false` then no intersection computation will happen for this pair of colliders. If it returns `true`
   then the narrow-phase will test whether or not they are intersecting.
