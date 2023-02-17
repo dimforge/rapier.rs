@@ -14,7 +14,7 @@ of components, systems, and resources that share a common objective.
 The [**bevy_rapier2d**](https://crates.io/crates/bevy_rapier2d) and [**bevy_rapier3d**](https://crates.io/crates/bevy_rapier3d)
 crates which integrate **Rapier** to **Bevy** using their plugin system.
 To get the best of **bevy-rapier** multiple features can be enabled optionally:
-- `debug-render`: enables the debug-renderer plugin.
+- `debug-render-2d`/`debug-render-3d`: enables the debug-renderer plugin.
 - `simd-stable`: enables explicit SIMD optimizations using the [`wide` crate](https://crates.io/crates/wide).
   Has limited cross-platform support but can be used with a stable version of the Rust compiler.
 - `simd-nightly`: enables explicit SIMD optimizations using the [`packed_simd` crate](https://crates.io/crates/packed_simd).
@@ -76,7 +76,7 @@ values={[
 [dependencies]
 # TODO: Replace the * by the latest version numbers.
 bevy = "*"
-bevy_rapier2d = { version = "*", features = [ "simd-stable", "debug-render" ] }
+bevy_rapier2d = { version = "*", features = [ "simd-stable", "debug-render-2d" ] }
 ```
 
   </TabItem>
@@ -86,7 +86,7 @@ bevy_rapier2d = { version = "*", features = [ "simd-stable", "debug-render" ] }
 [dependencies]
 # TODO: Replace the * by the latest version numbers.
 bevy = "*"
-bevy_rapier3d = { version = "*", features = [ "simd-stable", "debug-render" ] }
+bevy_rapier3d = { version = "*", features = [ "simd-stable", "debug-render-3d" ] }
 ```
 
   </TabItem>
@@ -205,10 +205,10 @@ fn print_ball_altitude(positions: Query<&Transform, With<RigidBody>>) {
 
 
 ## The debug renderer
-The `bevy_rapier` plugin comes with a debug-render to help visualize exactly what the physics-engine sees. This
+The `bevy_rapier` plugin comes with a debug-render (either `debug-render-2d` or `debug-render-3d`) to help visualize exactly what the physics-engine sees. This
 can help fixing some bugs like colliders not being properly aligned with your graphics representation.
 The debug-renderer is be enabled by:
-1. Enabling the `debug-render` cargo feature of bevy-rapier.
+1. Enabling the `debug-render-2d` or `debug-render-3d` cargo feature of bevy-rapier.
 2. Adding the plugin `RapierDebugRenderPlugin` to the Bevy app.
 
 ![debug-render](/img/rapier_debug_render.png)
