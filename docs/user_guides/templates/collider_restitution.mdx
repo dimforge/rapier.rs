@@ -63,8 +63,7 @@ assert_eq!(collider.restitution_combine_rule(), CoefficientCombineRule::Min);
 ```rust
 /* Set the restitution coefficient and restitution combine rule
    when the collider is created. */
-commands.spawn()
-    .insert(Collider::ball(0.5))
+commands.spawn(Collider::ball(0.5))
     .insert(Restitution {
         coefficient: 0.7,
         combine_rule: CoefficientCombineRule::Min,

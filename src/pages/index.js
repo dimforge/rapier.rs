@@ -156,14 +156,6 @@ function Home() {
               </a>
             </p>
             <hr />
-            <h3>Platinum Sponsors</h3>
-            <br />
-            <p>
-              <a href="https://embark-studios.com">
-                <img src="https://www.embark.dev/img/logo_black.png" width="400px" />
-              </a>
-            </p>
-            <hr />
             <h4>Gold Sponsors</h4>
             <br />
             <p>

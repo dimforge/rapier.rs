@@ -30,8 +30,7 @@ values={[
 
 ```rust
 /* Character controller with the positive X axis as the up vector. */
-commands.spawn()
-    .insert(Collider::ball(0.5))
+commands.spawn(Collider::ball(0.5))
     .insert(KinematicCharacterController {
         up: Vec2::X,
         ..default()
@@ -51,8 +50,7 @@ fn modify_character_controller_autostep(mut character_controller: Query<&mut Kin
 
 ```rust
 /* Character controller with the positive Z axis as the up vector. */
-commands.spawn()
-    .insert(Collider::ball(0.5))
+commands.spawn(Collider::ball(0.5))
     .insert(KinematicCharacterController {
         up: Vec3::Z,
         ..default()

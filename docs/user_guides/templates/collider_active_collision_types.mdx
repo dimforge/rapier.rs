@@ -29,8 +29,7 @@ assert!(collider.active_collision_types().contains(ActiveCollisionTypes::KINEMAT
 
 ```rust
 /* Set the active collision types when the collider is created. */
-commands.spawn()
-    .insert(Collider::ball(0.5))
+commands.spawn(Collider::ball(0.5))
     .insert(ActiveCollisionTypes::default() | ActiveCollisionTypes::KINEMATIC_FIXED);
 ```
 ```rust

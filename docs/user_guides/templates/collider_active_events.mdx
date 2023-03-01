@@ -37,8 +37,7 @@ let collider = ColliderBundle {
     ..Default::default()
 };
 commands.spawn_bundle(collider);
-commands.spawn()
-    .insert(Collider::ball(0.5))
+commands.spawn(Collider::ball(0.5))
     .insert(ActiveEvents::COLLISION_EVENTS);
 ```
 ```rust

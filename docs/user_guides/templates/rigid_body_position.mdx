@@ -103,8 +103,7 @@ values={[
 
 ```rust
 /* Set the position when the rigid-body bundle is created. */
-commands.spawn()
-    .insert(RigidBody::Dynamic)
+commands.spawn(RigidBody::Dynamic)
     .insert_bundle(TransformBundle::from(Transform::from_xyz(0.0, 5.0, 0.0)));
 ```
 ```rust
@@ -123,8 +122,7 @@ fn modify_body_translation(mut positions: Query<&mut Transform, With<RigidBody>>
 /* Set the position when the rigid-body bundle is created. */
 ```rust
 /* Set the position when the rigid-body bundle is created. */
-commands.spawn()
-    .insert(RigidBody::Dynamic)
+commands.spawn(RigidBody::Dynamic)
     .insert_bundle(TransformBundle::from(Transform::from_xyz(0.0, 5.0, 0.0)));
 ```
 ```rust

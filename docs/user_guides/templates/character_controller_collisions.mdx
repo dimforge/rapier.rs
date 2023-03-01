@@ -107,8 +107,7 @@ character_controller.solve_character_collision_impulses(
 
 ```rust
 /* Configure the character controller when the collider is created. */
-commands.spawn()
-    .insert(Collider::ball(0.5))
+commands.spawn(Collider::ball(0.5))
     .insert(KinematicCharacterController {
         // Enable the automatic application of impulses to the dynamic bodies
         // hit by the character along its path.

@@ -55,12 +55,6 @@ module.exports = {
           ],
         },
         {
-          to: 'benchmarks/',
-          activeBasePath: 'benchmarks',
-          label: 'Benchmarks',
-          position: 'left',
-        },
-        {
           to: '/community',
           position: 'left',
           activeBaseRegex: `/community/`,

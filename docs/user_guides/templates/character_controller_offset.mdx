@@ -22,16 +22,14 @@ character_controller.offset = CharacterLength::Relative(0.01);
 
 ```rust
 /* Configure the character controller when the collider is created. */
-commands.spawn()
-    .insert(Collider::ball(0.5))
+commands.spawn(Collider::ball(0.5))
     .insert(KinematicCharacterController {
         // The character offset is set to 0.01.
         offset: CharacterLength::Absolute(0.01),
         ..default()
     });
 
-commands.spawn()
-    .insert(Collider::ball(0.5))
+commands.spawn(Collider::ball(0.5))
     .insert(KinematicCharacterController {
         // The character offset is set to 0.01 multiplied by the collider’s height.
         offset: CharacterLength::Absolute(0.01),

@@ -116,8 +116,7 @@ values={[
 
 ```rust
 fn init_system(mut commands: Commands) {
-    commands.spawn()
-        .insert(RigidBody::KinematicPositionBased)
+    commands.spawn(RigidBody::KinematicPositionBased)
         .insert(Collider::ball(0.5))
         .insert(KinematicCharacterController::default());
 }
@@ -141,8 +140,7 @@ fn read_result_system(controllers: Query<Entity, &KinematicCharacterControllerOu
 
 ```rust
 fn init_system(mut commands: Commands) {
-    commands.spawn()
-        .insert(RigidBody::KinematicPositionBased)
+    commands.spawn(RigidBody::KinematicPositionBased)
         .insert(Collider::ball(0.5))
         .insert(KinematicCharacterController::default());
 }

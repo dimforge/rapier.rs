@@ -63,8 +63,7 @@ assert_eq!(collider.friction_combine_rule(), CoefficientCombineRule::Min);
 ```rust
 /* Set the friction coefficient and friction combine rule
    when the collider is created. */
-commands.spawn()
-    .insert(Collider::ball(0.5))
+commands.spawn(Collider::ball(0.5))
     .insert(Friction {
         coefficient: 0.7,
         combine_rule: CoefficientCombineRule::Min,

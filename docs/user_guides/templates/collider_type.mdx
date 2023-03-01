@@ -32,8 +32,7 @@ assert!(collider.is_sensor());
 
 ```rust
 /* Set the collider sensor when the collider is created. */
-commands.spawn()
-    .insert(Collider::ball(0.5))
+commands.spawn(Collider::ball(0.5))
     .insert(Sensor);
 ```
 ```rust
