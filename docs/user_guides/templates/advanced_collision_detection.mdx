@@ -592,7 +592,7 @@ fn main() {
 
 struct MyPhysicsHooks;
 
-impl PhysicsHooksWithQuery<NoUserData for MyPhysicsHooks {
+impl PhysicsHooksWithQuery<NoUserData> for MyPhysicsHooks {
     fn modify_solver_contacts(
         &self, 
         context: ContactModificationContextView,
