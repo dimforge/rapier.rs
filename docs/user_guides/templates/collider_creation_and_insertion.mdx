@@ -156,7 +156,7 @@ use bevy_rapier2d::prelude::*;
 
 commands.spawn(Collider::cuboid(1.0, 2.0))
     .insert(Sensor)
-    .insert_bundle(TransformBundle::from(Transform::from_xyz(2.0, 0.0, 0.0)))
+    .insert(TransformBundle::from(Transform::from_xyz(2.0, 0.0, 0.0)))
     .insert(Friction::coefficient(0.7))
     .insert(Restitution::coefficient(0.3))
     .insert(ColliderMassProperties::Density(2.0));
@@ -170,13 +170,13 @@ use bevy_rapier3d::prelude::*;
 
 commands.spawn(Collider::cuboid(1.0, 2.0, 3.0))
     .insert(Sensor)
-    .insert_bundle(TransformBundle::from(Transform::from_xyz(2.0, 0.0, 0.0)))
+    .insert(TransformBundle::from(Transform::from_xyz(2.0, 0.0, 0.0)))
     .insert(Friction::coefficient(0.7))
     .insert(Restitution::coefficient(0.3))
     .insert(ColliderMassProperties::Density(2.0));
 };
 
-commands.spawn_bundle(collider);
+commands.spawn(collider);
 ```
 
   </TabItem>
@@ -199,10 +199,10 @@ commands.spawn(RigidBody::Dynamic)
     .with_children(|children| {
         children.spawn(Collider::ball(0.5))
             // Position the collider relative to the rigid-body.
-            .insert_bundle(TransformBundle::from(Transform::from_xyz(0.0, 0.0, -1.0)));
+            .insert(TransformBundle::from(Transform::from_xyz(0.0, 0.0, -1.0)));
         children.spawn(Collider::ball(0.5))
             // Position the collider relative to the rigid-body.
-            .insert_bundle(TransformBundle::from(Transform::from_xyz(0.0, 0.0, 1.0)));
+            .insert(TransformBundle::from(Transform::from_xyz(0.0, 0.0, 1.0)));
     });
 ```
 

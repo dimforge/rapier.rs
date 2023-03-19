@@ -155,7 +155,7 @@ use bevy::prelude::*;
 use bevy_rapier2d::prelude::*;
 
 commands.spawn(RigidBody::Dynamic)
-        .insert_bundle(TransformBundle::from(Transform::from_xyz(0.0, 5.0, 0.0)))
+        .insert(TransformBundle::from(Transform::from_xyz(0.0, 5.0, 0.0)))
         .insert(Velocity {
             linvel: Vec2::new(1.0, 2.0),
             angvel: 0.2
@@ -173,7 +173,7 @@ use bevy::prelude::*;
 use bevy_rapier3d::prelude::*;
 
 commands.spawn(RigidBody::Dynamic)
-        .insert_bundle(TransformBundle::from(Transform::from_xyz(0.0, 5.0, 0.0)))
+        .insert(TransformBundle::from(Transform::from_xyz(0.0, 5.0, 0.0)))
         .insert(Velocity {
             linvel: Vec3::new(1.0, 2.0, 3.0),
             angvel: Vec3::new(0.2, 0.0, 0.0),
