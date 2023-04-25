@@ -32,7 +32,7 @@ commands.spawn(Collider::ball(0.5))
 commands.spawn(Collider::ball(0.5))
     .insert(KinematicCharacterController {
         // The character offset is set to 0.01 multiplied by the collider’s height.
-        offset: CharacterLength::Absolute(0.01),
+        offset: CharacterLength::Relative(0.01),
         ..default()
     });
 ```
