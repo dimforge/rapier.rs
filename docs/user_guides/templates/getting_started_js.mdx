@@ -180,3 +180,59 @@ async function run_simulation() {
 </Tabs>
 
 A complete example can be found [on codepen](https://codepen.io/sebcrozet/pen/poRQoKK).
+
+## Rendering Debug Shapes
+
+Rapier does not come with any built-in rendering capabilities, so you must do the rendering yourself. However, the debug shape data
+can be accessed directly from the physics world instance by calling `debugRender()`.
+
+```js
+const { vertices, colors } = world.debugRender()
+```
+
+These are each flat arrays filled with shape and color data for every body and collider in the physics world.
+
+The `vertices` array contains point data of where to draw lines while the `colors` array contains the RGBA values to associate
+with each line.
+
+:::info
+The colors of each body are not configurable in the current version of Rapier. The colors given will
+be based on the type of the given rigid body or collider and the current kinematic state of it.
+:::
+
+Below is an example of rendering this data using Pixi.js and Pixi Viewport.
+
+```js
+import PIXI from 'pixi.js';
+import { Viewport } from 'pixi-viewport';
+
+// ...
+
+let GRAPHICS = [];
+function renderDebug (pixiViewport, physicsWorld) {
+  const { vertices, colors } = physicsWorld.debugRender();
+
+  GRAPHICS.forEach(g => g.destroy());
+  GRAPHICS = [];
+
+  for (let i = 0; i < vtx.length / 4; i += 1) {
+    const g = new PIXI.Graphics();
+    const c = new PIXI.Color({
+      r: colors[i * 4],
+      g: colors[i * 4 + 1],
+      b: colors[i * 4 + 2],
+      a: colors[i * 4 + 3]
+    });
+
+    g.lineStyle(0.5, c, 1);
+    g.moveTo(vertices[i * 4],     vertices[i * 4 + 1]);
+    g.lineTo(vertices[i * 4 + 2], vertices[i * 4 + 3]);
+    g.closePath();
+
+    GRAPHICS.push(g);
+    pixiViewport.addChild(g);
+  }
+}
+```
+
+An example of this in action can be see in the [Rapier.js testbed code](https://github.com/dimforge/rapier.js/blob/master/testbed2d/src/Graphics.ts).
