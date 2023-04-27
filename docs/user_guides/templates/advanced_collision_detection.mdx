@@ -162,7 +162,7 @@ will be multiple contact manifolds, one for each piece that may result in an act
 /* Find the contact pair, if it exists, between two colliders. */
 if let Some(contact_pair) = narrow_phase.contact_pair(collider_handle1, collider_handle2) {
     // The contact pair exists meaning that the broad-phase identified a potential contact.
-    if contact_pair.has_any_active_contact {
+    if contact_pair.has_any_active_contacts {
         // The contact pair has active contacts, meaning that it
         // contains contacts for which contact forces were computed.
     }
