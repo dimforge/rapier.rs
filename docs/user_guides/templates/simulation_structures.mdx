@@ -66,17 +66,8 @@ It will take care of updating every data-structures mentioned in this page (exce
 running the force computation and integration, and running CCD resolution.
 <rapier>
 
-Usage of `PhysicsPipeline::step` is illustrated in [the basic simulation example](getting_started#basic-simulation-example).
-It has two useful methods:
-- `PhysicsPipeline::step` executes one timestep. This is the method you should use most of the time, unless
-  you are trying to use your own containers instead of the predefined `RigidBodySet` and `ColliderSet`.
-- `PhysicsPipeline::step_generic` also executes one timestep, but is generic wrt. the rigid-body and collider
-  containers. It is strongly discouraged to use this method unless you understand what is expected from your
-  custom containers (more documentation on this topic will be added in the future). Our **bevy_rapier** plugin 
-  for the [Bevy](http://bevyengine.org/) game engine is one example that uses `PhysicsPipeline::step_generic`
-  to use Bevy's queries as rigid-bodies and collider containers.
-  
-
+`PhysicsPipeline::step` executes one timestep.
+Its usage is illustrated in [the basic simulation example](getting_started#basic-simulation-example).
 
 </rapier>
 
