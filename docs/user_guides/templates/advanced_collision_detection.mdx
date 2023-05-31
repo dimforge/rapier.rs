@@ -230,7 +230,7 @@ fn display_contact_info(rapier_context: Res<RapierContext>) {
             // Read the geometric contacts.
             for contact_point in manifold.points() {
                 // Keep in mind that all the geometric contact data are expressed in the local-space of the colliders.
-                println!("Found local contact point 1: {:?}", contact_point.local_p1();
+                println!("Found local contact point 1: {:?}", contact_point.local_p1());
                 println!("Found contact distance: {:?}", contact_point.dist()); // Negative if there is a penetration.
                 println!("Found contact impulse: {}", contact_point.data.impulse());
                 println!("Found friction impulse: {}", contact_point.data.tangent_impulse());
