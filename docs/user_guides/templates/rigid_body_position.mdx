@@ -120,8 +120,6 @@ fn modify_body_translation(mut positions: Query<&mut Transform, With<RigidBody>>
 
 ```rust
 /* Set the position when the rigid-body bundle is created. */
-```rust
-/* Set the position when the rigid-body bundle is created. */
 commands.spawn(RigidBody::Dynamic)
     .insert(TransformBundle::from(Transform::from_xyz(0.0, 5.0, 0.0)));
 ```
