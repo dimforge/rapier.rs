@@ -446,13 +446,11 @@ impl PhysicsHooks<RigidBodySet, ColliderSet> for MyPhysicsHooks {
 
 ```rust
 fn main() {
-    App::new()
-        .add_plugins((
-            DefaultPlugins,
-            // Make sure the Rapier plugin is parametrized by our custom hooks type
-            RapierPhysicsPlugin::<SameUserDataFilter>::default(),
-        ))
-        .add_systems(Startup, setup_physics)
+    App::build()
+        .add_plugins(DefaultPlugins)
+        // Make sure the Rapier plugin is parametrized by our custom user-data type.
+        .add_plugins(RapierPhysicsPlugin::<&CustomFilterTag>::default())
+        .add_systems(Startup, setup_physics.system())
         .run();
 }
 
@@ -570,12 +568,10 @@ impl PhysicsHooks<RigidBodySet, ColliderSet> for MyPhysicsHooks {
 
 ```rust
 fn main() {
-    App::new()
-        .add_plugins((
-            DefaultPlugins,
-            RapierPhysicsPlugin::<MyPhysicsHooks>::default()
-        ))
-        .add_systems(Startup, setup_physics)
+    App::build()
+        .add_plugins(DefaultPlugins)
+        .add_plugins(RapierPhysicsPlugin::<NoUserData>::default())
+        .add_systems(Startup, setup_physics.system())
         .run();
 }
 
