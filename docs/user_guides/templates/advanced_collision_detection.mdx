@@ -366,18 +366,15 @@ a physics hooks that does nothing particular.
 </rapier>
 <bevy>
 
-Physics hooks are given as a resource of type `PhysicsHooksWithQueryResource<UserData>` where `UserData` is an arbitrary
-component type that you would like to access inside of the hook methods (useful for example to access custom data
-attached to the entities to guide contact filtering). For physics hooks to work, the following steps must be taken:
-- The `RapierPhysicsPlugin` must be parametrized by the same `UserData` as your physics hooks, e.g., `app.add_plugin(RapierPhysicsPlugin::<&MyUserData>::default())`.
-- The custom physics hooks must implement the `PhysicsHooksWithQuery<&MyUserData>` trait.
-- The hooks must be inserted as a resource:
-```rust
-commands.add_resource(PhysicsHooksWithQueryResource(Box::new(my_hooks)));
-```
+Physics hooks are given as a type argument to `RapierPhysicsPlugin`. The hooks type must implement `BevyPhysicsHooks`
+trait. The trait requires `SystemParam` trait to also be implemented which is useful for example to access components
+attached to the entities to guide contact filtering. For physics hooks to work, the following steps must be taken:
+- The `RapierPhysicsPlugin` must be parametrized by the custom physics hooks type
+- The custom physics hooks must implement the `BevyPhysicsHooks` trait
+- The custom physics hooks must implement `SystemParam` trait for example using `derive` macro
 
 :::note
-If you don't need any user-data for your physics hooks, you can use `NoUserData` as the user data:
+If you don't need any physics hooks, `NoUserData` should be passed as a plugin type parameter:
 `RapierPhysicsPlugin::<NoUserData>::default()`.
 :::
 
@@ -389,7 +386,7 @@ Sometimes, [collision groups and solver groups](colliders#collision-groups-and-s
 to achieve the desired behavior. In that case, the contact filtering hooks let you apply custom rules to filter contact
 pairs and intersection pairs:
 - For each potential contact pair (between two non-sensor colliders) detected by the broad-phase, if at least one
-  of the colliders involved in the pair has the bit `ActiveHooks::FILTER_CONTACT_PAIR` enabled in its
+  of the colliders involved in the pair has the bit `ActiveHooks::FILTER_CONTACT_PAIRS` enabled in its
   [active hooks](colliders#active-hooks), then `PhysicsHooks::filter_contact_pair` will be called. If this filter
   returns `None` then no contact computation will happen for this pair of colliders. If it returns `Some` then the
   narrow-phase will compute contact points.
@@ -445,19 +442,21 @@ impl PhysicsHooks<RigidBodySet, ColliderSet> for MyPhysicsHooks {
 ```
 
 </rapier>
-<rapier>
+<bevy>
 
 ```rust
 fn main() {
-    App::build()
-        .add_plugins(DefaultPlugins)
-        // Make sure the Rapier plugin is parametrized by our custom user-data type.
-        .add_plugin(RapierPhysicsPlugin::<&CustomFilterTag>::default())
-        .add_startup_system(setup_physics.system())
+    App::new()
+        .add_plugins((
+            DefaultPlugins,
+            // Make sure the Rapier plugin is parametrized by our custom hooks type
+            RapierPhysicsPlugin::<SameUserDataFilter>::default(),
+        ))
+        .add_systems(Startup, setup_physics)
         .run();
 }
 
-#[derive(PartialEq, Eq, Clone, Copy)]
+#[derive(Component, PartialEq, Eq, Clone, Copy)]
 enum CustomFilterTag {
     GroupA,
     GroupB,
@@ -467,15 +466,14 @@ enum CustomFilterTag {
 // with the same CustomFilterTag component value.
 // Note that using collision groups would be a more efficient way of doing
 // this, but we use custom filters instead for demonstration purpose.
-struct SameUserDataFilter;
-impl<'a> PhysicsHooksWithQuery<&'a CustomFilterTag> for SameUserDataFilter {
-    fn filter_contact_pair(
-        &self,
-        context: &PairFilterContext<RigidBodyComponentsSet, ColliderComponentsSet>,
-        custom_tag: &Query<&'a CustomFilterTagComponent>,
-    ) -> Option<SolverFlags> {
-        if custom_tag.get(context.collider1.entity()).ok().copied()
-            == custom_tag.get(context.collider2.entity()).ok().copied()
+#[derive(SystemParam)]
+struct SameUserDataFilter<'w, 's> {
+    tags: Query<'w, 's, &'static CustomFilterTag>,
+}
+impl BevyPhysicsHooks for SameUserDataFilter<'_, '_> {
+    fn filter_contact_pair(&self, context: PairFilterContextView) -> Option<SolverFlags> {
+        if self.tags.get(context.collider1()).ok().copied()
+            == self.tags.get(context.collider2()).ok().copied()
         {
             Some(SolverFlags::COMPUTE_IMPULSES)
         } else {
@@ -483,38 +481,27 @@ impl<'a> PhysicsHooksWithQuery<&'a CustomFilterTag> for SameUserDataFilter {
         }
     }
 
-
-    fn filter_intersection_pair(
-        &self,
-        context: &PairFilterContext<RigidBodyComponentsSet, ColliderComponentsSet>,
-        custom_tag: &Query<&'a CustomFilterTagComponent>,
-    ) -> bool {
-        custom_tag.get(context.collider1.entity()).ok().copied()
-            == custom_tag.get(context.collider2.entity()).ok().copied()
+    fn filter_intersection_pair(&self, context: PairFilterContextView) -> bool {
+        self.tags.get(context.collider1()).ok().copied()
+            == self.tags.get(context.collider2()).ok().copied()
     }
 }
 
 fn setup_physics(mut commands: Commands) {
-    // Register our physics hooks.
-    commands.insert_resource(
-        PhysicsHooksWithQueryResource(
-            Box::new(SameUserDataFilter {})
-        )
-    );
-    
     // Add colliders with a `CustomFilterTag` component. Only colliders
     // with the same `CustomFilterTag` variant will collider thanks to
     // our custom physics hooks:
-    commands.spawn(Collider::Ball(0.5))
-        .insert(ActiveHooks::FILTER_CONTACT_PAIR
-            | ActiveHooks::FILTER_INTERSECTION_PAIR)
-        .insert(CustomFilterTag::GroupA);
+    commands.spawn((
+        Collider::ball(0.5),
+        ActiveHooks::FILTER_CONTACT_PAIRS | ActiveHooks::FILTER_INTERSECTION_PAIR,
+        CustomFilterTag::GroupA,
+    ));
     
     // TODO: add other colliders in a similar way.
 }
 ```
 
-</rapier>
+</bevy>
 
 ### Contact modification
 It is possible to modify contacts after they have been computed by the narrow-phase. Contact-modification can have
@@ -583,20 +570,22 @@ impl PhysicsHooks<RigidBodySet, ColliderSet> for MyPhysicsHooks {
 
 ```rust
 fn main() {
-    App::build()
-        .add_plugins(DefaultPlugins)
-        .add_plugin(RapierPhysicsPlugin::<NoUserData>::default())
-        .add_startup_system(setup_physics.system())
+    App::new()
+        .add_plugins((
+            DefaultPlugins,
+            RapierPhysicsPlugin::<MyPhysicsHooks>::default()
+        ))
+        .add_systems(Startup, setup_physics)
         .run();
 }
 
+#[derive(SystemParam)]
 struct MyPhysicsHooks;
 
-impl PhysicsHooksWithQuery<NoUserData> for MyPhysicsHooks {
+impl BevyPhysicsHooks for MyPhysicsHooks {
     fn modify_solver_contacts(
         &self, 
-        context: ContactModificationContextView,
-        _user_data: &Query<NoUserData>
+        context: ContactModificationContextView
     ) {
         // This is a silly example of contact modifier that does silly things
         // for illustration purpose:
@@ -626,14 +615,12 @@ impl PhysicsHooksWithQuery<NoUserData> for MyPhysicsHooks {
 }
 
 fn setup_physics(mut commands: Commands) {
-    // Register our physics hooks.
-    commands.insert_resource(PhysicsHooksWithQueryResource(Box::new(MyPhysicsHooks {})));
 
-    // Add colliders with a `CustomFilterTag` component. Only colliders
-    // with the same `CustomFilterTag` variant will collider thanks to
-    // our custom physics hooks:
-    commands.spawn(Collider::ball(0.5))
-        .insert(ActiveHooks::MODIFY_SOLVER_CONTACTS);
+    // Add colliders
+    commands.spawn((
+        Collider::ball(0.5),
+        ActiveHooks::MODIFY_SOLVER_CONTACTS
+    ));
 
     // TODO: add other colliders in a similar way.
 }
