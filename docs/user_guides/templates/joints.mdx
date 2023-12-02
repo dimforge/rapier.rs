@@ -105,7 +105,7 @@ values={[
 ```rust
 let joint = FixedJointBuilder::new().local_anchor(Vec2::new(0.0, -2.0));
 commands.spawn(RigidBody::Dynamic)
-    .insert(ImpulseJoint::new(parent_entity, joint);
+    .insert(ImpulseJoint::new(parent_entity, joint));
 ```
 
   </TabItem>
@@ -114,7 +114,7 @@ commands.spawn(RigidBody::Dynamic)
 ```rust
 let joint = FixedJointBuilder::new().local_anchor(Vec3::new(0.0, 0.0, -2.0));
 commands.spawn(RigidBody::Dynamic)
-    .insert(ImpulseJoint::new(parent_entity, joint);
+    .insert(ImpulseJoint::new(parent_entity, joint));
 ```
 
   </TabItem>
@@ -179,7 +179,7 @@ let joint = SphericalJointBuilder::new()
     .local_anchor1(Vec3::new(0.0, 0.0, 1.0))
     .local_anchor2(Vec3::new(0.0, 0.0, -3.0));
 commands.spawn(RigidBody::Dynamic)
-    .insert(ImpulseJoint::new(parent_entity, joint);
+    .insert(ImpulseJoint::new(parent_entity, joint));
 ```
 
 </bevy>
@@ -252,7 +252,7 @@ let joint = RevoluteJointBuilder::new()
     .local_anchor1(Vec2::new(0.0, 1.0))
     .local_anchor2(Vec2::new(0.0, -3.0));
 commands.spawn(RigidBody::Dynamic)
-    .insert(ImpulseJoint::new(parent_entity, joint);
+    .insert(ImpulseJoint::new(parent_entity, joint));
 ```
 
   </TabItem>
@@ -264,7 +264,7 @@ let joint = RevoluteJointBuilder::new(x)
     .local_anchor1(Vec3::new(0.0, 0.0, 1.0))
     .local_anchor2(Vec3::new(0.0, 0.0, -3.0));
 commands.spawn(RigidBody::Dynamic)
-    .insert(ImpulseJoint::new(parent_entity, joint);
+    .insert(ImpulseJoint::new(parent_entity, joint));
 ```
 
   </TabItem>
@@ -365,7 +365,7 @@ let mut joint = PrismaticJointBuilder::new(Vec2::X)
     .local_anchor2(Vec2::new(0.0, -3.0))
     .limits([-2.0, 5.0]);
 commands.spawn(RigidBody::Dynamic)
-    .insert(ImpulseJoint::new(parent_entity, joint);
+    .insert(ImpulseJoint::new(parent_entity, joint));
 ```
 
   </TabItem>
@@ -377,7 +377,7 @@ let mut joint = PrismaticJointBuilder::new(Vec3::X)
     .local_anchor2(Vec3::new(0.0, 0.0, -3.0))
     .limits([-2.0, 5.0]);
 commands.spawn(RigidBody::Dynamic)
-    .insert(ImpulseJoint::new(parent_entity, joint);
+    .insert(ImpulseJoint::new(parent_entity, joint));
 ```
 
   </TabItem>
@@ -500,7 +500,7 @@ let mut joint = PrismaticJointBuilder::new(Vec2::X)
     .local_anchor2(Vec2::new(0.0, -3.0))
     .motor_velocity(1.0, 0.5);
 commands.spawn(RigidBody::Dynamic)
-    .insert(ImpulseJoint::new(parent_entity, joint);
+    .insert(ImpulseJoint::new(parent_entity, joint));
 ```
 
   </TabItem>
@@ -512,7 +512,7 @@ let mut joint = PrismaticJointBuilder::new(Vec3::X)
     .local_anchor2(Vec3::new(0.0, 0.0, -3.0))
     .motor_velocity(1.0, 0.5);
 commands.spawn(RigidBody::Dynamic)
-    .insert(ImpulseJoint::new(parent_entity, joint);
+    .insert(ImpulseJoint::new(parent_entity, joint));
 ```
 
   </TabItem>
