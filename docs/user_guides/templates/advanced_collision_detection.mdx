@@ -449,8 +449,8 @@ fn main() {
     App::build()
         .add_plugins(DefaultPlugins)
         // Make sure the Rapier plugin is parametrized by our custom user-data type.
-        .add_plugins(RapierPhysicsPlugin::<&CustomFilterTag>::default())
-        .add_systems(Startup, setup_physics.system())
+        .add_plugins(RapierPhysicsPlugin::<SameUserDataFilter>::default())
+        .add_systems(Startup, setup_physics)
         .run();
 }
 
@@ -570,8 +570,8 @@ impl PhysicsHooks<RigidBodySet, ColliderSet> for MyPhysicsHooks {
 fn main() {
     App::build()
         .add_plugins(DefaultPlugins)
-        .add_plugins(RapierPhysicsPlugin::<NoUserData>::default())
-        .add_systems(Startup, setup_physics.system())
+        .add_plugins(RapierPhysicsPlugin::<MyPhysicsHooks>::default())
+        .add_systems(Startup, setup_physics)
         .run();
 }
 
