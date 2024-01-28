@@ -91,7 +91,7 @@ commands.spawn(Collider::cuboid(0.5, 0.5))
 ```
 ```rust
 /* Set the collider position inside of a system. */
-fn modify_collider_position(mut positions: Query<&mut Transform, With<Collider>) {
+fn modify_collider_position(mut positions: Query<&mut Transform, With<Collider>>) {
     for mut position in positions.iter_mut() {
         position.translation.z = 2.0;
     }
