@@ -143,31 +143,6 @@ function Home() {
             </div>
           </section>
         )}
-        <section className={styles.sponsors}>
-          <div className="container" align={"center"}>
-            <h1>Sponsors</h1>
-            Rapier is supported by the community and companies.
-            <hr />
-            <h2>Iridium Sponsors</h2>
-            <br />
-            <p>
-              <a href="https://croquet.io">
-                <img src="/img/croquet_logo.png" width="400px" />
-              </a>
-            </p>
-            <hr />
-            <h4>Gold Sponsors</h4>
-            <br />
-            <p>
-              <a href="https://fragcolor.com/">
-                <img src="/img/fragcolor_logo2_color_black.svg" width="300px" />
-              </a>
-              <a href="https://resolutiongames.com/">
-                <img src="/img/logo_resolution_games.png" width="300px" />
-              </a>
-            </p>
-          </div>
-        </section>
       </main>
     </Layout>
   );
