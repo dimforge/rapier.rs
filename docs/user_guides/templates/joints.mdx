@@ -41,8 +41,8 @@ that are not defined in 2D:
 | _Rectangular joint_ |                | 2 Translations |
 | _Universal joint_   |                | 2 Rotations |
 
-Currently, Rapier supports **fixed**, **spherical**, **prismatic**, and **revolute** joints. Joints must be inserted into a
-`ImpulseJointSet`. Each joint is attached to two distinct rigid-bodies identified by they rigid-body handles.
+Currently, Rapier supports **fixed**, **spherical**, **prismatic**, and **revolute** joints. Joints must be inserted into an
+`ImpulseJointSet`. Each joint is attached to two distinct rigid-bodies identified by their rigid-body handles.
 
 ## Fixed joint
 A fixed joint ensures that two rigid-bodies don't move relative to each other. Fixed joints are characterized by
@@ -194,7 +194,7 @@ let joint = world.createImpulseJoint(params, body1, body2, true);
 
 
 :::note
-In 2D, revolute joints are spherical joints are the same thing. Therefore, there is no `SphericalJoint` type in
+In 2D, revolute joints and spherical joints are the same thing. Therefore, there is no `SphericalJoint` type in
 2D (use the `RevoluteJoint` type instead).
 :::
 
@@ -423,7 +423,7 @@ let joint = world.createImpulseJoint(params, body1, body2, true);
 ## Joint motors
 Spherical, revolute, and prismatic joints support **joint motors**.
 
-Motors allow you to make the linked rigid-bodies move relative to one another, along the free degrees of freedoms left
+Motors allow you to make the linked rigid-bodies move relative to one another, along the free degrees of freedom left
 by the joint, as if a motor was pushing them. The joint motor is simulated with a PD controller (Proportional Derivative controller) where you
 can set a target relative velocity along the free degrees of freedom as well as a target position. The `stiffness` of
 the PD controller controls the strength of the force that will be applied to make the bodies reach the target relative
@@ -439,7 +439,7 @@ following methods:
   equal to <notjs>`target_vel`</notjs><js>`targeVel`</js>. There is no restriction on the relative position
   along the free DOF.
 - <notjs>`configure_motor(target_pos, target_vel, stiffness, damping)`</notjs><js>`configureMotor(targetPos, targetVel, stiffness, damping)`</js>:
-  this lets you control all the parameters of the motor's spring-like equation. This should be used only of the other configuration methods are not flexible enough.
+  this lets you control all the parameters of the motor's spring-like equation. This should be used only if the other configuration methods are not flexible enough.
 - <notjs>`configure_motor_model(model)`</notjs><js>`configureMotorModel(model)`</js>: this selects the mathematical model for the motor's controller. All the available
   models use a __spring-like__ equation. See the [API documentation of SpringModel](https://docs.rs/rapier3d/latest/rapier3d/dynamics/enum.SpringModel.html)
   for details.
