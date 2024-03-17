@@ -159,8 +159,8 @@ fn cast_ray(rapier_context: Res<RapierContext>) {
             let hit_normal = intersection.normal;
             println!("Entity {:?} hit at point {} with normal {}", entity, hit_point, hit_normal);
             true // Return `false` instead if we want to stop searching for other hits.
-        });
-    }
+        },
+    );
 }
 ```
 
@@ -174,7 +174,7 @@ fn cast_ray(rapier_context: Res<RapierContext>) {
     let ray_dir = Vec3::new(0.0, 1.0, 0.0);
     let max_toi = 4.0;
     let solid = true;
-    let filter = None;
+    let filter = QueryFilter::default();
 
     if let Some((entity, toi)) = rapier_context.cast_ray(
         ray_pos, ray_dir, max_toi, solid, filter
@@ -204,8 +204,8 @@ fn cast_ray(rapier_context: Res<RapierContext>) {
             let hit_normal = intersection.normal;
             println!("Entity {:?} hit at point {} with normal {}", entity, hit_point, hit_normal);
             true // Return `false` instead if we want to stop searching for other hits.
-        });
-    }
+        },
+    );
 }
 ```
 
