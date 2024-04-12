@@ -38,7 +38,7 @@ let corrected_movement = character_controller.move_shape(
     character_pos,   // The character’s initial position.
     desired_translation,
     QueryFilter::default()
-        // Make sure the the character we are trying to move isn’t considered an obstacle.
+        // Make sure the character we are trying to move isn’t considered an obstacle.
         .exclude_rigid_body(character_handle),
     |_| {} // We don’t care about events in this example.
 );
@@ -64,7 +64,7 @@ let corrected_movement = character_controller.move_shape(
     character_pos,   // The character’s initial position.
     desired_translation,
     QueryFilter::default()
-        // Make sure the the character we are trying to move isn’t considered an obstacle.
+        // Make sure the character we are trying to move isn’t considered an obstacle.
         .exclude_rigid_body(character_handle),
     |_| {} // We don’t care about events in this example.
 );
