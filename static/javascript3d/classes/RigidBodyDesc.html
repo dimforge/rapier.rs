@@ -20,7 +20,7 @@
 <ul class="tsd-hierarchy">
 <li><span class="target">RigidBodyDesc</span></li></ul></section><aside class="tsd-sources">
 <ul>
-<li>Defined in dynamics/rigid_body.d.ts:482</li></ul></aside>
+<li>Defined in dynamics/rigid_body.d.ts:496</li></ul></aside>
 <section class="tsd-panel-group tsd-index-group">
 <section class="tsd-panel tsd-index-panel">
 <details class="tsd-index-content tsd-index-accordion" open><summary class="tsd-accordion-summary tsd-index-summary">
@@ -52,6 +52,7 @@
 <a href="RigidBodyDesc.html#rotationsEnabledY" class="tsd-index-link tsd-kind-property tsd-parent-kind-class"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-1024-path"></use><use href="#icon-1024-text"></use></svg><span>rotations<wbr/>EnabledY</span></a>
 <a href="RigidBodyDesc.html#rotationsEnabledZ" class="tsd-index-link tsd-kind-property tsd-parent-kind-class"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-1024-path"></use><use href="#icon-1024-text"></use></svg><span>rotations<wbr/>EnabledZ</span></a>
 <a href="RigidBodyDesc.html#sleeping" class="tsd-index-link tsd-kind-property tsd-parent-kind-class"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-1024-path"></use><use href="#icon-1024-text"></use></svg><span>sleeping</span></a>
+<a href="RigidBodyDesc.html#softCcdPrediction" class="tsd-index-link tsd-kind-property tsd-parent-kind-class"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-1024-path"></use><use href="#icon-1024-text"></use></svg><span>soft<wbr/>Ccd<wbr/>Prediction</span></a>
 <a href="RigidBodyDesc.html#status" class="tsd-index-link tsd-kind-property tsd-parent-kind-class"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-1024-path"></use><use href="#icon-1024-text"></use></svg><span>status</span></a>
 <a href="RigidBodyDesc.html#translation" class="tsd-index-link tsd-kind-property tsd-parent-kind-class"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-1024-path"></use><use href="#icon-1024-text"></use></svg><span>translation</span></a>
 <a href="RigidBodyDesc.html#translationsEnabledX" class="tsd-index-link tsd-kind-property tsd-parent-kind-class"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-1024-path"></use><use href="#icon-1024-text"></use></svg><span>translations<wbr/>EnabledX</span></a>
@@ -81,6 +82,7 @@
 <a href="RigidBodyDesc.html#setLinvel" class="tsd-index-link tsd-kind-method tsd-parent-kind-class"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg><span>set<wbr/>Linvel</span></a>
 <a href="RigidBodyDesc.html#setRotation" class="tsd-index-link tsd-kind-method tsd-parent-kind-class"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg><span>set<wbr/>Rotation</span></a>
 <a href="RigidBodyDesc.html#setSleeping" class="tsd-index-link tsd-kind-method tsd-parent-kind-class"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg><span>set<wbr/>Sleeping</span></a>
+<a href="RigidBodyDesc.html#setSoftCcdPrediction" class="tsd-index-link tsd-kind-method tsd-parent-kind-class"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg><span>set<wbr/>Soft<wbr/>Ccd<wbr/>Prediction</span></a>
 <a href="RigidBodyDesc.html#setTranslation" class="tsd-index-link tsd-kind-method tsd-parent-kind-class"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg><span>set<wbr/>Translation</span></a>
 <a href="RigidBodyDesc.html#setUserData" class="tsd-index-link tsd-kind-method tsd-parent-kind-class"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg><span>set<wbr/>User<wbr/>Data</span></a>
 <a href="RigidBodyDesc.html#dynamic" class="tsd-index-link tsd-kind-method tsd-parent-kind-class"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg><span>dynamic</span></a>
@@ -106,139 +108,144 @@
 <h5>status: <a href="../enums/RigidBodyType.html" class="tsd-signature-type" data-tsd-kind="Enumeration">RigidBodyType</a></h5></li></ul></div>
 <h4 class="tsd-returns-title">Returns <a href="RigidBodyDesc.html" class="tsd-signature-type" data-tsd-kind="Class">RigidBodyDesc</a></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in dynamics/rigid_body.d.ts:509</li></ul></aside></li></ul></section></section>
+<li>Defined in dynamics/rigid_body.d.ts:524</li></ul></aside></li></ul></section></section>
 <section class="tsd-panel-group tsd-member-group">
 <h2>Properties</h2>
 <section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="additionalSolverIterations" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>additional<wbr/>Solver<wbr/>Iterations</span><a href="#additionalSolverIterations" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <div class="tsd-signature">additional<wbr/>Solver<wbr/>Iterations<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div><aside class="tsd-sources">
 <ul>
-<li>Defined in dynamics/rigid_body.d.ts:507</li></ul></aside></section>
+<li>Defined in dynamics/rigid_body.d.ts:522</li></ul></aside></section>
 <section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="angularDamping" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>angular<wbr/>Damping</span><a href="#angularDamping" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <div class="tsd-signature">angular<wbr/>Damping<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div><aside class="tsd-sources">
 <ul>
-<li>Defined in dynamics/rigid_body.d.ts:501</li></ul></aside></section>
+<li>Defined in dynamics/rigid_body.d.ts:515</li></ul></aside></section>
 <section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="angularInertiaLocalFrame" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>angular<wbr/>Inertia<wbr/>Local<wbr/>Frame</span><a href="#angularInertiaLocalFrame" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <div class="tsd-signature">angular<wbr/>Inertia<wbr/>Local<wbr/>Frame<span class="tsd-signature-symbol">:</span> <a href="../interfaces/Rotation.html" class="tsd-signature-type" data-tsd-kind="Interface">Rotation</a></div><aside class="tsd-sources">
 <ul>
-<li>Defined in dynamics/rigid_body.d.ts:495</li></ul></aside></section>
+<li>Defined in dynamics/rigid_body.d.ts:509</li></ul></aside></section>
 <section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="angvel" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>angvel</span><a href="#angvel" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <div class="tsd-signature">angvel<span class="tsd-signature-symbol">:</span> <a href="../interfaces/Vector.html" class="tsd-signature-type" data-tsd-kind="Interface">Vector</a></div><aside class="tsd-sources">
 <ul>
-<li>Defined in dynamics/rigid_body.d.ts:493</li></ul></aside></section>
+<li>Defined in dynamics/rigid_body.d.ts:507</li></ul></aside></section>
 <section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="canSleep" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>can<wbr/>Sleep</span><a href="#canSleep" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <div class="tsd-signature">can<wbr/>Sleep<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div><aside class="tsd-sources">
 <ul>
-<li>Defined in dynamics/rigid_body.d.ts:503</li></ul></aside></section>
+<li>Defined in dynamics/rigid_body.d.ts:517</li></ul></aside></section>
 <section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="ccdEnabled" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>ccd<wbr/>Enabled</span><a href="#ccdEnabled" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <div class="tsd-signature">ccd<wbr/>Enabled<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div><aside class="tsd-sources">
 <ul>
-<li>Defined in dynamics/rigid_body.d.ts:505</li></ul></aside></section>
+<li>Defined in dynamics/rigid_body.d.ts:519</li></ul></aside></section>
 <section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="centerOfMass" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>center<wbr/>Of<wbr/>Mass</span><a href="#centerOfMass" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <div class="tsd-signature">center<wbr/>Of<wbr/>Mass<span class="tsd-signature-symbol">:</span> <a href="../interfaces/Vector.html" class="tsd-signature-type" data-tsd-kind="Interface">Vector</a></div><aside class="tsd-sources">
 <ul>
-<li>Defined in dynamics/rigid_body.d.ts:489</li></ul></aside></section>
+<li>Defined in dynamics/rigid_body.d.ts:503</li></ul></aside></section>
 <section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="dominanceGroup" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>dominance<wbr/>Group</span><a href="#dominanceGroup" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <div class="tsd-signature">dominance<wbr/>Group<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div><aside class="tsd-sources">
 <ul>
-<li>Defined in dynamics/rigid_body.d.ts:506</li></ul></aside></section>
+<li>Defined in dynamics/rigid_body.d.ts:521</li></ul></aside></section>
 <section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="enabled" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>enabled</span><a href="#enabled" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <div class="tsd-signature">enabled<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div><aside class="tsd-sources">
 <ul>
-<li>Defined in dynamics/rigid_body.d.ts:483</li></ul></aside></section>
+<li>Defined in dynamics/rigid_body.d.ts:497</li></ul></aside></section>
 <section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="gravityScale" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>gravity<wbr/>Scale</span><a href="#gravityScale" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <div class="tsd-signature">gravity<wbr/>Scale<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div><aside class="tsd-sources">
 <ul>
-<li>Defined in dynamics/rigid_body.d.ts:486</li></ul></aside></section>
+<li>Defined in dynamics/rigid_body.d.ts:500</li></ul></aside></section>
 <section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="linearDamping" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>linear<wbr/>Damping</span><a href="#linearDamping" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <div class="tsd-signature">linear<wbr/>Damping<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div><aside class="tsd-sources">
 <ul>
-<li>Defined in dynamics/rigid_body.d.ts:500</li></ul></aside></section>
+<li>Defined in dynamics/rigid_body.d.ts:514</li></ul></aside></section>
 <section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="linvel" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>linvel</span><a href="#linvel" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <div class="tsd-signature">linvel<span class="tsd-signature-symbol">:</span> <a href="../interfaces/Vector.html" class="tsd-signature-type" data-tsd-kind="Interface">Vector</a></div><aside class="tsd-sources">
 <ul>
-<li>Defined in dynamics/rigid_body.d.ts:492</li></ul></aside></section>
+<li>Defined in dynamics/rigid_body.d.ts:506</li></ul></aside></section>
 <section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="mass" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>mass</span><a href="#mass" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <div class="tsd-signature">mass<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div><aside class="tsd-sources">
 <ul>
-<li>Defined in dynamics/rigid_body.d.ts:487</li></ul></aside></section>
+<li>Defined in dynamics/rigid_body.d.ts:501</li></ul></aside></section>
 <section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="massOnly" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>mass<wbr/>Only</span><a href="#massOnly" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <div class="tsd-signature">mass<wbr/>Only<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div><aside class="tsd-sources">
 <ul>
-<li>Defined in dynamics/rigid_body.d.ts:488</li></ul></aside></section>
+<li>Defined in dynamics/rigid_body.d.ts:502</li></ul></aside></section>
 <section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="principalAngularInertia" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>principal<wbr/>Angular<wbr/>Inertia</span><a href="#principalAngularInertia" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <div class="tsd-signature">principal<wbr/>Angular<wbr/>Inertia<span class="tsd-signature-symbol">:</span> <a href="../interfaces/Vector.html" class="tsd-signature-type" data-tsd-kind="Interface">Vector</a></div><aside class="tsd-sources">
 <ul>
-<li>Defined in dynamics/rigid_body.d.ts:494</li></ul></aside></section>
+<li>Defined in dynamics/rigid_body.d.ts:508</li></ul></aside></section>
 <section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="rotation" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>rotation</span><a href="#rotation" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <div class="tsd-signature">rotation<span class="tsd-signature-symbol">:</span> <a href="../interfaces/Rotation.html" class="tsd-signature-type" data-tsd-kind="Interface">Rotation</a></div><aside class="tsd-sources">
 <ul>
-<li>Defined in dynamics/rigid_body.d.ts:485</li></ul></aside></section>
+<li>Defined in dynamics/rigid_body.d.ts:499</li></ul></aside></section>
 <section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="rotationsEnabledX" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>rotations<wbr/>EnabledX</span><a href="#rotationsEnabledX" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <div class="tsd-signature">rotations<wbr/>EnabledX<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div><aside class="tsd-sources">
 <ul>
-<li>Defined in dynamics/rigid_body.d.ts:497</li></ul></aside></section>
+<li>Defined in dynamics/rigid_body.d.ts:511</li></ul></aside></section>
 <section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="rotationsEnabledY" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>rotations<wbr/>EnabledY</span><a href="#rotationsEnabledY" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <div class="tsd-signature">rotations<wbr/>EnabledY<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div><aside class="tsd-sources">
 <ul>
-<li>Defined in dynamics/rigid_body.d.ts:498</li></ul></aside></section>
+<li>Defined in dynamics/rigid_body.d.ts:512</li></ul></aside></section>
 <section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="rotationsEnabledZ" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>rotations<wbr/>EnabledZ</span><a href="#rotationsEnabledZ" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <div class="tsd-signature">rotations<wbr/>EnabledZ<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div><aside class="tsd-sources">
 <ul>
-<li>Defined in dynamics/rigid_body.d.ts:499</li></ul></aside></section>
+<li>Defined in dynamics/rigid_body.d.ts:513</li></ul></aside></section>
 <section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="sleeping" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>sleeping</span><a href="#sleeping" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <div class="tsd-signature">sleeping<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div><aside class="tsd-sources">
 <ul>
-<li>Defined in dynamics/rigid_body.d.ts:504</li></ul></aside></section>
+<li>Defined in dynamics/rigid_body.d.ts:518</li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="softCcdPrediction" class="tsd-anchor"></a>
+<h3 class="tsd-anchor-link"><span>soft<wbr/>Ccd<wbr/>Prediction</span><a href="#softCcdPrediction" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
+<div class="tsd-signature">soft<wbr/>Ccd<wbr/>Prediction<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div><aside class="tsd-sources">
+<ul>
+<li>Defined in dynamics/rigid_body.d.ts:520</li></ul></aside></section>
 <section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="status" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>status</span><a href="#status" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <div class="tsd-signature">status<span class="tsd-signature-symbol">:</span> <a href="../enums/RigidBodyType.html" class="tsd-signature-type" data-tsd-kind="Enumeration">RigidBodyType</a></div><aside class="tsd-sources">
 <ul>
-<li>Defined in dynamics/rigid_body.d.ts:502</li></ul></aside></section>
+<li>Defined in dynamics/rigid_body.d.ts:516</li></ul></aside></section>
 <section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="translation" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>translation</span><a href="#translation" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <div class="tsd-signature">translation<span class="tsd-signature-symbol">:</span> <a href="../interfaces/Vector.html" class="tsd-signature-type" data-tsd-kind="Interface">Vector</a></div><aside class="tsd-sources">
 <ul>
-<li>Defined in dynamics/rigid_body.d.ts:484</li></ul></aside></section>
+<li>Defined in dynamics/rigid_body.d.ts:498</li></ul></aside></section>
 <section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="translationsEnabledX" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>translations<wbr/>EnabledX</span><a href="#translationsEnabledX" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <div class="tsd-signature">translations<wbr/>EnabledX<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div><aside class="tsd-sources">
 <ul>
-<li>Defined in dynamics/rigid_body.d.ts:490</li></ul></aside></section>
+<li>Defined in dynamics/rigid_body.d.ts:504</li></ul></aside></section>
 <section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="translationsEnabledY" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>translations<wbr/>EnabledY</span><a href="#translationsEnabledY" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <div class="tsd-signature">translations<wbr/>EnabledY<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div><aside class="tsd-sources">
 <ul>
-<li>Defined in dynamics/rigid_body.d.ts:491</li></ul></aside></section>
+<li>Defined in dynamics/rigid_body.d.ts:505</li></ul></aside></section>
 <section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="translationsEnabledZ" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>translations<wbr/>EnabledZ</span><a href="#translationsEnabledZ" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <div class="tsd-signature">translations<wbr/>EnabledZ<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div><aside class="tsd-sources">
 <ul>
-<li>Defined in dynamics/rigid_body.d.ts:496</li></ul></aside></section>
+<li>Defined in dynamics/rigid_body.d.ts:510</li></ul></aside></section>
 <section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="userData" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagOptional">Optional</code> <span>user<wbr/>Data</span><a href="#userData" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <div class="tsd-signature">user<wbr/>Data<span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">unknown</span></div><aside class="tsd-sources">
 <ul>
-<li>Defined in dynamics/rigid_body.d.ts:508</li></ul></aside></section></section>
+<li>Defined in dynamics/rigid_body.d.ts:523</li></ul></aside></section></section>
 <section class="tsd-panel-group tsd-member-group">
 <h2>Methods</h2>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="enabledRotations" class="tsd-anchor"></a>
@@ -265,7 +272,7 @@
 </div></li></ul></div>
 <h4 class="tsd-returns-title">Returns <a href="RigidBodyDesc.html" class="tsd-signature-type" data-tsd-kind="Class">RigidBodyDesc</a></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in dynamics/rigid_body.d.ts:654</li></ul></aside></li></ul></section>
+<li>Defined in dynamics/rigid_body.d.ts:669</li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="enabledTranslations" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>enabled<wbr/>Translations</span><a href="#enabledTranslations" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
@@ -290,7 +297,7 @@
 </div></li></ul></div>
 <h4 class="tsd-returns-title">Returns <a href="RigidBodyDesc.html" class="tsd-signature-type" data-tsd-kind="Class">RigidBodyDesc</a></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in dynamics/rigid_body.d.ts:634</li></ul></aside></li></ul></section>
+<li>Defined in dynamics/rigid_body.d.ts:649</li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="lockRotations" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>lock<wbr/>Rotations</span><a href="#lockRotations" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
@@ -301,7 +308,7 @@ the created rigid-body.</p>
 </div>
 <h4 class="tsd-returns-title">Returns <a href="RigidBodyDesc.html" class="tsd-signature-type" data-tsd-kind="Class">RigidBodyDesc</a></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in dynamics/rigid_body.d.ts:667</li></ul></aside></li></ul></section>
+<li>Defined in dynamics/rigid_body.d.ts:682</li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="lockTranslations" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>lock<wbr/>Translations</span><a href="#lockTranslations" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
@@ -312,7 +319,7 @@ the created rigid-body.</p>
 </div>
 <h4 class="tsd-returns-title">Returns <a href="RigidBodyDesc.html" class="tsd-signature-type" data-tsd-kind="Class">RigidBodyDesc</a></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in dynamics/rigid_body.d.ts:647</li></ul></aside></li></ul></section>
+<li>Defined in dynamics/rigid_body.d.ts:662</li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="restrictRotations" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>restrict<wbr/>Rotations</span><a href="#restrictRotations" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
@@ -339,7 +346,7 @@ the created rigid-body.</p>
 </div></li></ul></div>
 <h4 class="tsd-returns-title">Returns <a href="RigidBodyDesc.html" class="tsd-signature-type" data-tsd-kind="Class">RigidBodyDesc</a></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in dynamics/rigid_body.d.ts:662</li></ul></aside></li></ul></section>
+<li>Defined in dynamics/rigid_body.d.ts:677</li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="restrictTranslations" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>restrict<wbr/>Translations</span><a href="#restrictTranslations" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
@@ -366,7 +373,7 @@ the created rigid-body.</p>
 </div></li></ul></div>
 <h4 class="tsd-returns-title">Returns <a href="RigidBodyDesc.html" class="tsd-signature-type" data-tsd-kind="Class">RigidBodyDesc</a></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in dynamics/rigid_body.d.ts:642</li></ul></aside></li></ul></section>
+<li>Defined in dynamics/rigid_body.d.ts:657</li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="setAdditionalMass" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>set<wbr/>Additional<wbr/>Mass</span><a href="#setAdditionalMass" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
@@ -383,7 +390,7 @@ the created rigid-body.</p>
 </div></li></ul></div>
 <h4 class="tsd-returns-title">Returns <a href="RigidBodyDesc.html" class="tsd-signature-type" data-tsd-kind="Class">RigidBodyDesc</a></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in dynamics/rigid_body.d.ts:593</li></ul></aside></li></ul></section>
+<li>Defined in dynamics/rigid_body.d.ts:608</li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="setAdditionalMassProperties" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>set<wbr/>Additional<wbr/>Mass<wbr/>Properties</span><a href="#setAdditionalMassProperties" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
@@ -421,7 +428,7 @@ only attach colliders with densities equal to zero.</p>
 </div></li></ul></div>
 <h4 class="tsd-returns-title">Returns <a href="RigidBodyDesc.html" class="tsd-signature-type" data-tsd-kind="Class">RigidBodyDesc</a></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in dynamics/rigid_body.d.ts:627</li></ul></aside></li></ul></section>
+<li>Defined in dynamics/rigid_body.d.ts:642</li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="setAdditionalSolverIterations" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>set<wbr/>Additional<wbr/>Solver<wbr/>Iterations</span><a href="#setAdditionalSolverIterations" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
@@ -443,7 +450,7 @@ performance loss.</p>
 </div></li></ul></div>
 <h4 class="tsd-returns-title">Returns <a href="RigidBodyDesc.html" class="tsd-signature-type" data-tsd-kind="Class">RigidBodyDesc</a></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in dynamics/rigid_body.d.ts:562</li></ul></aside></li></ul></section>
+<li>Defined in dynamics/rigid_body.d.ts:577</li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="setAngularDamping" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>set<wbr/>Angular<wbr/>Damping</span><a href="#setAngularDamping" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
@@ -462,7 +469,7 @@ performance loss.</p>
 </div></li></ul></div>
 <h4 class="tsd-returns-title">Returns <a href="RigidBodyDesc.html" class="tsd-signature-type" data-tsd-kind="Class">RigidBodyDesc</a></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in dynamics/rigid_body.d.ts:685</li></ul></aside></li></ul></section>
+<li>Defined in dynamics/rigid_body.d.ts:700</li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="setAngvel" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>set<wbr/>Angvel</span><a href="#setAngvel" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
@@ -479,7 +486,7 @@ performance loss.</p>
 </div></li></ul></div>
 <h4 class="tsd-returns-title">Returns <a href="RigidBodyDesc.html" class="tsd-signature-type" data-tsd-kind="Class">RigidBodyDesc</a></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in dynamics/rigid_body.d.ts:607</li></ul></aside></li></ul></section>
+<li>Defined in dynamics/rigid_body.d.ts:622</li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="setCanSleep" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>set<wbr/>Can<wbr/>Sleep</span><a href="#setCanSleep" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
@@ -496,7 +503,7 @@ performance loss.</p>
 </div></li></ul></div>
 <h4 class="tsd-returns-title">Returns <a href="RigidBodyDesc.html" class="tsd-signature-type" data-tsd-kind="Class">RigidBodyDesc</a></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in dynamics/rigid_body.d.ts:691</li></ul></aside></li></ul></section>
+<li>Defined in dynamics/rigid_body.d.ts:706</li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="setCcdEnabled" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>set<wbr/>Ccd<wbr/>Enabled</span><a href="#setCcdEnabled" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
@@ -513,7 +520,7 @@ performance loss.</p>
 </div></li></ul></div>
 <h4 class="tsd-returns-title">Returns <a href="RigidBodyDesc.html" class="tsd-signature-type" data-tsd-kind="Class">RigidBodyDesc</a></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in dynamics/rigid_body.d.ts:703</li></ul></aside></li></ul></section>
+<li>Defined in dynamics/rigid_body.d.ts:718</li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="setDominanceGroup" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>set<wbr/>Dominance<wbr/>Group</span><a href="#setDominanceGroup" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
@@ -526,7 +533,7 @@ performance loss.</p>
 <h5>group: <span class="tsd-signature-type">number</span></h5></li></ul></div>
 <h4 class="tsd-returns-title">Returns <a href="RigidBodyDesc.html" class="tsd-signature-type" data-tsd-kind="Class">RigidBodyDesc</a></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in dynamics/rigid_body.d.ts:550</li></ul></aside></li></ul></section>
+<li>Defined in dynamics/rigid_body.d.ts:565</li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="setEnabled" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>set<wbr/>Enabled</span><a href="#setEnabled" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
@@ -543,7 +550,7 @@ performance loss.</p>
 </div></li></ul></div>
 <h4 class="tsd-returns-title">Returns <a href="RigidBodyDesc.html" class="tsd-signature-type" data-tsd-kind="Class">RigidBodyDesc</a></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in dynamics/rigid_body.d.ts:567</li></ul></aside></li></ul></section>
+<li>Defined in dynamics/rigid_body.d.ts:582</li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="setGravityScale" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>set<wbr/>Gravity<wbr/>Scale</span><a href="#setGravityScale" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
@@ -562,7 +569,7 @@ the rigid-body being built.</p>
 </div></li></ul></div>
 <h4 class="tsd-returns-title">Returns <a href="RigidBodyDesc.html" class="tsd-signature-type" data-tsd-kind="Class">RigidBodyDesc</a></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in dynamics/rigid_body.d.ts:587</li></ul></aside></li></ul></section>
+<li>Defined in dynamics/rigid_body.d.ts:602</li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="setLinearDamping" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>set<wbr/>Linear<wbr/>Damping</span><a href="#setLinearDamping" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
@@ -581,7 +588,7 @@ the rigid-body being built.</p>
 </div></li></ul></div>
 <h4 class="tsd-returns-title">Returns <a href="RigidBodyDesc.html" class="tsd-signature-type" data-tsd-kind="Class">RigidBodyDesc</a></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in dynamics/rigid_body.d.ts:676</li></ul></aside></li></ul></section>
+<li>Defined in dynamics/rigid_body.d.ts:691</li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="setLinvel" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>set<wbr/>Linvel</span><a href="#setLinvel" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
@@ -606,7 +613,7 @@ the rigid-body being built.</p>
 </div></li></ul></div>
 <h4 class="tsd-returns-title">Returns <a href="RigidBodyDesc.html" class="tsd-signature-type" data-tsd-kind="Class">RigidBodyDesc</a></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in dynamics/rigid_body.d.ts:601</li></ul></aside></li></ul></section>
+<li>Defined in dynamics/rigid_body.d.ts:616</li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="setRotation" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>set<wbr/>Rotation</span><a href="#setRotation" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
@@ -623,7 +630,7 @@ the rigid-body being built.</p>
 </div></li></ul></div>
 <h4 class="tsd-returns-title">Returns <a href="RigidBodyDesc.html" class="tsd-signature-type" data-tsd-kind="Class">RigidBodyDesc</a></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in dynamics/rigid_body.d.ts:579</li></ul></aside></li></ul></section>
+<li>Defined in dynamics/rigid_body.d.ts:594</li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="setSleeping" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>set<wbr/>Sleeping</span><a href="#setSleeping" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
@@ -638,7 +645,29 @@ the rigid-body being built.</p>
 <h5>sleeping: <span class="tsd-signature-type">boolean</span></h5></li></ul></div>
 <h4 class="tsd-returns-title">Returns <a href="RigidBodyDesc.html" class="tsd-signature-type" data-tsd-kind="Class">RigidBodyDesc</a></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in dynamics/rigid_body.d.ts:697</li></ul></aside></li></ul></section>
+<li>Defined in dynamics/rigid_body.d.ts:712</li></ul></aside></li></ul></section>
+<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="setSoftCcdPrediction" class="tsd-anchor"></a>
+<h3 class="tsd-anchor-link"><span>set<wbr/>Soft<wbr/>Ccd<wbr/>Prediction</span><a href="#setSoftCcdPrediction" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
+<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+<li class="tsd-signature tsd-anchor-link" id="setSoftCcdPrediction.setSoftCcdPrediction-1">set<wbr/>Soft<wbr/>Ccd<wbr/>Prediction<span class="tsd-signature-symbol">(</span>distance<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="RigidBodyDesc.html" class="tsd-signature-type" data-tsd-kind="Class">RigidBodyDesc</a><a href="#setSoftCcdPrediction.setSoftCcdPrediction-1" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></li>
+<li class="tsd-description">
+<div class="tsd-comment tsd-typography"><p>Sets the maximum prediction distance Soft Continuous Collision-Detection.</p>
+<p>When set to 0, soft-CCD is disabled. Soft-CCD helps prevent tunneling especially of
+slow-but-thin to moderately fast objects. The soft CCD prediction distance indicates how
+far in the object’s path the CCD algorithm is allowed to inspect. Large values can impact
+performance badly by increasing the work needed from the broad-phase.</p>
+<p>It is a generally cheaper variant of regular CCD (that can be enabled with
+<code>RigidBodyDesc::setCcdEnabled</code> since it relies on predictive constraints instead of
+shape-cast and substeps.</p>
+</div>
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li>
+<h5>distance: <span class="tsd-signature-type">number</span></h5></li></ul></div>
+<h4 class="tsd-returns-title">Returns <a href="RigidBodyDesc.html" class="tsd-signature-type" data-tsd-kind="Class">RigidBodyDesc</a></h4><aside class="tsd-sources">
+<ul>
+<li>Defined in dynamics/rigid_body.d.ts:731</li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="setTranslation" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>set<wbr/>Translation</span><a href="#setTranslation" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
@@ -657,7 +686,7 @@ the rigid-body being built.</p>
 <h5>z: <span class="tsd-signature-type">number</span></h5></li></ul></div>
 <h4 class="tsd-returns-title">Returns <a href="RigidBodyDesc.html" class="tsd-signature-type" data-tsd-kind="Class">RigidBodyDesc</a></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in dynamics/rigid_body.d.ts:573</li></ul></aside></li></ul></section>
+<li>Defined in dynamics/rigid_body.d.ts:588</li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="setUserData" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>set<wbr/>User<wbr/>Data</span><a href="#setUserData" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
@@ -672,7 +701,7 @@ the rigid-body being built.</p>
 <h5><code class="tsd-tag ts-flagOptional">Optional</code> data: <span class="tsd-signature-type">unknown</span></h5></li></ul></div>
 <h4 class="tsd-returns-title">Returns <a href="RigidBodyDesc.html" class="tsd-signature-type" data-tsd-kind="Class">RigidBodyDesc</a></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in dynamics/rigid_body.d.ts:709</li></ul></aside></li></ul></section>
+<li>Defined in dynamics/rigid_body.d.ts:737</li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="dynamic" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagStatic">Static</code> <span>dynamic</span><a href="#dynamic" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
@@ -682,7 +711,7 @@ the rigid-body being built.</p>
 </div>
 <h4 class="tsd-returns-title">Returns <a href="RigidBodyDesc.html" class="tsd-signature-type" data-tsd-kind="Class">RigidBodyDesc</a></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in dynamics/rigid_body.d.ts:513</li></ul></aside></li></ul></section>
+<li>Defined in dynamics/rigid_body.d.ts:528</li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="fixed" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagStatic">Static</code> <span>fixed</span><a href="#fixed" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
@@ -692,7 +721,7 @@ the rigid-body being built.</p>
 </div>
 <h4 class="tsd-returns-title">Returns <a href="RigidBodyDesc.html" class="tsd-signature-type" data-tsd-kind="Class">RigidBodyDesc</a></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in dynamics/rigid_body.d.ts:525</li></ul></aside></li></ul></section>
+<li>Defined in dynamics/rigid_body.d.ts:540</li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="kinematicPositionBased" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagStatic">Static</code> <span>kinematic<wbr/>Position<wbr/>Based</span><a href="#kinematicPositionBased" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
@@ -702,7 +731,7 @@ the rigid-body being built.</p>
 </div>
 <h4 class="tsd-returns-title">Returns <a href="RigidBodyDesc.html" class="tsd-signature-type" data-tsd-kind="Class">RigidBodyDesc</a></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in dynamics/rigid_body.d.ts:517</li></ul></aside></li></ul></section>
+<li>Defined in dynamics/rigid_body.d.ts:532</li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="kinematicVelocityBased" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagStatic">Static</code> <span>kinematic<wbr/>Velocity<wbr/>Based</span><a href="#kinematicVelocityBased" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
@@ -712,7 +741,7 @@ the rigid-body being built.</p>
 </div>
 <h4 class="tsd-returns-title">Returns <a href="RigidBodyDesc.html" class="tsd-signature-type" data-tsd-kind="Class">RigidBodyDesc</a></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in dynamics/rigid_body.d.ts:521</li></ul></aside></li></ul></section>
+<li>Defined in dynamics/rigid_body.d.ts:536</li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="newDynamic" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagStatic">Static</code> <span>new<wbr/>Dynamic</span><a href="#newDynamic" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
@@ -724,7 +753,7 @@ the rigid-body being built.</p>
 </div>
 <h4 class="tsd-returns-title">Returns <a href="RigidBodyDesc.html" class="tsd-signature-type" data-tsd-kind="Class">RigidBodyDesc</a></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in dynamics/rigid_body.d.ts:531</li></ul></aside></li></ul></section>
+<li>Defined in dynamics/rigid_body.d.ts:546</li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="newKinematicPositionBased" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagStatic">Static</code> <span>new<wbr/>Kinematic<wbr/>Position<wbr/>Based</span><a href="#newKinematicPositionBased" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
@@ -736,7 +765,7 @@ the rigid-body being built.</p>
 </div>
 <h4 class="tsd-returns-title">Returns <a href="RigidBodyDesc.html" class="tsd-signature-type" data-tsd-kind="Class">RigidBodyDesc</a></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in dynamics/rigid_body.d.ts:537</li></ul></aside></li></ul></section>
+<li>Defined in dynamics/rigid_body.d.ts:552</li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="newKinematicVelocityBased" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagStatic">Static</code> <span>new<wbr/>Kinematic<wbr/>Velocity<wbr/>Based</span><a href="#newKinematicVelocityBased" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
@@ -748,7 +777,7 @@ the rigid-body being built.</p>
 </div>
 <h4 class="tsd-returns-title">Returns <a href="RigidBodyDesc.html" class="tsd-signature-type" data-tsd-kind="Class">RigidBodyDesc</a></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in dynamics/rigid_body.d.ts:543</li></ul></aside></li></ul></section>
+<li>Defined in dynamics/rigid_body.d.ts:558</li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="newStatic" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagStatic">Static</code> <span>new<wbr/>Static</span><a href="#newStatic" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
@@ -760,7 +789,7 @@ the rigid-body being built.</p>
 </div>
 <h4 class="tsd-returns-title">Returns <a href="RigidBodyDesc.html" class="tsd-signature-type" data-tsd-kind="Class">RigidBodyDesc</a></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in dynamics/rigid_body.d.ts:549</li></ul></aside></li></ul></section></section></div>
+<li>Defined in dynamics/rigid_body.d.ts:564</li></ul></aside></li></ul></section></section></div>
 <div class="col-4 col-menu menu-sticky-wrap menu-highlight">
 <div class="tsd-navigation settings">
 <details class="tsd-index-accordion"><summary class="tsd-accordion-summary">
@@ -807,6 +836,7 @@ the rigid-body being built.</p>
 <li class="tsd-kind-property tsd-parent-kind-class"><a href="RigidBodyDesc.html#rotationsEnabledY" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-1024-path"></use><use href="#icon-1024-text"></use></svg>rotations<wbr/>EnabledY</a></li>
 <li class="tsd-kind-property tsd-parent-kind-class"><a href="RigidBodyDesc.html#rotationsEnabledZ" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-1024-path"></use><use href="#icon-1024-text"></use></svg>rotations<wbr/>EnabledZ</a></li>
 <li class="tsd-kind-property tsd-parent-kind-class"><a href="RigidBodyDesc.html#sleeping" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-1024-path"></use><use href="#icon-1024-text"></use></svg>sleeping</a></li>
+<li class="tsd-kind-property tsd-parent-kind-class"><a href="RigidBodyDesc.html#softCcdPrediction" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-1024-path"></use><use href="#icon-1024-text"></use></svg>soft<wbr/>Ccd<wbr/>Prediction</a></li>
 <li class="tsd-kind-property tsd-parent-kind-class"><a href="RigidBodyDesc.html#status" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-1024-path"></use><use href="#icon-1024-text"></use></svg>status</a></li>
 <li class="tsd-kind-property tsd-parent-kind-class"><a href="RigidBodyDesc.html#translation" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-1024-path"></use><use href="#icon-1024-text"></use></svg>translation</a></li>
 <li class="tsd-kind-property tsd-parent-kind-class"><a href="RigidBodyDesc.html#translationsEnabledX" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-1024-path"></use><use href="#icon-1024-text"></use></svg>translations<wbr/>EnabledX</a></li>
@@ -833,6 +863,7 @@ the rigid-body being built.</p>
 <li class="tsd-kind-method tsd-parent-kind-class"><a href="RigidBodyDesc.html#setLinvel" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg>set<wbr/>Linvel</a></li>
 <li class="tsd-kind-method tsd-parent-kind-class"><a href="RigidBodyDesc.html#setRotation" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg>set<wbr/>Rotation</a></li>
 <li class="tsd-kind-method tsd-parent-kind-class"><a href="RigidBodyDesc.html#setSleeping" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg>set<wbr/>Sleeping</a></li>
+<li class="tsd-kind-method tsd-parent-kind-class"><a href="RigidBodyDesc.html#setSoftCcdPrediction" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg>set<wbr/>Soft<wbr/>Ccd<wbr/>Prediction</a></li>
 <li class="tsd-kind-method tsd-parent-kind-class"><a href="RigidBodyDesc.html#setTranslation" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg>set<wbr/>Translation</a></li>
 <li class="tsd-kind-method tsd-parent-kind-class"><a href="RigidBodyDesc.html#setUserData" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg>set<wbr/>User<wbr/>Data</a></li>
 <li class="tsd-kind-method tsd-parent-kind-class"><a href="RigidBodyDesc.html#dynamic" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg>dynamic</a></li>
