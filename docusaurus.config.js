@@ -16,8 +16,24 @@ module.exports = {
       indexName: 'rapier',
     },
     prism: {
-        theme: require('prism-react-renderer/themes/github'),
-        additionalLanguages: ['toml', 'rust'],
+      theme: require('prism-react-renderer/themes/github'),
+      additionalLanguages: ['toml', 'rust'],
+      // doc: https://docusaurus.io/docs/markdown-features/code-blocks#custom-magic-comments
+      magicComments: [
+        // Remember to extend the default highlight class name as well!
+        {
+          className: 'theme-code-block-highlighted-line',
+          line: 'highlight-next-line',
+          block: { start: 'highlight-start', end: 'highlight-end' },
+        },
+        // Custom comments:
+        // Hide the line, useful for automatic tool to read the whole line and test it compiles
+        // Also allow to show the whole context to the reader.
+        {
+          className: 'docusaurus-hidden-code-line',
+          line: 'hide-next-line',
+        },
+      ],
     },
     // announcementBar: {
     //   id: 'supportus',
@@ -179,6 +195,6 @@ module.exports = {
     ],
   ],
   stylesheets: [
-      'https://cdn.jsdelivr.net/npm/katex@0.11.0/dist/katex.min.css'
+    'https://cdn.jsdelivr.net/npm/katex@0.11.0/dist/katex.min.css'
   ]
 };

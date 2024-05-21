@@ -23,7 +23,7 @@ yarn-error.log*
 
 build
 
-# Ignore these because they are generated automatically from website/docs/user_guides/templates
-website/docs/user_guides/rust
-website/docs/user_guides/bevy_plugin
-website/docs/user_guides/javascript
+# Ignore these because they are generated automatically from docs/user_guides/templates
+docs/user_guides/rust
+docs/user_guides/bevy_plugin
+docs/user_guides/javascript
