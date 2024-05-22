@@ -1,10 +1,9 @@
 [package]
-name = "rapier_snippets_bevy3d"
+name = "inject_file"
 version = "0.1.0"
 edition = "2021"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-bevy = "0.13.2"
-bevy_rapier3d = "0.26.0"
+regex = "1.10"
