@@ -24,11 +24,6 @@
   padding: 0 var(--ifm-pre-padding);
 }
 
-.docusaurus-hidden-code-line {
-  display: none;
-}
-
-
 /*
  * We use this because sometimes the border of some buttons
  * don't appear for some reasons I ignore.

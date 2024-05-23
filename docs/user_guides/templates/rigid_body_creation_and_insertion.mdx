@@ -168,18 +168,10 @@ commands.spawn(RigidBody::Dynamic)
   </TabItem>
   <TabItem value="3D">
 
-```rust {1, line}
+```rust
 use bevy::prelude::*;
 use bevy_rapier3d::prelude::*;
-// highlight-next-line
-highlighted
-// This will be hidden
-hidden only 1
-shown
-// hide-start
-this should not be visible
-// hide-end
-// but this is
+
 commands.spawn(RigidBody::Dynamic)
         .insert(TransformBundle::from(Transform::from_xyz(0.0, 5.0, 0.0)))
         .insert(Velocity {

@@ -10,7 +10,6 @@ $ yarn
 
 ### Local Development
 
-
 ```
 $ ./generate_user_guides.sh
 ```
@@ -22,8 +21,6 @@ $ yarn start
 ```
 
 This command starts a local development server and open up a browser window. Most changes are reflected live without having to restart the server.
-
-
 
 ### Build
 
