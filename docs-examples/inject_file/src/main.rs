@@ -31,7 +31,7 @@ fn main() {
             r"// DOCUSAURUS: start {}(?:\r\n|\n)((?:\s|.)*)\/\/ DOCUSAURUS: stop {}",
             infos[1], infos[1]
         );
-        let re = Regex::new(dbg!(&regex)).unwrap();
+        let re = Regex::new(&regex).unwrap();
         let to_keep = re
             .captures_iter(&to_inject)
             .map(|c| {
@@ -39,7 +39,7 @@ fn main() {
                 to_keep.1[0]
             })
             .collect::<Vec<_>>();
-        dbg!(to_keep).join("")
+        to_keep.join("")
     });
     println!("{result}");
 }
