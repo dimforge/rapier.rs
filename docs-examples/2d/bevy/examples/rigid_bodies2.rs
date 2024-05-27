@@ -18,6 +18,10 @@ fn main() {
             Update,
             apply_forces.run_if(input_just_pressed(KeyCode::KeyF)),
         )
+        .add_systems(
+            Update,
+            modify_body_mass_props.run_if(input_just_pressed(KeyCode::KeyF)),
+        )
         .run();
 }
 
@@ -61,6 +65,21 @@ fn setup_physics(mut commands: Commands) {
             torque_impulse: 14.0,
         });
     // DOCUSAURUS: Forces1 stop
+    // DOCUSAURUS: Mass1 start
+    // When the collider is attached, the rigid-body's mass and angular
+    // inertia will be automatically updated to take the collider into account.
+    commands
+        .spawn(RigidBody::Dynamic)
+        .insert(Collider::ball(1.0))
+        // The default density is 1.0, we are setting 2.0 for this example.
+        .insert(ColliderMassProperties::Density(2.0));
+    // DOCUSAURUS: Mass1 stop
+    // DOCUSAURUS: Mass2 start
+    /* Set the additional mass properties when the rigid-body bundle is created. */
+    commands
+        .spawn(RigidBody::Dynamic)
+        .insert(AdditionalMassProperties::Mass(10.0));
+    // DOCUSAURUS: Mass2 stop
 }
 
 // DOCUSAURUS: Velocity2 stop
@@ -93,6 +112,15 @@ fn apply_forces(
     }
 }
 // DOCUSAURUS: Forces2 stop
+
+// DOCUSAURUS: Mass3 start
+/* Change the additional mass-properties inside of a system. */
+fn modify_body_mass_props(mut mprops: Query<&mut AdditionalMassProperties>) {
+    for mut mprops in mprops.iter_mut() {
+        *mprops = AdditionalMassProperties::Mass(100.0);
+    }
+}
+// DOCUSAURUS: Mass3 stop
 
 /// System to avoid too much drift
 fn reset_position(mut positions: Query<&mut Transform, With<RigidBody>>) {
