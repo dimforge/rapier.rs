@@ -8,7 +8,7 @@ groups or solver groups. Each collider is given:
   at least one of the colliders is a sensor) computed by the narrow-phase.
   This filtering happens right after the broad-phase, at the beginning of the narrow phase.
 - A `solver_groups` for filtering what pair of colliders should have their contact forces computed. This filtering
-  happens at the end of the narrow-phase, before the constraints solver
+  happens at the end of the narrow-phase, before the constraints solver.
 
 In other words, the `solver_groups` is here to prevent contact forces from being computed between some colliders, whereas the
 `collision_groups` will also prevent the contact themselves (and contact events) from being computed. The

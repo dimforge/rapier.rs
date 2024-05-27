@@ -3,9 +3,9 @@ import TabItem from '@theme/TabItem';
 
 
 The position of a collider represents its location (translation) in 2D or 3D world-space as well as its orientation (rotation).
-<bevy>Both are combined in a Bevy `Transform` component.</bevy> <rust>It translational part is represented as a vector and
+<bevy>Both are combined in a Bevy `Transform` component.</bevy> <rust>Its translational part is represented as a vector and
 its rotational part as an unit quaternion (in 3D) or a unit complex number (in 2D). Both are
-combined into an isometry.</rust> <js>It translational part is represented as a vector and its rotational part as an unit
+combined into an isometry.</rust> <js>Its translational part is represented as a vector and its rotational part as an unit
 quaternion (in 3D) or an angle (in 2D).</js>
 
 :::warning
@@ -166,7 +166,7 @@ collider.setRotation({ w: 1.0, x: 0.0, y: 0.0, z: 0.0 });
 
 
 If a collider is **attached to a rigid-body**, its position is automatically updated by the physics pipeline when a
-rigid-body moved by the physics pipeline. If a change to the rigid-body position is made by the user then the collider
+rigid-body is moved by the physics pipeline. If a change to the rigid-body position is made by the user then the collider
 position will be updated during the next timestep.
 
 <bevy>Therefore, setting the `Transform` of a collider attached to a rigid-body will modify the position of the
