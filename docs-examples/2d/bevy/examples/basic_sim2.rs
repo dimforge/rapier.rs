@@ -1,4 +1,4 @@
-// DOCUSAURUS: start basic_sim
+// DOCUSAURUS: basic_sim start
 use bevy::prelude::*;
 use bevy_rapier2d::prelude::*;
 
@@ -37,4 +37,4 @@ fn print_ball_altitude(positions: Query<&Transform, With<RigidBody>>) {
         println!("Ball altitude: {}", transform.translation.y);
     }
 }
-// DOCUSAURUS: stop basic_sim
+// DOCUSAURUS: basic_sim stop

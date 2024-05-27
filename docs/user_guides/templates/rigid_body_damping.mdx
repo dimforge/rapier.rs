@@ -31,18 +31,10 @@ assert_eq!(rigid_body.angular_damping(), 1.0);
 <bevy>
 
 ```rust
-/* Set damping when the rigid-body bundle is created. */
-commands.spawn(RigidBody::Dynamic)
-    .insert(Damping { linear_damping: 0.5, angular_damping: 1.0 });
+<load path='/2d/bevy/examples/rigid_bodies_continued2.rs' marker='Damping1' />
 ```
 ```rust
-/* Set damping inside of a system. */
-fn modify_body_damping(mut dampings: Query<&mut Damping>) {
-    for mut rb_damping in dampings.iter_mut() {
-        rb_damping.linear_damping = 0.5;
-        rb_damping.angular_damping = 1.0;
-    }
-}
+<load path='/2d/bevy/examples/rigid_bodies_continued2.rs' marker='Damping2' />
 ```
 
 </bevy>

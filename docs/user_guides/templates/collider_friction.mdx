@@ -61,23 +61,10 @@ assert_eq!(collider.friction_combine_rule(), CoefficientCombineRule::Min);
 <bevy>
 
 ```rust
-/* Set the friction coefficient and friction combine rule
-   when the collider is created. */
-commands.spawn(Collider::ball(0.5))
-    .insert(Friction {
-        coefficient: 0.7,
-        combine_rule: CoefficientCombineRule::Min,
-    });
+<load path='/2d/bevy/examples/colliders2.rs' marker='Friction1' />
 ```
 ```rust
-/* Set the friction coefficient and friction combine rule
-   inside of a system. */
-fn modify_collider_friction(mut frictions: Query<&mut Friction>) {
-    for mut friction in frictions.iter_mut() {
-        friction.coefficient = 0.7;
-        friction.combine_rule = CoefficientCombineRule::Min;
-    }
-}
+<load path='/2d/bevy/examples/colliders2.rs' marker='Friction2' />
 ```
 
 </bevy>

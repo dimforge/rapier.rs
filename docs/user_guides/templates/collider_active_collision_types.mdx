@@ -28,17 +28,10 @@ assert!(collider.active_collision_types().contains(ActiveCollisionTypes::KINEMAT
 <bevy>
 
 ```rust
-/* Set the active collision types when the collider is created. */
-commands.spawn(Collider::ball(0.5))
-    .insert(ActiveCollisionTypes::default() | ActiveCollisionTypes::KINEMATIC_FIXED);
+<load path='/2d/bevy/examples/colliders2.rs' marker='ActiveCollisions1' />
 ```
 ```rust
-/* Set the active collision types inside of a system. */
-fn modify_collider_active_collision_types(mut active_types: Query<&mut ActiveCollisionTypes>) {
-    for mut active_types in active_types.iter_mut() {
-        *active_types = (ActiveCollisionTypes::default() | ActiveCollisionTypes::KINEMATIC_FIXED);
-    }
-}
+<load path='/2d/bevy/examples/colliders2.rs' marker='ActiveCollisions2' />
 ```
 
 </bevy>

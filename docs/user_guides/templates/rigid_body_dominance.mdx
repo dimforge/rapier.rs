@@ -42,17 +42,10 @@ assert_eq!(rigid_body.dominance_group(), 10);
 <bevy>
 
 ```rust
-/* Set dominance when the rigid-body bundle is created. */
-commands.spawn(RigidBody::Dynamic)
-    .insert(Dominance::group(10));
+<load path='/2d/bevy/examples/rigid_bodies_continued2.rs' marker='Dominance1' />
 ```
 ```rust
-/* Set dominance inside of a system. */
-fn modify_body_dominance(mut dominances: Query<&mut Dominance>) {
-    for mut rb_dominance in dominances.iter_mut() {
-        rb_dominance.groups = 10;
-    }
-}
+<load path='/2d/bevy/examples/rigid_bodies_continued2.rs' marker='Dominance2' />
 ```
 
 </bevy>

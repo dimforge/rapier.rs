@@ -38,17 +38,10 @@ assert_eq!(rigid_body.is_ccd_enabled(), true);
 <bevy>
 
 ```rust
-/* Enable CCD when the rigid-body bundle is created. */
-commands.spawn(RigidBody::Dynamic)
-    .insert(Ccd::enabled());
+<load path='/2d/bevy/examples/rigid_bodies_continued2.rs' marker='Ccd1' />
 ```
 ```rust
-/* Enable CCD inside of a system. */
-fn modify_body_ccd(mut ccds: Query<&mut Ccd>) {
-    for mut rb_ccd in ccds.iter_mut() {
-        rb_ccd.enabled = true;
-    }
-}
+<load path='/2d/bevy/examples/rigid_bodies_continued2.rs' marker='Ccd2' />
 ```
 
 </bevy>

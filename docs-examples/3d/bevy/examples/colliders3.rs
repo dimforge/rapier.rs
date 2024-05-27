@@ -30,6 +30,27 @@ fn setup_physics(mut commands: Commands) {
         .insert(ColliderMassProperties::Density(2.0));
     // DOCUSAURUS: Creation1 stop
 
+    // DOCUSAURUS: MassAdvanced start
+    // First option: by setting the density of the collider (or we could just leave
+    //               its default value 1.0).
+    let collider_mprops = ColliderMassProperties::Density(2.0);
+    // Second option: by setting the mass of the collider.
+    let collider_mprops = ColliderMassProperties::Mass(0.8);
+    // Third option: by setting the mass-properties explicitly.
+    let collider_mprops = ColliderMassProperties::MassProperties(MassProperties {
+        local_center_of_mass: Vec3::new(0.0, 1.0, 2.0),
+        mass: 0.5,
+        principal_inertia_local_frame: Quat::IDENTITY,
+        principal_inertia: Vec3::new(0.3, 0.4, 0.5),
+    });
+    // When the collider is attached, the rigid-body's mass and angular
+    // inertia will be automatically updated to take the collider into account.
+    commands
+        .spawn(RigidBody::Dynamic)
+        .insert(Collider::ball(0.5))
+        .insert(collider_mprops);
+    // DOCUSAURUS: MassAdvanced stop
+
     // DOCUSAURUS: ColliderPosition1 start
     /* Set the collider position when the collider is created. */
     commands

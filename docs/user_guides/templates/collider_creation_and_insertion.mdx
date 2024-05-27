@@ -152,6 +152,7 @@ values={[
 <TabItem value="2D">
 
 ```rust
+<load path='/2d/bevy/examples/colliders2.rs' marker='Creation1' />
 use bevy_rapier2d::prelude::*;
 
 commands.spawn(Collider::cuboid(1.0, 2.0))
@@ -166,17 +167,7 @@ commands.spawn(Collider::cuboid(1.0, 2.0))
   <TabItem value="3D">
 
 ```rust
-use bevy_rapier3d::prelude::*;
-
-commands.spawn(Collider::cuboid(1.0, 2.0, 3.0))
-    .insert(Sensor)
-    .insert(TransformBundle::from(Transform::from_xyz(2.0, 0.0, 0.0)))
-    .insert(Friction::coefficient(0.7))
-    .insert(Restitution::coefficient(0.3))
-    .insert(ColliderMassProperties::Density(2.0));
-};
-
-commands.spawn(collider);
+<load path='/3d/bevy/examples/colliders3.rs' marker='Creation1' />
 ```
 
   </TabItem>
@@ -190,20 +181,7 @@ way allows you to attach multiple colliders to the same rigid-body:
 2. Attach the `Collider` to an entity that is a children of the entity containing the `RigidBody`.
 
 ```rust
-// Attach a single collider to a rigid-body.
-commands.spawn(RigidBody::Dynamic)
-    .insert(Collider::ball(0.5));
-
-// Attach a multiple colliders to a rigid-body.
-commands.spawn(RigidBody::Dynamic)
-    .with_children(|children| {
-        children.spawn(Collider::ball(0.5))
-            // Position the collider relative to the rigid-body.
-            .insert(TransformBundle::from(Transform::from_xyz(0.0, 0.0, -1.0)));
-        children.spawn(Collider::ball(0.5))
-            // Position the collider relative to the rigid-body.
-            .insert(TransformBundle::from(Transform::from_xyz(0.0, 0.0, 1.0)));
-    });
+<load path='/2d/bevy/examples/colliders2.rs' marker='Creation2' />
 ```
 
 

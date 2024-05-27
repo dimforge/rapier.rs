@@ -151,36 +151,15 @@ values={[
 <TabItem value="2D">
 
 ```rust
-use bevy::prelude::*;
-use bevy_rapier2d::prelude::*;
 
-commands.spawn(RigidBody::Dynamic)
-        .insert(TransformBundle::from(Transform::from_xyz(0.0, 5.0, 0.0)))
-        .insert(Velocity {
-            linvel: Vec2::new(1.0, 2.0),
-            angvel: 0.2
-        })
-        .insert(GravityScale(0.5))
-        .insert(Sleeping::disabled())
-        .insert(Ccd::enabled());
+<load path='/2d/bevy/examples/rigid_bodies2.rs' marker='Creation' />
 ```
 
   </TabItem>
   <TabItem value="3D">
 
 ```rust
-use bevy::prelude::*;
-use bevy_rapier3d::prelude::*;
-
-commands.spawn(RigidBody::Dynamic)
-        .insert(TransformBundle::from(Transform::from_xyz(0.0, 5.0, 0.0)))
-        .insert(Velocity {
-            linvel: Vec3::new(1.0, 2.0, 3.0),
-            angvel: Vec3::new(0.2, 0.0, 0.0),
-        })
-        .insert(GravityScale(0.5))
-        .insert(Sleeping::disabled())
-        .insert(Ccd::enabled());
+<load path='/3d/bevy/examples/rigid_bodies3.rs' marker='Creation' />
 ```
 
   </TabItem>

@@ -41,10 +41,6 @@ fn setup_physics(mut commands: Commands) {
         .spawn(RigidBody::Dynamic)
         .insert(Dominance::group(10));
     // DOCUSAURUS: Dominance1 stop
-    // DOCUSAURUS: Ccd1 start
-    /* Enable CCD when the rigid-body bundle is created. */
-    commands.spawn(RigidBody::Dynamic).insert(Ccd::enabled());
-    // DOCUSAURUS: Ccd1 stop
 }
 
 // DOCUSAURUS: LockedAxes2 start
@@ -74,15 +70,6 @@ fn modify_body_dominance(mut dominances: Query<&mut Dominance>) {
     }
 }
 // DOCUSAURUS: Dominance2 stop
-
-// DOCUSAURUS: Ccd2 start
-/* Enable CCD inside of a system. */
-fn modify_body_ccd(mut ccds: Query<&mut Ccd>) {
-    for mut rb_ccd in ccds.iter_mut() {
-        rb_ccd.enabled = true;
-    }
-}
-// DOCUSAURUS: Ccd2 stop
 
 /// System to avoid too much drift
 fn reset_position(mut positions: Query<&mut Transform, With<RigidBody>>) {

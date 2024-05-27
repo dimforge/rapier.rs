@@ -85,34 +85,20 @@ values={[
 <TabItem value="2D">
 
 ```rust
-/* Set the collider position when the collider is created. */
-commands.spawn(Collider::cuboid(0.5, 0.5))
-    .insert(TransformBundle::from(Transform::from_xyz(1.0, 2.0, 0.0));
+<load path='/2d/bevy/examples/colliders2.rs' marker='ColliderPosition1' />
 ```
 ```rust
-/* Set the collider position inside of a system. */
-fn modify_collider_position(mut positions: Query<&mut Transform, With<Collider>>) {
-    for mut position in positions.iter_mut() {
-        position.translation.z = 2.0;
-    }
-}
+<load path='/2d/bevy/examples/colliders2.rs' marker='ColliderPosition2' />
 ```
 
   </TabItem>
   <TabItem value="3D">
 
 ```rust
-/* Set the collider position when the collider is created. */
-commands.spawn(Collider::cuboid(0.5, 0.5, 0.5))
-    .insert(TransformBundle::from(Transform::from_xyz(1.0, 2.0, 3.0)));
+<load path='/3d/bevy/examples/colliders3.rs' marker='ColliderPosition1' />
 ```
 ```rust
-/* Set the collider position inside of a system. */
-fn modify_collider_position(mut positions: Query<&mut Transform, With<Collider>) {
-    for mut position in positions.iter_mut() {
-        position.translation.x = 2.0;
-    }
-}
+<load path='/3d/bevy/examples/colliders3.rs' marker='ColliderPosition2' />
 ```
 
   </TabItem>
@@ -242,28 +228,14 @@ values={[
 <TabItem value="2D">
 
 ```rust
-// Attach the collider to the rigid-body. The collider is attached as its
-// children, so the collider’s `Transform` components sets its position
-// relative to the parent rigid-body.
-commands.spawn(RigidBody::Dynamic)
-    .with_children(|children| {
-        children.spawn(Collider::cuboid(0.5, 0.5))
-            .insert(TransformBundle::from(Transform::from_xyz(1.0, 2.0, 0.0)));
-    });
+<load path='/2d/bevy/examples/colliders2.rs' marker='ColliderPosition3' />
 ```
 
   </TabItem>
   <TabItem value="3D">
 
 ```rust
-// Attach the collider to the rigid-body. The collider is attached as its
-// children, so the collider’s `Transform` components sets its position
-// relative to the parent rigid-body.
-commands.spawn(RigidBody::Dynamic)
-    .with_children(|children| {
-        children.spawn(Collider::cuboid(0.5, 0.5, 0.5))
-            .insert(TransformBundle(Transform::from_xyz(1.0, 2.0, 3.0)));
-    });
+<load path='/3d/bevy/examples/colliders3.rs' marker='ColliderPosition3' />
 ```
 
   </TabItem>

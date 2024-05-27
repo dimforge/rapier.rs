@@ -1,6 +1,10 @@
 #!/bin/bash
 set -v
 
+mkdir -p docs/user_guides/rust/
+mkdir -p docs/user_guides/bevy_plugin/
+mkdir -p docs/user_guides/javascript/
+
 cp -r docs/user_guides/templates/* docs/user_guides/rust/.
 cp -r docs/user_guides/templates/* docs/user_guides/bevy_plugin/.
 cp -r docs/user_guides/templates/* docs/user_guides/javascript/.

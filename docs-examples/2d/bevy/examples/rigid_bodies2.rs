@@ -47,6 +47,7 @@ fn setup_physics(mut commands: Commands) {
     // DOCUSAURUS: Creation stop
 
     // DOCUSAURUS: Velocity1 start
+    /* Set the velocities when the rigid-body is created. */
     commands.spawn(RigidBody::Dynamic).insert(Velocity {
         linvel: Vec2::new(0.0, 2.0),
         angvel: 0.4,
