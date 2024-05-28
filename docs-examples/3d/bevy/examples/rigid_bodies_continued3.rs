@@ -11,7 +11,6 @@ fn main() {
         .add_systems(Update, modify_body_locked_flags)
         .add_systems(Update, modify_body_damping)
         .add_systems(Update, modify_body_dominance)
-        .add_systems(Update, modify_body_ccd)
         .add_systems(Update, reset_position)
         .run();
 }
