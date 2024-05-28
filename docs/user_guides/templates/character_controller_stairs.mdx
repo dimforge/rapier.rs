@@ -48,42 +48,10 @@ character_controller.autostep = Some(CharacterAutostep {
 <bevy>
 
 ```rust
-/* Configure the character controller when the collider is created. */
-// Autostep if the step height is smaller than 0.5, and its width larger than 0.2.
-commands.spawn(Collider::ball(0.5))
-    .insert(KinematicCharacterController {
-        autostep: Some(CharacterAutostep {
-            max_height: CharacterLength::Absolute(0.5),
-            min_width: CharacterLength::Absolute(0.2),
-            include_dynamic_bodies: true,
-        }),
-        ..default()
-    });
-
-// Autostep if the step height is smaller than 0.5 multiplied by the character’s height,
-// and its width larger than 0.5 multiplied by the character’s width (i.e. half the character’s
-// width).
-commands.spawn(Collider::ball(0.5))
-    .insert(KinematicCharacterController {
-        autostep: Some(CharacterAutostep {
-            max_height: CharacterLength::Relative(0.3),
-            min_width: CharacterLength::Relative(0.5),
-            include_dynamic_bodies: true,
-        }),
-        ..default()
-    });
+<load path='/2d/bevy/examples/character_controller2.rs' marker="Stairs1" />
 ```
 ```rust
-/* Configure autostep inside of a system. */
-fn modify_character_controller_autostep(mut character_controller: Query<&mut KinematicCharacterController>) {
-    for mut character_controller in character_controllers.iter_mut() {
-        character_controller.autostep = Some(CharacterAutostep {
-           max_height: CharacterLength::Absolute(0.5),
-           min_width: CharacterLength::Absolute(0.2),
-           include_dynamic_bodies: true,
-       });
-    }
-}
+<load path='/2d/bevy/examples/character_controller2.rs' marker="Stairs2" />
 ```
 
 </bevy>
