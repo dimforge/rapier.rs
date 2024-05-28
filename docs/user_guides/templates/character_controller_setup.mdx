@@ -94,7 +94,7 @@ Refer to the API documentation of `RapierContext::move_shape` for details on how
 
 The `KinematicCharacterController` component must be added to the same entity as a `TransformBundle` bundle. If the field
 `KinematicCharacterController::custom_shape` isn’t set, then the entity it is attached to must also contain a `Collider` component.
-That collider optionally be attached to a rigid-body. At each frame, the `KinematicCharacterController::translation`
+That collider can optionally be attached to a rigid-body. At each frame, the `KinematicCharacterController::translation`
 field can be set to the desired translation for that character.
 
 During the next physics update step, that translation will
