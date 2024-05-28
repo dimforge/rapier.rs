@@ -27,3 +27,4 @@ build
 docs/user_guides/rust
 docs/user_guides/bevy_plugin
 docs/user_guides/javascript
+docs/user_guides/templates_injected

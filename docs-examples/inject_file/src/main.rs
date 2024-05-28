@@ -41,5 +41,5 @@ fn main() {
             .collect::<Vec<_>>();
         to_keep.join("")
     });
-    println!("{result}");
+    print!("{result}");
 }
