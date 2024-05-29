@@ -76,8 +76,7 @@ fn setup_physics(mut commands: Commands) {
     let joint = PrismaticJointBuilder::new(Vec3::X)
         .local_anchor1(Vec3::new(0.0, 0.0, 1.0))
         .local_anchor2(Vec3::new(0.0, 0.0, -3.0))
-        .motor_velocity(1.0, 0.5)
-        .limits([-2.0, 5.0]);
+        .motor_velocity(0.1, 0.05);
     commands
         .spawn(RigidBody::Dynamic)
         .insert(Collider::capsule_y(1f32, 0.5f32))
