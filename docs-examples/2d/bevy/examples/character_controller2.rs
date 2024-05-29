@@ -166,7 +166,7 @@ fn modify_character_controller_up(
         character_controller.up = Vec2::X;
     }
 }
-// DOCUSAURUS: CharacterControllerUpVector2 stop
+// DOCUSAURUS: UpVector2 stop
 
 // DOCUSAURUS: Slopes2 start
 /* Configure snap-to-ground inside of a system. */
@@ -208,7 +208,7 @@ fn modify_character_controller_snap_to_ground(
 }
 // DOCUSAURUS: Snap2 stop
 
-// DOCUSAURUS: Collisions1 start
+// DOCUSAURUS: Collisions3 start
 /* Read the character controller collisions stored in the character controller’s output. */
 fn read_character_controller_collisions(
     mut character_controller_outputs: Query<&mut KinematicCharacterControllerOutput>,
@@ -219,7 +219,7 @@ fn read_character_controller_collisions(
         }
     }
 }
-// DOCUSAURUS: Collisions1 stop
+// DOCUSAURUS: Collisions3 stop
 
 /* Configure dynamic impulses inside of a system. */
 fn modify_character_controller_impulses(
