@@ -47,7 +47,7 @@ fn setup_physics(mut commands: Commands) {
     commands
         .spawn(RigidBody::Dynamic)
         .insert(TransformBundle::from(Transform::from_xyz(0.0, 0.0, 0.0)))
-        // DOCUSAURUS: Position1 stop (should add a ";" though...)
+        // DOCUSAURUS: Position1 stop
         .insert(Velocity {
             linvel: Vec3::new(0.0, 2.0, 0.0),
             angvel: Vec3::new(0.2, 0.0, 0.0),
@@ -67,10 +67,10 @@ fn setup_physics(mut commands: Commands) {
     });
     // DOCUSAURUS: Velocity1 stop
 
-    // DOCUSAURUS: Gravity1 start shared
+    // DOCUSAURUS: Gravity1 start
     /* Set the gravity scale when the rigid-body is created. */
     commands.spawn(RigidBody::Dynamic).insert(GravityScale(2.0));
-    // DOCUSAURUS: Gravity1 stop shared
+    // DOCUSAURUS: Gravity1 stop
 
     // DOCUSAURUS: Forces1 start
     /* Apply forces when the rigid-body is created. */
@@ -94,8 +94,9 @@ fn modify_body_translation(mut positions: Query<&mut Transform, With<RigidBody>>
         position.translation.y += 0.1;
     }
 }
-// DOCUSAURUS: Velocity2 stop
+// DOCUSAURUS: Position2 stop
 
+// DOCUSAURUS: Velocity2 start
 /* Set the velocities inside of a system. */
 fn modify_body_velocity(mut velocities: Query<&mut Velocity>) {
     for mut vel in velocities.iter_mut() {
@@ -105,14 +106,14 @@ fn modify_body_velocity(mut velocities: Query<&mut Velocity>) {
 }
 // DOCUSAURUS: Velocity2 stop
 
-// DOCUSAURUS: Gravity2 start shared
+// DOCUSAURUS: Gravity2 start
 /* Set the gravity scale inside of a system. */
 fn modify_body_gravity_scale(mut grav_scale: Query<&mut GravityScale>) {
     for mut grav_scale in grav_scale.iter_mut() {
         grav_scale.0 = 2.0;
     }
 }
-// DOCUSAURUS: Gravity2 stop shared
+// DOCUSAURUS: Gravity2 stop
 
 // DOCUSAURUS: Forces2 start
 /* Apply forces and impulses inside of a system. */

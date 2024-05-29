@@ -51,14 +51,14 @@ fn setup_physics(mut commands: Commands) {
         .insert(collider_mprops);
     // DOCUSAURUS: MassAdvanced stop
 
-    // DOCUSAURUS: ColliderPosition1 start
+    // DOCUSAURUS: Position1 start
     /* Set the collider position when the collider is created. */
     commands
         .spawn(Collider::cuboid(0.5, 0.5, 0.5))
         .insert(TransformBundle::from(Transform::from_xyz(1.0, 2.0, 3.0)));
-    // DOCUSAURUS: ColliderPosition1 stop
+    // DOCUSAURUS: Position1 stop
 
-    // DOCUSAURUS: ColliderPosition3 start
+    // DOCUSAURUS: Position3 start
     // Attach the collider to the rigid-body. The collider is attached as its
     // children, so the collider’s `Transform` components sets its position
     // relative to the parent rigid-body.
@@ -69,14 +69,14 @@ fn setup_physics(mut commands: Commands) {
                 .spawn(Collider::cuboid(0.5, 0.5, 0.5))
                 .insert(TransformBundle::from(Transform::from_xyz(1.0, 2.0, 0.0)));
         });
-    // DOCUSAURUS: ColliderPosition3 stop
+    // DOCUSAURUS: Position3 stop
 }
 
-// DOCUSAURUS: ColliderPosition2 start
+// DOCUSAURUS: Position2 start
 /* Set the collider position inside of a system. */
 fn modify_collider_position(mut positions: Query<&mut Transform, With<Collider>>) {
     for mut position in positions.iter_mut() {
         position.translation.x = 2.0;
     }
 }
-// DOCUSAURUS: ColliderPosition2 stop
+// DOCUSAURUS: Position2 stop

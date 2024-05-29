@@ -34,9 +34,12 @@ fn setup_physics(mut commands: Commands) {
     // DOCUSAURUS: Creation start
     use bevy::prelude::*;
     use bevy_rapier2d::prelude::*;
+
+    // DOCUSAURUS: Position1 start
     commands
         .spawn(RigidBody::Dynamic)
         .insert(TransformBundle::from(Transform::from_xyz(0.0, 5.0, 0.0)))
+        // DOCUSAURUS: Position1 stop
         .insert(Velocity {
             linvel: Vec2::new(1.0, 2.0),
             angvel: 0.2,
@@ -83,8 +86,16 @@ fn setup_physics(mut commands: Commands) {
     // DOCUSAURUS: Mass2 stop
 }
 
-// DOCUSAURUS: Velocity2 stop
+// DOCUSAURUS: Position2 start
+/* Change the position inside of a system. */
+fn modify_body_translation(mut positions: Query<&mut Transform, With<RigidBody>>) {
+    for mut position in positions.iter_mut() {
+        position.translation.y += 0.1;
+    }
+}
+// DOCUSAURUS: Position2 stop
 
+// DOCUSAURUS: Velocity2 start
 /* Set the velocities inside of a system. */
 fn modify_body_velocity(mut velocities: Query<&mut Velocity>) {
     for mut vel in velocities.iter_mut() {

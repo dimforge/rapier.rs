@@ -29,7 +29,7 @@ fn setup_graphics(mut commands: Commands) {
 }
 
 fn setup_physics_more(mut commands: Commands) {
-    // DOCUSAURUS: CharacterControllerOffset start
+    // DOCUSAURUS: Offset start
     /* Configure the character controller when the collider is created. */
     commands
         .spawn(Collider::ball(0.5))
@@ -46,9 +46,9 @@ fn setup_physics_more(mut commands: Commands) {
             offset: CharacterLength::Relative(0.01),
             ..default()
         });
-    // DOCUSAURUS: CharacterControllerOffset stop
+    // DOCUSAURUS: Offset stop
 
-    // DOCUSAURUS: CharacterControllerUpVector1 start
+    // DOCUSAURUS: UpVector1 start
     /* Character controller with the positive X axis as the up vector. */
     commands
         .spawn(Collider::ball(0.5))
@@ -56,7 +56,7 @@ fn setup_physics_more(mut commands: Commands) {
             up: Vec2::X,
             ..default()
         });
-    // DOCUSAURUS: CharacterControllerUpVector1 stop
+    // DOCUSAURUS: UpVector1 stop
 
     // DOCUSAURUS: Slopes1 start
     /* Configure the character controller when the collider is created. */
@@ -133,7 +133,7 @@ fn setup_physics_more(mut commands: Commands) {
     // DOCUSAURUS: Collisions2 stop
 }
 
-// DOCUSAURUS: CharacterControllerSetup start
+// DOCUSAURUS: Setup start
 fn setup_physics(mut commands: Commands) {
     commands
         .spawn(RigidBody::KinematicPositionBased)
@@ -155,9 +155,9 @@ fn read_result_system(controllers: Query<(Entity, &KinematicCharacterControllerO
         );
     }
 }
-// DOCUSAURUS: CharacterControllerSetup stop
+// DOCUSAURUS: Setup stop
 
-// DOCUSAURUS: CharacterControllerUpVector2 start
+// DOCUSAURUS: UpVector2 start
 /* Modify the character controller’s up vector inside of a system. */
 fn modify_character_controller_up(
     mut character_controllers: Query<&mut KinematicCharacterController>,
