@@ -98,19 +98,7 @@ the rigid-body a collider is attached to: `collider_set.get(collider_handle).unw
 These events can be read using Bevy's event system with `EventReader`:
 
 ```rust
-/* A system that displays the events. */
-fn display_events(
-    mut collision_events: EventReader<CollisionEvent>,
-    mut contact_force_events: EventReader<ContactForceEvent>,
-) {
-    for collision_event in collision_events.read() {
-        println!("Received collision event: {:?}", collision_event);
-    }
-
-    for contact_force_event in contact_force_events.read() {
-        println!("Received contact force event: {:?}", contact_force_event);
-    }
-}
+<load path='/2d/bevy/examples/advanced_collision_detection2.rs' marker='Events' />
 ```
 
 </bevy>
@@ -209,59 +197,10 @@ for contact_pair in narrow_phase.contacts_with(collider_handle) {
 <bevy>
 
 ```rust
-fn display_contact_info(rapier_context: Res<RapierContext>) {
-    let entity1 = ...; // A first entity with a collider attached.
-    let entity2 = ...; // A second entity with a collider attached.
-    
-    /* Find the contact pair, if it exists, between two colliders. */
-    if let Some(contact_pair) = rapier_context.contact_pair(entity1, entity2) {
-        // The contact pair exists meaning that the broad-phase identified a potential contact.
-        if contact_pair.has_any_active_contact() {
-            // The contact pair has active contacts, meaning that it
-            // contains contacts for which contact forces were computed.
-        }
-
-        // We may also read the contact manifolds to access the contact geometry.
-        for manifold in contact_pair.manifolds() {
-            println!("Local-space contact normal: {}", manifold.local_n1());
-            println!("Local-space contact normal: {}", manifold.local_n2());
-            println!("World-space contact normal: {}", manifold.normal());
-
-            // Read the geometric contacts.
-            for contact_point in manifold.points() {
-                // Keep in mind that all the geometric contact data are expressed in the local-space of the colliders.
-                println!("Found local contact point 1: {:?}", contact_point.local_p1());
-                println!("Found contact distance: {:?}", contact_point.dist()); // Negative if there is a penetration.
-                println!("Found contact impulse: {}", contact_point.data.impulse());
-                println!("Found friction impulse: {}", contact_point.data.tangent_impulse());
-            }
-
-            // Read the solver contacts.
-            for solver_contact in manifold.data.solver_contacts() {
-                // Keep in mind that all the solver contact data are expressed in world-space.
-                println!("Found solver contact point: {:?}", solver_contact.point());
-                println!("Found solver contact distance: {:?}", solver_contact.dist()); // Negative if there is a penetration.
-            }
-        }
-    }
-}
+<load path='/2d/bevy/examples/advanced_collision_detection2.rs' marker='ContactGraph1' />
 ```
 ```rust
-fn display_contact_info(rapier_context: Res<RapierContext>) {
-    let entity = ...; // An entity with a collider attached.
-    
-    /* Iterate through all the contact pairs involving a specific collider. */
-    for contact_pair in rapier_context.contacts_with(entity) {
-        let other_collider = if contact_pair.collider1() == entity {
-            contact_pair.collider2()
-        } else {
-            contact_pair.collider1()
-        };
-
-        // Process the contact pair in a way similar to what we did in
-        // the previous example.
-    }
-}
+<load path='/2d/bevy/examples/advanced_collision_detection2.rs' marker='ContactGraph2' />
 ```
 
 </bevy>
@@ -315,28 +254,12 @@ for (collider1, collider2, intersecting) in narrow_phase.intersections_with(coll
 </rapier>
 <bevy>
 
+
 ```rust
-fn display_intersection_info(rapier_context: Res<RapierContext>) {
-    let entity1 = ...; // A first entity with a collider attached.
-    let entity2 = ...; // A second entity with a collider attached.
-    
-    /* Find the intersection pair, if it exists, between two colliders. */
-    if rapier_context.intersection_pair(entity1, entity2) == Some(true) {
-        println!("The entities {:?} and {:?} have intersecting colliders!", entity1, entity2);
-    }
-}
+<load path='/2d/bevy/examples/advanced_collision_detection2.rs' marker='IntersectionGraph1' />
 ```
 ```rust
-fn display_intersection_info(rapier_context: Res<RapierContext>) {
-    let entity = ...; // Entity with a collider attached.
-
-    /* Iterate through all the intersection pairs involving a specific collider. */
-    for (collider1, collider2, intersecting) in rapier_context.intersections_with(entity) {
-        if intersecting {
-            println!("The entities {:?} and {:?} have intersecting colliders!", collider1, collider2);
-        }
-    }
-}
+<load path='/2d/bevy/examples/advanced_collision_detection2.rs' marker='IntersectionGraph2' />
 ```
 
 </bevy>
@@ -445,58 +368,7 @@ impl PhysicsHooks<RigidBodySet, ColliderSet> for MyPhysicsHooks {
 <bevy>
 
 ```rust
-fn main() {
-    App::build()
-        .add_plugins(DefaultPlugins)
-        // Make sure the Rapier plugin is parametrized by our custom user-data type.
-        .add_plugins(RapierPhysicsPlugin::<SameUserDataFilter>::default())
-        .add_systems(Startup, setup_physics)
-        .run();
-}
-
-#[derive(Component, PartialEq, Eq, Clone, Copy)]
-enum CustomFilterTag {
-    GroupA,
-    GroupB,
-}
-
-// A custom filter that allows contacts/intersections only between rigid-bodies
-// with the same CustomFilterTag component value.
-// Note that using collision groups would be a more efficient way of doing
-// this, but we use custom filters instead for demonstration purpose.
-#[derive(SystemParam)]
-struct SameUserDataFilter<'w, 's> {
-    tags: Query<'w, 's, &'static CustomFilterTag>,
-}
-impl BevyPhysicsHooks for SameUserDataFilter<'_, '_> {
-    fn filter_contact_pair(&self, context: PairFilterContextView) -> Option<SolverFlags> {
-        if self.tags.get(context.collider1()).ok().copied()
-            == self.tags.get(context.collider2()).ok().copied()
-        {
-            Some(SolverFlags::COMPUTE_IMPULSES)
-        } else {
-            None
-        }
-    }
-
-    fn filter_intersection_pair(&self, context: PairFilterContextView) -> bool {
-        self.tags.get(context.collider1()).ok().copied()
-            == self.tags.get(context.collider2()).ok().copied()
-    }
-}
-
-fn setup_physics(mut commands: Commands) {
-    // Add colliders with a `CustomFilterTag` component. Only colliders
-    // with the same `CustomFilterTag` variant will collider thanks to
-    // our custom physics hooks:
-    commands.spawn((
-        Collider::ball(0.5),
-        ActiveHooks::FILTER_CONTACT_PAIRS | ActiveHooks::FILTER_INTERSECTION_PAIR,
-        CustomFilterTag::GroupA,
-    ));
-    
-    // TODO: add other colliders in a similar way.
-}
+<load path='/2d/bevy/examples/physics_hooks.rs' marker='PhysicsHooks' />
 ```
 
 </bevy>
@@ -567,59 +439,7 @@ impl PhysicsHooks<RigidBodySet, ColliderSet> for MyPhysicsHooks {
 <bevy>
 
 ```rust
-fn main() {
-    App::build()
-        .add_plugins(DefaultPlugins)
-        .add_plugins(RapierPhysicsPlugin::<MyPhysicsHooks>::default())
-        .add_systems(Startup, setup_physics)
-        .run();
-}
-
-#[derive(SystemParam)]
-struct MyPhysicsHooks;
-
-impl BevyPhysicsHooks for MyPhysicsHooks {
-    fn modify_solver_contacts(
-        &self, 
-        context: ContactModificationContextView
-    ) {
-        // This is a silly example of contact modifier that does silly things
-        // for illustration purpose:
-        // - Flip all the contact normals.
-        // - Delete the first contact.
-        // - Set the friction coefficients to 0.3
-        // - Set the restitution coefficients to 0.4
-        // - Set the tangent velocities to X * 10.0
-        *context.raw.normal = -*context.raw.normal;
-
-        if !context.raw.solver_contacts.is_empty() {
-            context.raw.solver_contacts.swap_remove(0);
-        }
-
-        for solver_contact in &mut *context.raw.solver_contacts {
-            solver_contact.friction = 0.3;
-            solver_contact.restitution = 0.4;
-            solver_contact.tangent_velocity.x = 10.0;
-        }
-
-        // Use the persistent user-data to count the number of times
-        // contact modification was called for this contact manifold
-        // since its creation.
-        *context.raw.user_data += 1;
-        println!("Contact manifold has been modified {} times since its creation.", *context.raw.user_data);
-    }
-}
-
-fn setup_physics(mut commands: Commands) {
-
-    // Add colliders
-    commands.spawn((
-        Collider::ball(0.5),
-        ActiveHooks::MODIFY_SOLVER_CONTACTS
-    ));
-
-    // TODO: add other colliders in a similar way.
-}
+<load path='/2d/bevy/examples/contact_modification.rs' marker='ContactModification' />
 ```
 
 </bevy>

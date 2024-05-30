@@ -11,6 +11,7 @@ fn main() {
         .add_systems(FixedUpdate, display_events)
         .add_systems(FixedUpdate, display_contact_info)
         .add_systems(FixedUpdate, display_contact_info_all_from_1_entity)
+        .add_systems(FixedUpdate, display_intersection_info)
         .add_systems(FixedUpdate, display_intersection_info_all_from_1_entity)
         .run();
 }
@@ -139,7 +140,7 @@ fn display_contact_info_all_from_1_entity(
 }
 // DOCUSAURUS: ContactGraph2 stop
 
-// DOCUSAURUS: IntersectionGraph1 stop
+// DOCUSAURUS: IntersectionGraph1 start
 fn display_intersection_info(rapier_context: Res<RapierContext>, custom_info: Res<CustomInfo>) {
     let entity1 = custom_info.entity1; // A first entity with a collider attached.
     let entity2 = custom_info.entity2; // A second entity with a collider attached.

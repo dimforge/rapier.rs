@@ -79,46 +79,14 @@ values={[
 <TabItem value="2D">
 
 ```rust
-/* Cast a shape inside of a system. */
-fn cast_shape(rapier_context: Res<RapierContext>) {
-    let shape = Collider::cuboid(1.0, 2.0);
-    let shape_pos = Vec2::new(1.0, 2.0);
-    let shape_rot = 0.8;
-    let shape_vel = Vec2::new(0.1, 0.4);
-    let max_toi = 4.0;
-    let filter = QueryFilter::default();
-
-    if let Some((entity, hit)) = rapier_context.cast_shape(
-        shape_pos, shape_rot, shape_vel, &shape, max_toi, filter
-    ) {
-        // The first collider hit has the entity `entity`. The `hit` is a
-        // structure containing details about the hit configuration.
-        println!("Hit the entity {:?} with the configuration: {:?}", entity, hit);
-    }
-}
+<load path='/2d/bevy/examples/scene_queries2.rs' marker='Shapecasting' />
 ```
 
 </TabItem>
 <TabItem value="3D">
 
 ```rust
-/* Cast a shape inside of a system. */
-fn cast_shape(rapier_context: Res<RapierContext>) {
-    let shape = Collider::cuboid(1.0, 2.0, 3.0);
-    let shape_pos = Vec3::new(1.0, 2.0, 3.0);
-    let shape_rot = Quat::from_rotation_z(0.8);
-    let shape_vel = Vec3::new(0.1, 0.4, 0.2);
-    let max_toi = 4.0;
-    let filter = QueryFilter::default();
-
-    if let Some((entity, hit)) = rapier_context.cast_shape(
-        shape_pos, shape_rot, shape_vel, &shape, max_toi, filter
-    ) {
-        // The first collider hit has the entity `entity`. The `hit` is a
-        // structure containing details about the hit configuration.
-        println!("Hit the entity {:?} with the configuration: {:?}", entity, hit);
-    }
-}
+<load path='/3d/bevy/examples/scene_queries3.rs' marker='Raycasting' />
 ```
 
 </TabItem>
