@@ -36,14 +36,16 @@ do
 
     filename=$(basename -- "$file_to_inject")
     file_injected="$OUTPUT_FOLDER/$filename"
-    echo $file_to_inject
+    echo -n $file_to_inject
     
     cargo run --quiet --release "$file_to_inject" > "$file_injected"
     if [ $PRINT_DIFF -eq 1 ]; then
         if cmp -s "$file_to_inject" "$file_injected"; then
-            echo "No substitution on $file_to_inject"
+            echo ""
+            echo -e "No substitution to $file_to_inject"
         else
-            echo "substitution on "$file_injected" over $file_to_inject"
+            echo ""
+            echo -e "Substitution to $file_injected"
             mkdir -p "$(dirname $diff_file)"
             diff $file_to_inject $file_injected > "$diff_file".diff
         fi
