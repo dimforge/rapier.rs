@@ -29,5 +29,5 @@ fi
     # Once master has injected file we'll have to generate them before comparing.
     # find docs/user_guides/templates/ -type f -print0 | OUTPUT_FOLDER=tmp_diff_branches/branch2_templates_injected/ xargs -0 ./inject_code_in_user_guides.sh
     # diff tmp_diff_branches/branch1_templates_injected/ tmp_diff_branches/branch2_templates_injected/ > tmp_total_diff.diff
-    diff --git -w docs/user_guides/templates/ tmp_diff_branches/branch1_templates_injected/ > total_diff.diff
+    git diff --no-index -w docs/user_guides/templates/ tmp_diff_branches/branch1_templates_injected/ > total_diff.diff
 )
