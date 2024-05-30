@@ -21,20 +21,26 @@ fi
 
 set -v
 
-(
-    # "-" in git means previous branch
-    BRANCH_1="${1:--}"
-    # "." in git means' current branch
-    BRANCH_2="${2:-.}"
+origin_head=$(git symbolic-ref --short HEAD)
+echo $origin_head
 
-    git checkout $BRANCH_2
+# "-" in git means previous branch
+BRANCH_1="${1:--}"
+# "." in git means' current branch
+BRANCH_2="${2:-.}"
 
-    FILENAMES=`find docs/user_guides/templates/ -type f`
-    OUTPUT_FOLDER=tmp_diff_branches/branch1_templates_injected/ ./inject_code_in_user_guides.sh $FILENAMES
-    git checkout $BRANCH_1
-    # FIXME: Currently comparing with master, where there is not the injected files.
-    # Once master has injected file we'll have to generate them before comparing.
-    # find docs/user_guides/templates/ -type f -print0 | OUTPUT_FOLDER=tmp_diff_branches/branch2_templates_injected/ xargs -0 ./inject_code_in_user_guides.sh
-    # diff tmp_diff_branches/branch1_templates_injected/ tmp_diff_branches/branch2_templates_injected/ > tmp_total_diff.diff
-    git diff --no-index -w docs/user_guides/templates/ tmp_diff_branches/branch1_templates_injected/ > tmp_total_diff.diff
-)
+echo $BRANCH_1
+echo $BRANCH_2
+
+git checkout $BRANCH_2
+
+FILENAMES=`find docs/user_guides/templates/ -type f`
+OUTPUT_FOLDER=tmp_diff_branches/branch1_templates_injected/ ./inject_code_in_user_guides.sh $FILENAMES
+git checkout $BRANCH_1
+# FIXME: Currently comparing with master, where there is not the injected files.
+# Once master has injected file we'll have to generate them before comparing.
+# find docs/user_guides/templates/ -type f -print0 | OUTPUT_FOLDER=tmp_diff_branches/branch2_templates_injected/ xargs -0 ./inject_code_in_user_guides.sh
+# diff tmp_diff_branches/branch1_templates_injected/ tmp_diff_branches/branch2_templates_injected/ > tmp_total_diff.diff
+git diff --no-index -w docs/user_guides/templates/ tmp_diff_branches/branch1_templates_injected/ > tmp_total_diff.diff
+
+git checkout $origin_head
