@@ -19,7 +19,7 @@ All the pairs detected by the broad-phase are stored into two graph structures:
   and another collider) as well as the result of the boolean intersection test executed by the narrow-phase.
 
 These two graphs are part of the `NarrowPhase` structure and are automatically updated by the `PhysicsPipeline`
-or the `CollisionPipeline`. Each node of these graph contains a collide handle
+or the `CollisionPipeline`. Each node of these graph contains a `ColliderHandle`
 and there is one graph edge per pair detected by the broad-phase.
 
 ## Collision and contact force events
