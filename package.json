@@ -9,8 +9,7 @@
     "build": "docusaurus build",
     "swizzle": "docusaurus swizzle",
     "deploy": "docusaurus deploy",
-    "serve": "docusaurus serve",
-    "env": "NODE=C:\\Users\\thier\\AppData\\Roaming\\nvm\\v16.20.2\bin\\node.exe"
+    "serve": "docusaurus serve"
   },
   "engines": {
     "node": "^16.20.2",
