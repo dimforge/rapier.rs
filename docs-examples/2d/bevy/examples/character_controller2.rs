@@ -208,7 +208,7 @@ fn modify_character_controller_snap_to_ground(
 }
 // DOCUSAURUS: Snap2 stop
 
-// DOCUSAURUS: Collisions3 start
+// DOCUSAURUS: Collisions1 start
 /* Read the character controller collisions stored in the character controller’s output. */
 fn read_character_controller_collisions(
     mut character_controller_outputs: Query<&mut KinematicCharacterControllerOutput>,
@@ -219,8 +219,9 @@ fn read_character_controller_collisions(
         }
     }
 }
-// DOCUSAURUS: Collisions3 stop
+// DOCUSAURUS: Collisions1 stop
 
+// DOCUSAURUS: Collisions3 start
 /* Configure dynamic impulses inside of a system. */
 fn modify_character_controller_impulses(
     mut character_controllers: Query<&mut KinematicCharacterController>,
@@ -231,3 +232,4 @@ fn modify_character_controller_impulses(
         character_controller.apply_impulse_to_dynamic_bodies = true;
     }
 }
+// DOCUSAURUS: Collisions3 stop
