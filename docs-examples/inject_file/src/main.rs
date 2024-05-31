@@ -56,7 +56,7 @@ pub struct InjectError<'a> {
     pub errors: Vec<ErrorType>,
 }
 
-fn injected(source_text: &str, get_path: fn(&str) -> String) -> Result<Cow<str>, InjectError> {
+fn injected(source_text: &str, get_path: fn(&str) -> String) -> Result<String, InjectError> {
     let re = Regex::new(r"<load.*>").unwrap();
     let total_to_inject = re.find_iter(source_text).count();
     let mut injected_count = 0;
@@ -109,7 +109,10 @@ fn injected(source_text: &str, get_path: fn(&str) -> String) -> Result<Cow<str>,
     if 0 < error.errors.len() {
         return Err(error);
     }
-    Ok(result)
+    let re = Regex::new(r"(.*\/\/ DOCUSAURUS:.*[\r\n|\n])").unwrap();
+    let result = result.replace("\r\n", "\n");
+    let result = re.replace_all(&result, |_: &Captures| "");
+    Ok(result.to_string())
 }
 
 #[test]
@@ -125,6 +128,40 @@ fn simple_injection() {
     assert_eq!(
         result.expect("This should not error out").trim_end(),
         "correct data1 1"
+    );
+}
+
+#[test]
+fn simple_marker_short() {
+    use crate::*;
+
+    let result = injected(
+        "<load path='test/to_inject1.txt' marker='ToInject' />",
+        |path| path.to_string(),
+    );
+
+    // Trimming end for cross platform, on windows I had \r finishing result.
+    assert_eq!(
+        result.expect("This should not error out").trim_end(),
+        "correct data short"
+    );
+}
+
+#[test]
+fn simple_nest_removal() {
+    use crate::*;
+
+    let result = injected(
+        "<load path='test/to_inject1.txt' marker='ToInject1_nest' />",
+        |path| path.to_string(),
+    );
+
+    // Trimming end for cross platform, on windows I had \r finishing result.
+    assert_eq!(
+        result.expect("This should not error out").trim_end(),
+        "correct data nest1
+correct data nested
+correct data nest2"
     );
 }
 
