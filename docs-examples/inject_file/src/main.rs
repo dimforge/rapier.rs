@@ -111,8 +111,28 @@ fn injected(source_text: &str, get_path: fn(&str) -> String) -> Result<String, I
     }
     let re = Regex::new(r"(.*\/\/ DOCUSAURUS:.*[\r\n|\n])").unwrap();
     let result = result.replace("\r\n", "\n");
+    let result = remove_indent(&result).unwrap_or(result);
     let result = re.replace_all(&result, |_: &Captures| "");
     Ok(result.to_string())
+}
+
+fn remove_indent(source: &str) -> Option<String> {
+    let min_indent = source
+        .lines()
+        .map(|l| l.chars().take_while(|c| c.is_whitespace()).count())
+        .min()?;
+    if min_indent == 0 {
+        return Some(source.to_string());
+    }
+    let unindented_lines = source
+        .lines()
+        .map(|l| l.chars().skip(min_indent).collect::<String>());
+    let mut result = String::new();
+    for unindented_line in unindented_lines {
+        result.push_str(&unindented_line);
+        result.push('\n');
+    }
+    Some(result)
 }
 
 #[test]
@@ -132,7 +152,7 @@ fn simple_injection() {
 }
 
 #[test]
-fn simple_marker_short() {
+fn marker_short() {
     use crate::*;
 
     let result = injected(
@@ -148,7 +168,7 @@ fn simple_marker_short() {
 }
 
 #[test]
-fn simple_nest_removal() {
+fn nest_removal() {
     use crate::*;
 
     let result = injected(
@@ -162,6 +182,24 @@ fn simple_nest_removal() {
         "correct data nest1
 correct data nested
 correct data nest2"
+    );
+}
+
+#[test]
+fn indent_removal() {
+    use crate::*;
+
+    let result = injected(
+        "<load path='test/to_inject1.txt' marker='ToInject1_indent' />",
+        |path| path.to_string(),
+    );
+
+    // Trimming end for cross platform, on windows I had \r finishing result.
+    assert_eq!(
+        result.expect("This should not error out").trim_end(),
+        "correct data not indented
+    correct data indented
+correct data not indented again"
     );
 }
 

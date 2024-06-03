@@ -21,3 +21,11 @@ correct data nested
 // DOCUSAURUS: ToInject1_nested stop
 correct data nest2
 // DOCUSAURUS: ToInject1_nest stop
+
+some outside data
+// DOCUSAURUS: ToInject1_indent start
+    correct data not indented
+        correct data indented
+    correct data not indented again
+// DOCUSAURUS: ToInject1_indent stop
+outside data again
