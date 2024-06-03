@@ -119,7 +119,13 @@ fn injected(source_text: &str, get_path: fn(&str) -> String) -> Result<String, I
 fn remove_indent(source: &str) -> Option<String> {
     let min_indent = source
         .lines()
-        .map(|l| l.chars().take_while(|c| c.is_whitespace()).count())
+        .filter_map(|l| {
+            // Don't count empty lines
+            if l.chars().find(|c| c.is_whitespace() == false) == None {
+                return None;
+            }
+            Some(l.chars().take_while(|c| c.is_whitespace()).count())
+        })
         .min()?;
     if min_indent == 0 {
         return Some(source.to_string());
@@ -198,7 +204,8 @@ fn indent_removal() {
     assert_eq!(
         result.expect("This should not error out").trim_end(),
         "correct data not indented
-    correct data indented
+    empty line without space next
+
 correct data not indented again"
     );
 }
