@@ -25,7 +25,8 @@ correct data nest2
 some outside data
 // DOCUSAURUS: ToInject1_indent start
     correct data not indented
-        correct data indented
+        empty line without space next
+
     correct data not indented again
 // DOCUSAURUS: ToInject1_indent stop
 outside data again
