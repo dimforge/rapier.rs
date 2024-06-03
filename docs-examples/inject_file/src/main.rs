@@ -61,7 +61,7 @@ fn injected(source_text: &str, get_path: fn(&str) -> String) -> Result<String, I
     let total_to_inject = re.find_iter(source_text).count();
     let mut injected_count = 0;
     // Regex to find "<load" tags and capture their info (path + marker)
-    let re = Regex::new(r"<load path='(.*)'.*marker='(.*)'.*>").unwrap();
+    let re = Regex::new(r"<load path='(.*)'.*marker='(.*)'.*>[\r\n|\n]?").unwrap();
 
     let mut error = InjectError {
         result: None,
@@ -90,7 +90,12 @@ fn injected(source_text: &str, get_path: fn(&str) -> String) -> Result<String, I
             .map(|c| {
                 let to_keep = c.extract::<1>();
                 injected_count += 1;
-                to_keep.1[0]
+                let injected_string = to_keep.1[0];
+                let injected_string = remove_indent(&injected_string)
+                    .unwrap_or(injected_string.to_string())
+                    .trim_end()
+                    .to_string();
+                injected_string
             })
             .collect::<Vec<_>>();
         if to_keep.len() == 0 {
@@ -109,14 +114,14 @@ fn injected(source_text: &str, get_path: fn(&str) -> String) -> Result<String, I
     if 0 < error.errors.len() {
         return Err(error);
     }
-    let re = Regex::new(r"(.*\/\/ DOCUSAURUS:.*[\r\n|\n])").unwrap();
     let result = result.replace("\r\n", "\n");
-    let result = remove_indent(&result).unwrap_or(result);
-    let result = re.replace_all(&result, |_: &Captures| "");
-    Ok(result.to_string())
+    let re = Regex::new(r"(.*\/\/ DOCUSAURUS:.*\n)").unwrap();
+    let result = re.replace_all(&result, |_: &Captures| "").to_string();
+    Ok(result)
 }
 
 fn remove_indent(source: &str) -> Option<String> {
+    let source = source.replace("\r\n", "\n");
     let min_indent = source
         .lines()
         .filter_map(|l| {
@@ -192,6 +197,25 @@ correct data nest2"
 }
 
 #[test]
+fn indent_removal_simple() {
+    use crate::*;
+
+    let result = remove_indent(
+        "    correct data indented 1
+        correct data indented more
+    correct data indented 2",
+    );
+
+    // Trimming end for cross platform, on windows I had \r finishing result.
+    assert_eq!(
+        result.expect("This should not error out").trim_end(),
+        "correct data indented 1
+    correct data indented more
+correct data indented 2"
+    );
+}
+
+#[test]
 fn indent_removal() {
     use crate::*;
 
@@ -205,6 +229,7 @@ fn indent_removal() {
         result.expect("This should not error out").trim_end(),
         "correct data not indented
     empty line without space next
+        empty line without space next
 
 correct data not indented again"
     );
