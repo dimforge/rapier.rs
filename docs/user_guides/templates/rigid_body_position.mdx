@@ -2,7 +2,7 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
 The position of a rigid-body represents its location (translation) in 2D or 3D world-space, as well as its orientation (rotation).
-<rapier>It translational part is represented as a vector and its rotational part as an unit quaternion (in 3D) or a unit complex
+<rapier>Its translational part is represented as a vector and its rotational part as an unit quaternion (in 3D) or a unit complex
 number (in 2D). Both are combined into an isometry</rapier><bevy> stored in the standard Bevy `Transform` component</bevy>.
 
 The position of a rigid-body can be set when creating it. It can also be set after
@@ -102,34 +102,20 @@ values={[
 <TabItem value="2D">
 
 ```rust
-/* Set the position when the rigid-body bundle is created. */
-commands.spawn(RigidBody::Dynamic)
-    .insert(TransformBundle::from(Transform::from_xyz(0.0, 5.0, 0.0)));
+<load path='/2d/bevy/examples/rigid_bodies2.rs' marker='Position1' />
 ```
 ```rust
-/* Change the position inside of a system. */
-fn modify_body_translation(mut positions: Query<&mut Transform, With<RigidBody>>) {
-    for mut position in positions.iter_mut() {
-        position.translation.y += 0.1;
-    }
-}
+<load path='/2d/bevy/examples/rigid_bodies2.rs' marker='Position2' />
 ```
 
   </TabItem>
   <TabItem value="3D">
 
 ```rust
-/* Set the position when the rigid-body bundle is created. */
-commands.spawn(RigidBody::Dynamic)
-    .insert(TransformBundle::from(Transform::from_xyz(0.0, 5.0, 0.0)));
+<load path='/3d/bevy/examples/rigid_bodies3.rs' marker='Position1' />
 ```
 ```rust
-/* Change the position inside of a system. */
-fn modify_body_translation(mut positions: Query<&mut Transform, With<RigidBody>>) {
-    for mut position in positions.iter_mut() {
-        position.translation.y += 0.1;
-    }
-}
+<load path='/3d/bevy/examples/rigid_bodies3.rs' marker='Position2' />
 ```
 
   </TabItem>

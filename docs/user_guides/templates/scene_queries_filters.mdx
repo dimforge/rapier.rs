@@ -42,24 +42,7 @@ if let Some((handle, toi)) = query_pipeline.cast_ray(
 <bevy>
 
 ```rust
-/* Cast a ray inside of a system. */
-fn cast_ray(rapier_context: Res<RapierContext>) {
-    let ray_pos = Vec2::new(1.0, 2.0);
-    let ray_dir = Vec2::new(0.0, 1.0);
-    let max_toi = 4.0;
-    let solid = true;
-    let filter = QueryFilter::exclude_dynamic()
-        .exclude_sensors()
-        .exclude_rigid_body(player_handle)
-        .groups(InteractionGroups::new(0b0011, 0b0001))
-        .predicate(&|handle, collider| collider.user_data == 10);
-
-    if let Some((entity, toi)) = rapier_context.cast_ray(
-        ray_pos, ray_dir, max_toi, solid, filter
-    ) {
-        // Handle the hit.
-    }
-}
+<load path='/2d/bevy/examples/scene_queries2.rs' marker='QueryFilter' />
 ```
 
 </bevy>

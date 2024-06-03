@@ -29,40 +29,20 @@ values={[
 <TabItem value="2D">
 
 ```rust
-/* Character controller with the positive X axis as the up vector. */
-commands.spawn(Collider::ball(0.5))
-    .insert(KinematicCharacterController {
-        up: Vec2::X,
-        ..default()
-    });
+<load path='/2d/bevy/examples/character_controller2.rs' marker='UpVector1' />
 ```
 ```rust
-/* Modify the character controller’s up vector inside of a system. */
-fn modify_character_controller_autostep(mut character_controller: Query<&mut KinematicCharacterController>) {
-    for mut character_controller in character_controllers.iter_mut() {
-        character_controller.up = Vec2::X;
-    }
-}
+<load path='/2d/bevy/examples/character_controller2.rs' marker='UpVector2' />
 ```
 
   </TabItem>
   <TabItem value="3D">
 
 ```rust
-/* Character controller with the positive Z axis as the up vector. */
-commands.spawn(Collider::ball(0.5))
-    .insert(KinematicCharacterController {
-        up: Vec3::Z,
-        ..default()
-    });
+<load path='/3d/bevy/examples/character_controller3.rs' marker='UpVector1' />
 ```
 ```rust
-/* Modify the character controller’s up vector inside of a system. */
-fn modify_character_controller_autostep(mut character_controller: Query<&mut KinematicCharacterController>) {
-    for mut character_controller in character_controllers.iter_mut() {
-        character_controller.up = Vec3::Z;
-    }
-}
+<load path='/3d/bevy/examples/character_controller3.rs' marker='UpVector2' />
 ```
 
   </TabItem>

@@ -123,90 +123,14 @@ query_pipeline.intersections_with_ray(
 <TabItem value="2D">
 
 ```rust
-/* Cast a ray inside of a system. */
-fn cast_ray(rapier_context: Res<RapierContext>) {
-    let ray_pos = Vec2::new(1.0, 2.0);
-    let ray_dir = Vec2::new(0.0, 1.0);
-    let max_toi = 4.0;
-    let solid = true;
-    let filter = QueryFilter::default();
-
-    if let Some((entity, toi)) = rapier_context.cast_ray(
-        ray_pos, ray_dir, max_toi, solid, filter
-    ) {
-        // The first collider hit has the entity `entity` and it hit after
-        // the ray travelled a distance equal to `ray_dir * toi`.
-        let hit_point = ray_pos + ray_dir * toi;
-        println!("Entity {:?} hit at point {}", entity, hit_point);
-    }
-
-
-    if let Some((entity, intersection)) = rapier_context.cast_ray_and_get_normal(
-        ray_pos, ray_dir, max_toi, solid, filter
-    ) {
-        // This is similar to `RapierContext::cast_ray` illustrated above except
-        // that it also returns the normal of the collider shape at the hit point.
-        let hit_point = intersection.point;
-        let hit_normal = intersection.normal;
-        println!("Entity {:?} hit at point {} with normal {}", entity, hit_point, hit_normal);
-    }
-
-    rapier_context.intersections_with_ray(
-        ray_pos, ray_dir, max_toi, solid, filter,
-        |entity, intersection| {
-            // Callback called on each collider hit by the ray.
-            let hit_point = intersection.point;
-            let hit_normal = intersection.normal;
-            println!("Entity {:?} hit at point {} with normal {}", entity, hit_point, hit_normal);
-            true // Return `false` instead if we want to stop searching for other hits.
-        },
-    );
-}
+<load path='/2d/bevy/examples/scene_queries2.rs' marker='Raycasting' />
 ```
 
 </TabItem>
 <TabItem value="3D">
 
 ```rust
-/* Cast a ray inside of a system. */
-fn cast_ray(rapier_context: Res<RapierContext>) {
-    let ray_pos = Vec3::new(1.0, 2.0, 3.0);
-    let ray_dir = Vec3::new(0.0, 1.0, 0.0);
-    let max_toi = 4.0;
-    let solid = true;
-    let filter = QueryFilter::default();
-
-    if let Some((entity, toi)) = rapier_context.cast_ray(
-        ray_pos, ray_dir, max_toi, solid, filter
-    ) {
-        // The first collider hit has the entity `entity` and it hit after
-        // the ray travelled a distance equal to `ray_dir * toi`.
-        let hit_point = ray_pos + ray_dir * toi;
-        println!("Entity {:?} hit at point {}", entity, hit_point);
-    }
-
-
-    if let Some((entity, intersection)) = rapier_context.cast_ray_and_get_normal(
-        ray_pos, ray_dir, max_toi, solid, filter
-    ) {
-        // This is similar to `QueryPipeline::cast_ray` illustrated above except
-        // that it also returns the normal of the collider shape at the hit point.
-        let hit_point = intersection.point;
-        let hit_normal = intersection.normal;
-        println!("Entity {:?} hit at point {} with normal {}", entity, hit_point, hit_normal);
-    }
-
-    rapier_context.intersections_with_ray(
-        ray_pos, ray_dir, max_toi, solid, filter,
-        |entity, intersection| {
-            // Callback called on each collider hit by the ray.
-            let hit_point = intersection.point;
-            let hit_normal = intersection.normal;
-            println!("Entity {:?} hit at point {} with normal {}", entity, hit_point, hit_normal);
-            true // Return `false` instead if we want to stop searching for other hits.
-        },
-    );
-}
+<load path='/3d/bevy/examples/scene_queries3.rs' marker='Raycasting' />
 ```
 
 </TabItem>

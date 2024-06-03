@@ -31,17 +31,10 @@ assert!(collider.active_events().contains(ActiveEvents::COLLISION_EVENTS));
 <bevy>
 
 ```rust
-/* Set the active events when the collider is created. */
-commands.spawn(Collider::ball(0.5))
-    .insert(ActiveEvents::COLLISION_EVENTS);
+<load path='/2d/bevy/examples/colliders2.rs' marker='ActiveEvents1' />
 ```
 ```rust
-/* Set the active events inside of a system. */
-fn modify_collider_active_events(mut active_events: Query<&mut ActiveEvents>) {
-    for mut active_events in active_events.iter_mut() {
-        *active_events = ActiveEvents::COLLISION_EVENTS;
-    }
-}
+<load path='/2d/bevy/examples/colliders2.rs' marker='ActiveEvents2' />
 ```
 
 </bevy>

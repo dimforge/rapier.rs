@@ -92,42 +92,20 @@ values={[
 <TabItem value="2D">
 
 ```rust
-/* Set the velocities when the rigid-body is created. */
-commands.spawn(RigidBody::Dynamic)
-    .insert(Velocity {
-        linvel: Vec2::new(1.0, 2.0),
-        angvel: 0.4,
-    });
+<load path='/2d/bevy/examples/rigid_bodies2.rs' marker='Velocity1' />
 ```
 ```rust
-/* Set the velocities inside of a system. */
-fn modify_body_velocity(mut velocities: Query<&mut Velocity>) {
-    for mut vel in velocities.iter_mut() {
-        vel.linvel = Vec2::new(1.0, 2.0);
-        vel.angvel = 0.4;
-    }
-}
+<load path='/2d/bevy/examples/rigid_bodies2.rs' marker='Velocity2' />
 ```
 
   </TabItem>
   <TabItem value="3D">
 
 ```rust
-/* Set the velocities when the rigid-body is created. */
-commands.spawn(RigidBody::Dynamic)
-    .insert(Velocity {
-        linvel: Vec3::new(1.0, 2.0, 3.0),
-        angvel: Vec3::new(0.2, 0.4, 0.8),
-    });
+<load path='/3d/bevy/examples/rigid_bodies3.rs' marker='Velocity1' />
 ```
 ```rust
-/* Set the velocities inside of a system. */
-fn modify_body_velocity(mut velocities: Query<&mut Velocity>) {
-    for mut vel in velocities.iter_mut() {
-        vel.linvel = Vec3::new(1.0, 2.0, 3.0);
-        vel.angvel = Vec3::new(0.2, 0.4, 0.8);
-    }
-}
+<load path='/3d/bevy/examples/rigid_bodies3.rs' marker='Velocity2' />
 ```
 
   </TabItem>

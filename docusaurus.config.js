@@ -16,8 +16,8 @@ module.exports = {
       indexName: 'rapier',
     },
     prism: {
-        theme: require('prism-react-renderer/themes/github'),
-        additionalLanguages: ['toml', 'rust'],
+      theme: require('prism-react-renderer/themes/github'),
+      additionalLanguages: ['toml', 'rust'],
     },
     // announcementBar: {
     //   id: 'supportus',
@@ -179,6 +179,6 @@ module.exports = {
     ],
   ],
   stylesheets: [
-      'https://cdn.jsdelivr.net/npm/katex@0.11.0/dist/katex.min.css'
+    'https://cdn.jsdelivr.net/npm/katex@0.11.0/dist/katex.min.css'
   ]
 };

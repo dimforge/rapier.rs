@@ -1,0 +1,20 @@
+name: Rapier CI build
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  check-code-snippets:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Linux dependencies
+        uses: ./.github/actions/install-linux-deps
+      - name: Code snippets compilation check + tests
+        run: cd docs-examples && cargo test

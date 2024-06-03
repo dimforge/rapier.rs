@@ -8,7 +8,7 @@ groups or solver groups. Each collider is given:
   at least one of the colliders is a sensor) computed by the narrow-phase.
   This filtering happens right after the broad-phase, at the beginning of the narrow phase.
 - A `solver_groups` for filtering what pair of colliders should have their contact forces computed. This filtering
-  happens at the end of the narrow-phase, before the constraints solver
+  happens at the end of the narrow-phase, before the constraints solver.
 
 In other words, the `solver_groups` is here to prevent contact forces from being computed between some colliders, whereas the
 `collision_groups` will also prevent the contact themselves (and contact events) from being computed. The
@@ -63,24 +63,10 @@ assert_eq!(collider.solver_groups(), InteractionGroups::new(0b0011.into(), 0b101
 <bevy>
 
 ```rust
-/* Set the collision and/or solver groups when the collider is created. */
-commands.spawn(Collider::ball(0.5))
-    .insert(CollisionGroups::new(0b1101.into(), 0b0100.into())
-    .insert(SolverGroups::new(0b0011.into(), 0b1011.into());
+<load path='/2d/bevy/examples/colliders2.rs' marker='Groups1' />
 ```
 ```rust
-/* Set the collision and/or solver groups inside of a system. */
-fn modify_collider_groups(mut collision_groups: Query<&mut CollisionGroups>, mut solver_groups: Query<&mut SolverGroups>) {
-    for mut collision_groups in flags.iter_mut() {
-        collision_groups.memberships = 0b1101.into();
-        collision_groups.filters = 0b0100.into();
-    }
-
-    for mut solver_groups in flags.iter_mut() {
-        solver_groups.memberships = 0b0011.into();
-        solver_groups.filters = 0b1011.into();
-    }
-}
+<load path='/2d/bevy/examples/colliders2.rs' marker='Groups2' />
 ```
 
 </bevy>

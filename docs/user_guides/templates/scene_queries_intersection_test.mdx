@@ -83,50 +83,14 @@ query_pipeline.colliders_with_aabb_intersecting_aabb(&aabb, |handle| {
 <TabItem value="2D">
 
 ```rust
-/* Test intersections inside of a system. */
-fn test_intersections(rapier_context: Res<RapierContext>) {
-    let shape = Collider::cuboid(1.0, 2.0);
-    let shape_pos = Vec2::new(0.0, 1.0);
-    let shape_rot = 0.8;
-    let filter = QueryFilter::default();
-
-    rapier_context.intersections_with_shape(
-        &shape_pos, &shape_rot, &shape, filter, |entity| {
-        println!("The entity {:?} intersects our shape.", entity);
-        true // Return `false` instead if we want to stop searching for other colliders that contain this point.
-    });
-
-    let aabb = Aabb::from_min_max(Vec3::new(-1.0, -2.0, 0.0), Vec3::new(1.0, 2.0, 0.0));
-    rapier_context.colliders_with_aabb_intersecting_aabb(&aabb, |entity| {
-        println!("The entity {:?} has an AABB intersecting our test AABB", entity);
-        true // Return `false` instead if we want to stop searching for other colliders that contain this point.
-    });
-}
+<load path='/2d/bevy/examples/scene_queries2.rs' marker='IntersectionTest' />
 ```
 
 </TabItem>
 <TabItem value="3D">
 
 ```rust
-/* Test intersections inside of a system. */
-fn test_intersections(rapier_context: Res<RapierContext>) {
-    let shape = Collider::cuboid(1.0, 2.0, 3.0);
-    let shape_pos = Vec3::new(0.0, 1.0, 2.0);
-    let shape_rot = Quat::from_rotation_z(0.8);
-    let filter = QueryFilter::default();
-
-    rapier_context.intersections_with_shape(
-        &shape_pos, &shape_rot, &shape, filter, |entity| {
-        println!("The entity {:?} intersects our shape.", entity);
-        true // Return `false` instead if we want to stop searching for other colliders that contain this point.
-    });
-
-    let aabb = Aabb::from_min_max(Vec3::new(-1.0, -2.0, -3.0), Vec3::new(1.0, 2.0, 3.0));
-    rapier_context.colliders_with_aabb_intersecting_aabb(&aabb, |entity| {
-        println!("The entity {:?} has an AABB intersecting our test AABB", entity);
-        true // Return `false` instead if we want to stop searching for other colliders that contain this point.
-    });
-}
+<load path='/3d/bevy/examples/scene_queries3.rs' marker='IntersectionTest' />
 ```
 
 </TabItem>

@@ -81,58 +81,14 @@ values={[
 <TabItem value="2D">
 
 ```rust
-/* Project a point inside of a system. */
-fn project_point(rapier_context: Res<RapierContext>) {
-    let point = Vec2::new(1.0, 2.0);
-    let solid = true;
-    let filter = QueryFilter::default();
-
-    if let Some((entity, projection)) = rapier_context.project_point(
-        &point, solid, filter
-    ) {
-        // The collider closest to the point has this `handle`.
-        println!("Projected point on entity {:?}. Point projection: {}", entity, projection.point);
-        println!("Point was inside of the collider shape: {}", projection.is_inside);
-    }
-
-    rapier_context.intersections_with_point(
-        &point, filter, |entity| {
-            // Callback called on each collider with a shape containing the point.
-            println!("The entity {:?} contains the point.", entity);
-            // Return `false` instead if we want to stop searching for other colliders containing this point.
-            true
-        }
-    );
-}
+<load path='/2d/bevy/examples/scene_queries2.rs' marker='PointProjection' />
 ```
 
 </TabItem>
 <TabItem value="3D">
 
 ```rust
-/* Project a point inside of a system. */
-fn project_point(rapier_context: Res<RapierContext>) {
-    let point = Vec3::new(1.0, 2.0, 3.0);
-    let solid = true;
-    let filter = QueryFilter::default();
-
-    if let Some((entity, projection)) = rapier_context.project_point(
-        &point, solid, filter
-    ) {
-        // The collider closest to the point has this `handle`.
-        println!("Projected point on entity {:?}. Point projection: {}", entity, projection.point);
-        println!("Point was inside of the collider shape: {}", projection.is_inside);
-    }
-
-    rapier_context.intersections_with_point(
-        &point, filter, |entity| {
-            // Callback called on each collider with a shape containing the point.
-            println!("The entity {:?} contains the point.", entity);
-            // Return `false` instead if we want to stop searching for other colliders containing this point.
-            true
-        }
-    );
-}
+<load path='/3d/bevy/examples/scene_queries3.rs' marker='PointProjection' />
 ```
 
 </TabItem>

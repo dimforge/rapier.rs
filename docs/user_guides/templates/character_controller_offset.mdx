@@ -21,20 +21,7 @@ character_controller.offset = CharacterLength::Relative(0.01);
 <bevy>
 
 ```rust
-/* Configure the character controller when the collider is created. */
-commands.spawn(Collider::ball(0.5))
-    .insert(KinematicCharacterController {
-        // The character offset is set to 0.01.
-        offset: CharacterLength::Absolute(0.01),
-        ..default()
-    });
-
-commands.spawn(Collider::ball(0.5))
-    .insert(KinematicCharacterController {
-        // The character offset is set to 0.01 multiplied by the collider’s height.
-        offset: CharacterLength::Relative(0.01),
-        ..default()
-    });
+<load path='/2d/bevy/examples/character_controller2.rs' marker='Offset' />
 ```
 
 </bevy>

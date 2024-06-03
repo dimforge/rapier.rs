@@ -103,18 +103,14 @@ values={[
 <TabItem value="2D">
 
 ```rust
-let joint = FixedJointBuilder::new().local_anchor(Vec2::new(0.0, -2.0));
-commands.spawn(RigidBody::Dynamic)
-    .insert(ImpulseJoint::new(parent_entity, joint));
+<load path='/2d/bevy/examples/joints2.rs' marker='FixedJoint' />
 ```
 
   </TabItem>
   <TabItem value="3D">
 
 ```rust
-let joint = FixedJointBuilder::new().local_anchor(Vec3::new(0.0, 0.0, -2.0));
-commands.spawn(RigidBody::Dynamic)
-    .insert(ImpulseJoint::new(parent_entity, joint));
+<load path='/3d/bevy/examples/joints3.rs' marker='FixedJoint' />
 ```
 
   </TabItem>
@@ -175,11 +171,7 @@ joint_set.insert(&mut rigid_body_set, body_handle1, body_handle2, joint, true);
 <bevy>
 
 ```rust
-let joint = SphericalJointBuilder::new()
-    .local_anchor1(Vec3::new(0.0, 0.0, 1.0))
-    .local_anchor2(Vec3::new(0.0, 0.0, -3.0));
-commands.spawn(RigidBody::Dynamic)
-    .insert(ImpulseJoint::new(parent_entity, joint));
+<load path='/3d/bevy/examples/joints3.rs' marker='SphericalJoint' />
 ```
 
 </bevy>
@@ -248,23 +240,14 @@ values={[
 <TabItem value="2D">
 
 ```rust
-let joint = RevoluteJointBuilder::new()
-    .local_anchor1(Vec2::new(0.0, 1.0))
-    .local_anchor2(Vec2::new(0.0, -3.0));
-commands.spawn(RigidBody::Dynamic)
-    .insert(ImpulseJoint::new(parent_entity, joint));
+<load path='/2d/bevy/examples/joints2.rs' marker='RevoluteJoint' />
 ```
 
   </TabItem>
   <TabItem value="3D">
 
 ```rust
-let x = Vector::x_axis();
-let joint = RevoluteJointBuilder::new(x)
-    .local_anchor1(Vec3::new(0.0, 0.0, 1.0))
-    .local_anchor2(Vec3::new(0.0, 0.0, -3.0));
-commands.spawn(RigidBody::Dynamic)
-    .insert(ImpulseJoint::new(parent_entity, joint));
+<load path='/3d/bevy/examples/joints3.rs' marker='RevoluteJoint' />
 ```
 
   </TabItem>
@@ -360,24 +343,14 @@ values={[
 <TabItem value="2D">
 
 ```rust
-let mut joint = PrismaticJointBuilder::new(Vec2::X)
-    .local_anchor1(Vec2::new(0.0, 1.0))
-    .local_anchor2(Vec2::new(0.0, -3.0))
-    .limits([-2.0, 5.0]);
-commands.spawn(RigidBody::Dynamic)
-    .insert(ImpulseJoint::new(parent_entity, joint));
+<load path='/2d/bevy/examples/joints2.rs' marker='PrismaticJoint' />
 ```
 
   </TabItem>
   <TabItem value="3D">
 
 ```rust
-let mut joint = PrismaticJointBuilder::new(Vec3::X)
-    .local_anchor1(Vec3::new(0.0, 0.0, 1.0))
-    .local_anchor2(Vec3::new(0.0, 0.0, -3.0))
-    .limits([-2.0, 5.0]);
-commands.spawn(RigidBody::Dynamic)
-    .insert(ImpulseJoint::new(parent_entity, joint));
+<load path='/3d/bevy/examples/joints3.rs' marker='PrismaticJoint' />
 ```
 
   </TabItem>
@@ -495,24 +468,14 @@ values={[
 <TabItem value="2D">
 
 ```rust
-let mut joint = PrismaticJointBuilder::new(Vec2::X)
-    .local_anchor1(Vec2::new(0.0, 1.0))
-    .local_anchor2(Vec2::new(0.0, -3.0))
-    .motor_velocity(1.0, 0.5);
-commands.spawn(RigidBody::Dynamic)
-    .insert(ImpulseJoint::new(parent_entity, joint));
+<load path='/2d/bevy/examples/joints2.rs' marker='Motor' />
 ```
 
   </TabItem>
   <TabItem value="3D">
 
 ```rust
-let mut joint = PrismaticJointBuilder::new(Vec3::X)
-    .local_anchor1(Vec3::new(0.0, 0.0, 1.0))
-    .local_anchor2(Vec3::new(0.0, 0.0, -3.0))
-    .motor_velocity(1.0, 0.5);
-commands.spawn(RigidBody::Dynamic)
-    .insert(ImpulseJoint::new(parent_entity, joint));
+<load path='/3d/bevy/examples/joints3.rs' marker='Motor' />
 ```
 
   </TabItem>

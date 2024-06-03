@@ -1,0 +1,3 @@
+[workspace]
+members = ["2d/bevy", "3d/bevy", "inject_file"]
+resolver = "2"

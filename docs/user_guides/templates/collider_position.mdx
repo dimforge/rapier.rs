@@ -3,9 +3,9 @@ import TabItem from '@theme/TabItem';
 
 
 The position of a collider represents its location (translation) in 2D or 3D world-space as well as its orientation (rotation).
-<bevy>Both are combined in a Bevy `Transform` component.</bevy> <rust>It translational part is represented as a vector and
+<bevy>Both are combined in a Bevy `Transform` component.</bevy> <rust>Its translational part is represented as a vector and
 its rotational part as an unit quaternion (in 3D) or a unit complex number (in 2D). Both are
-combined into an isometry.</rust> <js>It translational part is represented as a vector and its rotational part as an unit
+combined into an isometry.</rust> <js>Its translational part is represented as a vector and its rotational part as an unit
 quaternion (in 3D) or an angle (in 2D).</js>
 
 :::warning
@@ -85,34 +85,20 @@ values={[
 <TabItem value="2D">
 
 ```rust
-/* Set the collider position when the collider is created. */
-commands.spawn(Collider::cuboid(0.5, 0.5))
-    .insert(TransformBundle::from(Transform::from_xyz(1.0, 2.0, 0.0));
+<load path='/2d/bevy/examples/colliders2.rs' marker='Position1' />
 ```
 ```rust
-/* Set the collider position inside of a system. */
-fn modify_collider_position(mut positions: Query<&mut Transform, With<Collider>>) {
-    for mut position in positions.iter_mut() {
-        position.translation.z = 2.0;
-    }
-}
+<load path='/2d/bevy/examples/colliders2.rs' marker='Position2' />
 ```
 
   </TabItem>
   <TabItem value="3D">
 
 ```rust
-/* Set the collider position when the collider is created. */
-commands.spawn(Collider::cuboid(0.5, 0.5, 0.5))
-    .insert(TransformBundle::from(Transform::from_xyz(1.0, 2.0, 3.0)));
+<load path='/3d/bevy/examples/colliders3.rs' marker='Position1' />
 ```
 ```rust
-/* Set the collider position inside of a system. */
-fn modify_collider_position(mut positions: Query<&mut Transform, With<Collider>) {
-    for mut position in positions.iter_mut() {
-        position.translation.x = 2.0;
-    }
-}
+<load path='/3d/bevy/examples/colliders3.rs' marker='Position2' />
 ```
 
   </TabItem>
@@ -166,7 +152,7 @@ collider.setRotation({ w: 1.0, x: 0.0, y: 0.0, z: 0.0 });
 
 
 If a collider is **attached to a rigid-body**, its position is automatically updated by the physics pipeline when a
-rigid-body moved by the physics pipeline. If a change to the rigid-body position is made by the user then the collider
+rigid-body is moved by the physics pipeline. If a change to the rigid-body position is made by the user then the collider
 position will be updated during the next timestep.
 
 <bevy>Therefore, setting the `Transform` of a collider attached to a rigid-body will modify the position of the
@@ -242,28 +228,14 @@ values={[
 <TabItem value="2D">
 
 ```rust
-// Attach the collider to the rigid-body. The collider is attached as its
-// children, so the collider’s `Transform` components sets its position
-// relative to the parent rigid-body.
-commands.spawn(RigidBody::Dynamic)
-    .with_children(|children| {
-        children.spawn(Collider::cuboid(0.5, 0.5))
-            .insert(TransformBundle::from(Transform::from_xyz(1.0, 2.0, 0.0)));
-    });
+<load path='/2d/bevy/examples/colliders2.rs' marker='Position3' />
 ```
 
   </TabItem>
   <TabItem value="3D">
 
 ```rust
-// Attach the collider to the rigid-body. The collider is attached as its
-// children, so the collider’s `Transform` components sets its position
-// relative to the parent rigid-body.
-commands.spawn(RigidBody::Dynamic)
-    .with_children(|children| {
-        children.spawn(Collider::cuboid(0.5, 0.5, 0.5))
-            .insert(TransformBundle(Transform::from_xyz(1.0, 2.0, 3.0)));
-    });
+<load path='/3d/bevy/examples/colliders3.rs' marker='Position3' />
 ```
 
   </TabItem>

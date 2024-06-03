@@ -28,28 +28,10 @@ character_controller.snap_to_ground = Some(CharacterLength::Relative(0.2));
 <bevy>
 
 ```rust
-/* Configure the character controller when the collider is created. */
-// Snap to the ground if the vertical distance to the ground is smaller than 0.5.
-commands.spawn(Collider::ball(0.5))
-    .insert(KinematicCharacterController {
-        snap_to_ground: Some(CharacterLength::Absolute(0.5)),
-        ..default()
-    });
-
-// Snap to the ground if the vertical distance to the ground is smaller than 0.2 times the character’s height
-commands.spawn(Collider::ball(0.5))
-    .insert(KinematicCharacterController {
-        snap_to_ground: Some(CharacterLength::Relative(0.2)),
-        ..default()
-    });
+<load path='/2d/bevy/examples/character_controller2.rs' marker='Snap1' />
 ```
 ```rust
-/* Configure snap-to-ground inside of a system. */
-fn modify_character_controller_snap_to_ground(mut character_controller: Query<&mut KinematicCharacterController>) {
-    for mut character_controller in character_controllers.iter_mut() {
-        character_controller.snap_to_ground = Some(CharacterLength::Absolute(0.5));
-    }
-}
+<load path='/2d/bevy/examples/character_controller2.rs' marker='Snap2' />
 ```
 
 </bevy>

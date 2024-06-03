@@ -31,17 +31,10 @@ assert!(collider.is_sensor());
 <bevy>
 
 ```rust
-/* Set the collider sensor when the collider is created. */
-commands.spawn(Collider::ball(0.5))
-    .insert(Sensor);
+<load path='/2d/bevy/examples/colliders2.rs' marker='ColliderType1' />
 ```
 ```rust
-/* Change the collider sensor status inside of a system. */
-fn modify_collider_type(mut sensors: Query<&mut Sensor>) {
-    for mut sensor in collider_types.iter_mut() {
-        sensor.0 = true;
-    }
-}
+<load path='/2d/bevy/examples/colliders2.rs' marker='ColliderType2' />
 ```
 
 </bevy>

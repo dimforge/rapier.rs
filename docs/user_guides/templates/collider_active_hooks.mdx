@@ -40,17 +40,10 @@ assert!(collider.active_hooks().contains(ActiveHooks::MODIFY_SOLVER_CONTACTS));
 <bevy>
 
 ```rust
-/* Set the active hooks when the collider is created. */
-commands.spawn(Collider::ball(0.5))
-    .insert(ActiveHooks::FILTER_CONTACT_PAIRS | ActiveHooks::MODIFY_SOLVER_CONTACTS);
+<load path='/2d/bevy/examples/colliders2.rs' marker='ActiveHooks1' />
 ```
 ```rust
-/* Set the active hooks inside of a system. */
-fn modify_collider_active_hooks(mut active_hooks: Query<&mut ColliderFlagsComponent>) {
-    for mut active_hooks in active_hooks.iter_mut() {
-        *active_hooks = ActiveHooks::FILTER_CONTACT_PAIRS | ActiveHooks::MODIFY_SOLVER_CONTACTS;
-    }
-}
+<load path='/2d/bevy/examples/colliders2.rs' marker='ActiveHooks2' />
 ```
 
 </bevy>

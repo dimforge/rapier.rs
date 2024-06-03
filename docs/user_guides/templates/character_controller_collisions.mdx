@@ -35,14 +35,7 @@ character_controller.move_shape(
 <bevy>
 
 ```rust
-/* Read the character controller collisions stored in the character controller’s output. */
-fn modify_character_controller_slopes(mut character_controller_outputs: Query<&mut KinematicCharacterControllerOutput>) {
-    for mut output in outputs.iter_mut() {
-        for collision in &output.collisions {
-            // Do something with that collision information.
-        }
-    }
-}
+<load path='/2d/bevy/examples/character_controller2.rs' marker='Collisions1' />
 ```
 
 </bevy>
@@ -106,24 +99,10 @@ character_controller.solve_character_collision_impulses(
 <bevy>
 
 ```rust
-/* Configure the character controller when the collider is created. */
-commands.spawn(Collider::ball(0.5))
-    .insert(KinematicCharacterController {
-        // Enable the automatic application of impulses to the dynamic bodies
-        // hit by the character along its path.
-        apply_impulse_to_dynamic_bodies: true,
-        ..default()
-    });
+<load path='/2d/bevy/examples/character_controller2.rs' marker='Collisions2' />
 ```
 ```rust
-/* Configure dynamic impulses inside of a system. */
-fn modify_character_controller_impulses(mut character_controller: Query<&mut KinematicCharacterController>) {
-    for mut character_controller in character_controllers.iter_mut() {
-        // Enable the automatic application of impulses to the dynamic bodies
-        // hit by the character along its path.
-        character_controller.apply_impulse_to_dynamic_bodies = true;
-    }
-}
+<load path='/2d/bevy/examples/character_controller2.rs' marker='Collisions3' />
 ```
 
 </bevy>

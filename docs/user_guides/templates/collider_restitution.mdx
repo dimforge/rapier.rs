@@ -61,23 +61,10 @@ assert_eq!(collider.restitution_combine_rule(), CoefficientCombineRule::Min);
 <bevy>
 
 ```rust
-/* Set the restitution coefficient and restitution combine rule
-   when the collider is created. */
-commands.spawn(Collider::ball(0.5))
-    .insert(Restitution {
-        coefficient: 0.7,
-        combine_rule: CoefficientCombineRule::Min,
-    });
+<load path='/2d/bevy/examples/colliders2.rs' marker='Restitution1' />
 ```
 ```rust
-/* Set the restitution coefficient and restitution combine rule
-   inside of a system. */
-fn modify_collider_restitution(mut restitutions: Query<&mut Restitution>) {
-    for mut restitution in restitutions.iter_mut() {
-        restitution.coefficient = 0.7;
-        restitution.combine_rule = CoefficientCombineRule::Min;
-    }
-}
+<load path='/2d/bevy/examples/colliders2.rs' marker='Restitution2' />
 ```
 
 </bevy>

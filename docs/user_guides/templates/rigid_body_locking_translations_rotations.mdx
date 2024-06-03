@@ -71,34 +71,20 @@ values={[
 <TabItem value="2D">
 
 ```rust
-/* Lock translations and/or rotations when the rigid-body bundle is created. */
-commands.spawn(RigidBody::Dynamic)
-    .insert(LockedAxes::TRANSLATION_LOCKED);
+<load path='/2d/bevy/examples/rigid_bodies_continued2.rs' marker='LockedAxes1' />
 ```
 ```rust
-/* Lock translations and/or rotations inside of a system. */
-fn modify_body_locked_flags(mut locked_axes: Query<&mut LockedAxes>) {
-    for mut locked_axes in locked_axes.iter_mut() {
-        *locked_axes = LockedAxes::ROTATION_LOCKED;
-    }
-}
+<load path='/2d/bevy/examples/rigid_bodies_continued2.rs' marker='LockedAxes2' />
 ```
 
   </TabItem>
   <TabItem value="3D">
 
 ```rust
-/* Lock translations and/or rotations when the rigid-body bundle is created. */
-commands.spawn(RigidBody::Dynamic)
-    .insert(LockedAxes::TRANSLATION_LOCKED | LockedAxes::ROTATION_LOCKED_X);
+<load path='/3d/bevy/examples/rigid_bodies_continued3.rs' marker='LockedAxes1' />
 ```
 ```rust
-/* Lock translations and/or rotations inside of a system. */
-fn modify_body_locked_flags(mut locked_axes: Query<&mut LockedAxes>) {
-    for mut locked_axes in locked_axes.iter_mut() {
-        *locked_axes = LockedAxes::ROTATION_LOCKED;
-    }
-}
+<load path='/3d/bevy/examples/rigid_bodies_continued3.rs' marker='LockedAxes2' />
 ```
 
   </TabItem>
