@@ -21,11 +21,11 @@ query_pipeline.update(&island_manager, &rigid_body_set, &collider_set);
 // Scene queries can now be executed accurately.
 ```
 
-:::note
-Right now, the query pipeline takes the `IslandManager` and `RigidBodySet` as arguments. These two arguments
-may look superfluous, especially if the colliders are not attached to rigid-bodies. Another update method that only
-takes a `ColliderSet` as its only argument will be added in the future.
-:::
+If you need to avoid an expensive full rebuild, it is possible to update only specific changes:
+
+```rust
+<load path="2d/rust/rs_scene_queries2.rs" marker="UpdateIncremental" />
+```
 
 </rapier>
 
