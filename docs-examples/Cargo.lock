@@ -3072,7 +3072,6 @@ version = "0.1.0"
 dependencies = [
  "bincode",
  "crossbeam",
- "glam",
  "nalgebra",
  "rapier2d",
  "serde",

@@ -1,4 +1,4 @@
-use nalgebra::UnitComplex;
+use nalgebra::{Isometry2, UnitComplex};
 use rapier2d::prelude::*;
 
 fn main() {
@@ -75,14 +75,10 @@ fn main() {
     // DOCUSAURUS: ColliderType2 stop
 
     let shape = ColliderBuilder::ball(0.5).shape;
-    let pos1 = vector![0.0, 1.0];
-    let pos2 = vector![0.0, 1.0];
+    let pos1 = Isometry2::translation(0.0, 1.0);
+    let pos2 = Isometry2::translation(0.0, 1.0);
     // DOCUSAURUS: Compound start
-    use glam::Vec2;
-    let _ = ColliderBuilder::compound(vec![
-        (pos1 shape.clone()),
-        (pos2 shape.clone()),
-    ]);
+    let _ = ColliderBuilder::compound(vec![(pos1, shape.clone()), (pos2, shape.clone())]);
     // DOCUSAURUS: Compound stop
 
     // DOCUSAURUS: Mass start
