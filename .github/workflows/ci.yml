@@ -22,5 +22,5 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Install Linux dependencies
+      - name: Check injection script
         run: find docs/user_guides/templates/ -type f -print0 | OUTPUT_FOLDER=docs/user_guides/templates_injected xargs -0 ./inject_code_in_user_guides.sh
