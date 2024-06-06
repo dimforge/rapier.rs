@@ -22,20 +22,7 @@ Here is an an example of usage of the query filters with ray-casting:
 <rapier>
 
 ```rust
-let ray = Ray::new(point![1.0, 2.0], vector![0.0, 1.0]);
-let max_toi = 4.0;
-let solid = true;
-let filter = QueryFilter::exclude_dynamic()
-    .exclude_sensors()
-    .exclude_rigid_body(player_handle)
-    .groups(InteractionGroups::new(0b0011, 0b0001))
-    .predicate(&|handle, collider| collider.user_data == 10);
-
-if let Some((handle, toi)) = query_pipeline.cast_ray(
-    &collider_set, &ray, max_toi, solid, filter
-) {
-    // Handle the hit.
-}
+<load path='/2d/rust/examples/rs_scene_queries2.rs' marker='QueryFilter' />
 ```
 
 </rapier>

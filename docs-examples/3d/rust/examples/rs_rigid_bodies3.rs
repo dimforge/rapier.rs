@@ -156,21 +156,21 @@ fn main() {
     );
     // DOCUSAURUS: Mass3 stop
 
-    // DOCUSAURUS: Locking1 start
+    // DOCUSAURUS: LockedAxes1 start
     /* Lock translations/rotations when the rigid-body is created. */
     let rigid_body = RigidBodyBuilder::dynamic()
         .lock_translations() // prevent translations along along all axes.
         .lock_rotations() // prevent rotations along all axes.
         .enabled_rotations(true, false, false) // only enable rotations along the X axis.
         .build();
-    // DOCUSAURUS: Locking1 stop
+    // DOCUSAURUS: LockedAxes1 stop
 
-    // DOCUSAURUS: Locking2 start
+    // DOCUSAURUS: LockedAxes2 start
     /* Lock translations/rotations after the rigid-body creation. */
     let rigid_body = rigid_body_set.get_mut(rigid_body_handle).unwrap();
     // The last `true` argument makes sure the rigid-body is awake.
     rigid_body.lock_translations(true, true);
     rigid_body.lock_rotations(true, true);
     rigid_body.set_enabled_rotations(true, false, false, true);
-    // DOCUSAURUS: Locking2 stop
+    // DOCUSAURUS: LockedAxes2 stop
 }

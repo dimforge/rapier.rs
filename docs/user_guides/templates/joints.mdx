@@ -69,22 +69,14 @@ values={[
 <TabItem value="2D">
 
 ```rust
-// NOTE: setting the local anchors sets the translation part of the local frames.
-let joint = FixedJointBuilder::new()
-    .local_anchor1(point![0.0, 1.0])
-    .local_anchor2(point![0.0, -3.0]);
-joint_set.insert(&mut rigid_body_set, body_handle1, body_handle2, joint, true);
+<load path='/2d/rust/examples/rs_joints2.rs' marker='FixedJoint' />
 ```
 
   </TabItem>
   <TabItem value="3D">
 
 ```rust
-// NOTE: setting the local anchors sets the translation part of the local frames.
-let joint = FixedJointBuilder::new()
-    .local_anchor1(point![0.0, 1.0, 0.0])
-    .local_anchor2(point![0.0, -3.0, 0.0]);
-joint_set.insert(&mut rigid_body_set, body_handle1, body_handle2, joint, true);
+<load path='/3d/rust/examples/rs_joints3.rs' marker='FixedJoint' />
 ```
 
   </TabItem>
@@ -161,6 +153,7 @@ of the points that need to coincide on the local-space of each rigid-body.
 <rapier>
 
 ```rust
+<load path='/3d/rust/examples/rs_joints3.rs' marker='SphericalJoint' />
 let joint = SphericalJointBuilder::new()
     .local_anchor1(point![0.0, 0.0, 1.0])
     .local_anchor2(point![0.0, 0.0, -3.0]);
@@ -207,21 +200,14 @@ values={[
 <TabItem value="2D">
 
 ```rust
-let joint = RevoluteJointBuilder::new()
-    .local_anchor1(point![0.0, 1.0])
-    .local_anchor2(point![0.0, -3.0]);
-joint_set.insert(&mut rigid_body_set, body_handle1, body_handle2, joint, true);
+<load path='/2d/rust/examples/rs_joints2.rs' marker='FixedJoint' />
 ```
 
   </TabItem>
   <TabItem value="3D">
 
 ```rust
-let x = Vector::x_axis();
-let joint = RevoluteJointBuilder::new(x)
-    .local_anchor1(point![0.0, 0.0, 1.0])
-    .local_anchor2(point![0.0, 0.0, -3.0]);
-joint_set.insert(&mut rigid_body_set, body_handle1, body_handle2, joint, true);
+<load path='/3d/rust/examples/rs_joints3.rs' marker='FixedJoint' />
 ```
 
   </TabItem>
@@ -307,24 +293,14 @@ values={[
 <TabItem value="2D">
 
 ```rust
-let x = Vector::x_axis();
-let mut joint = PrismaticJointBuilder::new(x)
-    .local_anchor1(point![0.0, 1.0])
-    .local_anchor2(point![0.0, -3.0])
-    .limits([-2.0, 5.0]);
-joint_set.insert(&mut rigid_body_set, body_handle1, body_handle2, joint, true);
+<load path='/2d/rust/examples/rs_joints2.rs' marker='PrismaticJoint' />
 ```
 
   </TabItem>
   <TabItem value="3D">
 
 ```rust
-let x = Vector::x_axis();
-let mut joint = PrismaticJointBuilder::new(x)
-    .local_anchor1(point![0.0, 0.0, 1.0])
-    .local_anchor2(point![0.0, 0.0, -3.0])
-    .limits([-2.0, 5.0]);
-joint_set.insert(&mut rigid_body_set, body_handle1, body_handle2, joint, true);
+<load path='/3d/rust/examples/rs_joints3.rs' marker='PrismaticJoint' />
 ```
 
   </TabItem>
@@ -432,24 +408,14 @@ values={[
 <TabItem value="2D">
 
 ```rust
-let x = Vector::x_axis();
-let mut joint = PrismaticJointBuilder::new(x)
-    .local_anchor1(point![0.0, 1.0])
-    .local_anchor2(point![0.0, -3.0])
-    .motor_velocity(1.0, 0.5);
-joint_set.insert(&mut rigid_body_set, body_handle1, body_handle2, joint, true);
+<load path='/2d/rust/examples/rs_joints2.rs' marker='Motor' />
 ```
 
   </TabItem>
   <TabItem value="3D">
 
 ```rust
-let x = Vector::x_axis();
-let mut joint = PrismaticJointBuilder::new(x)
-    .local_anchor1(point![0.0, 0.0, 1.0])
-    .local_anchor2(point![0.0, 0.0, -3.0])
-    .motor_velocity(1.0, 0.5);
-joint_set.insert(&mut rigid_body_set, body_handle1, body_handle2, joint, true);
+<load path='/3d/rust/examples/rs_joints3.rs' marker='Motor' />
 ```
 
   </TabItem>

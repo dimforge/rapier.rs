@@ -15,16 +15,10 @@ construction:
 <rapier>
 
 ```rust
-/* Set the collider type when the collider is created. */
-let collider = ColliderBuilder::ball(0.5)
-  .sensor(true)
-  .build();
+<load path='/2d/rust/examples/rs_colliders2.rs' marker='ColliderType1' />
 ```
 ```rust
-/* Set the collider type after the collider creation. */
-let collider = collider_set.get_mut(collider_handle).unwrap();
-collider.set_sensor(true);
-assert!(collider.is_sensor());
+<load path='/2d/rust/examples/rs_colliders2.rs' marker='ColliderType2' />
 ```
 
 </rapier>
@@ -40,13 +34,13 @@ assert!(collider.is_sensor());
 </bevy>
 <js>
 
-```rust
+```js
 /* Set the collider type when the collider is created. */
 let colliderDesc = RAPIER.ColliderDesc.ball(0.5)
   .setSensor(true);
 let collider = world.createCollider(colliderDesc);
 ```
-```rust
+```js
 /* Set the collider type after the collider creation. */
 collider.setSensor(true);
 ```

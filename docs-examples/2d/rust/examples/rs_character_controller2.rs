@@ -148,7 +148,7 @@ fn main() {
     // DOCUSAURUS: UpVector start
     // Set the up-vector to the positive X axis.
     character_controller.up = Vector::x_axis();
-    // DOCUSAURUS: UpVector start
+    // DOCUSAURUS: UpVector stop
 
     // DOCUSAURUS: Slopes start
     // Don’t allow climbing slopes larger than 45 degrees.

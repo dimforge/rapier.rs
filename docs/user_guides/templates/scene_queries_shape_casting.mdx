@@ -29,38 +29,14 @@ values={[
 <TabItem value="2D">
 
 ```rust
-let shape = Cuboid::new(vector![1.0, 2.0]);
-let shape_pos = Isometry::new(vector![0.0, 1.0], 0.8);
-let shape_vel = vector![0.1, 0.4];
-let max_toi = 4.0;
-let filter = QueryFilter::default();
-
-if let Some((handle, hit)) = query_pipeline.cast_shape(
-    &collider_set, &shape_pos, &shape_vel, &shape, max_toi, filter
-) {
-    // The first collider hit has the handle `handle`. The `hit` is a
-    // structure containing details about the hit configuration.
-    println!("Hit the collider {:?} with the configuration: {:?}", handle, hit);
-}
+<load path='/2d/rust/examples/rs_scene_queries2.rs' marker='Shapecast' />
 ```
 
 </TabItem>
 <TabItem value="3D">
 
 ```rust
-let shape = Cuboid::new(vector![1.0, 2.0, 3.0]);
-let shape_pos = Isometry::new(vector![0.0, 1.0, 0.0], vector![0.2, 0.7, 0.1]);
-let shape_vel = vector![0.1, 0.4, 0.2];
-let max_toi = 4.0;
-let filter = QueryFilter::default();
-
-if let Some((handle, hit)) = query_pipeline.cast_shape(
-    &collider_set, &shape_pos, &shape_vel, &shape, max_toi, filter
-) {
-    // The first collider hit has the handle `handle`. The `hit` is a
-    // structure containing details about the hit configuration.
-    println!("Hit the collider {:?} with the configuration: {:?}", handle, hit);
-}
+<load path='/3d/rust/examples/rs_scene_queries3.rs' marker='Shapecast' />
 ```
 
 </TabItem>
@@ -79,14 +55,14 @@ values={[
 <TabItem value="2D">
 
 ```rust
-<load path='/2d/bevy/examples/scene_queries2.rs' marker='Shapecasting' />
+<load path='/2d/bevy/examples/scene_queries2.rs' marker='Shapecast' />
 ```
 
 </TabItem>
 <TabItem value="3D">
 
 ```rust
-<load path='/3d/bevy/examples/scene_queries3.rs' marker='Shapecasting' />
+<load path='/3d/bevy/examples/scene_queries3.rs' marker='Shapecast' />
 ```
 
 </TabItem>

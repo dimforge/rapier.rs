@@ -2,6 +2,7 @@ use nalgebra::{vector, ComplexField};
 use rapier3d::geometry::ColliderBuilder;
 
 fn main() {
+    // DOCUSAURUS: Determinism start
     // WRONG version:
     // The following will not work cross-platform-deterministically because the values
     // given to `ColliderBuilder::translation` won't be cross-platform deterministic.
@@ -19,4 +20,5 @@ fn main() {
             ComplexField::cos(3.0),
         ])
         .build();
+    // DOCUSAURUS: Determinism stop
 }

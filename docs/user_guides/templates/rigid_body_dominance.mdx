@@ -26,16 +26,10 @@ The dominance group can be set when the rigid-body is created or after its creat
 <rapier>
 
 ```rust
-/* Set the dominance group when the rigid-body is created. */
-let rigid_body = RigidBodyBuilder::dynamic()
-    .dominance_group(10)
-    .build();
+<load path='/2d/rust/examples/rs_rigid_bodies2.rs' marker='Dominance1' />
 ```
 ```rust
-/* Set the dominance group after the rigid-body creation. */
-let rigid_body = rigid_body_set.get_mut(rigid_body_handle).unwrap();
-rigid_body.set_dominance_group(10);
-assert_eq!(rigid_body.dominance_group(), 10);
+<load path='/2d/rust/examples/rs_rigid_bodies2.rs' marker='Dominance2' />
 ```
 
 </rapier>

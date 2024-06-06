@@ -11,10 +11,7 @@ to avoid numerical issues (if the character seems to get stuck inexplicably, try
 <rapier>
 
 ```rust
-// The character offset is set to 0.01.
-character_controller.offset = CharacterLength::Absolute(0.01);
-// The character offset is set to 0.01 multiplied by the shape’s height.
-character_controller.offset = CharacterLength::Relative(0.01);
+<load path='/2d/rust/examples/rs_character_controller2.rs' marker='Offset' />
 ```
 
 </rapier>

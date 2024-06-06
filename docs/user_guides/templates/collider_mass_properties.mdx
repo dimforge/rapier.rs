@@ -29,48 +29,14 @@ values={[
 <TabItem value="2D">
 
 ```rust
-let rigid_body = RigidBodyBuilder::dynamic().build();
-let rigid_body_handle = rigid_body_set.insert(rigid_body);
-// First option: by setting the density of the collider (or we could just leave
-//               its default value 1.0).
-let collider = ColliderBuilder::cuboid(1.0, 2.0)
-    .density(2.0)
-    .build();
-// Second option: by setting the mass of the collider.
-let collider = ColliderBuilder::cuboid(1.0, 2.0)
-    .mass(0.8)
-    .build();
-// Third option: by setting the mass-properties explicitly.
-let collider = ColliderBuilder::cuboid(1.0, 2.0)
-    .mass_properties(MassProperties::new(point![0.0, 1.0], 0.5, 0.3))
-    .build();
-// When the collider is attached, the rigid-body's mass and angular
-// inertia is automatically updated to take the collider into account.
-collider_set.insert_with_parent(collider, rigid_body_handle, &mut rigid_body_set);
+<load path='/2d/rust/examples/rs_colliders2.rs' marker='Mass' />
 ```
 
   </TabItem>
   <TabItem value="3D">
 
 ```rust
-let rigid_body = RigidBodyBuilder::dynamic().build();
-let rigid_body_handle = rigid_body_set.insert(rigid_body);
-// First option: by setting the density of the collider (or we could just leave
-//               its default value 1.0).
-let collider = ColliderBuilder::cuboid(1.0, 2.0, 3.0)
-    .density(2.0)
-    .build();
-// Second option: by setting the mass of the collider.
-let collider = ColliderBuilder::cuboid(1.0, 2.0, 3.0)
-    .mass(0.8)
-    .build();
-// Third option: by setting the mass-properties explicitly.
-let collider = ColliderBuilder::cuboid(1.0, 2.0, 3.0)
-    .mass_properties(MassProperties::new(point![0.0, 1.0, 0.0], 0.5, vector![0.3, 0.2, 0.1]))
-    .build();
-// When the collider is attached, the rigid-body's mass and angular
-// inertia is automatically updated to take the collider into account.
-collider_set.insert_with_parent(collider, rigid_body_handle, &mut rigid_body_set);
+<load path='/3d/rust/examples/rs_colliders3.rs' marker='Mass' />
 ```
 
   </TabItem>
@@ -89,14 +55,14 @@ values={[
 <TabItem value="2D">
 
 ```rust
-<load path='/2d/bevy/examples/colliders2.rs' marker='MassAdvanced' />
+<load path='/2d/bevy/examples/colliders2.rs' marker='Mass' />
 ```
 
   </TabItem>
   <TabItem value="3D">
 
 ```rust
-<load path='/3d/bevy/examples/colliders3.rs' marker='MassAdvanced' />
+<load path='/3d/bevy/examples/colliders3.rs' marker='Mass' />
 ```
 
   </TabItem>

@@ -88,16 +88,10 @@ custom [contact filtering/modification](advanced_collision_detection#physics-hoo
 This user-data can be set when the rigid-body is created or after its creation:
 
 ```rust
-/* Set the user-data when the rigid-body is created. */
-let rigid_body = RigidBodyBuilder::dynamic()
-  .user_data(42)
-  .build();
+<load path='/2d/rust/examples/rs_rigid_bodies2.rs' marker='Userdata1' />
 ```
 ```rust
-/* Set the user-data after the rigid-body creation. */
-let rigid_body = rigid_body_set.get_mut(rigid_body_handle).unwrap();
-rigid_body.user_data = 42;
-assert_eq!(rigid_body.user_data, 42);
+<load path='/2d/rust/examples/rs_rigid_bodies2.rs' marker='Userdata2' />
 ```
 
 </rapier>

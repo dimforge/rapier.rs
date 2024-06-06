@@ -23,36 +23,14 @@ values={[
 <TabItem value="2D">
 
 ```rust
-let rigid_body = rigid_body_set.get_mut(rigid_body_handle).unwrap();
-
-// The `true` argument makes sure the rigid-body is awake.
-rigid_body.reset_forces(true);  // Reset the forces to zero.
-rigid_body.reset_torques(true); // Reset the torques to zero.
-rigid_body.add_force(vector![0.0, 1000.0], true);
-rigid_body.add_torque(100.0, true);
-rigid_body.add_force_at_point(vector![0.0, 1000.0], point![1.0, 2.0], true);
-
-rigid_body.apply_impulse(vector![0.0, 1000.0], true);
-rigid_body.apply_torque_impulse(100.0, true);
-rigid_body.apply_impulse_at_point(vector![0.0, 1000.0], point![1.0, 2.0], true);
+<load path='/2d/rust/examples/rs_rigid_bodies2.rs' marker='Forces' />
 ```
 
   </TabItem>
   <TabItem value="3D">
 
 ```rust
-let rigid_body = rigid_body_set.get_mut(rigid_body_handle).unwrap();
-
-// The `true` argument makes sure the rigid-body is awake.
-rigid_body.reset_forces(true);  // Reset the forces to zero.
-rigid_body.reset_torques(true); // Reset the torques to zero.
-rigid_body.add_force(vector![0.0, 1000.0, 0.0], true);
-rigid_body.add_torque(vector![100.0, 0.0, 0.0], true);
-rigid_body.add_force_at_point(vector![0.0, 1000.0, 0.0], point![1.0, 2.0, 3.0], true);
-
-rigid_body.apply_impulse(vector![0.0, 1000.0, 0.0], true);
-rigid_body.apply_torque_impulse(vector![100.0, 0.0, 0.0], true);
-rigid_body.apply_impulse_at_point(vector![0.0, 1000.0, 0.0], point![1.0, 2.0, 3.0], true);
+<load path='/3d/rust/examples/rs_rigid_bodies3.rs' marker='Forces' />
 ```
 
   </TabItem>

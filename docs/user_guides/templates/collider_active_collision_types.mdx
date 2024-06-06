@@ -9,19 +9,10 @@ and a collider attached to a fixed rigid-body. This can be done by modifying the
 <rapier>
 
 ```rust
-/* Set the active collision types when the collider is created. */
-let collider = ColliderBuilder::ball(0.5)
-    .active_collision_types(ActiveCollisionTypes::default() | 
-                            ActiveCollisionTypes::KINEMATIC_FIXED)
-    .build();
+<load path='/2d/rust/examples/rs_colliders2.rs' marker='ActiveCollisionTypes1' />
 ```
 ```rust
-/* Set the active collision types after the collider creation. */
-let collider = collider_set.get_mut(collider_handle).unwrap();
-collider.set_active_collision_types(ActiveCollisionTypes::default() |
-                                    ActiveCollisionTypes::KINEMATIC_FIXED);
-assert!(collider.active_collision_types().contains(ActiveCollisionTypes::DYNAMIC_KINEMATIC));
-assert!(collider.active_collision_types().contains(ActiveCollisionTypes::KINEMATIC_FIXED));
+<load path='/2d/rust/examples/rs_colliders2.rs' marker='ActiveCollisionTypes2' />
 ```
 
 </rapier>

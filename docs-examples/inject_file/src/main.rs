@@ -1,8 +1,8 @@
-use std::{borrow::Cow, fs::read_to_string};
+use std::{borrow::Cow, fs::read_to_string, process::ExitCode};
 
 use regex::{Captures, Regex};
 
-fn main() {
+fn main() -> ExitCode {
     let args = std::env::args().collect::<Vec<_>>();
     let input_path = args
         .get(1)
@@ -25,6 +25,9 @@ fn main() {
                     ErrorType::IncorrectTag => {
                         eprintln!("❌ ERROR: a <load> tag was incorrectly written in {}, maybe missing path or marker, or not using `'` for string delimiters ?", input_path);
                     }
+                    ErrorType::IncorrectPath(path) => {
+                        eprintln!("❌ ERROR: path {} not found", path);
+                    }
                     ErrorType::IncorrectMarker(IncorrectMarker { marker, filepath }) => {
                         eprintln!("❌ ERROR: marker {} not found in {}", marker, filepath);
                     }
@@ -33,19 +36,22 @@ fn main() {
             if let Some(result) = error.result {
                 print!("{result}");
             }
+            return ExitCode::from(1);
         }
     }
+    ExitCode::from(0)
 }
 
-#[derive(Debug)]
+#[derive(Debug, PartialEq)]
 pub struct IncorrectMarker {
     pub marker: String,
     pub filepath: String,
 }
 
-#[derive(Debug)]
+#[derive(Debug, PartialEq)]
 pub enum ErrorType {
     IncorrectTag,
+    IncorrectPath(String),
     IncorrectMarker(IncorrectMarker),
 }
 #[derive(Debug)]
@@ -75,7 +81,10 @@ fn injected(source_text: &str, get_path: fn(&str) -> String) -> Result<String, I
         );
         let path = get_path(infos[0]);
         // Reading file from the path of the tag of input file
-        let to_inject = read_to_string(&path).expect(&format!("could not read path: {}", path));
+        let Ok(to_inject) = read_to_string(&path) else {
+            error.errors.push(ErrorType::IncorrectPath(path));
+            return "".to_string();
+        };
 
         // Regex to find the markers inside comments, and only print what's inside
         // FIXME: I think we should just paste all the inside,
@@ -249,6 +258,22 @@ fn simple_tag_error() {
         result.expect_err("This should error out").errors[0],
         ErrorType::IncorrectTag
     ));
+}
+
+#[test]
+fn simple_path_error() {
+    use crate::*;
+
+    let result = injected(
+        "<load path='this_path_does_not_exist_obviously' marker='ToInject1_wrong' />",
+        |path| path.to_string(),
+    );
+
+    // Trimming end for cross platform, on windows I had \r finishing result.
+    assert_eq!(
+        result.expect_err("This should error out").errors[0],
+        ErrorType::IncorrectPath("this_path_does_not_exist_obviously".to_string())
+    );
 }
 
 #[test]

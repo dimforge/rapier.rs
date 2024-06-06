@@ -31,7 +31,7 @@ fn main() {
     let physics_hooks = ();
     let event_handler = ();
 
-    // DOCUSAURUS: events start
+    // DOCUSAURUS: Events start
     // Initialize the event collector.
     let (collision_send, collision_recv) = crossbeam::channel::unbounded();
     let (contact_force_send, contact_force_recv) = crossbeam::channel::unbounded();
@@ -62,7 +62,7 @@ fn main() {
         // Handle the contact force event.
         println!("Received contact force event: {:?}", contact_force_event);
     }
-    // DOCUSAURUS: events stop
+    // DOCUSAURUS: Events stop
 
     // DOCUSAURUS: ContactGraph1 start
     /* Find the contact pair, if it exists, between two colliders. */
@@ -102,6 +102,7 @@ fn main() {
     }
     // DOCUSAURUS: ContactGraph1 stop
 
+    // DOCUSAURUS: ContactGraph2 start
     /* Iterate through all the contact pairs involving a specific collider. */
     for contact_pair in narrow_phase.contact_pairs_with(collider_handle1) {
         let other_collider = if contact_pair.collider1 == collider_handle1 {
@@ -113,6 +114,7 @@ fn main() {
         // Process the contact pair in a way similar to what we did in
         // the previous example.
     }
+    // DOCUSAURUS: ContactGraph2 stop
 
     // DOCUSAURUS: IntersectionGraph1 start
     /* Find the intersection pair, if it exists, between two colliders. */

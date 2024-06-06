@@ -25,6 +25,8 @@ OUTPUT_FOLDER="../../$OUTPUT_FOLDER"
 
 
 mkdir -p "tmp_diff"
+
+error=0
 for path in "$@"
 do
     file_to_inject="../../$path"
@@ -35,6 +37,9 @@ do
     echo $file_to_inject
     
     cargo run --quiet --release "$file_to_inject" > "$file_injected"
+    if [ $? -eq 1 ]; then
+        error=1
+    fi
     if [ $PRINT_DIFF -eq 1 ]; then
         if cmp -s "$file_to_inject" "$file_injected"; then
             echo "No substitution to $file_to_inject"
@@ -49,3 +54,5 @@ done
 if [ ! $KEEP_TMP ]; then
     rm -rf tmp_diff
 fi
+
+exit $error

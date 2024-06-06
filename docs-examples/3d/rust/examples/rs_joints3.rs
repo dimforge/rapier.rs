@@ -22,7 +22,7 @@ fn main() {
         .local_anchor1(point![0.0, 0.0, 1.0])
         .local_anchor2(point![0.0, 0.0, -3.0]);
     joint_set.insert(body_handle1, body_handle2, joint, true);
-    // DOCUSAURUS: FixedJoint stop
+    // DOCUSAURUS: SphericalJoint stop
 
     // DOCUSAURUS: RevoluteJoint start
     let x = Vector::x_axis();

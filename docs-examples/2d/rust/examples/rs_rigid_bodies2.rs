@@ -166,21 +166,21 @@ fn main() {
         .set_additional_mass_properties(MassProperties::new(point![0.0, 1.0], 0.5, 0.3), true);
     // DOCUSAURUS: Mass3 stop
 
-    // DOCUSAURUS: Locking1 start
+    // DOCUSAURUS: LockedAxes1 start
     /* Lock translations/rotations when the rigid-body is created. */
     let rigid_body = RigidBodyBuilder::dynamic()
         .lock_translations() // prevent translations along along all axes.
         .lock_rotations() // prevent rotations.
         .build();
-    // DOCUSAURUS: Locking1 stop
+    // DOCUSAURUS: LockedAxes1 stop
 
-    // DOCUSAURUS: Locking2 start
+    // DOCUSAURUS: LockedAxes2 start
     /* Lock translations/rotations after the rigid-body creation. */
     let rigid_body = rigid_body_set.get_mut(rigid_body_handle).unwrap();
     // The last `true` argument makes sure the rigid-body is awake.
     rigid_body.lock_translations(true, true);
     rigid_body.lock_rotations(true, true);
-    // DOCUSAURUS: Locking2 stop
+    // DOCUSAURUS: LockedAxes2 stop
 
     // DOCUSAURUS: Damping1 start
     /* Set the damping coefficients when the rigid-body is created. */

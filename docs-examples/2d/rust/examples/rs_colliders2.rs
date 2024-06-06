@@ -75,11 +75,13 @@ fn main() {
     // DOCUSAURUS: ColliderType2 stop
 
     let shape = ColliderBuilder::ball(0.5).shape;
+    let pos1 = vector![0.0, 1.0];
+    let pos2 = vector![0.0, 1.0];
     // DOCUSAURUS: Compound start
     use glam::Vec2;
     let _ = ColliderBuilder::compound(vec![
-        (Vec2::new(0.0, 0.0).into(), shape.clone()),
-        (Vec2::new(1.0, 1.0).into(), shape.clone()),
+        (pos1 shape.clone()),
+        (pos2 shape.clone()),
     ]);
     // DOCUSAURUS: Compound stop
 
@@ -186,15 +188,15 @@ fn main() {
     );
     // DOCUSAURUS: Restitution2 stop
 
-    // DOCUSAURUS: CollisionGroup1 start
+    // DOCUSAURUS: Groups1 start
     /* Set the collision groups and solver groups when the collider is created. */
     let collider = ColliderBuilder::ball(0.5)
         .collision_groups(InteractionGroups::new(0b1101.into(), 0b0100.into()))
         .solver_groups(InteractionGroups::new(0b0011.into(), 0b1011.into()))
         .build();
-    // DOCUSAURUS: CollisionGroup1 stop
+    // DOCUSAURUS: Groups1 stop
 
-    // DOCUSAURUS: CollisionGroup2 start
+    // DOCUSAURUS: Groups2 start
     /* Set the collision groups and solver groups after the collider creation. */
     let collider = collider_set.get_mut(collider_handle).unwrap();
     collider.set_collision_groups(InteractionGroups::new(0b1101.into(), 0b0100.into()));
@@ -207,7 +209,7 @@ fn main() {
         collider.solver_groups(),
         InteractionGroups::new(0b0011.into(), 0b1011.into())
     );
-    // DOCUSAURUS: CollisionGroup2 stop
+    // DOCUSAURUS: Groups2 stop
 
     // DOCUSAURUS: ActiveCollisionTypes1 start
     /* Set the active collision types when the collider is created. */
