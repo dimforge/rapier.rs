@@ -72,6 +72,7 @@ fn main() {
     point_projection_section(&query_pipeline, &rigid_body_set, &collider_set);
     intersection_section(&query_pipeline, &rigid_body_set, &collider_set);
 
+    let player_handle = ball_body_handle;
     // DOCUSAURUS: QueryFilter start
     let ray = Ray::new(point![1.0, 2.0], vector![0.0, 1.0]);
     let max_toi = 4.0;
@@ -79,36 +80,15 @@ fn main() {
     let filter = QueryFilter::exclude_dynamic()
         .exclude_sensors()
         .exclude_rigid_body(player_handle)
-        .groups(InteractionGroups::new(0b0011, 0b0001))
+        .groups(InteractionGroups::new(0b0011.into(), 0b0001.into()))
         .predicate(&|handle, collider| collider.user_data == 10);
-    // DOCUSAURUS: QueryFilter stop
 
     if let Some((handle, toi)) =
-        query_pipeline.cast_ray(&collider_set, &ray, max_toi, solid, filter)
+        query_pipeline.cast_ray(&rigid_body_set, &collider_set, &ray, max_toi, solid, filter)
     {
         // Handle the hit.
     }
-    /* Run the game loop, stepping the simulation once per frame. */
-    for _ in 0..200 {
-        physics_pipeline.step(
-            &gravity,
-            &integration_parameters,
-            &mut island_manager,
-            &mut broad_phase,
-            &mut narrow_phase,
-            &mut rigid_body_set,
-            &mut collider_set,
-            &mut impulse_joint_set,
-            &mut multibody_joint_set,
-            &mut ccd_solver,
-            Some(&mut query_pipeline),
-            &physics_hooks,
-            &event_handler,
-        );
-
-        let ball_body = &rigid_body_set[ball_body_handle];
-        println!("Ball altitude: {}", ball_body.translation().y);
-    }
+    // DOCUSAURUS: QueryFilter stop
 }
 
 #[rustfmt::skip]

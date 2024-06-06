@@ -22,7 +22,7 @@ fn main() {
     assert_eq!(pt.x, 1.0);  assert_eq!(pt.y, 2.0);
     assert_eq!(pt[0], 1.0); assert_eq!(pt[1], 2.0);
     // DOCUSAURUS: Points stop
-
+    
     {
     // DOCUSAURUS: Isometries start
     use nalgebra::{Isometry2, vector};
