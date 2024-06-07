@@ -61,10 +61,9 @@ fn main() {
         .position(Isometry::new(vector![1.0, 2.0], 0.4))
         // All done, actually build the rigid-body.
         .build();
-    // DOCUSAURUS: Position1 stop
-
     // Insert the rigid-body into the set.
     let rigid_body_handle = rigid_body_set.insert(rigid_body);
+    // DOCUSAURUS: Position1 stop
 
     // DOCUSAURUS: Position2 start
     use nalgebra::UnitComplex;
@@ -94,10 +93,9 @@ fn main() {
         .angvel(3.0)
         // All done, actually build the rigid-body.
         .build();
-    // DOCUSAURUS: Velocity1 stop
-
     // Insert the rigid-body into the set.
     let rigid_body_handle = rigid_body_set.insert(rigid_body);
+    // DOCUSAURUS: Velocity1 stop
 
     // DOCUSAURUS: Velocity2 start
     /* Set the velocities after the rigid-body creation. */

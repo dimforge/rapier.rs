@@ -3,6 +3,14 @@ use rapier3d::prelude::*;
 
 fn main() {
     let mut rigid_body_set = RigidBodySet::new();
+    let vertices = vec![
+        point![-1.0, -1.0, 0.0],
+        point![1.0, -1.0, 0.0],
+        point![1.0, 1.0, 0.0],
+    ];
+    let indices = vec![[0, 2, 1]];
+    let heights = DMatrix::from_vec(2, 2, vec![0.0, 1.0, 0.5, 0.0]);
+    let scale = Vector::new(1.0, 1.0, 1.0);
     // DOCUSAURUS: Creation start
     use rapier3d::prelude::*;
     use std::f32::consts::PI;
@@ -21,19 +29,9 @@ fn main() {
     // Builder for a capsule-shaped collider. The capsule principal axis is the `z` coordinate axis.
     let _ = ColliderBuilder::capsule_z(0.5, 0.2);
     // Builder for a triangle-mesh-shaped collider.
-    let _ = ColliderBuilder::trimesh(
-        vec![
-            point![-1.0, -1.0, 0.0],
-            point![1.0, -1.0, 0.0],
-            point![1.0, 1.0, 0.0],
-        ],
-        vec![[0, 2, 1]],
-    );
+    let _ = ColliderBuilder::trimesh(vertices, indices);
     // Builder for a heightfield-shaped collider.
-    let _ = ColliderBuilder::heightfield(
-        DMatrix::from_vec(2, 2, vec![0.0, 1.0, 0.5, 0.0]),
-        Vector::new(1.0, 1.0, 1.0),
-    );
+    let _ = ColliderBuilder::heightfield(heights, scale);
     // Builder for a collider with the given shape.
     let collider = ColliderBuilder::new(SharedShape::ball(0.5))
         // The collider translation wrt. the body it is attached to.

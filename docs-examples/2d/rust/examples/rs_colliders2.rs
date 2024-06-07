@@ -2,9 +2,12 @@ use nalgebra::{Isometry2, UnitComplex};
 use rapier2d::prelude::*;
 
 fn main() {
+    let vertices = vec![point![-1.0, -1.0], point![1.0, -1.0], point![1.0, 1.0]];
+    let indices = vec![[0, 2, 1]];
+    let heights = nalgebra::DVector::<Real>::from_vec(vec![0.0, 1.0, 0.5, 0.9]);
+    let scale = Vector::new(1.0, 1.0);
+
     // DOCUSAURUS: Creation start
-    /* Set the collider type when the collider is created. */
-    let collider = ColliderBuilder::ball(0.5).sensor(true).build();
     use rapier2d::prelude::*;
     use std::f32::consts::PI;
 
@@ -20,15 +23,9 @@ fn main() {
     // Builder for a capsule-shaped collider. The capsule principal axis is the `y` coordinate axis.
     let _ = ColliderBuilder::capsule_y(0.5, 0.2);
     // Builder for a triangle-mesh-shaped collider.
-    let _ = ColliderBuilder::trimesh(
-        vec![point![-1.0, -1.0], point![1.0, -1.0], point![1.0, 1.0]],
-        vec![[0, 2, 1]],
-    );
+    let _ = ColliderBuilder::trimesh(vertices, indices);
     // Builder for a heightfield-shaped collider.
-    let _ = ColliderBuilder::heightfield(
-        nalgebra::DVector::<Real>::from_vec(vec![0.0, 1.0, 0.5, 0.9]),
-        Vector::new(1.0, 1.0),
-    );
+    let _ = ColliderBuilder::heightfield(heights, scale);
     // Builder for a collider with the given shape.
     let collider = ColliderBuilder::new(SharedShape::ball(0.5))
         // The collider translation wrt. the body it is attached to.

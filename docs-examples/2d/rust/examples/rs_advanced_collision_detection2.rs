@@ -127,12 +127,16 @@ fn main() {
     // DOCUSAURUS: IntersectionGraph1 stop
 
     // DOCUSAURUS: IntersectionGraph2 start
-    /* Find the intersection pair, if it exists, between two colliders. */
-    if narrow_phase.intersection_pair(collider_handle1, collider_handle2) == Some(true) {
-        println!(
-            "The colliders {:?} and {:?} are intersecting!",
-            collider_handle1, collider_handle2
-        );
+    /* Iterate through all the intersection pairs involving a specific collider. */
+    for (collider1, collider2, intersecting) in
+        narrow_phase.intersection_pairs_with(collider_handle1)
+    {
+        if intersecting {
+            println!(
+                "The colliders {:?} and {:?} are intersecting!",
+                collider1, collider2
+            );
+        }
     }
     // DOCUSAURUS: IntersectionGraph2 stop
 
