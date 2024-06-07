@@ -74,7 +74,7 @@ assert_eq!(v[0], 1.0); assert_eq!(v[1], 2.0); assert_eq!(v[2], 3.0);
 </Tabs>
 
 ## Points
-Points are wrappers around vectors, but with a semantic than vectors. A point can be interpreted as a location in
+Points are wrappers around vectors, but with a different semantic than vectors. A point can be interpreted as a location in
 space whereas a vector can be seen as a direction or a displacement between two points. For example
 a contact between two shapes has contact points (the location of the contact in space) represented as points,
 and has a contact normal (the direction used to apply forces) represented as a vector.
@@ -206,16 +206,5 @@ Here are examples of conversions these features enable:
 - Conversion from `glam::Quat` to `na::Isometry3` (builds a rotation-only isometry).
 
 ```rust
-// Here are just a few examples.
-use nalgebra::{vector, Point2, Isometry3};
-use glam::{Quat, Vec2, Vec3};
-
-let na_vector = vector![1.0, 2.0, 3.0];
-let glam_vector: Vec3 = na_vector.into();
-
-let glam_vector = Vec2::new(1.0, 2.0);
-let na_point: Point2<f32> = glam_vector.into();
-
-let na_isometry: Isometry3<f32> = 
-    (Vec3::new(0.1, 2.0, 0.0), Quat::from_rotation_x(0.4)).into();
+<load path='/3d/rust/examples/rs_nalgebra.rs' marker='Glam' />
 ```

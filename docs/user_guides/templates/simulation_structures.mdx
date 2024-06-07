@@ -35,16 +35,15 @@ to update the rendering of only the rigid-bodies that moved:
 <rapier>
 
 ```rust
-// Iter on each dynamic rigid-bodies that moved.
-for rigid_body_handle in island_manager.active_dynamic_bodies() {
-    let rigid_body = &rigid_body_set[*rigid_body_handle];
-    println!("Rigid body {:?} has a new position: {}", rigid_body_handle, rigid_body.position());
-}
+<load path='/2d/rust/examples/rs_simulation_structures2.rs' marker='IslandManager' />
 ```
 
 </rapier>
-<bevy>
 
+<bevy>
+<technote>
+this is not used, nothing links to it. Also, it's not compiling.
+</technote>
 ```rust
 fn print_active_bodies_positions(island_manager: Res<IslandManager>, positions: Query<&RigidBodyPositionComponent>) {
     // Iter on each dynamic rigid-bodies that moved.
@@ -94,7 +93,22 @@ or `PhysicsPipeline`:
 ```rust
 // Game loop.
 loop {
-  physics_pipeline.step(...);
+  // You can pass the query pipeline as parameter to the physics pipeline,
+  // This enables optimizations such as update the query pipeline incrementally rather
+  // than triggering a more expensive full rebuild.
+  physics_pipeline.step(..., Some(&mut query_pipeline), ...);
+
+  // - If you have passed the query pipeline in the physics pipeline `step()` function:
+  // Now we can read the results of the physics simulation,
+  // and we can do advanced scene queries on the colliders.
+```
+```rust
+// Game loop.
+loop {
+  physics_pipeline.step(..., None, ...);
+  // - If you have NOT passed the query pipeline in the physics pipeline `step()` function,
+  //   OR if you have made some changes to your simulation data since that `step()` call:
+  // You'll need to update your query pipeline.
   query_pipeline.update(...);
   // Now we can read the results of the physics simulation,
   // and we can do advanced scene queries on the colliders.
@@ -131,7 +145,7 @@ Learn more about joints in [the dedicated page](joints).
 
 ## CCD solver
 The CCD solver <bevy>resource</bevy> is responsible for the resolution of Continuous-Collision-Detection. By itself, this structure
-doesn't expose any feature useful. So it should simply be passed to the `PhysicsPipeline::step` method.
+doesn't expose any useful feature. So it should simply be passed to the `PhysicsPipeline::step` method.
 Learn more about CCD in [the dedicated section](rigid_bodies#continuous-collision-detection).
 
 ## Physics hooks

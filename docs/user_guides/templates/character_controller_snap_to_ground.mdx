@@ -16,12 +16,7 @@ Typical usages of snap-to-ground include going downstairs or remaining in contac
 <rapier>
 
 ```rust
-// Set snap-to-ground to None to disable it.
-character_controller.snap_to_ground = None;
-// Snap to the ground if the vertical distance to the ground is smaller than 0.5.
-character_controller.snap_to_ground = Some(CharacterLength::Absolute(0.5));
-// Snap to the ground if the vertical distance to the ground is smaller than 0.2 times the character’s height.
-character_controller.snap_to_ground = Some(CharacterLength::Relative(0.2));
+<load path='/2d/rust/examples/rs_character_controller2.rs' marker='Snap' />
 ```
 
 </rapier>

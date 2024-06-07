@@ -30,7 +30,7 @@ fn setup_physics(mut commands: Commands) {
         .insert(ColliderMassProperties::Density(2.0));
     // DOCUSAURUS: Creation1 stop
 
-    // DOCUSAURUS: MassAdvanced start
+    // DOCUSAURUS: Mass start
     // First option: by setting the density of the collider (or we could just leave
     //               its default value 1.0).
     let collider_mprops = ColliderMassProperties::Density(2.0);
@@ -49,7 +49,7 @@ fn setup_physics(mut commands: Commands) {
         .spawn(RigidBody::Dynamic)
         .insert(Collider::ball(0.5))
         .insert(collider_mprops);
-    // DOCUSAURUS: MassAdvanced stop
+    // DOCUSAURUS: Mass stop
 
     // DOCUSAURUS: Position1 start
     /* Set the collider position when the collider is created. */

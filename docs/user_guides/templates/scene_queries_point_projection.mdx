@@ -17,52 +17,14 @@ or will enumerate every collider containing given point (<rapier>`QueryPipeline:
 <TabItem value="2D">
 
 ```rust
-let point = point![1.0, 2.0];
-let solid = true;
-let filter = QueryFilter::default();
-
-if let Some((handle, projection)) = query_pipeline.project_point(
-    &collider_set, &point, solid, filter
-) {
-    // The collider closest to the point has this `handle`.
-    println!("Projected point on collider {:?}. Point projection: {}", handle, projection.point);
-    println!("Point was inside of the collider shape: {}", projection.is_inside);
-}
-
-query_pipeline.intersections_with_point(
-    &collider_set, &point, filter, |handle| {
-        // Callback called on each collider with a shape containing the point.
-        println!("The collider {:?} contains the point.", handle);
-        // Return `false` instead if we want to stop searching for other colliders containing this point.
-        true
-    }
-);
+<load path='/2d/rust/examples/rs_scene_queries2.rs' marker='PointProjection' />
 ```
 
 </TabItem>
 <TabItem value="3D">
 
 ```rust
-let point = point![1.0, 2.0, 3.0];
-let solid = true;
-let filter = QueryFilter::default();
-
-if let Some((handle, projection)) = query_pipeline.project_point(
-    &collider_set, &point, solid, filter
-) {
-    // The collider closest to the point has this `handle`.
-    println!("Projected point on collider {:?}. Point projection: {}", handle, projection.point);
-    println!("Point was inside of the collider shape: {}", projection.is_inside);
-}
-
-query_pipeline.intersections_with_point(
-    &collider_set, &point, filter, |handle| {
-        // Callback called on each collider with a shape containing the point.
-        println!("The collider {:?} contains the point.", handle);
-        // Return `false` instead if we want to stop searching for other colliders containing this point.
-        true
-    }
-);
+<load path='/3d/rust/examples/rs_scene_queries3.rs' marker='PointProjection' />
 ```
 
 </TabItem>

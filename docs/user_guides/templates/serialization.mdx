@@ -18,29 +18,7 @@ complete physics state. For convenience, the example defines a `PhysicsState` se
 relevant serializable state. It uses [bincode](https://crates.io/crates/bincode) as the serialization format:
 
 ```rust
-// Use serde derives for our wrapper struct.
-#[derive(Serialize, Deserialize)] 
-struct PhysicsState {
-    pub islands: IslandManager,
-    pub broad_phase: BroadPhase,
-    pub narrow_phase: NarrowPhase,
-    pub bodies: RigidBodySet,
-    pub colliders: ColliderSet,
-    pub joints: ImpulseJointSet,
-    pub ccd_solver: CCDSolver,
-    pub query_pipeline: QueryPipeline,
-    pub integration_parameters: IntegrationParameters,
-    pub gravity: Vector<f32>,
-}
-
-fn main() {
-    let physics_state = setup_physics_scene();
-    // Serialize everything.
-    let serialized = bincode::serialize(&physics_state).unwrap();
-    // Deserialize everything.
-    let deserialized = bincode::deserialize(&serialized).unwrap();
-    // The simulation can continue using the deserialized state.
-}
+<load path='/2d/rust/examples/rs_serialization.rs' marker='Serialization' />
 ```
 
 :::info

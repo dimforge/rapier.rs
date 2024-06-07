@@ -27,44 +27,14 @@ a point.
 <TabItem value="2D">
 
 ```rust
-let shape = Cuboid::new(vector![1.0, 2.0]);
-let shape_pos = Isometry::new(vector![0.0, 1.0], 0.8);
-let filter = QueryFilter::default();
-
-query_pipeline.intersections_with_shape(
-    &collider_set, &shape_pos, &shape, filter, |handle| {
-        println!("The collider {:?} intersects our shape.", handle);
-        true // Return `false` instead if we want to stop searching for other colliders that contain this point.
-    }
-);
-
-let aabb = AABB::new(point![-1.0, -2.0], point![1.0, 2.0]);
-query_pipeline.colliders_with_aabb_intersecting_aabb(&aabb, |handle| {
-    println!("The collider {:?} has an AABB intersecting our test AABB", handle);
-    true // Return `false` instead if we want to stop searching for other colliders that contain this point.
-});
+<load path='/2d/rust/examples/rs_scene_queries2.rs' marker='Intersection' />
 ```
 
 </TabItem>
 <TabItem value="3D">
 
 ```rust
-let shape = Cuboid::new(vector![1.0, 2.0, 3.0]);
-let shape_pos = Isometry::new(vector![0.0, 1.0, 0.0], vector![0.2, 0.7, 0.1]);
-let filter = QueryFilter::default();
-
-query_pipeline.intersections_with_shape(
-    &collider_set, &shape_pos, &shape, filter, |handle| {
-        println!("The collider {:?} intersects our shape.", handle);
-        true // Return `false` instead if we want to stop searching for other colliders that contain this point.
-    }
-);
-
-let aabb = AABB::new(point![-1.0, -2.0, -3.0], point![1.0, 2.0, 3.0]);
-query_pipeline.colliders_with_aabb_intersecting_aabb(&aabb, |handle| {
-    println!("The collider {:?} has an AABB intersecting our test AABB", handle);
-    true // Return `false` instead if we want to stop searching for other colliders that contain this point.
-});
+<load path='/3d/rust/examples/rs_scene_queries3.rs' marker='Intersection' />
 ```
 
 </TabItem>

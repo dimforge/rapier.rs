@@ -30,81 +30,14 @@ get, the more computationally expensive the ray-cast will be.
 <TabItem value="2D">
 
 ```rust
-let ray = Ray::new(point![1.0, 2.0], vector![0.0, 1.0]);
-let max_toi = 4.0;
-let solid = true;
-let filter = QueryFilter::default();
-
-if let Some((handle, toi)) = query_pipeline.cast_ray(
-    &collider_set, &ray, max_toi, solid, filter
-) {
-    // The first collider hit has the handle `handle` and it hit after
-    // the ray travelled a distance equal to `ray.dir * toi`.
-    let hit_point = ray.point_at(toi); // Same as: `ray.origin + ray.dir * toi`
-    println!("Collider {:?} hit at point {}", handle, hit_point);
-}
-
-
-if let Some((handle, intersection)) = query_pipeline.cast_ray_and_get_normal(
-    &collider_set, &ray, max_toi, solid, filter
-) {
-    // This is similar to `QueryPipeline::cast_ray` illustrated above except
-    // that it also returns the normal of the collider shape at the hit point.
-    let hit_point = ray.point_at(intersection.toi);
-    let hit_normal = intersection.normal;
-    println!("Collider {:?} hit at point {} with normal {}", handle, hit_point, hit_normal);
-}
-
-query_pipeline.intersections_with_ray(
-    &collider_set, &ray, max_toi, solid, filter,
-    |handle, intersection| {
-    // Callback called on each collider hit by the ray.
-        let hit_point = ray.point_at(intersection.toi);
-        let hit_normal = intersection.normal;
-        println!("Collider {:?} hit at point {} with normal {}", handle, hit_point, hit_normal);
-        true // Return `false` instead if we want to stop searching for other hits.
-    }
-);
+<load path='/2d/rust/examples/rs_scene_queries2.rs' marker='Raycast' />
 ```
 
 </TabItem>
 <TabItem value="3D">
 
 ```rust
-let ray = Ray::new(point![1.0, 2.0, 3.0], vector![0.0, 1.0, 0.0]);
-let max_toi = 4.0;
-let solid = true;
-let filter = QueryFilter::default();
-
-if let Some((handle, toi)) = query_pipeline.cast_ray(
-    &collider_set, &ray, max_toi, solid, filter
-) {
-    // The first collider hit has the handle `handle` and it hit after
-    // the ray travelled a distance equal to `ray.dir * toi`.
-    let hit_point = ray.point_at(toi); // Same as: `ray.origin + ray.dir * toi`
-    println!("Collider {:?} hit at point {}", handle, hit_point);
-}
-
-
-if let Some((handle, intersection)) = query_pipeline.cast_ray_and_get_normal(
-    &collider_set, &ray, max_toi, solid, filter
-) {
-    // This is similar to `QueryPipeline::cast_ray` illustrated above except
-    // that it also returns the normal of the collider shape at the hit point.
-    let hit_point = ray.point_at(intersection.toi);
-    let hit_normal = intersection.normal;
-    println!("Collider {:?} hit at point {} with normal {}", handle, hit_point, hit_normal);
-}
-
-query_pipeline.intersections_with_ray(
-    &collider_set, &ray, max_toi, solid, filter,
-    |handle, intersection| {
-    // Callback called on each collider hit by the ray.
-    let hit_point = ray.point_at(intersection.toi);
-    let hit_normal = intersection.normal;
-    println!("Collider {:?} hit at point {} with normal {}", handle, hit_point, hit_normal);
-    true // Return `false` instead if we want to stop searching for other hits.
-});
+<load path='/3d/rust/examples/rs_scene_queries3.rs' marker='Raycast' />
 ```
 
 </TabItem>
@@ -123,14 +56,14 @@ query_pipeline.intersections_with_ray(
 <TabItem value="2D">
 
 ```rust
-<load path='/2d/bevy/examples/scene_queries2.rs' marker='Raycasting' />
+<load path='/2d/bevy/examples/scene_queries2.rs' marker='Raycast' />
 ```
 
 </TabItem>
 <TabItem value="3D">
 
 ```rust
-<load path='/3d/bevy/examples/scene_queries3.rs' marker='Raycasting' />
+<load path='/3d/bevy/examples/scene_queries3.rs' marker='Raycast' />
 ```
 
 </TabItem>

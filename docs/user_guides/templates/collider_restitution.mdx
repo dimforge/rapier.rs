@@ -40,21 +40,10 @@ The restitution coefficient and restitution combine rule can both be set when th
 <rapier>
 
 ```rust
-/* Set the restitution coefficient and restitution combine rule
-  when the collider is created. */
-let collider = ColliderBuilder::ball(0.5)
-    .restitution(0.7)
-    .restitution_combine_rule(CoefficientCombineRule::Min)
-    .build();
+<load path='/2d/rust/examples/rs_colliders2.rs' marker='Restitution1' />
 ```
 ```rust
-/* Set the restitution coefficient and restitution combine rule
-   after the collider creation. */
-let collider = collider_set.get_mut(collider_handle).unwrap();
-collider.set_restitution(0.7);
-collider.set_restitution_combine_rule(CoefficientCombineRule::Min);
-assert_eq!(collider.restitution(), 0.7);
-assert_eq!(collider.restitution_combine_rule(), CoefficientCombineRule::Min);
+<load path='/2d/rust/examples/rs_colliders2.rs' marker='Restitution2' />
 ```
 
 </rapier>

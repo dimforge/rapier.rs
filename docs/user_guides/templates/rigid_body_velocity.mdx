@@ -29,50 +29,20 @@ values={[
 <TabItem value="2D">
 
 ```rust
-/* Set the velocities when the rigid-body is created. */
-let rigid_body = RigidBodyBuilder::dynamic()
-    // The linear velocity of this body.
-    // Default: zero velocity.
-    .linvel(vector![1.0, 3.0])
-    // The angular velocity of this body.
-    // Default: zero velocity.
-    .angvel(3.0)
-    // All done, actually build the rigid-body.
-    .build();
+<load path='/2d/rust/examples/rs_rigid_bodies2.rs' marker='Velocity1' />
 ```
 ```rust
-/* Set the velocities after the rigid-body creation. */
-let rigid_body = rigid_body_set.get_mut(rigid_body_handle).unwrap();
-// The `true` argument makes sure the rigid-body is awake.
-rigid_body.set_linvel(vector![1.0, 3.0], true);
-rigid_body.set_angvel(3.0, true);
-assert_eq!(*rigid_body.linvel(), vector![1.0, 3.0]);
-assert_eq!(rigid_body.angvel(), 3.0);
+<load path='/2d/rust/examples/rs_rigid_bodies2.rs' marker='Velocity2' />
 ```
 
   </TabItem>
   <TabItem value="3D">
 
 ```rust
-/* Set the velocities when the rigid-body is created. */
-let rigid_body = RigidBodyBuilder::dynamic()
-    // The linear velocity of this body.
-    // Default: zero velocity.
-    .linvel(vector![1.0, 3.0, 4.0])
-    // The angular velocity of this body.
-    // Default: zero velocity.
-    .angvel(vector![3.0, 0.0, 0.0])
-    // All done, actually build the rigid-body.
-    .build();
+<load path='/3d/rust/examples/rs_rigid_bodies3.rs' marker='Velocity1' />
 ```
 ```rust
-/* Set the velocities after the rigid-body creation. */
-let rigid_body = rigid_body_set.get_mut(rigid_body_handle).unwrap();
-// The `true` argument makes sure the rigid-body is awake.
-rigid_body.set_linvel(vector![1.0, 3.0, 4.0], true);
-rigid_body.set_angvel(vector![3.0, 0.0, 0.0], true);
-assert_eq!(*rigid_body.linvel(), vector![1.0, 3.0, 4.0]);
-assert_eq!(*rigid_body.angvel(), vector![3.0, 0.0, 0.0]);
+<load path='/3d/rust/examples/rs_rigid_bodies3.rs' marker='Velocity2' />
 ```
 
   </TabItem>

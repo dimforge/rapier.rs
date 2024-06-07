@@ -15,20 +15,7 @@ with A will be reported first, and the collision with B will be reported second.
 <rapier>
 
 ```rust
-let character_controller = KinematicCharacterController::default();
-// Use a closure to handle or collect the collisions while
-// the character is being moved.
-character_controller.move_shape(
-    dt,
-    bodies,
-    colliders,
-    queries,
-    character_shape,
-    character_pos,
-    desired_translation,
-    filter,
-    |collision| { /* Handle or collect the collision in this closure. */ }
-)
+<load path='/2d/rust/examples/rs_character_controller2.rs' marker='Collisions1' />
 ```
 
 </rapier>
@@ -65,34 +52,7 @@ forces for you if needed:
 <rapier>
 
 ```rust
-let character_controller = KinematicCharacterController::default();
-
-// First, collect all the collisions.
-let mut collisions = vec![];
-character_controller.move_shape(
-    dt,
-    &bodies,
-    &colliders,
-    &queries,
-    character_shape,
-    character_pos,
-    desired_translation,
-    filter,
-    |collision| { collisions.push(collision) }
-);
-
-// Then, let the character controller solve (and apply) the collision impulses
-// to the dynamic rigid-bodies hit along its path.
-character_controller.solve_character_collision_impulses(
-    dt,
-    &mut bodies,
-    &colliders,
-    &queries,
-    character_shape,
-    character_mass,
-    &collisions,
-    filter,
-);
+<load path='/2d/rust/examples/rs_character_controller2.rs' marker='Collisions2' />
 ```
 
 </rapier>

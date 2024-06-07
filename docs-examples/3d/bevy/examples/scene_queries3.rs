@@ -39,7 +39,7 @@ fn setup_physics(mut commands: Commands) {
         .insert(TransformBundle::from(Transform::from_xyz(0.0, 4.0, 0.0)));
 }
 
-// DOCUSAURUS: Raycasting start
+// DOCUSAURUS: Raycast start
 /* Cast a ray inside of a system. */
 fn cast_ray(rapier_context: Res<RapierContext>) {
     let ray_pos = Vec3::new(1.0, 2.0, 3.0);
@@ -86,9 +86,9 @@ fn cast_ray(rapier_context: Res<RapierContext>) {
         },
     );
 }
-// DOCUSAURUS: Raycasting stop
+// DOCUSAURUS: Raycast stop
 
-// DOCUSAURUS: Shapecasting start
+// DOCUSAURUS: Shapecast start
 /* Cast a shape inside of a system. */
 fn cast_shape(rapier_context: Res<RapierContext>) {
     let shape = Collider::cuboid(1.0, 2.0, 3.0);
@@ -114,7 +114,7 @@ fn cast_shape(rapier_context: Res<RapierContext>) {
         );
     }
 }
-// DOCUSAURUS: Shapecasting stop
+// DOCUSAURUS: Shapecast stop
 
 // DOCUSAURUS: PointProjection start
 /* Project a point inside of a system. */

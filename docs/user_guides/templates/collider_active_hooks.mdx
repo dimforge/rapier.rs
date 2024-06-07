@@ -21,19 +21,10 @@ The active hooks of a collider can be set when the collider is created or after 
 <rapier>
 
 ```rust
-/* Set the active hooks when the collider is created. */
-let collider = ColliderBuilder::ball(0.5)
-    .active_hooks(ActiveHooks::FILTER_CONTACT_PAIRS |
-                  ActiveHooks::MODIFY_SOLVER_CONTACTS)
-.build();
+<load path='/2d/rust/examples/rs_colliders2.rs' marker='ActiveHooks1' />
 ```
 ```rust
-/* Set the active hooks after the collider creation. */
-let collider = collider_set.get_mut(collider_handle).unwrap();
-collider.set_active_hooks(ActiveHooks::FILTER_CONTACT_PAIRS |
-                          ActiveHooks::MODIFY_SOLVER_CONTACTS);
-assert!(collider.active_hooks().contains(ActiveHooks::FILTER_CONTACT_PAIRS));
-assert!(collider.active_hooks().contains(ActiveHooks::MODIFY_SOLVER_CONTACTS));
+<load path='/2d/rust/examples/rs_colliders2.rs' marker='ActiveHooks2' />
 ```
 
 </rapier>

@@ -130,7 +130,7 @@ compound shape's local space:
 <rapier>
 
 ```rust
-ColliderBuilder::compound(vec![(pos1, shape1), (pos2, shape2)])
+<load path='/2d/rust/examples/rs_colliders2.rs' marker='Compound' />
 ```
 
 </rapier>
@@ -220,16 +220,10 @@ and is never used/modified by the physics-engine. This can for example be useful
 This user-data can be set when the collider is created or after its creation:
 
 ```rust
-/* Set the user-data when the collider is created. */
-let collider = ColliderBuilder::ball(0.5)
-  .user_data(42)
-  .build();
+<load path='/2d/rust/examples/rs_colliders2.rs' marker='UserData1' />
 ```
 ```rust
-/* Set the user-data after the collider creation. */
-let collider = collider_set.get_mut(collider_handle).unwrap();
-collider.user_data = 42;
-assert_eq!(collider.user_data, 42);
+<load path='/2d/rust/examples/rs_colliders2.rs' marker='UserData2' />
 ```
 
 </rapier>
