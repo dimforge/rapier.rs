@@ -95,8 +95,8 @@ fn main() {
             for solver_contact in &manifold.data.solver_contacts {
                 // Keep in mind that all the solver contact data are expressed in world-space.
                 println!("Found solver contact point: {:?}", solver_contact.point);
+                // The solver contact distance is negative if there is a penetration.
                 println!("Found solver contact distance: {:?}", solver_contact.dist);
-                // Negative if there is a penetration.
             }
         }
     }
