@@ -127,12 +127,12 @@ fn setup_physics(mut commands: Commands) {
     commands
         .spawn(Collider::ball(0.5))
         .insert(CollisionGroups::new(
-            Group::from_bits(0b1101).unwrap(),
-            Group::from_bits(0b0100).unwrap(),
+            Group::GROUP_1 | Group::GROUP_3 | Group::GROUP_4,
+            Group::GROUP_3,
         ))
         .insert(SolverGroups::new(
-            Group::from_bits(0b0011).unwrap(),
-            Group::from_bits(0b1011).unwrap(),
+            Group::GROUP_1 | Group::GROUP_2,
+            Group::GROUP_1 | Group::GROUP_2 | Group::GROUP_4,
         ));
     // DOCUSAURUS: Groups1 stop
 
@@ -205,13 +205,13 @@ fn modify_collider_groups(
     mut solver_groups: Query<&mut SolverGroups>,
 ) {
     for mut collision_groups in collision_groups.iter_mut() {
-        collision_groups.memberships = Group::from_bits(0b1101).unwrap();
-        collision_groups.filters = Group::from_bits(0b0100).unwrap();
+        collision_groups.memberships = Group::GROUP_1 | Group::GROUP_3 | Group::GROUP_4;
+        collision_groups.filters = Group::GROUP_3;
     }
 
     for mut solver_groups in solver_groups.iter_mut() {
-        solver_groups.memberships = Group::from_bits(0b0011).unwrap();
-        solver_groups.filters = Group::from_bits(0b1011).unwrap();
+        solver_groups.memberships = Group::GROUP_1 | Group::GROUP_2;
+        solver_groups.filters = Group::GROUP_1 | Group::GROUP_2 | Group::GROUP_4;
     }
 }
 // DOCUSAURUS: Groups2 stop
