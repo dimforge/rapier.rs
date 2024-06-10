@@ -44,6 +44,7 @@ to update the rendering of only the rigid-bodies that moved:
 <technote>
 this is not used, nothing links to it. Also, it's not compiling.
 </technote>
+
 ```rust
 fn print_active_bodies_positions(island_manager: Res<IslandManager>, positions: Query<&RigidBodyPositionComponent>) {
     // Iter on each dynamic rigid-bodies that moved.
