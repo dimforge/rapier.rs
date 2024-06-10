@@ -195,8 +195,8 @@ fn cast_ray_filtered(
         .exclude_sensors()
         .exclude_rigid_body(player_handle)
         .groups(CollisionGroups::new(
-            Group::from_bits(0b0011).unwrap(),
-            Group::from_bits(0b0001).unwrap(),
+            Group::GROUP_1 | Group::GROUP_2,
+            Group::GROUP_1,
         ))
         .predicate(&predicate);
 

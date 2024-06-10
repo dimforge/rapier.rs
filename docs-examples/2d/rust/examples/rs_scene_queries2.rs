@@ -80,7 +80,10 @@ fn main() {
     let filter = QueryFilter::exclude_dynamic()
         .exclude_sensors()
         .exclude_rigid_body(player_handle)
-        .groups(InteractionGroups::new(0b0011.into(), 0b0001.into()))
+        .groups(InteractionGroups::new(
+            Group::GROUP_1 | Group::GROUP_2,
+            Group::GROUP_1,
+        ))
         .predicate(&|handle, collider| collider.user_data == 10);
 
     if let Some((handle, toi)) =

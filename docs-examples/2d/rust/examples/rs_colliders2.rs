@@ -184,23 +184,41 @@ fn main() {
     // DOCUSAURUS: Groups1 start
     /* Set the collision groups and solver groups when the collider is created. */
     let collider = ColliderBuilder::ball(0.5)
-        .collision_groups(InteractionGroups::new(0b1101.into(), 0b0100.into()))
-        .solver_groups(InteractionGroups::new(0b0011.into(), 0b1011.into()))
+        .collision_groups(InteractionGroups::new(
+            Group::GROUP_1 | Group::GROUP_3 | Group::GROUP_4,
+            Group::GROUP_3,
+        ))
+        .solver_groups(InteractionGroups::new(
+            Group::GROUP_1 | Group::GROUP_2,
+            Group::GROUP_1 | Group::GROUP_2 | Group::GROUP_4,
+        ))
         .build();
     // DOCUSAURUS: Groups1 stop
 
     // DOCUSAURUS: Groups2 start
     /* Set the collision groups and solver groups after the collider creation. */
     let collider = collider_set.get_mut(collider_handle).unwrap();
-    collider.set_collision_groups(InteractionGroups::new(0b1101.into(), 0b0100.into()));
-    collider.set_solver_groups(InteractionGroups::new(0b0011.into(), 0b1011.into()));
+    collider.set_collision_groups(InteractionGroups::new(
+        Group::GROUP_1 | Group::GROUP_3 | Group::GROUP_4,
+        Group::GROUP_3,
+    ));
+    collider.set_solver_groups(InteractionGroups::new(
+        Group::GROUP_1 | Group::GROUP_2,
+        Group::GROUP_1 | Group::GROUP_2 | Group::GROUP_4,
+    ));
     assert_eq!(
         collider.collision_groups(),
-        InteractionGroups::new(0b1101.into(), 0b0100.into())
+        InteractionGroups::new(
+            Group::GROUP_1 | Group::GROUP_3 | Group::GROUP_4,
+            Group::GROUP_3
+        )
     );
     assert_eq!(
         collider.solver_groups(),
-        InteractionGroups::new(0b0011.into(), 0b1011.into())
+        InteractionGroups::new(
+            Group::GROUP_1 | Group::GROUP_2,
+            Group::GROUP_1 | Group::GROUP_2 | Group::GROUP_4
+        )
     );
     // DOCUSAURUS: Groups2 stop
 
