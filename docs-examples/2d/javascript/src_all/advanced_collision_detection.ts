@@ -1,0 +1,82 @@
+import RAPIER, { RigidBodyDesc, RigidBodyType, ColliderDesc } from '@dimforge/rapier2d';
+
+
+let world = new RAPIER.World({ x: 0.0, y: -9.81 });
+{
+
+    // DOCUSAURUS: Events start
+    let eventQueue = new RAPIER.EventQueue(true);
+    world.step(eventQueue);
+
+    eventQueue.drainCollisionEvents((handle1, handle2, started) => {
+        /* Handle the collision event. */
+    });
+
+    eventQueue.drainContactForceEvents(event => {
+        let handle1 = event.collider1(); // Handle of the first collider involved in the event.
+        let handle2 = event.collider2(); // Handle of the second collider involved in the event.
+        /* Handle the contact force event. */
+    });
+    // DOCUSAURUS: Events stop
+}
+
+{
+    // DOCUSAURUS: ContactGraph start
+    world.contactsWith(collider, (otherCollider) => {
+        // This closure is called on each collider object potentially
+        // in contact with `collider`.
+    });
+
+    world.contactPair(collider1, collider2, (manifold, flipped) => {
+        // Contact information can be read from `manifold`. 
+    });
+    // DOCUSAURUS: Shapecasting stop
+}
+
+{
+    // DOCUSAURUS: IntersectionGraph start
+    world.intersectionsWith(collider, (otherCollider) => {
+        // This closure is called on each collider potentially
+        // intersecting the collider `collider`.
+    });
+
+    let intersections = world.intersectionPair(collider1, collider2);
+    // DOCUSAURUS: IntersectionGraph stop
+}
+{
+    // DOCUSAURUS: IntersectionTest start
+    let shape = new RAPIER.Cuboid(1.0, 2.0);
+    let shapePos = { x: 1.0, y: 2.0 };
+    let shapeRot = 0.1;
+
+    world.intersectionsWithShape(shapePos, shapeRot, shape, (handle) => {
+        console.log("The collider", handle, "intersects our shape.");
+        return true; // Return `false` instead if we want to stop searching for other colliders that contain this point.
+    });
+
+    let aabbCenter = { x: -1.0, y: -2.0 };
+    let aabbHalfExtents = { x: 0.5, y: 0.6 };
+    world.collidersWithAabbIntersectingAabb(aabbCenter, aabbHalfExtents, (handle) => {
+        console.log("The collider", handle, "has an AABB intersecting our test AABB");
+        return true; // Return `false` instead if we want to stop searching for other colliders that contain this point.
+    });
+    // DOCUSAURUS: IntersectionTest stop
+}
+{
+    // DOCUSAURUS: QueryFilters start
+    let ray = new RAPIER.Ray({ x: 1.0, y: 2.0 }, { x: 0.0, y: 1.0 });
+    let maxToi = 4.0;
+    let solid = true;
+
+    let filterFlags = QueryFilterFlags.EXCLUDE_DYNAMIC,
+        let filterGroups = 0x000b0001,
+        let filterExcludeRigidBody = player_rigid_body,
+        let filterPredicate = (collider: Collider) => collider.userData == 10.0,
+
+
+        let hit = world.castRay(ray, maxToi, solid, filterFlags, filterGroups, null, filterExcludeRigidBody, filterPredicate);
+    if (hit != null) {
+        // Handle the hit.
+    }
+    // DOCUSAURUS: QueryFilters stop
+}

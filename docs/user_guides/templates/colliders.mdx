@@ -40,7 +40,7 @@ There are two ways of creating a collider with a convex shape:
 1. Using <rapier>`ColliderBuilder::convex_hull(points)`</rapier><bevy>`Collider::convex_hull(points)`</bevy><js>`ColliderDesc.convexHull(points)`</js>. This is the simplest approach: it will automatically compute the convex
    hull of the given set of points. A __convex hull__ is the smallest convex shape that contains all the given points.
 2. Using <rapier>`ColliderBuilder::convex_mesh(points, indices)`</rapier><bevy>`Collider::convex_mesh(points, indices)`</bevy><js>`ColliderDesc.convexMesh(points, indices)`</js> in
-   3D or <rapier>`ColliderBuilder::convex_polyline(points)`</rapier><bevy>`Collider::convex_polyline(points)`</bevy><js>`ColliderDesc.convexPolyline(points`</js> in 2D.
+   3D or <rapier>`ColliderBuilder::convex_polyline(points)`</rapier><bevy>`Collider::convex_polyline(points)`</bevy><js>`ColliderDesc.convexPolyline(points)`</js> in 2D.
    This takes a mesh described by its vertex buffer and index
    buffer and assumes it is already convex (you need to ensure that it is convex yourself). This will be more efficient than
    the <rapier>`ColliderBuilder::convex_hull`</rapier><bevy>`Collider::convex_hull`</bevy><js>`ColliderDesc.convexHull`</js> constructor because it

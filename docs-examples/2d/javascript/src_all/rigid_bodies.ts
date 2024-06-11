@@ -1,9 +1,9 @@
-import { World, RigidBodyDesc, RigidBodyType } from '@dimforge/rapier2d';
+import RAPIER, { RigidBodyDesc, RigidBodyType, ColliderDesc } from '@dimforge/rapier2d';
 
-function setup() {
+{
     // DOCUSAURUS: Setup start
     // The world that will contain our rigid-bodies.
-    let world = new World({ x: 0.0, y: -9.81 });
+    let world = new RAPIER.World({ x: 0.0, y: -9.81 });
 
     // Builder for a fixed rigid-body.
     let _1 = RigidBodyDesc.fixed();
@@ -46,12 +46,10 @@ function setup() {
     let position = rigidBody.translation();
     console.log("Rigid-body position: ", position.x, position.y);
 }
-setup();
 
-
-function creation() {
-    let world = new World({ x: 0.0, y: -9.81 });
-
+let world = new RAPIER.World({ x: 0.0, y: -9.81 });
+{
+    // DOCUSAURUS: position1 start
     /* Set the position when the rigid-body is created. */
     let rigidBodyDesc = RigidBodyDesc.dynamic()
         // The rigid body translation.
@@ -61,6 +59,166 @@ function creation() {
         // Default: no rotation.
         .setRotation(5.0);
     let rigidBody = world.createRigidBody(rigidBodyDesc);
+    // DOCUSAURUS: position1 stop
+
+    // DOCUSAURUS: position2 start
+    /* Set the position after the rigid-body creation. */
+    // The `true` argument makes sure the rigid-body is awake.
+    rigidBody.setTranslation({ x: 0.0, y: 5.0 }, true);
+    rigidBody.setRotation(0.2, true);
+    // DOCUSAURUS: position2 stop
 }
 
-creation()
+{
+    // DOCUSAURUS: position1 start
+    /* Set the velocities when the rigid-body is created. */
+    let rigidBodyDesc = RAPIER.RigidBodyDesc.dynamic()
+        // The linear velocity of this body.
+        // Default: zero velocity.
+        .setLinvel(1.0, 3.0)
+        // The angular velocity of this body.
+        // Default: zero velocity.
+        .setAngvel(3.0);
+    let rigidBody = world.createRigidBody(rigidBodyDesc);
+    // DOCUSAURUS: position1 stop
+
+    // DOCUSAURUS: position2 start
+    /* Set the velocities after the rigid-body creation. */
+    // The `true` argument makes sure the rigid-body is awake.
+    rigidBody.setLinvel({ x: 1.0, y: 3.0 }, true);
+    rigidBody.setAngvel(3.0, true);
+    // DOCUSAURUS: position2 stop
+}
+
+{
+    // DOCUSAURUS: Gravity1 start
+    /* Set the gravity scale when the rigid-body is created. */
+    let rigidBodyDesc = RAPIER.RigidBodyDesc.dynamic()
+        .setGravityScale(2.0);
+    let rigidBody = world.createRigidBody(rigidBodyDesc);
+    // DOCUSAURUS: Gravity1 stop
+
+    // DOCUSAURUS: Gravity2 start
+    /* Set the gravity scale after the rigid-body creation. */
+    rigidBody.setGravityScale(2.0, true);
+    // DOCUSAURUS: Gravity2 stop
+
+    // DOCUSAURUS: Forces start
+    // The `true` argument makes sure the rigid-body is awake.
+    rigidBody.resetForces(true);  // Reset the forces to zero.
+    rigidBody.resetTorques(true); // Reset the torques to zero.
+    rigidBody.addForce({ x: 0.0, y: 1000.0 }, true);
+    rigidBody.addTorque(100.0, true);
+    rigidBody.addForceAtPoint({ x: 0.0, y: 1000.0 }, { x: 1.0, y: 2.0 }, true);
+
+    rigidBody.applyImpulse({ x: 0.0, y: 1000.0 }, true);
+    rigidBody.applyTorqueImpulse(100.0, true);
+    rigidBody.applyImpulseAtPoint({ x: 0.0, y: 1000.0 }, { x: 1.0, y: 2.0 }, true);
+    // DOCUSAURUS: Forces stop
+}
+
+{
+    // DOCUSAURUS: Mass1 start
+    let rigidBodyDesc = RigidBodyDesc.dynamic();
+    let rigidBody = world.createRigidBody(rigidBodyDesc);
+    // The default density is 1.0, we are setting 2.0 for this example.
+    let colliderDesc = ColliderDesc.ball(1.0).setDensity(2.0);
+    // When the collider is attached, the rigid-body's mass and angular
+    // inertia is automatically updated to take the collider into account.
+    world.createCollider(colliderDesc, rigidBody);
+    // DOCUSAURUS: Mass1 stop
+}
+
+{
+    // DOCUSAURUS: Mass2 start
+    /* Set the mass-properties when the rigid-body is created. */
+    let rigidBodyDesc = RAPIER.RigidBodyDesc.dynamic()
+        .setAdditionalMass(0.5)
+        .setAdditionalPrincipalAngularInertia(0.3)
+        // Sets both the mass and angular inertia at once.
+        .setAdditionalMassProperties(
+            0.5,                // Mass.
+            { x: 0.0, y: 1.0 }, // Center of mass.
+            0.3                 // Principal angular inertia.
+        );
+    let rigidBody = world.createRigidBody(rigidBodyDesc);
+    // DOCUSAURUS: Mass2 stop
+}
+
+{
+    // DOCUSAURUS: LockedAxes1 start
+    /* Lock translations/rotations when the rigid-body is created. */
+    let rigidBodyDesc = RAPIER.RigidBodyDesc.dynamic()
+        .lockTranslations() // prevent translations along along all axes.
+        .lockRotations();   // prevent rotations.
+    let rigidBody = world.createRigidBody(rigidBodyDesc);
+    // DOCUSAURUS: LockedAxes1 stop
+
+    // DOCUSAURUS: LockedAxes2 start
+    /* Lock translations/rotations after the rigid-body creation. */
+    // The last `true` argument makes sure the rigid-body is awake.
+    rigidBody.lockTranslations(true, true);
+    rigidBody.lockRotations(true, true);
+    // DOCUSAURUS: LockedAxes2 stop
+}
+
+{
+    // DOCUSAURUS: Damping1 start
+    /* Lock translations/rotations when the rigid-body is created. */
+    /* Set the damping coefficients when the rigid-body is created. */
+    let rigidBodyDesc = RAPIER.RigidBodyDesc.dynamic()
+        .setLinearDamping(0.5)
+        .setAngularDamping(1.0);
+    let rigidBody = world.createRigidBody(rigidBodyDesc);
+    // DOCUSAURUS: Damping1 stop
+
+    // DOCUSAURUS: Damping2 start
+    /* Set the damping coefficients after the rigid-body creation. */
+    rigidBody.setLinearDamping(0.5);
+    rigidBody.setAngularDamping(1.0);
+    // DOCUSAURUS: Damping2 stop
+}
+
+{
+    // DOCUSAURUS: Dominance1 start
+    /* Set the damping coefficients when the rigid-body is created. */
+    let rigidBodyDesc = RAPIER.RigidBodyDesc.dynamic()
+        .setDominanceGroup(10);
+    let rigidBody = world.createRigidBody(rigidBodyDesc);
+    // DOCUSAURUS: Dominance1 stop
+
+    // DOCUSAURUS: Dominance2 start
+    /* Set the damping coefficients after the rigid-body creation. */
+    rigidBody.setDominanceGroup(10);
+    // DOCUSAURUS: Dominance2 stop
+}
+
+{
+    // DOCUSAURUS: Ccd1 start
+    /* Enable CCD when the rigid-body is created. */
+    let rigidBodyDesc = RAPIER.RigidBodyDesc.dynamic()
+        .setCcdEnabled(true);
+    let rigidBody = world.createRigidBody(rigidBodyDesc);
+    // DOCUSAURUS: Ccd1 stop
+
+    // DOCUSAURUS: Ccd2 start
+    /* Enable CCD after the rigid-body creation. */
+    rigidBody.enableCcd(true);
+    // DOCUSAURUS: Ccd2 stop
+}
+{
+    // DOCUSAURUS: Damping1 start
+    /* Lock translations/rotations when the rigid-body is created. */
+    /* Set the damping coefficients when the rigid-body is created. */
+    let rigidBodyDesc = RAPIER.RigidBodyDesc.dynamic()
+        .setLinearDamping(0.5)
+        .setAngularDamping(1.0);
+    let rigidBody = world.createRigidBody(rigidBodyDesc);
+    // DOCUSAURUS: Damping1 stop
+
+    // DOCUSAURUS: Damping2 start
+    /* Set the damping coefficients after the rigid-body creation. */
+    rigidBody.setLinearDamping(0.5);
+    rigidBody.setAngularDamping(1.0);
+    // DOCUSAURUS: Damping2 stop
+}
