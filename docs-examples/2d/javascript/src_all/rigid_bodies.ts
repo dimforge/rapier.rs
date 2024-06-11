@@ -45,15 +45,22 @@ function setup() {
 
     let position = rigidBody.translation();
     console.log("Rigid-body position: ", position.x, position.y);
-
-
 }
-/* Set the position when the rigid-body is created. */
-let rigidBodyDesc = RAPIER.RigidBodyDesc.dynamic()
-    // The rigid body translation.
-    // Default: zero vector.
-    .setTranslation(0.0, 5.0)
-    // The rigid body rotation.
-    // Default: no rotation.
-    .setRotation(5.0);
-let rigidBody = world.createRigidBody(rigidBodyDesc);
+setup();
+
+
+function creation() {
+    let world = new World({ x: 0.0, y: -9.81 });
+
+    /* Set the position when the rigid-body is created. */
+    let rigidBodyDesc = RigidBodyDesc.dynamic()
+        // The rigid body translation.
+        // Default: zero vector.
+        .setTranslation(0.0, 5.0)
+        // The rigid body rotation.
+        // Default: no rotation.
+        .setRotation(5.0);
+    let rigidBody = world.createRigidBody(rigidBodyDesc);
+}
+
+creation()

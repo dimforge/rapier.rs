@@ -4,7 +4,7 @@
   "description": "Javascript snippets from rapier.rs. Exists only to check it's compiling",
   "scripts": {
     "build": "bash build.sh",
-    "start": "static-web-server",
+    "start": "static-web-server -w static-web-server.toml",
     "preview": "npm run build && npm run start"
   },
   "author": "",
