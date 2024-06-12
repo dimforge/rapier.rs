@@ -20,9 +20,13 @@ let world = new RAPIER.World({ x: 0.0, y: -9.81 });
     // DOCUSAURUS: Events stop
 }
 
+let colliderDesc = new RAPIER.ColliderDesc(new RAPIER.Ball(0.5));
+let collider1 = world.createCollider(colliderDesc);
+let collider2 = world.createCollider(colliderDesc);
+let collider = world.createCollider(colliderDesc);
 {
     // DOCUSAURUS: ContactGraph start
-    world.contactsWith(collider, (otherCollider) => {
+    world.contactPairsWith(collider, (otherCollider) => {
         // This closure is called on each collider object potentially
         // in contact with `collider`.
     });
@@ -35,7 +39,7 @@ let world = new RAPIER.World({ x: 0.0, y: -9.81 });
 
 {
     // DOCUSAURUS: IntersectionGraph start
-    world.intersectionsWith(collider, (otherCollider) => {
+    world.intersectionPairsWith(collider, (otherCollider) => {
         // This closure is called on each collider potentially
         // intersecting the collider `collider`.
     });
@@ -61,22 +65,4 @@ let world = new RAPIER.World({ x: 0.0, y: -9.81 });
         return true; // Return `false` instead if we want to stop searching for other colliders that contain this point.
     });
     // DOCUSAURUS: IntersectionTest stop
-}
-{
-    // DOCUSAURUS: QueryFilters start
-    let ray = new RAPIER.Ray({ x: 1.0, y: 2.0 }, { x: 0.0, y: 1.0 });
-    let maxToi = 4.0;
-    let solid = true;
-
-    let filterFlags = QueryFilterFlags.EXCLUDE_DYNAMIC,
-        let filterGroups = 0x000b0001,
-        let filterExcludeRigidBody = player_rigid_body,
-        let filterPredicate = (collider: Collider) => collider.userData == 10.0,
-
-
-        let hit = world.castRay(ray, maxToi, solid, filterFlags, filterGroups, null, filterExcludeRigidBody, filterPredicate);
-    if (hit != null) {
-        // Handle the hit.
-    }
-    // DOCUSAURUS: QueryFilters stop
 }

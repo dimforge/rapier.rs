@@ -134,7 +134,6 @@ let world = new RAPIER.World({ x: 0.0, y: -9.81 });
     /* Set the mass-properties when the rigid-body is created. */
     let rigidBodyDesc = RAPIER.RigidBodyDesc.dynamic()
         .setAdditionalMass(0.5)
-        .setAdditionalPrincipalAngularInertia(0.3)
         // Sets both the mass and angular inertia at once.
         .setAdditionalMassProperties(
             0.5,                // Mass.

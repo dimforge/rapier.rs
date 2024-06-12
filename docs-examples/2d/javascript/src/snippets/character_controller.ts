@@ -17,10 +17,12 @@ let world = new RAPIER.World({ x: 0.0, y: -9.81 });
 {
     let offset = 0.01;
     let desiredTranslation = { x: 1, y: 0 };
+    let colliderDesc = new RAPIER.ColliderDesc(new RAPIER.Ball(0.5));
+    let collider_handle = world.createCollider(colliderDesc);
     // DOCUSAURUS: Setup2 start
     let characterController = world.createCharacterController(offset);
     characterController.computeColliderMovement(
-        collider,           // The collider we would like to move.
+        collider_handle,    // The collider we would like to move.
         desiredTranslation, // The movement we would like to apply if there wasn’t any obstacle.
     );
     // Read the result.

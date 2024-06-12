@@ -1,3 +1,19 @@
+
+// DOCUSAURUS: NoBundler start
+import RAPIER, { Vector2 } from 'https://cdn.skypack.dev/@dimforge/rapier2d-compat';
+RAPIER.init().then(() => {
+    // Run the simulation.
+});
+
+// OR using the await syntax:
+async function run_simulation() {
+    await RAPIER.init();
+    // Run the simulation.
+    _run_simulation(RAPIER);
+}
+run_simulation()
+// DOCUSAURUS: NoBundler stop
+
 function _run_simulation(RAPIER) {
     // Use the RAPIER module here.
     let gravity = { x: 0.0, y: -9.81 };
@@ -8,8 +24,11 @@ function _run_simulation(RAPIER) {
     world.createCollider(groundColliderDesc);
 
     // Create a dynamic rigid-body.
+    console.log("before settranslation");
+    console.log("is");
     let rigidBodyDesc = RAPIER.RigidBodyDesc.dynamic()
         .setTranslation(0.0, 1.0);
+    console.log("after settranslation");
     let rigidBody = world.createRigidBody(rigidBodyDesc);
 
     // Create a cuboid collider attached to the dynamic rigidBody.
@@ -31,19 +50,6 @@ function _run_simulation(RAPIER) {
     gameLoop();
 }
 
-// DOCUSAURUS: NoBundler start
-import RAPIER from 'https://cdn.skypack.dev/@dimforge/rapier3d-compat';
 
 
-RAPIER.init().then(() => {
-    // Run the simulation.
-});
 
-// OR using the await syntax:
-async function run_simulation() {
-    await RAPIER.init();
-    // Run the simulation.
-    _run_simulation(RAPIER);
-}
-run_simulation()
-// DOCUSAURUS: NoBundler stop

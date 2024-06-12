@@ -1,6 +1,11 @@
-import RAPIER, { RigidBodyDesc, RigidBodyType, ColliderDesc } from '@dimforge/rapier2d';
+import RAPIER, { Vector2, RigidBodyDesc, RigidBodyType, ColliderDesc } from '@dimforge/rapier2d';
 
 {
+    let vertices = new Float32Array([-1.0, -1.0, 1.0, -1.0, 1.0, 1.0]);
+    let indices = new Uint32Array([0, 2, 1]);
+    let heights = new Float32Array([0.0, 1.0, 0.5, 0.9]);
+    let scale = new Vector2(0.0, 1.0);
+
     // DOCUSAURUS: Creation start
     // The physics world.
     let world = new RAPIER.World({ x: 0.0, y: -9.81 });
