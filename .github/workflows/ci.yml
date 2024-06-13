@@ -10,17 +10,31 @@ env:
   CARGO_TERM_COLOR: always
 
 jobs:
-  check-code-snippets:
+  check-injection:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run injection script locally
+        run: find docs/user_guides/templates/ -type f -print0 | OUTPUT_FOLDER=docs/user_guides/templates_injected xargs -0 ./inject_code_in_user_guides.sh
+  test-code-snippets-rust:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - name: Install Linux dependencies
         uses: ./.github/actions/install-linux-deps
-      - name: Code snippets compilation check + tests
+      - name: Tests injection + code snippets
         run: cd docs-examples && cargo test
-  check-injection:
+  check-code-snippets-javascript:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        dimension: [2d]
+    defaults:
+      run:
+        working-directory: ./docs-examples/${{ matrix.dimension }}/javascript
     steps:
       - uses: actions/checkout@v4
-      - name: Check injection script
-        run: find docs/user_guides/templates/ -type f -print0 | OUTPUT_FOLDER=docs/user_guides/templates_injected xargs -0 ./inject_code_in_user_guides.sh
+      - name: Install dependencies
+        run: npm i
+      - name: Builds javascript snippets.
+        run: npm run build
