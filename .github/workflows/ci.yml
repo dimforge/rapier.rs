@@ -28,7 +28,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        dimension: [2d]
+        dimension: [2d, 3d]
     defaults:
       run:
         working-directory: ./docs-examples/${{ matrix.dimension }}/javascript

@@ -15,19 +15,12 @@ let body2 = world.createRigidBody(rigidBodyDesc);
 }
 
 {
-    // TODO: SphericalJoint is only and should appear in the 3d/ folder.
-    // DOCUSAURUS: SphericalJoint start
-    // let params = RAPIER.JointData.spherical({ x: 0.0, y: 0.0, z: 1.0 }, { x: 0.0, y: 0.0, z: -3.0 });
-    // let joint = world.createImpulseJoint(params, body1, body2, true);
-    // DOCUSAURUS: SphericalJoint stop
-}
-
-{
     // DOCUSAURUS: RevoluteJoint start
     let params = RAPIER.JointData.revolute({ x: 0.0, y: 1.0 }, { x: 0.0, y: -3.0 });
     let joint = world.createImpulseJoint(params, body1, body2, true);
     // DOCUSAURUS: RevoluteJoint stop
 }
+
 {
     // DOCUSAURUS: PrismaticJoint start
     let x = { x: 1.0, y: 0.0 };
@@ -37,6 +30,7 @@ let body2 = world.createRigidBody(rigidBodyDesc);
     let joint = world.createImpulseJoint(params, body1, body2, true);
     // DOCUSAURUS: PrismaticJoint stop
 }
+
 {
     // DOCUSAURUS: Motor start
     let x = { x: 1.0, y: 0.0 };

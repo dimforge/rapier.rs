@@ -4,7 +4,7 @@ import RAPIER, { Vector2, RigidBodyDesc, RigidBodyType, ColliderDesc } from '@di
     let vertices = new Float32Array([-1.0, -1.0, 1.0, -1.0, 1.0, 1.0]);
     let indices = new Uint32Array([0, 2, 1]);
     let heights = new Float32Array([0.0, 1.0, 0.5, 0.9]);
-    let scale = new Vector2(0.0, 1.0);
+    let scale = new Vector2(1.0, 1.0);
 
     // DOCUSAURUS: Creation start
     // The physics world.
@@ -33,7 +33,7 @@ import RAPIER, { Vector2, RigidBodyDesc, RigidBodyType, ColliderDesc } from '@di
         // Default: 1.0
         .setDensity(1.3)
         // The friction coefficient of this collider.
-        // Default: ColliderDesc.default_friction() == 0.5
+        // Default: 0.5
         .setFriction(0.8)
         // Whether this collider is a sensor.
         // Default: false
