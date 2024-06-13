@@ -51,76 +51,14 @@ example with a dynamic rigid-body falling on the ground.
   <TabItem value="2D">
 
 ```js
-import('@dimforge/rapier2d').then(RAPIER => {
-    // Use the RAPIER module here.
-    let gravity = { x: 0.0, y: -9.81 };
-    let world = new RAPIER.World(gravity);
-
-    // Create the ground
-    let groundColliderDesc = RAPIER.ColliderDesc.cuboid(10.0, 0.1);
-    world.createCollider(groundColliderDesc);
-
-    // Create a dynamic rigid-body.
-    let rigidBodyDesc = RAPIER.RigidBodyDesc.dynamic()
-            .setTranslation(0.0, 1.0);
-    let rigidBody = world.createRigidBody(rigidBodyDesc);
-
-    // Create a cuboid collider attached to the dynamic rigidBody.
-    let colliderDesc = RAPIER.ColliderDesc.cuboid(0.5, 0.5);
-    let collider = world.createCollider(colliderDesc, rigidBody);
-
-    // Game loop. Replace by your own game loop system.
-    let gameLoop = () => {
-      // Ste the simulation forward.  
-      world.step();
-
-      // Get and print the rigid-body's position.
-      let position = rigidBody.translation();
-      console.log("Rigid-body position: ", position.x, position.y);
-
-      setTimeout(gameLoop, 16);
-    };
-
-    gameLoop();
-})
+<load path='/2d/javascript/src/snippets/getting_started.ts' marker='basic_sim' />
 ```
 
   </TabItem>
   <TabItem value="3D">
 
 ```js
-import('@dimforge/rapier3d').then(RAPIER => {
-    // Use the RAPIER module here.
-    let gravity = { x: 0.0, y: -9.81, z: 0.0 };
-    let world = new RAPIER.World(gravity);
-  
-    // Create the ground
-    let groundColliderDesc = RAPIER.ColliderDesc.cuboid(10.0, 0.1, 10.0);
-    world.createCollider(groundColliderDesc);
-  
-    // Create a dynamic rigid-body.
-    let rigidBodyDesc = RAPIER.RigidBodyDesc.dynamic()
-            .setTranslation(0.0, 1.0, 0.0);
-    let rigidBody = world.createRigidBody(rigidBodyDesc);
-  
-    // Create a cuboid collider attached to the dynamic rigidBody.
-    let colliderDesc = RAPIER.ColliderDesc.cuboid(0.5, 0.5, 0.5);
-    let collider = world.createCollider(colliderDesc, rigidBody);
-  
-    // Game loop. Replace by your own game loop system.
-    let gameLoop = () => {
-      // Ste the simulation forward.  
-      world.step();
-  
-      // Get and print the rigid-body's position.
-      let position = rigidBody.translation();
-      console.log("Rigid-body position: ", position.x, position.y, position.z);
-  
-      setTimeout(gameLoop, 16);
-    };
-  
-    gameLoop();
-})
+<load path='/3d/javascript/src/snippets/getting_started.ts' marker='basic_sim' />
 ```
 
   </TabItem>
@@ -146,34 +84,14 @@ in base64) into the main `JS` file. This results in a slightly different initial
   <TabItem value="2D">
 
 ```js
-import RAPIER from 'https://cdn.skypack.dev/@dimforge/rapier2d-compat';
-
-RAPIER.init().then(() => {
-    // Run the simulation.
-});
-
-// OR using the await syntax:
-async function run_simulation() {
-    await RAPIER.init();
-    // Run the simulation.
-}
+<load path='/2d/javascript/src/snippets/standalone.js' marker='NoBundler' />
 ```
 
   </TabItem>
   <TabItem value="3D">
 
 ```js
-import RAPIER from 'https://cdn.skypack.dev/@dimforge/rapier3d-compat';
-
-RAPIER.init().then(() => {
-    // Run the simulation.
-});
-
-// OR using the await syntax:
-async function run_simulation() {
-    await RAPIER.init();
-    // Run the simulation.
-}
+<load path='/3d/javascript/src/snippets/standalone.js' marker='NoBundler' />
 ```
 
   </TabItem>
@@ -187,7 +105,7 @@ Rapier does not come with any built-in rendering capabilities, so you must do th
 can be accessed directly from the physics world instance by calling `debugRender()`.
 
 ```js
-const { vertices, colors } = world.debugRender()
+<load path='/2d/javascript/src/snippets/graphics/Graphics.ts' marker='Debug0' />
 ```
 
 These are each flat arrays filled with shape and color data for every body and collider in the physics world.
@@ -203,36 +121,11 @@ be based on the type of the given rigid body or collider and the current kinemat
 Below is an example of rendering this data using Pixi.js and Pixi Viewport.
 
 ```js
-import PIXI from 'pixi.js';
-import { Viewport } from 'pixi-viewport';
-
-// ...
-
-let GRAPHICS = [];
-function renderDebug (pixiViewport, physicsWorld) {
-  const { vertices, colors } = physicsWorld.debugRender();
-
-  GRAPHICS.forEach(g => g.destroy());
-  GRAPHICS = [];
-
-  for (let i = 0; i < vtx.length / 4; i += 1) {
-    const g = new PIXI.Graphics();
-    const c = new PIXI.Color({
-      r: colors[i * 4] * 255,
-      g: colors[i * 4 + 1] * 255,
-      b: colors[i * 4 + 2] * 255,
-      a: colors[i * 4 + 3] * 255
-    });
-
-    g.lineStyle(0.5, c, 1);
-    g.moveTo(vertices[i * 4],     vertices[i * 4 + 1]);
-    g.lineTo(vertices[i * 4 + 2], vertices[i * 4 + 3]);
-    g.closePath();
-
-    GRAPHICS.push(g);
-    pixiViewport.addChild(g);
-  }
-}
+<load path='/2d/javascript/src/snippets/graphics/Graphics.ts' marker='Debug1' />
+...
+```
+```js
+<load path='/2d/javascript/src/snippets/graphics/Graphics.ts' marker='Debug2' />
 ```
 
 An example of this in action can be see in the [Rapier.js testbed code](https://github.com/dimforge/rapier.js/blob/master/testbed2d/src/Graphics.ts).

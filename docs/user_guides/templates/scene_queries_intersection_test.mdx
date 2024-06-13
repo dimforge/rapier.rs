@@ -27,14 +27,14 @@ a point.
 <TabItem value="2D">
 
 ```rust
-<load path='/2d/rust/examples/rs_scene_queries2.rs' marker='Intersection' />
+<load path='/2d/rust/examples/rs_scene_queries2.rs' marker='IntersectionTest' />
 ```
 
 </TabItem>
 <TabItem value="3D">
 
 ```rust
-<load path='/3d/rust/examples/rs_scene_queries3.rs' marker='Intersection' />
+<load path='/3d/rust/examples/rs_scene_queries3.rs' marker='IntersectionTest' />
 ```
 
 </TabItem>
@@ -79,42 +79,14 @@ values={[
 <TabItem value="2D">
 
 ```js
-let shape = new RAPIER.Cuboid(1.0, 2.0);
-let shapePos = { x: 1.0, y: 2.0 };
-let shapeRot = 0.1;
-
-world.intersectionsWithShape(shapePos, shapeRot, shape, (handle) => {
-    console.log("The collider", handle, "intersects our shape.");
-    return true; // Return `false` instead if we want to stop searching for other colliders that contain this point.
-});
-
-let aabbCenter = { x: -1.0, y: -2.0 };
-let aabbHalfExtents = { x: 0.5, y: 0.6 };
-world.collidersWithAabbIntersectingAabb(aabbCenter, aabbHalfExtents, (handle) => {
-    console.log("The collider", handle, "has an AABB intersecting our test AABB");
-    return true; // Return `false` instead if we want to stop searching for other colliders that contain this point.
-});
+<load path='/2d/javascript/src/snippets/scene_queries.ts' marker='IntersectionTest' />
 ```
 
 </TabItem>
 <TabItem value="3D">
 
 ```js
-let shape = new RAPIER.Cuboid(1.0, 2.0, 3.0);
-let shapePos = { x: 1.0, y: 2.0, z: 3.0 };
-let shapeRot = { w: 1.0, x: 0.0, y: 0.0, z: 0.0 };
-
-world.intersectionsWithShape(shapePos, shapeRot, shape, (handle) => {
-    console.log("The collider", handle, "intersects our shape.");
-    return true; // Return `false` instead if we want to stop searching for other colliders that contain this point.
-});
-
-let aabbCenter = { x: -1.0, y: -2.0, z: -3.0 };
-let aabbHalfExtents = { x: 0.5, y: 0.6, z: 0.5 };
-world.collidersWithAabbIntersectingAabb(aabbCenter, aabbHalfExtents, (handle) => {
-    console.log("The collider", handle, "has an AABB intersecting our test AABB");
-    return true; // Return `false` instead if we want to stop searching for other colliders that contain this point.
-});
+<load path='/3d/javascript/src/snippets/scene_queries.ts' marker='IntersectionTest' />
 ```
 
 </TabItem>

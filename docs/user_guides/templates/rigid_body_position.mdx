@@ -28,62 +28,20 @@ values={[
 <TabItem value="2D">
 
 ```rust
-/* Set the position when the rigid-body is created. */
-let rigid_body = RigidBodyBuilder::dynamic()
-    // The rigid body translation.
-    // Default: zero vector.
-    .translation(vector![0.0, 5.0])
-    // The rigid body rotation.
-    // Default: no rotation.
-    .rotation(5.0)
-    // The rigid body position. Will override `.translation(...)` and `.rotation(...)`.
-    // Default: the identity isometry.
-    .position(Isometry::new(vector![1.0, 2.0], 0.4))
-    // All done, actually build the rigid-body.
-    .build();
+<load path='/2d/rust/examples/rs_rigid_bodies2.rs' marker='Position1' />
 ```
 ```rust
-/* Set the position after the rigid-body creation. */
-let rigid_body = rigid_body_set.get_mut(rigid_body_handle).unwrap();
-// The `true` argument makes sure the rigid-body is awake.
-rigid_body.set_translation(vector![0.0, 5.0], true);
-rigid_body.set_rotation(0.2, true);
-assert_eq!(*rigid_body.translation(), vector![0.0, 5.0]);
-assert_eq!(rigid_body.rotation().angle(), 0.2);
-
-rigid_body.set_position(Isometry::new(vector![1.0, 2.0], 0.4), true);
-assert_eq!(*rigid_body.position(), Isometry::new(vector![1.0, 2.0], 0.4));
+<load path='/2d/rust/examples/rs_rigid_bodies2.rs' marker='Position2' />
 ```
 
   </TabItem>
   <TabItem value="3D">
 
 ```rust
-/* Set the position when the rigid-body is created. */
-let rigid_body = RigidBodyBuilder::dynamic()
-    // The rigid body translation.
-    // Default: zero vector.
-    .translation(vector![0.0, 5.0, 1.0])
-    // The rigid body rotation.
-    // Default: no rotation.
-    .rotation(vector![0.2, 0.0, 0.0])
-    // The rigid body position. Will override `.translation(...)` and `.rotation(...)`.
-    // Default: the identity isometry.
-    .position(Isometry::new(vector![1.0, 2.0, 3.0], vector![0.2, 0.0, 0.0]))
-    // All done, actually build the rigid-body.
-    .build();
+<load path='/3d/rust/examples/rs_rigid_bodies3.rs' marker='Position1' />
 ```
 ```rust
-/* Set the position after the rigid-body creation. */
-let rigid_body = rigid_body_set.get_mut(rigid_body_handle).unwrap();
-// The `true` argument makes sure the rigid-body is awake.
-rigid_body.set_translation(vector![0.0, 5.0, 1.0], true);
-rigid_body.set_rotation(vector![0.2, 0.0, 0.0], true);
-assert_eq!(*rigid_body.translation(), vector![0.0, 5.0, 1.0]);
-assert_eq!(rigid_body.rotation().scaled_axis(), vector![0.2, 0.0, 0.0]);
-
-rigid_body.set_position(Isometry::new(vector![1.0, 2.0, 3.0], vector![0.0, 0.4, 0.0]), true);
-assert_eq!(*rigid_body.position(), Isometry::new(vector![1.0, 2.0, 3.0], vector![0.0, 0.4, 0.0]));
+<load path='/3d/rust/examples/rs_rigid_bodies3.rs' marker='Position2' />
 ```
 
   </TabItem>
@@ -134,42 +92,20 @@ values={[
 <TabItem value="2D">
 
 ```js
-/* Set the position when the rigid-body is created. */
-let rigidBodyDesc = RAPIER.RigidBodyDesc.dynamic()
-    // The rigid body translation.
-    // Default: zero vector.
-    .setTranslation(0.0, 5.0)
-    // The rigid body rotation.
-    // Default: no rotation.
-    .setRotation(5.0);
-let rigidBody = world.createRigidBody(rigidBodyDesc);
+<load path='/2d/javascript/src/snippets/rigid_bodies.ts' marker='Position1' />
 ```
 ```js
-/* Set the position after the rigid-body creation. */
-// The `true` argument makes sure the rigid-body is awake.
-rigidBody.setTranslation({ x: 0.0, y: 5.0 }, true);
-rigidBody.setRotation(0.2, true);
+<load path='/2d/javascript/src/snippets/rigid_bodies.ts' marker='Position2' />
 ```
 
   </TabItem>
   <TabItem value="3D">
 
 ```js
-/* Set the position when the rigid-body is created. */
-let rigidBodyDesc = RAPIER.RigidBodyDesc.dynamic()
-    // The rigid body translation.
-    // Default: zero vector.
-    .setTranslation(0.0, 5.0, 1.0)
-    // The rigid body rotation as a quaternion.
-    // Default: no rotation.
-    .setRotation({ w: 1.0, x: 0.0, y: 0.0, z: 0.0 });
-let rigidBody = world.createRigidBody(rigidBodyDesc);
+<load path='/3d/javascript/src/snippets/rigid_bodies.ts' marker='Position1' />
 ```
 ```js
-/* Set the position after the rigid-body creation. */
-// The `true` argument makes sure the rigid-body is awake.
-rigidBody.setTranslation({ x: 0.0, y: 5.0, z: 1.0 }, true);
-rigidBody.setRotation({ w: 1.0, x: 0.0, y: 0.0, z: 0.0 }, true);
+<load path='/3d/javascript/src/snippets/rigid_bodies.ts' marker='Position2' />
 ```
 
   </TabItem>

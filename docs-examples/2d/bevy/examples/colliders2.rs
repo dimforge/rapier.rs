@@ -136,12 +136,12 @@ fn setup_physics(mut commands: Commands) {
         ));
     // DOCUSAURUS: Groups1 stop
 
-    // DOCUSAURUS: ActiveCollisions1 start
+    // DOCUSAURUS: ActiveCollisionTypes1 start
     /* Set the active collision types when the collider is created. */
     commands
         .spawn(Collider::ball(0.5))
         .insert(ActiveCollisionTypes::default() | ActiveCollisionTypes::KINEMATIC_STATIC);
-    // DOCUSAURUS: ActiveCollisions1 stop
+    // DOCUSAURUS: ActiveCollisionTypes1 stop
 
     // DOCUSAURUS: ActiveEvents1 start
     /* Set the active events when the collider is created. */
@@ -216,14 +216,14 @@ fn modify_collider_groups(
 }
 // DOCUSAURUS: Groups2 stop
 
-// DOCUSAURUS: ActiveCollisions2 start
+// DOCUSAURUS: ActiveCollisionTypes2 start
 /* Set the active collision types inside of a system. */
 fn modify_collider_active_collision_types(mut active_types: Query<&mut ActiveCollisionTypes>) {
     for mut active_types in active_types.iter_mut() {
         *active_types = (ActiveCollisionTypes::default() | ActiveCollisionTypes::KINEMATIC_STATIC);
     }
 }
-// DOCUSAURUS: ActiveCollisions2 stop
+// DOCUSAURUS: ActiveCollisionTypes2 stop
 
 // DOCUSAURUS: ActiveEvents2 start
 /* Set the active events inside of a system. */

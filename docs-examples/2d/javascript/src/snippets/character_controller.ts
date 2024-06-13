@@ -1,4 +1,4 @@
-import RAPIER, { RigidBodyDesc, RigidBodyType, ColliderDesc } from '@dimforge/rapier2d';
+import RAPIER from '@dimforge/rapier2d';
 
 
 let world = new RAPIER.World({ x: 0.0, y: -9.81 });
@@ -41,10 +41,8 @@ let world = new RAPIER.World({ x: 0.0, y: -9.81 });
 {
     // DOCUSAURUS: UpVector start
     let characterController = world.createCharacterController(0.01);
-    // Don’t allow climbing slopes larger than 45 degrees.
-    characterController.setMaxSlopeClimbAngle(45 * Math.PI / 180);
-    // Automatically slide down on slopes smaller than 30 degrees.
-    characterController.setMinSlopeSlideAngle(30 * Math.PI / 180);
+    // Change the character controller’s up vector to the positive X axis.
+    characterController.setUp({ x: 1.0, y: 0.0 });
     // DOCUSAURUS: UpVector stop
 }
 {
@@ -66,16 +64,6 @@ let world = new RAPIER.World({ x: 0.0, y: -9.81 });
     // Disable autostep.
     characterController.disableAutostep();
     // DOCUSAURUS: Stairs stop
-}
-
-{
-    // DOCUSAURUS: Snap start
-    let characterController = world.createCharacterController(0.01);
-    // Snap to the ground if the vertical distance to the ground is smaller than 0.5.
-    characterController.enableSnapToGround(0.5);
-    // Disable snap-to-ground.
-    characterController.disableSnapToGround();
-    // DOCUSAURUS: Snap stop
 }
 
 {

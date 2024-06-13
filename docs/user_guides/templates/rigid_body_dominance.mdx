@@ -46,14 +46,10 @@ The dominance group can be set when the rigid-body is created or after its creat
 <js>
 
 ```js
-/* Set the damping coefficients when the rigid-body is created. */
-let rigidBodyDesc = RAPIER.RigidBodyDesc.dynamic()
-    .setDominanceGroup(10);
-let rigidBody = world.createRigidBody(rigidBodyDesc);
+<load path='/2d/javascript/src/snippets/rigid_bodies.ts' marker='Dominance1' />
 ```
 ```js
-/* Set the damping coefficients after the rigid-body creation. */
-rigidBody.setDominanceGroup(10);
+<load path='/2d/javascript/src/snippets/rigid_bodies.ts' marker='Dominance2' />
 ```
 
 </js>

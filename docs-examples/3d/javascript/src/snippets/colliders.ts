@@ -1,4 +1,4 @@
-import RAPIER, { Vector3, RigidBodyDesc, RigidBodyType, ColliderDesc } from '@dimforge/rapier3d';
+import RAPIER, { Vector3, ColliderDesc } from '@dimforge/rapier3d';
 
 {
     let vertices = new Float32Array([-1.0, -1.0, 0.0, 1.0, -1.0, 0.0, 1.0, 1.0, 0.0]);
@@ -52,7 +52,7 @@ import RAPIER, { Vector3, RigidBodyDesc, RigidBodyType, ColliderDesc } from '@di
 
 let world = new RAPIER.World({ x: 0.0, y: -9.81, z: 0.0 });
 {
-    // DOCUSAURUS: MassProperties start
+    // DOCUSAURUS: Mass start
     let rigidBodyDesc = RAPIER.RigidBodyDesc.dynamic();
     let rigidBody = world.createRigidBody(rigidBodyDesc);
     // First option: by setting the density of the collider (or we could just leave
@@ -68,7 +68,7 @@ let world = new RAPIER.World({ x: 0.0, y: -9.81, z: 0.0 });
     // When the collider is attached, the rigid-body's mass and angular
     // inertia is automatically updated to take the collider into account.
     let collider = world.createCollider(colliderDesc, rigidBody);
-    // DOCUSAURUS: MassProperties stop
+    // DOCUSAURUS: Mass stop
 }
 
 {
@@ -96,7 +96,10 @@ let world = new RAPIER.World({ x: 0.0, y: -9.81, z: 0.0 });
     // Attach the collider to the rigid-body. The collider's position wrt. the rigid-body
     // is automatically set to the collider current position when this method is called.
     let collider = world.createCollider(colliderDesc, rigidBody);
+    // DOCUSAURUS: Position3 stop
+
+    // DOCUSAURUS: Position4 start
     /* Set the collider position wrt. its parent after the collider creation. */
     collider.setTranslationWrtParent({ x: 1.0, y: 2.0, z: 3.0 });
-    // DOCUSAURUS: Position3 stop
+    // DOCUSAURUS: Position4 stop
 }

@@ -1,10 +1,10 @@
-import RAPIER, { Collider, QueryFilterFlags, RigidBodyDesc, RigidBodyType, ColliderDesc } from '@dimforge/rapier3d';
+import RAPIER, { QueryFilterFlags } from '@dimforge/rapier3d';
 
 
 let world = new RAPIER.World({ x: 0.0, y: -9.81, z: 0.0 });
 {
 
-    // DOCUSAURUS: Raycasting start
+    // DOCUSAURUS: Raycast start
     let ray = new RAPIER.Ray({ x: 1.0, y: 2.0, z: 3.0 }, { x: 0.0, y: 1.0, z: 0.0 });
     let maxToi = 4.0;
     let solid = true;
@@ -31,18 +31,17 @@ let world = new RAPIER.World({ x: 0.0, y: -9.81, z: 0.0 });
         console.log("Collider", hit.collider, "hit at point", hitPoint, "with normal", hit.normal);
         return true; // Return `false` instead if we want to stop searching for other hits.
     });
-    // DOCUSAURUS: Raycasting stop
+    // DOCUSAURUS: Raycast stop
 }
 
 {
     let collider = world.createCollider(new RAPIER.ColliderDesc(new RAPIER.Ball(0.5)));
-    // Or create the collider and attach it to a rigid-body.
     let rigidBody = world.createRigidBody(RAPIER.RigidBodyDesc.dynamic());
-    // DOCUSAURUS: Shapecasting start
-    let shape = new RAPIER.Cuboid(1.0, 2.0, 3.0);
+    // DOCUSAURUS: Shapecast start
     let shapePos = { x: 0.0, y: 1.0, z: 0.0 };
     let shapeRot = { w: 1.0, x: 0.0, y: 0.0, z: 0.0 };
     let shapeVel = { x: 0.1, y: 0.4, z: 1.0 };
+    let shape = new RAPIER.Cuboid(1.0, 2.0, 3.0);
     let targetDistance = 0.0;
     let maxToi = 4.0;
     // Optional parameters:
@@ -51,7 +50,6 @@ let world = new RAPIER.World({ x: 0.0, y: -9.81, z: 0.0 });
     let filterGroups = 0x000b0001;
     let filterExcludeCollider = collider;
     let filterExcludeRigidBody = rigidBody;
-    // FIXME: fix cast shape
 
     let hit = world.castShape(shapePos, shapeRot, shapeVel, shape, targetDistance, maxToi,
         stopAtPenetration, filterFlags, filterGroups, filterExcludeCollider, filterExcludeRigidBody);
@@ -60,11 +58,11 @@ let world = new RAPIER.World({ x: 0.0, y: -9.81, z: 0.0 });
         // structure containing details about the hit configuration.
         console.log("Hit the collider", hit.collider, "at time", hit.time_of_impact);
     }
-    // DOCUSAURUS: Shapecasting stop
+    // DOCUSAURUS: Shapecast stop
 }
 
 {
-    // DOCUSAURUS: Pointprojection start
+    // DOCUSAURUS: PointProjection start
     let point = { x: 1.0, y: 2.0, z: 1.0 };
     let solid = true;
 
@@ -81,7 +79,7 @@ let world = new RAPIER.World({ x: 0.0, y: -9.81, z: 0.0 });
         // Return `false` instead if we want to stop searching for other colliders containing this point.
         return true;
     });
-    // DOCUSAURUS: Pointprojection stop
+    // DOCUSAURUS: PointProjection stop
 }
 {
     // DOCUSAURUS: IntersectionTest start

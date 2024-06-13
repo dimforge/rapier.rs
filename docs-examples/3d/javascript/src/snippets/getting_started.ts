@@ -1,3 +1,4 @@
+// DOCUSAURUS: basic_sim start
 import('@dimforge/rapier3d').then(RAPIER => {
     // Use the RAPIER module here.
     let gravity = { x: 0.0, y: -9.81, z: 0.0 };
@@ -30,3 +31,4 @@ import('@dimforge/rapier3d').then(RAPIER => {
 
     gameLoop();
 })
+// DOCUSAURUS: basic_sim stop

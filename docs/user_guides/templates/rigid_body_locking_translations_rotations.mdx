@@ -85,41 +85,21 @@ values={[
 <TabItem value="2D">
 
 ```js
-/* Lock translations/rotations when the rigid-body is created. */
-let rigidBodyDesc = RAPIER.RigidBodyDesc.dynamic()
-    .lockTranslations() // prevent translations along along all axes.
-    .lockRotations();   // prevent rotations.
-let rigidBody = world.createRigidBody(rigidBodyDesc);
-```
-
-```js
-/* Lock translations/rotations after the rigid-body creation. */
-// The last `true` argument makes sure the rigid-body is awake.
-rigidBody.lockTranslations(true, true);
-rigidBody.lockRotations(true, true);
+<load path='/2d/javascript/src/snippets/rigid_bodies.ts' marker='LockedAxes1' />
 ```
 
   </TabItem>
   <TabItem value="3D">
 
 ```js
-/* Lock translations/rotations when the rigid-body is created. */
-let rigidBodyDesc = RAPIER.RigidBodyDesc.dynamic()
-    .lockTranslations() // prevent translations along along all axes.
-    .lockRotations()    // prevent rotations along all axes.
-    .setEnabledRotations(true, false, false); // only enable rotations along the X axis.
-let rigidBody = world.createRigidBody(rigidBodyDesc);
-```
-
-```js
-/* Lock translations/rotations after the rigid-body creation. */
-// The last `true` argument makes sure the rigid-body is awake.
-rigidBody.lockTranslations(true, true);
-rigidBody.lockRotations(true, true);
-rigidBody.setEnabledRotations(true, false, false, true);
+<load path='/3d/javascript/src/snippets/rigid_bodies.ts' marker='LockedAxes1' />
 ```
 
   </TabItem>
 </Tabs>
+
+```js
+<load path='/2d/javascript/src/snippets/rigid_bodies.ts' marker='LockedAxes2' />
+```
 
 </js>

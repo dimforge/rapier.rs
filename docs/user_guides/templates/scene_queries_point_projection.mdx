@@ -69,45 +69,14 @@ values={[
 <TabItem value="2D">
 
 ```js
-let point = { x: 1.0, y: 2.0 };
-let solid = true;
-
-let proj = world.projectPoint(point, solid);
-if (proj != null) {
-    // The collider closest to the point has this `handle`.
-    console.log("Projected point on collider ", proj.colliderHandle, ". Point projection: ", proj.point);
-    console.log("Point was inside of the collider shape: {}", proj.isInside);
-}
-
-world.intersectionsWithPoint(point, (handle) => {
-    // Callback called on each collider with a shape containing the point.
-    console.log("The collider", handle, "contains the point.");
-    // Return `false` instead if we want to stop searching for other colliders containing this point.
-    return true;
-});
+<load path='/2d/javascript/src/snippets/scene_queries.ts' marker='PointProjection' />
 ```
 
 </TabItem>
 <TabItem value="3D">
 
 ```js
-let point = { x: 1.0, y: 2.0, z: 3.0 };
-let solid = true;
-let groups = 0xffffffff;
-
-let proj = world.projectPoint(point, solid);
-if (proj != null) {
-    // The collider closest to the point has this `handle`.
-    console.log("Projected point on collider ", proj.colliderHandle, ". Point projection: ", proj.point);
-    console.log("Point was inside of the collider shape: {}", proj.isInside);
-}
-
-world.intersectionsWithPoint(point, (handle) => {
-    // Callback called on each collider with a shape containing the point.
-    console.log("The collider", handle, "contains the point.");
-    // Return `false` instead if we want to stop searching for other colliders containing this point.
-    return true;
-});
+<load path='/3d/javascript/src/snippets/scene_queries.ts' marker='PointProjection' />
 ```
 
 </TabItem>

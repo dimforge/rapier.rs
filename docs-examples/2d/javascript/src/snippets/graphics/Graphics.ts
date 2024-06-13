@@ -1,9 +1,9 @@
 // Adapted from https://github.com/dimforge/rapier.js/blob/a86610ffc744efb1541f896cd0f421993e6ddb54/testbed2d/src/Graphics.ts
 
-// DOCUSAURUS: debug1 start
+// DOCUSAURUS: Debug1 start
 import * as PIXI from "pixi.js";
 import { Viewport } from "pixi-viewport";
-// DOCUSAURUS: debug1 stop
+// DOCUSAURUS: Debug1 stop
 
 import type * as RAPIER from "@dimforge/rapier2d";
 
@@ -54,13 +54,13 @@ export class Graphics {
         window.addEventListener("resize", onWindowResize, false);
     }
 
-    // DOCUSAURUS: debug2 start
     lines: PIXI.Graphics;
 
+    // DOCUSAURUS: Debug2 start
     render(world: RAPIER.World) {
-        // DOCUSAURUS: debug0 start
+        // DOCUSAURUS: Debug0 start
         const { vertices, colors } = world.debugRender();
-        // DOCUSAURUS: debug0 stop
+        // DOCUSAURUS: Debug0 stop
 
         this.lines.clear();
 
@@ -77,7 +77,7 @@ export class Graphics {
 
         this.renderer.render(this.scene);
     }
-    // DOCUSAURUS: debug2 stop
+    // DOCUSAURUS: Debug2 stop
 
     lookAt(pos: { zoom: number; target: { x: number; y: number } }) {
         this.viewport.setZoom(pos.zoom);

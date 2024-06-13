@@ -112,86 +112,14 @@ values={[
 <TabItem value="2D">
 
 ```js
-// The physics world.
-let world = new RAPIER.World({ x: 0.0, y: -9.81 });
-
-// Builder for a ball-shaped collider.
-let example1 = RAPIER.ColliderDesc.ball(0.5);
-// Builder for a cuboid-shaped collider.
-let example2 = RAPIER.ColliderDesc.cuboid(0.5, 0.2);
-// Builder for a capsule-shaped collider. The capsule principal axis is the `y` coordinate axis.
-let example3 = RAPIER.ColliderDesc.capsule(0.5, 0.2);
-// Builder for a triangle-mesh-shaped collider.
-let example4 = RAPIER.ColliderDesc.trimesh(vertices, indices);
-// Builder for a heightfield-shaped collider.
-let example5 = RAPIER.ColliderDesc.heightfield(heights, scale);
-// Builder for a collider with the given shape.
-let colliderDesc = new RAPIER.ColliderDesc(new RAPIER.Ball(0.5))
-    // The collider translation wrt. the body it is attached to.
-    // Default: the zero vector.
-    .setTranslation(1.0, 2.0)
-    // The collider rotation wrt. the body it is attached to.
-    // Default: the identity rotation.
-    .setRotation(3.14)
-    // The collider density. If non-zero the collider's mass and angular inertia will be added
-    // to the inertial properties of the body it is attached to.
-    // Default: 1.0
-    .setDensity(1.3)
-    // The friction coefficient of this collider.
-        // Default: ColliderDesc.default_friction() == 0.5
-    .setFriction(0.8)
-    // Whether this collider is a sensor.
-    // Default: false
-    .setSensor(true);
-
-// Create the collider, without attaching it to a rigid-body.
-let handle = world.createCollider(colliderDesc);
-// Or create the collider and attach it to a rigid-body.
-let rigidBody = world.createRigidBody(RAPIER.RigidBodyDesc.dynamic());
-let collider = world.createCollider(colliderDesc, rigidBody);
+<load path='/2d/javascript/src/snippets/colliders.ts' marker='Creation' />
 ```
 
   </TabItem>
   <TabItem value="3D">
 
 ```js
-// The physics world.
-let world = new World({ x: 0.0, y: -9.81, z: 0.0 });
-
-// Builder for a ball-shaped collider.
-let example1 = RAPIER.ColliderDesc.ball(0.5);
-// Builder for a cuboid-shaped collider.
-let example2 = RAPIER.ColliderDesc.cuboid(0.5, 0.2, 0.1);
-// Builder for a capsule-shaped collider. The capsule principal axis is the `y` coordinate axis.
-let example3 = RAPIER.ColliderDesc.capsule(0.5, 0.2);
-// Builder for a triangle-mesh-shaped collider.
-let example4 = RAPIER.ColliderDesc.trimesh(vertices, indices);
-// Builder for a heightfield-shaped collider.
-let example5 = RAPIER.ColliderDesc.heightfield(10, 10, heights, scale);
-// Builder for a collider with the given shape.
-let colliderDesc = new RAPIER.ColliderDesc(new RAPIER.Ball(0.5))
-    // The collider translation wrt. the body it is attached to.
-    // Default: the zero vector.
-    .setTranslation(1.0, 2.0, 3.0)
-    // The collider rotation wrt. the body it is attached to, as a unit quaternion.
-    // Default: the identity rotation.
-    .setRotation({ w: 1.0, x: 0.0, y: 0.0, z: 0.0 })
-    // The collider density. If non-zero the collider's mass and angular inertia will be added
-    // to the inertial properties of the body it is attached to.
-    // Default: 1.0
-    .setDensity(1.3)
-    // The friction coefficient of this collider.
-    // Default: 0.5
-    .setFriction(0.8)
-    // Whether this collider is a sensor.
-    // Default: false
-    .setSensor(true);
-
-// Create the collider, without attaching it to a rigid-body.
-let handle = world.createCollider(colliderDesc);
-// Or create the collider and attach it to a rigid-body.
-let rigidBody = world.createRigidBody(RAPIER.RigidBodyDesc.dynamic());
-let collider = world.createCollider(colliderDesc, rigidBody);
+<load path='/3d/javascript/src/snippets/colliders.ts' marker='Creation' />
 ```
 
   </TabItem>

@@ -1,10 +1,10 @@
-import RAPIER, { Collider, QueryFilterFlags, RigidBodyDesc, RigidBodyType, ColliderDesc } from '@dimforge/rapier2d';
+import RAPIER, { Collider, QueryFilterFlags, RigidBodyDesc } from '@dimforge/rapier2d';
 
 
 let world = new RAPIER.World({ x: 0.0, y: -9.81 });
 {
 
-    // DOCUSAURUS: Raycasting start
+    // DOCUSAURUS: Raycast start
     let ray = new RAPIER.Ray({ x: 1.0, y: 2.0 }, { x: 0.0, y: 1.0 });
     let maxToi = 4.0;
     let solid = true;
@@ -31,30 +31,38 @@ let world = new RAPIER.World({ x: 0.0, y: -9.81 });
         console.log("Collider", hit.collider, "hit at point", hitPoint, "with normal", hit.normal);
         return true; // Return `false` instead if we want to stop searching for other hits.
     });
-    // DOCUSAURUS: Raycasting stop
+    // DOCUSAURUS: Raycast stop
 }
 
 {
-    // DOCUSAURUS: Shapecasting start
-    let shape = new RAPIER.Cuboid(1.0, 2.0);
+    let collider = world.createCollider(new RAPIER.ColliderDesc(new RAPIER.Ball(0.5)));
+    let rigidBody = world.createRigidBody(RAPIER.RigidBodyDesc.dynamic());
+    // DOCUSAURUS: Shapecast start
     let shapePos = { x: 0.0, y: 1.0 };
     let shapeRot = 0.2;
     let shapeVel = { x: 0.1, y: 0.4 };
+    let shape = new RAPIER.Cuboid(1.0, 2.0);
+    let targetDistance = 0.0;
     let maxToi = 4.0;
+    // Optional parameters:
+    let stopAtPenetration = true;
+    let filterFlags = QueryFilterFlags.EXCLUDE_DYNAMIC;
+    let filterGroups = 0x000b0001;
+    let filterExcludeCollider = collider;
+    let filterExcludeRigidBody = rigidBody;
 
-    // FIXME: fix cast shape
-    /*
-    let hit = world.castShape(shapePos, shapeRot, shapeVel, shape, maxToi);
+    let hit = world.castShape(shapePos, shapeRot, shapeVel, shape, targetDistance, maxToi,
+        stopAtPenetration, filterFlags, filterGroups, filterExcludeCollider, filterExcludeRigidBody);
     if (hit != null) {
         // The first collider hit has the handle `handle`. The `hit` is a
         // structure containing details about the hit configuration.
         console.log("Hit the collider", hit.collider, "at time", hit.time_of_impact);
-    }*/
-    // DOCUSAURUS: Shapecasting stop
+    }
+    // DOCUSAURUS: Shapecast stop
 }
 
 {
-    // DOCUSAURUS: Pointprojection start
+    // DOCUSAURUS: PointProjection start
     let point = { x: 1.0, y: 2.0 };
     let solid = true;
 
@@ -71,7 +79,7 @@ let world = new RAPIER.World({ x: 0.0, y: -9.81 });
         // Return `false` instead if we want to stop searching for other colliders containing this point.
         return true;
     });
-    // DOCUSAURUS: Pointprojection stop
+    // DOCUSAURUS: PointProjection stop
 }
 {
     // DOCUSAURUS: IntersectionTest start
@@ -95,7 +103,10 @@ let world = new RAPIER.World({ x: 0.0, y: -9.81 });
 {
     let rigidBodyDesc = RigidBodyDesc.dynamic();
     let player_rigid_body = world.createRigidBody(rigidBodyDesc);
-    // DOCUSAURUS: QueryFilters start
+    let collider = world.createCollider(new RAPIER.ColliderDesc(new RAPIER.Ball(0.5)));
+    let data = new Map();
+    data.set(collider.handle, 10);
+    // DOCUSAURUS: QueryFilter start
     let ray = new RAPIER.Ray({ x: 1.0, y: 2.0 }, { x: 0.0, y: 1.0 });
     let maxToi = 4.0;
     let solid = true;
@@ -103,13 +114,11 @@ let world = new RAPIER.World({ x: 0.0, y: -9.81 });
     let filterFlags = QueryFilterFlags.EXCLUDE_DYNAMIC;
     let filterGroups = 0x000b0001;
     let filterExcludeRigidBody = player_rigid_body;
-    // FIXME: no userdata for collider ?
-    /*let filterPredicate = (collider: Collider) => collider.userData == 10.0;
-
+    let filterPredicate = (collider: Collider) => data.get(collider.handle) == 10.0;
 
     let hit = world.castRay(ray, maxToi, solid, filterFlags, filterGroups, null, filterExcludeRigidBody, filterPredicate);
     if (hit != null) {
         // Handle the hit.
-    }*/
-    // DOCUSAURUS: QueryFilters stop
+    }
+    // DOCUSAURUS: QueryFilter stop
 }

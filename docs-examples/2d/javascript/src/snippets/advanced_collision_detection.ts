@@ -1,4 +1,4 @@
-import RAPIER, { RigidBodyDesc, RigidBodyType, ColliderDesc } from '@dimforge/rapier2d';
+import RAPIER from '@dimforge/rapier2d';
 
 
 let world = new RAPIER.World({ x: 0.0, y: -9.81 });
@@ -34,7 +34,7 @@ let collider = world.createCollider(colliderDesc);
     world.contactPair(collider1, collider2, (manifold, flipped) => {
         // Contact information can be read from `manifold`. 
     });
-    // DOCUSAURUS: Shapecasting stop
+    // DOCUSAURUS: ContactGraph stop
 }
 
 {

@@ -42,14 +42,10 @@ when creating a rigid-body or after its creation:
 <js>
 
 ```js
-/* Enable CCD when the rigid-body is created. */
-let rigidBodyDesc = RAPIER.RigidBodyDesc.dynamic()
-    .setCcdEnabled(true);
-let rigidBody =  world.createRigidBody(rigidBodyDesc);
+<load path='/2d/javascript/src/snippets/rigid_bodies.ts' marker='Ccd1' />
 ```
 ```js
-/* Enable CCD after the rigid-body creation. */
-rigidBody.enableCcd(true);
+<load path='/2d/javascript/src/snippets/rigid_bodies.ts' marker='Ccd2' />
 ```
 
 </js>

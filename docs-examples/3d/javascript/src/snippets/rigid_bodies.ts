@@ -1,7 +1,7 @@
-import RAPIER, { RigidBodyDesc, RigidBodyType, ColliderDesc } from '@dimforge/rapier3d';
+import RAPIER, { RigidBodyDesc, RigidBodyType } from '@dimforge/rapier3d';
 
 {
-    // DOCUSAURUS: Setup start
+    // DOCUSAURUS: Creation start
     // The world that will contain our rigid-bodies.
     let world = new RAPIER.World({ x: 0.0, y: -9.81, z: 0.0 });
 
@@ -41,7 +41,7 @@ import RAPIER, { RigidBodyDesc, RigidBodyType, ColliderDesc } from '@dimforge/ra
     let rigidBody = world.createRigidBody(rigidBodyDesc);
     // The integer handle of the rigid-body can be read from the `handle` field. 
     let rigidBodyHandle = rigidBody.handle;
-    // DOCUSAURUS: Setup stop
+    // DOCUSAURUS: Creation stop
 
     let position = rigidBody.translation();
     console.log("Rigid-body position: ", position.x, position.y);
@@ -49,7 +49,7 @@ import RAPIER, { RigidBodyDesc, RigidBodyType, ColliderDesc } from '@dimforge/ra
 
 let world = new RAPIER.World({ x: 0.0, y: -9.81, z: 0.0 });
 {
-    // DOCUSAURUS: position1 start
+    // DOCUSAURUS: Position1 start
     /* Set the position when the rigid-body is created. */
     let rigidBodyDesc = RigidBodyDesc.dynamic()
         // The rigid body translation.
@@ -59,18 +59,18 @@ let world = new RAPIER.World({ x: 0.0, y: -9.81, z: 0.0 });
         // Default: no rotation.
         .setRotation({ w: 1.0, x: 0.0, y: 0.0, z: 0.0 });
     let rigidBody = world.createRigidBody(rigidBodyDesc);
-    // DOCUSAURUS: position1 stop
+    // DOCUSAURUS: Position1 stop
 
-    // DOCUSAURUS: position2 start
+    // DOCUSAURUS: Position2 start
     /* Set the position after the rigid-body creation. */
     // The `true` argument makes sure the rigid-body is awake.
     rigidBody.setTranslation({ x: 0.0, y: 5.0, z: 1.0 }, true);
     rigidBody.setRotation({ w: 1.0, x: 0.0, y: 0.0, z: 0.0 }, true);
-    // DOCUSAURUS: position2 stop
+    // DOCUSAURUS: Position2 stop
 }
 
 {
-    // DOCUSAURUS: position1 start
+    // DOCUSAURUS: Velocity1 start
     /* Set the velocities when the rigid-body is created. */
     let rigidBodyDesc = RAPIER.RigidBodyDesc.dynamic()
         // The linear velocity of this body.
@@ -80,14 +80,14 @@ let world = new RAPIER.World({ x: 0.0, y: -9.81, z: 0.0 });
         // Default: zero velocity.
         .setAngvel({ x: 3.0, y: 0.0, z: 0.0 });
     let rigidBody = world.createRigidBody(rigidBodyDesc);
-    // DOCUSAURUS: position1 stop
+    // DOCUSAURUS: Velocity1 stop
 
-    // DOCUSAURUS: position2 start
+    // DOCUSAURUS: Velocity2 start
     /* Set the velocities after the rigid-body creation. */
     // The `true` argument makes sure the rigid-body is awake.
     rigidBody.setLinvel({ x: 1.0, y: 3.0, z: 4.0 }, true);
     rigidBody.setAngvel({ x: 3.0, y: 0.0, z: 0.0 }, true);
-    // DOCUSAURUS: position2 stop
+    // DOCUSAURUS: Velocity2 stop
 }
 
 {

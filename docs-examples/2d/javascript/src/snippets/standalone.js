@@ -24,11 +24,8 @@ function _run_simulation(RAPIER) {
     world.createCollider(groundColliderDesc);
 
     // Create a dynamic rigid-body.
-    console.log("before settranslation");
-    console.log("is");
     let rigidBodyDesc = RAPIER.RigidBodyDesc.dynamic()
         .setTranslation(0.0, 1.0);
-    console.log("after settranslation");
     let rigidBody = world.createRigidBody(rigidBodyDesc);
 
     // Create a cuboid collider attached to the dynamic rigidBody.

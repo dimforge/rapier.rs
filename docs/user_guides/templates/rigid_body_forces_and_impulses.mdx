@@ -81,32 +81,14 @@ values={[
 <TabItem value="2D">
 
 ```js
-// The `true` argument makes sure the rigid-body is awake.
-rigidBody.resetForces(true);  // Reset the forces to zero.
-rigidBody.resetTorques(true); // Reset the torques to zero.
-rigidBody.addForce({ x: 0.0, y: 1000.0 }, true);
-rigidBody.addTorque(100.0, true);
-rigidBody.addForceAtPoint({ x: 0.0, y: 1000.0 }, { x: 1.0, y: 2.0 }, true);
-
-rigidBody.applyImpulse({ x: 0.0, y: 1000.0 }, true);
-rigidBody.applyTorqueImpulse(100.0, true);
-rigidBody.applyImpulseAtPoint({ x: 0.0, y: 1000.0 }, { x: 1.0, y: 2.0 }, true);
+<load path='/2d/javascript/src/snippets/rigid_bodies.ts' marker='Forces' />
 ```
 
   </TabItem>
   <TabItem value="3D">
 
 ```js
-// The `true` argument makes sure the rigid-body is awake.
-rigidBody.resetForces(true);  // Reset the forces to zero.
-rigidBody.resetTorques(true); // Reset the torques to zero.
-rigidBody.addForce({ x: 0.0, y: 1000.0, z: 0.0 }, true);
-rigidBody.addTorque({ x: 100.0, y: 0.0, z: 0.0 }, true);
-rigidBody.addForceAtPoint({ x: 0.0, y: 1000.0, z: 0.0 }, { x: 1.0, y: 2.0, z: 3.0 }, true);
-
-rigidBody.applyImpulse({ x: 0.0, y: 1000.0, z: 0.0 }, true);
-rigidBody.applyTorqueImpulse({ x: 100.0, y: 0.0, z: 0.0 }, true);
-rigidBody.applyImpulseAtPoint({ x: 0.0, y: 1000.0, z: 0.0 }, { x: 1.0, y: 2.0, z: 3.0 }, true);
+<load path='/3d/javascript/src/snippets/rigid_bodies.ts' marker='Forces' />
 ```
 
   </TabItem>

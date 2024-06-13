@@ -97,12 +97,7 @@ values={[
 A new character controller can be created and removed by the physics `World`:
 
 ```js
-// The gap the controller will leave between the character and its environment.
-let offset = 0.01;
-// Create the controller.
-let characterController = world.createCharacterController(offset);
-// Remove the controller once we are done with it.
-world.removeCharacterController(characterController);
+<load path='/2d/javascript/src/snippets/character_controller.ts' marker='Setup1' />
 ```
 
 Note that the character controller does not store a reference to the rigid-body and collider it controls. Therefore, the
@@ -116,14 +111,7 @@ on its path. This is done in two steps:
    position, kinematic velocity, or next kinematic position, depending on the situation.
 
 ```js
-let characterController = world.createCharacterController(offset);
-characterController.computeColliderMovement(
-    collider,           // The collider we would like to move.
-    desiredTranslation, // The movement we would like to apply if there wasn’t any obstacle.
-);
-// Read the result.
-let correctedMovement = characterController.computedMovement();
-// TODO: apply this corrected movement by following the rules described bellow.
+<load path='/2d/javascript/src/snippets/character_controller.ts' marker='Setup2' />
 ```
 
 The recommended way to update the character’s position depends on its representation:

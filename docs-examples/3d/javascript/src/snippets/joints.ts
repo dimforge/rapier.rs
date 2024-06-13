@@ -1,4 +1,4 @@
-import RAPIER, { RigidBodyDesc, RigidBodyType, ColliderDesc } from '@dimforge/rapier3d';
+import RAPIER from '@dimforge/rapier3d';
 
 
 let world = new RAPIER.World({ x: 0.0, y: -9.81, z: 0.0 });

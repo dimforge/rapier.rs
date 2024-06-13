@@ -64,16 +64,10 @@ during or after its creation:
 <js>
 
 ```js
-/* Set the collision groups and solver groups when the collider is created. */
-let colliderDesc = RAPIER.ColliderDesc.ball(0.5)
-    .setCollisionGroups(0x000D0004)
-    .setSolverGroups(0x00500010);
-let collider = world.createCollider(colliderDesc);
+<load path='/2d/javascript/src/snippets/colliders.ts' marker='Groups1' />
 ```
 ```js
-/* Set the collision groups and solver groups after the collider creation. */
-collider.setCollisionGroups(0x000D0004);
-collider.setSolverGroups(0x000D0004);
+<load path='/2d/javascript/src/snippets/colliders.ts' marker='Groups2' />
 ```
 
 </js>

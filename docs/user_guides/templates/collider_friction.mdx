@@ -60,18 +60,10 @@ The friction coefficient and friction combine rule can both be set when the coll
 <js>
 
 ```js
-/* Set the friction coefficient and friction combine rule
-  when the collider is created. */
-let colliderDesc = RAPIER.ColliderDesc.ball(0.5)
-    .setFriction(0.7)
-    .setFrictionCombineRule(RAPIER.CoefficientCombineRule.Min);
-let collider = world.createCollider(colliderDesc);
+<load path='/2d/javascript/src/snippets/colliders.ts' marker='Friction1' />
 ```
 ```js
-/* Set the friction coefficient and friction combine rule
-   after the collider creation. */
-collider.setFriction(0.7);
-collider.setFrictionCombineRule(RAPIER.CoefficientCombineRule.Min);
+<load path='/2d/javascript/src/snippets/colliders.ts' marker='Friction2' />
 ```
 
 </js>
