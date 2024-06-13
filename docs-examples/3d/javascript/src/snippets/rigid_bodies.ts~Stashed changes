@@ -51,7 +51,7 @@ let world = new RAPIER.World({ x: 0.0, y: -9.81, z: 0.0 });
 {
     // DOCUSAURUS: Position1 start
     /* Set the position when the rigid-body is created. */
-    let rigidBodyDesc = RAPIER.RigidBodyDesc.dynamic()
+    let rigidBodyDesc = RigidBodyDesc.dynamic()
         // The rigid body translation.
         // Default: zero vector.
         .setTranslation(0.0, 5.0, 1.0)

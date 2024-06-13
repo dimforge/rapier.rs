@@ -25,7 +25,7 @@ import RAPIER, { Vector3, ColliderDesc } from '@dimforge/rapier3d';
         // The collider translation wrt. the body it is attached to.
         // Default: the zero vector.
         .setTranslation(1.0, 2.0, 1.0)
-        // The collider rotation wrt. the body it is attached to.
+        // The collider rotation wrt. the body it is attached to, as a unit quaternion.
         // Default: the identity rotation.
         .setRotation({ w: 1.0, x: 0.0, y: 0.0, z: 0.0 })
         // The collider density. If non-zero the collider's mass and angular inertia will be added
@@ -74,7 +74,7 @@ let world = new RAPIER.World({ x: 0.0, y: -9.81, z: 0.0 });
 {
     // DOCUSAURUS: Position1 start
     /* Set the collider position when the collider is created. */
-    let colliderDesc = ColliderDesc.ball(0.5)
+    let colliderDesc = RAPIER.ColliderDesc.ball(0.5)
         .setTranslation(1.0, 2.0, 3.0)
         .setRotation({ w: 1.0, x: 0.0, y: 0.0, z: 0.0 });
     let collider = world.createCollider(colliderDesc);
@@ -88,7 +88,6 @@ let world = new RAPIER.World({ x: 0.0, y: -9.81, z: 0.0 });
 }
 {
     // DOCUSAURUS: Position3 start
-    // The `true` argument makes sure the rigid-body is awake.
     let rigidBodyDesc = RAPIER.RigidBodyDesc.dynamic();
     let rigidBody = world.createRigidBody(rigidBodyDesc);
     let colliderDesc = RAPIER.ColliderDesc.ball(0.5)

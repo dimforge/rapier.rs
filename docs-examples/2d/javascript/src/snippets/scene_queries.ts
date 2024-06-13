@@ -101,7 +101,7 @@ let world = new RAPIER.World({ x: 0.0, y: -9.81 });
     // DOCUSAURUS: IntersectionTest stop
 }
 {
-    let rigidBodyDesc = RigidBodyDesc.dynamic();
+    let rigidBodyDesc = RAPIER.RigidBodyDesc.dynamic();
     let player_rigid_body = world.createRigidBody(rigidBodyDesc);
     let collider = world.createCollider(new RAPIER.ColliderDesc(new RAPIER.Ball(0.5)));
     let data = new Map();

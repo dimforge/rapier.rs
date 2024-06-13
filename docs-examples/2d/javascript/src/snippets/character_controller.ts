@@ -77,12 +77,19 @@ let world = new RAPIER.World({ x: 0.0, y: -9.81 });
 }
 
 {
+    let colliderDesc = new RAPIER.ColliderDesc(new RAPIER.Ball(0.5));
+    let collider = world.createCollider(colliderDesc);
+    let desiredMovementVector = { x: 1, y: 0 };
     // DOCUSAURUS: Collisions1 start
     let characterController = world.createCharacterController(0.01);
-    // Snap to the ground if the vertical distance to the ground is smaller than 0.5.
-    characterController.enableSnapToGround(0.5);
-    // Disable snap-to-ground.
-    characterController.disableSnapToGround();
+    characterController.computeColliderMovement(collider, desiredMovementVector);
+
+    // After the collider movement calculation is done, we can read the
+    // collision events.
+    for (let i = 0; i < characterController.numComputedCollisions(); i++) {
+        let collision = characterController.computedCollision(i);
+        // Do something with that collision information.
+    }
     // DOCUSAURUS: Collisions1 stop
 }
 

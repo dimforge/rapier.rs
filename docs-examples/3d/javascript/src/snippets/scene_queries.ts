@@ -84,7 +84,7 @@ let world = new RAPIER.World({ x: 0.0, y: -9.81, z: 0.0 });
 {
     // DOCUSAURUS: IntersectionTest start
     let shape = new RAPIER.Cuboid(1.0, 2.0, 3.0);
-    let shapePos = { x: 1.0, y: 2.0, z: 1.0 };
+    let shapePos = { x: 1.0, y: 2.0, z: 3.0 };
     let shapeRot = { w: 1.0, x: 0.0, y: 0.0, z: 0.0 };
 
     world.intersectionsWithShape(shapePos, shapeRot, shape, (handle) => {

@@ -88,7 +88,7 @@ let world = new RAPIER.World({ x: 0.0, y: -9.81 });
 {
     // DOCUSAURUS: Position1 start
     /* Set the collider position when the collider is created. */
-    let colliderDesc = ColliderDesc.ball(0.5)
+    let colliderDesc = RAPIER.ColliderDesc.ball(0.5)
         .setTranslation(1.0, 2.0)
         .setRotation(0.4);
     let collider = world.createCollider(colliderDesc);
@@ -102,7 +102,6 @@ let world = new RAPIER.World({ x: 0.0, y: -9.81 });
 }
 {
     // DOCUSAURUS: Position3 start
-    // The `true` argument makes sure the rigid-body is awake.
     let rigidBodyDesc = RAPIER.RigidBodyDesc.dynamic();
     let rigidBody = world.createRigidBody(rigidBodyDesc);
     let colliderDesc = RAPIER.ColliderDesc.ball(0.5)

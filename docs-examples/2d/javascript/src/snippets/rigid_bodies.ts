@@ -14,7 +14,7 @@ import RAPIER, { RigidBodyDesc, RigidBodyType, ColliderDesc } from '@dimforge/ra
     // Builder for a kinematic rigid-body controlled at the position level.
     let _4 = RigidBodyDesc.kinematicPositionBased();
     // Builder for a body with a status specified by an enum.
-    let rigidBodyDesc = new RigidBodyDesc(RigidBodyType.Dynamic)
+    let rigidBodyDesc = new RAPIER.RigidBodyDesc(RigidBodyType.Dynamic)
         // The rigid body translation.
         // Default: zero vector.
         .setTranslation(0.0, 5.0)
@@ -51,7 +51,7 @@ let world = new RAPIER.World({ x: 0.0, y: -9.81 });
 {
     // DOCUSAURUS: Position1 start
     /* Set the position when the rigid-body is created. */
-    let rigidBodyDesc = RigidBodyDesc.dynamic()
+    let rigidBodyDesc = RAPIER.RigidBodyDesc.dynamic()
         // The rigid body translation.
         // Default: zero vector.
         .setTranslation(0.0, 5.0)
@@ -119,7 +119,7 @@ let world = new RAPIER.World({ x: 0.0, y: -9.81 });
 
 {
     // DOCUSAURUS: Mass1 start
-    let rigidBodyDesc = RigidBodyDesc.dynamic();
+    let rigidBodyDesc = RAPIER.RigidBodyDesc.dynamic();
     let rigidBody = world.createRigidBody(rigidBodyDesc);
     // The default density is 1.0, we are setting 2.0 for this example.
     let colliderDesc = ColliderDesc.ball(1.0).setDensity(2.0);
@@ -163,7 +163,6 @@ let world = new RAPIER.World({ x: 0.0, y: -9.81 });
 
 {
     // DOCUSAURUS: Damping1 start
-    /* Lock translations/rotations when the rigid-body is created. */
     /* Set the damping coefficients when the rigid-body is created. */
     let rigidBodyDesc = RAPIER.RigidBodyDesc.dynamic()
         .setLinearDamping(0.5)
