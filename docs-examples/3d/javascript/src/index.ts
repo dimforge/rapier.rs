@@ -1,7 +1,5 @@
-require('./snippets/advanced_collision_detection')
 require('./snippets/character_controller')
 require('./snippets/colliders')
-require('./snippets/debug')
 require('./snippets/getting_started')
 require('./snippets/joints')
 require('./snippets/rigid_bodies')
