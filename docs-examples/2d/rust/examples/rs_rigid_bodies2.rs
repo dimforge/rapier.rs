@@ -45,6 +45,8 @@ fn main() {
         .ccd_enabled(false)
         // All done, actually build the rigid-body.
         .build();
+    // Insert the rigid-body into the set.
+    let rigid_body_handle = rigid_body_set.insert(rigid_body);
     // DOCUSAURUS: Creation stop
 
     // DOCUSAURUS: Position1 start
@@ -93,9 +95,9 @@ fn main() {
         .angvel(3.0)
         // All done, actually build the rigid-body.
         .build();
+    // DOCUSAURUS: Velocity1 stop
     // Insert the rigid-body into the set.
     let rigid_body_handle = rigid_body_set.insert(rigid_body);
-    // DOCUSAURUS: Velocity1 stop
 
     // DOCUSAURUS: Velocity2 start
     /* Set the velocities after the rigid-body creation. */

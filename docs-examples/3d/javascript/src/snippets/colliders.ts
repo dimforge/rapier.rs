@@ -24,7 +24,7 @@ import RAPIER, { Vector3, ColliderDesc } from '@dimforge/rapier3d';
     let colliderDesc = new RAPIER.ColliderDesc(new RAPIER.Ball(0.5))
         // The collider translation wrt. the body it is attached to.
         // Default: the zero vector.
-        .setTranslation(1.0, 2.0, 1.0)
+        .setTranslation(1.0, 2.0, 3.0)
         // The collider rotation wrt. the body it is attached to, as a unit quaternion.
         // Default: the identity rotation.
         .setRotation({ w: 1.0, x: 0.0, y: 0.0, z: 0.0 })

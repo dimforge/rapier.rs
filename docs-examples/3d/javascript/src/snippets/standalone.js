@@ -1,6 +1,7 @@
 
 // DOCUSAURUS: NoBundler start
 import RAPIER from 'https://cdn.skypack.dev/@dimforge/rapier3d-compat';
+
 RAPIER.init().then(() => {
     // Run the simulation.
     _run_simulation(RAPIER);

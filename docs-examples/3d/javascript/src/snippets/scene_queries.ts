@@ -63,7 +63,7 @@ let world = new RAPIER.World({ x: 0.0, y: -9.81, z: 0.0 });
 
 {
     // DOCUSAURUS: PointProjection start
-    let point = { x: 1.0, y: 2.0, z: 1.0 };
+    let point = { x: 1.0, y: 2.0, z: 3.0 };
     let solid = true;
 
     let proj = world.projectPoint(point, solid);

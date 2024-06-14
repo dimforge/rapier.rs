@@ -1,4 +1,4 @@
-import RAPIER, { RigidBodyDesc, RigidBodyType } from '@dimforge/rapier3d';
+import RAPIER from '@dimforge/rapier3d';
 
 {
     // DOCUSAURUS: Creation start
@@ -6,15 +6,15 @@ import RAPIER, { RigidBodyDesc, RigidBodyType } from '@dimforge/rapier3d';
     let world = new RAPIER.World({ x: 0.0, y: -9.81, z: 0.0 });
 
     // Builder for a fixed rigid-body.
-    let _1 = RigidBodyDesc.fixed();
+    let example1 = RAPIER.RigidBodyDesc.fixed();
     // Builder for a dynamic rigid-body.
-    let _2 = RigidBodyDesc.dynamic();
+    let example2 = RAPIER.RigidBodyDesc.dynamic();
     // Builder for a kinematic rigid-body controlled at the velocity level.
-    let _3 = RigidBodyDesc.kinematicVelocityBased();
+    let example3 = RAPIER.RigidBodyDesc.kinematicVelocityBased();
     // Builder for a kinematic rigid-body controlled at the position level.
-    let _4 = RigidBodyDesc.kinematicPositionBased();
+    let example4 = RAPIER.RigidBodyDesc.kinematicPositionBased();
     // Builder for a body with a status specified by an enum.
-    let rigidBodyDesc = new RAPIER.RigidBodyDesc(RigidBodyType.Dynamic)
+    let rigidBodyDesc = new RAPIER.RigidBodyDesc(RAPIER.RigidBodyType.Dynamic)
         // The rigid body translation.
         // Default: zero vector.
         .setTranslation(0.0, 5.0, 1.0)
@@ -23,7 +23,7 @@ import RAPIER, { RigidBodyDesc, RigidBodyType } from '@dimforge/rapier3d';
         .setRotation({ w: 1.0, x: 0.0, y: 0.0, z: 0.0 })
         // The linear velocity of this body.
         // Default: zero velocity.
-        .setLinvel(1.0, 2.0, 4.0)
+        .setLinvel(1.0, 3.0, 4.0)
         // The angular velocity of this body.
         // Default: zero velocity.
         .setAngvel({ x: 3.0, y: 0.0, z: 1.0 })
@@ -129,7 +129,7 @@ let world = new RAPIER.World({ x: 0.0, y: -9.81, z: 0.0 });
     /* Lock translations/rotations when the rigid-body is created. */
     let rigidBodyDesc = RAPIER.RigidBodyDesc.dynamic()
         .lockTranslations() // prevent translations along along all axes.
-        .lockRotations()   // prevent rotations.
+        .lockRotations()   // prevent rotations along all axes.
         .enabledRotations(true, false, false); // only enable rotations along the X axis.
     let rigidBody = world.createRigidBody(rigidBodyDesc);
     // DOCUSAURUS: LockedAxes1 stop
@@ -141,6 +141,4 @@ let world = new RAPIER.World({ x: 0.0, y: -9.81, z: 0.0 });
     rigidBody.lockRotations(true, true);
     rigidBody.setEnabledRotations(true, false, false, true);
     // DOCUSAURUS: LockedAxes2 stop
-}
-
 }

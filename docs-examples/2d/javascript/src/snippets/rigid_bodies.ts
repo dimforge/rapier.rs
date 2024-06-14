@@ -1,4 +1,4 @@
-import RAPIER, { RigidBodyDesc, RigidBodyType, ColliderDesc } from '@dimforge/rapier2d';
+import RAPIER from '@dimforge/rapier2d';
 
 {
     // DOCUSAURUS: Creation start
@@ -6,15 +6,15 @@ import RAPIER, { RigidBodyDesc, RigidBodyType, ColliderDesc } from '@dimforge/ra
     let world = new RAPIER.World({ x: 0.0, y: -9.81 });
 
     // Builder for a fixed rigid-body.
-    let _1 = RigidBodyDesc.fixed();
+    let example1 = RAPIER.RigidBodyDesc.fixed();
     // Builder for a dynamic rigid-body.
-    let _2 = RigidBodyDesc.dynamic();
+    let example2 = RAPIER.RigidBodyDesc.dynamic();
     // Builder for a kinematic rigid-body controlled at the velocity level.
-    let _3 = RigidBodyDesc.kinematicVelocityBased();
+    let example3 = RAPIER.RigidBodyDesc.kinematicVelocityBased();
     // Builder for a kinematic rigid-body controlled at the position level.
-    let _4 = RigidBodyDesc.kinematicPositionBased();
+    let example4 = RAPIER.RigidBodyDesc.kinematicPositionBased();
     // Builder for a body with a status specified by an enum.
-    let rigidBodyDesc = new RAPIER.RigidBodyDesc(RigidBodyType.Dynamic)
+    let rigidBodyDesc = new RAPIER.RigidBodyDesc(RAPIER.RigidBodyType.Dynamic)
         // The rigid body translation.
         // Default: zero vector.
         .setTranslation(0.0, 5.0)
@@ -122,7 +122,7 @@ let world = new RAPIER.World({ x: 0.0, y: -9.81 });
     let rigidBodyDesc = RAPIER.RigidBodyDesc.dynamic();
     let rigidBody = world.createRigidBody(rigidBodyDesc);
     // The default density is 1.0, we are setting 2.0 for this example.
-    let colliderDesc = ColliderDesc.ball(1.0).setDensity(2.0);
+    let colliderDesc = RAPIER.ColliderDesc.ball(1.0).setDensity(2.0);
     // When the collider is attached, the rigid-body's mass and angular
     // inertia is automatically updated to take the collider into account.
     world.createCollider(colliderDesc, rigidBody);
