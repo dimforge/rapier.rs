@@ -60,18 +60,10 @@ The restitution coefficient and restitution combine rule can both be set when th
 <js>
 
 ```js
-/* Set the restitution coefficient and restitution combine rule
-  when the collider is created. */
-let colliderDesc = RAPIER.ColliderDesc.ball(0.5)
-    .setRestitution(0.7)
-    .setRestitutionCombineRule(RAPIER.CoefficientCombineRule.Min);
-let collider = world.createCollider(colliderDesc);
+<load path='/2d/javascript/src/snippets/colliders.ts' marker='Restitution1' />
 ```
 ```js
-/* Set the restitution coefficient and restitution combine rule
-   after the collider creation. */
-collider.setRestitution(0.7);
-collider.setRestitutionCombineRule(RAPIER.CoefficientCombineRule.Min);
+<load path='/2d/javascript/src/snippets/colliders.ts' marker='Restitution2' />
 ```
 
 </js>

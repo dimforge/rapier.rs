@@ -35,14 +35,10 @@ The active events of a collider can be set when the collider is created or after
 <js>
 
 ```js
-/* Set the active events when the collider is created. */
-let colliderDesc = RAPIER.ColliderDesc.ball(0.5)
-    .setActiveEvents(RAPIER.ActiveEvents.COLLISION_EVENTS);
-let collider = world.createCollider(colliderDesc);
+<load path='/2d/javascript/src/snippets/colliders.ts' marker='ActiveEvents1' />
 ```
 ```js
-/* Set the active events after the collider creation. */
-collider.setActiveEvents(RAPIER.ActiveEvents.COLLISION_EVENTS);
+<load path='/2d/javascript/src/snippets/colliders.ts' marker='ActiveEvents2' />
 ```
 
 </js>

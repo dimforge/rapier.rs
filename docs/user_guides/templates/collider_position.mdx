@@ -91,32 +91,20 @@ values={[
 <TabItem value="2D">
 
 ```js
-/* Set the collider position when the collider is created. */
-let colliderDesc = ColliderDesc.ball(0.5)
-    .setTranslation(1.0, 2.0)
-    .setRotation(0.4);
-let collider = world.createCollider(colliderDesc);
+<load path='/2d/javascript/src/snippets/colliders.ts' marker='Position1' />
 ```
 ```js
-/* Set the collider position after the collider creation. */
-collider.setTranslation({ x: 1.0, y: 2.0 });
-collider.setRotation(0.4);
+<load path='/2d/javascript/src/snippets/colliders.ts' marker='Position2' />
 ```
 
   </TabItem>
   <TabItem value="3D">
 
 ```js
-/* Set the collider position when the collider is created. */
-let colliderDesc = RAPIER.ColliderDesc.ball(0.5)
-    .setTranslation(1.0, 2.0, 3.0)
-    .setRotation({ w: 1.0, x: 0.0, y: 0.0, z: 0.0 });
-let collider = world.createCollider(colliderDesc);
+<load path='/3d/javascript/src/snippets/colliders.ts' marker='Position1' />
 ```
 ```js
-/* Set the collider position after the collider creation. */
-collider.setTranslation({ x: 1.0, y: 2.0, z: 3.0 });
-collider.setRotation({ w: 1.0, x: 0.0, y: 0.0, z: 0.0 });
+<load path='/3d/javascript/src/snippets/colliders.ts' marker='Position2' />
 ```
 
   </TabItem>
@@ -208,34 +196,20 @@ values={[
 <TabItem value="2D">
 
 ```js
-let rigidBodyDesc = RAPIER.RigidBodyDesc.dynamic();
-let rigidBody = world.createRigidBody(rigidBodyDesc);
-let colliderDesc = RAPIER.ColliderDesc.ball(0.5)
-    .setTranslation(1.0, 2.0);
-// Attach the collider to the rigid-body. The collider's position wrt. the rigid-body
-// is automatically set to the collider current position when this method is called.
-let collider = world.createCollider(colliderDesc, rigidBody);
+<load path='/2d/javascript/src/snippets/colliders.ts' marker='Position3' />
 ```
 ```js
-/* Set the collider position wrt. its parent after the collider creation. */
-collider.setTranslationWrtParent({ x: 1.0, y: 2.0 });
+<load path='/2d/javascript/src/snippets/colliders.ts' marker='Position4' />
 ```
 
   </TabItem>
   <TabItem value="3D">
 
 ```js
-let rigidBodyDesc = RAPIER.RigidBodyDesc.dynamic();
-let rigidBody = world.createRigidBody(rigidBodyDesc);
-let colliderDesc = RAPIER.ColliderDesc.ball(0.5)
-    .setTranslation(1.0, 2.0, 3.0);
-// Attach the collider to the rigid-body. The collider's position wrt. the rigid-body
-// is automatically set to the collider current position when this method is called.
-let collider = world.createCollider(colliderDesc, rigidBody);
+<load path='/3d/javascript/src/snippets/colliders.ts' marker='Position3' />
 ```
 ```js
-/* Set the collider position wrt. its parent after the collider creation. */
-collider.setTranslationWrtParent({ x: 1.0, y: 2.0, z: 3.0 });
+<load path='/3d/javascript/src/snippets/colliders.ts' marker='Position4' />
 ```
 
   </TabItem>

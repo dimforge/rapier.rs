@@ -43,12 +43,7 @@ This prevents the player from being teleported on to of a platform while it is i
 <js>
 
 ```js
-let characterController = world.createCharacterController(0.01);
-// Autostep if the step height is smaller than 0.5, its width is larger than 0.2,
-// and allow stepping on dynamic bodies.
-characterController.enableAutostep(0.5, 0.2, true);
-// Disable autostep.
-characterController.disableAutostep();
+<load path='/2d/javascript/src/snippets/character_controller.ts' marker='Stairs' />
 ```
 
 </js>

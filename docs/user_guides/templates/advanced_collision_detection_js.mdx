@@ -25,18 +25,7 @@ Events can be collected by passing an instance of `EventQueue` to `World.step(ev
 involved in each event is identified by its handle.
 
 ```js
-let eventQueue = new RAPIER.EventQueue(true);
-world.step(eventQueue);
-
-eventQueue.drainCollisionEvents((handle1, handle2, started) => {
-    /* Handle the collision event. */
-});
-
-eventQueue.drainContactForceEvents(event => {
-    let handle1 = event.collider1(); // Handle of the first collider involved in the event.
-    let handle2 = event.collider2(); // Handle of the second collider involved in the event.
-    /* Handle the contact force event. */
-});
+<load path='/2d/javascript/src/snippets/advanced_collision_detection.ts' marker='Events' />
 ```
 
 :::warning
@@ -74,14 +63,7 @@ will be multiple contact manifolds, one for each piece that may result in an act
 :::
 
 ```js
-world.contactsWith(collider, (otherCollider) => {
-    // This closure is called on each collider object potentially
-    // in contact with `collider`.
-});
-
-world.contactPair(collider1, collider2, (manifold, flipped) => {
-   // Contact information can be read from `manifold`. 
-});
+<load path='/2d/javascript/src/snippets/advanced_collision_detection.ts' marker='ContactGraph' />
 ```
 
 ## The intersection graph
@@ -100,12 +82,7 @@ instead of the intersection graph.
 :::
 
 ```js
-world.intersectionsWith(collider, (otherCollider) => {
-    // This closure is called on each collider potentially
-    // intersecting the collider `collider`.
-});
-
-let intersections = world.intersectionPair(collider1, collider2);
+<load path='/2d/javascript/src/snippets/advanced_collision_detection.ts' marker='IntersectionGraph' />
 ```
 
 ## Physics hooks

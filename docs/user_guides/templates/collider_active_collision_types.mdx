@@ -19,26 +19,20 @@ and a collider attached to a fixed rigid-body. This can be done by modifying the
 <bevy>
 
 ```rust
-<load path='/2d/bevy/examples/colliders2.rs' marker='ActiveCollisions1' />
+<load path='/2d/bevy/examples/colliders2.rs' marker='ActiveCollisionTypes1' />
 ```
 ```rust
-<load path='/2d/bevy/examples/colliders2.rs' marker='ActiveCollisions2' />
+<load path='/2d/bevy/examples/colliders2.rs' marker='ActiveCollisionTypes2' />
 ```
 
 </bevy>
 <js>
 
 ```js
-/* Set the active collision types when the collider is created. */
-let colliderDesc = RAPIER.ColliderDesc.ball(0.5)
-    .setActiveCollisionTypes(RAPIER.ActiveCollisionTypes.DEFAULT | 
-                             RAPIER.ActiveCollisionTypes.KINEMATIC_FIXED);
-let collider = world.createCollider(colliderDesc);
+<load path='/2d/javascript/src/snippets/colliders.ts' marker='ActiveCollisionTypes1' />
 ```
 ```js
-/* Set the active collision types after the collider creation. */
-collider.setActiveCollisionTypes(RAPIER.ActiveCollisionTypes.DEFAULT|
-                                 RAPIER.ActiveCollisionTypes.KINEMATIC_FIXED);
+<load path='/2d/javascript/src/snippets/colliders.ts' marker='ActiveCollisionTypes2' />
 ```
 
 </js>

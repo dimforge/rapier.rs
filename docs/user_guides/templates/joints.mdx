@@ -121,21 +121,14 @@ values={[
 <TabItem value="2D">
 
 ```js
-let params = RAPIER.JointData.fixed({ x: 0.0, y: 0.0 }, 0.0, { x: 0.0, y: -2.0 }, 0.0);
-let joint = world.createImpulseJoint(params, body1, body2, true);
+<load path='/2d/javascript/src/snippets/joints.ts' marker='FixedJoint' />
 ```
 
   </TabItem>
   <TabItem value="3D">
 
 ```js
-let params = RAPIER.JointData.fixed(
-    { x: 0.0, y: 0.0, z: 0.0 }, 
-    { w: 1.0, x: 0.0, y: 0.0, z: 0.0 },
-    { x: 0.0, y: -2.0, z: 0.0 },
-    { w: 1.0, x: 0.0, y: 0.0, z: 0.0 }
-);
-let joint = world.createImpulseJoint(params, body1, body2, true);
+<load path='/3d/javascript/src/snippets/joints.ts' marker='FixedJoint' />
 ```
 
   </TabItem>
@@ -167,8 +160,7 @@ of the points that need to coincide on the local-space of each rigid-body.
 <js>
 
 ```js
-let params = RAPIER.JointData.spherical({ x: 0.0, y: 0.0, z: 1.0 }, { x: 0.0, y: 0.0, z: -3.0 });
-let joint = world.createImpulseJoint(params, body1, body2, true);
+<load path='/3d/javascript/src/snippets/joints.ts' marker='SphericalJoint' />
 ```
 
 </js>
@@ -248,17 +240,14 @@ values={[
 <TabItem value="2D">
 
 ```js
-let params = RAPIER.JointData.revolute({ x: 0.0, y: 1.0 }, { x: 0.0, y: -3.0 });
-let joint = world.createImpulseJoint(params, body1, body2, true);
+<load path='/2d/javascript/src/snippets/joints.ts' marker='RevoluteJoint' />
 ```
 
   </TabItem>
   <TabItem value="3D">
 
 ```js
-let x = { x: 1.0, y: 0.0, z: 0.0 };
-let params = RAPIER.JointData.revolute({ x: 0.0, y: 0.0, z: 1.0 }, { x: 0.0, y: 0.0, z: -3.0 }, x);
-let joint = world.createImpulseJoint(params, body1, body2, true);
+<load path='/3d/javascript/src/snippets/joints.ts' marker='RevoluteJoint' />
 ```
 
   </TabItem>
@@ -341,23 +330,14 @@ values={[
 <TabItem value="2D">
 
 ```js
-let x = { x: 1.0, y: 0.0 };
-let params = RAPIER.JointData.prismatic({ x: 0.0, y: 0.0 }, x, { x: 0.0, y: -3.0 }, x);
-params.limitsEnabled = true;
-params.limits = [-2.0, 5.0];
-let joint = world.createImpulseJoint(params, body1, body2, true);
+<load path='/2d/javascript/src/snippets/joints.ts' marker='PrismaticJoint' />
 ```
 
   </TabItem>
   <TabItem value="3D">
 
 ```js
-let x = { x: 1.0, y: 0.0, z: 0.0 };
-let z = { x: 0.0, y: 0.0, z: 1.0 };
-let params = RAPIER.JointData.prismatic({ x: 0.0, y: 0.0, z: 1.0 }, x, z, { x: 0.0, y: 0.0, z: -3.0 }, x, z);
-params.limitsEnabled = true;
-params.limits = [-2.0, 5.0];
-let joint = world.createImpulseJoint(params, body1, body2, true);
+<load path='/3d/javascript/src/snippets/joints.ts' marker='PrismaticJoint' />
 ```
 
   </TabItem>
@@ -456,21 +436,14 @@ values={[
 <TabItem value="2D">
 
 ```js
-let x = { x: 1.0, y: 0.0 };
-let params = RAPIER.JointData.prismatic({ x: 0.0, y: 0.0 }, { x: 0.0, y: -3.0 }, x);
-let joint = world.createImpulseJoint(params, body1, body2, true);
-(joint as RAPIER.PrismaticImpulseJoint).configureMotorVelocity(1.0, 0.5);
+<load path='/2d/javascript/src/snippets/joints.ts' marker='Motor' />
 ```
 
   </TabItem>
   <TabItem value="3D">
 
 ```js
-let x = { x: 1.0, y: 0.0, z: 0.0 };
-let z = { x: 0.0, y: 0.0, z: 1.0 };
-let params = RAPIER.JointData.prismatic({ x: 0.0, y: 0.0, z: 1.0 }, { x: 0.0, y: 0.0, z: -3.0 }, x);
-let joint = world.createImpulseJoint(params, body1, body2, true);
-(joint as RAPIER.PrismaticImpulseJoint).configureMotorVelocity(1.0, 0.5);
+<load path='/3d/javascript/src/snippets/joints.ts' marker='Motor' />
 ```
 
   </TabItem>

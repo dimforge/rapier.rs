@@ -33,11 +33,7 @@ As always in Rapier, angles are specified in radians.
 <js>
 
 ```js
-let characterController = world.createCharacterController(0.01);
-// Don’t allow climbing slopes larger than 45 degrees.
-characterController.setMaxSlopeClimbAngle(45 * Math.PI / 180);
-// Automatically slide down on slopes smaller than 30 degrees.
-characterController.setMinSlopeSlideAngle(30 * Math.PI / 180);
+<load path='/2d/javascript/src/snippets/character_controller.ts' marker='Slopes' />
 ```
 
 </js>

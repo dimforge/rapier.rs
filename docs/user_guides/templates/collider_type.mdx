@@ -35,14 +35,10 @@ construction:
 <js>
 
 ```js
-/* Set the collider type when the collider is created. */
-let colliderDesc = RAPIER.ColliderDesc.ball(0.5)
-  .setSensor(true);
-let collider = world.createCollider(colliderDesc);
+<load path='/2d/javascript/src/snippets/colliders.ts' marker='ColliderType1' />
 ```
 ```js
-/* Set the collider type after the collider creation. */
-collider.setSensor(true);
+<load path='/2d/javascript/src/snippets/colliders.ts' marker='ColliderType2' />
 ```
 
 </js>

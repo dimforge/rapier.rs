@@ -169,7 +169,7 @@ fn intersection_section(
     rigid_body_set: &RigidBodySet,
     collider_set: &ColliderSet,
 ) {
-    // DOCUSAURUS: Intersection start
+    // DOCUSAURUS: IntersectionTest start
     let shape = Cuboid::new(vector![1.0, 2.0, 3.0]);
     let shape_pos = Isometry::new(vector![0.0, 1.0, 0.0], vector![0.2, 0.7, 0.1]);
     let filter = QueryFilter::default();
@@ -186,5 +186,5 @@ fn intersection_section(
         println!("The collider {:?} has an AABB intersecting our test AABB", handle);
         true // Return `false` instead if we want to stop searching for other colliders that contain this point.
     });
-    // DOCUSAURUS: Intersection stop
+    // DOCUSAURUS: IntersectionTest stop
 }

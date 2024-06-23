@@ -41,14 +41,10 @@ The active hooks of a collider can be set when the collider is created or after 
 <js>
 
 ```js
-/* Set the active hooks when the collider is created. */
-let colliderDesc = RAPIER.ColliderDesc.ball(0.5)
-    .setActiveHooks(RAPIER.ActiveHooks.FILTER_CONTACT_PAIRS);
-let collider = world.createCollider(colliderDesc);
+<load path='/2d/javascript/src/snippets/colliders.ts' marker='ActiveHooks1' />
 ```
 ```js
-/* Set the active hooks after the collider creation. */
-collider.setActiveHooks(RAPIER.ActiveHooks.FILTER_CONTACT_PAIRS);
+<load path='/2d/javascript/src/snippets/colliders.ts' marker='ActiveHooks2' />
 ```
 
 </js>

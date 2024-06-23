@@ -1,0 +1,3 @@
+[general]
+cache-control-headers = false
+compression = false

@@ -94,42 +94,20 @@ values={[
 <TabItem value="2D">
 
 ```js
-/* Set the velocities when the rigid-body is created. */
-let rigidBodyDesc = RAPIER.RigidBodyDesc.dynamic()
-    // The linear velocity of this body.
-    // Default: zero velocity.
-    .setLinvel(1.0, 3.0)
-    // The angular velocity of this body.
-    // Default: zero velocity.
-    .setAngvel(3.0);
-let rigidBody = world.createRigidBody(rigidBodyDesc);
+<load path='/2d/javascript/src/snippets/rigid_bodies.ts' marker='Velocity1' />
 ```
 ```js
-/* Set the velocities after the rigid-body creation. */
-// The `true` argument makes sure the rigid-body is awake.
-rigidBody.setLinvel({ x: 1.0, y: 3.0 }, true);
-rigidBody.setAngvel(3.0, true);
+<load path='/2d/javascript/src/snippets/rigid_bodies.ts' marker='Velocity2' />
 ```
 
   </TabItem>
   <TabItem value="3D">
 
 ```js
-/* Set the velocities when the rigid-body is created. */
-let rigidBodyDesc = RAPIER.RigidBodyDesc.dynamic()
-    // The linear velocity of this body.
-    // Default: zero velocity.
-    .setLinvel(1.0, 3.0, 4.0)
-    // The angular velocity of this body.
-    // Default: zero velocity.
-    .setAngvel({ x: 3.0, y: 0.0, z: 0.0 });
-let rigidBody = world.createRigidBody(rigidBodyDesc);
+<load path='/3d/javascript/src/snippets/rigid_bodies.ts' marker='Velocity1' />
 ```
 ```js
-/* Set the velocities after the rigid-body creation. */
-// The `true` argument makes sure the rigid-body is awake.
-rigidBody.setLinvel({ x: 1.0, y: 3.0, z: 4.0 }, true);
-rigidBody.setAngvel({ x: 3.0, y: 0.0, z: 0.0 }, true);
+<load path='/3d/javascript/src/snippets/rigid_bodies.ts' marker='Velocity2' />
 ```
 
   </TabItem>

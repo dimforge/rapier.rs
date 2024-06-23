@@ -29,15 +29,7 @@ with A will be reported first, and the collision with B will be reported second.
 <js>
 
 ```js
-let characterController = world.createCharacterController(0.01);
-characterController.computeColliderMovement(collider, desiredMovementVector);
-
-// After the collider movement calculation is done, we can read the
-// collision events.
-for (let i = 0; i < characterController.numComputedCollisions(); i++) {
-    let collision = characterController.computedCollision(i);
-    // Do something with that collision information.
-}
+<load path='/2d/javascript/src/snippets/character_controller.ts' marker='Collisions1' />
 ```
 
 </js>
@@ -69,10 +61,7 @@ forces for you if needed:
 <js>
 
 ```js
-let characterController = world.createCharacterController(0.01);
-// Enable the automatic application of impulses to the dynamic bodies
-// hit by the character along its path.
-characterController.setApplyImpulsesToDynamicBodies(true);
+<load path='/2d/javascript/src/snippets/character_controller.ts' marker='Collisions2' />
 ```
 
 </js>
