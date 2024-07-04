@@ -6,13 +6,14 @@ module.exports = {
   tagline: 'Fast 2D and 3D physics engine for the Rust programming language.',
   url: 'https://rapier.rs',
   baseUrl: '/',
-  onBrokenLinks: 'error', // 'throw',
+  onBrokenLinks: 'throw',
   favicon: 'img/favicon.png',
   organizationName: 'dimforge', // Usually your GitHub org/user name.
   projectName: 'rapier', // Usually your repo name.
   themeConfig: {
     algolia: {
       apiKey: '2fb2392fe420e3f9cd94004bda27a775',
+      appId: 'rapier',
       indexName: 'rapier',
     },
     prism: {
@@ -45,12 +46,10 @@ module.exports = {
             {
               href: 'https://rapier.rs/demos2d/index.html', // FIXME: should depend on the base url.
               label: '2D Demos ↪',
-              position: 'left',
             },
             {
               href: 'https://rapier.rs/demos3d/index.html', // FIXME: should depend on the base url.
               label: '3D Demos ↪',
-              position: 'left',
             }
           ],
         },
