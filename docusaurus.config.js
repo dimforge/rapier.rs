@@ -17,7 +17,7 @@ module.exports = {
       indexName: 'rapier',
     },
     prism: {
-      theme: require('prism-react-renderer/themes/github'),
+      theme: require('prism-react-renderer').themes.github,
       additionalLanguages: ['toml', 'rust'],
     },
     // announcementBar: {

@@ -11,13 +11,16 @@
     "deploy": "docusaurus deploy",
     "serve": "docusaurus serve"
   },
+  "engines": {
+    "node": ">=18.0"
+  },
   "dependencies": {
-    "@docusaurus/core": "^2.4",
-    "@docusaurus/preset-classic": "^2.4",
-    "@mdx-js/react": "^1.5.8",
+    "@docusaurus/core": "^3.0",
+    "@docusaurus/preset-classic": "^3.0",
+    "@mdx-js/react": "^3.0",
     "clsx": "^1.1.1",
-    "react": "^16.8.4",
-    "react-dom": "^16.8.4",
+    "react": "^18.2",
+    "react-dom": "^18.2",
     "rehype-katex": "^3.1.0",
     "remark-math": "^2.0.1",
     "terminus": "^1.1.0"
@@ -33,5 +36,6 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "packageManager": "yarn@1.22.22+sha1.ac34549e6aa8e7ead463a7407e1c7390f61a6610"
 }
