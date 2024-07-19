@@ -45,11 +45,11 @@ module.exports = {
           items: [
             {
               href: 'https://rapier.rs/demos2d/index.html', // FIXME: should depend on the base url.
-              label: '2D Demos ↪',
+              label: '2D Demos',
             },
             {
               href: 'https://rapier.rs/demos3d/index.html', // FIXME: should depend on the base url.
-              label: '3D Demos ↪',
+              label: '3D Demos',
             }
           ],
         },
@@ -61,18 +61,18 @@ module.exports = {
         },
         {
           href: 'https://dimforge.com/blog',
-          label: 'Blog ↪',
+          label: 'Blog',
           position: 'left',
         },
         {
-          href: 'https://github.com/sponsors/dimforge',
-          label: 'Donate ♥',
+          value: '<a class="header-button-donate" href="https://github.com/sponsors/dimforge" target="_blank" rel="noopener noreferrer">Donate ♥</a>',
+          className: 'header-button-donate',
           position: 'right',
-          className: 'header-button-donate'
+          type: 'html'
         },
         {
           href: 'https://dimforge.com',
-          label: 'Dimforge ↪',
+          label: 'Dimforge',
           position: 'right',
         },
         {
@@ -100,11 +100,11 @@ module.exports = {
               to: 'docs/',
             },
             {
-              label: 'Demos 2D ↪',
+              label: 'Demos 2D',
               href: 'https://rapier.rs/demos2d/index.html',
             },
             {
-              label: 'Demos 3D ↪',
+              label: 'Demos 3D',
               href: 'https://rapier.rs/demos3d/index.html',
             },
           ],
