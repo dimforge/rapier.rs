@@ -75,7 +75,7 @@ if (!process.env.PUBLISH_MODE) {
 }
 
 
-module.exports = {
+const config = {
   docs: [
     'about_rapier',
     {
@@ -119,3 +119,5 @@ module.exports = {
     }
   ],
 };
+
+export default config;

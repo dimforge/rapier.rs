@@ -1,7 +1,7 @@
 const math = require('remark-math')
 const katex = require('rehype-katex')
 
-module.exports = {
+const config = {
   title: 'Rapier',
   tagline: 'Fast 2D and 3D physics engine for the Rust programming language.',
   url: 'https://rapier.rs',
@@ -181,3 +181,5 @@ module.exports = {
     'https://cdn.jsdelivr.net/npm/katex@0.11.0/dist/katex.min.css'
   ]
 };
+
+export default config;
