@@ -6,7 +6,7 @@ edition = "2021"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-rapier3d = { version = "0.21", features = ["enhanced-determinism"] }
+rapier3d = { version = "0.22", features = ["enhanced-determinism"] }
 nalgebra = { version = "0.33", features = ["convert-glam027"] }
 # Used to demonstrate compatibility.
 glam = "0.27.0"
