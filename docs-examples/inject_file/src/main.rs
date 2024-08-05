@@ -115,7 +115,9 @@ fn injected(source_text: &str, get_path: fn(&str) -> String) -> Result<String, I
                     filepath: infos[0].to_string(),
                 }));
         }
-        to_keep.join("")
+        let mut result = to_keep.join("");
+        result.push('\n');
+        result
     });
     if (injected_count + error.errors.len()) != total_to_inject {
         error.errors.push(ErrorType::IncorrectTag);
@@ -198,10 +200,11 @@ fn nest_removal() {
 
     // Trimming end for cross platform, on windows I had \r finishing result.
     assert_eq!(
-        result.expect("This should not error out").trim_end(),
+        result.expect("This should not error out"),
         "correct data nest1
 correct data nested
-correct data nest2"
+correct data nest2
+"
     );
 }
 
@@ -212,15 +215,17 @@ fn indent_removal_simple() {
     let result = remove_indent(
         "    correct data indented 1
         correct data indented more
-    correct data indented 2",
+    correct data indented 2
+",
     );
 
     // Trimming end for cross platform, on windows I had \r finishing result.
     assert_eq!(
-        result.expect("This should not error out").trim_end(),
+        result.expect("This should not error out"),
         "correct data indented 1
     correct data indented more
-correct data indented 2"
+correct data indented 2
+"
     );
 }
 
@@ -286,8 +291,10 @@ fn simple_marker_error() {
     );
 
     // Trimming end for cross platform, on windows I had \r finishing result.
-    assert!(matches!(
-        &result.expect_err("This should error out").errors[0],
-        IncorrectMarker
-    ));
+    match &result.expect_err("This should error out").errors[0] {
+        ErrorType::IncorrectMarker(_) => {}
+        invalid_value => {
+            panic!("unexpected error type: {:?}", invalid_value);
+        }
+    }
 }
