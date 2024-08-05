@@ -63,11 +63,12 @@ pub struct InjectError<'a> {
 }
 
 fn injected(source_text: &str, get_path: fn(&str) -> String) -> Result<String, InjectError> {
+    let source_text = &source_text.replace("\r\n", "\n");
     let re = Regex::new(r"<load.*>").unwrap();
     let total_to_inject = re.find_iter(source_text).count();
     let mut injected_count = 0;
     // Regex to find "<load" tags and capture their info (path + marker)
-    let re = Regex::new(r"<load path='(.*)'.*marker='(.*)'.*>[\r\n|\n]?").unwrap();
+    let re = Regex::new(r"<load path='(.*)'.*marker='(.*)'.*>\n?").unwrap();
 
     let mut error = InjectError {
         result: None,
@@ -85,12 +86,12 @@ fn injected(source_text: &str, get_path: fn(&str) -> String) -> Result<String, I
             error.errors.push(ErrorType::IncorrectPath(path));
             return "".to_string();
         };
-
+        let to_inject = to_inject.replace("\r\n", "\n");
         // Regex to find the markers inside comments, and only print what's inside
         // FIXME: I think we should just paste all the inside,
         // and then remove all "// DOCUSAURUS*"" lines, to allow reuse of a same file.
         let regex = format!(
-            r"// DOCUSAURUS: {} start(?:\r\n|\n)((?:\s|.)*)\s+\/\/ DOCUSAURUS: {} stop",
+            r"// DOCUSAURUS: {} start\n((?:\s|.)*)\s+\/\/ DOCUSAURUS: {} stop",
             infos[1], infos[1]
         );
         let re = Regex::new(&regex).unwrap();
@@ -125,7 +126,6 @@ fn injected(source_text: &str, get_path: fn(&str) -> String) -> Result<String, I
     if 0 < error.errors.len() {
         return Err(error);
     }
-    let result = result.replace("\r\n", "\n");
     let re = Regex::new(r"(.*\/\/ DOCUSAURUS:.*\n)").unwrap();
     let result = re.replace_all(&result, |_: &Captures| "").to_string();
     Ok(result)
