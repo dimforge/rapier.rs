@@ -13,7 +13,7 @@ const config = {
   themeConfig: {
     algolia: {
       apiKey: '2fb2392fe420e3f9cd94004bda27a775',
-      appId: 'rapier',
+      appId: 'MDOZU7PTCV',
       indexName: 'rapier',
     },
     prism: {
