@@ -63,11 +63,12 @@ pub struct InjectError<'a> {
 }
 
 fn injected(source_text: &str, get_path: fn(&str) -> String) -> Result<String, InjectError> {
+    let source_text = &source_text.replace("\r\n", "\n");
     let re = Regex::new(r"<load.*>").unwrap();
     let total_to_inject = re.find_iter(source_text).count();
     let mut injected_count = 0;
     // Regex to find "<load" tags and capture their info (path + marker)
-    let re = Regex::new(r"<load path='(.*)'.*marker='(.*)'.*>[\r\n|\n]?").unwrap();
+    let re = Regex::new(r"<load path='(.*)'.*marker='(.*)'.*>\n?").unwrap();
 
     let mut error = InjectError {
         result: None,
@@ -85,12 +86,12 @@ fn injected(source_text: &str, get_path: fn(&str) -> String) -> Result<String, I
             error.errors.push(ErrorType::IncorrectPath(path));
             return "".to_string();
         };
-
+        let to_inject = to_inject.replace("\r\n", "\n");
         // Regex to find the markers inside comments, and only print what's inside
         // FIXME: I think we should just paste all the inside,
         // and then remove all "// DOCUSAURUS*"" lines, to allow reuse of a same file.
         let regex = format!(
-            r"// DOCUSAURUS: {} start(?:\r\n|\n)((?:\s|.)*)\s+\/\/ DOCUSAURUS: {} stop",
+            r"// DOCUSAURUS: {} start\n((?:\s|.)*)\s+\/\/ DOCUSAURUS: {} stop",
             infos[1], infos[1]
         );
         let re = Regex::new(&regex).unwrap();
@@ -115,7 +116,9 @@ fn injected(source_text: &str, get_path: fn(&str) -> String) -> Result<String, I
                     filepath: infos[0].to_string(),
                 }));
         }
-        to_keep.join("")
+        let mut result = to_keep.join("");
+        result.push('\n');
+        result
     });
     if (injected_count + error.errors.len()) != total_to_inject {
         error.errors.push(ErrorType::IncorrectTag);
@@ -123,7 +126,6 @@ fn injected(source_text: &str, get_path: fn(&str) -> String) -> Result<String, I
     if 0 < error.errors.len() {
         return Err(error);
     }
-    let result = result.replace("\r\n", "\n");
     let re = Regex::new(r"(.*\/\/ DOCUSAURUS:.*\n)").unwrap();
     let result = re.replace_all(&result, |_: &Captures| "").to_string();
     Ok(result)
@@ -198,10 +200,11 @@ fn nest_removal() {
 
     // Trimming end for cross platform, on windows I had \r finishing result.
     assert_eq!(
-        result.expect("This should not error out").trim_end(),
+        result.expect("This should not error out"),
         "correct data nest1
 correct data nested
-correct data nest2"
+correct data nest2
+"
     );
 }
 
@@ -212,15 +215,17 @@ fn indent_removal_simple() {
     let result = remove_indent(
         "    correct data indented 1
         correct data indented more
-    correct data indented 2",
+    correct data indented 2
+",
     );
 
     // Trimming end for cross platform, on windows I had \r finishing result.
     assert_eq!(
-        result.expect("This should not error out").trim_end(),
+        result.expect("This should not error out"),
         "correct data indented 1
     correct data indented more
-correct data indented 2"
+correct data indented 2
+"
     );
 }
 
@@ -286,8 +291,10 @@ fn simple_marker_error() {
     );
 
     // Trimming end for cross platform, on windows I had \r finishing result.
-    assert!(matches!(
-        &result.expect_err("This should error out").errors[0],
-        IncorrectMarker
-    ));
+    match &result.expect_err("This should error out").errors[0] {
+        ErrorType::IncorrectMarker(_) => {}
+        invalid_value => {
+            panic!("unexpected error type: {:?}", invalid_value);
+        }
+    }
 }

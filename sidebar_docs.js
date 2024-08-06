@@ -75,7 +75,7 @@ if (!process.env.PUBLISH_MODE) {
 }
 
 
-module.exports = {
+const config = {
   docs: [
     'about_rapier',
     {
@@ -87,35 +87,37 @@ module.exports = {
         'api/javascript/JavaScript3D',
         {
           type: 'link',
-          label: 'bevy_rapier2d ↪',
+          label: 'bevy_rapier2d',
           href: 'https://docs.rs/bevy_rapier2d'
         },
         {
           type: 'link',
-          label: 'bevy_rapier3d ↪',
+          label: 'bevy_rapier3d',
           href: 'https://docs.rs/bevy_rapier3d'
         },
         {
           type: 'link',
-          label: 'rapier2d ↪',
+          label: 'rapier2d',
           href: 'https://docs.rs/rapier2d'
         },
         {
           type: 'link',
-          label: 'rapier3d ↪',
+          label: 'rapier3d',
           href: 'https://docs.rs/rapier3d'
         },
         {
           type: 'link',
-          label: 'rapier2d-f64 ↪',
+          label: 'rapier2d-f64',
           href: 'https://docs.rs/rapier2d-f64'
         },
         {
           type: 'link',
-          label: 'rapier3d-f64 ↪',
+          label: 'rapier3d-f64',
           href: 'https://docs.rs/rapier3d-f64'
         },
       ],
     }
   ],
 };
+
+export default config;
