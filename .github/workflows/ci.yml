@@ -10,12 +10,17 @@ env:
   CARGO_TERM_COLOR: always
 
 jobs:
-  check-injection:
+  build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Run injection script locally
-        run: find docs/user_guides/templates/ -type f -print0 | OUTPUT_FOLDER=docs/user_guides/templates_injected xargs -0 ./inject_code_in_user_guides.sh
+      - name: User guides generation
+        run: ./generate_user_guides.sh
+      - name: yarn install
+        run: corepack enable && yarn
+      - name: yarn build
+        run: PUBLISH_MODE=1 yarn build
+
   test-code-snippets-rust:
     runs-on: ubuntu-latest
     steps:
