@@ -1,7 +1,9 @@
 const math = require('remark-math')
 const katex = require('rehype-katex')
+import { Config } from "@docusaurus/types";
+import type * as Preset from "@docusaurus/preset-classic";
 
-const config = {
+const config: Config = {
   title: 'Rapier',
   tagline: 'Fast 2D and 3D physics engine for the Rust programming language.',
   url: 'https://rapier.rs',
@@ -142,7 +144,7 @@ const config = {
       ],
       // copyright: `Copyright © ${new Date().getFullYear()} Dimforge EURL. Website built with Docusaurus.`,
     },
-  },
+  } satisfies Preset.ThemeConfig,
   plugins: [
     [
       '@docusaurus/plugin-content-docs',
@@ -174,7 +176,7 @@ const config = {
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
         },
-      },
+      } satisfies Preset.Options,
     ],
   ],
   stylesheets: [
