@@ -6,7 +6,7 @@ function iframeLoaded() {
     if (typeof document !== 'undefined') {
         const iFrameID = document.getElementById('bench-iframe');
         if (!(iFrameID instanceof HTMLIFrameElement)) 
-          throw new Error(`Expected e to be an HTMLIFrameElement, was ${iFrameID && iFrameID.constructor && iFrameID.constructor.name || iFrameID}`);
+          throw new Error(`Expected iFrameID to be an HTMLIFrameElement, was ${iFrameID && iFrameID.constructor && iFrameID.constructor.name || iFrameID}`);
         
         const newHeight = (iFrameID.contentWindow.document.body.scrollHeight + 100) + "px";
         if (iFrameID.height != newHeight)
