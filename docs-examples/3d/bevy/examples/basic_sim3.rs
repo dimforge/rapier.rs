@@ -36,10 +36,8 @@ fn setup_physics(mut commands: Commands) {
 }
 
 fn print_ball_altitude(mut positions: Query<&mut Transform, With<RigidBody>>) {
-    for mut transform in positions.iter_mut() {
-        dbg!(transform.rotation.to_axis_angle());
-        transform.rotation = Quat::from_rotation_z(270_f32.to_radians());
-        //println!("Ball altitude: {}", transform.translation.y);
+    for transform in positions.iter_mut() {
+        println!("Ball altitude: {}", transform.translation.y);
     }
 }
 // DOCUSAURUS: basic_sim stop
