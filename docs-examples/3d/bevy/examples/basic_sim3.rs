@@ -35,8 +35,8 @@ fn setup_physics(mut commands: Commands) {
         .insert(TransformBundle::from(Transform::from_xyz(0.0, 4.0, 0.0)));
 }
 
-fn print_ball_altitude(mut positions: Query<&mut Transform, With<RigidBody>>) {
-    for transform in positions.iter_mut() {
+fn print_ball_altitude(positions: Query<&Transform, With<RigidBody>>) {
+    for transform in positions.iter() {
         println!("Ball altitude: {}", transform.translation.y);
     }
 }
