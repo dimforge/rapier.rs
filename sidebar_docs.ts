@@ -1,6 +1,6 @@
 
 
-let template = {
+const template = {
   '<Templates>': [
     'user_guides/templates_injected/getting_started',
     'user_guides/templates_injected/getting_started_bevy',
@@ -23,7 +23,7 @@ let template = {
   ]
 };
 
-let specialized_guides = {
+const specialized_guides = {
   'Rust': [
     'user_guides/rust/getting_started',
     'user_guides/rust/introduction_to_nalgebra',
