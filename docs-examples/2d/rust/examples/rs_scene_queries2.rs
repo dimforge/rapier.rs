@@ -41,7 +41,7 @@ fn main() {
 
     // DOCUSAURUS: Update start
     // Update the query pipeline to take the latest collider positions into account.
-    query_pipeline.update(&rigid_body_set, &collider_set);
+    query_pipeline.update(&collider_set);
     // Scene queries can now be executed accurately.
     // DOCUSAURUS: Update stop
     collider_set.remove(

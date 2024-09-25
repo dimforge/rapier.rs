@@ -1,7 +1,7 @@
 // Adapted from https://github.com/dimforge/rapier.js/blob/a86610ffc744efb1541f896cd0f421993e6ddb54/testbed2d/src/Graphics.ts
 
 // DOCUSAURUS: Debug1 start
-import PIXI from "pixi.js";
+import * as PIXI from "pixi.js";
 import { Viewport } from "pixi-viewport";
 // DOCUSAURUS: Debug1 stop
 

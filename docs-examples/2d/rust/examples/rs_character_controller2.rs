@@ -119,18 +119,16 @@ fn main() {
             );
             // Then, let the character controller solve (and apply) the collision impulses
             // to the dynamic rigid-bodies hit along its path.
-            for collision in collisions {
-                character_controller.solve_character_collision_impulses(
-                    dt,
-                    &mut bodies,
-                    &colliders,
-                    &query_pipeline,
-                    character_shape,
-                    character_mass,
-                    &collision,
-                    filter,
-                );
-            }
+            character_controller.solve_character_collision_impulses(
+                dt,
+                &mut bodies,
+                &colliders,
+                &query_pipeline,
+                character_shape,
+                character_mass,
+                &collisions,
+                filter,
+            );
             // DOCUSAURUS: Collisions2 stop
         }
         let character_body = &bodies[rigid_body_handle];
