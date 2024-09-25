@@ -21,8 +21,8 @@
     "clsx": "^1.1.1",
     "react": "^18.2",
     "react-dom": "^18.2",
-    "rehype-katex": "^3.1.0",
-    "remark-math": "^2.0.1",
+    "rehype-katex": "7",
+    "remark-math": "6",
     "terminus": "^1.1.0"
   },
   "browserslist": {
@@ -37,5 +37,5 @@
       "last 1 safari version"
     ]
   },
-  "packageManager": "yarn@1.22.22+sha1.ac34549e6aa8e7ead463a7407e1c7390f61a6610"
+  "packageManager": "yarn@4.3.1"
 }

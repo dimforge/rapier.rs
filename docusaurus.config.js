@@ -1,7 +1,7 @@
 const math = require('remark-math')
 const katex = require('rehype-katex')
 
-module.exports = {
+const config = {
   title: 'Rapier',
   tagline: 'Fast 2D and 3D physics engine for the Rust programming language.',
   url: 'https://rapier.rs',
@@ -13,7 +13,7 @@ module.exports = {
   themeConfig: {
     algolia: {
       apiKey: '2fb2392fe420e3f9cd94004bda27a775',
-      appId: 'rapier',
+      appId: 'MDOZU7PTCV',
       indexName: 'rapier',
     },
     prism: {
@@ -45,11 +45,11 @@ module.exports = {
           items: [
             {
               href: 'https://rapier.rs/demos2d/index.html', // FIXME: should depend on the base url.
-              label: '2D Demos ↪',
+              label: '2D Demos',
             },
             {
               href: 'https://rapier.rs/demos3d/index.html', // FIXME: should depend on the base url.
-              label: '3D Demos ↪',
+              label: '3D Demos',
             }
           ],
         },
@@ -61,18 +61,18 @@ module.exports = {
         },
         {
           href: 'https://dimforge.com/blog',
-          label: 'Blog ↪',
+          label: 'Blog',
           position: 'left',
         },
         {
-          href: 'https://github.com/sponsors/dimforge',
-          label: 'Donate ♥',
+          value: '<a class="header-button-donate" href="https://github.com/sponsors/dimforge" target="_blank" rel="noopener noreferrer">Donate ♥</a>',
+          className: 'header-button-donate',
           position: 'right',
-          className: 'header-button-donate'
+          type: 'html'
         },
         {
           href: 'https://dimforge.com',
-          label: 'Dimforge ↪',
+          label: 'Dimforge',
           position: 'right',
         },
         {
@@ -100,11 +100,11 @@ module.exports = {
               to: 'docs/',
             },
             {
-              label: 'Demos 2D ↪',
+              label: 'Demos 2D',
               href: 'https://rapier.rs/demos2d/index.html',
             },
             {
-              label: 'Demos 3D ↪',
+              label: 'Demos 3D',
               href: 'https://rapier.rs/demos3d/index.html',
             },
           ],
@@ -181,3 +181,5 @@ module.exports = {
     'https://cdn.jsdelivr.net/npm/katex@0.11.0/dist/katex.min.css'
   ]
 };
+
+export default config;
