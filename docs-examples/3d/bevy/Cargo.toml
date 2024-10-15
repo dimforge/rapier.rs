@@ -7,4 +7,5 @@ edition = "2021"
 
 [dependencies]
 bevy = "0.14"
-bevy_rapier3d = "0.27"
+# bevy_rapier3d = "0.27"
+bevy_rapier3d = { path = "../../../../bevy_rapier/bevy_rapier3d" }

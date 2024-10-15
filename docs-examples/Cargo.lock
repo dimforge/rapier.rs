@@ -789,27 +789,23 @@ checksum = "c115c97a5c8a263bd0aa7001b999772c744ac5ba797d07c86f25734ce381ea69"
 [[package]]
 name = "bevy_rapier2d"
 version = "0.27.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "17d82b9cbb851249a8859647ae3a2c5d17664df1da27ccd43fddd1faa66b58a6"
 dependencies = [
  "bevy",
  "bitflags 2.5.0",
  "log",
  "nalgebra",
- "rapier2d 0.21.0",
+ "rapier2d",
 ]
 
 [[package]]
 name = "bevy_rapier3d"
 version = "0.27.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "863f0fa7a944d8fa49dde5b89793f4deecf8476f25d61f336063fe71db7743bd"
 dependencies = [
  "bevy",
  "bitflags 2.5.0",
  "log",
  "nalgebra",
- "rapier3d 0.21.0",
+ "rapier3d",
 ]
 
 [[package]]
@@ -3079,30 +3075,6 @@ dependencies = [
 
 [[package]]
 name = "parry2d"
-version = "0.16.1"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "9c8aa1c304489b71ab35ad4080c5a333a5fc24b2a5f244f197dedb93276c9a05"
-dependencies = [
- "approx",
- "arrayvec",
- "bitflags 2.5.0",
- "downcast-rs",
- "either",
- "log",
- "nalgebra",
- "num-derive",
- "num-traits",
- "ordered-float",
- "rustc-hash 2.0.0",
- "simba",
- "slab",
- "smallvec",
- "spade",
- "thiserror",
-]
-
-[[package]]
-name = "parry2d"
 version = "0.17.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "3f9dedc688fd089d8f48a4f3ef704b5ba6945288ee8c9b511b130d8dcb84e4ee"
@@ -3119,30 +3091,6 @@ dependencies = [
  "ordered-float",
  "rustc-hash 2.0.0",
  "serde",
- "simba",
- "slab",
- "smallvec",
- "spade",
- "thiserror",
-]
-
-[[package]]
-name = "parry3d"
-version = "0.16.1"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "ec1d9cc5a359352e2be7e47270cef9f9e175794c03302553353804a436228e7f"
-dependencies = [
- "approx",
- "arrayvec",
- "bitflags 2.5.0",
- "downcast-rs",
- "either",
- "log",
- "nalgebra",
- "num-derive",
- "num-traits",
- "ordered-float",
- "rustc-hash 2.0.0",
  "simba",
  "slab",
  "smallvec",
@@ -3348,29 +3296,6 @@ checksum = "9c8a99fddc9f0ba0a85884b8d14e3592853e787d581ca1816c91349b10e4eeab"
 
 [[package]]
 name = "rapier2d"
-version = "0.21.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "7a9a115cec2cd9533e376e23c87a7869508691a7b38ab078cc8a8e1cd24d9d1b"
-dependencies = [
- "approx",
- "arrayvec",
- "bit-vec 0.6.3",
- "bitflags 2.5.0",
- "crossbeam",
- "downcast-rs",
- "log",
- "nalgebra",
- "num-derive",
- "num-traits",
- "ordered-float",
- "parry2d 0.16.1",
- "rustc-hash 2.0.0",
- "simba",
- "thiserror",
-]
-
-[[package]]
-name = "rapier2d"
 version = "0.22.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "643116992c25c96a07e1aae7d59fba207f01979dc9a107c42bcd4c4b83ef78b2"
@@ -3386,32 +3311,9 @@ dependencies = [
  "num-derive",
  "num-traits",
  "ordered-float",
- "parry2d 0.17.0",
+ "parry2d",
  "rustc-hash 2.0.0",
  "serde",
- "simba",
- "thiserror",
-]
-
-[[package]]
-name = "rapier3d"
-version = "0.21.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "bdfa17fa28a7a4cfaebf669f57ca34dce0e758b295bd8a2aa1fbac4e054fb836"
-dependencies = [
- "approx",
- "arrayvec",
- "bit-vec 0.6.3",
- "bitflags 2.5.0",
- "crossbeam",
- "downcast-rs",
- "log",
- "nalgebra",
- "num-derive",
- "num-traits",
- "ordered-float",
- "parry3d 0.16.1",
- "rustc-hash 2.0.0",
  "simba",
  "thiserror",
 ]
@@ -3433,7 +3335,7 @@ dependencies = [
  "num-derive",
  "num-traits",
  "ordered-float",
- "parry3d 0.17.0",
+ "parry3d",
  "rustc-hash 2.0.0",
  "simba",
  "thiserror",
@@ -3462,7 +3364,7 @@ dependencies = [
  "bincode",
  "crossbeam",
  "nalgebra",
- "rapier2d 0.22.0",
+ "rapier2d",
  "serde",
 ]
 
@@ -3472,7 +3374,7 @@ version = "0.1.0"
 dependencies = [
  "glam",
  "nalgebra",
- "rapier3d 0.22.0",
+ "rapier3d",
 ]
 
 [[package]]

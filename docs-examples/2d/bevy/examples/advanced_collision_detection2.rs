@@ -74,9 +74,10 @@ fn display_events(
 // DOCUSAURUS: Events stop
 
 // DOCUSAURUS: ContactGraph1 start
-fn display_contact_info(rapier_context: Res<RapierContext>, custom_info: Res<CustomInfo>) {
+fn display_contact_info(rapier_context: ReadRapierContext, custom_info: Res<CustomInfo>) {
     let entity1 = custom_info.entity1; // A first entity with a collider attached.
     let entity2 = custom_info.entity2; // A second entity with a collider attached.
+    let rapier_context = rapier_context.single();
 
     /* Find the contact pair, if it exists, between two colliders. */
     if let Some(contact_pair) = rapier_context.contact_pair(entity1, entity2) {
@@ -121,10 +122,11 @@ fn display_contact_info(rapier_context: Res<RapierContext>, custom_info: Res<Cus
 
 // DOCUSAURUS: ContactGraph2 start
 fn display_contact_info_all_from_1_entity(
-    rapier_context: Res<RapierContext>,
+    rapier_context: ReadRapierContext,
     custom_info: Res<CustomInfo>,
 ) {
     let entity = custom_info.entity2; // An entity with a collider attached.
+    let rapier_context = rapier_context.single();
 
     /* Iterate through all the contact pairs involving a specific collider. */
     for contact_pair in rapier_context.contact_pairs_with(entity) {
@@ -141,9 +143,10 @@ fn display_contact_info_all_from_1_entity(
 // DOCUSAURUS: ContactGraph2 stop
 
 // DOCUSAURUS: IntersectionGraph1 start
-fn display_intersection_info(rapier_context: Res<RapierContext>, custom_info: Res<CustomInfo>) {
+fn display_intersection_info(rapier_context: ReadRapierContext, custom_info: Res<CustomInfo>) {
     let entity1 = custom_info.entity1; // A first entity with a collider attached.
     let entity2 = custom_info.entity2; // A second entity with a collider attached.
+    let rapier_context = rapier_context.single();
 
     /* Find the intersection pair, if it exists, between two colliders. */
     if rapier_context.intersection_pair(entity1, entity2) == Some(true) {
@@ -157,10 +160,11 @@ fn display_intersection_info(rapier_context: Res<RapierContext>, custom_info: Re
 
 // DOCUSAURUS: IntersectionGraph2 start
 fn display_intersection_info_all_from_1_entity(
-    rapier_context: Res<RapierContext>,
+    rapier_context: ReadRapierContext,
     custom_info: Res<CustomInfo>,
 ) {
     let entity = custom_info.entity2; // An entity with a collider attached.
+    let rapier_context = rapier_context.single();
 
     /* Iterate through all the intersection pairs involving a specific collider. */
     for (collider1, collider2, intersecting) in rapier_context.intersection_pairs_with(entity) {

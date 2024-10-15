@@ -9,24 +9,34 @@ import TabItem from '@theme/TabItem';
 
 This page describes <rapier> all the data structures needed for stepping the simulation as illustrated by the
 [basic simulation example](getting_started#basic-simulation-example)</rapier><bevy> all the useful
-resources added automatically by the `RapierPhysicsPlugin`</bevy>.
+components and resources added automatically by the `RapierPhysicsPlugin`</bevy>.
 
+<bevy>
+
+## Rapier Context
+
+The data structures handled by rapier for a specific context are stored in different components.
+
+An ergonomic `SystemParam` helper is provided to reduce boilerplate:
+See https://docs.rs/rapier3d/latest/rapier3d/plugin/context/systemparams/struct.RapierContext.html
+
+</bevy>
 
 ## Gravity
 Gravity is represented as a vector. It affects every dynamic rigid-body taking part of the simulation. The gravity
 can be altered at each timestep <rapier>(by passing a different vector to `PhysicsPipeline::step`)</rapier><bevy>(by
-modifying the resource field `RapierConfiguration::gravity`)</bevy>.
+modifying the component field `RapierConfiguration::gravity`)</bevy>.
 Learn more about per-rigid-body gravity modification in [the dedicated section](rigid_bodies#gravity).
 
 ## Integration parameters
-The `IntegrationParameters` <bevy>resource</bevy> controls various aspects of the physics simulation, including the timestep length,
+The `IntegrationParameters` controls various aspects of the physics simulation, including the timestep length,
 number of solver iterations, number of CCD substeps, etc. The default integration parameters are set to
 achieve a good balance between performance and accuracy for games. They can be changed to make the simulation more
 accurate at the expanse of a bit of performance. Learn more about each integration parameter in
 [the API docs](https://docs.rs/rapier3d/latest/rapier3d/dynamics/struct.IntegrationParameters.html).
 
 ## Island manager
-The `IslandManager` <bevy>resource</bevy> is responsible for tracking the set of dynamic rigid-bodies that are still moving
+The `IslandManager` is responsible for tracking the set of dynamic rigid-bodies that are still moving
 and these that are no longer moving (and can ignored by subsequent timesteps to avoid useless computations).
 The island manager is automatically updated by `PhysicsPipeline::step` and can be queried to retrieve
 the list of all the rigid-bodies modified by the physics engine during the last timestep. This can be useful
@@ -61,7 +71,7 @@ fn print_active_bodies_positions(island_manager: Res<IslandManager>, positions: 
 Learn more about sleeping rigid-bodies in [the dedicated section](rigid_bodies#sleeping).
 
 ## Physics pipeline
-The `PhysicsPipeline` <bevy>resource</bevy> is responsible for tying everything together in order to run the physics simulation.
+The `PhysicsPipeline` is responsible for tying everything together in order to run the physics simulation.
 It will take care of updating every data-structures mentioned in this page (except the other pipelines), running the collision-detection,
 running the force computation and integration, and running CCD resolution.
 <rapier>
@@ -145,7 +155,7 @@ Learn more about joints in [the dedicated page](joints).
 </rapier>
 
 ## CCD solver
-The CCD solver <bevy>resource</bevy> is responsible for the resolution of Continuous-Collision-Detection. By itself, this structure
+The CCD solver is responsible for the resolution of Continuous-Collision-Detection. By itself, this structure
 doesn't expose any useful feature. So it should simply be passed to the `PhysicsPipeline::step` method.
 Learn more about CCD in [the dedicated section](rigid_bodies#continuous-collision-detection).
 

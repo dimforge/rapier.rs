@@ -1,7 +1,6 @@
 use bevy::prelude::*;
 use bevy::render::primitives::Aabb;
 use bevy_rapier3d::prelude::*;
-use bevy_rapier3d::rapier::geometry::InteractionGroups;
 
 fn main() {
     App::new()
@@ -41,7 +40,9 @@ fn setup_physics(mut commands: Commands) {
 
 // DOCUSAURUS: Raycast start
 /* Cast a ray inside of a system. */
-fn cast_ray(rapier_context: Res<RapierContext>) {
+fn cast_ray(rapier_context: ReadRapierContext) {
+    let rapier_context = rapier_context.single();
+
     let ray_pos = Vec3::new(1.0, 2.0, 3.0);
     let ray_dir = Vec3::new(0.0, 1.0, 0.0);
     let max_toi = 4.0;
@@ -90,7 +91,8 @@ fn cast_ray(rapier_context: Res<RapierContext>) {
 
 // DOCUSAURUS: Shapecast start
 /* Cast a shape inside of a system. */
-fn cast_shape(rapier_context: Res<RapierContext>) {
+fn cast_shape(rapier_context: ReadRapierContext) {
+    let rapier_context = rapier_context.single();
     let shape = Collider::cuboid(1.0, 2.0, 3.0);
     let shape_pos = Vec3::new(1.0, 2.0, 3.0);
     let shape_rot = Quat::from_rotation_z(0.8);
@@ -118,7 +120,8 @@ fn cast_shape(rapier_context: Res<RapierContext>) {
 
 // DOCUSAURUS: PointProjection start
 /* Project a point inside of a system. */
-fn project_point(rapier_context: Res<RapierContext>) {
+fn project_point(rapier_context: ReadRapierContext) {
+    let rapier_context = rapier_context.single();
     let point = Vec3::new(1.0, 2.0, 3.0);
     let solid = true;
     let filter = QueryFilter::default();
@@ -146,7 +149,8 @@ fn project_point(rapier_context: Res<RapierContext>) {
 
 // DOCUSAURUS: IntersectionTest start
 /* Test intersections inside of a system. */
-fn test_intersections(rapier_context: Res<RapierContext>) {
+fn test_intersections(rapier_context: ReadRapierContext) {
+    let rapier_context = rapier_context.single();
     let shape = Collider::cuboid(1.0, 2.0, 3.0);
     let shape_pos = Vec3::new(0.0, 1.0, 2.0);
     let shape_rot = Quat::from_rotation_z(0.8);
