@@ -1,5 +1,5 @@
 use bevy::{prelude::*, render::primitives::Aabb};
-use bevy_rapier2d::{parry::query::intersection_test, prelude::*};
+use bevy_rapier2d::prelude::*;
 
 #[derive(PartialEq, Eq, Clone, Copy, Component)]
 struct CustomData {
@@ -46,12 +46,14 @@ fn setup_physics(mut commands: Commands) {
 
 // DOCUSAURUS: Raycast start
 /* Cast a ray inside of a system. */
-fn cast_ray(rapier_context: Res<RapierContext>) {
+fn cast_ray(rapier_context: ReadRapierContext) {
     let ray_pos = Vec2::new(1.0, 2.0);
     let ray_dir = Vec2::new(0.0, 1.0);
     let max_toi = 4.0;
     let solid = true;
     let filter = QueryFilter::default();
+
+    let rapier_context = rapier_context.single();
 
     if let Some((entity, toi)) = rapier_context.cast_ray(ray_pos, ray_dir, max_toi, solid, filter) {
         // The first collider hit has the entity `entity` and it hit after
@@ -95,7 +97,7 @@ fn cast_ray(rapier_context: Res<RapierContext>) {
 
 // DOCUSAURUS: Shapecast start
 /* Cast a shape inside of a system. */
-fn cast_shape(rapier_context: Res<RapierContext>) {
+fn cast_shape(rapier_context: ReadRapierContext) {
     let shape = Collider::cuboid(1.0, 2.0);
     let shape_pos = Vec2::new(1.0, 2.0);
     let shape_rot = 0.8;
@@ -107,6 +109,7 @@ fn cast_shape(rapier_context: Res<RapierContext>) {
         stop_at_penetration: false,
         compute_impact_geometry_on_penetration: false,
     };
+    let rapier_context = rapier_context.single();
 
     if let Some((entity, hit)) =
         rapier_context.cast_shape(shape_pos, shape_rot, shape_vel, &shape, options, filter)
@@ -123,11 +126,12 @@ fn cast_shape(rapier_context: Res<RapierContext>) {
 
 // DOCUSAURUS: PointProjection start
 /* Project a point inside of a system. */
-fn project_point(rapier_context: Res<RapierContext>) {
+fn project_point(rapier_context: ReadRapierContext) {
     let point = Vec2::new(1.0, 2.0);
     let solid = true;
     let filter = QueryFilter::default();
 
+    let rapier_context = rapier_context.single();
     if let Some((entity, projection)) = rapier_context.project_point(point, solid, filter) {
         // The collider closest to the point has this `handle`.
         println!(
@@ -151,12 +155,13 @@ fn project_point(rapier_context: Res<RapierContext>) {
 
 // DOCUSAURUS: IntersectionTest start
 /* Test intersections inside of a system. */
-fn test_intersections(rapier_context: Res<RapierContext>) {
+fn test_intersections(rapier_context: ReadRapierContext) {
     let shape = Collider::cuboid(1.0, 2.0);
     let shape_pos = Vec2::new(0.0, 1.0);
     let shape_rot = 0.8;
     let filter = QueryFilter::default();
 
+    let rapier_context = rapier_context.single();
     rapier_context.intersections_with_shape(shape_pos, shape_rot, &shape, filter, |entity| {
         println!("The entity {:?} intersects our shape.", entity);
         true // Return `false` instead if we want to stop searching for other colliders that contain this point.
@@ -176,11 +181,13 @@ fn test_intersections(rapier_context: Res<RapierContext>) {
 // DOCUSAURUS: QueryFilter start
 /* Cast a ray inside of a system. */
 fn cast_ray_filtered(
-    rapier_context: Res<RapierContext>,
+    rapier_context: ReadRapierContext,
     player_query: Query<Entity, With<Player>>,
     custom_data_query: Query<&CustomData>,
 ) {
     let player_handle = player_query.single();
+    let rapier_context = rapier_context.single();
+
     let ray_pos = Vec2::new(1.0, 2.0);
     let ray_dir = Vec2::new(0.0, 1.0);
     let max_toi = 4.0;

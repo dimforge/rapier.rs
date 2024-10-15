@@ -6,8 +6,8 @@ edition = "2021"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-rapier2d = { version = "0.19.0", features = ["serde-serialize"] }
-nalgebra = { version = "0.32.5" }
+rapier2d = { version = "0.22.0", features = ["serde-serialize"] }
+nalgebra = { version = "0.33" }
 # Used for events handling
 crossbeam = "0.8.4"
 # Used For serialization

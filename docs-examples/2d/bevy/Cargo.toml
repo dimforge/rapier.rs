@@ -6,5 +6,6 @@ edition = "2021"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-bevy = "0.13.2"
-bevy_rapier2d = "0.26.0"
+bevy = "0.14"
+# bevy_rapier2d = "0.28"
+bevy_rapier2d = { path = "../../../../bevy_rapier/bevy_rapier2d" }

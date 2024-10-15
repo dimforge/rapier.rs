@@ -17,6 +17,6 @@
     "webpack-cli": "^5.1.4"
   },
   "dependencies": {
-    "@dimforge/rapier3d": "0.13.1"
+    "@dimforge/rapier3d": "0.14.0"
   }
 }
