@@ -81,7 +81,7 @@ fn display_contact_info(rapier_context: Res<RapierContext>, custom_info: Res<Cus
     /* Find the contact pair, if it exists, between two colliders. */
     if let Some(contact_pair) = rapier_context.contact_pair(entity1, entity2) {
         // The contact pair exists meaning that the broad-phase identified a potential contact.
-        if contact_pair.has_any_active_contacts() {
+        if contact_pair.has_any_active_contact() {
             // The contact pair has active contacts, meaning that it
             // contains contacts for which contact forces were computed.
         }

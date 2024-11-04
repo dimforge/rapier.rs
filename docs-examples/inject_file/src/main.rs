@@ -7,12 +7,12 @@ fn main() -> ExitCode {
     let input_path = args
         .get(1)
         .expect("Expected 1 argument: the path to the file to parse.");
-    let file: &str = &read_to_string(&input_path)
-        .expect(&format!("Could not read file at input {}", input_path));
+    let file: &str = &read_to_string(input_path)
+        .unwrap_or_else(|_| panic!("Could not read file at input {}", input_path));
 
     let result = injected(file, |file_path| {
         let mut path = "..".to_string();
-        path.push_str(&file_path);
+        path.push_str(file_path);
         path.to_string()
     });
     match result {
@@ -101,14 +101,14 @@ fn injected(source_text: &str, get_path: fn(&str) -> String) -> Result<String, I
                 let to_keep = c.extract::<1>();
                 injected_count += 1;
                 let injected_string = to_keep.1[0];
-                let injected_string = remove_indent(&injected_string)
+                let injected_string = remove_indent(injected_string)
                     .unwrap_or(injected_string.to_string())
                     .trim_end()
                     .to_string();
                 injected_string
             })
             .collect::<Vec<_>>();
-        if to_keep.len() == 0 {
+        if to_keep.is_empty() {
             error
                 .errors
                 .push(ErrorType::IncorrectMarker(IncorrectMarker {
@@ -123,7 +123,7 @@ fn injected(source_text: &str, get_path: fn(&str) -> String) -> Result<String, I
     if (injected_count + error.errors.len()) != total_to_inject {
         error.errors.push(ErrorType::IncorrectTag);
     }
-    if 0 < error.errors.len() {
+    if !error.errors.is_empty() {
         return Err(error);
     }
     let re = Regex::new(r"(.*\/\/ DOCUSAURUS:.*\n)").unwrap();
@@ -137,7 +137,7 @@ fn remove_indent(source: &str) -> Option<String> {
         .lines()
         .filter_map(|l| {
             // Don't count empty lines
-            if l.chars().find(|c| c.is_whitespace() == false) == None {
+            if !l.chars().any(|c| !c.is_whitespace()) {
                 return None;
             }
             Some(l.chars().take_while(|c| c.is_whitespace()).count())

@@ -1,12 +1,14 @@
 #!/bin/bash
 set -v
 
-if [ gsed -v ]; then
+if gsed --help >  /dev/null 2>&1; then
     gsed=gsed
+    echo "gsed found: using gsed."
 else
     # Hopefully installed sed is the gnu one.
     # note: aliases work poorly with xargs.
     gsed=sed
+    echo "gsed not found: using sed."
 fi
 
 mkdir -p docs/user_guides/rust/
