@@ -15,7 +15,7 @@ will result in the exact same simulation results. However, doing this on two dif
 completely different results.
 
 :::note
-Two simulations run with the **same initial conditions** if all the [simulation structures](simulation_structures) are
+Two simulations run with the **same initial conditions** if all the [simulation structures](./simulation_structures.mdx) are
 initialized with the same values, rigid-bodies/colliders/joints are constructed the same way, and they are added/removed
 to sets (rigid-body sets, etc.) in the exact same order.
 :::
@@ -54,7 +54,7 @@ values, rigid-bodies/colliders/joints are constructed the same way, and they are
 
 Keep in mind that all the values used to initialize the physics simulation must result from cross-platform
 deterministic operations to in order to preserve the determinism of the physics engine itself. Otherwise, you won't
-get the exact same initial conditions on all the platfroms. In particular, transcendental functions like
+get the exact same initial conditions on all the platforms. In particular, transcendental functions like
 `Math.sin, Math.cos` are not cross-platform determinism and may give different results on different platforms.
 
 </js>

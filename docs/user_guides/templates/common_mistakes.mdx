@@ -78,7 +78,7 @@ If applying a force or an impulse to a rigid-body doesn't work, please make sure
 - The rigid-body has a non-zero mass (or non-zero angular inertia for torques).
 - The force or impulse must be strong enough to actually push the rigid-body. You may for example try with a very
       high force/impulse value (say, with a magnitude of `100_000.0`) and see if this stronger force works.
-- The rigid-body is [awake](rigid_bodies#sleeping), either by calling `RigidBody::wake_up(true)` explicitly, or by using `true` as the
+- The rigid-body is [awake](./rigid_bodies.mdx#sleeping), either by calling `RigidBody::wake_up(true)` explicitly, or by using `true` as the
   last argument of the force/impulse application method.
   
 </rapier>
