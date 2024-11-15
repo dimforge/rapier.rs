@@ -79,7 +79,7 @@ space whereas a vector can be seen as a direction or a displacement between two 
 a contact between two shapes has contact points (the location of the contact in space) represented as points,
 and has a contact normal (the direction used to apply forces) represented as a vector.
 
-Points are created/accessed in a way very similar to [vectors](#vectors):
+Points are created/accessed in a way very similar to [vectors](./introduction_to_nalgebra.mdx#vectors):
 
 <Tabs
   groupId="dim"
@@ -122,7 +122,7 @@ It is possible to access the vector wrapped by a point by accessing its `coords`
 
 ## Isometries
 An isometry represents a rotation followed by a translation. Isometries are often used within Rapier to represent
-the position of a [rigid-body](rigid_bodies#position) or a [collider](colliders#position). By **position**, we generally
+the position of a [rigid-body](./rigid_bodies.mdx#position) or a [collider](./colliders.mdx#position). By **position**, we generally
 mean both the translation and the orientation of the rigid-body or collider.
 - In 2D, the translational part of an isometry is represented as a `Vector2`, and the rotational part
   is represented as a `UnitComplex` number (a complex number with a norm equal to 1).

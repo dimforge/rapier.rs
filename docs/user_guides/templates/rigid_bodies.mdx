@@ -11,9 +11,9 @@ The real-time simulation of rigid-bodies subjected to forces and contacts is the
 video-games, robotics, or animation. Rigid-bodies are typically used to simulate the dynamics of non-deformable solids as well
 as to integrate the trajectory of solids which velocities are controlled by the user (e.g. moving platforms). On
 the other hand, rigid-bodies are not enough to simulate, e.g., cars, ragdolls, or robotic systems, as those use-cases
-require adding restrictions on the relative motion between their parts using [joints](joints).
+require adding restrictions on the relative motion between their parts using [joints](./joints.mdx).
  
-Note that rigid-bodies are only responsible for the dynamics and kinematics of the solid. [Colliders](colliders) can be
+Note that rigid-bodies are only responsible for the dynamics and kinematics of the solid. [Colliders](./colliders.mdx) can be
 attached to a rigid-body to specify its shape and enable collision-detection. A rigid-body without collider attached to it will
 not be affected by contacts (because there is no shape to compute contact against).
 
@@ -83,7 +83,7 @@ import Sleeping from './rigid_body_sleeping.mdx'
 ## User-data
 Each rigid-body can be given a user-defined data of type `u128`. This integer can have any value
 and is never used/modified by the physics-engine. This can for example be useful to add some custom data for
-custom [contact filtering/modification](advanced_collision_detection#physics-hooks).
+custom [contact filtering/modification](./advanced_collision_detection.mdx#physics-hooks).
 
 This user-data can be set when the rigid-body is created or after its creation:
 

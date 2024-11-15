@@ -77,7 +77,7 @@ form a line strip, i.e., the polyline is formed from the  segments `[vertices[0]
 It is discouraged to use a triangle meshes or a polylines for colliders attached to
 dynamic rigid-bodies. Because they have no interior, it is easy for another object to get stuck into them.
 In order to simulate properly non-convex objects, it is recommended to use a **convex decomposition** with a
-[compound shape](#compound-shapes) instead.
+[compound shape](./colliders.mdx#compound-shapes) instead.
 :::
 
 ### Heightfields
@@ -215,7 +215,7 @@ import ActiveHooks from './collider_active_hooks.mdx'
 ## User-data
 Each collider can be given a user-defined data of type `u128`. This integer can have any value
 and is never used/modified by the physics-engine. This can for example be useful to add some custom data for personalized
-[contact filtering/modification](advanced_collision_detection).
+[contact filtering/modification](./advanced_collision_detection.mdx).
 
 This user-data can be set when the collider is created or after its creation:
 

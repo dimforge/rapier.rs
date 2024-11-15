@@ -9,9 +9,9 @@ its fields:</notjs><js>several optional arguments that lets you describe what ne
 arguments:</js>
 - `flags` allows you to discard whole families of colliders based on their types or their parent types (e.g. exclude all
   sensors and all the colliders attached to a dynamic rigid-body).
-- `groups` is used to apply the [collision group](colliders#collision-groups-and-solver-groups) rules for the scene query.
+- `groups` is used to apply the [collision group](./colliders.mdx#collision-groups-and-solver-groups) rules for the scene query.
   The scene query will only consider hits with colliders with collision groups compatible with this  collision group
-  (using the bitwise test described in the [collision groups section](colliders#collision-groups-and-solver-groups)).
+  (using the bitwise test described in the [collision groups section](./colliders.mdx#collision-groups-and-solver-groups)).
 - `exclude_collider` is the handle of one collider the query must ignore.
 - `exclude_rigid_body` is the handle of one rigid-body with attached colliders the query must ignore.
 - `predicate` is a user-defined closure to apply any filtering rule. This can be used if the other filtering options

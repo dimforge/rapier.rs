@@ -8,7 +8,7 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
 This page describes <rapier> all the data structures needed for stepping the simulation as illustrated by the
-[basic simulation example](getting_started#basic-simulation-example)</rapier><bevy> all the useful
+[basic simulation example](./getting_started.mdx#basic-simulation-example)</rapier><bevy> all the useful
 resources added automatically by the `RapierPhysicsPlugin`</bevy>.
 
 
@@ -16,7 +16,7 @@ resources added automatically by the `RapierPhysicsPlugin`</bevy>.
 Gravity is represented as a vector. It affects every dynamic rigid-body taking part of the simulation. The gravity
 can be altered at each timestep <rapier>(by passing a different vector to `PhysicsPipeline::step`)</rapier><bevy>(by
 modifying the resource field `RapierConfiguration::gravity`)</bevy>.
-Learn more about per-rigid-body gravity modification in [the dedicated section](rigid_bodies#gravity).
+Learn more about per-rigid-body gravity modification in [the dedicated section](./rigid_bodies.mdx#gravity).
 
 ## Integration parameters
 The `IntegrationParameters` <bevy>resource</bevy> controls various aspects of the physics simulation, including the timestep length,
@@ -58,7 +58,7 @@ fn print_active_bodies_positions(island_manager: Res<IslandManager>, positions: 
 
 </bevy>
 
-Learn more about sleeping rigid-bodies in [the dedicated section](rigid_bodies#sleeping).
+Learn more about sleeping rigid-bodies in [the dedicated section](./rigid_bodies.mdx#sleeping).
 
 ## Physics pipeline
 The `PhysicsPipeline` <bevy>resource</bevy> is responsible for tying everything together in order to run the physics simulation.
@@ -67,7 +67,7 @@ running the force computation and integration, and running CCD resolution.
 <rapier>
 
 `PhysicsPipeline::step` executes one timestep.
-Its usage is illustrated in [the basic simulation example](getting_started#basic-simulation-example).
+Its usage is illustrated in [the basic simulation example](./getting_started.mdx#basic-simulation-example).
 
 </rapier>
 
@@ -83,7 +83,7 @@ does collision-detection.
 
 
 ## Query pipeline
-The `QueryPipeline` is responsible for efficiently running [scene queries](scene_queries), e.g., ray-casting,
+The `QueryPipeline` is responsible for efficiently running [scene queries](./scene_queries.mdx), e.g., ray-casting,
 shape-casting (sweep tests), intersection tests, on all the colliders of the scene.
 
 <rapier>
@@ -118,7 +118,7 @@ loop {
 
 </rapier>
 
-Learn more about scene queries with the `QueryPipeline` in the [dedicated page](scene_queries).
+Learn more about scene queries with the `QueryPipeline` in the [dedicated page](./scene_queries.mdx).
 
 <rapier>
 
@@ -126,38 +126,38 @@ Learn more about scene queries with the `QueryPipeline` in the [dedicated page](
 The `RigidBodySet` contains all the **rigid-bodies** that needs to be simulated. This set is represented as a
 generational-arena, i.e., a vector where each element is indexed using a __handle__ that combines
 an `u32` index and an `u32` generation number. This ensures that every rigid-body is given a unique handle.
-Learn more about rigid-bodies in [the dedicated page](rigid_bodies).
+Learn more about rigid-bodies in [the dedicated page](./rigid_bodies.mdx).
 
 ## Collider set
 The `ColliderSet` contains all the **colliders** that needs to be simulated. This set is represented as a
 generational-arena, i.e., a vector where each element is indexed using a __handle__ that combines
 an `u32` index and an `u32` generation number. This ensures that every collider is
 given a unique handle.
-Learn more about colliders in [the dedicated page](colliders).
+Learn more about colliders in [the dedicated page](./colliders.mdx).
 
 ## Joint set
 The `ImpulseJointSet` contains all the **impulse-based joints** that needs to be simulated. This set is represented as a
 generational-arena, i.e., a vector where each element is indexed using a __handle__ that combines
 an `u32` index and an `u32` generation number. This ensures that every joint is
 given a unique handle.
-Learn more about joints in [the dedicated page](joints).
+Learn more about joints in [the dedicated page](./joints.mdx).
 
 </rapier>
 
 ## CCD solver
 The CCD solver <bevy>resource</bevy> is responsible for the resolution of Continuous-Collision-Detection. By itself, this structure
 doesn't expose any useful feature. So it should simply be passed to the `PhysicsPipeline::step` method.
-Learn more about CCD in [the dedicated section](rigid_bodies#continuous-collision-detection).
+Learn more about CCD in [the dedicated section](./rigid_bodies.mdx#continuous-collision-detection).
 
 ## Physics hooks
 The physics hooks are trait-objects implementing the `PhysicsHooks` trait. They can be used to apply arbitrary
 rules to ignore collision detection between some pairs of colliders. They can also be used to modify the contacts
 processed by the constraints solver for computing forces.
-Learn more about physics hooks in [the dedicated section](advanced_collision_detection#physics-hooks).
+Learn more about physics hooks in [the dedicated section](./advanced_collision_detection.mdx#physics-hooks).
 
 
 ## Event handler
 The event handlers are trait-objects implementing the `EventHandler` trait. They can be used to get notified
 when two non-sensor colliders start/stop having contacts, and when one sensor collider and one other collider
 start/stop intersecting. Learn more about collision events in
-[the dedicated section](advanced_collision_detection#collision-and-contact-force-events).
+[the dedicated section](./advanced_collision_detection.mdx#collision-and-contact-force-events).

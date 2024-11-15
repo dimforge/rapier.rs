@@ -10,7 +10,7 @@ exit velocity at a contact will be zero along the contact normal: it's as if you
 
 :::note
 The friction and restitution coefficients are both managed in very similar ways: with the `CoefficientCombineRule`
-or with [contact modification](advanced_collision_detection#contact-modification). The paragraph bellow is almost identical to the paragraph about [friction](#friction).
+or with [contact modification](./advanced_collision_detection.mdx#contact-modification). The paragraph bellow is almost identical to the paragraph about [friction](./collider_restitution.mdx#friction).
 :::
 
 Each collider has its own restitution coefficient. This means that when two colliders are in contact, we need to apply a
@@ -31,7 +31,7 @@ of both colliders will be multiplied to obtain the coefficient used by the conta
 :::info
 The `CoefficientCombineRule` system exists to cover a wide variety of use-cases efficiently. If this is not flexible
 enough, it is possible to get  full control over the selection of restitution coefficients for each contact point using
-[contact modification](advanced_collision_detection#contact-modification). For example, contact modification allows the
+[contact modification](./advanced_collision_detection.mdx#contact-modification). For example, contact modification allows the
 simulation of colliders with non-uniform restitution coefficients.
 :::
 
