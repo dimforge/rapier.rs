@@ -18,7 +18,7 @@ Collision events are triggered when two colliders transition between intersectin
 one contact point to having more than one contact points is not reported an event.
 
 In addition, after forces are computed by the constraints solver, contact force events may be
-generated between two colliders. There events can be collected by optionts). Based on these points,nstance of `EventQueue` to
+generated between two colliders. There events can be collected by optionally passing an instance of `EventQueue` to
 `World.step(eventQueue)`. The colliders involved in each event is identified by its handle.
 
 Events can be collected by passing an instance of `EventQueue` to `World.step(eventQueue)`. The colliders
