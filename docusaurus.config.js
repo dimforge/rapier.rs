@@ -12,7 +12,7 @@ const config = {
   projectName: 'rapier', // Usually your repo name.
   themeConfig: {
     algolia: {
-      apiKey: '2fb2392fe420e3f9cd94004bda27a775',
+      apiKey: '00969eabbf113aa543d1be16629dd663',
       appId: 'MDOZU7PTCV',
       indexName: 'rapier',
     },
