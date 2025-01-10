@@ -17,7 +17,7 @@ fn main() {
 
 fn setup_graphics(mut commands: Commands) {
     // Add a camera so we can see the debug-render.
-    commands.spawn(Camera3dBundle::default());
+    commands.spawn(Camera3d::default());
 }
 
 fn setup_physics(mut commands: Commands) {

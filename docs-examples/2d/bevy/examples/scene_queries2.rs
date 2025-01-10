@@ -1,5 +1,5 @@
-use bevy::{prelude::*, render::primitives::Aabb};
-use bevy_rapier2d::{parry::query::intersection_test, prelude::*};
+use bevy::{math::bounding::Aabb2d, prelude::*};
+use bevy_rapier2d::prelude::*;
 
 #[derive(PartialEq, Eq, Clone, Copy, Component)]
 struct CustomData {
@@ -26,14 +26,14 @@ struct Player;
 
 fn setup_graphics(mut commands: Commands) {
     // Add a camera so we can see the debug-render.
-    commands.spawn(Camera2dBundle::default());
+    commands.spawn(Camera2d::default());
 }
 
 fn setup_physics(mut commands: Commands) {
     /* Create the ground. */
     commands
         .spawn(Collider::cuboid(500.0, 50.0))
-        .insert(TransformBundle::from(Transform::from_xyz(0.0, -100.0, 0.0)));
+        .insert(Transform::from_xyz(0.0, -100.0, 0.0));
 
     /* Create the bouncing ball. */
     commands
@@ -41,12 +41,12 @@ fn setup_physics(mut commands: Commands) {
         .insert(Player)
         .insert(Collider::ball(50.0))
         .insert(Restitution::coefficient(0.7))
-        .insert(TransformBundle::from(Transform::from_xyz(0.0, 400.0, 0.0)));
+        .insert(Transform::from_xyz(0.0, 400.0, 0.0));
 }
 
 // DOCUSAURUS: Raycast start
 /* Cast a ray inside of a system. */
-fn cast_ray(rapier_context: Res<RapierContext>) {
+fn cast_ray(rapier_context: ReadDefaultRapierContext) {
     let ray_pos = Vec2::new(1.0, 2.0);
     let ray_dir = Vec2::new(0.0, 1.0);
     let max_toi = 4.0;
@@ -95,7 +95,7 @@ fn cast_ray(rapier_context: Res<RapierContext>) {
 
 // DOCUSAURUS: Shapecast start
 /* Cast a shape inside of a system. */
-fn cast_shape(rapier_context: Res<RapierContext>) {
+fn cast_shape(rapier_context: ReadDefaultRapierContext) {
     let shape = Collider::cuboid(1.0, 2.0);
     let shape_pos = Vec2::new(1.0, 2.0);
     let shape_rot = 0.8;
@@ -123,7 +123,7 @@ fn cast_shape(rapier_context: Res<RapierContext>) {
 
 // DOCUSAURUS: PointProjection start
 /* Project a point inside of a system. */
-fn project_point(rapier_context: Res<RapierContext>) {
+fn project_point(rapier_context: ReadDefaultRapierContext) {
     let point = Vec2::new(1.0, 2.0);
     let solid = true;
     let filter = QueryFilter::default();
@@ -151,7 +151,7 @@ fn project_point(rapier_context: Res<RapierContext>) {
 
 // DOCUSAURUS: IntersectionTest start
 /* Test intersections inside of a system. */
-fn test_intersections(rapier_context: Res<RapierContext>) {
+fn test_intersections(rapier_context: ReadDefaultRapierContext) {
     let shape = Collider::cuboid(1.0, 2.0);
     let shape_pos = Vec2::new(0.0, 1.0);
     let shape_rot = 0.8;
@@ -162,7 +162,7 @@ fn test_intersections(rapier_context: Res<RapierContext>) {
         true // Return `false` instead if we want to stop searching for other colliders that contain this point.
     });
 
-    let aabb = Aabb::from_min_max(Vec3::new(-1.0, -2.0, 0.0), Vec3::new(1.0, 2.0, 0.0));
+    let aabb = Aabb2d::new(Vec2::new(-1.0, -2.0), Vec2::new(1.0, 2.0));
     rapier_context.colliders_with_aabb_intersecting_aabb(aabb, |entity| {
         println!(
             "The entity {:?} has an AABB intersecting our test AABB",
@@ -176,7 +176,7 @@ fn test_intersections(rapier_context: Res<RapierContext>) {
 // DOCUSAURUS: QueryFilter start
 /* Cast a ray inside of a system. */
 fn cast_ray_filtered(
-    rapier_context: Res<RapierContext>,
+    rapier_context: ReadDefaultRapierContext,
     player_query: Query<Entity, With<Player>>,
     custom_data_query: Query<&CustomData>,
 ) {

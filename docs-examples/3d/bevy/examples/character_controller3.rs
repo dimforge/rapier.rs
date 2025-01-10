@@ -20,26 +20,24 @@ fn main() {
 
 fn setup_graphics(mut commands: Commands) {
     // Add a camera so we can see the debug-render.
-    commands.spawn(Camera3dBundle {
-        transform: Transform::from_xyz(-3.0, 3.0, 10.0).looking_at(Vec3::ZERO, Vec3::Y),
-        ..Default::default()
-    });
+    commands.spawn((
+        Camera3d::default(),
+        Transform::from_xyz(-3.0, 3.0, 10.0).looking_at(Vec3::ZERO, Vec3::Y),
+    ));
 }
 
 fn setup_physics_more(mut commands: Commands) {
     /* Create the ground. */
     commands
         .spawn(Collider::cuboid(100.0, 0.1, 100.0))
-        .insert(TransformBundle::from(Transform::from_xyz(0.0, -0.9, 0.0)));
+        .insert(Transform::from_xyz(0.0, -0.9, 0.0));
 
     // DOCUSAURUS: UpVector1 start
     /* Character controller with the positive X axis as the up vector. */
     commands
         .spawn(RigidBody::KinematicPositionBased)
         .insert(Collider::ball(0.5))
-        .insert(SpatialBundle::from_transform(
-            Transform::default().with_translation(Vec3::Z * -10f32),
-        ))
+        .insert(Transform::default().with_translation(Vec3::Z * -10f32))
         .insert(KinematicCharacterController {
             up: Vec3::X,
             ..default()
@@ -52,7 +50,7 @@ fn setup_physics(mut commands: Commands) {
     commands
         .spawn(RigidBody::KinematicPositionBased)
         .insert(Collider::ball(0.5))
-        .insert(SpatialBundle::default())
+        .insert(Transform::default())
         .insert(KinematicCharacterController {
             ..KinematicCharacterController::default()
         });
@@ -60,7 +58,7 @@ fn setup_physics(mut commands: Commands) {
 
 fn update_system(time: Res<Time>, mut controllers: Query<&mut KinematicCharacterController>) {
     for mut controller in controllers.iter_mut() {
-        controller.translation = Some(Vec3::new(1.0, -5.0, -1.0) * time.delta_seconds());
+        controller.translation = Some(Vec3::new(1.0, -5.0, -1.0) * time.delta_secs());
     }
 }
 

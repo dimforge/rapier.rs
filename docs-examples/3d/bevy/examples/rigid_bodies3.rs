@@ -31,11 +31,10 @@ fn main() {
 
 fn setup_graphics(mut commands: Commands) {
     // Add a camera so we can see the debug-render.
-    commands.spawn(Camera3dBundle {
-        transform: Transform::from_xyz(-3.0, 10.0, 30.0)
-            .looking_at(Vec3::new(0.0, 10.0, 0.0), Vec3::Y),
-        ..Default::default()
-    });
+    commands.spawn((
+        Camera3d::default(),
+        Transform::from_xyz(-3.0, 10.0, 30.0).looking_at(Vec3::new(0.0, 10.0, 0.0), Vec3::Y),
+    ));
 }
 
 fn setup_physics(mut commands: Commands) {
@@ -46,7 +45,7 @@ fn setup_physics(mut commands: Commands) {
     // DOCUSAURUS: Position1 start
     commands
         .spawn(RigidBody::Dynamic)
-        .insert(TransformBundle::from(Transform::from_xyz(0.0, 0.0, 0.0)))
+        .insert(Transform::from_xyz(0.0, 0.0, 0.0))
         // DOCUSAURUS: Position1 stop
         .insert(Velocity {
             linvel: Vec3::new(0.0, 2.0, 0.0),
