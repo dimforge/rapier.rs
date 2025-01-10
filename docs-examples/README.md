@@ -7,7 +7,7 @@ By running `./generate_user_guide.sh` at the root path, These examples are copie
 ## Rust
 
 The produced binary might or might not produce something useful, it's
-intended usage is to run `cargo check --workspace`.
+intended usage is to run `cargo check --workspace --examples`.
 
 ## Javascript
 
