@@ -7,70 +7,38 @@ sidebar_label: Joint constraints
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-One of the most appealing features of a physics engine is to simulate articulations. Articulations, aka. _joints_, allow
-the restriction of the motion of one body relative to another. For example, one well-known joint is the ball-in-socket
-joint also known as the ball joint: it allows one object to rotate freely with regard to the other but not to translate.
-This is typically used to simulate shoulders of a ragdoll.
-
-## Fundamental concepts
-
-Joints can be modeled in various ways but let's talk about the concept of **Degrees Of Freedom (DOF)** first. In 3D, a
-rigid-body is capable of translating along the 3 coordinates axes $\mathbf{x}$, $\mathbf{y}$ and $\mathbf{z}$, and to
-rotate along those three axes as well. Therefore, a rigid-body is said to have **3 translational DOF** and **3 rotational DOF**.
-We can also say a 3D rigid-body has a total of **6 DOF**. The 2D case is similar but with less possibilities of movements:
-a 2D rigid-body has 2 translational DOF and only 1 rotational DOF (which forms a total of 3 DOF). The number of **relative DOF**
-of a body wrt. another body is the number of possible relative translations and rotations.
-The goal of a joint is to reduce the number of DOF a body has. For example, the aforementioned ball joint removes all relative
-translations between two bodies. Therefore, it allows only the 3 rotational DOF in 3D simulations or the 1 rotational DOF
-in 2D simulations. Other joints exist allowing other combinations of relative DOF. Note that because there are less possible
-motions in 2D, some joints are only defined in 3D. This is illustrated by empty cells in the following table for joints
-that are not defined in 2D:
-
-| Joint           | Allowed DOF in 2D | Allowed DOF in 3D |
-|-----------------|-------------------|---------------|
-| _Fixed joint_       | None           | None
-| _Free joint_        | All            | All
-| _Prismatic joint_   | 1 Translation  | 1 Translation |
-| _Revolute joint_    | 1 Rotation     | 1 Rotation    |
-| _Ball joint_        | 1 Rotation     | 3 Rotations |
-| _Cartesian joint_   | 2 Translations | 3 Translations |
-| _Planar joint_      |                | 2 Translations + 1 Rotation |
-| _Cylindrical joint_ |                | 1 Translation + 1 Rotation (along the same axis) |
-| _Pin-slot joint_    |                | 1 Translation + 1 Rotation (along different axes) |
-| _Rectangular joint_ |                | 2 Translations |
-| _Universal joint_   |                | 2 Rotations |
-
-In 3D, a special _Helical joint_ also exists: it allows only one DOF which is a bit special as it is the combination of
-a rotation and a translation. In other words, a body attached to the ground by an helical joint will only be able to translate
-and rotate simultaneously: any translation induce automatically a rotation and vice-versa.
-
--------
-
 In practice, there are two main ways of modeling joints:
 
-1. The **reduced-coordinates approach** encodes the reduction of DOF directly into the equations of motion. For example,
+- Reduced-coordinates approach.
+- Constraints-based approach.
+
+## Reduced-coordinates approach
+
+The **reduced-coordinates approach** encodes the reduction of DOF directly into the equations of motion. For example,
 a 3D rigid-body attached to the ground with a revolute joint will have its position encoded by only one variable: the
 rotation angle. Therefore, integrating its motion only changes this one variable and doesn't need additional forces or
 mathematical constraints to be generated. The clear advantage is that there is no way for the physics engine to apply
 any motion other than that single rotation to this body, meaning there is no way the body shifts to a position that is
 not realistic, even if the dynamics solver does not converge completely.
-2. The **constraints-based approach** (or full-coordinates approach) is the most commonly available approach on other
+
+Rapier implements this approach through `MultiBodyJointSet`,
+where each joint is attached to its relevant rigid-bodies identified by their handle.
+
+## Constraints-based approach
+
+The **constraints-based approach** (or full-coordinates approach) is the most commonly available approach on other
 physics engines for video-games and animations. Here, a 3D rigid-body attached to the ground with a revolute joint will
 still have its position encoded by 6 variables (3 for translations and 3 for rotations) just like any rigid-body without
 a joint. Then the integrator will add mathematical constraints to the dynamic system to ensure forces are applied to
 simulate the reduction of the number of DOF as imposed by the joints. In practice, this means that the rigid-body will
 break the joint constraint if the constraint solver does not converge completely.
 
-This description shows only one aspect of the difference between the reduced-coordinates approach and the constraints-based
-approach. More generally, the reduced-coordinates approach favors accuracy while the constraints-based approach favors
-versatility.
+Rapier implements this approach through `ImpulseJointSet`,
+where each joint is attached to two distinct rigid-bodies identified by their rigid-body handles.
 
-:::warning
-Currently, Rapier only implements the constraints-based approach. A reduced-coordinates implementation will be added to
-a future version of Rapier.
-:::
+-------
 
-<!--
+More generally, the reduced-coordinates approach favors accuracy while the constraints-based approach favors versatility.
 
 The following table compares the advantages and limitations of both approaches:
 
@@ -90,7 +58,7 @@ right models a necklace with five pearls. It has a total of 15 rotational DOF (d
 
 <center>
 <br/>
-![Tree-like assembly](img/assembly_examples.svg)
+![Tree-like assembly](/img/assembly_examples.svg)
 <br/>
 </center>
 
@@ -112,8 +80,8 @@ it is possible to combine both approaches by using joint constraints only to clo
 for details.
 :::
 
-The use of the reduced-coordinates approach is detailed in the [multibodies](./advanced_collision_detection.mdx#multibodies) section and demonstrated by
-the [Multibody joints](/all_examples3/?multibody) demo. The constraints-based approach is detailed in the
+The use of the reduced-coordinates approach is detailed in the [multibodies](./joint_constraints.mdx#multibodies) section and demonstrated by
+the Multibody joints example from the [demo](/demos3d). The constraints-based approach is detailed in the
 [joint constraints](./advanced_collision_detection.mdx#joint-constraints) section and demonstrated by the [Joint constraints](/all_examples3/?constraints) demo.
 
 ## Multibodies
@@ -246,23 +214,6 @@ let multibody_handle = body_set.insert(multibody);
   </div>
 </div>
 
-
-The following table summarizes the types corresponding to the joints mentioned at the beginning of this chapter that
-can be used for the `MultibodyDesc`:
-
-| Joint name | Multibody joint type on **nphysics** |
-|------------|---------|
-| _Fixed joint_       | [`FixedJoint`](/rustdoc/nphysics3d/joint/struct.FixedJoint.html)|
-| _Prismatic joint_   | [`PrismaticJoint`](/rustdoc/nphysics3d/joint/struct.PrismaticJoint.html)  |
-| _Revolute joint_    | [`RevoluteJoint`](/rustdoc/nphysics3d/joint/struct.RevoluteJoint.html)  |
-| _Ball joint_        | [`BallJoint`](/rustdoc/nphysics3d/joint/struct.BallJoint.html)     |
-| _Cartesian joint_   | [`CartesianJoint`](/rustdoc/nphysics3d/joint/struct.CartesianJoint.html) |
-| _Planar joint_      | [`PlanarJoint`](/rustdoc/nphysics3d/joint/struct.PlanarJoint.html)     |
-| _Cylindrical joint_ | [`CylindricalJoint`](/rustdoc/nphysics3d/joint/struct.CylindricalJoint.html)  |
-| _Pin-slot joint_    | [`PinSlotJoint`](/rustdoc/nphysics3d/joint/struct.PinSlotJoint.html)   |
-| _Rectangular joint_ | [`RectangularJoint`](/rustdoc/nphysics3d/joint/struct.RectangularJoint.html) |
-| _Universal joint_   | [`UniversalJoint`](/rustdoc/nphysics3d/joint/struct.UniversalJoint.html)   |
-
 :::note
 The first multibody link of a multibody is necessarily attached to an implicit fixed ground. Note however that
 "attached" is a bit misleading here. Indeed if `joint` is set to an instance of `FreeJoint`, then this first
@@ -270,7 +221,7 @@ multibody link will have all the possible degrees of freedom, making it complete
 :::
 
 :::warning
-The `FreeJoint` can be used only by the first link of the multibody otherwise, the creation of the
+The `FreeJoint` can be used only by the first link of the multibody, otherwise, the creation of the
 multibody will panic.
 :::
 
@@ -304,6 +255,11 @@ You may refer to the [code](https://github.com/rustsim/nphysics/blob/master/exam
 ### Removing a multibody
 The removal of a multibody from the body set uses the same method as the removal of a rigid-body: `body_set.remove(handle)`.
 It is not possible to remove a single link of a multibody without removing the whole multibody altogether.
+
+<hidden>
+
+<technote>This part should belong in a GenericJoint section within joints.mdx.</technote>
+
 
 ### Multibody joint limits and motors
 It is often desirable to limit the amplitude of movement a multibody link can have with regard to its parent. For
@@ -352,37 +308,15 @@ For the moment, joint motors are only implemented for multibody joints with DOF 
 :::note
 Joints with no angular DOF will not have the methods related to the angular motors. Similarly, joints with no linear DOF will not have the methods related to the linear motors. Joints with several angular or linear DOF will have those methods with an index appended to their name, e.g., the `.enable_angular_motor_1()` method of an universal joint will enable a motor for its first angular DOF.
 :::
--->
 
-## Joint constraints
-Joint constraints implement the constraints-based approach. The following table summarizes the types corresponding to the joints mentioned at the beginning of this chapter:
+</hidden>
 
-| Joint name | Joint constraint type on **Rapier** |
-|------------|---------|
-| _Fixed joint_       | `dynamics::FixedJoint` |
-| _Prismatic joint_   | `dynamics::PrismaticJoint`     |
-| _Revolute joint_    | `dynamics::RevoluteJoint`    |
-| _Ball joint_        | `dynamics::BallJoint` |
-
-<!--
-| _Cartesian joint_   | `dynamics::CartesianJoint`    |
-| _Planar joint_      | `dynamics::PlanarJoint`     |
-| _Cylindrical joint_ | `dynamics::CylindricalJoint`      |
-| _Pin-slot joint_    | `dynamics::PinSlotJoint`    |
-| _Rectangular joint_ | `dynamics::RectangularJoint`   |
-| _Universal joint_   | `dynamics::UniversalJoint`     |
--->
-
-:::note
-Other joints will be added in the future.
-:::
+## Combining joint constraints
 
 A joint constraint geometry is completely configured at its creation, and added to the joint set by the
 `joint_set.insert(&mut bodies, body1, body2, joint, true)` method by specifying the handles of the bodies the joint is
 attached to.
 
-<!--
-## Combining both
 Combining multibodies and joint constraints is a useful way of combining the stability of multibodies with the flexibility of joint constraints. Indeed, one of the most appealing features of a multibody is its stability and ease of use (especially for robotics). However its greatest weakness is its inability to represent assemblies that do not match a tree structure, i.e., an articulated body composed of graph-like assembly of solids (each graph node being a solid and each graph edge being an articulation) cannot be simulated by a multibody. A common approach is thus to:
 
 1. Define a multibody from a spanning-tree of the graph.
@@ -391,11 +325,15 @@ Combining multibodies and joint constraints is a useful way of combining the sta
 The following shows an example of combination of multibodies and joint constraints for the simulation of a necklace. It is composed of 5 pearls forming a single loop attached together by 5 ball joints. Since such a loop cannot be simulated by a multibody, we first start to create 5 multibody links attached together with 4 `BallJoint`. Only 4 joints can be added here since a 5th would close the loop.
 The 5th joint that closes the loop must be modeled as a joint constraint, here a `BallConstraint` between the first and the last link:
 
+<hidden>
+
+<!--
 <center>
-![Loop-closing constraint](img/loop_closing_joint.svg)
+![Loop-closing constraint](/img/loop_closing_joint.svg)
 </center>
+-->
+</hidden>
 
 :::note
 Note that using the world to create multibody links removes any risk of inadvertently creating multibody links attached in such a way that they would form anything but a tree structure.
 :::
--->

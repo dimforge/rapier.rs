@@ -27,22 +27,26 @@ in 2D simulations. Other joints exist allowing other combinations of relative DO
 motions in 2D, some joints are only defined in 3D. This is illustrated by empty cells in the following table for joints
 that are not defined in 2D:
 
-| Joint           | Allowed DOF in 2D | Allowed DOF in 3D |
-|-----------------|-------------------|---------------|
-| _Fixed joint_       | None           | None
-| _Free joint_        | All            | All
-| _Prismatic joint_   | 1 Translation  | 1 Translation |
-| _Revolute joint_    | 1 Rotation     | 1 Rotation    |
-| _Spherical joint_   | 1 Rotation     | 3 Rotations |
-| _Cartesian joint_   | 2 Translations | 3 Translations |
-| _Planar joint_      |                | 2 Translations + 1 Rotation |
-| _Cylindrical joint_ |                | 1 Translation + 1 Rotation (along the same axis) |
-| _Pin-slot joint_    |                | 1 Translation + 1 Rotation (along different axes) |
-| _Rectangular joint_ |                | 2 Translations |
-| _Universal joint_   |                | 2 Rotations |
+| Joint           | Allowed DOF in 2D | Allowed DOF in 3D | Rapier support
+|-----------------|-------------------|---------------|---------------|
+| _Fixed joint_       | None           | None| Yes |
+| _Free joint_        | All            | All | Through GenericJoint |
+| _Prismatic joint_   | 1 Translation  | 1 Translation | Yes |
+| _Revolute joint_    | 1 Rotation     | 1 Rotation    | Yes |
+| _Spherical joint_   | 1 Rotation     | 3 Rotations | Yes|
+| _Cartesian joint_   | 2 Translations | 3 Translations | Through GenericJoint |
+| _Planar joint_      |                | 2 Translations + 1 Rotation | Through GenericJoint |
+| _Cylindrical joint_ |                | 1 Translation + 1 Rotation (along the same axis) | Through GenericJoint |
+| _Pin-slot joint_    |                | 1 Translation + 1 Rotation (along different axes) | Through GenericJoint |
+| _Rectangular joint_ |                | 2 Translations | Through GenericJoint |
+| _Universal joint_   |                | 2 Rotations | Through GenericJoint |
 
-Currently, Rapier supports **fixed**, **spherical**, **prismatic**, and **revolute** joints. Joints must be inserted into an
-`ImpulseJointSet`. Each joint is attached to two distinct rigid-bodies identified by their rigid-body handles.
+In 3D, a special _Helical joint_ also exists: it allows only one DOF which is a bit special as it is the combination of
+a rotation and a translation. In other words, a body attached to the ground by an helical joint will only be able to translate
+and rotate simultaneously: any translation induce automatically a rotation and vice-versa.
+
+Joints must be inserted into either an `ImpulseJointSet` or a `MultibodyJointSet`.
+The difference between those is explained in [next section](./joint_constraints.mdx).
 
 ## Fixed joint
 A fixed joint ensures that two rigid-bodies don't move relative to each other. Fixed joints are characterized by
