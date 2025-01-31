@@ -325,14 +325,9 @@ Combining multibodies and joint constraints is a useful way of combining the sta
 The following shows an example of combination of multibodies and joint constraints for the simulation of a necklace. It is composed of 5 pearls forming a single loop attached together by 5 ball joints. Since such a loop cannot be simulated by a multibody, we first start to create 5 multibody links attached together with 4 `BallJoint`. Only 4 joints can be added here since a 5th would close the loop.
 The 5th joint that closes the loop must be modeled as a joint constraint, here a `BallConstraint` between the first and the last link:
 
-<hidden>
-
-<!--
 <center>
 ![Loop-closing constraint](/img/loop_closing_joint.svg)
 </center>
--->
-</hidden>
 
 :::note
 Note that using the world to create multibody links removes any risk of inadvertently creating multibody links attached in such a way that they would form anything but a tree structure.
