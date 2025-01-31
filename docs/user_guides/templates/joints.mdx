@@ -41,10 +41,6 @@ that are not defined in 2D:
 | _Rectangular joint_ |                | 2 Translations | Through GenericJoint |
 | _Universal joint_   |                | 2 Rotations | Through GenericJoint |
 
-In 3D, a special _Helical joint_ also exists: it allows only one DOF which is a bit special as it is the combination of
-a rotation and a translation. In other words, a body attached to the ground by an helical joint will only be able to translate
-and rotate simultaneously: any translation induce automatically a rotation and vice-versa.
-
 Joints must be inserted into either an `ImpulseJointSet` or a `MultibodyJointSet`.
 The difference between those is explained in [next section](./joint_constraints.mdx).
 
