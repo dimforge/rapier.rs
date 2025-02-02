@@ -1722,7 +1722,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@docusaurus/core@npm:3.5.2, @docusaurus/core@npm:^3.0":
+"@docusaurus/core@npm:3.5.2, @docusaurus/core@npm:^3.5.2":
   version: 3.5.2
   resolution: "@docusaurus/core@npm:3.5.2"
   dependencies:
@@ -2039,7 +2039,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@docusaurus/preset-classic@npm:^3.0":
+"@docusaurus/preset-classic@npm:^3.5.2":
   version: 3.5.2
   resolution: "@docusaurus/preset-classic@npm:3.5.2"
   dependencies:
@@ -9649,8 +9649,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "rapier@workspace:."
   dependencies:
-    "@docusaurus/core": "npm:^3.0"
-    "@docusaurus/preset-classic": "npm:^3.0"
+    "@docusaurus/core": "npm:^3.5.2"
+    "@docusaurus/preset-classic": "npm:^3.5.2"
     "@mdx-js/react": "npm:^3.0"
     clsx: "npm:^1.1.1"
     react: "npm:^18.2"
