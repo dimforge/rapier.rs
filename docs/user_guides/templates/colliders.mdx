@@ -60,11 +60,24 @@ A triangle mesh/polyline is composed of triangles/segments with no thickness. Th
 point-containment tests won't work intuitively because the triangle mesh is assumed to have no interior.
 :::
 
+#### Triangle mesh
+
 A **triangle-mesh** collider can be built
 with <rapier>`ColliderBuilder::trimesh(vertices, indices)`</rapier><bevy>`Collider::trimesh(vertices, indices)`</bevy><js>`ColliderDesc.trimesh(vertices, indices)`</js> where
 `vertices` is the buffer containing all the vertices of the mesh, and `indices` is a set of indices indicating what vertex is used by
 what triangle. The vertex buffer and index buffer may have different lengths, and any vertex can be shared
 by multiple triangles.
+
+To have more control over the resulting `Trimesh`,
+<rapier>you can call `ColliderBuilder::trimesh_with_flags(vertices, indices, trimesh_flags)`.</rapier>
+<bevy>you can call `Collider::trimesh_with_flags(vertices, indices, trimesh_flags)`.</bevy>
+<js>you can call `ColliderDesc.trimesh` with a third optional parameter `trimeshFlags`.</js>
+
+For example, `TrimeshFlags::FIX_INTERNAL_EDGES` is a popular choice to help with correcting ghost collision.
+
+See [`TriMeshFlags` documentation](https://docs.rs/rapier2d/latest/rapier2d/geometry/struct.TriMeshFlags.html) for more information.
+
+#### Polyline
 
 A **polyline** collider can be built
 with <rapier>`ColliderBuilder::polyline(vertices, indices)`</rapier><bevy>`Collider::polyline(vertices, indices)`</bevy><js>`ColliderDesc.polyline(vertices, indices)`</js> where
