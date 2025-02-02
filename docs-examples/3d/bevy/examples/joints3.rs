@@ -13,23 +13,21 @@ fn main() {
 
 fn setup_graphics(mut commands: Commands) {
     // Add a camera so we can see the debug-render.
-    commands.spawn(Camera3dBundle {
-        transform: Transform::from_xyz(-3.0, 3.0, -10.0).looking_at(Vec3::ZERO, Vec3::Y),
-        ..Default::default()
-    });
+    commands.spawn((
+        Camera3d::default(),
+        Transform::from_xyz(-3.0, 3.0, -10.0).looking_at(Vec3::ZERO, Vec3::Y),
+    ));
 }
 
 fn setup_physics(mut commands: Commands) {
     /* Create the ground. */
     commands
         .spawn(Collider::cuboid(100.0, 0.1, 100.0))
-        .insert(TransformBundle::from(Transform::from_xyz(0.0, -2.0, 0.0)));
+        .insert(Transform::from_xyz(0.0, -2.0, 0.0));
 
     let parent_entity = commands
         .spawn(RigidBody::Fixed)
-        .insert(SpatialBundle::from_transform(
-            Transform::default().with_translation(Vec3::Y * 3f32),
-        ))
+        .insert(Transform::default().with_translation(Vec3::Y * 3f32))
         .insert(Collider::cuboid(0.5, 0.5, 0.5))
         .id();
     // DOCUSAURUS: FixedJoint start

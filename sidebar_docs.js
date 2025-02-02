@@ -50,6 +50,9 @@ let specialized_guides = {
     'user_guides/bevy_plugin/character_controller',
     'user_guides/bevy_plugin/scene_queries',
     'user_guides/bevy_plugin/advanced_collision_detection',
+
+    // bevy specific
+    'user_guides/bevy_plugin/multiple_contexts',
     'user_guides/bevy_plugin/common_mistakes',
   ],
   'JavaScript': [

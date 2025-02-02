@@ -14,7 +14,7 @@ fn main() {
 
 fn setup_graphics(mut commands: Commands) {
     // Add a camera so we can see the debug-render.
-    commands.spawn(Camera2dBundle::default());
+    commands.spawn(Camera2d::default());
 }
 
 fn setup_physics(mut commands: Commands) {
@@ -24,7 +24,7 @@ fn setup_physics(mut commands: Commands) {
     commands
         .spawn(Collider::cuboid(1.0, 2.0, 1.0))
         .insert(Sensor)
-        .insert(TransformBundle::from(Transform::from_xyz(2.0, 0.0, 0.0)))
+        .insert(Transform::from_xyz(2.0, 0.0, 0.0))
         .insert(Friction::coefficient(0.7))
         .insert(Restitution::coefficient(0.3))
         .insert(ColliderMassProperties::Density(2.0));
@@ -55,7 +55,7 @@ fn setup_physics(mut commands: Commands) {
     /* Set the collider position when the collider is created. */
     commands
         .spawn(Collider::cuboid(0.5, 0.5, 0.5))
-        .insert(TransformBundle::from(Transform::from_xyz(1.0, 2.0, 3.0)));
+        .insert(Transform::from_xyz(1.0, 2.0, 3.0));
     // DOCUSAURUS: Position1 stop
 
     // DOCUSAURUS: Position3 start
@@ -67,7 +67,7 @@ fn setup_physics(mut commands: Commands) {
         .with_children(|children| {
             children
                 .spawn(Collider::cuboid(0.5, 0.5, 0.5))
-                .insert(TransformBundle::from(Transform::from_xyz(1.0, 2.0, 0.0)));
+                .insert(Transform::from_xyz(1.0, 2.0, 0.0));
         });
     // DOCUSAURUS: Position3 stop
 }

@@ -24,14 +24,14 @@ struct CustomInfo {
 
 fn setup_graphics(mut commands: Commands) {
     // Add a camera so we can see the debug-render.
-    commands.spawn(Camera2dBundle::default());
+    commands.spawn(Camera2d::default());
 }
 
 fn setup_physics(mut commands: Commands) {
     /* Create the ground. */
     let ground = commands
         .spawn(Collider::cuboid(500.0, 50.0))
-        .insert(TransformBundle::from(Transform::from_xyz(0.0, -100.0, 0.0)))
+        .insert(Transform::from_xyz(0.0, -100.0, 0.0))
         .id();
     /* Create the bouncing ball. */
     let ball1 = commands
@@ -39,9 +39,7 @@ fn setup_physics(mut commands: Commands) {
         .insert(ActiveEvents::CONTACT_FORCE_EVENTS)
         .insert(Collider::ball(50.0))
         .insert(Restitution::coefficient(0.7))
-        .insert(TransformBundle::from(Transform::from_xyz(
-            -55.0, 400.0, 0.0,
-        )))
+        .insert(Transform::from_xyz(-55.0, 400.0, 0.0))
         .id();
     commands.insert_resource(CustomInfo {
         entity1: ground,
@@ -54,7 +52,7 @@ fn setup_physics(mut commands: Commands) {
         .insert(ActiveEvents::COLLISION_EVENTS)
         .insert(Collider::ball(50.0))
         .insert(Restitution::coefficient(0.7))
-        .insert(TransformBundle::from(Transform::from_xyz(55.0, 300.0, 0.0)));
+        .insert(Transform::from_xyz(55.0, 300.0, 0.0));
 }
 
 // DOCUSAURUS: Events start
@@ -74,7 +72,7 @@ fn display_events(
 // DOCUSAURUS: Events stop
 
 // DOCUSAURUS: ContactGraph1 start
-fn display_contact_info(rapier_context: Res<RapierContext>, custom_info: Res<CustomInfo>) {
+fn display_contact_info(rapier_context: ReadDefaultRapierContext, custom_info: Res<CustomInfo>) {
     let entity1 = custom_info.entity1; // A first entity with a collider attached.
     let entity2 = custom_info.entity2; // A second entity with a collider attached.
 
@@ -121,7 +119,7 @@ fn display_contact_info(rapier_context: Res<RapierContext>, custom_info: Res<Cus
 
 // DOCUSAURUS: ContactGraph2 start
 fn display_contact_info_all_from_1_entity(
-    rapier_context: Res<RapierContext>,
+    rapier_context: ReadDefaultRapierContext,
     custom_info: Res<CustomInfo>,
 ) {
     let entity = custom_info.entity2; // An entity with a collider attached.
@@ -141,7 +139,10 @@ fn display_contact_info_all_from_1_entity(
 // DOCUSAURUS: ContactGraph2 stop
 
 // DOCUSAURUS: IntersectionGraph1 start
-fn display_intersection_info(rapier_context: Res<RapierContext>, custom_info: Res<CustomInfo>) {
+fn display_intersection_info(
+    rapier_context: ReadDefaultRapierContext,
+    custom_info: Res<CustomInfo>,
+) {
     let entity1 = custom_info.entity1; // A first entity with a collider attached.
     let entity2 = custom_info.entity2; // A second entity with a collider attached.
 
@@ -157,7 +158,7 @@ fn display_intersection_info(rapier_context: Res<RapierContext>, custom_info: Re
 
 // DOCUSAURUS: IntersectionGraph2 start
 fn display_intersection_info_all_from_1_entity(
-    rapier_context: Res<RapierContext>,
+    rapier_context: ReadDefaultRapierContext,
     custom_info: Res<CustomInfo>,
 ) {
     let entity = custom_info.entity2; // An entity with a collider attached.

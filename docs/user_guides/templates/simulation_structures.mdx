@@ -9,24 +9,24 @@ import TabItem from '@theme/TabItem';
 
 This page describes <rapier> all the data structures needed for stepping the simulation as illustrated by the
 [basic simulation example](./getting_started.mdx#basic-simulation-example)</rapier><bevy> all the useful
-resources added automatically by the `RapierPhysicsPlugin`</bevy>.
+components and resources added automatically by the `RapierPhysicsPlugin`</bevy>.
 
 
 ## Gravity
 Gravity is represented as a vector. It affects every dynamic rigid-body taking part of the simulation. The gravity
 can be altered at each timestep <rapier>(by passing a different vector to `PhysicsPipeline::step`)</rapier><bevy>(by
-modifying the resource field `RapierConfiguration::gravity`)</bevy>.
+modifying the component field `RapierConfiguration::gravity`)</bevy>.
 Learn more about per-rigid-body gravity modification in [the dedicated section](./rigid_bodies.mdx#gravity).
 
 ## Integration parameters
-The `IntegrationParameters` <bevy>resource</bevy> controls various aspects of the physics simulation, including the timestep length,
-number of solver iterations, number of CCD substeps, etc. The default integration parameters are set to
+The `IntegrationParameters` <bevy>component field from `RapierContext`</bevy> controls various aspects of the physics simulation,
+including the timestep length, number of solver iterations, number of CCD substeps, etc. The default integration parameters are set to
 achieve a good balance between performance and accuracy for games. They can be changed to make the simulation more
-accurate at the expanse of a bit of performance. Learn more about each integration parameter in
+accurate at the expense of a bit of performance. Learn more about each integration parameter in
 [the API docs](https://docs.rs/rapier3d/latest/rapier3d/dynamics/struct.IntegrationParameters.html).
 
 ## Island manager
-The `IslandManager` <bevy>resource</bevy> is responsible for tracking the set of dynamic rigid-bodies that are still moving
+The `IslandManager` <bevy>component field from `RapierContext`</bevy> is responsible for tracking the set of dynamic rigid-bodies that are still moving
 and these that are no longer moving (and can ignored by subsequent timesteps to avoid useless computations).
 The island manager is automatically updated by `PhysicsPipeline::step` and can be queried to retrieve
 the list of all the rigid-bodies modified by the physics engine during the last timestep. This can be useful
