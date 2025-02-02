@@ -366,7 +366,7 @@ following methods:
 - <notjs>`configure_motor(target_pos, target_vel, stiffness, damping)`</notjs><js>`configureMotor(targetPos, targetVel, stiffness, damping)`</js>:
   this lets you control all the parameters of the motor's spring-like equation. This should be used only if the other configuration methods are not flexible enough.
 - <notjs>`configure_motor_model(model)`</notjs><js>`configureMotorModel(model)`</js>: this selects the mathematical model for the motor's controller. All the available
-  models use a __spring-like__ equation. See the [API documentation of SpringModel](https://docs.rs/rapier3d/latest/rapier3d/dynamics/enum.SpringModel.html)
+  models use a __spring-like__ equation. See the [API documentation of MotorModel](https://docs.rs/rapier3d/latest/rapier3d/dynamics/enum.MotorModel.html)
   for details.
   
 It is also possible to configure the maximum impulse applied by the motor: this limits the maximum force/torque the
