@@ -1,0 +1,33 @@
+name: Rapier CI build
+
+on:
+  workflow_run:
+    workflows: [ci, links]
+    branches: [master]
+    types: [completed]
+  workflow_dispatch:
+    # workflow dispatch is to manually trigger the workflow,
+    # useful if we want to bring an older version online or an upload failed somehow.
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check Rsync version
+        run: rsync --version
+      - name: Install Linux dependencies
+        uses: ./.github/actions/install-linux-deps
+      - name: Setup SSH Key
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.DEPLOY_SSH_KEY }}" > ~/.ssh/id_deploy
+          chmod 600 ~/.ssh/id_deploy
+          ssh-keyscan -H ssh.cluster003.hosting.ovh.net >> ~/.ssh/known_hosts
+        shell: bash
+      - name: Publish
+        run: |
+          ./publish.sh
