@@ -80,10 +80,6 @@ it is possible to combine both approaches by using joint constraints only to clo
 for details.
 :::
 
-The use of the reduced-coordinates approach is detailed in the [multibodies](./joint_constraints.mdx#multibodies) section and demonstrated by
-the Multibody joints example from the [demo](/demos3d). The constraints-based approach is detailed in the
-[joint constraints](./advanced_collision_detection.mdx#joint-constraints) section and demonstrated by the [Joint constraints](/all_examples3/?constraints) demo.
-
 ## Multibodies
 
 Multibodies implement the reduced-coordinates approach. A multibody is a set of **multibody links** attached together by
@@ -93,6 +89,8 @@ a **multibody joint**.
 
 The API to create a Multibody joint is similar to creating an Impulse Joint, refer to [Joints](./joints.mdx),
 but insert those into a `MultibodyJointSet`.
+
+See [Rapier's example](https://github.com/dimforge/rapier/blob/v017.1/examples3d/joints3.rs) for a demonstration of both approaches.
 
 ## Combining both
 
