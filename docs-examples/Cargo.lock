@@ -901,15 +901,15 @@ dependencies = [
 
 [[package]]
 name = "bevy_rapier3d"
-version = "0.28.0"
+version = "0.29.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "65fff77c1e3140f8fa9d08632841f42cbef06e4ad98ba61d65a6297369bad763"
+checksum = "85f3856331b3f75e900db0fd47c34d7e63dc7f736f455e9d0e6d775a24099c37"
 dependencies = [
  "bevy",
  "bitflags 2.8.0",
  "log",
  "nalgebra",
- "rapier3d 0.22.0",
+ "rapier3d",
 ]
 
 [[package]]
@@ -3320,32 +3320,6 @@ dependencies = [
 
 [[package]]
 name = "parry3d"
-version = "0.17.5"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "b5d6c81f7d291d5ba572951242779a672f73ed605fe5520045c0bccdb381e913"
-dependencies = [
- "approx",
- "arrayvec",
- "bitflags 2.8.0",
- "downcast-rs",
- "either",
- "ena",
- "log",
- "nalgebra",
- "num-derive",
- "num-traits",
- "ordered-float",
- "rstar",
- "rustc-hash 2.1.0",
- "simba",
- "slab",
- "smallvec",
- "spade",
- "thiserror",
-]
-
-[[package]]
-name = "parry3d"
 version = "0.18.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "ecb572cea5c76b06bc744aaefdbb9e6ea9e5695f50f79c0227bddecd6ec925a4"
@@ -3631,29 +3605,6 @@ dependencies = [
 
 [[package]]
 name = "rapier3d"
-version = "0.22.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "87360935d1a54802efe0ddf908489436bb49c84865c36c930131843c7b1dc97d"
-dependencies = [
- "approx",
- "arrayvec",
- "bit-vec 0.7.0",
- "bitflags 2.8.0",
- "crossbeam",
- "downcast-rs",
- "log",
- "nalgebra",
- "num-derive",
- "num-traits",
- "ordered-float",
- "parry3d 0.17.5",
- "rustc-hash 2.1.0",
- "simba",
- "thiserror",
-]
-
-[[package]]
-name = "rapier3d"
 version = "0.23.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "57a93155032849cf4ae33481c60c8d1fd2a8ded14553e10539aaf1d401b65ecc"
@@ -3669,7 +3620,7 @@ dependencies = [
  "num-derive",
  "num-traits",
  "ordered-float",
- "parry3d 0.18.0",
+ "parry3d",
  "profiling",
  "rustc-hash 2.1.0",
  "simba",
@@ -3709,7 +3660,7 @@ version = "0.1.0"
 dependencies = [
  "glam 0.27.0",
  "nalgebra",
- "rapier3d 0.23.0",
+ "rapier3d",
 ]
 
 [[package]]
