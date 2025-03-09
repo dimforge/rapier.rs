@@ -33,7 +33,12 @@ fn main() {
 fn create_contexts(mut commands: Commands) {
     for i in 0..N_CONTEXTS {
         // DOCUSAURUS: MultipleContexts_new start
-        let mut context = commands.spawn(RapierContext::default());
+        let mut context = commands.spawn((
+            RapierContextColliders::default(),
+            RapierContextJoints::default(),
+            RapierContextSimulation::default(),
+            RapierRigidBodySet::default(),
+        ));
         // DOCUSAURUS: MultipleContexts_new stop
         context.insert(ContextId(i));
         if i == 0 {
@@ -81,7 +86,7 @@ fn change_context(
 }
 
 pub fn setup_physics(
-    context: Query<(Entity, &ContextId), With<RapierContext>>,
+    context: Query<(Entity, &ContextId), With<RapierContextSimulation>>,
     mut commands: Commands,
 ) {
     for (context_entity, id) in context.iter() {
