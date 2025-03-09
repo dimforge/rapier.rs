@@ -46,7 +46,10 @@ fn setup_physics(mut commands: Commands) {
 
 // DOCUSAURUS: Raycast start
 /* Cast a ray inside of a system. */
-fn cast_ray(rapier_context: ReadDefaultRapierContext) {
+fn cast_ray(rapier_context: ReadRapierContext) {
+    // Get the rapier context
+    let rapier_context = rapier_context.single();
+
     let ray_pos = Vec2::new(1.0, 2.0);
     let ray_dir = Vec2::new(0.0, 1.0);
     let max_toi = 4.0;
@@ -95,7 +98,10 @@ fn cast_ray(rapier_context: ReadDefaultRapierContext) {
 
 // DOCUSAURUS: Shapecast start
 /* Cast a shape inside of a system. */
-fn cast_shape(rapier_context: ReadDefaultRapierContext) {
+fn cast_shape(rapier_context: ReadRapierContext) {
+    // Get the rapier context
+    let rapier_context = rapier_context.single();
+
     let shape = Collider::cuboid(1.0, 2.0);
     let shape_pos = Vec2::new(1.0, 2.0);
     let shape_rot = 0.8;
@@ -123,7 +129,10 @@ fn cast_shape(rapier_context: ReadDefaultRapierContext) {
 
 // DOCUSAURUS: PointProjection start
 /* Project a point inside of a system. */
-fn project_point(rapier_context: ReadDefaultRapierContext) {
+fn project_point(rapier_context: ReadRapierContext) {
+    // Get the rapier context
+    let rapier_context = rapier_context.single();
+
     let point = Vec2::new(1.0, 2.0);
     let solid = true;
     let filter = QueryFilter::default();
@@ -151,7 +160,10 @@ fn project_point(rapier_context: ReadDefaultRapierContext) {
 
 // DOCUSAURUS: IntersectionTest start
 /* Test intersections inside of a system. */
-fn test_intersections(rapier_context: ReadDefaultRapierContext) {
+fn test_intersections(rapier_context: ReadRapierContext) {
+    // Get the rapier context
+    let rapier_context = rapier_context.single();
+
     let shape = Collider::cuboid(1.0, 2.0);
     let shape_pos = Vec2::new(0.0, 1.0);
     let shape_rot = 0.8;
@@ -176,10 +188,13 @@ fn test_intersections(rapier_context: ReadDefaultRapierContext) {
 // DOCUSAURUS: QueryFilter start
 /* Cast a ray inside of a system. */
 fn cast_ray_filtered(
-    rapier_context: ReadDefaultRapierContext,
+    rapier_context: ReadRapierContext,
     player_query: Query<Entity, With<Player>>,
     custom_data_query: Query<&CustomData>,
 ) {
+    // Get the rapier context
+    let rapier_context = rapier_context.single();
+
     let player_handle = player_query.single();
     let ray_pos = Vec2::new(1.0, 2.0);
     let ray_dir = Vec2::new(0.0, 1.0);
