@@ -36,7 +36,7 @@ that are not defined in 2D:
 | _Cartesian joint_   | 2 Translations | 3 Translations |
 | _Planar joint_      |                | 2 Translations + 1 Rotation |
 | _Cylindrical joint_ |                | 1 Translation + 1 Rotation (along the same axis) |
-| _Pin-slot joint_    |                | 1 Translation + 1 Rotation (along different axes) |
+| _Pin-slot joint or [groove joint (Godot)](https://docs.godotengine.org/en/stable/classes/class_groovejoint2d.html)_    | 1 Translation + 1 Rotation (along different axes) | 1 Translation + 1 Rotation (along different axes) |
 | _Rectangular joint_ |                | 2 Translations |
 | _Universal joint_   |                | 2 Rotations |
 
@@ -368,7 +368,7 @@ Joint constraints implement the constraints-based approach. The following table 
 | _Cartesian joint_   | `dynamics::CartesianJoint`    |
 | _Planar joint_      | `dynamics::PlanarJoint`     |
 | _Cylindrical joint_ | `dynamics::CylindricalJoint`      |
-| _Pin-slot joint_    | `dynamics::PinSlotJoint`    |
+| _Pin-slot joint or [groove joint (Godot)](https://docs.godotengine.org/en/stable/classes/class_groovejoint2d.html)_ | `dynamics::PinSlotJoint`    |
 | _Rectangular joint_ | `dynamics::RectangularJoint`   |
 | _Universal joint_   | `dynamics::UniversalJoint`     |
 -->
