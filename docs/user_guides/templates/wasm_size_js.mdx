@@ -1,0 +1,85 @@
+---
+id: wasm_size
+title: Wasm size
+sidebar_label: Wasm size
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# Reducing WebAssembly Size
+
+One of the main challenges when using WebAssembly (Wasm) in the browser is managing the size of the `.wasm` binary.
+Larger Wasm files lead to longer download times, increased memory usage, and delayed startup,
+especially on mobile networks and lower-end devices.
+For game engines, physics libraries, or interactive web tools using `rapier.js`,
+minimizing Wasm size is essential for a responsive user experience.
+
+This chapter will guide you through creating a customized `rapier.js` build including only what you need.
+
+## Customizing Your Build
+
+Rust-to-Wasm projects often include a lot of functionality—even things you may not use at runtime.
+Every public function, every exported symbol, and every dependency can increase the final `.wasm` file size.
+Although tools like `wasm-opt` and Rust's dead-code elimination (via `--release`) help,
+some runtime features (like serialization, or debugging) can still bloat your binary.
+
+### Example
+
+#### Quick minimal
+
+Rapier's javascript package is already built using different settings,
+so you can leverage its configuration to make your own one:
+
+Take a look at the `builds/prepare_builds/` folder:
+it contains automation to create rust projects with different settings,
+using [Tera](https://docs.rs/crate/tera) and custom scripts under the hood.
+
+To customize a build, you can edit a configuration json file from `assets/`:
+a `example_dim2_minimal.json` is provided:
+you can see that its `feature_set` is empty, and its `conditions_to_remove` has a list of items.
+
+Let's build it!
+
+0. Clone the repository
+
+```bash
+git clone https://github.com/dimforge/rapier.js
+cd rapier.js
+```
+
+1. Generate the rust wasm
+
+That's the purpose of `builds/prepare_builds/` folder, 
+run `cargo run -- -c assets/example_dim2_minimal.json` in it to generate a `builds/rapier2d-minimal` Rust project.
+
+Feel free to look at its content: the most impactful operation is to NOT enable some features.
+For convenience, features typically share names with Rapier's packages and are forwarded accordingly.
+
+Navigate into the created folder, and run `npm run build` to create a wasm package.
+
+If you want more options, you can:
+- create a new feature in the `Cargo.toml.tera`, which you can use in rust code
+- or modify the generated `Cargo.toml`, and rebuild the package.
+
+2. Rapier-compat
+
+To build [rapier-compat](./getting_started_js#using-rapier-without-a-bundler),
+go into `rapier-compat` and run `./build_conf.sh example_dim2_minimal`.
+This copies the Wasm package and its javascript glue code,
+applies transformations, and removes the `conditions_to_remove` entries from the included files.
+
+3. End result
+
+Now you have a customized wasm build, ready to use.
+
+With this example, here is the size impact you can expect on `rapier_wasm2d_bg.wasm`:
+
+- published rapier2d package:
+  - Bundle Size:    1.27 MB
+  - brotli Size:    353.56 KB
+- Custom build (no debug render, no serialization):
+  - Bundle Size:    1.05 MB
+  - brotli Size:    300.06 KB
+
+That's a solid improvement! you may go further by passing `-Oz` to wasm-opt, or customizing your build even further.
