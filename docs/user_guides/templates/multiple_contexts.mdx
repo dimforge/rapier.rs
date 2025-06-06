@@ -14,8 +14,8 @@ This page explains how to manage multiple physics contexts in Rapier.
 
 ## Components
 
-By default, on `PreStartup`, `bevy_rapier` spawns a `RapierContext`, marked by a `DefaultRapierContext` component,
-so most users can forget about multiple contexts support and use "easy" accessors such as `ReadDefaultRapierContext`.
+By default, on `PreStartup`, `bevy_rapier` spawns an entity with components needed for the `RapierContext` **QueryData**, and mark it with the `DefaultRapierContext` component,
+so most users can forget about multiple contexts support and use "low boilerplate" accessors such as `ReadRapierContext`.
 
 If you don't want a default context to be spawned,
 you can disable it using `RapierContextInitialization`:
