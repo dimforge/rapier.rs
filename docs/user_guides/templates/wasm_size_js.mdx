@@ -1,5 +1,5 @@
 ---
-id: wasm_size
+id: wasm_size_js
 title: Wasm size
 sidebar_label: Wasm size
 ---
@@ -19,7 +19,7 @@ This chapter will guide you through creating a customized `rapier.js` build incl
 
 ## Customizing Your Build
 
-Rust-to-Wasm projects often include a lot of functionality—even things you may not use at runtime.
+Rust-to-Wasm projects often include a lot of functionality, even things you may not use at runtime.
 Every public function, every exported symbol, and every dependency can increase the final `.wasm` file size.
 Although tools like `wasm-opt` and Rust's dead-code elimination (via `--release`) help,
 some runtime features (like serialization, or debugging) can still bloat your binary.
