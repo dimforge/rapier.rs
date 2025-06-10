@@ -22,9 +22,14 @@ struct PhysicsState {
 fn main() {
     let physics_state = setup_physics_scene();
     // Serialize everything.
-    let serialized = bincode::serialize(&physics_state).unwrap();
+    let serialized =
+        bincode::serde::encode_to_vec(&physics_state, bincode::config::standard()).unwrap();
     // Deserialize everything.
-    let deserialized = bincode::deserialize::<PhysicsState>(&serialized).unwrap();
+    let deserialized = bincode::serde::decode_from_slice::<PhysicsState, _>(
+        &serialized,
+        bincode::config::standard(),
+    )
+    .unwrap();
     // The simulation can continue using the deserialized state.
 }
 // DOCUSAURUS: Serialization stop

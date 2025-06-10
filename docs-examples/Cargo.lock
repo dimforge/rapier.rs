@@ -346,7 +346,7 @@ dependencies = [
  "bevy_utils",
  "blake3",
  "derive_more",
- "downcast-rs 2.0.1",
+ "downcast-rs",
  "either",
  "petgraph",
  "ron",
@@ -373,7 +373,7 @@ dependencies = [
  "cfg-if",
  "console_error_panic_hook",
  "ctrlc",
- "downcast-rs 2.0.1",
+ "downcast-rs",
  "log",
  "thiserror 2.0.12",
  "variadics_please",
@@ -404,7 +404,7 @@ dependencies = [
  "crossbeam-channel",
  "derive_more",
  "disqualified",
- "downcast-rs 2.0.1",
+ "downcast-rs",
  "either",
  "futures-io",
  "futures-lite",
@@ -809,7 +809,7 @@ dependencies = [
  "approx",
  "bevy_reflect",
  "derive_more",
- "glam 0.29.3",
+ "glam",
  "itertools 0.14.0",
  "libm",
  "rand",
@@ -851,7 +851,7 @@ version = "0.16.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "8bb60c753b968a2de0fd279b76a3d19517695e771edb4c23575c7f92156315de"
 dependencies = [
- "glam 0.29.3",
+ "glam",
 ]
 
 [[package]]
@@ -976,10 +976,10 @@ dependencies = [
  "bevy_utils",
  "derive_more",
  "disqualified",
- "downcast-rs 2.0.1",
+ "downcast-rs",
  "erased-serde",
  "foldhash",
- "glam 0.29.3",
+ "glam",
  "petgraph",
  "serde",
  "smallvec",
@@ -1032,7 +1032,7 @@ dependencies = [
  "bytemuck",
  "codespan-reporting",
  "derive_more",
- "downcast-rs 2.0.1",
+ "downcast-rs",
  "encase",
  "fixedbitset",
  "futures-lite",
@@ -1333,11 +1333,22 @@ dependencies = [
 
 [[package]]
 name = "bincode"
-version = "1.3.3"
+version = "2.0.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "b1f45e9417d87227c7a56d22e471c6206462cba514c7590c09aff4cf6d1ddcad"
+checksum = "36eaf5d7b090263e8150820482d5d93cd964a81e4019913c972f4edcc6edb740"
 dependencies = [
+ "bincode_derive",
  "serde",
+ "unty",
+]
+
+[[package]]
+name = "bincode_derive"
+version = "2.0.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "bf95709a440f45e986983918d0e8a1f30a9b1df04918fc828670606804ac3c09"
+dependencies = [
+ "virtue",
 ]
 
 [[package]]
@@ -1386,18 +1397,12 @@ checksum = "349f9b6a179ed607305526ca489b34ad0a41aed5f7980fa90eb03160b69598fb"
 
 [[package]]
 name = "bit-vec"
-version = "0.7.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "d2c54ff287cfc0a34f38a6b832ea1bd8e448a330b3e40a50859e6488bee07f22"
-dependencies = [
- "serde",
-]
-
-[[package]]
-name = "bit-vec"
 version = "0.8.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "5e764a1d40d510daf35e07be9eb06e75770908c27d411ee6c92109c9840eaaf7"
+dependencies = [
+ "serde",
+]
 
 [[package]]
 name = "bitflags"
@@ -1909,12 +1914,6 @@ dependencies = [
 
 [[package]]
 name = "downcast-rs"
-version = "1.2.1"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "75b325c5dbd37f80359721ad39aca5a29fb04c89279657cffdda8736d0c0b9d2"
-
-[[package]]
-name = "downcast-rs"
 version = "2.0.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "ea8a8b81cacc08888170eef4d13b775126db426d0b348bee9d18c2c1eaf123cf"
@@ -1948,7 +1947,7 @@ checksum = "b0a05902cf601ed11d564128448097b98ebe3c6574bd7b6a653a3d56d54aa020"
 dependencies = [
  "const_panic",
  "encase_derive",
- "glam 0.29.3",
+ "glam",
  "thiserror 1.0.69",
 ]
 
@@ -2246,12 +2245,6 @@ dependencies = [
 
 [[package]]
 name = "glam"
-version = "0.27.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "9e05e7e6723e3455f4818c7b26e855439f7546cf617ef669d1adedb8669e5cb9"
-
-[[package]]
-name = "glam"
 version = "0.29.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "8babf46d4c1c9d92deac9f7be466f76dfc4482b6452fc5024b5e8daf6ffeb3ee"
@@ -2453,7 +2446,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "d9c9e718d32b6e6b2b32354e1b0367025efdd0b11d6a740b905ddf5db1074679"
 dependencies = [
  "constgebra",
- "glam 0.29.3",
+ "glam",
  "tinyvec",
 ]
 
@@ -2857,8 +2850,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "26aecdf64b707efd1310e3544d709c5c0ac61c13756046aaaba41be5c4f66a3b"
 dependencies = [
  "approx",
- "glam 0.27.0",
- "glam 0.29.3",
+ "glam",
  "matrixmultiply",
  "nalgebra-macros",
  "num-complex",
@@ -3407,32 +3399,6 @@ dependencies = [
 
 [[package]]
 name = "parry2d"
-version = "0.18.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "efd0ac62e76d6143e008a4988d795550d47aba40a50929d6b7b85e4230784403"
-dependencies = [
- "approx",
- "arrayvec",
- "bitflags 2.9.1",
- "downcast-rs 1.2.1",
- "either",
- "ena",
- "log",
- "nalgebra",
- "num-derive",
- "num-traits",
- "ordered-float 4.6.0",
- "rustc-hash 2.1.1",
- "serde",
- "simba",
- "slab",
- "smallvec",
- "spade",
- "thiserror 1.0.69",
-]
-
-[[package]]
-name = "parry2d"
 version = "0.20.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "6b89f8a3309b82a3a81a6957c7916fe00834e79678451683b048e8d75109b9e4"
@@ -3440,7 +3406,7 @@ dependencies = [
  "approx",
  "arrayvec",
  "bitflags 2.9.1",
- "downcast-rs 2.0.1",
+ "downcast-rs",
  "either",
  "ena",
  "hashbrown",
@@ -3456,30 +3422,28 @@ dependencies = [
 ]
 
 [[package]]
-name = "parry3d"
-version = "0.18.0"
+name = "parry2d"
+version = "0.21.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "ecb572cea5c76b06bc744aaefdbb9e6ea9e5695f50f79c0227bddecd6ec925a4"
+checksum = "fcc75102c1fac2294401262c78e5a42abe7168244c9436df2fec8fe0c27395c7"
 dependencies = [
  "approx",
  "arrayvec",
  "bitflags 2.9.1",
- "downcast-rs 1.2.1",
+ "downcast-rs",
  "either",
  "ena",
- "indexmap",
+ "hashbrown",
  "log",
  "nalgebra",
  "num-derive",
  "num-traits",
- "ordered-float 4.6.0",
- "rstar",
- "rustc-hash 2.1.1",
+ "ordered-float 5.0.0",
+ "serde",
  "simba",
  "slab",
- "smallvec",
  "spade",
- "thiserror 1.0.69",
+ "thiserror 2.0.12",
 ]
 
 [[package]]
@@ -3491,10 +3455,36 @@ dependencies = [
  "approx",
  "arrayvec",
  "bitflags 2.9.1",
- "downcast-rs 2.0.1",
+ "downcast-rs",
  "either",
  "ena",
  "hashbrown",
+ "log",
+ "nalgebra",
+ "num-derive",
+ "num-traits",
+ "ordered-float 5.0.0",
+ "rstar",
+ "simba",
+ "slab",
+ "spade",
+ "thiserror 2.0.12",
+]
+
+[[package]]
+name = "parry3d"
+version = "0.21.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "e7f8d0a3b2f4c0e250d4599b69e490535521c3497e2b88b0b5d2ada251bc83a8"
+dependencies = [
+ "approx",
+ "arrayvec",
+ "bitflags 2.9.1",
+ "downcast-rs",
+ "either",
+ "ena",
+ "hashbrown",
+ "indexmap",
  "log",
  "nalgebra",
  "num-derive",
@@ -3763,31 +3753,6 @@ checksum = "f60fcc7d6849342eff22c4350c8b9a989ee8ceabc4b481253e8946b9fe83d684"
 
 [[package]]
 name = "rapier2d"
-version = "0.23.1"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "dd9ef3dbd7ab80f038f37a6952b00146a771ddde72244b0745ac43c2a4ad30c1"
-dependencies = [
- "approx",
- "arrayvec",
- "bit-vec 0.7.0",
- "bitflags 2.9.1",
- "crossbeam",
- "downcast-rs 1.2.1",
- "log",
- "nalgebra",
- "num-derive",
- "num-traits",
- "ordered-float 4.6.0",
- "parry2d 0.18.0",
- "profiling",
- "rustc-hash 2.1.1",
- "serde",
- "simba",
- "thiserror 1.0.69",
-]
-
-[[package]]
-name = "rapier2d"
 version = "0.25.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "5ec6acdc5db3699c64e000945450c844d34b215dae3bf875b40e20b1909c0063"
@@ -3797,7 +3762,7 @@ dependencies = [
  "bit-vec 0.8.0",
  "bitflags 2.9.1",
  "crossbeam",
- "downcast-rs 2.0.1",
+ "downcast-rs",
  "log",
  "nalgebra",
  "num-derive",
@@ -3811,27 +3776,28 @@ dependencies = [
 ]
 
 [[package]]
-name = "rapier3d"
-version = "0.23.1"
+name = "rapier2d"
+version = "0.26.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "37d84644f385b81f065576058bc8f7e3d64e56a66f2f5fc40bfd917774659e12"
+checksum = "b70793351467e663d06f52ffdf6138a1d7920b305ee4b7751e1adb90d56a797f"
 dependencies = [
  "approx",
  "arrayvec",
- "bit-vec 0.7.0",
+ "bit-vec 0.8.0",
  "bitflags 2.9.1",
  "crossbeam",
- "downcast-rs 1.2.1",
+ "downcast-rs",
  "log",
  "nalgebra",
  "num-derive",
  "num-traits",
- "ordered-float 4.6.0",
- "parry3d 0.18.0",
+ "ordered-float 5.0.0",
+ "parry2d 0.21.1",
  "profiling",
  "rustc-hash 2.1.1",
+ "serde",
  "simba",
- "thiserror 1.0.69",
+ "thiserror 2.0.12",
 ]
 
 [[package]]
@@ -3845,13 +3811,37 @@ dependencies = [
  "bit-vec 0.8.0",
  "bitflags 2.9.1",
  "crossbeam",
- "downcast-rs 2.0.1",
+ "downcast-rs",
  "log",
  "nalgebra",
  "num-derive",
  "num-traits",
  "ordered-float 5.0.0",
  "parry3d 0.20.2",
+ "profiling",
+ "rustc-hash 2.1.1",
+ "simba",
+ "thiserror 2.0.12",
+]
+
+[[package]]
+name = "rapier3d"
+version = "0.26.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "7f1015500058823ba9c479c908d7069adcf3f0f51a3e49dca7efc5575df7e574"
+dependencies = [
+ "approx",
+ "arrayvec",
+ "bit-vec 0.8.0",
+ "bitflags 2.9.1",
+ "crossbeam",
+ "downcast-rs",
+ "log",
+ "nalgebra",
+ "num-derive",
+ "num-traits",
+ "ordered-float 5.0.0",
+ "parry3d 0.21.1",
  "profiling",
  "rustc-hash 2.1.1",
  "simba",
@@ -3881,7 +3871,7 @@ dependencies = [
  "bincode",
  "crossbeam",
  "nalgebra",
- "rapier2d 0.23.1",
+ "rapier2d 0.26.1",
  "serde",
 ]
 
@@ -3889,9 +3879,9 @@ dependencies = [
 name = "rapier_snippets_rust3d"
 version = "0.1.0"
 dependencies = [
- "glam 0.27.0",
+ "glam",
  "nalgebra",
- "rapier3d 0.23.1",
+ "rapier3d 0.26.1",
 ]
 
 [[package]]
@@ -4266,6 +4256,7 @@ dependencies = [
  "hashbrown",
  "num-traits",
  "robust",
+ "serde",
  "smallvec",
 ]
 
@@ -4658,6 +4649,12 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "ebc1c04c71510c7f702b52b7c350734c9ff1295c464a03335b00bb84fc54f853"
 
 [[package]]
+name = "unty"
+version = "0.0.4"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "6d49784317cd0d1ee7ec5c716dd598ec5b4483ea832a2dced265471cc0f690ae"
+
+[[package]]
 name = "uuid"
 version = "1.17.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -4697,6 +4694,12 @@ name = "version_check"
 version = "0.9.5"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "0b928f33d975fc6ad9f86c8f283853ad26bdd5b10b7f1542aa2fa15e2289105a"
+
+[[package]]
+name = "virtue"
+version = "0.0.18"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "051eb1abcf10076295e815102942cc58f9d5e3b4560e46e53c21e8ff6f3af7b1"
 
 [[package]]
 name = "walkdir"
