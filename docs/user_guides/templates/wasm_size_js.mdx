@@ -37,7 +37,7 @@ using [Tera](https://docs.rs/crate/tera) and custom scripts under the hood.
 
 To customize a build, you can edit a configuration json file from `assets/`:
 a `example_dim2_minimal.json` is provided:
-you can see that its `feature_set` is empty, and its `conditions_to_remove` has a list of items.
+you can see that its `additional_features` is empty, and its `conditional_compilation_to_remove` has a list of items.
 
 Let's build it!
 
@@ -67,7 +67,7 @@ If you want more options, you can:
 To build [rapier-compat](./getting_started_js#using-rapier-without-a-bundler),
 go into `rapier-compat` and run `./build_conf.sh example_dim2_minimal`.
 This copies the Wasm package and its javascript glue code,
-applies transformations, and removes the `conditions_to_remove` entries from the included files.
+applies transformations, and removes the `conditional_compilation_to_remove` entries from the included files.
 
 3. End result
 
