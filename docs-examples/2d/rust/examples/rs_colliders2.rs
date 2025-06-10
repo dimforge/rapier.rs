@@ -1,5 +1,5 @@
 use nalgebra::{Isometry2, UnitComplex};
-use rapier2d::prelude::*;
+use rapier2d::{parry::transformation::voxelization::FillMode, prelude::*};
 
 fn main() {
     let vertices = vec![point![-1.0, -1.0], point![1.0, -1.0], point![1.0, 1.0]];
@@ -70,6 +70,22 @@ fn main() {
     collider.set_sensor(true);
     assert!(collider.is_sensor());
     // DOCUSAURUS: ColliderType2 stop
+
+    // DOCUSAURUS: VoxelsPoints start
+    // A voxels shape from arbitrary points
+    let shape = ColliderBuilder::voxels_from_points(
+        Vector::new(1.0, 1.0),
+        &[point![0.0, 0.0], point![1.0, 1.0], point![-1.0, 1.0]],
+    );
+    // DOCUSAURUS: VoxelsPoints stop
+
+    let mesh = vec![point![0.0, 0.0], point![0.0, 10.0]];
+    let indices: Vec<_> = (0..mesh.len() as u32)
+        .map(|i| [i, (i + 1) % mesh.len() as u32])
+        .collect();
+    // DOCUSAURUS: VoxelsMesh start
+    let shape = SharedShape::voxelized_mesh(&mesh, &indices, 0.2, FillMode::default());
+    // DOCUSAURUS: VoxelsMesh stop
 
     let shape = ColliderBuilder::ball(0.5).shape;
     let pos1 = Isometry2::translation(0.0, 1.0);
