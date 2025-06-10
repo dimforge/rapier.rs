@@ -24,7 +24,7 @@ let template = {
 };
 
 let specialized_guides = {
-  'Rust': [
+  'Rust (0.26)': [
     'user_guides/rust/getting_started',
     'user_guides/rust/introduction_to_nalgebra',
     'user_guides/rust/simulation_structures',
@@ -41,7 +41,7 @@ let specialized_guides = {
     // 'user_guides/rust/the_rapier_testbed',
     // 'user_guides/rust/common_recipes',
   ],
-  'Bevy Plugin': [
+  'Bevy Plugin (0.30)': [
     'user_guides/bevy_plugin/getting_started_bevy',
     // 'user_guides/bevy_plugin/simulation_structures',
     'user_guides/bevy_plugin/rigid_bodies',
@@ -55,7 +55,7 @@ let specialized_guides = {
     'user_guides/bevy_plugin/multiple_contexts',
     'user_guides/bevy_plugin/common_mistakes',
   ],
-  'JavaScript': [
+  'JavaScript (0.17)': [
     'user_guides/javascript/getting_started_js',
     'user_guides/javascript/rigid_bodies',
     'user_guides/javascript/colliders',
