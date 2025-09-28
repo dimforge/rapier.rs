@@ -14,7 +14,6 @@ struct PhysicsState {
     pub impulse_joints: ImpulseJointSet,
     pub multibody_joints: MultibodyJointSet,
     pub ccd_solver: CCDSolver,
-    pub query_pipeline: QueryPipeline,
     pub integration_parameters: IntegrationParameters,
     pub gravity: Vector<f32>,
 }
@@ -61,7 +60,6 @@ fn setup_physics_scene() -> PhysicsState {
     let mut impulse_joint_set = ImpulseJointSet::new();
     let mut multibody_joint_set = MultibodyJointSet::new();
     let mut ccd_solver = CCDSolver::new();
-    let mut query_pipeline = QueryPipeline::new();
     let physics_hooks = ();
     let event_handler = ();
 
@@ -78,7 +76,6 @@ fn setup_physics_scene() -> PhysicsState {
             &mut impulse_joint_set,
             &mut multibody_joint_set,
             &mut ccd_solver,
-            Some(&mut query_pipeline),
             &physics_hooks,
             &event_handler,
         );
@@ -95,7 +92,6 @@ fn setup_physics_scene() -> PhysicsState {
         impulse_joints: impulse_joint_set,
         multibody_joints: multibody_joint_set,
         ccd_solver,
-        query_pipeline,
         integration_parameters,
         gravity,
     }

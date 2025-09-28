@@ -25,7 +25,7 @@ let template = {
 };
 
 let specialized_guides = {
-  'Rust (0.26)': [
+  'Rust (0.29)': [
     'user_guides/rust/getting_started',
     'user_guides/rust/introduction_to_nalgebra',
     'user_guides/rust/simulation_structures',

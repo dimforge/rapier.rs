@@ -29,7 +29,6 @@ fn main() {
     let mut impulse_joint_set = ImpulseJointSet::new();
     let mut multibody_joint_set = MultibodyJointSet::new();
     let mut ccd_solver = CCDSolver::new();
-    let mut query_pipeline = QueryPipeline::new();
     let physics_hooks = ();
     let event_handler = ();
     let character_shape = collider.shape();
@@ -43,18 +42,23 @@ fn main() {
             let desired_translation = vector![1.0, -2.0, 3.0];
             // Create the character controller, here with the default configuration.
             let character_controller = KinematicCharacterController::default();
+            // Init the query pipeline.
+            let filter = QueryFilter::default()
+                // Make sure the character we are trying to move isn’t considered an obstacle.
+                .exclude_rigid_body(rigid_body_handle);
+            let query_pipeline = broad_phase.as_query_pipeline(
+                narrow_phase.query_dispatcher(),
+                &bodies,
+                &colliders,
+                filter,
+            );
             // Calculate the possible movement.
             let corrected_movement = character_controller.move_shape(
                 dt,              // The timestep length (can be set to SimulationSettings::dt).
-                &bodies,         // The RigidBodySet.
-                &colliders,      // The ColliderSet.
-                &query_pipeline, // The QueryPipeline.
+                &query_pipeline, // The query pipelien.
                 character_shape, // The character’s shape.
                 character_pos,   // The character’s initial position.
                 desired_translation,
-                QueryFilter::default()
-                    // Make sure the character we are trying to move isn’t considered an obstacle.
-                    .exclude_rigid_body(rigid_body_handle),
                 |_| {}, // We don’t care about events in this example.
             );
 
@@ -73,7 +77,6 @@ fn main() {
             &mut impulse_joint_set,
             &mut multibody_joint_set,
             &mut ccd_solver,
-            Some(&mut query_pipeline),
             &physics_hooks,
             &event_handler,
         );

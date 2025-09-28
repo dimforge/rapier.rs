@@ -17,7 +17,6 @@ fn main() {
     collider_set.insert_with_parent(collider, ball_body_handle, &mut rigid_body_set);
 
     /* Create other structures necessary for the simulation. */
-    let gravity = vector![0.0, -9.81];
     let integration_parameters = IntegrationParameters::default();
     let mut physics_pipeline = PhysicsPipeline::new();
     let mut island_manager = IslandManager::new();
@@ -26,7 +25,6 @@ fn main() {
     let mut impulse_joint_set = ImpulseJointSet::new();
     let mut multibody_joint_set = MultibodyJointSet::new();
     let mut ccd_solver = CCDSolver::new();
-    let mut query_pipeline = QueryPipeline::new();
     let physics_hooks = ();
     let event_handler = ();
 
@@ -54,15 +52,16 @@ fn main() {
     let modified_colliders = vec![handle1, handle2];
     let removed_colliders = vec![handle_to_remove];
 
-    raycast_section(&query_pipeline, &rigid_body_set, &collider_set);
-    shapecast_section(&query_pipeline, &rigid_body_set, &collider_set);
-    point_projection_section(&query_pipeline, &rigid_body_set, &collider_set);
-    intersection_section(&query_pipeline, &rigid_body_set, &collider_set);
+    raycast_section(&broad_phase, &narrow_phase, &rigid_body_set, &collider_set);
+    shapecast_section(&broad_phase, &narrow_phase, &rigid_body_set, &collider_set);
+    point_projection_section(&broad_phase, &narrow_phase, &rigid_body_set, &collider_set);
+    intersection_section(&broad_phase, &narrow_phase, &rigid_body_set, &collider_set);
 }
 
 #[rustfmt::skip]
 fn raycast_section(
-    query_pipeline: &QueryPipeline,
+    broad_phase: &BroadPhaseBvh,
+    narrow_phase: &NarrowPhase,
     rigid_body_set: &RigidBodySet,
     collider_set: &ColliderSet,
 ) {
@@ -72,8 +71,15 @@ fn raycast_section(
     let solid = true;
     let filter = QueryFilter::default();
 
+    let query_pipeline = broad_phase.as_query_pipeline(
+        narrow_phase.query_dispatcher(),
+        rigid_body_set,
+        collider_set,
+        filter,
+    );
+
     if let Some((handle, toi)) = query_pipeline.cast_ray(
-        rigid_body_set, &collider_set, &ray, max_toi, solid, filter
+        &ray, max_toi, solid
     ) {
         // The first collider hit has the handle `handle` and it hit after
         // the ray travelled a distance equal to `ray.dir * toi`.
@@ -83,7 +89,7 @@ fn raycast_section(
 
 
     if let Some((handle, intersection)) = query_pipeline.cast_ray_and_get_normal(
-        rigid_body_set, &collider_set, &ray, max_toi, solid, filter
+        &ray, max_toi, solid
     ) {
         // This is similar to `QueryPipeline::cast_ray` illustrated above except
         // that it also returns the normal of the collider shape at the hit point.
@@ -92,21 +98,19 @@ fn raycast_section(
         println!("Collider {:?} hit at point {} with normal {}", handle, hit_point, hit_normal);
     }
 
-    query_pipeline.intersections_with_ray(
-        rigid_body_set, &collider_set, &ray, max_toi, solid, filter,
-        |handle, intersection| {
+    for (handle, _, intersection) in query_pipeline.intersect_ray(ray, max_toi, solid) {
         // Callback called on each collider hit by the ray.
         let hit_point = ray.point_at(intersection.time_of_impact);
         let hit_normal = intersection.normal;
         println!("Collider {:?} hit at point {} with normal {}", handle, hit_point, hit_normal);
-        true // Return `false` instead if we want to stop searching for other hits.
-    });
+    }
     // DOCUSAURUS: Raycast stop
 }
 
 #[rustfmt::skip]
 fn shapecast_section(
-    query_pipeline: &QueryPipeline,
+    broad_phase: &BroadPhaseBvh,
+    narrow_phase: &NarrowPhase,
     rigid_body_set: &RigidBodySet,
     collider_set: &ColliderSet,
 ) {
@@ -123,8 +127,15 @@ fn shapecast_section(
         compute_impact_geometry_on_penetration: false,
     };
 
+    let query_pipeline = broad_phase.as_query_pipeline(
+        narrow_phase.query_dispatcher(),
+        rigid_body_set,
+        collider_set,
+        filter,
+    );
+
     if let Some((handle, hit)) = query_pipeline.cast_shape(
-        rigid_body_set, &collider_set, &shape_pos, &shape_vel, &shape, options, filter
+        &shape_pos, &shape_vel, &shape, options
     ) {
         // The first collider hit has the handle `handle`. The `hit` is a
         // structure containing details about the hit configuration.
@@ -135,37 +146,43 @@ fn shapecast_section(
 
 #[rustfmt::skip]
 fn point_projection_section(
-    query_pipeline: &QueryPipeline,
+    broad_phase: &BroadPhaseBvh,
+    narrow_phase: &NarrowPhase,
     rigid_body_set: &RigidBodySet,
     collider_set: &ColliderSet,
 ) {
     // DOCUSAURUS: PointProjection start
     let point = point![1.0, 2.0, 3.0];
     let solid = true;
+    let max_dist = 12.0;
     let filter = QueryFilter::default();
+
+    let query_pipeline = broad_phase.as_query_pipeline(
+        narrow_phase.query_dispatcher(),
+        rigid_body_set,
+        collider_set,
+        filter,
+    );
     
     if let Some((handle, projection)) = query_pipeline.project_point(
-        rigid_body_set, &collider_set, &point, solid, filter
+        &point, max_dist, solid
     ) {
         // The collider closest to the point has this `handle`.
         println!("Projected point on collider {:?}. Point projection: {}", handle, projection.point);
         println!("Point was inside of the collider shape: {}", projection.is_inside);
     }
     
-    query_pipeline.intersections_with_point(
-        rigid_body_set, &collider_set, &point, filter, |handle| {
-            // Callback called on each collider with a shape containing the point.
-            println!("The collider {:?} contains the point.", handle);
-            // Return `false` instead if we want to stop searching for other colliders containing this point.
-            true
-        }
-    );
+    for (handle, _) in query_pipeline.intersect_point(point) {
+        // Callback called on each collider with a shape containing the point.
+        println!("The collider {:?} contains the point.", handle);
+    }
     // DOCUSAURUS: PointProjection stop
 }
 
 #[rustfmt::skip]
 fn intersection_section(
-    query_pipeline: &QueryPipeline,
+    broad_phase: &BroadPhaseBvh,
+    narrow_phase: &NarrowPhase,
     rigid_body_set: &RigidBodySet,
     collider_set: &ColliderSet,
 ) {
@@ -174,17 +191,20 @@ fn intersection_section(
     let shape_pos = Isometry::new(vector![0.0, 1.0, 0.0], vector![0.2, 0.7, 0.1]);
     let filter = QueryFilter::default();
 
-    query_pipeline.intersections_with_shape(
-        rigid_body_set, &collider_set, &shape_pos, &shape, filter, |handle| {
-            println!("The collider {:?} intersects our shape.", handle);
-            true // Return `false` instead if we want to stop searching for other colliders that contain this point.
-        }
+    let query_pipeline = broad_phase.as_query_pipeline(
+        narrow_phase.query_dispatcher(),
+        rigid_body_set,
+        collider_set,
+        filter,
     );
 
+    for (handle, _) in query_pipeline.intersect_shape(shape_pos, &shape) {
+        println!("The collider {:?} intersects our shape.", handle);
+    }
+
     let aabb = Aabb::new(point![-1.0, -2.0, -3.0], point![1.0, 2.0, 3.0]);
-    query_pipeline.colliders_with_aabb_intersecting_aabb(&aabb, |handle| {
+    for (handle, _) in query_pipeline.intersect_aabb_conservative(aabb) {
         println!("The collider {:?} has an AABB intersecting our test AABB", handle);
-        true // Return `false` instead if we want to stop searching for other colliders that contain this point.
-    });
+    }
     // DOCUSAURUS: IntersectionTest stop
 }
