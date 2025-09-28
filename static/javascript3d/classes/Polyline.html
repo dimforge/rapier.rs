@@ -25,7 +25,7 @@
 <ul class="tsd-hierarchy">
 <li><span class="target">Polyline</span></li></ul></li></ul></section><aside class="tsd-sources">
 <ul>
-<li>Defined in geometry/shape.d.ts:332</li></ul></aside>
+<li>Defined in geometry/shape.d.ts:333</li></ul></aside>
 <section class="tsd-panel-group tsd-index-group">
 <section class="tsd-panel tsd-index-panel">
 <details class="tsd-index-content tsd-index-accordion" open><summary class="tsd-accordion-summary tsd-index-summary">
@@ -78,7 +78,7 @@
 <h4 class="tsd-returns-title">Returns <a href="Polyline.html" class="tsd-signature-type" data-tsd-kind="Class">Polyline</a></h4><aside class="tsd-sources">
 <p>Overrides <a href="Shape.html">Shape</a>.<a href="Shape.html#constructor">constructor</a></p>
 <ul>
-<li>Defined in geometry/shape.d.ts:349</li></ul></aside></li></ul></section></section>
+<li>Defined in geometry/shape.d.ts:350</li></ul></aside></li></ul></section></section>
 <section class="tsd-panel-group tsd-member-group">
 <h2>Properties</h2>
 <section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="indices" class="tsd-anchor"></a>
@@ -87,20 +87,20 @@
 <div class="tsd-comment tsd-typography"><p>The indices of the segments.</p>
 </div><aside class="tsd-sources">
 <ul>
-<li>Defined in geometry/shape.d.ts:341</li></ul></aside></section>
+<li>Defined in geometry/shape.d.ts:342</li></ul></aside></section>
 <section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="type" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagReadonly">Readonly</code> <span>type</span><a href="#type" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <div class="tsd-signature">type<span class="tsd-signature-symbol">:</span> <a href="../enums/ShapeType.html#Polyline" class="tsd-signature-type" data-tsd-kind="Enumeration Member">Polyline</a><span class="tsd-signature-symbol"> = ShapeType.Polyline</span></div><aside class="tsd-sources">
 <p>Overrides <a href="Shape.html">Shape</a>.<a href="Shape.html#type">type</a></p>
 <ul>
-<li>Defined in geometry/shape.d.ts:333</li></ul></aside></section>
+<li>Defined in geometry/shape.d.ts:334</li></ul></aside></section>
 <section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="vertices" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>vertices</span><a href="#vertices" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <div class="tsd-signature">vertices<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Float32Array</span></div>
 <div class="tsd-comment tsd-typography"><p>The vertices of the polyline.</p>
 </div><aside class="tsd-sources">
 <ul>
-<li>Defined in geometry/shape.d.ts:337</li></ul></aside></section></section>
+<li>Defined in geometry/shape.d.ts:338</li></ul></aside></section></section>
 <section class="tsd-panel-group tsd-member-group">
 <h2>Methods</h2>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a id="castRay" class="tsd-anchor"></a>
@@ -202,7 +202,7 @@
 <h5>stopAtPenetration: <span class="tsd-signature-type">boolean</span></h5>
 <div class="tsd-comment tsd-typography"><p>If set to <code>false</code>, the linear shape-cast won’t immediately stop if
   the shape is penetrating another shape at its starting point <strong>and</strong> its trajectory is such
-  that it’s on a path to exist that penetration state.</p>
+  that it’s on a path to exit that penetration state.</p>
 </div></li></ul></div>
 <h4 class="tsd-returns-title">Returns <a href="ShapeCastHit.html" class="tsd-signature-type" data-tsd-kind="Class">ShapeCastHit</a></h4><aside class="tsd-sources">
 <p>Inherited from <a href="Shape.html">Shape</a>.<a href="Shape.html#castShape">castShape</a></p>
@@ -330,7 +330,7 @@
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">RawShape</span></h4><aside class="tsd-sources">
 <p>Overrides <a href="Shape.html">Shape</a>.<a href="Shape.html#intoRaw">intoRaw</a></p>
 <ul>
-<li>Defined in geometry/shape.d.ts:350</li></ul></aside></li></ul></section>
+<li>Defined in geometry/shape.d.ts:351</li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a id="projectPoint" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>project<wbr/>Point</span><a href="#projectPoint" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
