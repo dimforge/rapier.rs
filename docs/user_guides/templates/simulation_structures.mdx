@@ -11,6 +11,16 @@ This page describes <rapier> all the data structures needed for stepping the sim
 [basic simulation example](./getting_started.mdx#basic-simulation-example)</rapier><bevy> all the useful
 components and resources added automatically by the `RapierPhysicsPlugin`</bevy>.
 
+<bevy>
+
+## Rapier Context
+
+The data structures handled by rapier for a specific context are stored in different components.
+
+An ergonomic `QueryData` helper is provided to reduce boilerplate:
+See https://docs.rs/bevy_rapier3d/latest/bevy_rapier3d/plugin/context/systemparams/struct.RapierContext.html
+
+</bevy>
 
 ## Gravity
 Gravity is represented as a vector. It affects every dynamic rigid-body taking part of the simulation. The gravity
@@ -61,7 +71,7 @@ fn print_active_bodies_positions(island_manager: Res<IslandManager>, positions: 
 Learn more about sleeping rigid-bodies in [the dedicated section](./rigid_bodies.mdx#sleeping).
 
 ## Physics pipeline
-The `PhysicsPipeline` <bevy>resource</bevy> is responsible for tying everything together in order to run the physics simulation.
+The `PhysicsPipeline` <bevy>from the `RapierContextSimulation` component </bevy>is responsible for tying everything together in order to run the physics simulation.
 It will take care of updating every data-structures mentioned in this page (except the other pipelines), running the collision-detection,
 running the force computation and integration, and running CCD resolution.
 <rapier>

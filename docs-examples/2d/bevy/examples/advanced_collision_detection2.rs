@@ -72,7 +72,8 @@ fn display_events(
 // DOCUSAURUS: Events stop
 
 // DOCUSAURUS: ContactGraph1 start
-fn display_contact_info(rapier_context: ReadDefaultRapierContext, custom_info: Res<CustomInfo>) {
+fn display_contact_info(rapier_context: ReadRapierContext, custom_info: Res<CustomInfo>) {
+    let rapier_context = rapier_context.single().unwrap();
     let entity1 = custom_info.entity1; // A first entity with a collider attached.
     let entity2 = custom_info.entity2; // A second entity with a collider attached.
 
@@ -119,14 +120,15 @@ fn display_contact_info(rapier_context: ReadDefaultRapierContext, custom_info: R
 
 // DOCUSAURUS: ContactGraph2 start
 fn display_contact_info_all_from_1_entity(
-    rapier_context: ReadDefaultRapierContext,
+    rapier_context: ReadRapierContext,
     custom_info: Res<CustomInfo>,
 ) {
+    let rapier_context = rapier_context.single().unwrap();
     let entity = custom_info.entity2; // An entity with a collider attached.
 
     /* Iterate through all the contact pairs involving a specific collider. */
     for contact_pair in rapier_context.contact_pairs_with(entity) {
-        let other_collider = if contact_pair.collider1() == entity {
+        let other_collider = if contact_pair.collider1() == Some(entity) {
             contact_pair.collider2()
         } else {
             contact_pair.collider1()
@@ -139,10 +141,8 @@ fn display_contact_info_all_from_1_entity(
 // DOCUSAURUS: ContactGraph2 stop
 
 // DOCUSAURUS: IntersectionGraph1 start
-fn display_intersection_info(
-    rapier_context: ReadDefaultRapierContext,
-    custom_info: Res<CustomInfo>,
-) {
+fn display_intersection_info(rapier_context: ReadRapierContext, custom_info: Res<CustomInfo>) {
+    let rapier_context = rapier_context.single().unwrap();
     let entity1 = custom_info.entity1; // A first entity with a collider attached.
     let entity2 = custom_info.entity2; // A second entity with a collider attached.
 
@@ -158,9 +158,10 @@ fn display_intersection_info(
 
 // DOCUSAURUS: IntersectionGraph2 start
 fn display_intersection_info_all_from_1_entity(
-    rapier_context: ReadDefaultRapierContext,
+    rapier_context: ReadRapierContext,
     custom_info: Res<CustomInfo>,
 ) {
+    let rapier_context = rapier_context.single().unwrap();
     let entity = custom_info.entity2; // An entity with a collider attached.
 
     /* Iterate through all the intersection pairs involving a specific collider. */
