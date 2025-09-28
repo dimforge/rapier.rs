@@ -27,14 +27,13 @@ fn main() {
     let mut impulse_joint_set = ImpulseJointSet::new();
     let mut multibody_joint_set = MultibodyJointSet::new();
     let mut ccd_solver = CCDSolver::new();
-    let mut query_pipeline = QueryPipeline::new();
     let physics_hooks = ();
     let event_handler = ();
 
     // DOCUSAURUS: Events start
     // Initialize the event collector.
-    let (collision_send, collision_recv) = crossbeam::channel::unbounded();
-    let (contact_force_send, contact_force_recv) = crossbeam::channel::unbounded();
+    let (collision_send, collision_recv) = std::sync::mpsc::channel();
+    let (contact_force_send, contact_force_recv) = std::sync::mpsc::channel();
     let event_handler = ChannelEventCollector::new(collision_send, contact_force_send);
 
     physics_pipeline.step(
@@ -48,7 +47,6 @@ fn main() {
         &mut impulse_joint_set,
         &mut multibody_joint_set,
         &mut ccd_solver,
-        Some(&mut query_pipeline),
         &physics_hooks,
         &event_handler,
     );

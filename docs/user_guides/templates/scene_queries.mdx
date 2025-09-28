@@ -11,18 +11,27 @@ Scene queries are geometric queries that take all the colliders of the physics w
 available through the <rapier>[QueryPipeline](./simulation_structures.mdx#query-pipeline)</rapier><bevy>`RapierQueryPipeline` component</bevy><js>`World` class</js>.
 
 <rapier>
-
-Keep in mind that scene queries will only take into account the colliders (and their positions) known during the
-last call to `QueryPipeline::update`:
-
-```rust
-<load path='/2d/rust/examples/rs_scene_queries2.rs' marker='Update' />
-```
-
-If you need to avoid an expensive full rebuild, it is possible to update only specific changes:
+The `QueryPipeline` is a temporary object that is initialized from the broad-phase, collider set, and rigid-body set.
+It reuses the acceleration data-structure (BVH) from the broad-phase which is automatically updated by the physics
+stepping function.
 
 ```rust
-<load path='/2d/rust/examples/rs_scene_queries2.rs' marker='UpdateIncremental' />
+// Game loop.
+loop {
+  // Stepping the simulation will update the broad-phase.
+  physics_pipeline.step(...);
+
+  // Init a temporary query pipeline by borrowing from the broad-phase
+  // and collides/rigid-bodies. Scene queries will take into account
+  // the last objects positions know at the end of the last physics
+  // simulation step.
+    let query_pipeline = broad_phase.as_query_pipeline(
+        narrow_phase.query_dispatcher(),
+        rigid_body_set,
+        collider_set,
+        filter,
+    );
+}
 ```
 
 </rapier>

@@ -97,32 +97,26 @@ The `QueryPipeline` is responsible for efficiently running [scene queries](./sce
 shape-casting (sweep tests), intersection tests, on all the colliders of the scene.
 
 <rapier>
-Before it is used, the `QueryPipeline` needs to be updated in order to take the new colliders' positions into account.
-The `QueryPipeline` can be used alone, but it is very common to use the `QueryPipeline` alongside the `CollisionPipeline`
-or `PhysicsPipeline`:
+The `QueryPipeline` is a temporary object that is initialized from the broad-phase, collider set, and rigid-body set.
+It reuses the acceleration data-structure (BVH) from the broad-phase which is automatically updated by the physics
+stepping function.
 
 ```rust
 // Game loop.
 loop {
-  // You can pass the query pipeline as parameter to the physics pipeline,
-  // This enables optimizations such as update the query pipeline incrementally rather
-  // than triggering a more expensive full rebuild.
-  physics_pipeline.step(..., Some(&mut query_pipeline), ...);
+  // Stepping the simulation will update the broad-phase.
+  physics_pipeline.step(...);
 
-  // - If you have passed the query pipeline in the physics pipeline `step()` function:
-  // Now we can read the results of the physics simulation,
-  // and we can do advanced scene queries on the colliders.
-```
-```rust
-// Game loop.
-loop {
-  physics_pipeline.step(..., None, ...);
-  // - If you have NOT passed the query pipeline in the physics pipeline `step()` function,
-  //   OR if you have made some changes to your simulation data since that `step()` call:
-  // You'll need to update your query pipeline.
-  query_pipeline.update(...);
-  // Now we can read the results of the physics simulation,
-  // and we can do advanced scene queries on the colliders.
+  // Init a temporary query pipeline by borrowing from the broad-phase
+  // and collides/rigid-bodies. Scene queries will take into account
+  // the last objects positions know at the end of the last physics
+  // simulation step.
+    let query_pipeline = broad_phase.as_query_pipeline(
+        narrow_phase.query_dispatcher(),
+        rigid_body_set,
+        collider_set,
+        filter,
+    );
 }
 ```
 

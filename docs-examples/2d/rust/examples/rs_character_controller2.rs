@@ -29,7 +29,6 @@ fn main() {
     let mut impulse_joint_set = ImpulseJointSet::new();
     let mut multibody_joint_set = MultibodyJointSet::new();
     let mut ccd_solver = CCDSolver::new();
-    let mut query_pipeline = QueryPipeline::new();
     let physics_hooks = ();
     let event_handler = ();
     let character_shape = collider.shape();
@@ -43,18 +42,23 @@ fn main() {
             let desired_translation = vector![1.0, -2.0];
             // Create the character controller, here with the default configuration.
             let character_controller = KinematicCharacterController::default();
+            // Init the query pipeline.
+            let filter = QueryFilter::default()
+                // Make sure the character we are trying to move isn’t considered an obstacle.
+                .exclude_rigid_body(rigid_body_handle);
+            let query_pipeline = broad_phase.as_query_pipeline(
+                narrow_phase.query_dispatcher(),
+                &bodies,
+                &colliders,
+                filter,
+            );
             // Calculate the possible movement.
             let corrected_movement = character_controller.move_shape(
                 dt,              // The timestep length (can be set to SimulationSettings::dt).
-                &bodies,         // The RigidBodySet.
-                &colliders,      // The ColliderSet.
-                &query_pipeline, // The QueryPipeline.
+                &query_pipeline, // The query pipeline.
                 character_shape, // The character’s shape.
                 character_pos,   // The character’s initial position.
                 desired_translation,
-                QueryFilter::default()
-                    // Make sure the character we are trying to move isn’t considered an obstacle.
-                    .exclude_rigid_body(rigid_body_handle),
                 |_| {}, // We don’t care about events in this example.
             );
             // TODO: apply the `corrected_movement.translation` to the rigid-body or collider based on the rules described below.
@@ -72,13 +76,18 @@ fn main() {
             &mut impulse_joint_set,
             &mut multibody_joint_set,
             &mut ccd_solver,
-            Some(&mut query_pipeline),
             &physics_hooks,
             &event_handler,
         );
         let filter = QueryFilter::default()
             // Make sure the character we are trying to move isn’t considered an obstacle.
             .exclude_rigid_body(rigid_body_handle);
+        let query_pipeline = broad_phase.as_query_pipeline(
+            narrow_phase.query_dispatcher(),
+            &bodies,
+            &colliders,
+            filter,
+        );
 
         {
             let character_pos = bodies[rigid_body_handle].position();
@@ -89,13 +98,10 @@ fn main() {
             // the character is being moved.
             character_controller.move_shape(
                 dt,
-                &bodies,
-                &colliders,
                 &query_pipeline,
                 character_shape,
                 character_pos,
                 desired_translation,
-                filter,
                 |collision| { /* Handle or collect the collision in this closure. */ },
             );
             // DOCUSAURUS: Collisions1 stop
@@ -108,26 +114,28 @@ fn main() {
             let mut collisions = vec![];
             character_controller.move_shape(
                 dt,
-                &bodies,
-                &colliders,
                 &query_pipeline,
                 character_shape,
                 &character_pos,
                 desired_translation,
-                filter,
                 |collision| collisions.push(collision),
             );
             // Then, let the character controller solve (and apply) the collision impulses
             // to the dynamic rigid-bodies hit along its path.
+            // Note that we need to init a QueryPipelineMut here (because the impulse
+            // application will modify rigid-bodies.
+            let mut query_pipeline_mut = broad_phase.as_query_pipeline_mut(
+                narrow_phase.query_dispatcher(),
+                &mut bodies,
+                &mut colliders,
+                filter,
+            );
             character_controller.solve_character_collision_impulses(
                 dt,
-                &mut bodies,
-                &colliders,
-                &query_pipeline,
+                &mut query_pipeline_mut,
                 character_shape,
                 character_mass,
                 &collisions,
-                filter,
             );
             // DOCUSAURUS: Collisions2 stop
         }
