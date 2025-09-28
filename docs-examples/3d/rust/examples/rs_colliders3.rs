@@ -1,5 +1,5 @@
 use nalgebra::{Matrix3x2, UnitComplex};
-use rapier3d::prelude::*;
+use rapier3d::{parry::transformation::voxelization::FillMode, prelude::*};
 
 fn main() {
     let mut rigid_body_set = RigidBodySet::new();
@@ -62,6 +62,14 @@ fn main() {
     // Or insert the collider into the set and attach it to a rigid-body.
     let handle = collider_set.insert_with_parent(collider, rigid_body_handle, &mut rigid_body_set);
     // DOCUSAURUS: Creation stop
+
+    // DOCUSAURUS: VoxelsPoints start
+    // A voxels shape from arbitrary points
+    let shape = ColliderBuilder::voxels_from_points(
+        Vector::new(1.0, 1.0, 1.0),
+        &[point![0.0, 0.0, 0.0], point![1.0, 1.0, 1.0]],
+    );
+    // DOCUSAURUS: VoxelsPoints stop
 
     // DOCUSAURUS: Mass start
     let rigid_body = RigidBodyBuilder::dynamic().build();

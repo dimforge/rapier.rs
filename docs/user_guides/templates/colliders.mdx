@@ -125,6 +125,44 @@ segment along the `X` axis.
 
 <notjs>
 
+### Voxels
+
+Voxel shapes are useful to represent 3D volumes made of small uniform cubes (voxels),
+such as Minecraft-like worlds or volumetric data.
+Unlike triangle meshes, voxel-based shapes can offer
+improved collision detection robustness and performance due to their regular structure.
+
+A voxel collider is constructed from a 3D grid of occupied cells.
+
+<Tabs
+groupId="dim"
+defaultValue="2D"
+values={[
+{label: 'Example 2D', value: '2D'},
+{label: 'Example 3D', value: '3D'},
+]}>
+<TabItem value="2D">
+
+```rust
+<load path='/2d/rust/examples/rs_colliders2.rs' marker='VoxelsPoints' />
+```
+
+  </TabItem>
+  <TabItem value="3D">
+
+```rust
+<load path='/3d/rust/examples/rs_colliders3.rs' marker='VoxelsPoints' />
+```
+
+  </TabItem>
+</Tabs>
+
+You can also voxelize a mesh:
+
+```rust
+<load path='/2d/rust/examples/rs_colliders2.rs' marker='VoxelsMesh' />
+```
+
 ### Compound shapes
 It is not recommended to use a triangle mesh or polyline for the shape of a collider attached to a dynamic rigid-body.
 The alternative is to use a compound shape to model a non-convex object as the union of multiple convex parts (which can
