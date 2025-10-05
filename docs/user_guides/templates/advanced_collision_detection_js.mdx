@@ -96,7 +96,7 @@ to achieve the desired behavior. In that case, the contact filtering hooks let y
 pairs and intersection pairs:
 - For each potential contact pair (between two non-sensor colliders) detected by the broad-phase, if at least one
   of the colliders involved in the pair has the bit `ActiveHooks.FILTER_CONTACT_PAIRS` enabled in its
-  [active hooks](./colliders.mdx#active-hooks), then `PhysicsHooks.firterContactPair` will be called. If this filter
+  [active hooks](./colliders.mdx#active-hooks), then `PhysicsHooks.filterContactPair` will be called. If this filter
   returns `null` then no contact computation will happen for this pair of colliders. If it returns a `SolverFlags` value then the
   narrow-phase will compute contact points.
 - For each potential intersection pair (between a sensor colliders and another collider) detected by the broad-phase, if
