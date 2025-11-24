@@ -169,6 +169,7 @@ const config: Config = {
           showLastUpdateTime: false,
           remarkPlugins: [math],
           rehypePlugins: [katex],
+          editUrl: "https://github.com/dimforge/rapier.rs/blob/master/",
         },
         blog: {
           showReadingTime: true,
