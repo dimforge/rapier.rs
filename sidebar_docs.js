@@ -18,6 +18,7 @@ let template = {
     // 'user_guides/templates_injected/integration_parameters',
     'user_guides/templates_injected/serialization',
     'user_guides/templates_injected/determinism',
+    'user_guides/templates_injected/wasm_size_js',
     'user_guides/templates_injected/common_mistakes',
     // 'user_guides/templates_injected/the_rapier_testbed',
     // 'user_guides/templates_injected/common_recipes',
@@ -69,6 +70,7 @@ let specialized_guides = {
     'user_guides/javascript/advanced_collision_detection_js',
     'user_guides/javascript/serialization',
     'user_guides/javascript/determinism',
+    'user_guides/javascript/wasm_size_js',
     'user_guides/javascript/common_mistakes',
   ],
 };
